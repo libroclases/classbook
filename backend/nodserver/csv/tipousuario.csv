@@ -1,0 +1,8 @@
+id|nombre|descripcion|createdAt|updatedAt
+1|profesor|Docentes|2023-08-14|2023-08-14
+2|alumno|Alumnos|2023-08-14|2023-08-14
+3|apoderado|Apoderados|2023-08-14|2023-08-14
+4|asistente|Profesionales no docentes|2023-08-14|2023-08-14
+5|utp|Asistente UTP|2023-08-14|2023-08-14
+6|sostenedor|Sostenedores|2023-08-14|2023-08-14
+7|admin|Administradores|2023-08-14|2023-08-14

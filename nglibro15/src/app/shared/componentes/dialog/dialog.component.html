@@ -1,0 +1,102 @@
+
+<div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 2%;padding-bottom: 0%;">
+
+    <div class="container-fluid" style="width: 100%; height: 50px ;  padding-top: 3%;" [style.background-color]="bgmodal">
+      <p style="color: white; vertical-align: middle;"><em [class]="getBiClass()">&nbsp;{{lowerUpper[modalData.mainTable]}}</em></p>
+    </div>
+  <hr>
+
+  <div class="container-fluid" style="padding-bottom: 1%">
+   <form  [formGroup]="formModal">
+     <table  class="table table-sm table-secundary table-fit">
+       <tbody class="table-secundary" >
+         <tr *ngFor="let table of modalData.tables; index as i" ><td>{{getTableLabel(table)}}</td>
+           <td>
+             <select select class="form-select form-select-sm"
+             [formControlName]="table"
+             (change)="changeFunction(table, $event)">
+               <option value=0>Ninguno</option>
+               <option *ngFor="let r of (getQuery(table) | async)"
+                 [value]="r.id">{{getObjectLabel(table, r)}}</option>
+             </select>
+             <div *ngIf="formModal.controls[table]?.invalid && (formModal.controls[table]?.dirty || formModal.controls[table]?.touched)"  class="alert alert-danger">
+                 <div *ngIf="formModal.controls[table]?.errors?.['selectValidator']">Debe ser seleccionado</div>
+            </div>
+           </td>
+         </tr>
+
+         <tr *ngFor="let texto of modalData.textFields">
+
+          <td>
+                <label *ngIf="texto!='rut'" for="{{texto}}" class="form-label">{{getAttributeLabel(modalData.mainTable, texto)}}</label>
+            </td>
+            <td>
+                <ng-container *ngIf="textAreaFields.includes(texto); else isInput">
+                  <textarea type="text" class="form-control form-control-sm" style="height: 120px"
+                    id="{{texto}}" placeholder="Ingrese {{texto}}" formControlName="{{texto}}">
+                  </textarea>
+                </ng-container>
+                <ng-template #isInput>
+                  <input *ngIf="texto!='rut'" type="text" class="form-control  form-control-sm"
+                    id="{{texto}}" placeholder="Ingrese {{texto}}" formControlName="{{texto}}"/>
+                  <input *ngIf="texto=='rut'" type="hidden" formControlName="{{texto}}"/>
+                </ng-template>
+              <div *ngIf="formModal.controls[texto]?.invalid && (formModal.controls[texto]?.dirty || formModal.controls[texto]?.touched)"  class="alert alert-danger">
+                  <div *ngIf="formModal.controls[texto]?.errors?.['required']">Por favor ingrese un(a) {{texto}}</div>
+                  <div *ngIf="formModal.controls[texto]?.errors?.['maxlength']">Máximo largo excedido</div>
+                  <div *ngIf="formModal.controls[texto]?.errors?.['minlength']">Mínimo largo necesario</div>
+                  <div *ngIf="formModal.controls[texto]?.errors?.['pattern']">Patrón inválido</div>
+                  <div *ngIf="formModal.controls[texto]?.errors?.['horaValidator']">Hora ya asignada</div>
+                  <div *ngIf="formModal.controls[texto]?.errors?.['rutValidator']">Rut no válido.</div>
+                  <div *ngIf="formModal.controls[texto]?.errors?.['emailValidator']">Email no válido.</div>
+                  <div *ngIf="formModal.controls[texto]?.errors?.['min']">Hora Fuera de Rango</div>
+                  <div *ngIf="formModal.controls[texto]?.errors?.['max']">Hora Fuera de Rango</div>
+              </div>
+            </td>
+         </tr>
+
+         <tr *ngFor="let dateField of modalData.dateFields">
+          <td><label for="{{dateField}}" class="form-label">
+            {{getAttributeLabel(modalData.mainTable, dateField)}}</label></td>
+          <td><input type="date" class="form-control form-control-sm"
+             formControlName="{{dateField}}"/></td>
+         </tr>
+
+       </tbody>
+     </table>
+     <span *ngFor="let hidden of modalData.hidden">
+         <input type="hidden"  formControlName="{{hidden}}"/>
+     </span>
+        <input type="hidden"  formControlName="id"/>
+
+   </form>
+  </div>
+
+
+
+
+  <ng-container *ngIf="getEstado()=='encontrado' && getAccion()=='verificar'; else otro">
+    <p>Datos Correctos ? <span><button  type="button" class="btn btn-sm"  [style.background-color]="modalbutton"  (click)="ngOnSubmit()" class="text-light">Si</button></span>
+      <span><button  type="button" class="btn btn-sm"  [style.background-color]="modalbutton" (click)="setEnable()" class="text-light">No</button></span></p>
+    </ng-container>
+
+  <ng-template #otro>
+    <div mat-dialog-actions align="center">
+      <span *ngIf="formModal.valid"><em class="bi bi-check2-circle">&nbsp;Valid!</em></span>
+      <span *ngIf="!formModal.valid"><em class="bi bi-x-circle">&nbsp;Invalid!</em></span>
+      <button mat-raised-button  [style.background-color]="modalbutton"  [style.background-color]="modalbutton"
+      [disabled]="formModal.invalid"  class="text-light" (click)="ngOnSubmit()">Ingresar</button>&nbsp;
+        <!--button mat-raised-button  [style.background-color]="modalbutton"  [style.background-color]="modalbutton" class="text-light"
+        (click)="cancelar()">Cancelar</button-->
+    </div>
+    <br>
+  </ng-template>
+
+<br>
+</div>
+
+
+
+
+
+

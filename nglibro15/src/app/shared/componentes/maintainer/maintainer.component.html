@@ -1,0 +1,120 @@
+<div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 2%;padding-bottom: 0%;"
+[style.background-color]="bodybgcolor" [style.height] = "height"
+role="main">
+
+
+  <!-- Search -->
+
+
+    <div *ngIf="isSearchTable" style="float: left; padding-top: 1.5%;">
+      <div class="input-group">
+        <input type="search" (input)="search($event)"  class="form-control rounded" id="default-search"
+        placeholder="ingrese búsqueda" aria-label="Search" aria-describedby="search-addon" />
+        <button type="button" class="btn btn-light" disabled><em class="bi bi-search"></em></button>
+      </div>
+    </div>
+
+
+
+  <!-- Selectores -->
+<!--  Elimine   [init-ids]="multiSelectInitIds"  04-12-2023  -->
+<div  style="float: right; padding-bottom: 1%; height:auto; ">
+    <multi-select
+      [tables]="selTables"
+
+      [change-functions]="changeFnsArray"
+      [ignore-FK-requirements]="ignoreFkRequirements"
+
+      [patch-fks-from-storage]="patchFKsFromStorage">
+    </multi-select>
+</div>
+
+<div class="overflow-auto p-3 bg-light"  [style.max-height]="height" style="width: 100%; ">
+
+  <!-- Tabla Principal -->
+
+  <table class="table table-sm  table-striped table-fit table-bordered">
+    <ng-container *ngIf="isGroupTable; else notGroupTable">
+      <thead>
+        <tr><th [attr.colspan]="numColumns" [style.background-color]="tablehead" style="text-align: center;color:white; height:40px"><em [class]="getBiClass('/'+ mainTable)">&nbsp;&nbsp;</em><b>{{title}}</b></th></tr>
+        <tr class="table-bordered">
+          <th [attr.colspan]="numRedirect" *ngIf="numRedirect > 0"  style="text-align: center;">
+            <a class="btn btn-link btn-sm px-3" data-bs-toggle="tooltip" title="Bajar Datos"
+            data-bs-target="#staticBackdrop" (click)="downloadCSV()"><em  class="bi bi-cloud-download"></em></a>
+          </th>
+
+          <th *ngFor="let dateFd of dateFields">{{getAttributeLabel(mainTable, dateFd)}}</th>
+          <th *ngFor="let tabla of fkFields">{{getTableLabel(tabla)}}</th>
+          <th *ngFor="let textFd of textFields" >{{getAttributeLabel(mainTable, textFd)}}</th>
+        </tr>
+      </thead>
+    </ng-container>
+    <ng-template #notGroupTable>
+      <thead>
+        <tr><th [attr.colspan]="numColumns" [style.background-color]="tablehead"  style="text-align: center;color:white; font-size: medium;"><em [class]="getBiClass('/'+ mainTable)">&nbsp;&nbsp;</em><b>{{title}}  ({{numreg}})</b></th></tr>
+        <tr class="table-bordered">
+          <th [attr.colspan]="numRedirect" *ngIf="numRedirect > 0"  style="text-align: center;">
+            <a class="btn btn-link btn-sm px-3" data-bs-toggle="tooltip" title="Bajar Datos"
+            data-bs-target="#staticBackdrop" (click)="downloadFile()"><em  class="bi bi-cloud-download"></em></a>
+          </th>
+          <th *ngFor="let textFd of textFields" >{{getAttributeLabel(mainTable, textFd)}}</th>
+          <th *ngFor="let dateFd of dateFields">{{getAttributeLabel(mainTable, dateFd)}}</th>
+          <th *ngFor="let tabla of fkFields">{{getTableLabel(tabla)}}</th>
+
+          <th [attr.colspan]="1" style="text-align: center;">
+            <ng-container *ngIf="isNotCreateTable; else notCreate">
+              <a></a>
+            </ng-container>
+            <ng-template #notCreate>
+              <a mat-button (click)="openDialog()"  disabled={{disable}} title="Nuevo"><em class="bi bi-plus-lg"></em></a>
+            </ng-template>
+          </th>
+        </tr>
+      </thead>
+    </ng-template>
+      <tbody *ngIf="mainQuery$">
+        <ng-container *ngIf="isGroupTable; else notAGroupTable">
+          <tr *ngFor="let c of (mainQuery$ | async)  | paginate: { itemsPerPage: 10, currentPage: currPage }">
+
+            <ng-container *ngFor="let route of redirectRts">
+              <td  style="text-align: center; width: 40px;"><a class="nav-link"
+              [routerLink]="[route, c.Anno.id,c.Colegio.id,c.Curso.id,c.Profesor.id,c.AsignaturaProfesor.id]" routerLinkActive="active"><!-- TODO  Generalizar -->
+              <em [class]="getBiClass(route)" [title]="getIconLabel(route)"></em></a></td>
+            </ng-container>
+
+            <td *ngFor="let dateFd of dateFields">{{c[dateFd] | date:'dd/MM/YYYY'}}</td>
+            <td *ngFor="let table of fkFields">{{c[table].apellido}} {{c[table].nombre}}</td>
+            <th *ngFor="let txtFd of textFields">{{c[txtFd]}}</th>
+
+          </tr>
+          <tr><th *ngFor="let c of columns">&nbsp;</th><th>{{sumGroup}}</th></tr>
+        </ng-container>
+        <ng-template #notAGroupTable>
+          <tr *ngFor="let c of (mainQuery$ | async) | paginate: { itemsPerPage: 10, currentPage: currPage }">
+
+            <ng-container *ngFor="let route of redirectRts">
+              <td  style="text-align: center; width: 40px;"><a class="nav-link"
+              [routerLink]="[route, c.id, lowerUpperTables[mainTable]]" routerLinkActive="active">
+              <em [class]="getBiClass(route)" [title]="getIconLabel(route)"></em></a></td>
+            </ng-container>
+
+            <td *ngFor="let txtFd of textFields">{{c[txtFd]}}</td>
+            <td *ngFor="let dateFd of dateFields">{{c[dateFd] | date:'dd/MM/YYYY'}}</td>
+            <td *ngFor="let table of fkFields">{{getObjectLabel(table, c[table])}}</td>
+            <th style="text-align: center;">
+             <a mat-button (click)="openDialog(c)" disabled={{disable}}> <em class="bi bi-lock"></em> </a>
+            </th>
+          </tr>
+        </ng-template>
+      </tbody>
+
+
+  </table>
+</div>
+
+<div class="col" [style.background-color]="pagination">
+  <pagination-controls (pageChange)="currPage=$event"></pagination-controls>
+</div>
+
+</div>
+

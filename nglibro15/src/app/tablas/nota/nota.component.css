@@ -1,0 +1,12 @@
+
+th {
+    align-content: center;
+    text-align: center;
+}
+
+
+  
+  tr , th, td {
+
+    background: rgba(0,0,0,0.01);
+  }    

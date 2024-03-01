@@ -1,0 +1,7 @@
+div .float-right {
+    float:right;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+ 
+}

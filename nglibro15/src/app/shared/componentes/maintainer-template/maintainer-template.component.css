@@ -1,0 +1,16 @@
+th,
+td {
+  vertical-align: middle;
+}
+
+th {
+  align-content: center;
+  text-align: center;
+  font-weight: normal;
+}
+
+
+tr , th, td {
+
+  background: rgba(0,0,0,0.01);
+}    

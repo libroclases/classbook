@@ -1,0 +1,12 @@
+<app-cabecera></app-cabecera>
+<ng-container *ngIf="isAuth0Loading$ | async; else auth0Loaded">
+  <!-- empty menu -->
+ 
+  <div class="menu"></div>
+  
+</ng-container>
+<ng-template #auth0Loaded>
+  <!-- menu -->
+  <app-menu ></app-menu>
+</ng-template>
+<router-outlet></router-outlet>

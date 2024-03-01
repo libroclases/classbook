@@ -1,0 +1,23 @@
+   
+   <div class="float-end">
+    <div class="row" [formGroup]="valuesForm">
+      <div class="col-sm-4" *ngFor="let table of tables">
+        <p>{{getTableLabel(table)}}</p>
+        <select
+        class="form-select form-select-sm"
+        [formControlName]="table"
+        (change)="changeFunction(table, $event)"
+      >
+        <option value="0">Todo</option>
+        <option *ngFor="let r of getQuery(table) | async" [value]="r.id">
+          {{ getLabel(table, r) }}
+        </option>
+      </select>
+      </div>
+ 
+    </div>
+
+   </div>
+   
+   
+  

@@ -1,0 +1,74 @@
+<div class="container-fluid" style="padding-left: 5%; padding-right: 5%;text-align:center;  padding-top: 2%;padding-bottom: 0%;" 
+[style.background-color]="bodybgcolor" [style.height] = "height" 
+role="main">
+
+
+<div class="top">
+
+  <p><b>{{detalle_estado[getEntidad()].titulo}}</b></p>
+<p>{{detalle_estado[getEntidad()].fase}}</p>
+
+
+<ng-container *ngIf="(getEntidad()=='alumno' || getEntidad()=='apoderado') && getEstado()=='pre-consulta'">
+    <form [formGroup]="formConsulta">
+        <table class="table"><thead>
+          <tr><td>
+            RUT {{lowerUpperTables[getEntidad()]}}
+          </td>
+          <td>
+              <table>
+                <tr>
+                  <td><input type="text" id="rut_entidad" formControlName="rut_entidad"/></td></tr>
+                <tr><td><div style="width: 200px" *ngIf="formConsulta.controls['rut_entidad']?.invalid && (formConsulta.controls['rut_entidad']?.dirty || formConsulta.controls['rut_entidad']?.touched)"  class="alert alert-danger">
+                  <div  *ngIf="formConsulta.controls['rut_entidad']?.errors?.['rutValidator']">Rut no válido.</div>                
+                  </div>
+                </td>
+                </tr>
+              </table>
+          </td>
+        </tr>
+        </thead>
+        </table>  
+        
+        
+        
+        <br>
+        <span><button type="button" class="btn  btn-sm"  (click)="rut_consulta()" [style.background-color]="modalbutton" class="text-light" >Buscar</button></span>
+        <span><button type="button" class="btn  btn-sm"  (click)="reset()" [style.background-color]="modalbutton" class="text-light" >Limpiar</button></span>
+        </form>
+        <br>
+        
+</ng-container>
+  
+  <ng-container *ngIf="getEntidad() == 'matricula'">
+    <table class="table table-bordered">
+        <thead>
+           <tr><td>&nbsp;</td><td>id</td><td>Nombre</td><td>Apellido</td><td>Rut</td></tr>
+        </thead>
+        <tbody>   
+           <tr><td>Alumno</td><td>{{r_alumno.id}}</td><td>{{r_alumno.nombre}}</td><td>{{r_alumno.apellido}}</td><td>{{r_alumno.rut}}</td></tr>
+           <tr><td>Apoderado</td>{{r_apoderado.id}}<td>{{r_apoderado.nombre}}</td><td>{{r_apoderado.apellido}}</td><td>{{r_apoderado.rut}}</td></tr>
+        </tbody>   
+        </table>
+        <br>
+        <p><button type="button" class="btn  btn-sm"  (click)="mostra_matricula()" [style.background-color]="modalbutton" class="text-light" >Generar</button>
+          &nbsp;&nbsp;<button type="button" class="btn  btn-sm"  (click)="cancelar()" [style.background-color]="modalbutton" class="text-light" >Cancelar</button></p>
+      
+  </ng-container>  
+
+</div>
+
+  
+    <div class="center" *ngIf="muestra_dialog">
+ 
+    <app-dialog (newItemEvent)="closeMe($event)" ></app-dialog>
+            
+    </div>
+    
+  
+
+ <p>{{msg?.message}}</p>
+
+</div>
+
+

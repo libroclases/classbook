@@ -1,0 +1,101 @@
+<div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 1%;padding-bottom: 0%"
+[style.background-color]="bodybgcolor" [style.minHeight] = "height">
+
+
+    <div  style="float: right; padding-bottom: 0%; height:100px; ">
+      <multi-select
+      [title]=""
+      [tables]="fKeysSel"
+
+      [ignore-FK-requirements]="ignoreFkRequirements"
+      [change-functions]="changeFnsArray"
+      [custom-endpoints]="customEndpoints"
+      [patch-fks-from-storage]="patchFksFromStorage"
+    >
+    </multi-select>
+
+    </div>
+
+    <div class="overflow-auto p-3 bg-light"  [style.max-height]="height" style="width: 100%;">
+
+      <table class="table table-light table-bordered table-striped table-sm">
+      <thead>
+        <tr>
+          <th colspan="7" style="height: 40px; vertical-align: middle; color:white" [style.background-color]="tablehead">
+
+              <em [class]="getBiClass('/registroactividad')">&nbsp;&nbsp;</em><b>{{ title }}</b>
+
+          </th>
+        </tr>
+        <tr>
+          <td style="width: 12%" colspan="1">Fecha</td>
+          <td style="width: 5%" colspan="1">Día</td>
+          <td style="width: 10%">Hora Inicial</td>
+          <td style="width: 5%">N° horas</td>
+          <td style="width: 20%">Profesor(a)</td>
+          <th style="width: 4%; color: blue">Editar</th>
+          <th style="width: 44%">Descripción</th>
+        </tr>
+      </thead>
+      <tbody style="vertical-align: middle; text-align: center">
+        <tr
+          *ngFor="let entry of mainQuery; index as i"
+          style="height: fit-content"
+        >
+          <td>{{ entry.fecha }}</td>
+          <td>{{ fullDaysOfWeek[entry.Horario.dixId] }}</td>
+          <th>{{ entry.horaInicial }}</th>
+          <th>{{ entry.numeroHoras }}</th>
+          <td>
+            {{ entry.Profesor.apellido1 }} {{ entry.Profesor.apellido2 }} {{ entry.Profesor.nombre }}
+          </td>
+          <th>
+            <ng-container *ngIf="editable.get(i); else bloqueada">
+              <a
+                class="btn btn-link btn-sm px-3"
+                (click)="enableDisableInput(i)"
+              >
+                <em
+                  class="bi bi-save"
+                  *ngIf="inputIsEnabled.get(i); else onlyShow"
+                ></em>
+                <ng-template #onlyShow>
+                  <em class="bi bi-pencil-square"></em>
+                </ng-template>
+              </a>
+            </ng-container>
+            <ng-template #bloqueada>
+              <em class="bi bi-lock" style="color: rgb(97, 147, 255)"></em>
+            </ng-template>
+          </th>
+          <td>
+            <ng-container *ngIf="inputIsEnabled.get(i); else onlyShowB">
+              <input
+                  type="text"
+                  size="40"
+                  style="color: rgb(0, 0, 161)"
+                  value="{{ descripcionesToSave.get(i) }}"
+                  #observacionesInput
+                  (keyup)="onKeyFieldText(i, observacionesInput)"
+                  (keyup.escape)="resetValue(i, observacionesInput)"
+                />
+            </ng-container>
+            <ng-template #onlyShowB>
+              {{ descripciones.get(i) }}
+            </ng-template>
+          </td>
+
+        </tr>
+      </tbody>
+      </table>
+
+      <!--ng-container *ngFor="let alert of alerts">
+        <ngb-alert *ngIf="alert.show" [id]="alert.id" [type]="alert.type">
+        {{ alert.message }}
+        </ngb-alert>
+      </ng-container-->
+
+    </div>
+
+
+  </div>

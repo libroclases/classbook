@@ -1,0 +1,23 @@
+version: '3.3'
+services:
+  db:
+    image: postgres:16.0-bullseye
+    restart: always
+    container_name: dbpostgres
+    env_file:
+      - ./env/postgres.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data
+      - ./nodserver/csv/csv-no-id/:/var/lib/postgresql/csv
+  
+  adminer:
+    image: adminer:4.8.1-standalone
+    container_name: dbadminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+  

@@ -1,0 +1,52 @@
+table  {
+  width: auto;
+  margin:auto;
+}
+
+th {
+
+ background: rgba(0,0,0,0.01);
+}
+
+td {
+
+  text-align:justify;
+  background: rgba(0,0,0,0.01);
+}
+
+.top {
+text-align: center;
+border: 1px;
+border-color:lightgrey;
+padding-top: 1cap;
+border-radius: 2%;
+border-style: solid;
+align-items: center;
+width: 60%;
+margin: 1cap auto;
+margin-top: 2cap;
+
+}
+
+.center {
+  text-align: center;
+  border: 1px;
+  border-color:lightgrey;
+  padding-top: 0cap;
+  border-radius: 2%;
+  border-style: solid;
+  align-items: center;
+  width: 60%;
+  margin: 1cap auto;
+  margin-top: 2cap;
+
+}
+
+hr {
+  width: auto;
+  margin:auto;
+}
+
+span {
+  margin: 1cap;
+}

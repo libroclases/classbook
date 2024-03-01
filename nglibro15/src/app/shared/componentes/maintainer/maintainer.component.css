@@ -1,0 +1,18 @@
+
+td {
+  vertical-align:middle;
+}
+
+th {
+  align-content: center;
+  vertical-align: bottom;
+  text-align: center;
+  font-weight: normal;
+  text-indent:1ch;
+}
+
+
+tr , th, td {
+
+  background: rgba(0,0,0,0.01);
+}    

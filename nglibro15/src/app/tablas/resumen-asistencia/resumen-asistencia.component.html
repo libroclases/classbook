@@ -1,0 +1,38 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+<div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 1%;padding-bottom: 0%"
+[style.background-color]="bodybgcolor" [style.minHeight] = "height">
+
+  <div  style="float: right; padding-bottom: 0%; height:auto; ">
+    <multi-select
+    [tables]="selTables"
+    [change-functions]="changeFnsArray"
+    [patch-fks-from-storage]="patchFksFromStorage">
+    </multi-select>
+  </div>
+  <br>
+
+    <app-numbers-calendar
+      [title]="title"
+      [rowLabel]="rowLabel"
+      [total-label]="totalLabel"
+      [table]="table"
+      [endpoint-suffix]="endpoint_suffix"
+      [endpoint-foreign-keys]="endpoint_foreign_keys"
+      [row-count-title]="rowCountTitle"
+      [row-count-table]="rowCountTable"
+      [row-count-endpoint-suffix]="rowCountEndpointSuffix"
+      [row-count-foreign-keys]="rowCountForeignKeys"
+      [update-if-selected]="updateIfSelected"
+      [year-table]="yearTable"
+      [month-table]="monthTable"
+      [holidays-table]="holidaysTable"
+      [max-rows-number]="80"
+    >
+    </app-numbers-calendar>
+</div>  
+
+
+

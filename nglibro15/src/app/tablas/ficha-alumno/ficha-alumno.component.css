@@ -1,0 +1,22 @@
+th,
+td {
+  vertical-align: middle;
+  text-align: left;
+  text-indent: 1cap;
+}
+
+th {
+  align-content: center;
+  text-align: center;
+  font-weight: normal;
+  
+  
+}
+
+
+
+tr , th, td {
+  height: 4cap;
+  width: 50%;
+  background: rgba(0,0,0,0.01);
+}    

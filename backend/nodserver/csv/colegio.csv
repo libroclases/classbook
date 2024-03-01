@@ -1,0 +1,6 @@
+id|nombre|telefono|rut|direccion|email|www|regionId|provincixId|comunaId|tipocolegioId|createdAt|updatedAt
+1|Trinidad|56942597029|8685800-2|Las Pataguas 2234|contacto@colegiotrinidad.cl|www.colegiotrinidad.cl|7|23|103|2|2023-08-14|2023-08-14
+2|Nuevo Amanecer|56943397029|9685800-2|Los Jazmines 3526|contacto@colegionuevoamanecer.cl|www.colegionuevoamanecer.cl|7|23|103|2|2023-08-14|2023-08-14
+3|Las Tres Marías|56942572029|7685800-2|El Membrillo 367|contacto@colegiolastresmarias.cl|www.colegiolastresmarias.cl|7|23|109|2|2023-08-14|2023-08-14
+4|Obispo Orrego|56945677029|6685800-2|El petete 123|contacto@colegioobispoorrego.cl|www.colegioobispoorrego.cl|7|23|109|2|2023-08-14|2023-08-14
+5|Francisco Varela|56232848700|72499021-3|José Arrieta 10117|info@colegiofranciscovarela.cl|www.colegiofranciscovarela.cl|7|23|104|2|2023-08-14|2023-08-14

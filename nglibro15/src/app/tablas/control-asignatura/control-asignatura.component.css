@@ -1,0 +1,19 @@
+.virtual-scroll {
+    height: 650px;
+    width: 90%;
+    /* border: 1px solid black; */
+    float: right;
+  }
+  
+  
+  tr , th {
+    align-content: center;
+    text-align: center;
+    font-weight: normal;
+    background: rgba(0,0,0,0.01);
+  }  
+  
+  td {
+    text-align: left;
+    background: rgba(0,0,0,0.01);
+  }

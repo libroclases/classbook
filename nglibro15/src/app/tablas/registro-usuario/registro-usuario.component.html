@@ -1,0 +1,99 @@
+<div class="container-fluid" style="padding-left: 5%; padding-right: 5%;text-align:center;  padding-top: 2%;padding-bottom: 0%;"
+[style.background-color]="bodybgcolor">
+
+
+<div class="top">
+    <!--
+
+    <form [formGroup]="formConsulta">
+        <table class="table"><thead>
+          <tr><th><b>Registro Usuario</b></th></tr>
+          <tr><td>
+            email Usuario
+          </td>
+          <td>
+              <table>
+                <tr>
+                  <td><input type="text" id="email" formControlName="email"/></td></tr>
+                <tr><td><div style="width: 200px" *ngIf="formConsulta.controls['email']?.invalid && (formConsulta.controls['email']?.dirty || formConsulta.controls['email']?.touched)"  class="alert alert-danger">
+                  <div  *ngIf="formConsulta.controls['email']?.errors?.['emailValidator']">email no válido.</div>
+                  </div>
+                </td>
+                </tr>
+              </table>
+          </td>
+        </tr>
+        </thead>
+        </table>
+
+
+        <br>
+        <span><button type="button" class="btn  btn-sm"  (click)="email_consulta()" [disabled]="formConsulta.invalid"
+          [style.background-color]="modalbutton" class="text-light" >Buscar</button></span>
+        <span><button type="button" class="btn  btn-sm"  (click)="reset()" [style.background-color]="modalbutton" class="text-light" >Limpiar</button></span>
+        </form>
+        <br>
+        <hr>
+        <br>
+        <p *ngIf="usuario">{{email_asociado}}</p>
+
+    -->
+
+        <div class="center">
+          <h2>Registro Usuario</h2>
+          <form  [formGroup]="valuesForm">
+
+          <table  class="table table-sm table-secundary table-fit">
+            <tbody class="table-secundary" >
+              <tr><td>Email</td><td><input type="text" formControlName="email"/>
+                <div *ngIf="valuesForm.controls['email']?.invalid && (valuesForm.controls['email']?.dirty || valuesForm.controls['email']?.touched)"  class="alert alert-danger">
+                  <div *ngIf="valuesForm.controls['email']?.errors?.['emailValidator']">Por favor ingrese un email</div>
+                </div>
+              </td>
+              <td>
+                <button type="button" class="btn  btn-sm"  (click)="email_consulta()"
+                   [style.background-color]="modalbutton" class="text-light" >Buscar</button>
+              </td>
+            </tr>
+              <tr><td>Username</td><td><input type="text" formControlName="username"/>
+                <div *ngIf="valuesForm.controls['username']?.invalid && (valuesForm.controls['username']?.dirty || valuesForm.controls['username']?.touched)"  class="alert alert-danger">
+                  <div *ngIf="valuesForm.controls['username']?.errors?.['required']">Por favor ingrese un username</div>
+                </div>
+              </td></tr>
+              <tr *ngFor="let table of tables; index as i" ><td>{{getTableLabel(table)}}</td>
+                <th>
+                  <select class="form-select form-select-sm"
+                  [formControlName]="table"
+                  (change)="changeFunction(table, $event)">
+                    <option value=0>Ninguno</option>
+                    <option *ngFor="let r of (queries[table] | async)"
+                      [value]="r.id">{{getLabel(table, r)}}</option>
+                  </select>
+                  <div *ngIf="valuesForm.controls[table]?.invalid && (valuesForm.controls[table]?.dirty || valuesForm.controls[table]?.touched)"  class="alert alert-danger">
+                      <div *ngIf="valuesForm.controls[table]?.errors?.['selectValidator']">Debe ser seleccionado</div>
+                  </div>
+                </th>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+          <span *ngIf="valuesForm.valid"><em class="bi bi-check2-circle">&nbsp;Valid!</em></span>
+          <span *ngIf="!valuesForm.valid"><em class="bi bi-x-circle">&nbsp;Invalid!</em></span>
+          <span><button type="button" class="btn  btn-sm" [disabled]="valuesForm.invalid" (click)="ingresar()"
+            [style.background-color]="modalbutton" class="text-light">Ingresar</button></span>
+          <span><button type="button" class="btn  btn-sm" [disabled]="valuesForm.invalid" (click)="reset()"
+            [style.background-color]="modalbutton" class="text-light">Limpiar</button></span>
+          </form>
+          <br>
+          <p *ngIf="usuario">{{email_asociado}}</p>
+          <br>
+          <p>{{mensaje}}</p>
+
+      </div>
+   <br>
+</div>
+
+
+
+
+

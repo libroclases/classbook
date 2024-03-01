@@ -1,0 +1,28 @@
+.greycell {
+    background-color: #c9c9c9;
+  }
+  
+  th {
+    align-content: center;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 110%;
+    font-weight: normal;
+  }
+  
+  .foot {
+    align-content: center;
+    text-align: center;
+    font-size: 110%;
+    font-weight: normal;
+  }
+  
+  tr , th, td {
+  
+    background: rgba(0,0,0,0.01);
+  }
+  
+  div.center {
+    text-align: center;
+    margin: 0 auto;
+  }

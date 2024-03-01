@@ -1,0 +1,160 @@
+<div class="overflow-auto p-3 bg-light"  [style.max-height]="height" style="width: 100%;">
+
+<table
+  class="table table-sm  table-fit table-bordered table-hover"
+  style="width: 100%"  
+>
+  <thead>
+    <tr>
+      <th colspan="33"  [style.background-color]="tablehead" style="color:white; height: 40px">
+        <em [class]="getBiClass('/asistencia')">&nbsp;&nbsp;</em><b>{{ title }}</b> 
+        &nbsp;
+        <button
+        type="button"
+        class="btn btn-sm"
+        *ngIf="currentDateInMonth"
+        [disabled]="saveValuesDisabled"
+         [style.background-color]="modalbutton"
+        (click)="saveValues()"
+      >Guardar</button>
+    
+
+      </th>
+    </tr>
+  </thead>
+
+  <tbody style="width: 100%">
+    <ng-container *ngIf="nRows > 0">
+      <tr class="table-bordered">
+        <th style="width: 2.5%"></th>
+        <th></th>
+        <ng-container *ngFor="let c of colIndices">
+          <th style="width: 2.5%; text-align: center">
+            {{ daysOfWeek[dayIndicesInWeek[c]] }}
+          </th>
+        </ng-container>
+      </tr>
+      <tr class="table-bordered">
+        <th style="width: 6%">Num.</th>
+        <th style="padding-left: 3%">Nombre</th>
+        <ng-container *ngFor="let c of colIndices">
+          <th
+            *ngIf="columnLabelInRed.get(c); else notRed"
+            style="width: 2.5%; text-align: center; color: red"
+          >
+            {{ c + 1 }}
+          </th>
+          <ng-template #notRed>
+            <th style="width: 2.5%; color: black">{{ c + 1 }}</th>
+          </ng-template>
+        </ng-container>
+      </tr>
+      <ng-container
+        *ngIf="emptyTable; then tableIsEmpty; else tableHasData"
+      ></ng-container>
+      <ng-template #tableIsEmpty>
+        <tr *ngFor="let lbl of rowLabels">
+          <td></td>
+          <td style="padding-left: 3%">{{ lbl }}</td>
+          <td
+            *ngFor="let cl of colIndices"
+            style="text-align: center"
+          ></td>
+        </tr>
+      </ng-template>
+      <ng-template #tableHasData>
+        <tr *ngFor="let rowLbl of rowLabels; let row = index">
+          <td style="text-align: center">{{ row + 1 }}</td>
+          <td style="padding-left: 3%">{{ rowLbl }}</td>
+          <ng-container
+            *ngFor="let col of colIndices"
+            style="text-align: center"
+          >
+            <ng-container
+              *ngIf="columnIsGrey.get(col); then thenBlock; else elseBlock"
+            ></ng-container>
+            <ng-template #thenBlock>
+              <td class="greycell"></td>
+            </ng-template>
+            <ng-template #elseBlock>
+              <td style="text-align: center">
+                <ng-container
+                  *ngIf="
+                    selected.get(rowLbl)!.get(col) == null;
+                    then noData;
+                    else someData
+                  "
+                ></ng-container>
+                <ng-template #someData>
+                  <ng-container
+                    *ngIf="
+                      columnEnabled.get(col);
+                      then isEnabled;
+                      else isDisabled
+                    "
+                  >
+                  </ng-container>
+                  <ng-template #isDisabled>
+                    <input
+                      mdbCheckbox
+                      [value]=""
+                      class="form-check-input"
+                      type="checkbox"
+                      [checked]="selected.get(rowLbl)!.get(col)"
+                      [disabled]="true"
+                      [id]="row.toString() + ',' + col.toString()"
+                      aria-label="..."
+                    />
+                  </ng-template>
+                  <ng-template #isEnabled>
+                    <div>
+                      <input
+                        mdbCheckbox
+                        [value]=""
+                        class="form-check-input"
+                        #target
+                        type="checkbox"
+                        [checked]="checkBoxesToday.get(rowLbl)"
+                        [id]="row.toString() + ',' + col.toString()"
+                        (change)="toggleCheckBox(rowLbl)"
+                        aria-label="..."
+                      />
+                    </div>
+                  </ng-template>
+                </ng-template>
+                <ng-template #noData>
+                  <div></div>
+                </ng-template>
+              </td>
+            </ng-template>
+          </ng-container>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="foot">Asistencia total (de {{ nRows }})</td>
+          <ng-container
+            *ngFor="let col of colIndices"
+            style="text-align: center"
+          >
+            <ng-container
+              *ngIf="columnIsGrey.get(col); then thenBlock; else elseBlock"
+            ></ng-container>
+            <ng-template #thenBlock>
+              <td class="greycell"></td>
+            </ng-template>
+            <ng-template #elseBlock>
+              <td class="foot" style="color: blue">{{ totalAtColumn(col) }}</td>
+            </ng-template>
+          </ng-container>
+        </tr>
+      </ng-template>
+    </ng-container>
+  </tbody>
+</table>
+<p></p>
+<ng-container *ngFor="let alert of alerts">
+  <ngb-alert *ngIf="alert.show" [id]="alert.id" [type]="alert.type">
+    {{ alert.message }}
+  </ngb-alert>
+</ng-container>
+</div>

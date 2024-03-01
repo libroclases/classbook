@@ -1,0 +1,1 @@
+psql -U ulimon -h 127.0.0.1 -d libro_clases -c "\i copy_csv.sql"

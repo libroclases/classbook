@@ -1,0 +1,88 @@
+<div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 1%;padding-bottom: 0%; padding-top: 2%;"
+[style.background-color]="bodybgcolor" [style.minHeight] = "height">
+
+  <!-- Selectores -->
+
+  <!--
+    [fatherId] = "fatherId"
+    [father] = "father"
+  -->
+
+<div style="float: right; padding-bottom: 0%; height:100px; ">
+  <multi-select
+    [tables]="selTables"
+    [ignore-FK-requirements]="ignoreFkRequirements"
+    [change-functions]="changeFnsArray"
+    [patch-fks-from-storage]="patchFKsFromStorage">
+  </multi-select>
+</div>
+
+
+   <!-- Tabla Principal -->
+   <div class="overflow-auto p-3 bg-light"  [style.max-height]="height" style="width: 100%;">
+     <table  class="table table-sm  table-bordered">
+    <thead class="table-bordered">
+      <tr>
+        <th [style.background-color]="tablehead"><a class="btn btn-link btn-sm" data-bs-toggle="tooltip" title="Imprimir"
+          data-bs-target="#staticBackdrop" (click)="onPrint()"><em  class="bi bi-printer"></em></a>
+        </th>
+        <th colspan="6" style="text-align: center; color:white"  [style.background-color]="tablehead">
+          <em [class]="getBiClass('/'+ mainTable)">&nbsp;&nbsp;&nbsp;&nbsp;</em>
+          {{titulo}}
+        </th>
+      </tr>
+      <tr>
+        <th style="width: 14.2%">Hora</th>
+
+          <th  *ngFor="let d of days" style="width: 14.2%">{{d.nombre}}
+            <button class="btn btn-outline-light text-dark btn-sm" data-bs-toggle="tooltip" title="Nuevo" [disabled]="stateOfplusButton == false"
+            (click)="openDialog({Dix: d.id},'create')"><em  class="bi bi-plus-lg"></em></button>
+          </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <table  class="table table-sm table-fit table-bordered">
+            <thead>
+
+              <tr *ngFor="let h of (horaasignada$ | async)">
+                <td style="text-align: center;">{{h.numero}}</td><td  style="text-align: center;">{{h.horario}}</td>
+              </tr>
+
+            </thead>
+          </table>
+        </td>
+          <td *ngFor="let d of days">
+            <table  class="table table-sm table-fit table-bordered">
+              <tbody>
+
+                <tr *ngFor="let dayOf of dayOfWeekMap.get(d.id-1)">
+
+                    <td *ngIf="dayOf.AsignaturaProfesor">
+
+                            <button class="btn btn-outline-light text-dark btn-sm" data-bs-toggle="tooltip"  [disabled]="stateOfModalEdit == false"
+                               title=" {{dayOf.Profesor.apellido1}} {{dayOf.Profesor.apellido2}} {{dayOf.Profesor.nombre}}"
+                              (click)="openDialog(dayOf,'update')">{{dayOf.AsignaturaProfesor.nombre}}
+                            </button>
+
+                    </td>
+                    <td *ngIf="!dayOf.AsignaturaProfesor">
+                      &nbsp;
+                    </td>
+
+                </tr>
+
+
+              </tbody>
+            </table>
+          </td>
+
+      </tr>
+    </tbody>
+     </table>
+   </div>
+  
+
+  <!-- Modal -->
+</div>

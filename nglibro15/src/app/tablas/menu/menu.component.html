@@ -1,0 +1,213 @@
+<!--div class = "menu" style="height: 52px"-->
+    <nav class="navbar navbar-expand-sm navbar-light bg-light" [style.background]="menu">
+      <div class="container-fluid">
+
+
+        <a class="navbar-brand" routerLink="/home"  routerLinkActive="active" title="Home" title="Páginia Inicio"><em class='bi bi-house-door'></em></a>
+
+
+        <!--button class="button" type="btn btn-light btn-sm" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+          <em class="navbar-toggler-icon"></em>
+        </button-->
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+
+          <ul class="navbar-nav">
+
+
+
+            <ng-container *ngIf="auth.isAuthenticated$ | async">
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-table'>&nbsp;Asistencia&nbsp;</em></a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item"  routerLink="/asistencia" routerLinkActive="active">Ingreso</a></li>
+                  <li><a class="dropdown-item"  routerLink="/resumen_asistencia" routerLinkActive="active">Resumen</a></li>
+
+                </ul>
+              </li>
+
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-bank'>&nbsp;Colegio&nbsp;</em></a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item"  routerLink="/colegio" routerLinkActive="active" (click)="sendtype('Colegio',tipousuario)">Colegio</a></li>
+                  <li><a class="dropdown-item"  routerLink="/asistentecolegio" routerLinkActive="active" (click)="sendtype('AsistenteColegio',tipousuario)">Asistente Colegio</a></li>
+                  <li><a class="dropdown-item"  routerLink="/curso" routerLinkActive="active" (click)="sendtype('Curso',tipousuario)">Curso</a></li>
+                  <li><a class="dropdown-item"  routerLink="/asignatura" routerLinkActive="active" (click)="sendtype('TipoUsuario',tipousuario)">Asignatura</a></li>
+                  <li><a class="dropdown-item"  routerLink="/horaasignada" routerLinkActive="active" (click)="sendtype('HoraAsignada',tipousuario)">Hora Asignada</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-mortarboard-fill'>&nbsp;Alumno&nbsp;</em></a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" routerLink="/alumno" routerLinkActive="active" (click)="sendtype('Alumno',tipousuario)">Alumno</a></li>
+                  <li><a class="dropdown-item" routerLink="/estadoalumno" routerLinkActive="active" (click)="sendtype('EstadoAlumno',tipousuario)">Estado Alumno</a></li>
+                  <li><a class="dropdown-item" routerLink="/apoderado" routerLinkActive="active" (click)="sendtype('Apoderado',tipousuario)">Apoderado</a></li>
+                  <li><a class="dropdown-item" routerLink="/anotaciones" routerLinkActive="active" (click)="sendtype('Anotacion',tipousuario)">Observaciones</a></li>
+                  <li><a class="dropdown-item" routerLink="/fichaalumno" routerLinkActive="active" >Ficha Alumno</a></li>
+                  <li><a class="dropdown-item" routerLink="/matricula" routerLinkActive="active"  (click)="sendtype('Matricula',tipousuario)">Matrícula</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><em class='bi bi-person-video3'>&nbsp;Profesor&nbsp;</em></a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" routerLink="/profesor" routerLinkActive="active" (click)="sendtype('Profesor',tipousuario)">Profesor</a></li>
+                  <li><a class="dropdown-item" routerLink="/asignaturaprofesor" routerLinkActive="active" (click)="sendtype('TipoUsuario',tipousuario)">Asignatura Profesor</a></li>
+                  <li><a class="dropdown-item" routerLink="/evaluacion" routerLinkActive="active" (click)="sendtype('Evaluacion',tipousuario)">Evaluación</a></li>
+                  <li><a class="dropdown-item" routerLink="/nota" routerLinkActive="active"  (click)="sendtype('Nota',tipousuario)">Notas</a></li>
+                  <li><a class="dropdown-item" routerLink="/horario" routerLinkActive="active">Horario</a></li>
+                  <li><a class="dropdown-item" routerLink="/horasinscritas" routerLinkActive="active">Horas Inscritas</a></li>
+                  <li><a class="dropdown-item" routerLink="/control_asignatura" routerLinkActive="active">Control Asignatura</a></li>
+                  <li><a class="dropdown-item" routerLink="/registro_actividad" routerLinkActive="active">Registro Actividad</a></li>
+
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-person-fill-lock'>&nbsp;Admin&nbsp;</em></a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" routerLink="/tipousuario" routerLinkActive="active" (click)="sendtype('TipoUsuario',tipousuario)">TipoUsuario</a></li>
+                  <li><a class="dropdown-item" routerLink="/usuario" routerLinkActive="active" (click)="sendtype('Usuario',tipousuario)">Usuario</a></li>
+                  <li><a class="dropdown-item" routerLink="/utp" routerLinkActive="active" (click)="sendtype('Utp',tipousuario)">UTP</a></li>
+                  <li><a class="dropdown-item" routerLink="/tabla" routerLinkActive="active" (click)="sendtype('Tabla',tipousuario)">Tabla</a></li>
+                  <li><a class="dropdown-item" routerLink="/ventana" routerLinkActive="active" (click)="sendtype('Ventana',tipousuario)">Ventana</a></li>
+                </ul>
+              </li>
+
+              <li class="nav-item dropdown">
+                <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-grid'>&nbsp;Procesos&nbsp;</em></button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item"  routerLink="matricula-alumno" routerLinkActive="active">Matrícula Alumno</a></li>
+                  <li><a class="dropdown-item" routerLink="registro-usuario" routerLinkActive="active">Registro Usuario</a></li>
+                  <li><a class="dropdown-item" routerLink="informar-sigue" routerLinkActive="active">Informe SIGE</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-palette'>&nbsp;Temas</em></button>
+                <ul class="dropdown-menu">
+
+                  <li><a class="dropdown-item" (click)="mensaje([1,'azul'])">&nbsp;Azul</a></li>
+                  <li><a class="dropdown-item" (click)="mensaje([2,'verde'])">&nbsp;Verde</a></li>
+                  <li><a class="dropdown-item" (click)="mensaje([3,'naranjo'])">&nbsp;Naranjo</a></li>
+
+                </ul>
+              </li>
+            </ng-container>
+
+            <ng-container>
+
+              <li class="nav-item dropdown">
+                <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-question-square'>&nbsp;Ayuda&nbsp;</em></button>
+                <ul class="dropdown-menu">
+
+                  <li><a class="dropdown-item" routerLink="/home/tutoriales" routerLinkActive="active">&nbsp;Tutoriales en línea</a></li>
+                  <li><a class="dropdown-item" routerLink="/home/preguntas" routerLinkActive="active">&nbsp;Preguntas Frecuentes</a></li>
+
+                </ul>
+              </li>
+
+            <li class="nav-item">
+              <a class="nav-link"  title="navegación"
+              type="button" data-bs-toggle="offcanvas" data-bs-target="#demo"
+             ><em class='bi bi-compass'>&nbsp;Navegación</em></a>
+            </li>
+
+            <li class="nav-item" *ngIf="!isFullScreen">
+              <a class="nav-link"  title="Expandir"
+              type="button" (click)="toggleFullScreen()"
+             ><em class="bi bi-arrows-fullscreen">&nbsp;Expandir</em></a>
+            </li>
+
+            <li class="nav-item" *ngIf="isFullScreen">
+              <a class="nav-link"  title="Contraer"
+              type="button" (click)="toggleFullScreen()"
+             ><em class="bi bi-fullscreen-exit">&nbsp;Contraer</em></a>
+            </li>
+
+
+            <li class="nav-item dropdown">
+                <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-info-square'>&nbsp;Acerca de&nbsp;</em></button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item"  routerLink="/home/acerca" routerLinkActive="active">Acerca de</a></li>
+                  <li><a class="dropdown-item" routerLink="/home/contacto" routerLinkActive="active">Contáctenos</a></li>
+                </ul>
+            </li>
+
+          </ng-container>
+          </ul>
+
+        </div>
+
+      </div>
+    </nav>
+
+    <!-- Offcanvas Sidebar -->
+<div class="offcanvas offcanvas-bottom" style="height: 70%;" id="demo">
+  <div class="offcanvas-header  bg-light">
+    <h1 class="offcanvas-title">Navegación</h1>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body bg-light small">
+    <table class="table table-bordered bg-light">
+      <thead  class="table-dark">
+          <tr><th>Concepto</th><th>Menu</th><th>Submenu</th></tr>
+      </thead>
+      <tbody>
+          <tr><td>Ingreso Asistencia por curso</td><td rowspan="2">Asistencia</td><td>Ingreso</td></tr>
+          <tr><td>Resumen Asistencia por cursos</td><td>Resumen</td></tr>
+          <!--tr><td>Control Asignatura</td><td rowspan="3">Principal</td><td rowspan="3"></td></tr-->
+          <!--tr><td>Registro de Actividades</td></tr-->
+
+          <!--tr><td>Horario de Profesores</td><td rowspan="2">horario</td><td>Horario</td></tr-->
+          <!--tr><td>Horas Inscritas Profesor</td><td>Horas Inscritas</td></tr-->
+
+          <tr><td>Mantenedor Colegios</td><td rowspan="5">Colegio</td><td>Colegio</td></tr>
+          <tr><td>Asistentes por colegio</td><td>Asistente Colegio</td></tr>
+          <tr><td>Cursos por Colegio</td><td>Curso</td></tr>
+          <tr><td>Asignatura</td><td>Asignatura</td></tr>
+          <tr><td>Asignación de horarios</td><td>Hora Asignada</td></tr>
+
+          <tr><td>Mantenedor Alumno</td><td rowspan="7">Alumno</td><td>Alumno</td><tr>
+          <tr><td>Estado Alumno</td><td>Estados del Alumno</td></tr>
+          <tr><td>Mantenedor Apoderado</td><td>Apoderado</td></tr>
+          <tr><td>Observaciones Alumno</td><td>Observaciones</td></tr>
+          <tr><td>Ficha de Alumno</td><td>Ficha Alumno</td></tr>
+          <tr><td>Mantenedor Matrícula Alumno</td><td>Matrícula</td></tr>
+
+          <tr><td>Mantenedor Profesor</td><td rowspan="8">Profesor</td><td>Profesor</td></tr>
+          <tr><td>Asignaturas por profesor</td><td>Asignatura Profesor</td></tr>
+          <tr><td>Programación de Evaluaciones</td><td>Evaluación</td></tr>
+          <tr><td>Notas de Alumno</td><td>Notas</td></tr>
+          <tr><td>Horario de Profesores</td><td>Horarios</td></tr>
+          <tr><td>Horas inscritas por profesor</td><td>Horas Inscritas</td></tr>
+          <tr><td>Control Asignatura</td><td>Control Asignatura</td></tr>
+          <tr><td>Registro Actividad</td><td>registro Actividad</td></tr>
+
+
+
+          <tr><td>Tipo Usuario</td><td rowspan="4">Admin</td><td>Tipo usuario</td></tr>
+          <tr><td>Usuario</td><td>Usuario</td></tr>
+          <tr><td>Tablas de asignación ventanas</td><td>Tablas</td></tr>
+          <tr><td>Ventanas de Tiempo Correciones</td><td>Ventanas</td></tr>
+
+          <tr><td>Matricula Alumno</td><td rowspan="3">Procesos</td><td>Matricula Alumno</td></tr>
+          <tr><td>Registro Usuario</td><td>Registro Usuario</td></tr>
+          <tr><td>Informe SIGE</td><td>Informe SIGE</td></tr>
+
+          <tr><td>Tutoriales en Línea</td><td rowspan="2">Ayuda</td><td>Tutoriales</td></tr>
+          <tr><td>Preguntas Frecuentes</td><td>faqs</td></tr>
+
+          <tr><td>Acerca de</td><td rowspan="2">Acerca</td><td>Acerca de</td></tr>
+          <tr><td>Contáctenos</td><td>Contáctenos</td></tr>
+
+          </tbody>
+  </table>
+
+  </div>
+</div>
+
+  <!--/div-->

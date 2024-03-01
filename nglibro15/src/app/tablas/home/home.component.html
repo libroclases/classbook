@@ -1,0 +1,42 @@
+<div class="trasparente" [style.background-image]="url"
+[style.background-position]="position"
+[style.background-size]="size"
+[style.height] = "height"
+
+>
+
+ 
+
+    <div [class]="showme" *ngIf="showme != ''">
+      <h3 [class]="color">{{titles[showme]}}</h3>
+     
+      <h3 [class]="color">
+        {{intro[showme]}}
+      </h3>
+
+      <table class="table table-bordered">
+      <thead></thead>
+      <tbody>
+          <tr *ngFor="let b of body[showme]">
+            <th [class]="color">{{b}}</th>
+
+              <th *ngIf="showme=='tutoriales'" [class]="color" style="text-align: center;"><a href='#'>hml</a></th>
+              <th *ngIf="showme=='tutoriales'" [class]="color" style="text-align: center;"><a href='#'>pdf</a></th>
+              <th *ngIf="showme=='tutoriales'" [class]="color" style="text-align: center;"><a href='#'><em class="bi bi-youtube"></em></a></th>
+
+              <th *ngIf="showme=='preguntas' || showme=='acerca'" style="text-align: center; width: 80px;"><a href='#'>ver mas</a></th>
+
+          </tr>
+      </tbody>
+      </table>
+     
+      <h3 [class]="color">
+        {{bottom[showme]}}
+      </h3>
+    </div>
+
+</div>
+
+
+
+

@@ -1,0 +1,29 @@
+<div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 1%;padding-bottom: 0%"
+[style.background-color]="bodybgcolor" [style.minHeight] = "height">
+
+  <div  style="float: right; padding-bottom: 1%; height:auto; ">
+    <multi-select
+    [tables]="selTables"
+    [change-functions]="changeFnsArray"
+    [patch-fks-from-storage]="patchFksFromStorage">
+    </multi-select>
+  </div>
+  <br>
+  <checkbox-calendar
+    [title]="title"
+    [table]="table"
+    [check-field]="checkField"
+    [update-if-selected]="updateIfSelected"
+    [row-fk-table]="rowTable"
+    [year-table]="yearTable"
+    [month-table]="monthTable"
+    [holidays-table]="holidaysTable"
+    [day-number-field]="dayNumberField"
+    maxRows="50"
+    [populate-function]="populateAsistenciaMes">
+  </checkbox-calendar>
+
+ </div>
+
+
+

@@ -1,0 +1,15 @@
+
+  tr ,  td {
+    align-content: center;
+    text-align: left;
+    font-weight: normal;
+    background: rgba(0,0,0,0.01);
+    padding: 1cap;
+  }   
+
+  th {
+    text-align: center;
+    padding: 1cap;
+    background: rgba(0,0,0,0.01);
+  }
+  

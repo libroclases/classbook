@@ -1,0 +1,251 @@
+<div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 1%;padding-bottom: 0%"
+[style.background-color]="bodybgcolor" [style.minHeight] = "height">
+
+          <div style="float: left; padding-top: 1%">
+              <form class="row row-cols-sm-auto">
+                <div class="col-12">
+                  <div class="input-group">
+                    <input
+                      class="form-control"
+                      placeholder="yyyy-mm-dd"
+                      name="dp"
+                      [(ngModel)]="model"
+                      ngbDatepicker
+                      (dateSelect)="datePickerCallback()"
+                      #d="ngbDatepicker"
+                    />
+                    <button
+                      class="btn btn-outline-secondary bi bi-calendar3"
+                      (click)="d.toggle()"
+                      type="button"
+                    ></button>
+                  </div>
+                </div>
+              </form>
+          </div>
+            
+          <div style="float: right; padding-bottom: 0%; height:100px; ">
+              <multi-select
+                [tables]="fKeysSel"
+              
+                [change-functions]="changeFnsArray"
+                [patch-fks-from-storage]="patchFksFromStorage"
+              >
+              </multi-select>
+          </div>
+
+          <div class="overflow-auto p-3 bg-light"  [style.max-height]="height" style="width: 100%;">
+            
+            <table class="table  table-bordered table-fix table-striped table-sm">
+              <thead>
+                <tr>
+                  <th colspan="12" style="height: 40px; vertical-align: middle; color: white;"  [style.background-color]="tablehead">
+                    <em [class]="getBiClass('/control_asignatura')"> &nbsp;&nbsp;</em
+                    ><b>Control de Asignatura</b>
+                    <a *ngIf="allSelectorsSet" style="color: blue">
+                      :: {{ getSelectorText("curso") }}</a
+                    >
+                  </th>
+                </tr>
+                <tr>
+                  <th style="width: 3.25%">Hora</th>
+                  <th style="width: 12%">Asignatura</th>
+                  <th style="width: 3.75%; color: blue">Editar</th>
+                  <th style="width: 16%" colspan="4">Inasistentes</th>
+                  <th style="width: 4%">Asist.</th>
+                  <th style="width: 4%">Atrasos</th>
+                  <th style="width: 18%">Profesor(a)</th>
+                  <th style="width: 18%">Profesor(a) PIE</th>
+                  <th style="width: 21%">Observaciones</th>
+                </tr>
+              </thead>
+              <tbody style="vertical-align: middle; text-align: center">
+                <tr
+                  *ngFor="let hora of indicesHoras.slice(0, this.numEntries)"
+                  style="height: 40px"
+                >
+                  <td>&nbsp;{{ hora }}</td>
+                  <td>&nbsp;{{ nombresAsignaturas.get(hora) }}</td>
+                  <td>
+                    <ng-container *ngIf="editable.get(hora); else bloqueada">
+                      <a
+                        class="btn btn-link btn-sm px-3"
+                        (click)="enableDisableInput(hora)"
+                      >
+                        <em
+                          class="bi bi-save"
+                          *ngIf="inputIsEnabled[hora]; else onlyShow"
+                        ></em>
+                        <ng-template #onlyShow>
+                          <em class="bi bi-pencil-square"></em>
+                        </ng-template>
+                      </a>
+                    </ng-container>
+                    <ng-template #bloqueada>
+                      <em class="bi bi-lock" style="color: rgb(97, 147, 255)"></em>
+                    </ng-template>
+                  </td>
+                  <td style="width: 4%">H ({{ n_hombres }})</td>
+                  <td style="width: 4%">
+                    <ng-container *ngIf="inputIsEnabled[hora]; else onlyShowA">
+                      <input
+                        type="text"
+                        size="2"
+                        style="color: blue"
+                        value="{{ valuesToSave.get('inasistentesHombres')!.get(hora) }}"
+                        #inasHomInput
+                        (keyup)="
+                          onKeyField(
+                            'inasistentesHombres',
+                            hora,
+                            inasHomInput,
+                            n_hombres
+                          )
+                        "
+                        (keyup.escape)="
+                          resetValue('inasistentesHombres', hora, inasHomInput)
+                        "
+                      />
+                    </ng-container>
+                    <ng-template #onlyShowA>
+                      <div style="color: blue">
+                        {{ valuesToSave.get("inasistentesHombres")!.get(hora) }}
+                      </div>
+                    </ng-template>
+                  </td>
+
+                  <td style="width: 4%">M ({{ n_mujeres }})</td>
+                  <td style="width: 4%">
+                    <ng-container *ngIf="inputIsEnabled[hora]; else onlyShowB">
+                      <input
+                        type="text"
+                        size="2"
+                        style="color: blue"
+                        value="{{ valuesToSave.get('inasistentesMujeres')!.get(hora) }}"
+                        #inasMujInput
+                        (keyup)="
+                          onKeyField(
+                            'inasistentesMujeres',
+                            hora,
+                            inasMujInput,
+                            n_mujeres
+                          )
+                        "
+                        (keyup.escape)="
+                          resetValue('inasistentesMujeres', hora, inasMujInput)
+                        "
+                      />
+                    </ng-container>
+                    <ng-template #onlyShowB>
+                      <div style="color: blue">
+                        {{ valuesToSave.get("inasistentesMujeres")!.get(hora) }}
+                      </div>
+                    </ng-template>
+                  </td>
+
+                  <td>
+                    {{ asistenciaHombres(hora) + asistenciaMujeres(hora) }}/{{
+                      n_curso
+                    }}
+                  </td>
+                  <td>
+                    <ng-container *ngIf="inputIsEnabled[hora]; else onlyShowC">
+                      <input
+                        type="text"
+                        size="2"
+                        style="color: blue"
+                        value="{{ valuesToSave.get('atrasos')!.get(hora) }}"
+                        #atrasosInput
+                        (keyup)="
+                          onKeyField(
+                            'atrasos',
+                            hora,
+                            atrasosInput,
+                            n_hombres + n_mujeres
+                          )
+                        "
+                        (keyup.escape)="resetValue('atrasos', hora, atrasosInput)"
+                      />
+                    </ng-container>
+                    <ng-template #onlyShowC>
+                      <a style="color: blue">{{
+                        valuesToSave.get("atrasos")!.get(hora)
+                      }}</a>
+                    </ng-template>
+                  </td>
+                  <td>{{ nombresProfesores.get(hora) }}</td>
+                  <td>
+                    <ng-container *ngIf="inputIsEnabled[hora]; else onlyShowD">
+                      <form [formGroup]="profPieFormGroup">
+                        <select
+                          select
+                          class="form-select form-select-sm"
+                          [formControlName]="hora.toString()"
+                          (change)="changeProfPie(hora, $event)"
+                        >
+                          <option value="0">Ninguno</option>
+                          <option *ngFor="let pp of profesoresPie" [value]="pp.id">
+                            {{ getObjectLabel("profesor", pp) }}
+                          </option>
+                        </select>
+                      </form>
+                    </ng-container>
+                    <ng-template #onlyShowD>
+                      <a>{{ pieNombres.get(pieValues.get(hora)!) }}</a>
+                    </ng-template>
+                  </td>
+                  <td>
+                    <ng-container *ngIf="inputIsEnabled[hora]; else onlyShowE">
+                      <input
+                        type="text"
+                        size="40"
+                        style="color: rgb(0, 0, 161)"
+                        value="{{ valuesToSave.get('observaciones')!.get(hora) }}"
+                        #observacionesInput
+                        (keyup)="
+                          onKeyFieldText('observaciones', hora, observacionesInput)
+                        "
+                        (keyup.escape)="
+                          resetValue('observaciones', hora, observacionesInput)
+                        "
+                      />
+                    </ng-container>
+                    <ng-template #onlyShowE>
+                      <div style="width: 20">
+                        <a style="color: rgb(0, 0, 161)">{{
+                          valuesToSave.get("observaciones")!.get(hora)
+                        }}</a>
+                      </div>
+                    </ng-template>
+                  </td>
+                </tr>
+                <tr
+                  *ngFor="let i of indicesHoras.slice(this.numEntries)"
+                  style="height: 40px"
+                >
+                  <td>{{ i }}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!--ng-container *ngFor="let alert of alerts">
+              <ngb-alert *ngIf="alert.show" [id]="alert.id" [type]="alert.type">
+                {{ alert.message }}
+              </ngb-alert>
+            </ng-container-->
+
+          </div>
+  </div>
+  
+
