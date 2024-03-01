@@ -57,13 +57,13 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   menu_height = environment.cabecera.menu_height;
   margen_superior_tabla = environment.cabecera.margen_superior_tabla
 
-  height = window.innerHeight - (this.banner_height + this.menu_height +  250) + 'px';
+  height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
 
   url!:string;
 
   @HostListener('window:resize', ['$event'])
   onResize(event:any) {
-    this.height = event.target.innerHeight - (this.banner_height + this.menu_height + 250) + 'px';
+    this.height = event.target.innerHeight - (this.banner_height + this.menu_height) + 'px';
   }
 
   // Tabla Principal

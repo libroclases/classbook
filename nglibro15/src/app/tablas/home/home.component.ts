@@ -25,6 +25,7 @@ export class HomeComponent {
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
 
+
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
 
   showme = '';
