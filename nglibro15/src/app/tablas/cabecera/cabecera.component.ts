@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { environment as env } from '../../../environments/environment';
 import { UserInfoService } from '../../shared/services/user-info/user-info.service';
-import { ColorService } from '../../shared/services/color-service/color.service';
+import { MessageService } from '../../shared/services/message/message.service';
 import { AsyncPipe } from '@angular/common';
 import { AuthService } from '@auth0/auth0-angular';
 
@@ -19,13 +19,13 @@ export class CabeceraComponent {
 
   constructor(
     public userInfo: UserInfoService,
-    public cs: ColorService,
+    public ms: MessageService,
     public auth: AuthService) {
 
     this.auth.isAuthenticated$.subscribe(isAuth => { if(isAuth) {
       userInfo.personalInfo$.subscribe( info  => {
         if (info.usuario) {
-          this.cs.nextColor(info.usuario.Tema.nombre);
+          this.ms.nextColor(info.usuario.Tema.nombre);
           sessionStorage.setItem('Color', info.usuario.Tema.nombre);
           this.fullName = (info.datos_usuario) ? Object.values(info.datos_usuario).slice(1).toString(): '';
         } else {
@@ -37,15 +37,15 @@ export class CabeceraComponent {
 
     } else {
        let color = sessionStorage.getItem('Color');
-       if (color) { this.cs.nextColor(color) }
-       else { this.cs.nextColor('azul'); }
+       if (color) { this.ms.nextColor(color) }
+       else { this.ms.nextColor('azul'); }
 
     }
 
     })
 
 
-    cs.color_msg.subscribe((color:any) =>  {
+    ms.color_msg.subscribe((color:any) =>  {
       if (color=='azul') {
         this.color = this.objcolors.azul.color;
         this.lineal = this.objcolors.azul.lineal;

@@ -19,7 +19,7 @@ import { SelectionIdsService } from '../../services/selection-ids/selection-ids.
 import { CommonModule, NgFor, formatDate } from '@angular/common';
 import { selectValidator } from '../../directives/select-validator/select-validator.directive';
 
-import { ColorService } from '../../services/color-service/color.service';
+
 
 import { MessageService } from '../../services/message/message.service';
 import { Output, EventEmitter } from '@angular/core';
@@ -82,7 +82,7 @@ data: any = {}
   private fKeysService: ForeignKeysService ,
   private fb: FormBuilder,
 
-  private cs : ColorService,
+  private ms : MessageService,
   private iconsService: IconsService,
   private labelsService: LabelsService,
   private selIdsService: SelectionIdsService,
@@ -112,7 +112,7 @@ data: any = {}
     })
 
 
- cs.color_msg.subscribe(color =>  {
+ ms.color_msg.subscribe(color =>  {
 
     //  TODO  Asignar dinamicamente los indices
 

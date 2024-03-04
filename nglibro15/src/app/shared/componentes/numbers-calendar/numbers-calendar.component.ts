@@ -7,7 +7,7 @@ import { SelectionIdsService } from '../../services/selection-ids/selection-ids.
 import { SubscriptionsManagerService } from '../../services/subscriptions-manager/subscriptions-manager.service';
 import { IconsService } from '../../services/icons/icons.service';
 import { environment } from '../../../../environments/environment';
-import { ColorService } from '../../services/color-service/color.service';
+import { MessageService } from '../../services/message/message.service';
 import { NgFor, NgIf } from '@angular/common';
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 
@@ -123,7 +123,7 @@ export class NumbersCalendarComponent  implements OnInit, OnDestroy {
   entryIdToday: Map<string, number> = new Map();
 
   constructor(
-    cs: ColorService,
+    ms: MessageService,
     private crud: CrudService,
     private selIdsService: SelectionIdsService,
     private subsManagerService: SubscriptionsManagerService,
@@ -132,7 +132,7 @@ export class NumbersCalendarComponent  implements OnInit, OnDestroy {
   ) {
     this.configAlert.dismissible = false;
 
-    cs.color_msg.subscribe(color =>  {
+    ms.color_msg.subscribe(color =>  {
 
       //  TODO  Asignar dinamicamente los indices
 

@@ -6,7 +6,6 @@ import { ModalDialog } from 'src/app/shared/componentes/modal-dialog/modal-dialo
 import { emailValidator } from 'src/app/shared/directives/email-validator/email-validator.directive';
 import { rutValidator } from 'src/app/shared/directives/rut-validator/rut-validator.directive';
 import { selectValidator } from 'src/app/shared/directives/select-validator/select-validator.directive';
-import { ColorService } from 'src/app/shared/services/color-service/color.service';
 import { CrudService } from 'src/app/shared/services/crud/crud.service';
 import { LabelsService } from 'src/app/shared/services/labels/labels.service';
 import { MessageService } from 'src/app/shared/services/message/message.service';
@@ -135,11 +134,11 @@ export class RegistroUsuarioComponent implements OnInit {
     public dialog: MatDialog,
     private userid: UsuarioIdService,
     private crud: CrudService,
-    private cs : ColorService,
+    private ms : MessageService,
     private labelsService: LabelsService,
     private selIdsService: SelectionIdsService, ) {
 
-      cs.color_msg.subscribe((color:any) =>  {
+      ms.color_msg.subscribe((color:any) =>  {
 
 
         if (color=='azul') {

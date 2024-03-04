@@ -13,7 +13,7 @@ import { Anno } from '../../interfaces/anno.interface';
 import { IconsService } from '../../shared/services/icons/icons.service';
 import { Alert } from '../../interfaces/generic.interface';
 import { ProfesorPie } from '../../interfaces/profesor.interface';
-import { ColorService } from '../../shared/services/color-service/color.service';
+import { MessageService } from '../../shared/services/message/message.service';
 import { MultiSelectComponent } from '../../shared/componentes/multi-select/multi-select.component';
 import { CommonModule, NgFor } from '@angular/common';
 
@@ -123,7 +123,7 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
   }
 
   constructor(
-    cs: ColorService,
+    ms: MessageService,
     private crud: CrudService,
     private subsManagerService: SubscriptionsManagerService,
     private fKeysService: ForeignKeysService,
@@ -133,7 +133,7 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
     private ngbCalendar: NgbCalendar,
     private iconsService: IconsService) {
 
-      cs.color_msg.subscribe(color =>  {
+      ms.color_msg.subscribe(color =>  {
 
         if (color=='azul') {
           this.bodybgcolor = this.objcolors.azul.bodybgcolor;

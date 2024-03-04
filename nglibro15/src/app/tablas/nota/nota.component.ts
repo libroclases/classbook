@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalDialog } from '../../shared/componentes/modal-dialog/modal-dialog.component';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Evaluacion } from '../../interfaces/evaluacion.interface';
-import { ColorService } from '../../shared/services/color-service/color.service';
+import { MessageService } from '../../shared/services/message/message.service';
 import { GetdatetimeService } from 'src/app/shared/services/getdatetime/getdatetime.service';
 
 @Component({
@@ -108,7 +108,7 @@ export class NotaComponent implements OnInit {
 
   constructor(private crud: CrudService,
       route: ActivatedRoute,
-      cs : ColorService,
+      ms : MessageService,
       private selIdsService: SelectionIdsService,
       public dialog: MatDialog,
       private fkService: ForeignKeysService,
@@ -118,7 +118,7 @@ export class NotaComponent implements OnInit {
     ) {
 
 
-      cs.color_msg.subscribe(color =>  {
+      ms.color_msg.subscribe(color =>  {
 
 
         if (color=='azul') {

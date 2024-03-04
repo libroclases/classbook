@@ -7,7 +7,7 @@ import { SubscriptionsManagerService } from '../../services/subscriptions-manage
 import { tap } from 'rxjs';
 import { UserInfoService } from '../../services/user-info/user-info.service';
 import { environment } from 'src/environments/environment';
-import { ColorService } from '../../services/color-service/color.service';
+import { MessageService } from '../../services/message/message.service';
 
 @Component({
   selector: 'auth-button',
@@ -24,8 +24,8 @@ export class AuthButtonComponent implements OnDestroy {
     @Inject(DOCUMENT) public document: Document,
     public auth: AuthService,
     private subsManager: SubscriptionsManagerService,
-    private cs : ColorService,) {
-      cs.color_msg.subscribe(color =>  {
+    private ms : MessageService,) {
+      ms.color_msg.subscribe(color =>  {
         if (color=='azul') {
           this.colorMenuButton = this.objcolors.azul.colorMenuButton;
         }

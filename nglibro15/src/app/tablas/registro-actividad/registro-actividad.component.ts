@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {
   lowerUpperTables, fullDaysOfWeek, environment,
 } from '../../../environments/environment';
-import { ColorService } from '../../shared/services/color-service/color.service';
+import { MessageService } from '../../shared/services/message/message.service';
 import { MultiSelectComponent } from '../../shared/componentes/multi-select/multi-select.component';
 import { NgFor, NgIf } from '@angular/common';
 import { NgbAlert, } from '@ng-bootstrap/ng-bootstrap';
@@ -92,7 +92,7 @@ export class RegistroActividadComponent implements OnDestroy {
 
   constructor(
     private crud: CrudService,
-    private cs : ColorService,
+    private ms : MessageService,
     public dialog: MatDialog,
     private subsManagerService: SubscriptionsManagerService,
     private fKeysService: ForeignKeysService,
@@ -100,7 +100,7 @@ export class RegistroActividadComponent implements OnDestroy {
     private iconsService: IconsService
   ) {
 
-    cs.color_msg.subscribe((color:any) =>  {
+    ms.color_msg.subscribe((color:any) =>  {
 
 
       if (color=='azul') {

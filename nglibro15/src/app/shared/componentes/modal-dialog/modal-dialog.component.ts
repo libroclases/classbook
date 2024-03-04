@@ -16,7 +16,7 @@ import { SelectionIdsService } from '../../services/selection-ids/selection-ids.
 import { CommonModule, NgFor, formatDate } from '@angular/common';
 import { selectValidator } from '../../directives/select-validator/select-validator.directive';
 import { horaValidator} from '../../directives/hora-validator/hora-validator.directive';
-import { ColorService } from '../../services/color-service/color.service';
+import { MessageService } from '../../services/message/message.service';
 
 import { profeValidator } from '../../directives/profe-validator/profe-validator.directive';
 import { UsuarioIdService } from '../../services/usuario-id/usuario-id.service';
@@ -59,7 +59,7 @@ import { UsuarioIdService } from '../../services/usuario-id/usuario-id.service';
     private fKeysService: ForeignKeysService ,
     private fb: FormBuilder,
     // private validateHora: ValidaHorarioService,
-    private cs : ColorService,
+    private ms : MessageService,
     private iconsService: IconsService,
     private labelsService: LabelsService,
     private selIdsService: SelectionIdsService,
@@ -68,7 +68,7 @@ import { UsuarioIdService } from '../../services/usuario-id/usuario-id.service';
 
     ) {
 
-   cs.color_msg.subscribe(color =>  {
+   ms.color_msg.subscribe(color =>  {
 
       //  TODO  Asignar dinamicamente los indices
 

@@ -14,7 +14,7 @@ import { ModalDialog } from '../modal-dialog/modal-dialog.component';
 import { OriginTableIdService as OriginTableIdService } from '../../services/origin-table-id/origin-table-id.service';
 
 import { customOperator } from './custom-operator';
-import { ColorService } from '../../services/color-service/color.service';
+import { MessageService } from '../../services/message/message.service';
 import { CommonModule, NgFor } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 
@@ -143,7 +143,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    cs : ColorService,
+    ms : MessageService,
     ts : TypeService,
     private crud: CrudService,
     activatedRoute: ActivatedRoute,
@@ -165,7 +165,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     ).subscribe()
 
 
-    cs.color_msg.subscribe((color:any) =>  {
+    ms.color_msg.subscribe((color:any) =>  {
 
 
       if (color=='azul') {

@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { ColorService } from '../../shared/services/color-service/color.service';
+import { MessageService } from '../../shared/services/message/message.service';
 import { environment, attributesLabels, fKeysByTable, tableLabels, lowerUpperTables } from 'src/environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, tap } from 'rxjs';
@@ -60,7 +60,7 @@ patchFKsFromStorage = ['colegio', 'anno'];
 setAny(valor:any): any { return valor }
 
 constructor(
-   private cs : ColorService,
+   private ms : MessageService,
    private router: ActivatedRoute,
    private selIdsService: SelectionIdsService,
    private crud: CrudService,
@@ -69,7 +69,7 @@ constructor(
 
   router.params.subscribe(params => console.log(JSON.stringify(params)))
   
-  cs.color_msg.pipe(
+  ms.color_msg.pipe(
     tap(
       (color:any) =>  {
 

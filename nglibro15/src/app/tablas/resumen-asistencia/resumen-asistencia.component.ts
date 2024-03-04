@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { ColorService } from '../../shared/services/color-service/color.service';
+import { MessageService } from '../../shared/services/message/message.service';
 import { CrudService } from '../../shared/services/crud/crud.service';
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
 import { SubscriptionsManagerService } from '../../shared/services/subscriptions-manager/subscriptions-manager.service';
@@ -57,11 +57,11 @@ export class ResumenAsistenciaComponent {
   patchFksFromStorage = ['colegio', 'anno', 'mes'];
 
   constructor(private crud: CrudService,
-    cs: ColorService,
+    ms: MessageService,
     private subsManagerService: SubscriptionsManagerService,
     private selIdsService: SelectionIdsService) { 
 
-      cs.color_msg.subscribe(color =>  {
+      ms.color_msg.subscribe(color =>  {
 
         //  TODO  Asignar dinamicamente los indices
   

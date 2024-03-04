@@ -1,6 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { ColorService } from '../../shared/services/color-service/color.service';
+import { MessageService } from '../../shared/services/message/message.service';
 import { ActivatedRoute } from '@angular/router';
 import { body, intro, titles, bottom } from './datatexto';
 
@@ -36,7 +36,7 @@ export class HomeComponent {
     this.height = event.target.innerHeight - (this.banner_height + this.menu_height) + 'px';
   }
 
-  constructor(private cs: ColorService,
+  constructor(private ms: MessageService,
     activatedRoute: ActivatedRoute,
     ) {
 
@@ -56,7 +56,7 @@ export class HomeComponent {
       this.showme = data['showme'];
     })
 
-    cs.color_msg.subscribe(color =>  {
+    ms.color_msg.subscribe(color =>  {
       if (color=='azul') { this.color="azul";  this.url = this.photo.azul; }
       else if (color=='verde') { this.color = "verde"; this.url = this.photo.verde; }
       else if (color=='naranjo') { this.color = "naranjo"; this.url = this.photo.naranjo; }

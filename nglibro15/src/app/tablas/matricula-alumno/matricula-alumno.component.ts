@@ -14,7 +14,6 @@ import { CrudService } from '../../shared/services/crud/crud.service';
 import { tap } from 'rxjs';
 // import { ModalData } from '../../interfaces/generic.interface';
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
-import { ColorService } from '../../shared/services/color-service/color.service';
 
 @Component({
   selector: 'app-matricula-alumno',
@@ -63,10 +62,10 @@ export class MatriculaAlumnoComponent implements OnInit {
   constructor(
     private mensaje: MessageService,
     private crud: CrudService,
-    private cs : ColorService,
+    private ms : MessageService,
     private selIdsService: SelectionIdsService, ) {
 
-      cs.color_msg.subscribe((color:any) =>  {
+      ms.color_msg.subscribe((color:any) =>  {
 
 
         if (color=='azul') {

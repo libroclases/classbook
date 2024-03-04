@@ -11,7 +11,7 @@ import { ForeignKeysService } from '../../shared/services/foreign-keys/foreign-k
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
 import { IconsService } from '../../shared/services/icons/icons.service';
 import { OriginTableIdService } from '../../shared/services/origin-table-id/origin-table-id.service';
-import { ColorService } from '../../shared/services/color-service/color.service';
+import { MessageService } from '../../shared/services/message/message.service';
 import { CommonModule, NgFor } from '@angular/common';
 import { MultiSelectComponent } from '../../shared/componentes/multi-select/multi-select.component';
 
@@ -118,7 +118,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
   constructor(private crud: CrudService,
     // route: ActivatedRoute,
-    cs: ColorService,
+    ms: MessageService,
     originTableIdsService: OriginTableIdService,
     activatedRoute: ActivatedRoute,
     private subsManagerService: SubscriptionsManagerService,
@@ -129,7 +129,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
      ) {
 
-      cs.color_msg.subscribe(color =>  {
+      ms.color_msg.subscribe(color =>  {
 
 
         if (color=='azul') {

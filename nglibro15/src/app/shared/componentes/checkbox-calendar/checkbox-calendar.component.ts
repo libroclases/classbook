@@ -8,7 +8,7 @@ import { SelectionIdsService } from '../../services/selection-ids/selection-ids.
 import { SubscriptionsManagerService } from '../../services/subscriptions-manager/subscriptions-manager.service';
 import { Alert } from '../../../interfaces/generic.interface';
 import { IconsService } from '../../services/icons/icons.service';
-import { ColorService } from '../../services/color-service/color.service';
+import { MessageService } from '../../services/message/message.service';
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -134,7 +134,7 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
 
   constructor(
     private crud: CrudService,
-    cs: ColorService,
+    ms: MessageService,
     private fkService: ForeignKeysService,
     private selIdsService: SelectionIdsService,
     private subsManagerService: SubscriptionsManagerService,
@@ -144,7 +144,7 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
   ) {
     this.configAlert.dismissible = false;
 
-    cs.color_msg.subscribe((color:any) =>  {
+    ms.color_msg.subscribe((color:any) =>  {
 
 
       if (color=='azul') {

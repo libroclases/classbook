@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalDialog } from '../../shared/componentes/modal-dialog/modal-dialog.component';
 import { environment, lowerUpperTables, modalDataObject } from '../../../environments/environment';
 import { tap } from 'rxjs';
-import { ColorService } from '../../shared/services/color-service/color.service';
+import { MessageService } from '../../shared/services/message/message.service';
 import { CommonModule, NgFor } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MultiSelectComponent } from '../../shared/componentes/multi-select/multi-select.component';
@@ -73,14 +73,14 @@ export class AnotacionesComponent implements OnDestroy {
 
   constructor(
     private crud: CrudService,
-    cs: ColorService,
+    ms: MessageService,
     public dialog: MatDialog,
     private subsManagerService: SubscriptionsManagerService,
     private fKeysService: ForeignKeysService,
     private selIdsService: SelectionIdsService,
     private iconsService: IconsService) {
 
-      cs.color_msg.subscribe(color =>  {
+      ms.color_msg.subscribe(color =>  {
 
 
         if (color=='azul') {

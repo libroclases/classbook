@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 
 import { IconsService } from '../../shared/services/icons/icons.service';
 import { environment as env, lowerUpperTables } from '../../../environments/environment';
-import { ColorService } from '../../shared/services/color-service/color.service';
+import { MessageService } from '../../shared/services/message/message.service';
 import { TypeService } from 'src/app/shared/services/type-service/type-service';
 import { AuthService } from '@auth0/auth0-angular';
 import { CrudService } from '../../shared/services/crud/crud.service';
@@ -55,7 +55,7 @@ export class MenuComponent implements OnInit{
     private iconsService: IconsService,
     public userInfo: UserInfoService,
     private router: Router,
-    public cs: ColorService,
+    public ms: MessageService,
     public ts: TypeService,
     private crud: CrudService,
     public auth: AuthService) {
@@ -66,7 +66,7 @@ export class MenuComponent implements OnInit{
 
 
 
-      cs.color_msg.subscribe(color =>  {
+      ms.color_msg.subscribe(color =>  {
         this.color = color;
         if (color=='azul') {
           this.menu = this.objcolors.azul.menu;
@@ -99,7 +99,7 @@ export class MenuComponent implements OnInit{
 
           this.crud.putData({id: info.id, Tema: color[0]},'usuario')
           .subscribe(() => {
-            this.cs.nextColor(color[1]);
+            this.ms.nextColor(color[1]);
             sessionStorage.setItem('Color',color[1]);
           })
    
