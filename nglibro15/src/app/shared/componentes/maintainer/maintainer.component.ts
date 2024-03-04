@@ -164,26 +164,8 @@ export class MaintainerComponent implements OnInit, OnDestroy {
       take(1)
     ).subscribe()
 
-    /*
-    (msg => {
-      console.log(msg);
 
-      this.tipousuario = tipo;
-      if (this.mainTable) {
-        console.log('maintable', this.mainTable);
-        console.log('tolower', lowerUpperTables[this.mainTable]);
-        console.log('modaldataobject',modalDataObject[lowerUpperTables[this.mainTable]]);
-        console.log('permission',modalDataObject[lowerUpperTables[this.mainTable]].permission);
-        this.permission = modalDataObject[lowerUpperTables[this.mainTable]].permission;
-        this.disable = (this.permission.includes(tipo)) ? false : true;
-
-      }
-
-    })
-
-    */
-
-    cs.msg.subscribe((color:any) =>  {
+    cs.color_msg.subscribe((color:any) =>  {
 
 
       if (color=='azul') {
@@ -216,10 +198,6 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
         let originTable = params['padre'];
 
-
-        // console.log('originTable',originTable)
-
-
         const originId = parseInt(params['id']);
 
         if ( originTable ) {
@@ -234,7 +212,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
               originTableIdsService.nextMsg(this.multiSelectInitIds);
             });
         }
-        //if (newColor) {  console.log('newColorxx', newColor); this.cs.nextColor('green') }
+        
 
       }
    });

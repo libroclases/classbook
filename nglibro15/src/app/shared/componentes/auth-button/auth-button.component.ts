@@ -25,7 +25,7 @@ export class AuthButtonComponent implements OnDestroy {
     public auth: AuthService,
     private subsManager: SubscriptionsManagerService,
     private cs : ColorService,) {
-      cs.msg.subscribe(color =>  {
+      cs.color_msg.subscribe(color =>  {
         if (color=='azul') {
           this.colorMenuButton = this.objcolors.azul.colorMenuButton;
         }

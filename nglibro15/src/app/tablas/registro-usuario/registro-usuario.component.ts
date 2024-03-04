@@ -139,7 +139,7 @@ export class RegistroUsuarioComponent implements OnInit {
     private labelsService: LabelsService,
     private selIdsService: SelectionIdsService, ) {
 
-      cs.msg.subscribe((color:any) =>  {
+      cs.color_msg.subscribe((color:any) =>  {
 
 
         if (color=='azul') {

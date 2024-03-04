@@ -69,7 +69,7 @@ constructor(
 
   router.params.subscribe(params => console.log(JSON.stringify(params)))
   
-  cs.msg.pipe(
+  cs.color_msg.pipe(
     tap(
       (color:any) =>  {
 

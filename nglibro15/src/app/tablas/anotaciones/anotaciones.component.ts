@@ -80,7 +80,7 @@ export class AnotacionesComponent implements OnDestroy {
     private selIdsService: SelectionIdsService,
     private iconsService: IconsService) {
 
-      cs.msg.subscribe(color =>  {
+      cs.color_msg.subscribe(color =>  {
 
 
         if (color=='azul') {

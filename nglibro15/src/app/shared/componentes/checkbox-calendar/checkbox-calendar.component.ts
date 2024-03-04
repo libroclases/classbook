@@ -144,7 +144,7 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
   ) {
     this.configAlert.dismissible = false;
 
-    cs.msg.subscribe((color:any) =>  {
+    cs.color_msg.subscribe((color:any) =>  {
 
 
       if (color=='azul') {

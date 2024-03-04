@@ -100,7 +100,7 @@ export class RegistroActividadComponent implements OnDestroy {
     private iconsService: IconsService
   ) {
 
-    cs.msg.subscribe((color:any) =>  {
+    cs.color_msg.subscribe((color:any) =>  {
 
 
       if (color=='azul') {

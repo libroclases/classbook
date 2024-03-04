@@ -61,7 +61,7 @@ export class ResumenAsistenciaComponent {
     private subsManagerService: SubscriptionsManagerService,
     private selIdsService: SelectionIdsService) { 
 
-      cs.msg.subscribe(color =>  {
+      cs.color_msg.subscribe(color =>  {
 
         //  TODO  Asignar dinamicamente los indices
   

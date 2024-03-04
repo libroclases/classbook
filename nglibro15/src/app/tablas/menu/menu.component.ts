@@ -66,7 +66,7 @@ export class MenuComponent implements OnInit{
 
 
 
-      cs.msg.subscribe(color =>  {
+      cs.color_msg.subscribe(color =>  {
         this.color = color;
         if (color=='azul') {
           this.menu = this.objcolors.azul.menu;

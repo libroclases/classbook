@@ -118,7 +118,7 @@ export class NotaComponent implements OnInit {
     ) {
 
 
-      cs.msg.subscribe(color =>  {
+      cs.color_msg.subscribe(color =>  {
 
 
         if (color=='azul') {

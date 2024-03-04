@@ -133,7 +133,7 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
     private ngbCalendar: NgbCalendar,
     private iconsService: IconsService) {
 
-      cs.msg.subscribe(color =>  {
+      cs.color_msg.subscribe(color =>  {
 
         if (color=='azul') {
           this.bodybgcolor = this.objcolors.azul.bodybgcolor;

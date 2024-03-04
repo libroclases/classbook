@@ -63,7 +63,7 @@ export class AsistenciaComponent implements OnInit {
     private selIdsService: SelectionIdsService
   ) {
     
-    cs.msg.subscribe((color) => {
+    cs.color_msg.subscribe((color) => {
       //  TODO  Asignar dinamicamente los indices
 
       if (color == 'azul') {

@@ -68,7 +68,7 @@ import { UsuarioIdService } from '../../services/usuario-id/usuario-id.service';
 
     ) {
 
-   cs.msg.subscribe(color =>  {
+   cs.color_msg.subscribe(color =>  {
 
       //  TODO  Asignar dinamicamente los indices
 

@@ -129,7 +129,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
      ) {
 
-      cs.msg.subscribe(color =>  {
+      cs.color_msg.subscribe(color =>  {
 
 
         if (color=='azul') {

@@ -56,7 +56,7 @@ export class HomeComponent {
       this.showme = data['showme'];
     })
 
-    cs.msg.subscribe(color =>  {
+    cs.color_msg.subscribe(color =>  {
       if (color=='azul') { this.color="azul";  this.url = this.photo.azul; }
       else if (color=='verde') { this.color = "verde"; this.url = this.photo.verde; }
       else if (color=='naranjo') { this.color = "naranjo"; this.url = this.photo.naranjo; }

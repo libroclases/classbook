@@ -45,7 +45,7 @@ export class CabeceraComponent {
     })
 
 
-    cs.msg.subscribe((color:any) =>  {
+    cs.color_msg.subscribe((color:any) =>  {
       if (color=='azul') {
         this.color = this.objcolors.azul.color;
         this.lineal = this.objcolors.azul.lineal;

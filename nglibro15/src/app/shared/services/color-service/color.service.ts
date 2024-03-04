@@ -6,13 +6,13 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ColorService {
 
-  msg: BehaviorSubject<any>;
+  color_msg: BehaviorSubject<any>;
   constructor() {
-      this.msg = new BehaviorSubject(null);
+      this.color_msg = new BehaviorSubject(null);
   }
 
   nextColor(color: any) {
-    this.msg.next(color);
+    this.color_msg.next(color);
 
   }
 

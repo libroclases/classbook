@@ -33,9 +33,7 @@ export class MatriculaAlumnoComponent implements OnInit {
   // data:any={};
   muestra_dialog=false;
 
-  r_alumno:any = {};
-  r_apoderado:any = {};
-
+ 
   objcolors = environment.colors;
 
   bodybgcolor!:string;
@@ -58,7 +56,9 @@ export class MatriculaAlumnoComponent implements OnInit {
   
   ngOnInit() {}
 
-  
+  alumno:any = null;
+  apoderado:any = null;
+  matricula:any=null;
   
   constructor(
     private mensaje: MessageService,
@@ -66,7 +66,7 @@ export class MatriculaAlumnoComponent implements OnInit {
     private cs : ColorService,
     private selIdsService: SelectionIdsService, ) {
 
-      cs.msg.subscribe((color:any) =>  {
+      cs.color_msg.subscribe((color:any) =>  {
 
 
         if (color=='azul') {
@@ -93,19 +93,9 @@ export class MatriculaAlumnoComponent implements OnInit {
       })
 
       this.formConsulta = new FormGroup({
-          rut : new FormControl('', rutValidator()),
-/*          nombre: new FormControl('',Validators.required),
-          apellido1: new FormControl('',Validators.required),
-          apellido2: new FormControl('',Validators.required),
-          direccion: new FormControl('',Validators.required),
-          celular: new FormControl('',Validators.required),
-          nacimiento: new FormControl('',Validators.required),
-          Sexo: new FormControl('',Validators.required),
-          Region: new FormControl('',Validators.required),
-          Provincia: new FormControl('',Validators.required),
-          Comuna: new FormControl('',Validators.required)
-*/          
-    })
+          rut_alumno : new FormControl('', rutValidator()),
+          rut_apoderado : new FormControl('', rutValidator()),
+      })
 
 
   }
@@ -123,49 +113,25 @@ export class MatriculaAlumnoComponent implements OnInit {
     this.mensaje.nextMsg({})
 
   }
-  // msg!:any
-  closeMe(e: any) {
+  
 
-    // console.log('1.- entidad',this.getEntidad());
-    // console.log('1.- data',e.data);
-
-    if (e.data) {
-
-      // console.log('2.- entidad',this.getEntidad());
-      // console.log('2.- data',e.data);
-
-    }
-
-    this.msg= e;
-
- 
+  generar_matricula() {
+    
   }
 
-  matricula:any={};
+  rut_alumno() {
 
-
-
-  rut_consulta() {
-
-    this.msg=null;
-
-    const getModalData = (tipo: string, modal: any[], data: any = null): any[] => {
-      var output:any={};
-      if (tipo == 'tablas') {
-        modal.forEach((m:any) => output[m] = (data) ?  data[lowerUpperTables[m]] : null)
-      } else {
-        modal.forEach((m:any) =>  output[m] = (data) ? data[m] : null);
-      }
-
-      return output
-    };
-
-   
-   
-
+     this.crud.getByRut('alumno',this.formConsulta.value.rut_alumno)
+     .subscribe(res => this.alumno = res)
+       
   }
 
+  rut_apoderado() {
 
+    this.crud.getByRut('apoderado',this.formConsulta.value.rut_apoderado)
+    .subscribe(res => this.apoderado = res)
+       
+ }
 
 
 
