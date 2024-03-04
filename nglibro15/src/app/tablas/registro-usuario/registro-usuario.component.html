@@ -3,42 +3,7 @@
 
 
 <div class="top">
-    <!--
-
-    <form [formGroup]="formConsulta">
-        <table class="table"><thead>
-          <tr><th><b>Registro Usuario</b></th></tr>
-          <tr><td>
-            email Usuario
-          </td>
-          <td>
-              <table>
-                <tr>
-                  <td><input type="text" id="email" formControlName="email"/></td></tr>
-                <tr><td><div style="width: 200px" *ngIf="formConsulta.controls['email']?.invalid && (formConsulta.controls['email']?.dirty || formConsulta.controls['email']?.touched)"  class="alert alert-danger">
-                  <div  *ngIf="formConsulta.controls['email']?.errors?.['emailValidator']">email no válido.</div>
-                  </div>
-                </td>
-                </tr>
-              </table>
-          </td>
-        </tr>
-        </thead>
-        </table>
-
-
-        <br>
-        <span><button type="button" class="btn  btn-sm"  (click)="email_consulta()" [disabled]="formConsulta.invalid"
-          [style.background-color]="modalbutton" class="text-light" >Buscar</button></span>
-        <span><button type="button" class="btn  btn-sm"  (click)="reset()" [style.background-color]="modalbutton" class="text-light" >Limpiar</button></span>
-        </form>
-        <br>
-        <hr>
-        <br>
-        <p *ngIf="usuario">{{email_asociado}}</p>
-
-    -->
-
+ 
         <div class="center">
           <h2>Registro Usuario</h2>
           <form  [formGroup]="valuesForm">
