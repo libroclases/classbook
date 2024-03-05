@@ -7,13 +7,10 @@ import { IconsService } from '../../shared/services/icons/icons.service';
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
 import { SubscriptionsManagerService } from '../../shared/services/subscriptions-manager/subscriptions-manager.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalDialog } from '../../shared/componentes/modal-dialog/modal-dialog.component';
+import { ModalDialogComponent } from '../../shared/componentes/modal-dialog/modal-dialog.component';
 import { environment, lowerUpperTables, modalDataObject } from '../../../environments/environment';
 import { tap } from 'rxjs';
 import { MessageService } from '../../shared/services/message/message.service';
-import { CommonModule, NgFor } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { MultiSelectComponent } from '../../shared/componentes/multi-select/multi-select.component';
 
 
 @Component({
@@ -161,7 +158,7 @@ export class AnotacionesComponent implements OnDestroy {
    }
     let modaldata: any = this.modalDataObj;
     modaldata['title'] = `Observación: ${this.nombreAlumno}`;
-    const dialogRef = this.dialog.open(ModalDialog, {
+    const dialogRef = this.dialog.open(ModalDialogComponent, {
       data: {
         registro: reg,
         ...modaldata,

@@ -6,7 +6,7 @@ import { Notification } from '../../interfaces/generic.interface';
 import { LabelsService } from '../../shared/services/labels/labels.service';
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
 import { ForeignKeysService } from '../../shared/services/foreign-keys/foreign-keys.service';
-import { NgbAlert, NgbCalendar, NgbDate, NgbDateAdapter, NgbDateStruct, NgbDatepicker, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { fullDaysOfWeek, fullMonths, yearTable, monthTable, dayOfWeekTable, lowerUpperTables, environment } from '../../../environments/environment';
 import { SubscriptionsManagerService } from '../../shared/services/subscriptions-manager/subscriptions-manager.service';
 import { Anno } from '../../interfaces/anno.interface';
@@ -14,8 +14,7 @@ import { IconsService } from '../../shared/services/icons/icons.service';
 import { Alert } from '../../interfaces/generic.interface';
 import { ProfesorPie } from '../../interfaces/profesor.interface';
 import { MessageService } from '../../shared/services/message/message.service';
-import { MultiSelectComponent } from '../../shared/componentes/multi-select/multi-select.component';
-import { CommonModule, NgFor } from '@angular/common';
+
 
 const fieldsArray = ['inasistentesHombres', 'inasistentesMujeres', 'atrasos', 'observaciones'];
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MaintainerComponent } from '../../shared/componentes/maintainer/maintainer.component';
+
 
 @Component({
   selector: 'app-horaasignada',

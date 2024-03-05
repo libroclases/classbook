@@ -5,15 +5,14 @@ import { map, Observable, of, Subscription, take, tap } from 'rxjs';
 import { SubscriptionsManagerService } from '../../shared/services/subscriptions-manager/subscriptions-manager.service';
 import { Notification } from '../../interfaces/generic.interface';
 import { modalDataObject, lowerUpperTables, fKeysByTable, environment  } from '../../../environments/environment';
-import { ModalDialog } from '../../shared/componentes/modal-dialog/modal-dialog.component';
+import { ModalDialogComponent } from '../../shared/componentes/modal-dialog/modal-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ForeignKeysService } from '../../shared/services/foreign-keys/foreign-keys.service';
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
 import { IconsService } from '../../shared/services/icons/icons.service';
 import { OriginTableIdService } from '../../shared/services/origin-table-id/origin-table-id.service';
 import { MessageService } from '../../shared/services/message/message.service';
-import { CommonModule, NgFor } from '@angular/common';
-import { MultiSelectComponent } from '../../shared/componentes/multi-select/multi-select.component';
+
 
 
 @Component({
@@ -331,7 +330,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
     let modaldata : any = this.modalData
 
-    const dialogRef = this.dialog.open(ModalDialog, {
+    const dialogRef = this.dialog.open(ModalDialogComponent, {
       data: {registro: reg, valida1: this.takenDaysMap, valida2: this.takenDaysProf,
        ...modaldata, tabla: 'Horario'}, height: this.modalHeight , width: '600px',
     });

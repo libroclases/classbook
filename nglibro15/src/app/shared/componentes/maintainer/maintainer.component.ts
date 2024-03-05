@@ -10,7 +10,7 @@ import { redirectRoutes, modalDataObject, personTables, notCreateTables ,searchT
   lowerUpperTables, fKeysByTable, environment } from '../../../../environments/environment';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalDialog } from '../modal-dialog/modal-dialog.component';
+import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
 import { OriginTableIdService as OriginTableIdService } from '../../services/origin-table-id/origin-table-id.service';
 
 import { customOperator } from './custom-operator';
@@ -406,7 +406,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
        }
 
     let modaldata: any = this.modalDataObj;
-    const dialogRef = this.dialog.open(ModalDialog, {
+    const dialogRef = this.dialog.open(ModalDialogComponent, {
       data: {
         registro: reg,
         ...modaldata,

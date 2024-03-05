@@ -11,9 +11,7 @@ import {
   lowerUpperTables, fullDaysOfWeek, environment,
 } from '../../../environments/environment';
 import { MessageService } from '../../shared/services/message/message.service';
-import { MultiSelectComponent } from '../../shared/componentes/multi-select/multi-select.component';
-import { NgFor, NgIf } from '@angular/common';
-import { NgbAlert, } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-registro-actividad',

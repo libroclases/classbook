@@ -25,7 +25,7 @@ import { profeValidator } from '../../directives/profe-validator/profe-validator
     styleUrls: ['modal-dialog.component.css'],
     providers: [ForeignKeysService],
   })
-  export class ModalDialog implements OnInit, OnDestroy {
+  export class ModalDialogComponent implements OnInit, OnDestroy {
 
     formModal!: FormGroup;
     idsMap = new Map<string, number>;
@@ -60,6 +60,7 @@ import { profeValidator } from '../../directives/profe-validator/profe-validator
     private ms : MessageService,
     private iconsService: IconsService,
     private labelsService: LabelsService,
+    
     private selIdsService: SelectionIdsService,
 
     ) {

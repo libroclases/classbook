@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { environment as env } from '../../../environments/environment';
 import { UserInfoService } from '../../shared/services/user-info/user-info.service';
 import { MessageService } from '../../shared/services/message/message.service';
-import { AsyncPipe } from '@angular/common';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({

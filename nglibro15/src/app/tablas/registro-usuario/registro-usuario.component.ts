@@ -2,9 +2,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, take, tap } from 'rxjs';
-import { ModalDialog } from 'src/app/shared/componentes/modal-dialog/modal-dialog.component';
+import { ModalDialogComponent } from 'src/app/shared/componentes/modal-dialog/modal-dialog.component';
 import { emailValidator } from 'src/app/shared/directives/email-validator/email-validator.directive';
-import { rutValidator } from 'src/app/shared/directives/rut-validator/rut-validator.directive';
 import { selectValidator } from 'src/app/shared/directives/select-validator/select-validator.directive';
 import { CrudService } from 'src/app/shared/services/crud/crud.service';
 import { LabelsService } from 'src/app/shared/services/labels/labels.service';
@@ -226,7 +225,7 @@ export class RegistroUsuarioComponent implements OnInit {
     modaldata.textFields.forEach((text: string) => reg[text] = null);
     modaldata.dateFields.forEach((date: string) => reg[date] = null);
 
-    const dialogRef = this.dialog.open(ModalDialog, {
+    const dialogRef = this.dialog.open(ModalDialogComponent, {
      data: {
        registro: reg,
        ...modaldata,

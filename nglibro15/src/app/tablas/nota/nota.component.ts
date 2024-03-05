@@ -8,7 +8,7 @@ import { SelectionIdsService } from '../../shared/services/selection-ids/selecti
 import { IconsService } from '../../shared/services/icons/icons.service';
 import { environment, modalDataObject } from '../../../environments/environment';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalDialog } from '../../shared/componentes/modal-dialog/modal-dialog.component';
+import { ModalDialogComponent } from '../../shared/componentes/modal-dialog/modal-dialog.component';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Evaluacion } from '../../interfaces/evaluacion.interface';
 import { MessageService } from '../../shared/services/message/message.service';
@@ -467,7 +467,7 @@ export class NotaComponent implements OnInit {
 
 
     let modaldata: any = this.modalDataObj;
-    const dialogRef = this.dialog.open(ModalDialog, {
+    const dialogRef = this.dialog.open(ModalDialogComponent, {
       data: {
         registro: reg,
         ...modaldata,

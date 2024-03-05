@@ -1,18 +1,10 @@
 import { Component, HostListener, Inject, Injectable, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, ReactiveFormsModule, FormControl } from '@angular/forms';
-/*
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatInputModule } from '@angular/material/input';
-*/
 import { modalDataObject, lowerUpperTables, validator, environment } from '../../../environments/environment';
-// import { CommonModule, NgFor, NgIf, formatDate } from '@angular/common';
-// import { DialogComponent } from '../../shared/componentes/dialog/dialog.component';
 import { MessageService } from '../../shared/services/message/message.service';
 import { rutValidator } from '../../shared/directives/rut-validator/rut-validator.directive';
 import { CrudService } from '../../shared/services/crud/crud.service';
 import { tap } from 'rxjs';
-// import { ModalData } from '../../interfaces/generic.interface';
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
 
 @Component({

@@ -6,10 +6,8 @@ import { MessageService } from '../../shared/services/message/message.service';
 import { AuthService } from '@auth0/auth0-angular';
 import { CrudService } from '../../shared/services/crud/crud.service';
 import { UserInfoService } from '../../shared/services/user-info/user-info.service';
-import { AuthButtonComponent } from '../../shared/componentes/auth-button/auth-button.component';
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { bootstrapApplication } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-menu',

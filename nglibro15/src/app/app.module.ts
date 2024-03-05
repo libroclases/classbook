@@ -33,7 +33,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AuthModule, AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ModalDialog } from './shared/componentes/modal-dialog/modal-dialog.component';
+import { ModalDialogComponent } from './shared/componentes/modal-dialog/modal-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -51,7 +51,7 @@ import { HoraValidatorDirective } from './shared/directives/hora-validator/hora-
 
 import { MaintainerComponent } from './shared/componentes/maintainer/maintainer.component';
 import { MaintainerTemplateComponent } from './shared/componentes/maintainer-template/maintainer-template.component';
-import { ProfesorValidator } from './shared/directives/profesor-validator/profesor-validator.directive';
+
 
 import { CheckboxCalendarComponent } from './shared/componentes/checkbox-calendar/checkbox-calendar.component';
 import { NumbersCalendarComponent } from './shared/componentes/numbers-calendar/numbers-calendar.component';
@@ -60,7 +60,8 @@ import { TablaComponent } from './tablas/tabla/tabla.component';
 import { VentanaComponent } from './tablas/ventana/ventana.component';
 import { RegistroUsuarioComponent } from './tablas/registro-usuario/registro-usuario.component';
 import { UtpComponent } from './tablas/utp/utp.component';
-import { ProfeValidatorsDirective } from '../app/shared/directives/profe-validator/profe-validator.directive';
+import { ProfeValidatorsDirective } from './shared/directives/profe-validator/profe-validator.directive';
+
 
 // import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
@@ -153,9 +154,9 @@ allowedTables.forEach((tb) => {
     RutValidatorDirective,
     SelectValidatorDirective,
     HoraValidatorDirective,
-    ProfesorValidator,
+   
     MultiSelectComponent,
-    ModalDialog,
+    ModalDialogComponent,
     AuthButtonComponent,
     CheckboxCalendarComponent,
     NumbersCalendarComponent,
@@ -164,8 +165,8 @@ allowedTables.forEach((tb) => {
     VentanaComponent,
     RegistroUsuarioComponent,
     UtpComponent,
-    ProfeValidatorsDirective
-
+    ProfeValidatorsDirective,
+   
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { MaintainerComponent } from '../../shared/componentes/maintainer/maintainer.component';
-import { MultiSelectComponent } from '../../shared/componentes/multi-select/multi-select.component';
+
 
 @Component({
   selector: 'app-horas-inscritas',
