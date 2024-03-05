@@ -17,9 +17,7 @@ import { CommonModule, NgFor, formatDate } from '@angular/common';
 import { selectValidator } from '../../directives/select-validator/select-validator.directive';
 import { horaValidator} from '../../directives/hora-validator/hora-validator.directive';
 import { MessageService } from '../../services/message/message.service';
-
 import { profeValidator } from '../../directives/profe-validator/profe-validator.directive';
-import { UsuarioIdService } from '../../services/usuario-id/usuario-id.service';
 
 @Component({
     selector: 'modal-dialog',
@@ -63,8 +61,6 @@ import { UsuarioIdService } from '../../services/usuario-id/usuario-id.service';
     private iconsService: IconsService,
     private labelsService: LabelsService,
     private selIdsService: SelectionIdsService,
-    private useridservice: UsuarioIdService,
-    
 
     ) {
 
@@ -388,7 +384,7 @@ import { UsuarioIdService } from '../../services/usuario-id/usuario-id.service';
 
         if (this.data.mainTable == 'horario') { ids[5] = this.registro.Dix.id }
 
-        this.useridservice.msgId.subscribe((userId:any) => {
+        this.ms.userId.subscribe((userId:any) => {
           if (userId && personTables.includes(this.modalData.mainTable)) {  ids[0] = userId   }          
         })
 

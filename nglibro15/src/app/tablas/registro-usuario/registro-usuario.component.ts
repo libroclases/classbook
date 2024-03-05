@@ -10,7 +10,6 @@ import { CrudService } from 'src/app/shared/services/crud/crud.service';
 import { LabelsService } from 'src/app/shared/services/labels/labels.service';
 import { MessageService } from 'src/app/shared/services/message/message.service';
 import { SelectionIdsService } from 'src/app/shared/services/selection-ids/selection-ids.service';
-import { UsuarioIdService } from '../../shared/services/usuario-id/usuario-id.service';
 import { environment, lowerUpperTables as lowerUpper, lowerUpperTables, modalDataObject, usuarioTipo, validator } from 'src/environments/environment';
 
 @Component({
@@ -132,7 +131,6 @@ export class RegistroUsuarioComponent implements OnInit {
   constructor(
     // private mensaje: MessageService,
     public dialog: MatDialog,
-    private userid: UsuarioIdService,
     private crud: CrudService,
     private ms : MessageService,
     private labelsService: LabelsService,
@@ -222,7 +220,7 @@ export class RegistroUsuarioComponent implements OnInit {
 
     reg['id'] = 0;
 
-    this.userid.nextUser(usuario.id)
+    this.ms.nextUser(usuario.id)
 
     modaldata.tables.forEach((table: string) => reg[table] = {id: 0});
     modaldata.textFields.forEach((text: string) => reg[text] = null);

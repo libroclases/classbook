@@ -3,7 +3,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { IconsService } from '../../shared/services/icons/icons.service';
 import { environment as env, lowerUpperTables } from '../../../environments/environment';
 import { MessageService } from '../../shared/services/message/message.service';
-import { TypeService } from 'src/app/shared/services/type-service/type-service';
 import { AuthService } from '@auth0/auth0-angular';
 import { CrudService } from '../../shared/services/crud/crud.service';
 import { UserInfoService } from '../../shared/services/user-info/user-info.service';
@@ -56,7 +55,6 @@ export class MenuComponent implements OnInit{
     public userInfo: UserInfoService,
     private router: Router,
     public ms: MessageService,
-    public ts: TypeService,
     private crud: CrudService,
     public auth: AuthService) {
 
@@ -88,7 +86,7 @@ export class MenuComponent implements OnInit{
     return this.iconsService.getBiClass(route);
   }
 
-  sendtype(tabla: string, tipo:string) { this.ts.nextType({tabla,tipo}) }
+  sendtype(tabla: string, tipo:string) { this.ms.nextType({tabla,tipo}) }
 
   mensaje(color: any) {
 

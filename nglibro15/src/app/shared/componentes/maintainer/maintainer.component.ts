@@ -20,7 +20,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import { MultiSelectComponent} from '../multi-select/multi-select.component';
 import { UserInfoService } from '../../services/user-info/user-info.service';
-import { TypeService } from '../../services/type-service/type-service';
+
 
 
 
@@ -144,7 +144,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
   constructor(
     ms : MessageService,
-    ts : TypeService,
+    
     private crud: CrudService,
     activatedRoute: ActivatedRoute,
     originTableIdsService: OriginTableIdService,
@@ -159,7 +159,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
       this.disable = (modalDataObject[msg.tabla].permission.includes(msg.tipo)) ? false : true;
     } }
 
-    ts.typemsg.pipe(
+    ms.typemsg.pipe(
       tap(msg => getPermision(msg)),
       take(1)
     ).subscribe()
