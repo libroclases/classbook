@@ -35,7 +35,6 @@ import { AuthModule, AuthHttpInterceptor } from '@auth0/auth0-angular';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModalDialog } from './shared/componentes/modal-dialog/modal-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
-import { DialogComponent } from './shared/componentes/dialog/dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { environment as env } from '../environments/environment';
@@ -161,7 +160,6 @@ allowedTables.forEach((tb) => {
     CheckboxCalendarComponent,
     NumbersCalendarComponent,
     FichaAlumnoComponent,
-    DialogComponent,
     TablaComponent,
     VentanaComponent,
     RegistroUsuarioComponent,
