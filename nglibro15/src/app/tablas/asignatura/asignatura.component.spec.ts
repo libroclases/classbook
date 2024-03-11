@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AsignaturaComponent } from './asignatura.component';
+import { MaintainerComponent } from 'src/app/shared/componentes/maintainer/maintainer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CrudService } from 'src/app/shared/services/crud/crud.service';
 
 describe('AsignaturaComponent', () => {
   let component: AsignaturaComponent;
@@ -8,7 +11,8 @@ describe('AsignaturaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AsignaturaComponent ]
+      declarations: [ AsignaturaComponent, MaintainerComponent, HttpClientModule ],
+      providers: [CrudService]
     })
     .compileComponents();
 

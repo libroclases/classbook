@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ApoderadoComponent } from './apoderado.component';
+import { MaintainerComponent } from 'src/app/shared/componentes/maintainer/maintainer.component';
+import { CrudService } from 'src/app/shared/services/crud/crud.service';
+import { HttpClient } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ApoderadoComponent', () => {
   let component: ApoderadoComponent;
@@ -8,7 +12,9 @@ describe('ApoderadoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ApoderadoComponent ]
+      declarations: [ ApoderadoComponent, MaintainerComponent ],
+      providers:[CrudService, HttpClient],
+      schemas:[CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     })
     .compileComponents();
 

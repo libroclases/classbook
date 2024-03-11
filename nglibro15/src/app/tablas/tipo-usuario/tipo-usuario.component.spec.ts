@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TipoUsuarioComponent } from './tipo-usuario.component';
+import { MaintainerComponent } from 'src/app/shared/componentes/maintainer/maintainer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CrudService } from 'src/app/shared/services/crud/crud.service';
 
 describe('TipoUsuarioComponent', () => {
   let component: TipoUsuarioComponent;
@@ -8,7 +11,8 @@ describe('TipoUsuarioComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TipoUsuarioComponent ]
+      declarations: [ TipoUsuarioComponent, MaintainerComponent, HttpClientModule ],
+      providers: [CrudService]
     })
     .compileComponents();
 

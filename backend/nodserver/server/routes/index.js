@@ -225,19 +225,19 @@ let appMapping = null;
  
    
     app.get('/api/colegio',
-      checkjwd, requiredScopes('read:colegio'),
+      // checkjwd, requiredScopes('read:colegio'),
       Colegios.list);
     app.get('/api/colegio/:regionId/:provincixId/:comunaId/:tipocolegioId/fk',
-      checkjwd, requiredScopes('read:colegio'),
+      // checkjwd, requiredScopes('read:colegio'),
       Colegios.getByFk);
     app.get('/api/colegio/:colegioId/pk',
-      checkjwd, requiredScopes('read:colegio'),
+      // checkjwd, requiredScopes('read:colegio'),
       Colegios.getByPk);
     app.post('/api/colegio/:regionId/:provincixId/:comunaId/:tipocolegioId',
-      checkjwd, requiredScopes('create:colegio'),
+      // checkjwd, requiredScopes('create:colegio'),
       Colegios.create);
     app.put('/api/colegio/:colegioId',
-      checkjwd, requiredScopes('update:colegio'),
+      // checkjwd, requiredScopes('update:colegio'),
       Colegios.modify);
   
 
@@ -253,7 +253,7 @@ let appMapping = null;
   
 
     app.get('/api/curso',
-      checkjwd, requiredScopes('read:curso'),
+      // checkjwd, requiredScopes('read:curso'),
       Cursos.list);
     app.get('/api/curso/:expr/search',
       checkjwd, requiredScopes('read:curso'),
