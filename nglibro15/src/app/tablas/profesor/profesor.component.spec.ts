@@ -1,23 +1,27 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+
 import { ProfesorComponent } from './profesor.component';
-import { main } from '@popperjs/core';
 import { MaintainerComponent } from 'src/app/shared/componentes/maintainer/maintainer.component';
-import { CrudService } from 'src/app/shared/services/crud/crud.service';
-import { HttpClientModule } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { MockComponent, MockedComponentFixture, MockRender } from 'ng-mocks';
 
 describe('ProfesorComponent', () => {
   let component: ProfesorComponent;
-  let fixture: ComponentFixture<ProfesorComponent>;
+  let fixture: MockedComponentFixture<ProfesorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProfesorComponent, MaintainerComponent, HttpClientModule ],
-      providers: [CrudService]
+      declarations: [ 
+        ProfesorComponent,
+        MockComponent(ProfesorComponent),       
+      ],
+      providers:[ ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ProfesorComponent);
-    component = fixture.componentInstance;
+    fixture = MockRender(ProfesorComponent);
+    component = fixture.point.componentInstance;
     fixture.detectChanges();
   });
 

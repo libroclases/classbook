@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MessageService } from '../../shared/services/message/message.service';
 import { environment, attributesLabels, fKeysByTable, tableLabels, lowerUpperTables } from 'src/environments/environment';
-import { ActivatedRoute } from '@angular/router';
+// import { ActivatedRoute } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { SelectionIdsService } from 'src/app/shared/services/selection-ids/selection-ids.service';
 import { CrudService } from 'src/app/shared/services/crud/crud.service';
@@ -61,13 +61,13 @@ setAny(valor:any): any { return valor }
 
 constructor(
    private ms : MessageService,
-   private router: ActivatedRoute,
+ //  private router: ActivatedRoute,
    private selIdsService: SelectionIdsService,
    private crud: CrudService,
    private iconsService: IconsService
   ) {
 
-  router.params.subscribe(params => console.log(JSON.stringify(params)))
+  // router.params.subscribe(params => console.log(JSON.stringify(params)))
   
   ms.color_msg.pipe(
     tap(
