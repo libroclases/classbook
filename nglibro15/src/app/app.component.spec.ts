@@ -37,7 +37,7 @@ describe('AppComponent', () => {
 
   });
 
-  fit('should create the app', () => {
+  it('should create the app', () => {
     expect(component).toBeTruthy();
   });
 });
