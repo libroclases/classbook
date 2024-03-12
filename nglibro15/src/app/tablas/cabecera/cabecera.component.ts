@@ -17,9 +17,9 @@ export class CabeceraComponent {
   objcolors = env.colors;
 
   constructor(
-    public userInfo: UserInfoService,
-    public ms: MessageService,
-    public auth: AuthService) {
+    private userInfo: UserInfoService,
+    private ms: MessageService,
+    private auth: AuthService) {
 
     this.auth.isAuthenticated$.subscribe(isAuth => { if(isAuth) {
       userInfo.personalInfo$.subscribe( info  => {

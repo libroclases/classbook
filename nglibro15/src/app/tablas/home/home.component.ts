@@ -37,22 +37,11 @@ export class HomeComponent {
   }
 
   constructor(private ms: MessageService,
-    activatedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     ) {
 
-    /*
-    const ifParams = (params : any) :  any => {
-      console.log('params',params);
-      if (Object.keys(params).length == 0) { this.showme=''; }
-      else { this.showme = params.msg }
-    }
-
-
-    activatedRoute.params.subscribe(params => ifParams(params))
-    */
-
     activatedRoute.data.subscribe(data => {
-      //this.showme = data
+      
       this.showme = data['showme'];
     })
 

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">19.51% </span>
+                <span class="strong">2.43% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/41</span>
+                <span class='fraction'>1/41</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">18.75% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/16</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20.51% </span>
+                <span class="strong">2.56% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/39</span>
+                <span class='fraction'>1/39</span>
             </div>
         
             
@@ -178,18 +178,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -197,19 +191,25 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -279,13 +279,13 @@ export class SelectionIdsService implements OnDestroy {
   msg: Subject&lt;any&gt;;
 &nbsp;
   // Map (suscriptor --&gt; suscripcion) para poder eliminar suscripciones.
-  subsMap: Map&lt;string, Subscription&gt; = new Map();
+<span class="cstat-no" title="statement not covered" >  subsMap: Map&lt;string, Subscription&gt; = new Map();</span>
 &nbsp;
-  constructor() {
-    this.idsMap = new Map();
-    this.textMap = new Map();
+<span class="fstat-no" title="function not covered" >  constructor() {</span>
+<span class="cstat-no" title="statement not covered" >    this.idsMap = new Map();</span>
+<span class="cstat-no" title="statement not covered" >    this.textMap = new Map();</span>
 &nbsp;
-    this.msg = new Subject();
+<span class="cstat-no" title="statement not covered" >    this.msg = new Subject();</span>
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  subscribe(</span>subscriberId: string, func: any) {
@@ -302,15 +302,15 @@ export class SelectionIdsService implements OnDestroy {
     }
   }
 &nbsp;
-  unsubscribeAll() {
-    for (const key of this.subsMap.keys()) {
+<span class="fstat-no" title="function not covered" >  unsubscribeAll(</span>) {
+<span class="cstat-no" title="statement not covered" >    for (const key of this.subsMap.keys()) {</span>
 <span class="cstat-no" title="statement not covered" >      this.unsubscribe(key);</span>
     }
-    this.idsMap.clear();
+<span class="cstat-no" title="statement not covered" >    this.idsMap.clear();</span>
   }
 &nbsp;
-  ngOnDestroy(): void {
-    this.unsubscribeAll();
+<span class="fstat-no" title="function not covered" >  ngOnDestroy(</span>): void {
+<span class="cstat-no" title="statement not covered" >    this.unsubscribeAll();</span>
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  notifyUpdated(</span>) {
@@ -373,7 +373,7 @@ export class SelectionIdsService implements OnDestroy {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-08T14:21:49.754Z
+                at 2024-03-12T12:36:40.695Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
