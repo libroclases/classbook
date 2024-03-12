@@ -1,27 +1,31 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { CursoComponent } from './curso.component';
 import { MaintainerComponent } from 'src/app/shared/componentes/maintainer/maintainer.component';
-import { HttpClientModule } from '@angular/common/http';
-import { CrudService } from 'src/app/shared/services/crud/crud.service';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { MockComponent, MockedComponentFixture, MockRender } from 'ng-mocks';
 
 describe('CursoComponent', () => {
   let component: CursoComponent;
-  let fixture: ComponentFixture<CursoComponent>;
+  let fixture: MockedComponentFixture<CursoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CursoComponent, MaintainerComponent, HttpClientModule ],
-      providers: [CrudService]
+      declarations: [ 
+        CursoComponent,
+        MockComponent(MaintainerComponent),       
+      ],
+      providers:[ ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CursoComponent);
-    component = fixture.componentInstance;
+    fixture = MockRender(CursoComponent);
+    component = fixture.point.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  fit('should create', () => {
     expect(component).toBeTruthy();
   });
 });

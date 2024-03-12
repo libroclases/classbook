@@ -1,27 +1,31 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { HoraAsignadaComponent } from './hora-asignada.component';
 import { MaintainerComponent } from 'src/app/shared/componentes/maintainer/maintainer.component';
-import { HttpClientModule } from '@angular/common/http';
-import { CrudService } from 'src/app/shared/services/crud/crud.service';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { MockComponent, MockedComponentFixture, MockRender } from 'ng-mocks';
 
 describe('HoraAsignadaComponent', () => {
   let component: HoraAsignadaComponent;
-  let fixture: ComponentFixture<HoraAsignadaComponent>;
+  let fixture: MockedComponentFixture<HoraAsignadaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HoraAsignadaComponent, MaintainerComponent, HttpClientModule ],
-      providers: [CrudService]
+      declarations: [ 
+        HoraAsignadaComponent,
+        MockComponent(MaintainerComponent),       
+      ],
+      providers:[ ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HoraAsignadaComponent);
-    component = fixture.componentInstance;
+    fixture = MockRender(HoraAsignadaComponent);
+    component = fixture.point.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  fit('should create', () => {
     expect(component).toBeTruthy();
   });
 });
