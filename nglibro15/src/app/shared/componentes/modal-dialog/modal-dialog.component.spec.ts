@@ -1,20 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
+import { MockComponent, MockRender, MockedComponentFixture } from 'ng-mocks';
 import { ModalDialogComponent } from './modal-dialog.component';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ModalDialogComponent', () => {
   let component: ModalDialogComponent;
-  let fixture: ComponentFixture<ModalDialogComponent>;
+  let fixture: MockedComponentFixture<ModalDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ModalDialogComponent]
+      imports: [ModalDialogComponent],
+      declarations: [ MockComponent(ModalDialogComponent) ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(ModalDialogComponent);
-    component = fixture.componentInstance;
+
+    fixture = MockRender(ModalDialogComponent);
+    component = fixture.point.componentInstance;
     fixture.detectChanges();
+
   });
 
   it('should create', () => {

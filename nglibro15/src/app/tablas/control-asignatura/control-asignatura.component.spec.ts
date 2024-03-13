@@ -1,31 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CrudService } from 'src/app/shared/services/crud/crud.service';
+import { TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ControlAsignaturaComponent } from './control-asignatura.component';
-import { of } from 'rxjs';
-
-const crudServiceMock = {
-  getData: () => of([])
-}
+import { MockComponent, MockRender, MockedComponentFixture } from 'ng-mocks';
 
 describe('ControlAsignaturaComponent', () => {
+  
   let component: ControlAsignaturaComponent;
-  let fixture: ComponentFixture<ControlAsignaturaComponent>;
+  let fixture: MockedComponentFixture<ControlAsignaturaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers:[
-        { 
-          provide: CrudService, useValue: crudServiceMock 
-        }
-      ], 
-      declarations: [ ControlAsignaturaComponent ],
+      imports: [ControlAsignaturaComponent],
+      declarations: [ MockComponent(ControlAsignaturaComponent)  ],      
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ControlAsignaturaComponent);
-    component = fixture.componentInstance;
+    fixture = MockRender(ControlAsignaturaComponent);
+    component = fixture.point.componentInstance;
     fixture.detectChanges();
   });
 
