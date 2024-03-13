@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CrudService } from 'src/app/shared/services/crud/crud.service';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { AnotacionesComponent } from './anotaciones.component';
-import {  MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../../shared/componentes/modal-dialog/modal-dialog.component';
 import { MockComponent, MockedComponentFixture, MockModule, MockRender } from 'ng-mocks';
 import { of } from 'rxjs';

@@ -107,7 +107,7 @@ export class NotaComponent implements OnInit {
   }
 
   constructor(private crud: CrudService,
-      route: ActivatedRoute,
+      // route: ActivatedRoute,
       ms : MessageService,
       private selIdsService: SelectionIdsService,
       public dialog: MatDialog,
@@ -140,16 +140,6 @@ export class NotaComponent implements OnInit {
 
 
       this.notasForm = new FormGroup({})
-
-      route.params.subscribe(params => {
-
-        if (!isNaN(params['id'])) {
-
-          this.fatherId = params['id'];
-          this.father = params['padre'];
-
-        }
-     });
 
      }
 
