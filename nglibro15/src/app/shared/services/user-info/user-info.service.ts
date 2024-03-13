@@ -8,11 +8,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 
-class TodoService {
-  subject?: Subject<boolean>;
-  behavior?: BehaviorSubject<boolean>;
- 
-}
+
 
 export class UserInfoService {
 

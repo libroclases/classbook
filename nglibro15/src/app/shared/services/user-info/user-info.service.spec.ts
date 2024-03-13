@@ -26,7 +26,7 @@ describe('UserInfoService', () => {
     service = TestBed.inject(UserInfoService);
   });
 
-  fit('should be created', () => {
+  it('should be created', () => {
     expect(service).toBeTruthy();
   });
 });

@@ -11,6 +11,10 @@ const crudServiceMock = {
   putData: () => null
 }
 
+const userInfoMock = {
+
+}
+
 describe('MenuComponent', () => {
   let component: MenuComponent;
   let fixture: ComponentFixture<MenuComponent>;
@@ -26,7 +30,7 @@ describe('MenuComponent', () => {
       
       ],
       declarations: [ MenuComponent ],
-      providers: [UserInfoService, 
+      providers: [
       
         {
           provide: CrudService,
