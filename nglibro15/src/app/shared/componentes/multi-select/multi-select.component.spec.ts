@@ -1,19 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MockService, MockedComponentFixture, MockRender, MockComponent } from 'ng-mocks';
 import { MultiSelectComponent } from './multi-select.component';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('MultiSelectComponent', () => {
   let component: MultiSelectComponent;
-  let fixture: ComponentFixture<MultiSelectComponent>;
+  let fixture: MockedComponentFixture<MultiSelectComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MultiSelectComponent]
+      declarations: [ MockComponent(MultiSelectComponent) ],
+      
+      imports: [],
+      providers: [],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(MultiSelectComponent);
-    component = fixture.componentInstance;
+    fixture = MockRender(MultiSelectComponent);
+    component = fixture.point.componentInstance;
     fixture.detectChanges();
   });
 
