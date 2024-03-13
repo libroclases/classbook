@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
 import { CrudService } from '../../shared/services/crud/crud.service';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+// import { ActivatedRoute, RouterModule } from '@angular/router';
 import { map, Observable, of, Subscription, take, tap } from 'rxjs';
 import { SubscriptionsManagerService } from '../../shared/services/subscriptions-manager/subscriptions-manager.service';
 import { Notification } from '../../interfaces/generic.interface';
@@ -119,7 +119,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
     // route: ActivatedRoute,
     ms: MessageService,
     originTableIdsService: OriginTableIdService,
-    activatedRoute: ActivatedRoute,
+    // activatedRoute: ActivatedRoute,
     private subsManagerService: SubscriptionsManagerService,
     public dialog: MatDialog,
     private selIdsService: SelectionIdsService,
@@ -148,11 +148,12 @@ export class HorarioComponent implements OnInit, OnDestroy {
         }
       })
 
-
+      /*
       activatedRoute.params.subscribe(params =>
         this.crud.getDataPk('region', 1)
         .subscribe( () => { originTableIdsService.nextMsg(params); })
       )
+      */
     }
 
      getBiClass(route: string) {

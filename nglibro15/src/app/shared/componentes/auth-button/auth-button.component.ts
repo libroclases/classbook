@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 // Import the AuthService type from the SDK
-import { AuthService } from '@auth0/auth0-angular';
+import { AuthModule, AuthService } from '@auth0/auth0-angular';
 import { SubscriptionsManagerService } from '../../services/subscriptions-manager/subscriptions-manager.service';
 import { tap } from 'rxjs';
 import { UserInfoService } from '../../services/user-info/user-info.service';

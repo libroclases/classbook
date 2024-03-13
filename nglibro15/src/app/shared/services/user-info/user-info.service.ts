@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, concatMap, of, map, shareReplay, tap } from 'rxjs';
+import { Observable, concatMap, of, map, shareReplay, tap, Subject } from 'rxjs';
 import { CrudService } from '../crud/crud.service';
 import { AuthService } from '@auth0/auth0-angular';
 import { BehaviorSubject } from 'rxjs';
@@ -7,6 +7,13 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
+
+class TodoService {
+  subject?: Subject<boolean>;
+  behavior?: BehaviorSubject<boolean>;
+ 
+}
+
 export class UserInfoService {
 
   personalInfo$: Observable<Object | any>;
