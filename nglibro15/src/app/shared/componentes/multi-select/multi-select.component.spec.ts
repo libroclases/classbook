@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MockService, MockedComponentFixture, MockRender, MockComponent } from 'ng-mocks';
+import { TestBed } from '@angular/core/testing';
+import { MockedComponentFixture, MockRender, MockComponent } from 'ng-mocks';
 import { MultiSelectComponent } from './multi-select.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 

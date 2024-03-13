@@ -1,19 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { CheckboxCalendarComponent } from './checkbox-calendar.component';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { MockComponent, MockRender, MockedComponentFixture } from 'ng-mocks';
 
 describe('CheckboxCalendarComponent', () => {
   let component: CheckboxCalendarComponent;
-  let fixture: ComponentFixture<CheckboxCalendarComponent>;
+  let fixture: MockedComponentFixture<CheckboxCalendarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CheckboxCalendarComponent]
+      imports: [CheckboxCalendarComponent],
+      declarations: [ MockComponent(CheckboxCalendarComponent) ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(CheckboxCalendarComponent);
-    component = fixture.componentInstance;
+    fixture = MockRender(CheckboxCalendarComponent);
+    component = fixture.point.componentInstance;
     fixture.detectChanges();
   });
 
