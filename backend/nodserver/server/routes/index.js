@@ -225,19 +225,19 @@ let appMapping = null;
  
    
     app.get('/api/colegio',
-      // checkjwd, requiredScopes('read:colegio'),
+      checkjwd, requiredScopes('read:colegio'),
       Colegios.list);
     app.get('/api/colegio/:regionId/:provincixId/:comunaId/:tipocolegioId/fk',
-      // checkjwd, requiredScopes('read:colegio'),
+      checkjwd, requiredScopes('read:colegio'),
       Colegios.getByFk);
     app.get('/api/colegio/:colegioId/pk',
-      // checkjwd, requiredScopes('read:colegio'),
+      checkjwd, requiredScopes('read:colegio'),
       Colegios.getByPk);
     app.post('/api/colegio/:regionId/:provincixId/:comunaId/:tipocolegioId',
-      // checkjwd, requiredScopes('create:colegio'),
+      checkjwd, requiredScopes('create:colegio'),
       Colegios.create);
     app.put('/api/colegio/:colegioId',
-      // checkjwd, requiredScopes('update:colegio'),
+      checkjwd, requiredScopes('update:colegio'),
       Colegios.modify);
   
 
@@ -253,7 +253,7 @@ let appMapping = null;
   
 
     app.get('/api/curso',
-      // checkjwd, requiredScopes('read:curso'),
+      checkjwd, requiredScopes('read:curso'),
       Cursos.list);
     app.get('/api/curso/:expr/search',
       checkjwd, requiredScopes('read:curso'),
@@ -350,7 +350,7 @@ let appMapping = null;
       checkjwd, requiredScopes('read:usuario'),
       Usuarios.getByPk);
     app.post('/api/usuario/:tipousuarioId/:temaId',
-      // checkjwd, requiredScopes('create:usuario'),
+      checkjwd, requiredScopes('create:usuario'),
       Usuarios.create);
     app.put('/api/usuario/:usuarioId',
       checkjwd, requiredScopes('update:usuario'),
@@ -527,7 +527,7 @@ let appMapping = null;
       checkjwd, requiredScopes('read:asistencia'),
       Asistencias.list);
     app.get('/api/asistencia/:matriculaId/:colegioId/:cursoId/:alumnoId/:annoId/:mesId/fk',
-      // checkjwd, requiredScopes('read:asistencia'),
+      checkjwd, requiredScopes('read:asistencia'),
       Asistencias.getByFk);
     app.get('/api/asistencia/:colegioId/:cursoId/:annoId/:mesId/curso_dia',
       checkjwd, requiredScopes('read:asistencia'),
@@ -677,7 +677,7 @@ let appMapping = null;
       checkjwd, requiredScopes('read:nota'),
       Notas.list);
     app.get('/api/nota/:annoId/:periodoId/:colegioId/:cursoId/:profesorId/:asignaturaprofesorId/:matriculaId/:evaluacionId/fk',
-      // checkjwd, requiredScopes('read:nota'),
+      checkjwd, requiredScopes('read:nota'),
       Notas.getByFk);
     app.post('/api/nota/:annoId/:periodoId/:colegioId/:cursoId/:profesorId/:asignaturaprofesorId/:matriculaId/:evaluacionId',
       checkjwd, requiredScopes('create:nota'),
