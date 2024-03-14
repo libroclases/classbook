@@ -385,7 +385,9 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
     );
   }
 
-  totalAtColumn(column: number) {
+  totalAtColumn(column: number) { 
+    console.log('column,colToday, currentDateInMonth', column, this.colToday, this.currentDateInMonth, );
+    
     if (this.currentDateInMonth) {
       if (this.colToday == column) {
         return this.totalChechedToday;
