@@ -252,8 +252,8 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
   }
 
   updateData(message: any) {
-    console.log('updateData');
-    console.log('=====');
+    // console.log('updateData');
+    // console.log('=====');
     this.entryIdToday.clear();
     this.checkBoxesToday.clear();
     this.editedCheckBoxes.clear();
@@ -293,7 +293,7 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
     const selMonthId = this.selIdsService.getId(this.monthTable);
     // week-index of first day of the month
     // this.today = new Date();
-    this.today = new Date('2023-09-26T12:00:00');
+    this.today = new Date();
     this.colToday = this.today.getDate() - 1;
     this.currentDateInMonth =
       this.today.getMonth() === selMonthId - 1 &&
@@ -386,7 +386,7 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
   }
 
   totalAtColumn(column: number) { 
-    console.log('column,colToday, currentDateInMonth', column, this.colToday, this.currentDateInMonth, );
+    // console.log('column,colToday, currentDateInMonth', column, this.colToday, this.currentDateInMonth, );
     
     if (this.currentDateInMonth) {
       if (this.colToday == column) {
