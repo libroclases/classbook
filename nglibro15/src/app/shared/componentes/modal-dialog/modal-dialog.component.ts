@@ -13,7 +13,7 @@ import { modalDataObject, lowerUpperTables, validator, environment, personTables
 import { IconsService } from '../../services/icons/icons.service';
 import { LabelsService } from '../../services/labels/labels.service';
 import { SelectionIdsService } from '../../services/selection-ids/selection-ids.service';
-import { CommonModule, NgFor, formatDate } from '@angular/common';
+import { CommonModule, DOCUMENT, NgFor, formatDate } from '@angular/common';
 import { selectValidator } from '../../directives/select-validator/select-validator.directive';
 import { horaValidator} from '../../directives/hora-validator/hora-validator.directive';
 import { MessageService } from '../../services/message/message.service';
@@ -53,6 +53,7 @@ import { profeValidator } from '../../directives/profe-validator/profe-validator
     existe_table:any = [];
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(DOCUMENT) private document: Document,
     private crud: CrudService,
     private fKeysService: ForeignKeysService ,
     private fb: FormBuilder,
@@ -393,7 +394,7 @@ import { profeValidator } from '../../directives/profe-validator/profe-validator
         this.crud.postData(obj, this.modalData.mainTable, ids).pipe(
           tap(() => this.selIdsService.notifyUpdated()),
         )
-        .subscribe(msg => alert(msg.message));
+        .subscribe(msg => this.document.defaultView?.alert(msg.message));
         
       }
       else {   // If PUT
@@ -401,7 +402,7 @@ import { profeValidator } from '../../directives/profe-validator/profe-validator
 
         this.crud.putData(obj, this.modalData.mainTable).pipe(
           tap(() => this.selIdsService.notifyUpdated())
-          ).subscribe(msg => alert(msg.message));
+          ).subscribe(msg =>  this.document.defaultView?.alert(msg.message));
 
       }
     }
