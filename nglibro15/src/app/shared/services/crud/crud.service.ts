@@ -152,7 +152,7 @@ export class CrudService {
   putData(obj: any, table: string): Observable<any> {
     // const extraString = this.getExtraString(table);
     let baseurl = `${this.baseurl}/${table}/${obj.id}`;
-    console.log(baseurl)
+    
     return this.http.put(baseurl, obj, this.httpOptions).pipe(
       tap(_ => this.log(`updated ${table} id=${obj.id}`)),
       catchError(this.handleError<any>())

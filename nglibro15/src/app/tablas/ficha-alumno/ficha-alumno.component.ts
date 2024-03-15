@@ -23,20 +23,23 @@ export class FichaAlumnoComponent implements OnInit{
   alumnos:any = attributesLabels.alumno;
   apoderados:any = attributesLabels.apoderado;
   matriculas:any = attributesLabels.matricula;
+  anotaciones:any = attributesLabels.anotacion;
 
   matricula:any;
   alumno:any;
   apoderado:any;
+  anotacion:any;
 
   alumnofk:any = fKeysByTable['alumno'];
   apoderadofk:any = fKeysByTable['apoderado'];
   matriculafk:any = fKeysByTable['matricula'];
+  anotacionfk:any = fKeysByTable['anotacion'];
 
   labels:any = tableLabels;
   lowerUpper:any = lowerUpperTables
 
   lista_curso_nombres$!: Observable<any>
-  // matricula!:any;
+
 
   bodybgcolor!:string;
   pagination!:string;
@@ -51,8 +54,8 @@ export class FichaAlumnoComponent implements OnInit{
 
 // Selectores
 
-selTables = [  "colegio", "curso",  "anno" ];
-tableLabels = ['Colegio' ,'Curso', 'Año' ];
+selTables = [  "colegio", "anno",  "curso" ];
+tableLabels = ['Colegio' ,'Año', 'Curso' ];
 ignoreFkRequirements: string[] = ['asignatura'];
 changeFnsArray: Function[] = [];
 patchFKsFromStorage = ['colegio', 'anno'];
@@ -61,13 +64,10 @@ setAny(valor:any): any { return valor }
 
 constructor(
    private ms : MessageService,
- //  private router: ActivatedRoute,
    private selIdsService: SelectionIdsService,
    private crud: CrudService,
    private iconsService: IconsService
   ) {
-
-  // router.params.subscribe(params => console.log(JSON.stringify(params)))
   
   ms.color_msg.pipe(
     tap(
@@ -107,6 +107,10 @@ actualiza_ficha(id: number) {
     .subscribe(alumno => this.alumno = alumno);
     this.crud.getDataPk('apoderado', mat.apoderadoId)
     .subscribe(apoderado => this.apoderado = apoderado); 
+    this.crud.getData('anotacion', [this.matricula.id,0,this.selIdsService.getId('anno'),
+    this.selIdsService.getId('colegio'),
+    this.selIdsService.getId('curso')])?.subscribe((anotacion:any) => this.anotacion = anotacion); 
+
  
   }) 
 }
@@ -114,6 +118,7 @@ actualiza_ficha(id: number) {
 getmatricula(key:any) : any { if (this.matricula) return this.matricula[key] }
 getalumno(key:any) : any { if (this.alumno) return this.alumno[key] }
 getapoderado(key:any) : any { if (this.apoderado) return this.apoderado[key] }
+// getanotacion(key:any) : any { if (this.anotacion) return this.anotacion[key] }
 
 getBiClass(route: string) {
   // permite acceder a iconsService.getBiClass desde html
@@ -133,11 +138,11 @@ updateTable(notification: (Notification | null) = null) {
     this.selIdsService.getId('anno')
   ]
 
-  console.log(ides);
-
   if ( !notification || notification.message == "updated" ) {
     if (ides[0] * ides[1] * ides[2]  > 0) {
-      this.lista_curso_nombres$ = this.crud.getDataCustom('matricula', 'lista_curso_nombres', ides )      
+      this.lista_curso_nombres$ = this.crud.getDataCustom('matricula', 'lista_curso_nombres', ides )
+      
+     //  this.lista_curso_nombres$.subscribe(lista => console.log(lista))      
     }
 
   }
