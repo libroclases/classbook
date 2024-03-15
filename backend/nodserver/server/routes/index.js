@@ -208,19 +208,19 @@ let appMapping = null;
       EstadoAlumnos.modify);
   
       app.get('/api/anotacion',
-      checkjwd, requiredScopes('read:anotacion'),
+      // checkjwd, requiredScopes('read:anotacion'),
       Anotaciones.list);
     app.get('/api/anotacion/:matriculaId/:profesorId/:annoId/:colegioId/:cursoId/fk',
-      checkjwd, requiredScopes('read:anotacion'), 
+      // checkjwd, requiredScopes('read:anotacion'), 
       Anotaciones.getByFk);
     app.get('/api/anotacion/:anotacionId/pk',
-      checkjwd, requiredScopes('read:anotacion'),
+      // checkjwd, requiredScopes('read:anotacion'),
       Anotaciones.getByPk);
     app.post('/api/anotacion/:matriculaId/:profesorId/:annoId/:colegioId/:cursoId',
-      checkjwd, requiredScopes('create:anotacion'),
+      // checkjwd, requiredScopes('create:anotacion'),
       Anotaciones.create);
     app.put('/api/anotacion/:anotacionId',
-      checkjwd, requiredScopes('update:anotacion'),
+      // checkjwd, requiredScopes('update:anotacion'),
       Anotaciones.modify);
  
    

@@ -157,9 +157,10 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
     const getPermision = (msg: any) => { if(msg) {
       this.disable = (modalDataObject[msg.tabla].permission.includes(msg.tipo)) ? false : true;
-    } }
+    } 
+  }
 
-    ms.typemsg.pipe(
+    ms.disable_msg.pipe(
       tap(msg => getPermision(msg)),
       take(1)
     ).subscribe()

@@ -100,7 +100,6 @@ import { profeValidator } from '../../directives/profe-validator/profe-validator
 
     ngOnInit(): void {
 
-      console.log('this.data', this.data);
 
       this.modalData = modalDataObject[this.data.tabla];
 
@@ -114,13 +113,13 @@ import { profeValidator } from '../../directives/profe-validator/profe-validator
       this.validator = validator[this.data.tabla]
       this.considerReqSel = false;
       this.modalData.tables.forEach(
-      (table: string) => {  console.log('table',table);
+      (table: string) => { 
         this.queries[table] = EMPTY;
         this.idsMap.set(table, 0);
         this.requiredBySelTree.set(table, []);
       });
       this.registro = this.data.registro;
-      console.log('REGISTRO',this.data.registro)
+    
       this.getFKValues(); // Obtengo los valores de Fk
       this.generateForm(); // Crea Forms
       this.modalData.tables.forEach(
@@ -205,7 +204,7 @@ import { profeValidator } from '../../directives/profe-validator/profe-validator
       }
 
       const validateDateForm = (campo: string) :  ValidatorFn[] => {
-        console.log('fecha',campo,this.validator.modalDate[campo]);
+
         return this.validator.modalDate[campo];
       }
 
@@ -354,8 +353,6 @@ import { profeValidator } from '../../directives/profe-validator/profe-validator
 
     onSubmit() {
 
-      console.log('FormModal.value', this.formModal.value);
-
       let ids: any = [];
       let obj: any = {};
 
@@ -387,9 +384,13 @@ import { profeValidator } from '../../directives/profe-validator/profe-validator
         if (this.data.mainTable == 'horario') { ids[5] = this.registro.Dix.id }
 
         this.ms.userId.subscribe((userId:any) => {
-          if (userId && personTables.includes(this.modalData.mainTable)) {  ids[0] = userId   }          
-        })
 
+
+          if (userId && personTables.includes(this.modalData.mainTable)) {  ids[0] = userId   } 
+          if (userId && this.modalData.mainTable == 'anotacion') { ids[1] = userId }
+
+         
+        })     
         
         this.crud.postData(obj, this.modalData.mainTable, ids).pipe(
           tap(() => this.selIdsService.notifyUpdated()),

@@ -1297,7 +1297,7 @@ export const modalDataObject: any = {
     defaultValues: { fecha: 'today' },
     label: 'Observación',
     windowHeight: 'auto',
-    permission: ['profesor','utp']
+    permission: ['profesor']
   },
 
   RegistroActividad: {

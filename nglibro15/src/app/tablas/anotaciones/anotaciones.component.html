@@ -16,12 +16,17 @@
     </div>
 
     <div class="overflow-auto p-3 bg-light"  [style.max-height]="height" style="width: 100%;">
-  
+
       <table class="table table-bordered table-striped table-sm">
         <thead>  <!-- [disabled]="disabledAddButton" -->
           <tr><th colspan="22" [style.background-color]="tablehead" style="color: white">
             <em [class]="getBiClass('/anotacion')"></em>&nbsp;{{title}}
-              &nbsp;<button type="button" class="btn btn-sm text-light"  (click)="openDialog()" title="Nuevo" [style.background-color]="modalbutton" ><em class="bi bi-plus-lg"></em></button>
+              &nbsp;
+              
+              <a mat-button (click)="openDialog()"  disabled={{disabledAddButton}} title="Nuevo" [style.background-color]="modalbutton"><em class="bi bi-plus-lg"></em></a>
+
+              <!--button type="button" class="btn btn-sm text-light"  (click)="openDialog(null)"  disabled={{disable}} title="Nuevo" 
+              [style.background-color]="modalbutton" ><em class="bi bi-plus-lg">{{disable}}</em></button-->
           
           </th></tr>
           <tr><th colspan="22" style="background-color: rgba(0,0,0,0);"> <p style="color: blue;"> {{nombreAlumno}}</p></th></tr>
@@ -36,7 +41,7 @@
           <tr *ngFor="let entry of mainQuery; index as i" style="height:fit-content">
             <td colspan="2">{{entry.fecha}}</td>
             <td>{{entry.hora}}</td>
-            <td colspan="4">{{entry.Profesor.apellido}}, {{entry.Profesor.nombre}}</td>
+            <td colspan="4">{{entry.Profesor.apellido1}} {{entry.Profesor.apellido2}}, {{entry.Profesor.nombre}}</td>
             <td colspan="15">{{entry.texto}}</td>
           </tr>
         </tbody>

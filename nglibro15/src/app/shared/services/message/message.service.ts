@@ -9,14 +9,14 @@ export class MessageService {
   msg: BehaviorSubject<any>;
   color_msg: BehaviorSubject<any>;
   userId: BehaviorSubject<any>;
-  typemsg: BehaviorSubject<any>;
+  disable_msg: BehaviorSubject<any>;
 
 
   constructor() {
       this.msg = new BehaviorSubject({msg:''});
       this.color_msg = new BehaviorSubject(null);
       this.userId = new BehaviorSubject(null);
-      this.typemsg = new BehaviorSubject(null);
+      this.disable_msg = new BehaviorSubject(null);
   }
 
   nextMsg(msg: any) {
@@ -33,7 +33,6 @@ export class MessageService {
 
   nextType(msg: any) {
     // console.log('msg',msg);
-    this.typemsg.next(msg);
-
+    this.disable_msg.next(msg);
   }
 }  

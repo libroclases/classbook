@@ -9,9 +9,10 @@ import { SubscriptionsManagerService } from '../../shared/services/subscriptions
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../../shared/componentes/modal-dialog/modal-dialog.component';
 import { environment, lowerUpperTables, modalDataObject } from '../../../environments/environment';
-import { tap } from 'rxjs';
+import { take, tap } from 'rxjs';
 import { MessageService } from '../../shared/services/message/message.service';
-
+import { AuthService } from '@auth0/auth0-angular';
+import { UserInfoService,} from '../../shared/services/user-info/user-info.service'
 
 @Component({
   selector: 'app-anotaciones',
@@ -43,6 +44,7 @@ export class AnotacionesComponent implements OnDestroy {
   mainQuery: any = undefined;
   nombreAlumno: string = "";
   disabledAddButton = true;
+  personalInfo!: any;
 
   //   colores
 
@@ -53,6 +55,7 @@ export class AnotacionesComponent implements OnDestroy {
   tablehead!:string;
   modalbutton!:string;
 
+  disable = true;
 
   errorAlert = {
     id: "error",
@@ -71,11 +74,33 @@ export class AnotacionesComponent implements OnDestroy {
   constructor(
     private crud: CrudService,
     ms: MessageService,
+    auth: AuthService,
+    userInfo: UserInfoService,
     public dialog: MatDialog,
     private subsManagerService: SubscriptionsManagerService,
     private fKeysService: ForeignKeysService,
     private selIdsService: SelectionIdsService,
     private iconsService: IconsService) {
+
+    const getPermision = (msg: any) => { if(msg) {
+      
+        this.disable = (modalDataObject[msg.tabla].permission.includes(msg.tipo)) ? false : true;
+        
+      }
+    } 
+
+    ms.disable_msg.pipe(
+      tap(msg => getPermision(msg)),
+      take(1)
+    ).subscribe()
+
+    auth.isAuthenticated$.subscribe(isAuth => { if(isAuth) { 
+            userInfo.personalInfo$.subscribe(info => {
+              if (info) { 
+                ms.nextUser(info.usuario.id)
+              } 
+            }  )
+       }})
 
       ms.color_msg.subscribe(color =>  {
 
@@ -90,13 +115,13 @@ export class AnotacionesComponent implements OnDestroy {
           this.bodybgcolor = this.objcolors.verde.bodybgcolor;
           this.pagination = this.objcolors.verde.pagination;
           this.tablehead = this.objcolors.verde.tablehead;
-          this.modalbutton = this.objcolors.azul.modalbutton;
+          this.modalbutton = this.objcolors.verde.modalbutton;
         }
         else if (color=='naranjo') {
           this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
           this.pagination = this.objcolors.naranjo.pagination;
           this.tablehead = this.objcolors.naranjo.tablehead;
-          this.modalbutton = this.objcolors.azul.modalbutton;
+          this.modalbutton = this.objcolors.verde.modalbutton;
         }
       })
     }
@@ -104,7 +129,8 @@ export class AnotacionesComponent implements OnDestroy {
   ngOnInit(): void {
 
     this.mainTableUpper = lowerUpperTables[this.mainTable];
-    this.modalDataObj = modalDataObject[this.mainTableUpper]
+    this.modalDataObj = modalDataObject[this.mainTableUpper];
+    
     this.selIdsService.subscribe(
       'observaciones', (message: (Notification)) => this.updateData(message));
     this.alerts.push(this.successfulSaveAlert);
@@ -117,7 +143,7 @@ export class AnotacionesComponent implements OnDestroy {
     this.subsManagerService.unsubscribeAll();
   }
 
-  updateData(notification: (Notification | null) = null) {
+  updateData(notification: (Notification | null) = null) { 
     if ( !notification || notification.message == 'updated' ) {
       for ( let tbl of this.fKeysSel) {
         if( this.selIdsService.getId(tbl) === 0 ) {  // just don't update
@@ -125,11 +151,14 @@ export class AnotacionesComponent implements OnDestroy {
           return;
         }
       }
-      this.disabledAddButton = false;
+      if ( this.disable == false) { this.disabledAddButton = false; }
       const fks = this.selIdsService.getIds(
-        this.fKeysService.getFKeys(this.mainTable)!, {profesor: 0});
+        this.fKeysService.getFKeys(this.mainTable)!, {profesor: 0}
+        );
+
+      
       const subs = this.crud.getData(this.mainTable, fks)!
-      .subscribe( query => {
+      .subscribe( query => { 
         const subsNombre = this.crud.getDataCustom(
           "matricula", "nombreCompleto", [this.selIdsService.getId("matricula")])
         .subscribe( q => this.nombreAlumno = q.nombreCompleto );
@@ -151,9 +180,11 @@ export class AnotacionesComponent implements OnDestroy {
         id: 0,
         fecha: `${currentYear}-${currentMonth}-${currentDay}`
       };
-      this.modalDataObj.tables.forEach((table: string) => reg[table] = {
-        id: this.selIdsService.getId(table.toLocaleLowerCase()) || 0});
-
+      this.modalDataObj.tables.forEach((table: string) => {
+        console.log('table',table)
+        reg[table] = { id: this.selIdsService.getId(table.toLocaleLowerCase()) || 0 }
+      });
+     
 
    }
     let modaldata: any = this.modalDataObj;
