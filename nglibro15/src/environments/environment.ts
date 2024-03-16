@@ -1030,7 +1030,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Horario',
     windowHeight: '400px',
-    permission: ['profesor','utp']
+    permission: ['utp']
   },
 
   Profesor: {

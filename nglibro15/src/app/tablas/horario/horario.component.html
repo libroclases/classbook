@@ -19,6 +19,8 @@
 
 
    <!-- Tabla Principal -->
+   <p>disabled: {{disable}}</p>
+  
    <div class="overflow-auto p-3 bg-light"  [style.max-height]="height" style="width: 100%;">
      <table  class="table table-sm  table-bordered">
     <thead class="table-bordered">
@@ -35,8 +37,9 @@
         <th style="width: 14.2%">Hora</th>
 
           <th  *ngFor="let d of days" style="width: 14.2%">{{d.nombre}}
-            <button class="btn btn-outline-light text-dark btn-sm" data-bs-toggle="tooltip" title="Nuevo" [disabled]="stateOfplusButton == false"
-            (click)="openDialog({Dix: d.id},'create')"><em  class="bi bi-plus-lg"></em></button>
+            <a mat-button   disabled={{disable}} title="Nuevo" (click)="openDialog({Dix: d.id},'create')"  [disabled]="stateOfButton"><em class="bi bi-plus-lg"></em></a>
+            <!--button class="btn btn-outline-light text-dark btn-sm" data-bs-toggle="tooltip" title="Nuevo" [disabled]="stateOfplusButton == false"
+            (click)="openDialog({Dix: d.id},'create')"><em  class="bi bi-plus-lg"></em></button-->
           </th>
       </tr>
     </thead>
@@ -60,8 +63,8 @@
                 <tr *ngFor="let dayOf of dayOfWeekMap.get(d.id-1)">
 
                     <td *ngIf="dayOf.AsignaturaProfesor">
-
-                            <button class="btn btn-outline-light text-dark btn-sm" data-bs-toggle="tooltip"  [disabled]="stateOfModalEdit == false"
+                            
+                            <button class="btn btn-outline-light text-dark btn-sm" data-bs-toggle="tooltip"  [disabled]="stateOfButton"
                                title=" {{dayOf.Profesor.apellido1}} {{dayOf.Profesor.apellido2}} {{dayOf.Profesor.nombre}}"
                               (click)="openDialog(dayOf,'update')">{{dayOf.AsignaturaProfesor.nombre}}
                             </button>

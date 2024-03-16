@@ -61,6 +61,7 @@ import { VentanaComponent } from './tablas/ventana/ventana.component';
 import { RegistroUsuarioComponent } from './tablas/registro-usuario/registro-usuario.component';
 import { UtpComponent } from './tablas/utp/utp.component';
 import { ProfeValidatorsDirective } from './shared/directives/profe-validator/profe-validator.directive';
+import { MessageService } from './shared/services/message/message.service';
 
 
 // import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
@@ -194,6 +195,7 @@ allowedTables.forEach((tb) => {
 
   ],
   providers: [
+    MessageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHttpInterceptor,

@@ -10,6 +10,7 @@ export class MessageService {
   color_msg: BehaviorSubject<any>;
   userId: BehaviorSubject<any>;
   disable_msg: BehaviorSubject<any>;
+  profesor_msg: BehaviorSubject<number>;
 
 
   constructor() {
@@ -17,6 +18,7 @@ export class MessageService {
       this.color_msg = new BehaviorSubject(null);
       this.userId = new BehaviorSubject(null);
       this.disable_msg = new BehaviorSubject(null);
+      this.profesor_msg = new BehaviorSubject(0);
   }
 
   nextMsg(msg: any) {
@@ -34,5 +36,9 @@ export class MessageService {
   nextType(msg: any) {
     // console.log('msg',msg);
     this.disable_msg.next(msg);
+  }
+
+  nextProfesor(msg:any) {
+    this.profesor_msg.next(msg);
   }
 }  

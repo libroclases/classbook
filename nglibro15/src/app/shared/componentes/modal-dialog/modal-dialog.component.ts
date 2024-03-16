@@ -17,13 +17,13 @@ import { CommonModule, DOCUMENT, NgFor, formatDate } from '@angular/common';
 import { selectValidator } from '../../directives/select-validator/select-validator.directive';
 import { horaValidator} from '../../directives/hora-validator/hora-validator.directive';
 import { MessageService } from '../../services/message/message.service';
-import { profeValidator } from '../../directives/profe-validator/profe-validator.directive';
+import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe-validator.directive';
 
 @Component({
     selector: 'modal-dialog',
     templateUrl: 'modal-dialog.component.html',
     styleUrls: ['modal-dialog.component.css'],
-    providers: [ForeignKeysService],
+    providers: [ForeignKeysService, MessageService, ProfeValidatorsDirective],
   })
   export class ModalDialogComponent implements OnInit, OnDestroy {
 
@@ -33,6 +33,8 @@ import { profeValidator } from '../../directives/profe-validator/profe-validator
     modalData!: ModalData;
     textAreaFields: string[] = [];
     defaultValues: any = {};
+
+    selectedteacher = 0
 
     objcolors = environment.colors;
 
@@ -53,6 +55,7 @@ import { profeValidator } from '../../directives/profe-validator/profe-validator
     existe_table:any = [];
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+    private pval: ProfeValidatorsDirective,
     @Inject(DOCUMENT) private document: Document,
     private crud: CrudService,
     private fKeysService: ForeignKeysService ,
@@ -65,6 +68,8 @@ import { profeValidator } from '../../directives/profe-validator/profe-validator
     private selIdsService: SelectionIdsService,
 
     ) {
+
+   ms.profesor_msg.subscribe(p => console.log('PORONGAAA', p));
 
    ms.color_msg.subscribe(color =>  {
 
@@ -100,7 +105,9 @@ import { profeValidator } from '../../directives/profe-validator/profe-validator
 
     ngOnInit(): void {
 
-
+      if(this.data.mainTable == 'horario') {
+        this.selectedteacher = this.data.registro.Profesor.id;
+      }
       this.modalData = modalDataObject[this.data.tabla];
 
       if (this.modalData.textAreaFields!= undefined) {
@@ -192,10 +199,10 @@ import { profeValidator } from '../../directives/profe-validator/profe-validator
       const validateTextForm = (campo: string) : ValidatorFn[] => {
 
         if (campo=='hora' && this.modalData.mainTable == 'horario') {
-
+          
           return [ ...this.validator.modalText[campo],
           horaValidator(this.data.valida1,this.data.registro.Dix.id),
-          profeValidator(this.data.valida2,this.data.registro.Dix.id, this.data.registro.Profesor.id)  ]
+          this.pval.profeValidator(this.data.valida2,this.data.registro.Dix.id, this.selectedteacher)  ]
        }
        else {
          return this.validator.modalText[campo];
@@ -312,8 +319,14 @@ import { profeValidator } from '../../directives/profe-validator/profe-validator
     }
 
     changeFunction(table: string, event: any) {
-
+      
+      if (table == 'profesor') {
+        console.log(table, +event.target.value)
+        // this.selectedteacher = +event.target.value; 
+        this.ms.nextProfesor(+event.target.value);
+      }
       const newId = +event.target.value;
+      
       this.idsMap.set(table, newId);
       if ( newId === 0 ) {
         this.requiredBySelTree.get(table)!.forEach(

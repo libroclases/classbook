@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
+import { Component, OnDestroy, OnInit, HostListener, Inject } from '@angular/core';
 import { CrudService } from '../../shared/services/crud/crud.service';
 // import { ActivatedRoute, RouterModule } from '@angular/router';
 import { map, Observable, of, Subscription, take, tap } from 'rxjs';
@@ -12,6 +12,7 @@ import { SelectionIdsService } from '../../shared/services/selection-ids/selecti
 import { IconsService } from '../../shared/services/icons/icons.service';
 import { OriginTableIdService } from '../../shared/services/origin-table-id/origin-table-id.service';
 import { MessageService } from '../../shared/services/message/message.service';
+import { DOCUMENT } from '@angular/common';
 
 
 
@@ -42,9 +43,8 @@ export class HorarioComponent implements OnInit, OnDestroy {
     this.height = event.target.innerHeight - (this.banner_height + this.menu_height) + 'px';
   }
 
-  stateOfplusButton=false;
-  stateOfModalEdit=false;
-
+  stateOfButton=true;
+  
   modalDataObj!: any;
 
   takenDaysMap = new Map<number, number[]>([[1,[]],[2,[]],[3,[]],[4,[]],[5,[]],[6,[]]]);
@@ -95,6 +95,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
   fatherId=0;
   father='';
 
+  disable = true;
 
   horarios$! : Observable<any>;
   vhorario$! : Observable<any>;
@@ -117,6 +118,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
   constructor(private crud: CrudService,
     // route: ActivatedRoute,
+    // @Inject(DOCUMENT) private document: Document,
     ms: MessageService,
     originTableIdsService: OriginTableIdService,
     // activatedRoute: ActivatedRoute,
@@ -127,6 +129,19 @@ export class HorarioComponent implements OnInit, OnDestroy {
     private iconsService: IconsService,
 
      ) {
+
+      
+      const getPermision = (msg: any) => { if(msg) {
+          console.log('PORONGA',msg)
+          this.disable = (modalDataObject[msg.tabla].permission.includes(msg.tipo)) ? false : true;
+        } 
+      }
+  
+
+      ms.disable_msg.pipe(
+        tap(msg => getPermision(msg)),
+        take(1)
+      ).subscribe()
 
       ms.color_msg.subscribe(color =>  {
 
@@ -267,7 +282,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
   getDaysOfWeek(): void {
 
     let fks = this.getForeignKeysOfMainTable()
-    // console.log('fks->',fks)
+
 
     // Validadiones
     if (this.mainTable=='horario') {
@@ -276,13 +291,11 @@ export class HorarioComponent implements OnInit, OnDestroy {
       this.phorario$ = this.crud.getData('horario',[fks[0],fks[1],0,0,0,0])! // validar tipo 2 => profesor distintos cursos
       this.initValidators2()
     }
-
+    
     if (fks[0] * fks[1] * fks[2] > 0) {
-
-
-
-      this.stateOfplusButton=true;
-      this.stateOfModalEdit= (fks[0] * fks[1] * fks[2] * fks[3] > 0) ?  true : false;
+ 
+      console.log('fks->',fks)
+      this.stateOfButton= (this.disable == false) ?  false : true;
 
       this.horarios$ = this.crud.getData('horario',fks)!;
 
@@ -294,7 +307,8 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
       ).subscribe(() => this.subsManagerService.registerSubscription(subscribe, "sh-msg"))
       })
-    }
+    } 
+    else { this.dayOfWeekMap.clear() }
   }
 
   ngOnDestroy() {
