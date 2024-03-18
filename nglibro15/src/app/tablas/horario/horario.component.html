@@ -37,7 +37,7 @@
         <th style="width: 14.2%">Hora</th>
 
           <th  *ngFor="let d of days" style="width: 14.2%">{{d.nombre}}
-            <a mat-button   disabled={{disable}} title="Nuevo" (click)="openDialog({Dix: d.id},'create')"  [disabled]="stateOfButton"><em class="bi bi-plus-lg"></em></a>
+            <a mat-button   disabled={{disable}} title="Nuevo" (click)="openDialog({Dix: d.id},'create')"  [disabled]="stateOfButtonPlus"><em class="bi bi-plus-lg"></em></a>
             <!--button class="btn btn-outline-light text-dark btn-sm" data-bs-toggle="tooltip" title="Nuevo" [disabled]="stateOfplusButton == false"
             (click)="openDialog({Dix: d.id},'create')"><em  class="bi bi-plus-lg"></em></button-->
           </th>
@@ -64,7 +64,7 @@
 
                     <td *ngIf="dayOf.AsignaturaProfesor">
                             
-                            <button class="btn btn-outline-light text-dark btn-sm" data-bs-toggle="tooltip"  [disabled]="stateOfButton"
+                            <button class="btn btn-outline-light text-dark btn-sm" data-bs-toggle="tooltip"  [disabled]="stateOfButtonEdit"
                                title=" {{dayOf.Profesor.apellido1}} {{dayOf.Profesor.apellido2}} {{dayOf.Profesor.nombre}}"
                               (click)="openDialog(dayOf,'update')">{{dayOf.AsignaturaProfesor.nombre}}
                             </button>

@@ -44,13 +44,13 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
   editable = new Map<number, boolean>();
 
   mainTable = 'controlasignatura'
-  fKeysSel: string[] = ['colegio', 'curso'];
+  fKeysSel: string[] = ['anno','colegio', 'curso'];
   yearToTableId: Map<number, number> = new Map();
   monthToTableId: Map<number, number> = new Map();
 
   profesoresPie: ProfesorPie[] = [];
 
-  requiredSelectorsByTable: (string[])[] = [[], ['colegio']];
+  requiredSelectorsByTable: (string[])[] = [[], [], ['colegio']];
   changeFnsArray!: Function[];
   patchFksFromStorage = ['colegio', 'anno'];
 
@@ -170,9 +170,9 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
     this.alerts.push(this.successfulSaveAlert);
     this.alerts.push(this.errorAlert);
 
-    this.fKeysAll = this.fKeysService.getFKeys(this.mainTable)!;
+    this.fKeysAll = this.fKeysService.getFKeys(this.mainTable)!;console.log(this.mainTable, this.fKeysAll)
     // this.model = this.ngbCalendar.getToday();
-    this.model = new NgbDate(2023, 9, 26);
+    this.model = new NgbDate(2024, 3, 14);
     const newSubsYears = this.crud.getData(yearTable)!.subscribe(query => {
       query.forEach((yearEntry: Anno) => this.yearToTableId.set(yearEntry.numero, yearEntry.id));
       const newSubsMonths = this.crud.getData(monthTable)!.subscribe(query => {
@@ -237,7 +237,7 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
     this.selectedDay = this.model.day;
     this.selectedDate = new Date(this.model.year, this.model.month-1,this.model.day);
     // this.today = new Date();
-    this.today = new Date(2023, 8, 26);
+    this.today = new Date(2024, 3, 14);
     this.isToday = (
       (this.today.getFullYear() == this.selectedDate.getFullYear())
       && (this.today.getMonth() == this.selectedDate.getMonth())
@@ -291,10 +291,10 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
     this.allSelectorsSet = false;
     if ( !notification || notification.message == 'updated' ) {
       if ( this.selIdsService.getId('colegio')*this.selIdsService.getId('curso') > 0 ) {
-        this.allSelectorsSet = true;
+        this.allSelectorsSet = true;  console.log();
         let subsMain = this.crud.getDataCustom(
           this.mainTable, 'porDia',
-          this.selIdsService.getIds(this.fKeysAll),
+          this.selIdsService.getIds(this.fKeysAll), 
           // {dia: this.selIdsService.getId(dayOfWeekTable)})
           {dia: this.model.day})
         .subscribe(query => {

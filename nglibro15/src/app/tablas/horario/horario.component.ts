@@ -43,7 +43,8 @@ export class HorarioComponent implements OnInit, OnDestroy {
     this.height = event.target.innerHeight - (this.banner_height + this.menu_height) + 'px';
   }
 
-  stateOfButton=true;
+  stateOfButtonPlus=true;
+  stateOfButtonEdit=true;
   
   modalDataObj!: any;
 
@@ -295,10 +296,12 @@ export class HorarioComponent implements OnInit, OnDestroy {
     if (fks[0] * fks[1] * fks[2] > 0) {
  
       console.log('fks->',fks)
-      this.stateOfButton= (this.disable == false) ?  false : true;
+      this.stateOfButtonPlus= (this.disable == false) ?  false : true;
+
+      if (fks[3] > 0) { this.stateOfButtonEdit= (this.disable == false) ?  false : true;  }
+      else { this.stateOfButtonEdit = true; }
 
       this.horarios$ = this.crud.getData('horario',fks)!;
-
       this.days.forEach((d:any) => {
 
       const subscribe:any =  this.horarios$.pipe(
@@ -308,7 +311,10 @@ export class HorarioComponent implements OnInit, OnDestroy {
       ).subscribe(() => this.subsManagerService.registerSubscription(subscribe, "sh-msg"))
       })
     } 
-    else { this.dayOfWeekMap.clear() }
+    else { 
+      this.dayOfWeekMap.clear();
+      this.stateOfButtonPlus=true; 
+    }
   }
 
   ngOnDestroy() {

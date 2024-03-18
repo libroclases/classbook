@@ -16,25 +16,28 @@ import { MessageService } from '../../services/message/message.service';
 
 export class ProfeValidatorsDirective {
 
+  profesor = 0;
+
   constructor(private ms: MessageService) { 
-    ms.profesor_msg.subscribe(profesor => console.log('porongita',profesor)) 
+    ms.profesor_msg.subscribe(profesor => this.profesor = profesor) 
   }
 
 
   profeValidator(valida: any, dia: number, profesor: number): ValidatorFn {
   
+    if (profesor > 0) { this.profesor = profesor  }
          
     return (control: AbstractControl): ValidationErrors | null => {
 
       var isValid = true;
       var dias_ocupados:number[]=[];
       valida.forEach((e:any) => {
-        if (e.dia == dia && e.profesor == profesor)
+        if (e.dia == dia && e.profesor == this.profesor)
                dias_ocupados.push(e.hora)
       });
 
       // const ms = inject(MessageService)
-      console.log(dias_ocupados, +control.value, profesor)
+      console.log(dias_ocupados, +control.value, this.profesor)
       if ((dias_ocupados.includes(+control.value) ? false: true)) {
         return null;
       } else {
