@@ -372,25 +372,25 @@ let appMapping = null;
     
 
     app.get('/api/inscripcioncolegio',
-      checkjwd, requiredScopes('read:inscripcioncolegio'),
+      // checkjwd, requiredScopes('read:inscripcioncolegio'),
       InscripcionesColegio.list);
     app.get('/api/inscripcioncolegio/:profesorId/:colegioId/:annoId/fk',
-      checkjwd, requiredScopes('read:inscripcioncolegio'),
+      // checkjwd, requiredScopes('read:inscripcioncolegio'),
       InscripcionesColegio.getByFk);
     app.get('/api/inscripcioncolegio/:colegioId/:annoId/profes',
-      checkjwd, requiredScopes('read:inscripcioncolegio'),
+      // checkjwd, requiredScopes('read:inscripcioncolegio'),
       InscripcionesColegio.getProfesores);
     app.get('/api/inscripcioncolegio/:colegioId/:annoId/profesPie',
-      checkjwd, requiredScopes('read:inscripcioncolegio'),
+      // checkjwd, requiredScopes('read:inscripcioncolegio'),
       InscripcionesColegio.getProfesoresPie);
     app.get('/api/inscripcioncolegio/:inscripcioncolegioId/pk',
-      checkjwd, requiredScopes('read:inscripcioncolegio'),
+      // checkjwd, requiredScopes('read:inscripcioncolegio'),
       InscripcionesColegio.getByPk);
     app.post('/api/inscripcioncolegio/:profesorId/:colegioId/:annoId',
-      checkjwd, requiredScopes('create:inscripcioncolegio'),
+      // checkjwd, requiredScopes('create:inscripcioncolegio'),
       InscripcionesColegio.create);
     app.put('/api/inscripcioncolegio/:inscripcioncolegioId',
-      checkjwd, requiredScopes('update:inscripcioncolegio'),
+      // checkjwd, requiredScopes('update:inscripcioncolegio'),
       InscripcionesColegio.modify);
   
     app.get('/api/horario',

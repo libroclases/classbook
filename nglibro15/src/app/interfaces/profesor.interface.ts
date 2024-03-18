@@ -1,7 +1,8 @@
 export interface Profesor {
     id: number;
     nombre: string;
-    apellido: string;
+    apellido1: string;
+    apellido2: string;
     rut: string;
     direccion: string;
     celular: string;

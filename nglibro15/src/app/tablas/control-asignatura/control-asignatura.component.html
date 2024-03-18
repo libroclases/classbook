@@ -42,15 +42,12 @@
                   <th colspan="12" style="height: 40px; vertical-align: middle; color: white;"  [style.background-color]="tablehead">
                     <em [class]="getBiClass('/control_asignatura')"> &nbsp;&nbsp;</em
                     ><b>Control de Asignatura</b>
-                    <a *ngIf="allSelectorsSet" style="color: blue">
-                      :: {{ getSelectorText("curso") }}</a
-                    >
                   </th>
                 </tr>
                 <tr>
                   <th style="width: 3.25%">Hora</th>
                   <th style="width: 12%">Asignatura</th>
-                  <th style="width: 3.75%; color: blue">Editar</th>
+                  <th style="width: 3.75%">Editar</th>
                   <th style="width: 16%" colspan="4">Inasistentes</th>
                   <th style="width: 4%">Asist.</th>
                   <th style="width: 4%">Atrasos</th>
@@ -85,8 +82,8 @@
                       <em class="bi bi-lock" style="color: rgb(97, 147, 255)"></em>
                     </ng-template>
                   </td>
-                  <td style="width: 4%">H ({{ n_hombres }})</td>
-                  <td style="width: 4%">
+                  <td>H/{{ n_hombres }}</td>
+                  <td>
                     <ng-container *ngIf="inputIsEnabled[hora]; else onlyShowA">
                       <input
                         type="text"
@@ -114,8 +111,8 @@
                     </ng-template>
                   </td>
 
-                  <td style="width: 4%">M ({{ n_mujeres }})</td>
-                  <td style="width: 4%">
+                  <td>M/{{ n_mujeres }}</td>
+                  <td>
                     <ng-container *ngIf="inputIsEnabled[hora]; else onlyShowB">
                       <input
                         type="text"
@@ -185,7 +182,7 @@
                         >
                           <option value="0">Ninguno</option>
                           <option *ngFor="let pp of profesoresPie" [value]="pp.id">
-                            {{ getObjectLabel("profesor", pp) }}
+                            {{ pp.apellido }} , {{pp.nombre}}
                           </option>
                         </select>
                       </form>

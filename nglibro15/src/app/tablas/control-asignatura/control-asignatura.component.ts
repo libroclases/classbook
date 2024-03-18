@@ -14,6 +14,9 @@ import { IconsService } from '../../shared/services/icons/icons.service';
 import { Alert } from '../../interfaces/generic.interface';
 import { ProfesorPie } from '../../interfaces/profesor.interface';
 import { MessageService } from '../../shared/services/message/message.service';
+import { AuthService } from '@auth0/auth0-angular';
+import { UserInfoService } from 'src/app/shared/services/user-info/user-info.service';
+import { TipoUsuario } from '../../interfaces/tipousuario.interface';
 
 
 const fieldsArray = ['inasistentesHombres', 'inasistentesMujeres', 'atrasos', 'observaciones'];
@@ -81,6 +84,8 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
   n_mujeres = 0;
   n_curso = 0;
 
+  tipoUsuario:any=null;
+
  //   colores
 
   objcolors = environment.colors;
@@ -123,6 +128,8 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
 
   constructor(
     ms: MessageService,
+    auth: AuthService,
+    userInfo: UserInfoService,
     private crud: CrudService,
     private subsManagerService: SubscriptionsManagerService,
     private fKeysService: ForeignKeysService,
@@ -131,6 +138,14 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
     private fb: FormBuilder,
     private ngbCalendar: NgbCalendar,
     private iconsService: IconsService) {
+
+      auth.isAuthenticated$.subscribe(isAuth => { if(isAuth) { 
+        userInfo.personalInfo$.subscribe(info => {
+          if (info) { 
+            this.tipoUsuario = info.usuario.TipoUsuario.nombre;
+          } 
+        }  )
+      }})
 
       ms.color_msg.subscribe(color =>  {
 
@@ -170,9 +185,9 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
     this.alerts.push(this.successfulSaveAlert);
     this.alerts.push(this.errorAlert);
 
-    this.fKeysAll = this.fKeysService.getFKeys(this.mainTable)!;console.log(this.mainTable, this.fKeysAll)
-    // this.model = this.ngbCalendar.getToday();
-    this.model = new NgbDate(2024, 3, 14);
+    this.fKeysAll = this.fKeysService.getFKeys(this.mainTable)!;
+    this.model = this.ngbCalendar.getToday();
+    // this.model = new NgbDate(2024, 3, 14);
     const newSubsYears = this.crud.getData(yearTable)!.subscribe(query => {
       query.forEach((yearEntry: Anno) => this.yearToTableId.set(yearEntry.numero, yearEntry.id));
       const newSubsMonths = this.crud.getData(monthTable)!.subscribe(query => {
@@ -237,7 +252,7 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
     this.selectedDay = this.model.day;
     this.selectedDate = new Date(this.model.year, this.model.month-1,this.model.day);
     // this.today = new Date();
-    this.today = new Date(2024, 3, 14);
+    this.today = new Date();
     this.isToday = (
       (this.today.getFullYear() == this.selectedDate.getFullYear())
       && (this.today.getMonth() == this.selectedDate.getMonth())
@@ -291,19 +306,19 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
     this.allSelectorsSet = false;
     if ( !notification || notification.message == 'updated' ) {
       if ( this.selIdsService.getId('colegio')*this.selIdsService.getId('curso') > 0 ) {
-        this.allSelectorsSet = true;  console.log();
+        this.allSelectorsSet = true;
         let subsMain = this.crud.getDataCustom(
           this.mainTable, 'porDia',
           this.selIdsService.getIds(this.fKeysAll), 
           // {dia: this.selIdsService.getId(dayOfWeekTable)})
           {dia: this.model.day})
         .subscribe(query => {
-
+        // console.log(this.fKeysAll, this.selIdsService.getIds(this.fKeysAll))
         const subsProfPie = this.crud.getDataCustom(
           'inscripcioncolegio', 'profesPie',
           this.selIdsService.getIds(['colegio', 'anno']))
           .subscribe((profesoresPie: ProfesorPie[]) => {
-            console.log("profesoresPie");
+            // console.log("profesoresPie", this.selIdsService.getIds(['colegio', 'anno']));
             console.log(profesoresPie);
             this.profesoresPie = profesoresPie;
             profesoresPie.forEach(profPie => {
@@ -319,8 +334,8 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
                   this.n_curso = this.n_mujeres + this.n_hombres;
                 }
               );
-            this.subsManagerService.registerSubscription(subsCount, "subsCount");
-            if ( query.length === 0 ) {
+            this.subsManagerService.registerSubscription(subsCount, "subsCount"); 
+            if ( query.length === 0 ) {   
               // consulta al horario para crear entradas en ControlAsignatura
 
               let subsPopulateDia = this.crud.createDataCustom(
@@ -341,7 +356,7 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
                 });
               this.subsManagerService.registerSubscription(
                 subsPopulateDia, 'populateDia');
-            } else {
+            } else {  // console.log('query.length:', query.length, query)
               this.processQuery(query);
             }
           });
@@ -384,10 +399,10 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
 
   processEntry(entry: any) {
     this.numEntries += 1;
-    const hora = entry.hora;
+    const hora = entry.hora; // .log('isToday:',this.isToday)
     if ( this.isToday ) {
-      const editable = (( localStorage.getItem('table') == 'profesor' ) &&
-        (+localStorage.getItem('profesorId')! == entry.Profesor.id));
+      const editable = ( this.tipoUsuario == 'profesor' );
+      // console.log(this.tipoUsuario, editable)
       this.editable.set(hora, editable);
     }
     this.nombresAsignaturas.set(hora, entry.Asignatura.nombre );
@@ -413,8 +428,8 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
   }
 
   processQuery(query: ControlAsignatura[]) {
-    this.clearTable();
-    for ( let caEntry of query ) {
+    this.clearTable(); // console.log('poronga',query)
+    for ( let caEntry of query ) {  // console.log('poronga entry',caEntry)
       this.processEntry(caEntry);
     }
   }
