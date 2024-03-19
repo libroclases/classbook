@@ -232,6 +232,7 @@ export class RegistroUsuarioComponent implements OnInit {
        ...modaldata,
        tabla: lowerUpperTables[table]},
        height: modaldata.height, width: '600px',
+       disableClose: true
 
    });
 

@@ -104,7 +104,7 @@ import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe
     }
 
     ngOnInit(): void {
-
+      console.log('SUPERPORONGA!!!!',this.data)
       if(this.data.mainTable == 'horario') {
         this.selectedteacher = this.data.registro.Profesor.id;
       }
@@ -396,6 +396,12 @@ import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe
 
         if (this.data.mainTable == 'horario') { ids[5] = this.registro.Dix.id }
 
+        if (this.data.mainTable == 'matricula') { 
+          ids[2] = this.registro.foraneas.apoderado, 
+          ids[3] = this.registro.foraneas.alumno 
+          if (obj['retiro'] == '') { obj['retiro'] = null }
+        }
+
         console.log('PORONGAX1',this.registro)
         console.log('PORONGAX2',this.modalData.mainTable)
 
@@ -414,12 +420,15 @@ import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe
           if (userId && this.modalData.mainTable == 'anotacion') { ids[1] = userId }
 
          
-        })     
+        })
+        
+        console.log(obj, this.modalData.mainTable, ids);
+
         
         this.crud.postData(obj, this.modalData.mainTable, ids).pipe(
           tap(() => this.selIdsService.notifyUpdated()),
         )
-        .subscribe(msg => this.document.defaultView?.alert(msg.message));
+        .subscribe(msg => this.document.defaultView?.alert(msg?.message));
         
       }
       else {   // If PUT
@@ -427,7 +436,7 @@ import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe
 
         this.crud.putData(obj, this.modalData.mainTable).pipe(
           tap(() => this.selIdsService.notifyUpdated())
-          ).subscribe(msg =>  this.document.defaultView?.alert(msg.message));
+          ).subscribe(msg =>  this.document.defaultView?.alert(msg?.message));
 
       }
     }

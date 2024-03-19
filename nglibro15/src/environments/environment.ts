@@ -1219,7 +1219,7 @@ export const modalDataObject: any = {
     textFields: ['nombre', 'procedencia'],
     dateFields: ['incorporacion', 'retiro'],
     ignoreFkRequirements: [],
-    hidden: ['alumno','apoderado'], // se usan sólo para reemplazar las foreing key
+    hidden: [], // se usan sólo para reemplazar las foreing key
     defaultValues: {},
     label: 'Matricula',
     windowHeight: '600px',

@@ -1,4 +1,4 @@
-import { Component, HostListener, Inject, Injectable, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, Inject, Injectable, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { modalDataObject, lowerUpperTables, validator, environment } from '../../../environments/environment';
 import { MessageService } from '../../shared/services/message/message.service';
@@ -6,6 +6,9 @@ import { rutValidator } from '../../shared/directives/rut-validator/rut-validato
 import { CrudService } from '../../shared/services/crud/crud.service';
 import { tap } from 'rxjs';
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
+import { DOCUMENT } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalDialogComponent } from 'src/app/shared/componentes/modal-dialog/modal-dialog.component';
 
 @Component({
   selector: 'app-matricula-alumno',
@@ -52,7 +55,9 @@ export class MatriculaAlumnoComponent implements OnInit {
   matricula:any=null;
   
   constructor(
+    @Inject(DOCUMENT) private document:Document,
     private mensaje: MessageService,
+    public dialog: MatDialog,
     private crud: CrudService,
     private ms : MessageService,
     private selIdsService: SelectionIdsService, ) {
@@ -106,21 +111,61 @@ export class MatriculaAlumnoComponent implements OnInit {
   }
   
 
-  generar_matricula() {
+  openDialog(): void {
+
+    var reg:any={}
+    let modaldata = modalDataObject['Matricula'];
+
+    reg['id'] = 0;
     
-  }
+    modaldata?.tables.forEach((table: string) => reg[table] = {id: 0});
+    modaldata.textFields.forEach((text: string) => reg[text] = null);
+    modaldata.dateFields.forEach((date: string) => reg[date] = null);
+
+    console.log(this.alumno.id, this.apoderado.id);
+ 
+    reg['foraneas'] = { apoderado: this.apoderado.id, alumno: this.alumno.id }
+    
+    const dialogRef = this.dialog.open(ModalDialogComponent, {
+     data: {
+       registro: reg,
+       ...modaldata,
+       tabla: 'Matricula'},
+       height: modaldata.height, width: '600px',
+       disableClose: true
+
+   });
+
+   dialogRef.afterClosed().pipe(
+     tap(res => console.log(res)),
+     tap(() => { this.formConsulta.reset(); console.log('cerrado poronga')})
+   )
+   .subscribe();
+   
+
+ }
+
+
 
   rut_alumno() {
 
      this.crud.getByRut('alumno',this.formConsulta.value.rut_alumno)
-     .subscribe(res => this.alumno = res)
+     .subscribe(res => {
+      if (res) { this.alumno = res }
+      else { this.document.defaultView?.alert('No existe alumno') }
+      
+    })
        
   }
 
   rut_apoderado() {
 
     this.crud.getByRut('apoderado',this.formConsulta.value.rut_apoderado)
-    .subscribe(res => this.apoderado = res)
+    .subscribe(res => {
+      if (res) { this.apoderado = res }
+      else { this.document.defaultView?.alert('No existe apoderado') }
+      
+    })    
        
  }
 
