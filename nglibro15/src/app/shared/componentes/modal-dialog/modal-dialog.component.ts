@@ -396,10 +396,21 @@ import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe
 
         if (this.data.mainTable == 'horario') { ids[5] = this.registro.Dix.id }
 
+        console.log('PORONGAX1',this.registro)
+        console.log('PORONGAX2',this.modalData.mainTable)
+
+        if (personTables.includes(this.modalData.mainTable)) {  
+          console.log('PORONGAX3',this.registro.usuario_id)
+          ids[0] = this.registro.usuario_id
+        }
+        
+        
+
         this.ms.userId.subscribe((userId:any) => {
 
-
-          if (userId && personTables.includes(this.modalData.mainTable)) {  ids[0] = userId   } 
+          console.log('PORONGAX',userId)
+          
+          // if (userId && personTables.includes(this.modalData.mainTable)) {  ids[0] = userId   } 
           if (userId && this.modalData.mainTable == 'anotacion') { ids[1] = userId }
 
          

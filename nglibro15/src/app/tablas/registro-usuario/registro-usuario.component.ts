@@ -199,7 +199,7 @@ export class RegistroUsuarioComponent implements OnInit {
 
   ingresar() {
     let u = this.valuesForm.value;
-    console.log({username: u.username, email: u.email, id:0},'usuario', [+u.tipousuario, +u.tema])
+    // console.log({username: u.username, email: u.email, id:0},'usuario', [+u.tipousuario, +u.tema])
     this.crud.postData({username: u.username, email: u.email, id:0},'usuario', [+u.tipousuario, +u.tema])
     .subscribe(msg => { 
       this.addMessage(msg); 
@@ -218,8 +218,9 @@ export class RegistroUsuarioComponent implements OnInit {
 
 
     reg['id'] = 0;
-
-    this.ms.nextUser(usuario.id)
+    reg['usuario_id'] = usuario.id;
+    console.log('PORONGAY', reg);
+    this.ms.nextUser(usuario.id);
 
     modaldata.tables.forEach((table: string) => reg[table] = {id: 0});
     modaldata.textFields.forEach((text: string) => reg[text] = null);
