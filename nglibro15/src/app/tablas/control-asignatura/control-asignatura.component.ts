@@ -313,13 +313,12 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
           // {dia: this.selIdsService.getId(dayOfWeekTable)})
           {dia: this.model.day})
         .subscribe(query => {
-        // console.log(this.fKeysAll, this.selIdsService.getIds(this.fKeysAll))
+        
         const subsProfPie = this.crud.getDataCustom(
           'inscripcioncolegio', 'profesPie',
           this.selIdsService.getIds(['colegio', 'anno']))
           .subscribe((profesoresPie: ProfesorPie[]) => {
-            // console.log("profesoresPie", this.selIdsService.getIds(['colegio', 'anno']));
-            console.log(profesoresPie);
+            
             this.profesoresPie = profesoresPie;
             profesoresPie.forEach(profPie => {
               this.pieNombres.set(profPie.id, `${profPie.apellido}, ${profPie.nombre}`);
@@ -356,7 +355,7 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
                 });
               this.subsManagerService.registerSubscription(
                 subsPopulateDia, 'populateDia');
-            } else {  // console.log('query.length:', query.length, query)
+            } else {  
               this.processQuery(query);
             }
           });
@@ -402,7 +401,7 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
     const hora = entry.hora; // .log('isToday:',this.isToday)
     if ( this.isToday ) {
       const editable = ( this.tipoUsuario == 'profesor' );
-      // console.log(this.tipoUsuario, editable)
+      
       this.editable.set(hora, editable);
     }
     this.nombresAsignaturas.set(hora, entry.Asignatura.nombre );
@@ -428,8 +427,8 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
   }
 
   processQuery(query: ControlAsignatura[]) {
-    this.clearTable(); // console.log('poronga',query)
-    for ( let caEntry of query ) {  // console.log('poronga entry',caEntry)
+    this.clearTable(); 
+    for ( let caEntry of query ) {  
       this.processEntry(caEntry);
     }
   }

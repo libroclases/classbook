@@ -37,7 +37,7 @@ export class ProfeValidatorsDirective {
       });
 
       // const ms = inject(MessageService)
-      console.log(dias_ocupados, +control.value, this.profesor)
+     
       if ((dias_ocupados.includes(+control.value) ? false: true)) {
         return null;
       } else {

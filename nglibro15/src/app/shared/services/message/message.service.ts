@@ -34,7 +34,7 @@ export class MessageService {
   }
 
   nextType(msg: any) {
-    // console.log('msg',msg);
+   
     this.disable_msg.next(msg);
   }
 

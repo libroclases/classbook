@@ -28,7 +28,7 @@ export class MenuComponent implements OnInit{
 
     ngOnInit(): void {
     this.docElement = document.documentElement;
-    // console.log(this.auth.user$.subscribe(info => console.log(info)))
+    
     }
 
     toggleFullScreen() {

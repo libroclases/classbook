@@ -224,7 +224,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     if ( !this.redirectRts ) {
       this.redirectRts = [];
     }
-    // console.log(groupSum[this.mainTable])
+   
     this.mainTableUpper = this.labelsService.lowerToUpperTable(this.mainTable)!;
     this.modalDataObj = modalDataObject[this.mainTableUpper];
 
@@ -290,7 +290,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
       this.searchTerm$.pipe(
           debounceTime(500),
           tap((term:any) => {
-            console.log('x->',term.length);
+           
             this.mainQuery$ = (term.length > 0) ? this.crud.makeSearch(this.mainTable, term) :   this.crud.getData(this.mainTable, fKeys)!
 
           }
@@ -357,7 +357,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
                   }),
                   tap(() => {
                     const data: Blob = new Blob(out, { type: "text/csv;charset=utf-8" });
-                    console.log(data)
+                    
                   })
     ).subscribe()
   }

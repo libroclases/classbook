@@ -10,13 +10,13 @@ export class GetdatetimeService {
  
 
   getDays(colegioId:number, tabla:string, fecha: Date): (Observable<any> | null) {
-    console.log(colegioId, tabla, fecha + 'T00:00:00+00:00')
+    
     const diff = (days : any): boolean => { 
       const date = new Date();
       const evento: number = Date.parse(fecha + 'T00:00:00+00:00');
       const epoch: number = date.getTime();
       const diff =  (epoch/1000 - evento/1000)/86400;
-      console.log(diff);
+  
       return (+diff <= +days[0]['dias']) ? true : false;
     }
  

@@ -166,7 +166,6 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
         this.tablehead = this.objcolors.naranjo.tablehead;
         this.modalbutton = this.objcolors.naranjo.modalbutton;
       }
-      console.log('tablehead',this.tablehead)
     })
 
   }
@@ -252,8 +251,7 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
   }
 
   updateData(message: any) {
-    // console.log('updateData');
-    // console.log('=====');
+    
     this.entryIdToday.clear();
     this.checkBoxesToday.clear();
     this.editedCheckBoxes.clear();
@@ -386,7 +384,6 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
   }
 
   totalAtColumn(column: number) { 
-    // console.log('column,colToday, currentDateInMonth', column, this.colToday, this.currentDateInMonth, );
     
     if (this.currentDateInMonth) {
       if (this.colToday == column) {

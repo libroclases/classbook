@@ -206,7 +206,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
             this.takenDaysMap.set(v.Dix.id,arreglo)
           }
        })
-       // console.log(mapa)
+     
     }
 
       this.vhorario$!.pipe(
@@ -275,7 +275,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
           vjson.push({})
         } ;
     }
-    // console.log(dia,vjson)
+   
     this.dayOfWeekMap.set(dia,vjson);
 
   };
@@ -295,7 +295,6 @@ export class HorarioComponent implements OnInit, OnDestroy {
     
     if (fks[0] * fks[1] * fks[2] > 0) {
  
-      console.log('fks->',fks)
       this.stateOfButtonPlus= (this.disable == false) ?  false : true;
 
       if (fks[3] > 0) { this.stateOfButtonEdit= (this.disable == false) ?  false : true;  }

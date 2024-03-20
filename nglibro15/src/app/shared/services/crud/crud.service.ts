@@ -44,14 +44,14 @@ export class CrudService {
   getByRut(table: string, rut: string): Observable<any> {
 
     const baseurl = `${this.baseurl}/${table}/${rut}/rut`;
-    console.log(baseurl);
+  
     return this.http.get<any>(baseurl).pipe(take(1), share());
    }
 
    getByEmail(table: string, email: string): Observable<any> {
 
     const baseurl = `${this.baseurl}/${table}/${email}/email`;
-    console.log(baseurl);
+ 
     return this.http.get<any>(baseurl).pipe(take(1), share());
    }
 
@@ -64,7 +64,7 @@ export class CrudService {
   getLasId(): Observable<any>  {
 
     let baseurl = `${this.baseurl}/usuario/lastid`;
-    console.log('lastid', baseurl);
+  
     return this.http.get<any>(baseurl).pipe(take(1), share());
 
   }
@@ -93,8 +93,6 @@ export class CrudService {
       baseurl = `${this.baseurl}/${table}`;
     }
 
-    // console.log(baseurl)
-
     return this.http.get<any>(baseurl).pipe(take(1), share());
   }
 
@@ -120,7 +118,7 @@ export class CrudService {
     fields: any = null,
   ): Observable<any> {
     // const extraString = this.getExtraString(table);
-    // console.log('xxx->', extraString, table)
+  
     let k = '';
     let baseurl = '';
     if (fk) {
@@ -143,7 +141,7 @@ export class CrudService {
     } else {
       var url = baseurl;
     }
-    console.log(url);
+   
     return this.http.get<any>(url).pipe(take(1), share());
   }
 

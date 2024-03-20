@@ -128,8 +128,6 @@ export class MatriculaAlumnoComponent implements OnInit {
     modaldata?.tables.forEach((table: string) => reg[table] = {id: 0});
     modaldata.textFields.forEach((text: string) => reg[text] = null);
     modaldata.dateFields.forEach((date: string) => reg[date] = null);
-
-    console.log(this.alumno.id, this.apoderado.id);
  
     reg['foraneas'] = { apoderado: this.apoderado.id, alumno: this.alumno.id }
     
@@ -144,8 +142,8 @@ export class MatriculaAlumnoComponent implements OnInit {
    });
 
    dialogRef.afterClosed().pipe(
-     tap(res => console.log(res)),
-     tap(() => { this.formConsulta.reset(); console.log('cerrado poronga')})
+     // tap(res => console.log(res)),
+     tap(() => { this.formConsulta.reset(); console.log('cerrado')})
    )
    .subscribe();
    

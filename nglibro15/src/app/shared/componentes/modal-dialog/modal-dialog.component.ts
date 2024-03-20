@@ -69,8 +69,6 @@ import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe
 
     ) {
 
-   // ms.profesor_msg.subscribe(p => console.log('PORONGAAA', p));
-
    ms.color_msg.subscribe(color =>  {
 
       //  TODO  Asignar dinamicamente los indices
@@ -104,7 +102,7 @@ import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe
     }
 
     ngOnInit(): void {
-      // console.log('SUPERPORONGA!!!!',this.data)
+      
       if(this.data.mainTable == 'horario') {
         this.selectedteacher = this.data.registro.Profesor.id;
       }
@@ -321,7 +319,7 @@ import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe
     changeFunction(table: string, event: any) {
       
       if (table == 'profesor') {
-        // console.log(table, +event.target.value)
+       
         // this.selectedteacher = +event.target.value; 
         this.ms.nextProfesor(+event.target.value);
       }
@@ -402,29 +400,21 @@ import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe
           if (obj['retiro'] == '') { obj['retiro'] = null }
         }
 
-        // console.log('PORONGAX1',this.registro)
-        // console.log('PORONGAX2',this.modalData.mainTable)
-
         if (personTables.includes(this.modalData.mainTable)) {  
-          // console.log('PORONGAX3',this.registro.usuario_id)
+         
           ids[0] = this.registro.usuario_id
         }
         
         
 
         this.ms.userId.subscribe((userId:any) => {
-
-          // console.log('PORONGAX',userId)
           
           // if (userId && personTables.includes(this.modalData.mainTable)) {  ids[0] = userId   } 
           if (userId && this.modalData.mainTable == 'anotacion') { ids[1] = userId }
 
          
         })
-        
-        // console.log(obj, this.modalData.mainTable, ids);
 
-        
         this.crud.postData(obj, this.modalData.mainTable, ids).pipe(
           tap(() => this.selIdsService.notifyUpdated()),
         )

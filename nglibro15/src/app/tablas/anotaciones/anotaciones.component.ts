@@ -181,7 +181,7 @@ export class AnotacionesComponent implements OnDestroy {
         fecha: `${currentYear}-${currentMonth}-${currentDay}`
       };
       this.modalDataObj.tables.forEach((table: string) => {
-        console.log('table',table)
+   
         reg[table] = { id: this.selIdsService.getId(table.toLocaleLowerCase()) || 0 }
       });
      

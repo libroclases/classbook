@@ -244,7 +244,7 @@ export class RegistroUsuarioComponent implements OnInit {
    });
 
    dialogRef.afterClosed().pipe(
-     tap(res => console.log('por aqui si', res)),
+     tap(res => console.log(res)),
    )
    .subscribe();
 
