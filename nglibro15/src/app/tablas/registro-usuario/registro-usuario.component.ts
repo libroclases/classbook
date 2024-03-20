@@ -35,6 +35,8 @@ export class RegistroUsuarioComponent implements OnInit {
 
   mensaje:any;
 
+  disable = true;
+
   objcolors = environment.colors;
 
   bodybgcolor!:string;
@@ -135,6 +137,11 @@ export class RegistroUsuarioComponent implements OnInit {
     private labelsService: LabelsService,
     private selIdsService: SelectionIdsService, ) {
 
+      ms.disable_msg.pipe(
+        tap(msg => this.disable =  (msg.tipo == 'utp')? false : true),
+        take(1)
+      ).subscribe()
+
       ms.color_msg.subscribe((color:any) =>  {
 
 
@@ -190,7 +197,7 @@ export class RegistroUsuarioComponent implements OnInit {
 
   addMessage(msg: any) {
      this.mensaje = msg.message
-     console.log('poronga',msg)
+     // console.log('poronga',msg)
      if (msg.success) {
       
       this.openDialog(msg.usuario)
@@ -203,7 +210,7 @@ export class RegistroUsuarioComponent implements OnInit {
     this.crud.postData({username: u.username, email: u.email, id:0},'usuario', [+u.tipousuario, +u.tema])
     .subscribe(msg => { 
       this.addMessage(msg); 
-      console.log(msg) ;
+      // console.log(msg) ;
       this.reset();
     }) 
   }
@@ -219,7 +226,7 @@ export class RegistroUsuarioComponent implements OnInit {
 
     reg['id'] = 0;
     reg['usuario_id'] = usuario.id;
-    console.log('PORONGAY', reg);
+    // console.log('PORONGAY', reg);
     this.ms.nextUser(usuario.id);
 
     modaldata.tables.forEach((table: string) => reg[table] = {id: 0});
@@ -237,7 +244,7 @@ export class RegistroUsuarioComponent implements OnInit {
    });
 
    dialogRef.afterClosed().pipe(
-     tap(res => console.log(res)),
+     tap(res => console.log('por aqui si', res)),
    )
    .subscribe();
 

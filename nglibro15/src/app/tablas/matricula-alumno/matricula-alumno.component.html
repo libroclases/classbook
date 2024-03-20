@@ -10,13 +10,13 @@
 
           <table  class="table table-sm table-secundary table-fit">
             <thead class="table-secundary" >
-              <tr><td>Rut Alumno</td><td><input type="text" formControlName="rut_alumno"/>
+              <tr><td>Rut Alumno</td><td><input type="text" formControlName="rut_alumno"  [disabled]="disable"/>
                 <div *ngIf="formConsulta.controls['rut_alumno']?.invalid && (formConsulta.controls['rut_alumno']?.dirty || formConsulta.controls['rut_alumno']?.touched)"  class="alert alert-danger">
                   <div *ngIf="formConsulta.controls['rut_alumno']?.errors?.['rutValidator']">Por favor ingrese rut válido</div>
                 </div>
                 </td>
                 <td>
-                  <button type="button" class="btn  btn-sm"  (click)="rut_alumno()"
+                  <button type="button" class="btn  btn-sm"  (click)="rut_alumno()" [disabled]="disable"
                    [style.background-color]="modalbutton" class="text-light" >Buscar</button>
                 </td>
               </tr>
@@ -31,13 +31,13 @@
 
           <table  class="table table-sm table-secundary table-fit">
             <thead class="table-secundary" >
-              <tr><td>Rut Apoderado</td><td><input type="text" formControlName="rut_apoderado"/>
+              <tr><td>Rut Apoderado</td><td><input type="text" formControlName="rut_apoderado"  [disabled]="disable"/>
                 <div *ngIf="formConsulta.controls['rut_apoderado']?.invalid && (formConsulta.controls['rut_apoderado']?.dirty || formConsulta.controls['rut_apoderado']?.touched)"  class="alert alert-danger">
                   <div *ngIf="formConsulta.controls['rut_apoderado']?.errors?.['rutValidator']">Por favor ingrese rut válido</div>
                 </div>
                 </td>
                 <td>
-                  <button type="button" class="btn  btn-sm"  (click)="rut_apoderado()"
+                  <button type="button" class="btn  btn-sm"  (click)="rut_apoderado()"  [disabled]="disable"
                    [style.background-color]="modalbutton" class="text-light" >Buscar</button>
                 </td>
               </tr>

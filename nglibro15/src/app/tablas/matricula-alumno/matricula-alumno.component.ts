@@ -4,7 +4,7 @@ import { modalDataObject, lowerUpperTables, validator, environment } from '../..
 import { MessageService } from '../../shared/services/message/message.service';
 import { rutValidator } from '../../shared/directives/rut-validator/rut-validator.directive';
 import { CrudService } from '../../shared/services/crud/crud.service';
-import { tap } from 'rxjs';
+import { take, tap } from 'rxjs';
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,6 +23,7 @@ export class MatriculaAlumnoComponent implements OnInit {
   modalDataObj!: any;
 
   msg:any;
+  disable=true;
 
   // data:any={};
   muestra_dialog=false;
@@ -61,6 +62,12 @@ export class MatriculaAlumnoComponent implements OnInit {
     private crud: CrudService,
     private ms : MessageService,
     private selIdsService: SelectionIdsService, ) {
+
+      ms.disable_msg.pipe(
+        tap(msg => this.disable =  (msg.tipo == 'utp')? false : true),
+        take(1)
+      ).subscribe()
+
 
       ms.color_msg.subscribe((color:any) =>  {
 
