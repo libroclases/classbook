@@ -4,6 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec babel-node app.js",
+    "build": "babel app.js -d dist && babel server -d dist/server",
+    "serve": "node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -26,6 +28,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.3",
     "express-oauth2-jwt-bearer": "^1.6.0",
+    "fs": "^0.0.1-security",
     "https": "^1.0.0",
     "morgan": "^1.10.0",
     "pg": "^8.11.3",

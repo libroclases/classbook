@@ -58,17 +58,16 @@ let appMapping = null;
     app.get('/api', (req, res) => res.status(200).send({
         message: 'Welcome to the libroClases API!',
     }));
-  
-  app.get('/api/region',
-    checkjwd, requiredScopes('read:region'),
-    Regiones.list);
-  app.post('/api/region',
-    checkjwd, requiredScopes('create:region'),
-    Regiones.create);
-  app.put('/api/region/:regionId',
-    checkjwd, requiredScopes('update:region'),
-    Regiones.modify);
-  
+
+    app.get('/api/region',
+      checkjwd, requiredScopes('read:region'),
+      Regiones.list);
+    app.post('/api/region',
+      checkjwd, requiredScopes('create:region'),
+      Regiones.create);
+    app.put('/api/region/:regionId',
+      checkjwd, requiredScopes('update:region'),
+      Regiones.modify);
     app.get('/api/provincix',
       checkjwd, requiredScopes('read:provincix'),
       Provincixs.list);
@@ -81,8 +80,7 @@ let appMapping = null;
     app.put('/api/provincix/:provincixId',
       checkjwd, requiredScopes('update:provincix'),
       Provincixs.modify);
-  
-      app.get('/api/comuna',
+    app.get('/api/comuna',
       checkjwd, requiredScopes('read:comuna'),
       Comunas.list);
     app.get('/api/comuna/:regionId/:provincixId/fk',
@@ -94,8 +92,7 @@ let appMapping = null;
     app.put('/api/comuna/:comunaId',
       checkjwd, requiredScopes('update:comuna'),
       Comunas.modify);
-  
-      app.get('/api/dix',
+    app.get('/api/dix',
       checkjwd, requiredScopes('read:dix'),
       Dixs.list);
     app.post('/api/dix',
@@ -104,8 +101,7 @@ let appMapping = null;
     app.put('/api/dix/:dixId',
       checkjwd, requiredScopes('update:dix'),
       Dixs.modify);
-  
-      app.get('/api/tipoestado',
+    app.get('/api/tipoestado',
       checkjwd, requiredScopes('read:tipoestado'),
       TipoEstados.list);
     app.post('/api/tipoestado',
@@ -113,9 +109,8 @@ let appMapping = null;
       TipoEstados.create);
     app.put('/api/tipoestado/:tipoestadoId',
       checkjwd, requiredScopes('update:tipoestado'),
-      TipoEstados.modify);
-  
-      app.get('/api/tipoasistente',
+      TipoEstados.modify);  
+    app.get('/api/tipoasistente',
       checkjwd, requiredScopes('read:tipoasistente'),
       TipoAsistentes.list);
     app.post('/api/tipoasistente',
@@ -124,8 +119,7 @@ let appMapping = null;
     app.put('/api/tipoasistente/:tipoasistenteId',
       checkjwd, requiredScopes('update:tipoasistente'),
       TipoAsistentes.modify);
-  
-  app.get('/api/anno',
+    app.get('/api/anno',
       checkjwd, requiredScopes('read:anno'),
       Annos.list);
     app.post('/api/anno',
@@ -134,8 +128,7 @@ let appMapping = null;
     app.put('/api/anno/:annoId',
       checkjwd, requiredScopes('update:anno'),
       Annos.modify);
-  
-      app.get('/api/periodo',
+    app.get('/api/periodo',
       checkjwd, requiredScopes('read:periodo'),
       Periodos.list);
     app.post('/api/periodo',
@@ -144,8 +137,7 @@ let appMapping = null;
     app.put('/api/periodo/:periodoId',
       checkjwd, requiredScopes('update:periodo'),
       Periodos.modify);
-  
-      app.get('/api/asignatura',
+    app.get('/api/asignatura',
       checkjwd, requiredScopes('read:asignatura'),
       Asignaturas.list);
     app.get('/api/asignatura/:tipocolegioId/fk',
@@ -160,7 +152,6 @@ let appMapping = null;
     app.put('/api/asignatura/:asignaturaId',
       checkjwd, requiredScopes('update:asignatura'),
       Asignaturas.modify);
-  
       app.get('/api/asistentecolegio',
       checkjwd, requiredScopes('read:asistentecolegio'),
       AsistenteColegios.list);
@@ -178,22 +169,19 @@ let appMapping = null;
       AsistenteColegios.create);
     app.put('/api/asistentecolegio/:asistentecolegioId',
       checkjwd, requiredScopes('update:asistentecolegio'),
-      AsistenteColegios.modify);
-  
-
-      app.get('/api/horaasignada',
+      AsistenteColegios.modify);  
+   app.get('/api/horaasignada',
       checkjwd, requiredScopes('read:horaasignada'), 
       HorasAsignadas.list);
-      app.get('/api/horaasignada/:colegioId/fk',
+    app.get('/api/horaasignada/:colegioId/fk',
       checkjwd, requiredScopes('read:horaasignada'),
       HorasAsignadas.getByFk);
-      app.post('/api/horaasignada/:colegioId',
+    app.post('/api/horaasignada/:colegioId',
       checkjwd, requiredScopes('create:horaasignada'),
       HorasAsignadas.create);
-      app.put('/api/horaasignada/:horaasignadaId',
+     app.put('/api/horaasignada/:horaasignadaId',
       checkjwd, requiredScopes('update:horaasignada'),
       HorasAsignadas.modify);
-
     app.get('/api/estadoalumno',
       checkjwd, requiredScopes('read:estadoalumno'),
       EstadoAlumnos.list);
@@ -206,8 +194,7 @@ let appMapping = null;
     app.put('/api/estadoalumno/:estadoalumnoId',
       checkjwd, requiredScopes('update:estadoalumno'),
       EstadoAlumnos.modify);
-  
-      app.get('/api/anotacion',
+    app.get('/api/anotacion',
       checkjwd, requiredScopes('read:anotacion'),
       Anotaciones.list);
     app.get('/api/anotacion/:matriculaId/:profesorId/:annoId/:colegioId/:cursoId/fk',
@@ -222,8 +209,6 @@ let appMapping = null;
     app.put('/api/anotacion/:anotacionId',
       checkjwd, requiredScopes('update:anotacion'),
       Anotaciones.modify);
- 
-   
     app.get('/api/colegio',
       checkjwd, requiredScopes('read:colegio'),
       Colegios.list);
@@ -239,9 +224,7 @@ let appMapping = null;
     app.put('/api/colegio/:colegioId',
       checkjwd, requiredScopes('update:colegio'),
       Colegios.modify);
-  
-
-      app.get('/api/tipocolegio',
+    app.get('/api/tipocolegio',
       checkjwd, requiredScopes('read:tipocolegio'),
       TipoColegios.list);
     app.post('/api/tipocolegio',
@@ -250,8 +233,6 @@ let appMapping = null;
     app.put('/api/tipocolegio/:tipocolegioId',
       checkjwd, requiredScopes('update:tipocolegio'),
       TipoColegios.modify);    
-  
-
     app.get('/api/curso',
       checkjwd, requiredScopes('read:curso'),
       Cursos.list);
@@ -270,7 +251,6 @@ let appMapping = null;
     app.put('/api/curso/:cursoId',
       checkjwd, requiredScopes('update:curso'),
       Cursos.modify);
-  
     app.get('/api/profesor',
       checkjwd, requiredScopes('read:profesor'),
       Profesores.list);
@@ -289,7 +269,6 @@ let appMapping = null;
     app.put('/api/profesor/:profesorId',
       checkjwd, requiredScopes('update:profesor'),
       Profesores.modify);
-
     app.get('/api/utp',
       checkjwd, requiredScopes('read:utp'),
       Utps.list);
@@ -308,8 +287,6 @@ let appMapping = null;
     app.put('/api/utp/:utpId',
       checkjwd, requiredScopes('update:utp'),
       Utps.modify);
-      
-   
     app.get('/api/asignaturaprofesor',
       checkjwd, requiredScopes('read:asignaturaprofesor'),
       AsignaturaProfesores.list);
@@ -322,18 +299,15 @@ let appMapping = null;
     app.put('/api/asignaturaprofesor/:asignaturaprofesorId',
       checkjwd, requiredScopes('update:asignaturaprofesor'),
       AsignaturaProfesores.modify);
-  
-      app.get('/api/usuario',
+    app.get('/api/usuario',
       checkjwd, requiredScopes('read:usuario'),
       Usuarios.list);
     app.get('/api/usuario/:expr/search',
       checkjwd, requiredScopes('read:usuario'),
       Usuarios.bySearch);
-
     app.get('/api/usuario/:expr/email',
       checkjwd, requiredScopes('read:usuario'),
       Usuarios.byEmailSearch);
-
     app.get('/api/usuario/lastid',
       checkjwd, requiredScopes('read:usuario'),
       Usuarios.getLastId); 
@@ -355,22 +329,15 @@ let appMapping = null;
     app.put('/api/usuario/:usuarioId',
       checkjwd, requiredScopes('update:usuario'),
       Usuarios.modify)
-
     app.get('/api/tabla',
-      checkjwd,
-      requiredScopes('read:tabla'),
+      checkjwd, requiredScopes('read:tabla'),
       Tablas.list);
     app.post('/api/tabla',
-      checkjwd,
-      requiredScopes(['create:tabla']),
+      checkjwd, requiredScopes(['create:tabla']),
       Tablas.create);
     app.put('/api/tabla/:tablaId',
-      checkjwd,
-      requiredScopes(['update:tabla']),
+      checkjwd, requiredScopes(['update:tabla']),
       Tablas.modify);
-  
-    
-
     app.get('/api/inscripcioncolegio',
       checkjwd, requiredScopes('read:inscripcioncolegio'),
       InscripcionesColegio.list);
@@ -392,7 +359,6 @@ let appMapping = null;
     app.put('/api/inscripcioncolegio/:inscripcioncolegioId',
       checkjwd, requiredScopes('update:inscripcioncolegio'),
       InscripcionesColegio.modify);
-  
     app.get('/api/horario',
       checkjwd, requiredScopes('read:horario'),
       Horarios.list);
@@ -414,7 +380,6 @@ let appMapping = null;
     app.delete('/api/horario/:horarioId',
       checkjwd, requiredScopes('delete:horario'),
       Horarios.delete);
-  
     app.get('/api/sexo',
       checkjwd, requiredScopes('read:sexo'),
       Sexos.list);
@@ -424,7 +389,6 @@ let appMapping = null;
     app.put('/api/sexo/:sexoId',
       checkjwd, requiredScopes('update:sexo'),
       Sexos.modify);
-  
     app.get('/api/tema',
       checkjwd, requiredScopes('read:tema'),
       Temas.list);
@@ -434,23 +398,19 @@ let appMapping = null;
     app.put('/api/tema/:temaId',
       checkjwd, requiredScopes('update:tema'),
       Temas.modify);
-   
-      app.get('/api/tipousuario',
+    app.get('/api/tipousuario',
       checkjwd, requiredScopes('read:tipousuario'),
       TipoUsuarios.list);
     app.get('/api/tipousuario/:name/id',
       checkjwd, requiredScopes('read:tipousuario'),
       TipoUsuarios.getId);
-      
-
     app.post('/api/tipousuario',
       checkjwd, requiredScopes('create:tipousuario'),
       TipoUsuarios.create);
     app.put('/api/tipousuario/:tipousuarioId',
       checkjwd, requiredScopes('update:tipousuario'),
       TipoUsuarios.modify);
-  
-      app.get('/api/vinculo',
+    app.get('/api/vinculo',
       checkjwd, requiredScopes('read:vinculo'),
       Vinculos.list);
     app.post('/api/vinculo',
@@ -459,8 +419,7 @@ let appMapping = null;
     app.put('/api/vinculo/:vinculoId',
       checkjwd, requiredScopes('update:vinculo'),
       Vinculos.modify);
-  
-      app.get('/api/niveleducacional',
+    app.get('/api/niveleducacional',
       checkjwd, requiredScopes('read:niveleducacional'),
       Niveles.list);
     app.post('/api/niveleducacional',
@@ -469,19 +428,15 @@ let appMapping = null;
     app.put('/api/niveleducacional/:niveleducacionalId',
       checkjwd, requiredScopes('update:niveleducacional'),
       Niveles.modify);
-  
     app.get('/api/alumno',
       checkjwd, requiredScopes('read:alumno'),
       Alumnos.list);
     app.get('/api/alumno/:expr/search',
       checkjwd, requiredScopes('read:alumno'),
       Alumnos.bySearch);
-   
     app.get('/api/alumno/:expr/rut',
       checkjwd, requiredScopes('read:alumno'),
       Alumnos.byRutSearch);
-
-
     app.get('/api/alumno/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId/fk',
       checkjwd, requiredScopes('read:alumno'),
       Alumnos.getByFk);
@@ -494,21 +449,15 @@ let appMapping = null;
     app.put('/api/alumno/:alumnoId',
       checkjwd, requiredScopes('update:alumno'),
       Alumnos.modify);  
-
-
-  
     app.get('/api/apoderado',
       checkjwd, requiredScopes('read:apoderado'),
       Apoderados.list);
     app.get('/api/apoderado/:expr/search',
       checkjwd, requiredScopes('read:apoderado'),
       Apoderados.bySearch);
-
     app.get('/api/apoderado/:expr/rut',
       checkjwd, requiredScopes('read:apoderado'),
-      Apoderados.byRutSearch
-    )
-
+      Apoderados.byRutSearch);
     app.get('/api/apoderado/:usuarioId/:niveleducacionalId/:sexoId/:regionId/:provincixId/:comunaId/fk',
       checkjwd, requiredScopes('read:apoderado'),
       Apoderados.getByFk);
@@ -521,8 +470,6 @@ let appMapping = null;
     app.put('/api/apoderado/:apoderadoId',
       checkjwd, requiredScopes('update:apoderado'),
       Apoderados.modify);
-  
-  
     app.get('/api/asistencia',
       checkjwd, requiredScopes('read:asistencia'),
       Asistencias.list);
@@ -553,7 +500,6 @@ let appMapping = null;
     app.delete('/api/asistencia/:asistenciaId',
       checkjwd, requiredScopes('delete:asistencia'),
       Asistencias.delete);
-  
     app.get('/api/controlasignatura',
       checkjwd, requiredScopes('read:controlasignatura'),
       ControlAsignaturas.list);
@@ -568,15 +514,13 @@ let appMapping = null;
       ControlAsignaturas.create);
     app.post('/api/controlasignatura/:colegioId/:cursoId/:annoId/populateDia',
       checkjwd,requiredScopes(['create:controlasignatura', 'read:feriado', 'read:horario']),
-    
       ControlAsignaturas.populateDia);
     app.put('/api/controlasignatura/:controlasignaturaId',
       checkjwd, requiredScopes('update:controlasignatura'),
       ControlAsignaturas.modify);
     app.delete('/api/controlasignatura/:controlasignaturaId',
-       checkjwd, requiredScopes('delete:controlasignatura'),
+      checkjwd, requiredScopes('delete:controlasignatura'),
       ControlAsignaturas.delete);
-  
     app.get('/api/registroactividad',
       checkjwd, requiredScopes('read:registroactividad'),
       RegistroActividades.list);
@@ -598,8 +542,6 @@ let appMapping = null;
     app.delete('/api/registroactividad/:registroactividadId',
       checkjwd, requiredScopes('delete:registroactividad'),
       RegistroActividades.delete);
-  
-  
     app.get('/api/tipoevaluacion',
       checkjwd, requiredScopes('read:tipoevaluacion'),
       TiposEvaluacion.list);
@@ -609,7 +551,6 @@ let appMapping = null;
     app.put('/api/tipoevaluacion/:tipoevaluacionId',
       checkjwd, requiredScopes('update:tipoevaluacion'),
       TiposEvaluacion.modify);
-
     app.get('/api/ventana',
       checkjwd, requiredScopes('read:ventana'),
       Ventanas.list);
@@ -622,7 +563,6 @@ let appMapping = null;
     app.put('/api/ventana/:ventanaId',
       checkjwd, requiredScopes('update:ventana'),
       Ventanas.modify); 
-
     app.get('/api/matricula',
       checkjwd, requiredScopes('read:matricula'),
       Matriculas.list);
@@ -659,7 +599,6 @@ let appMapping = null;
     app.delete('/api/matricula/:matriculaId',
       checkjwd, requiredScopes('delete:matricula'),
       Matriculas.delete);
-  
     app.get('/api/evaluacion',
       checkjwd, requiredScopes('read:evaluacion'),
       Evaluaciones.list);
@@ -672,7 +611,6 @@ let appMapping = null;
     app.put('/api/evaluacion/:evaluacionId',
       checkjwd, requiredScopes('update:evaluacion'),
       Evaluaciones.modify);
-
     app.get('/api/nota',
       checkjwd, requiredScopes('read:nota'),
       Notas.list);
@@ -685,8 +623,6 @@ let appMapping = null;
     app.put('/api/nota/:notaId',
       checkjwd, requiredScopes('update:nota'),
       Notas.modify);
-
-
     app.get('/api/mes',
       checkjwd, requiredScopes('read:mes'),
       Meses.list);
@@ -696,7 +632,6 @@ let appMapping = null;
     app.put('/api/mes/:mesId',
       checkjwd, requiredScopes('update:mes'),
       Meses.modify);
-
       app.get('/api/feriado',
       checkjwd, requiredScopes('read:feriado'),
       Feriados.list);

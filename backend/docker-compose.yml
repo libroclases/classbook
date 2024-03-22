@@ -20,4 +20,29 @@ services:
       - 8080:8080
     depends_on:
       - db
+
+  nodapp:
+    build: 
+      context: ./nodserver/dist
+      dockerfile: Dockerfile
+    container_name: nodapp 
+    image: ulimon_img 
+    ports:
+      - '3000:3000'
+
+    environment:
+      - PG_DB=libro_clases
+      - PG_USER=ulimon
+      - PG_PASSWORD=ul1m0n
+      - PG_HOST=db
+    volumes:
+      - ./nodserver/dist:/app/dist
+    restart: always
+    stdin_open: true
+    tty: true
+
+    depends_on:
+      - db
+volumes:
+  db-data: {}
   
