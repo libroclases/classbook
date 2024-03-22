@@ -32,6 +32,7 @@ backend/nodserver/dist/
 compose-dev.yaml
 
 backend/nodserver/csv-auto-gen/*
+backend/nginx/html
 
 .hintrc
 

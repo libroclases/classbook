@@ -48,13 +48,13 @@ services:
 
   nginx:
     build: 
-      context: ./nodserver/nginx
+      context: ./nginx
       dockerfile: Dockerfile
     container_name: nginx-app
     ports:
       - 80:80
     volumes: 
-      - ./nodserver/nginx/html/nglibro15:/usr/share/nginx/html
+      - ./nginx/html/nglibro15:/usr/share/nginx/html
     
 
 volumes:
