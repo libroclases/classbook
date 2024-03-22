@@ -9,14 +9,13 @@ import fs from 'fs';
 var cors = require('cors');
 
 const hostname = '0.0.0.0';
-// const hostname = 'libroclases.cl';
+
+const environment = process.env.NODE_ENV || 'development';
 
 const port = 3000;
 const app = express() // setup express application
 
 app.use(cors({origin: '*'}));
-
-const server = http.createServer(app);
 
 app.use(logger('dev')); // log requests to the console
 
@@ -25,19 +24,29 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 routes(app);
-/*
-https.createServer({
+
+if (environment === 'development') {
+
+  const server = http.createServer(app);
+
+  server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+    });
+
+  app.get('*', (req, res) => res.status(200).send({
+    message: 'Welcome to the default API route',
+    }));
+          
+
+} else if (environment === 'production') {
+
+  https.createServer({
     cert: fs.readFileSync('/etc/letsencrypt/live/libroclases.cl/cert.pem'),
     key: fs.readFileSync('/etc/letsencrypt/live/libroclases.cl/privkey.pem')
   },app).listen(port, function(){
          console.log(`Servidor https corriendo en el puerto ${port}`);
  });
-*/
-app.get('*', (req, res) => res.status(200).send({
-message: 'Welcome to the default API route',
-}));
 
-server.listen(port, hostname, () => {
-console.log(`Server running at http://${hostname}:${port}/`);
-});
+}
+
 

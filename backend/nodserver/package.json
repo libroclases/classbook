@@ -5,8 +5,8 @@
   "scripts": {
     "start": "nodemon --exec babel-node app.js",
     "build": "babel app.js -d dist && babel server -d dist/server",
-    "serve": "node dist/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node dist/app.js"
   },
   "keywords": [],
   "author": "",

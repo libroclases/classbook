@@ -1,4 +1,5 @@
 version: '3.3'
+
 services:
   db:
     image: postgres:16.0-bullseye
@@ -35,6 +36,7 @@ services:
       - PG_USER=ulimon
       - PG_PASSWORD=ul1m0n
       - PG_HOST=db
+      - NODE_ENV=development
     volumes:
       - ./nodserver/dist:/app/dist
     restart: always
@@ -43,6 +45,18 @@ services:
 
     depends_on:
       - db
+
+  nginx:
+    build: 
+      context: ./nodserver/nginx
+      dockerfile: Dockerfile
+    container_name: nginx-app
+    ports:
+      - 80:80
+    volumes: 
+      - ./nodserver/nginx/html/nglibro15:/usr/share/nginx/html
+    
+
 volumes:
   db-data: {}
   

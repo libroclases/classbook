@@ -44,14 +44,17 @@ import Feriados from '../controllers/feriado';
 import Ventanas from '../controllers/ventana';
 
 
-const checkjwd = auth({
+  const checkjwd = auth({
     audience: 'https://libroclases.cl',
     issuerBaseURL: `https://dev-tupdibnrpuxah8p3.us.auth0.com/`,
   });
 
 
-let appMapping = null;
+  let appMapping = null;
   
+  const environment = process.env.NODE_ENV || 'development';
+
+  console.log('environment',environment)
 
   appMapping = (app) => {
   
