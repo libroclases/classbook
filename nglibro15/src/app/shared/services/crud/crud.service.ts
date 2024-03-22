@@ -9,8 +9,8 @@ import { AuthService } from '@auth0/auth0-angular';
   providedIn: 'root',
 })
 export class CrudService {
-  baseurl = `http://${environment.reserved_ip}:3000/api`;
-
+  // baseurl = `https://${environment.reserved_ip}:3000/api`;
+  baseurl = `${environment.apiUrl}:3000/api`;
   // Http Options
   httpOptions = {
     headers: new HttpHeaders({

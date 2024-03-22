@@ -71,8 +71,9 @@ permissions.push('delete:feriado');
 // --------------------------------------------------------------
 
 export const environment = {
-  production: false,
-  reserved_ip: 'localhost',
+  production: true,
+  apiUrl: 'http://localhost',
+  apiKey: 'devKey',
   userinfo: {},
 
   auth0: {
