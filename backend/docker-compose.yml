@@ -54,7 +54,8 @@ services:
     ports:
       - 80:80
     volumes: 
-      - ./nginx/html/nglibro15:/usr/share/nginx/html
+      - ./nginx/conf/libroclases.cl:/etc/nginx/sites-available
+      - ./nginx/html/nglibro15:/var/www/libroclases.cl/html
     
 
 volumes:
