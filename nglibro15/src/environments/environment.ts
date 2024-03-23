@@ -90,7 +90,7 @@ export const environment = {
   },
 
   api: {
-    serverUrl: 'http://localhost:3000',
+    serverUrl: 'https://libroclases.cl:3000',
   },
   cabecera: {
     banner_height: 100, menu_height: 62, margen_superior_tabla: 155
