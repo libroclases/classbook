@@ -72,14 +72,14 @@ permissions.push('delete:feriado');
 
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost',
+  apiUrl: 'https://libroclases.cl',
   apiKey: 'devKey',
   userinfo: {},
 
   auth0: {
     domain: 'dev-tupdibnrpuxah8p3.us.auth0.com',
     clientId: 'oW9EH9gLFZFovbTIEaafmVNwg55iCGim',
-    callbackUrl: 'http://localhost/home',
+    callbackUrl: 'https://libroclases.cl',
     // redirectUri: window.location.origin,
     authorizationParams: {
       redirect_uri: window.location.origin,
@@ -1315,4 +1315,5 @@ export const modalDataObject: any = {
     permission: ['profesor','utp']
   },
 };
+
 
