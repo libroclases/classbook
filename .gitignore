@@ -9,7 +9,7 @@ nglibro15/.vscode/
 nglibro15/coverage/
 
 
-/dist/
+# /dist/
 /bazel-out
 /integration/bazel/bazel-*
 
@@ -23,11 +23,11 @@ classbook.architect~
 
 backend/nginx/www/
 
-nglibro/dist/
+# nglibro/dist/
 
-nglibro15/dist/
+# nglibro15/dist/
 
-backend/nodserver/dist/
+#backend/nodserver/dist/
 
 compose-dev.yaml
 
