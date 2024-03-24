@@ -53,6 +53,8 @@ var checkjwd = auth({
   issuerBaseURL: "https://dev-tupdibnrpuxah8p3.us.auth0.com/"
 });
 var appMapping = null;
+var environment = process.env.NODE_ENV || 'development';
+console.log('environment', environment);
 appMapping = function appMapping(app) {
   app.get('/api', function (req, res) {
     return res.status(200).send({

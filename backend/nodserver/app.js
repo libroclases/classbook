@@ -41,8 +41,8 @@ if (environment === 'development') {
 } else if (environment === 'production') {
 
   https.createServer({
-    cert: fs.readFileSync('/etc/letsencrypt/live/libroclases.cl/cert.pem'),
-    key: fs.readFileSync('/etc/letsencrypt/live/libroclases.cl/privkey.pem')
+    cert: fs.readFileSync('/app/dist/etc/letsencrypt/cert.pem'),
+    key: fs.readFileSync('/app/dist/etc/letsencrypt/privkey.pem')
   },app).listen(port, function(){
          console.log(`Servidor https corriendo en el puerto ${port}`);
  });

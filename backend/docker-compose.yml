@@ -39,6 +39,7 @@ services:
       - NODE_ENV=development
     volumes:
       - ./nodserver/dist:/app/dist
+      
     restart: always
     stdin_open: true
     tty: true
@@ -55,6 +56,7 @@ services:
       - 80:80
     volumes: 
       - ./nginx/html/nglibro15:/usr/share/nginx/html
+      - ./nginx/letsencrypt:/etc/letsencrypt
 
 volumes:
   db-data: {}
