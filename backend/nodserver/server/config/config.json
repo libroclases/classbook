@@ -3,7 +3,7 @@
     "username": "ulimon",
     "password": "ul1m0n",
     "database": "libro_clases",
-    "host": "db",
+    "host": "localhost",
     "dialect": "postgres"
   },
   "test": { 

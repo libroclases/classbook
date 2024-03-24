@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.9'
 
 services:
   db:
@@ -45,7 +45,7 @@ services:
     tty: true
 
     depends_on:
-      - db
+       - db
 
   nginx:
     build: 
@@ -57,7 +57,7 @@ services:
     volumes: 
       - ./nginx/html/nglibro15:/usr/share/nginx/html
       - ./nginx/letsencrypt:/etc/letsencrypt
-
+      
 volumes:
   db-data: {}
   
