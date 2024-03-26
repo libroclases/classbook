@@ -432,7 +432,6 @@ export const searchTables = [
   'asistentecolegio',
   'usuario',
   'curso',
-  'matricula'
 ];
 
 export const groupTables = ['horario'];
@@ -943,7 +942,7 @@ export const validator: any = {
 
   Nota: {
     modalText: {
-      nota: [        
+      nota: [
         Validators.pattern(/^[0-9]\d*$/),
         Validators.required,
         Validators.min(1),
