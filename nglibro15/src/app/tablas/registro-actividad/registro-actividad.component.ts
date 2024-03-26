@@ -11,6 +11,7 @@ import {
   lowerUpperTables, fullDaysOfWeek, environment,
 } from '../../../environments/environment';
 import { MessageService } from '../../shared/services/message/message.service';
+import { UserInfoService } from 'src/app/shared/services/user-info/user-info.service';
 
 
 @Component({
@@ -27,6 +28,8 @@ export class RegistroActividadComponent implements OnDestroy {
   bodybgcolor!:string;
   pagination!:string;
   tablehead!:string;
+
+  userId=0;
 
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
@@ -91,12 +94,15 @@ export class RegistroActividadComponent implements OnDestroy {
   constructor(
     private crud: CrudService,
     private ms : MessageService,
+    private userinfo: UserInfoService,
     public dialog: MatDialog,
     private subsManagerService: SubscriptionsManagerService,
     private fKeysService: ForeignKeysService,
     private selIdsService: SelectionIdsService,
     private iconsService: IconsService
   ) {
+
+    userinfo.personalInfo$.subscribe(info => this.userId = info.datos_usuario.id)
 
     ms.color_msg.subscribe((color:any) =>  {
 
@@ -166,10 +172,10 @@ export class RegistroActividadComponent implements OnDestroy {
             this.populateRegistroActividadMes()
           } else {
             this.mainQuery = query;
-            const profesorId = this.selIdsService.getId('profesor');
+
             for ( const [index, entry] of query.entries() ) {
               this.indexToId.set(index, entry.id);
-              this.editable.set(index, entry.Profesor.id == profesorId);
+              this.editable.set(index, entry.Profesor.id == this.userId);
               this.inputIsEnabled.set(index, false);
               this.descripciones.set(index, entry.descripcion);
               this.descripcionesToSave.set(index, entry.descripcion);

@@ -93,7 +93,7 @@ export const environment = {
     serverUrl: 'http://localhost:3000',
   },
   cabecera: {
-    banner_height: 100, menu_height: 62, margen_superior_tabla: 155
+    banner_height: 100, menu_height: 62, margen_superior_tabla: 150
   },
   colors: {
     azul: {
@@ -943,7 +943,7 @@ export const validator: any = {
 
   Nota: {
     modalText: {
-      nota: [        
+      nota: [
         Validators.pattern(/^[0-9]\d*$/),
         Validators.required,
         Validators.min(1),

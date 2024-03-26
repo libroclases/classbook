@@ -45,7 +45,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
   stateOfButtonPlus=true;
   stateOfButtonEdit=true;
-  
+
   modalDataObj!: any;
 
   takenDaysMap = new Map<number, number[]>([[1,[]],[2,[]],[3,[]],[4,[]],[5,[]],[6,[]]]);
@@ -131,13 +131,13 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
      ) {
 
-      
+
       const getPermision = (msg: any) => { if(msg) {
-          console.log('PORONGA',msg)
+          
           this.disable = (modalDataObject[msg.tabla].permission.includes(msg.tipo)) ? false : true;
-        } 
+        }
       }
-  
+
 
       ms.disable_msg.pipe(
         tap(msg => getPermision(msg)),
@@ -206,7 +206,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
             this.takenDaysMap.set(v.Dix.id,arreglo)
           }
        })
-     
+
     }
 
       this.vhorario$!.pipe(
@@ -275,7 +275,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
           vjson.push({})
         } ;
     }
-   
+
     this.dayOfWeekMap.set(dia,vjson);
 
   };
@@ -292,9 +292,9 @@ export class HorarioComponent implements OnInit, OnDestroy {
       this.phorario$ = this.crud.getData('horario',[fks[0],fks[1],0,0,0,0])! // validar tipo 2 => profesor distintos cursos
       this.initValidators2()
     }
-    
+
     if (fks[0] * fks[1] * fks[2] > 0) {
- 
+
       this.stateOfButtonPlus= (this.disable == false) ?  false : true;
 
       if (fks[3] > 0) { this.stateOfButtonEdit= (this.disable == false) ?  false : true;  }
@@ -309,10 +309,10 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
       ).subscribe(() => this.subsManagerService.registerSubscription(subscribe, "sh-msg"))
       })
-    } 
-    else { 
+    }
+    else {
       this.dayOfWeekMap.clear();
-      this.stateOfButtonPlus=true; 
+      this.stateOfButtonPlus=true;
     }
   }
 

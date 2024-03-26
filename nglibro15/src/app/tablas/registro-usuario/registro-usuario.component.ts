@@ -197,9 +197,9 @@ export class RegistroUsuarioComponent implements OnInit {
 
   addMessage(msg: any) {
      this.mensaje = msg.message
-     // console.log('poronga',msg)
+
      if (msg.success) {
-      
+
       this.openDialog(msg.usuario)
     }
    }
@@ -208,11 +208,11 @@ export class RegistroUsuarioComponent implements OnInit {
     let u = this.valuesForm.value;
     // console.log({username: u.username, email: u.email, id:0},'usuario', [+u.tipousuario, +u.tema])
     this.crud.postData({username: u.username, email: u.email, id:0},'usuario', [+u.tipousuario, +u.tema])
-    .subscribe(msg => { 
-      this.addMessage(msg); 
+    .subscribe(msg => {
+      this.addMessage(msg);
       // console.log(msg) ;
       this.reset();
-    }) 
+    })
   }
 
   openDialog(usuario:any): void {
@@ -226,7 +226,7 @@ export class RegistroUsuarioComponent implements OnInit {
 
     reg['id'] = 0;
     reg['usuario_id'] = usuario.id;
-    // console.log('PORONGAY', reg);
+    
     this.ms.nextUser(usuario.id);
 
     modaldata.tables.forEach((table: string) => reg[table] = {id: 0});

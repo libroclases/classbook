@@ -68,7 +68,7 @@ import { UserInfoService } from '../../services/user-info/user-info.service';
     private ms : MessageService,
     private iconsService: IconsService,
     private labelsService: LabelsService,
-    
+
     private selIdsService: SelectionIdsService,
 
     ) {
@@ -77,7 +77,7 @@ import { UserInfoService } from '../../services/user-info/user-info.service';
 
       //  TODO  Asignar dinamicamente los indices
 
-      userinfo.personalInfo$.subscribe(info => this.usuarioId = info.datos_usuario.id);  
+      userinfo.personalInfo$.subscribe(info => this.usuarioId = info.datos_usuario.id);
 
       if (color=='azul') {
 
@@ -108,7 +108,7 @@ import { UserInfoService } from '../../services/user-info/user-info.service';
     }
 
     ngOnInit(): void {
-      
+
       if(this.data.mainTable == 'horario') {
         this.selectedteacher = this.data.registro.Profesor.id;
       }
@@ -124,13 +124,13 @@ import { UserInfoService } from '../../services/user-info/user-info.service';
       this.validator = validator[this.data.tabla]
       this.considerReqSel = false;
       this.modalData.tables.forEach(
-      (table: string) => { 
+      (table: string) => {
         this.queries[table] = EMPTY;
         this.idsMap.set(table, 0);
         this.requiredBySelTree.set(table, []);
       });
       this.registro = this.data.registro;
-    
+
       this.getFKValues(); // Obtengo los valores de Fk
       this.generateForm(); // Crea Forms
       this.modalData.tables.forEach(
@@ -203,7 +203,7 @@ import { UserInfoService } from '../../services/user-info/user-info.service';
       const validateTextForm = (campo: string) : ValidatorFn[] => {
 
         if (campo=='hora' && this.modalData.mainTable == 'horario') {
-          
+
           return [ ...this.validator.modalText[campo],
           horaValidator(this.data.valida1,this.data.registro.Dix.id),
           this.pval.profeValidator(this.data.valida2,this.data.registro.Dix.id, this.selectedteacher)  ]
@@ -323,14 +323,14 @@ import { UserInfoService } from '../../services/user-info/user-info.service';
     }
 
     changeFunction(table: string, event: any) {
-      
+
       if (table == 'profesor') {
-       
-        // this.selectedteacher = +event.target.value; 
+
+        // this.selectedteacher = +event.target.value;
         this.ms.nextProfesor(+event.target.value);
       }
       const newId = +event.target.value;
-      
+
       this.idsMap.set(table, newId);
       if ( newId === 0 ) {
         this.requiredBySelTree.get(table)!.forEach(
@@ -400,35 +400,35 @@ import { UserInfoService } from '../../services/user-info/user-info.service';
 
         if (this.data.mainTable == 'horario') { ids[5] = this.registro.Dix.id }
 
-        if (this.data.mainTable == 'matricula') { 
-          ids[2] = this.registro.foraneas.apoderado, 
-          ids[3] = this.registro.foraneas.alumno 
+        if (this.data.mainTable == 'matricula') {
+          ids[2] = this.registro.foraneas.apoderado,
+          ids[3] = this.registro.foraneas.alumno
           if (obj['retiro'] == '') { obj['retiro'] = null }
         }
 
-        if (personTables.includes(this.modalData.mainTable)) {  
-         
+        if (personTables.includes(this.modalData.mainTable)) {
+
           ids[0] = this.registro.usuario_id
         }
-        
+
         if (this.modalData.mainTable == 'anotacion') { ids[1] = this.usuarioId }
 
-        
+
 
         /*
 
         this.ms.userId.subscribe((userId:any) => {
-          console.log('poronga',userId)
-          // if (userId && personTables.includes(this.modalData.mainTable)) {  ids[0] = userId   } 
+         
+          // if (userId && personTables.includes(this.modalData.mainTable)) {  ids[0] = userId   }
           if (userId && this.modalData.mainTable == 'anotacion') { ids[1] = userId }
         })
         */
-        
+
         this.crud.postData(obj, this.modalData.mainTable, ids).pipe(
           tap(() => this.selIdsService.notifyUpdated()),
         )
         .subscribe(msg => this.document.defaultView?.alert(msg?.message));
-        
+
       }
       else {   // If PUT
         this.modalData.tables.forEach((table:any) => obj[lowerUpperTables[table]] = this.formModal.value[table]);
