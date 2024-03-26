@@ -22,42 +22,42 @@ services:
     depends_on:
       - db
 
-  nodapp:
-    build: 
-      context: ./nodserver/dist
-      dockerfile: Dockerfile
-    container_name: nodapp 
-    image: ulimon_img 
-    ports:
-      - '3000:3000'
+#  nodapp:
+#    build: 
+#      context: ./nodserver/dist
+#      dockerfile: Dockerfile
+#    container_name: nodapp 
+#    image: ulimon_img 
+#    ports:
+#      - '3000:3000'
 
-    environment:
-      - PG_DB=libro_clases
-      - PG_USER=ulimon
-      - PG_PASSWORD=ul1m0n
-      - PG_HOST=db
-      - NODE_ENV=development
-    volumes:
-      - ./nodserver/dist:/app/dist
+#    environment:
+#      - PG_DB=libro_clases
+#      - PG_USER=ulimon
+#      - PG_PASSWORD=ul1m0n
+#      - PG_HOST=db
+#      - NODE_ENV=development
+#    volumes:
+#      - ./nodserver/dist:/app/dist
       
-    restart: always
-    stdin_open: true
-    tty: true
+#    restart: always
+#    stdin_open: true
+#    tty: true
 
-    depends_on:
-       - db
+#    depends_on:
+#       - db
 
-  nginx:
-    build: 
-      context: ./nginx
-      dockerfile: Dockerfile
-    container_name: nginx-app
-    ports:
-      - 80:80
-    volumes: 
-      - ./nginx/html/nglibro15:/usr/share/nginx/html
-      - ./nginx/letsencrypt:/etc/letsencrypt
+#  nginx:
+#    build: 
+#      context: ./nginx
+#      dockerfile: Dockerfile
+#    container_name: nginx-app
+#    ports:
+#      - 80:80
+#    volumes: 
+#      - ./nginx/html/nglibro15:/usr/share/nginx/html
+#      - ./nginx/letsencrypt:/etc/letsencrypt
       
-volumes:
-  db-data: {}
+#volumes:
+#  db-data: {}
   

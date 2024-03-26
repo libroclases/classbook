@@ -73,6 +73,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
       );
     }
     let storageFks: any = {};
+    /*
     if (this.patchTablesFromStorage.length > 0) {
       this.patchTablesFromStorage.forEach((table) => {
         const newId = localStorage.getItem(`${table}Id`);
@@ -81,7 +82,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
         }
       });
     }
-
+    */
     this.considerReqSel = false;
     this.valuesForm = new FormGroup({});
     this.tables.forEach((table) => this.requiredBySelTree.set(table, []));

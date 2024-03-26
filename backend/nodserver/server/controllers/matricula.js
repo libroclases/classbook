@@ -26,6 +26,33 @@ class Matriculas {
       .catch(error => res.status(400).send(error));
   }
 
+  static bySearch(req, res) {
+    const { expr } = req.params;
+    console.log('expr',expr);
+    return Matricula
+    .findAll({
+        where: {
+            [Op.or] : [
+                { nombre : {[Op.iLike]: `%${expr}%`}},
+            ]
+            },
+        include: [
+            { model: Alumno, attributes:['id','nombre'], where: { } },
+            { model: Apoderado, attributes: ['id','nombre'], where: { } },
+            { model: Vinculo, attributes: ['id','nombre'], where: { } },
+            { model: Anno, attributes: ['id','nombre'], where: { } },
+            { model: Colegio, attributes: ['id','nombre'], where: { } },
+            { model: Curso, attributes: ['id','nombre'], where: { } },
+
+        ],
+        order: [['nombre', 'ASC']]   
+    } 
+)
+        .then(matricula => res.status(200).send(matricula))
+        .catch(error => res.status(400).send(error));
+}
+
+
   static getByFk(req, res) {
     const { colegioId, cursoId, apoderadoId, alumnoId, vinculoId, annoId } = req.params;
     let consulta = {};

@@ -18,6 +18,7 @@ import { selectValidator } from '../../directives/select-validator/select-valida
 import { horaValidator} from '../../directives/hora-validator/hora-validator.directive';
 import { MessageService } from '../../services/message/message.service';
 import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe-validator.directive';
+import { UserInfoService } from '../../services/user-info/user-info.service';
 
 @Component({
     selector: 'modal-dialog',
@@ -33,6 +34,8 @@ import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe
     modalData!: ModalData;
     textAreaFields: string[] = [];
     defaultValues: any = {};
+
+    usuarioId=0;
 
     selectedteacher = 0
 
@@ -60,6 +63,7 @@ import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe
     private crud: CrudService,
     private fKeysService: ForeignKeysService ,
     private fb: FormBuilder,
+    userinfo: UserInfoService,
     // private validateHora: ValidaHorarioService,
     private ms : MessageService,
     private iconsService: IconsService,
@@ -72,6 +76,8 @@ import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe
    ms.color_msg.subscribe(color =>  {
 
       //  TODO  Asignar dinamicamente los indices
+
+      userinfo.personalInfo$.subscribe(info => this.usuarioId = info.datos_usuario.id);  
 
       if (color=='azul') {
 
@@ -405,16 +411,19 @@ import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe
           ids[0] = this.registro.usuario_id
         }
         
+        if (this.modalData.mainTable == 'anotacion') { ids[1] = this.usuarioId }
+
         
 
+        /*
+
         this.ms.userId.subscribe((userId:any) => {
-          
+          console.log('poronga',userId)
           // if (userId && personTables.includes(this.modalData.mainTable)) {  ids[0] = userId   } 
           if (userId && this.modalData.mainTable == 'anotacion') { ids[1] = userId }
-
-         
         })
-
+        */
+        
         this.crud.postData(obj, this.modalData.mainTable, ids).pipe(
           tap(() => this.selIdsService.notifyUpdated()),
         )

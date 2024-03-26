@@ -431,7 +431,8 @@ export const searchTables = [
   'utp',
   'asistentecolegio',
   'usuario',
-  'curso'
+  'curso',
+  'matricula',
 ];
 
 export const groupTables = ['horario'];
