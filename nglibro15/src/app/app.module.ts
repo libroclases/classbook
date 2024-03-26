@@ -37,7 +37,7 @@ import { ModalDialogComponent } from './shared/componentes/modal-dialog/modal-di
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { environment as env } from '../environments/environment';
+import { environment as env, environment } from '../environments/environment';
 
 import { AuthButtonComponent } from './shared/componentes/auth-button/auth-button.component';
 
@@ -63,6 +63,7 @@ import { UtpComponent } from './tablas/utp/utp.component';
 import { ProfeValidatorsDirective } from './shared/directives/profe-validator/profe-validator.directive';
 import { MessageService } from './shared/services/message/message.service';
 
+import { NgxsModule } from '@ngxs/store';
 
 // import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
@@ -155,7 +156,7 @@ allowedTables.forEach((tb) => {
     RutValidatorDirective,
     SelectValidatorDirective,
     HoraValidatorDirective,
-   
+
     MultiSelectComponent,
     ModalDialogComponent,
     AuthButtonComponent,
@@ -167,7 +168,7 @@ allowedTables.forEach((tb) => {
     RegistroUsuarioComponent,
     UtpComponent,
     ProfeValidatorsDirective,
-   
+
   ],
   imports: [
     BrowserModule,
@@ -184,6 +185,10 @@ allowedTables.forEach((tb) => {
     MatDialogModule,
     MatInputModule,
     MatIconModule,
+
+    NgxsModule.forRoot([], {
+      developmentMode: !environment.production
+    }),
 
     // Auth0
     AuthModule.forRoot({
