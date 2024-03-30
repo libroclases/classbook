@@ -112,12 +112,12 @@ export const environment = {
       color: 'green',
       lineal: 'linear-gradient(to right, #38B15C,#76FA91)',
       menu: '#dcf3dd',
-      colorMenuButton: '#11b05f',
+      colorMenuButton: 'rgb(82, 205, 145)',
       pagination: '#dcebe4',
       bodybgcolor: 'rgb(242, 248, 242)', // rgb(232, 248, 240)
       tablehead: 'lightgreen',
       bgmodal: 'lightgreen',
-      modalbutton: 'rgb(61, 183, 96)',
+      modalbutton: 'rgb(82, 205, 145)',
     },
 
     naranjo: {

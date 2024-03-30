@@ -80,7 +80,7 @@
  <span *ngIf="formModal.valid"><em class="bi bi-check2-circle">&nbsp;Valid!</em></span>
  <span *ngIf="!formModal.valid"><em class="bi bi-x-circle">&nbsp;Invalid!</em></span>
  <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<button mat-raised-button mat-dialog-close [style.background-color]="modalbutton"
- [disabled]="formModal.invalid"  (click)="onSubmit()" class="text-light">Ejecutar</button>
+<button mat-raised-button mat-dialog-close 
+ [disabled]="formModal.invalid"  (click)="onSubmit()" style="color: #008cba" class="text-light">Ejecutar</button>
 <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
 </div>
