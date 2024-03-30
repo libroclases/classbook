@@ -1,1 +1,19 @@
-<p>alumno works!</p>
+<pre>
+<form>
+    <label for="name">Nombre</label> 
+    <input type="search" (input)="search($event)"  class="form-control rounded" id="default-search"
+    placeholder="ingrese búsqueda" aria-label="Search" aria-describedby="search-addon" />
+</form>
+<table>
+<tbody>
+<tr>
+<th>Nombre</th>
+<th>Apellidos</th>
+<th>Edad</th>
+</tr>
+<tr>
+<td>{{alumno$ | async | json}}</td>
+</tr>
+</tbody>
+</table>
+</pre>

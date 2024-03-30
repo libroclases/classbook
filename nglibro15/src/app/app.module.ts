@@ -64,7 +64,7 @@ import { ProfeValidatorsDirective } from './shared/directives/profe-validator/pr
 import { MessageService } from './shared/services/message/message.service';
 
 import { NgxsModule } from '@ngxs/store';
-import { AlumnoState } from './ngxs/store/alumno.state';
+import { AlumnoState } from '../app/ngxs/alumno/state/alumno.state';
 
 // import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
