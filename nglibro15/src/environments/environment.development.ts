@@ -15,7 +15,6 @@ import { rutValidator } from '../app/shared/directives/rut-validator/rut-validat
 // --------------------------------------------------------------
 // Auth0 permissions
 const tablesArray = [
-  'acceso',
   'alumno',
   'anno',
   'anotacion',
@@ -280,7 +279,6 @@ export const fKeysByTable: { [key: string]: string[] } = {
   ],
   mes: [],
   feriado: [],
-  acceso: ['usuario', 'tabla'],
   tabla: [],
   // endpoints especiales: usados en MultiSelect @Input('custom-endpoints')
   //  ejemplo: [custom-endpoints]="{matricula: 'lista_curso_nombres'}"
@@ -294,7 +292,6 @@ export const fKeysByTable: { [key: string]: string[] } = {
 //       Labels Service
 
 export const lowerUpperTables: stringString = {
-  acceso: 'Acceso',
   alumno: 'Alumno',
   anno: 'Anno',
   anotacion: 'Anotacion',
@@ -339,7 +336,6 @@ export const lowerUpperTables: stringString = {
 };
 
 export const tableLabels = {
-  acceso: 'Acceso',
   alumno: 'Alumno',
   anotacion: 'Observaciones',
   anno: 'Año',
@@ -441,10 +437,6 @@ export const groupSum: any = { horario: 'TotalHoras' };
 //    aqui van todos los atributos del modelo de datos
 
 export const attributesLabels = {
-  acceso: {
-    fechaExpiracion: 'Fecha de expiracion',
-    timestampExpiracion: 'timestamp de expiracion',
-  },
 
   alumno: {
     rut: 'Rut',
@@ -707,7 +699,6 @@ export const icons: stringStringPair = {
   '/tipousuario': ['bi-person-check', 'Tipo Usuario'],
   '/Tema': ['bi bi-palette'],
   '/usuario': ['bi-person-check-fill', 'Usuario'],
-  '/acceso': ['bi bi-lock', 'Acceso'],
   '/tabla': ['bi bi-table', 'Tabla'],
 };
 

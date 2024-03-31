@@ -102,10 +102,10 @@ export class RegistroUsuarioComponent implements OnInit {
 
 
     this.crud.getByEmail('usuario', this.valuesForm.value.email).pipe(
-      tap(usuario => { if(usuario) {
+      tap(usuario => { if(usuario && usuario.operativo == true) {
         this.usuario = usuario;
         this.usuario_encontrado = true;
-        this.email_asociado = 'Email asociado a usuario ya existe'
+        this.email_asociado = 'Email asociado a usuario ya está activado'
 
       } else {
 

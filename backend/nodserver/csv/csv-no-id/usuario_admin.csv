@@ -1,2 +1,2 @@
-username|email|tipousuarioId|temaId|createdAt|updatedAt
-admin|libro.de.clases@proton.me|7|1|2023-09-24|2023-09-24
+username|email|tipousuarioId|temaId|operativo|createdAt|updatedAt
+admin|libro.de.clases@proton.me|7|1|false|2023-09-24|2023-09-24

@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: "Please enter your name",
         },
-        unique: true,
+        unique: false,
       },
     },
     

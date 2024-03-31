@@ -62,8 +62,7 @@ class Usuarios {
         else if ( tipousuarioId == 3 ) { Tipo = Apoderado } 
         else if ( tipousuarioId == 4 ) { Tipo = AsistenteColegio } 
         else if ( tipousuarioId == 5 ) { Tipo = Utp } 
-        // else if ( tipousuarioId == 6 ) { Tipo = Sostenedor } 
-        // else if ( tipousuarioId == 7 ) { Tipo = Admin } 
+
                         
             Tipo.findOne({
                 where: { usuarioId: usuario.dataValues.id },

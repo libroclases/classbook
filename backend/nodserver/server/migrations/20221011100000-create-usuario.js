@@ -21,7 +21,7 @@ module.exports = {
       operativo: {
         allowNull: true,
         type: Sequelize.BOOLEAN,
-        unique: true,
+        unique: false,
         defaultValue: false
       },
       tipousuarioId: {
