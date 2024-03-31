@@ -7,7 +7,6 @@ COPY "Usuario"("username","email","tipousuarioId","temaId","createdAt","updatedA
 COPY "Usuario"("username","email","tipousuarioId","temaId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/usuario_admin.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "Usuario"("username","email","tipousuarioId","temaId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/usuario_utp.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "Tabla"("nombre","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/tabla.csv' DELIMITER '|' csv HEADER NULL AS 'null';
-COPY "Acceso"("fechaExpiracion","timestampExpiracion","idEntrada","usuarioId","tablaId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/acceso.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "TipoColegio"("nombre","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/tipocolegio.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "Region"("nombre","larga","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/region.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "Provincix"("nombre","regionId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/provincia.csv' DELIMITER '|' csv HEADER NULL AS 'null';

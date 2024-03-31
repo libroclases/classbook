@@ -1,5 +1,5 @@
 import model, { sequelize } from '../models';
-// import { getBaseQuery } from './acceso';
+
 const Op = require('../models').Sequelize.Op;
 
 const { Asistencia, Matricula, Colegio, Curso, Alumno, Anno, Mes, Feriado } = model;

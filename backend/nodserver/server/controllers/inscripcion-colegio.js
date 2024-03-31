@@ -1,5 +1,5 @@
 import model from "../models";
-// import { getBaseQuery } from "./acceso";
+
 const { InscripcionColegio, Profesor, Colegio, Anno } = model;
 
 class InscripcionesColegio {

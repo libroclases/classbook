@@ -1,5 +1,5 @@
 import model from "../models";
-// import { getBaseQuery } from "./acceso";
+
 const Op = require("../models").Sequelize.Op;
 
 const {

@@ -15,7 +15,14 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
-        unique: true
+        unique: true,
+        
+      },
+      operativo: {
+        allowNull: true,
+        type: Sequelize.BOOLEAN,
+        unique: true,
+        defaultValue: false
       },
       tipousuarioId: {
         allowNull: true,

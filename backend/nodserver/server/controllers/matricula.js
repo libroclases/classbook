@@ -1,5 +1,5 @@
 import model, { sequelize } from '../models';
-// import { getBaseQuery } from './acceso';
+
 const { Matricula, Colegio, Curso, Apoderado, Alumno, Vinculo, Anno, Periodo,
   Profesor, AsignaturaProfesor, Evaluacion, Nota } = model;
 

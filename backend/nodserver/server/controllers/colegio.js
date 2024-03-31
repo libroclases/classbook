@@ -1,6 +1,6 @@
 import model from '../models';
-import { getBaseQuery } from './acceso';
-const { Colegio, Region, Provincix, Comuna, TipoColegio, Acceso } = model;
+
+const { Colegio, Region, Provincix, Comuna, TipoColegio } = model;
 
 
 class Colegios {

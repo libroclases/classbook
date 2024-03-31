@@ -1,5 +1,4 @@
 import model from '../models';
-// import { getBaseQuery } from './acceso';
 
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;

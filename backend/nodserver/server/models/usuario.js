@@ -19,7 +19,16 @@ module.exports = (sequelize, DataTypes) => {
         },
         unique: true,
       },
+      operativo: {
+        type: DataTypes.BOOLEAN,
+        allowNull: {
+          args: true,
+          msg: "Please enter your name",
+        },
+        unique: true,
+      },
     },
+    
     {
       sequelize,
       freezeTableName: true,
@@ -51,10 +60,6 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Usuario.hasMany(models.AsistenteColegio, {
-      foreignKey: "usuarioId",
-    });
-
-    Usuario.hasMany(models.Acceso, {
       foreignKey: "usuarioId",
     });
   

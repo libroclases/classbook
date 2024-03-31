@@ -1,5 +1,4 @@
 import model from '../models';
-// import { getBaseQuery } from './acceso';
 
 const {  Colegio, Periodo, Curso, Anno, Profesor, AsignaturaProfesor, Matricula, Evaluacion, Nota } = model;
 

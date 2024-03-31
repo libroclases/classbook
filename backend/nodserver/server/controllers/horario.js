@@ -1,5 +1,4 @@
 import model, { sequelize } from '../models';
-// import { getBaseQuery } from './acceso';
 
 const { Horario, Colegio, Curso, Profesor, AsignaturaProfesor, Anno, Dix } = model;
 

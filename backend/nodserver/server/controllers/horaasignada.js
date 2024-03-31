@@ -1,5 +1,5 @@
 import model from '../models';
-// import { getBaseQuery } from './acceso';
+
 const { HoraAsignada, Colegio, Usuario } = model;
 
     class HorasAsignadas {
