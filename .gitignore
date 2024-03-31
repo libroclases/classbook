@@ -8,6 +8,7 @@ nglibro15/.angular
 nglibro15/.vscode/
 nglibro15/coverage/
 
+backend/nodserver/csv/csv-no-id
 
 /dist/
 /bazel-out
