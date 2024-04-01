@@ -41,8 +41,8 @@ import { UserInfoService } from '../../services/user-info/user-info.service';
 
     objcolors = environment.colors;
 
-    bgmodal!: string;
-    modalbutton!: string;
+    bgmodal!:string;
+    modalbutton!:string;
 
     validator: any;
 
@@ -73,33 +73,8 @@ import { UserInfoService } from '../../services/user-info/user-info.service';
 
     ) {
 
-   ms.color_msg.subscribe(color =>  {
-
-      //  TODO  Asignar dinamicamente los indices
-
-      userinfo.personalInfo$.subscribe(info => this.usuarioId = info.datos_usuario.id);
-
-      if (color=='azul') {
-
-        this.bgmodal = this.objcolors.azul.bgmodal;
-        this.modalbutton = this.objcolors.azul.modalbutton;
-
-      }
-      else if (color=='verde') {
-
-        this.bgmodal = this.objcolors.verde.bgmodal;
-        this.modalbutton = this.objcolors.verde.modalbutton;
-
-      }
-      else if (color=='naranjo') {
-
-        this.bgmodal =  this.objcolors.naranjo.bgmodal;
-        this.modalbutton =  this.objcolors.naranjo.modalbutton;
-
-      }
-
-    }
-   )
+       userinfo.personalInfo$.subscribe(info => this.usuarioId = info.datos_usuario.id);
+   
 
       this.formModal = new FormGroup({});
       if ( !data.hasOwnProperty('title') ) {
@@ -109,6 +84,9 @@ import { UserInfoService } from '../../services/user-info/user-info.service';
 
     ngOnInit(): void {
 
+      this.bgmodal = this.data.registro.bgmodal;
+      this.modalbutton = this.data.registro.modalbutton;
+      
       if(this.data.mainTable == 'horario') {
         this.selectedteacher = this.data.registro.Profesor.id;
       }

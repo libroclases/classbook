@@ -130,6 +130,8 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   objcolors = environment.colors;
 
   bodybgcolor!:string;
+  bgmodal!:string;
+  modalbutton!:string;
   pagination!:string;
   tablehead!:string;
 
@@ -143,7 +145,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    ms : MessageService,
+    private ms : MessageService,
     
     private crud: CrudService,
     activatedRoute: ActivatedRoute,
@@ -168,22 +170,28 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
     ms.color_msg.subscribe((color:any) =>  {
 
-
+      console.log('color',color)
       if (color=='azul') {
         this.bodybgcolor = this.objcolors.azul.bodybgcolor;
         this.pagination = this.objcolors.azul.pagination;
         this.tablehead = this.objcolors.azul.tablehead;
+        this.bgmodal = this.objcolors.azul.bgmodal;
+        this.modalbutton = this.objcolors.azul.modalbutton;
       }
       if (color=='verde') {
         this.bodybgcolor = this.objcolors.verde.bodybgcolor;
         this.pagination = this.objcolors.verde.pagination;
         this.tablehead = this.objcolors.verde.tablehead;
-
+        this.bgmodal = this.objcolors.verde.bgmodal;
+        this.modalbutton = this.objcolors.verde.modalbutton;
       }
       if (color=='naranjo') {
         this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
         this.pagination = this.objcolors.naranjo.pagination;
         this.tablehead = this.objcolors.naranjo.tablehead;
+        this.bgmodal = this.objcolors.naranjo.bgmodal;
+        this.modalbutton = this.objcolors.naranjo.modalbutton;
+
       }
 
 
@@ -404,7 +412,11 @@ export class MaintainerComponent implements OnInit, OnDestroy {
             id: this.selIdsService.getId(table.toLocaleLowerCase()) || 0});
           this.modalDataObj.textFields.forEach((text: string) => reg[text] = null);
           this.modalDataObj.dateFields.forEach((date: string) => reg[date] = null);
+  
        }
+
+       reg['bgmodal'] = this.bgmodal;
+       reg['modalbutton'] = this.modalbutton; 
 
     let modaldata: any = this.modalDataObj;
     const dialogRef = this.dialog.open(ModalDialogComponent, {

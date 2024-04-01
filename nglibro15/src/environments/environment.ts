@@ -103,7 +103,7 @@ export const environment = {
       pagination: '#e2e2eb',
       bodybgcolor: 'rgb(242,242,248)', // rgb(238, 238, 248)}
       tablehead: 'rgb(44,161,213)',
-      bgmodal: '#0D6EFD',
+      bgmodal: 'rgb(57, 150, 176)',
       modalbutton: 'rgb(69, 130, 233)',
     },
 
@@ -127,8 +127,8 @@ export const environment = {
       pagination: '#f2e6d3',
       bodybgcolor: 'rgb(255, 242, 222)',
       tablehead:  'rgb(255,212,96)',
-      bgmodal: 'orange',
-      modalbutton: 'orange',
+      bgmodal: 'rgb(167, 176, 96)',
+      modalbutton: 'rgb(167, 176, 96)',
     },
   },
   photo: {

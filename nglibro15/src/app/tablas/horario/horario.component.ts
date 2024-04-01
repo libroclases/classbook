@@ -117,6 +117,9 @@ export class HorarioComponent implements OnInit, OnDestroy {
   pagination!:string;
   tablehead!:string;
 
+  bgmodal!:string;
+  modalbutton!:string;
+
   constructor(private crud: CrudService,
     // route: ActivatedRoute,
     // @Inject(DOCUMENT) private document: Document,
@@ -151,16 +154,23 @@ export class HorarioComponent implements OnInit, OnDestroy {
           this.bodybgcolor = this.objcolors.azul.bodybgcolor;
           this.pagination = this.objcolors.azul.pagination;
           this.tablehead = this.objcolors.azul.tablehead;
+          this.bgmodal = this.objcolors.azul.bgmodal;
+          this.modalbutton = this.objcolors.azul.modalbutton;
         }
         if (color=='verde') {
           this.bodybgcolor = this.objcolors.verde.bodybgcolor;
           this.pagination = this.objcolors.verde.pagination;
           this.tablehead = this.objcolors.verde.tablehead;
+          this.bgmodal = this.objcolors.verde.bgmodal;
+          this.modalbutton = this.objcolors.verde.modalbutton;
         }
         if (color=='naranjo') {
           this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
           this.pagination = this.objcolors.naranjo.pagination;
           this.tablehead = this.objcolors.naranjo.tablehead;
+          this.bgmodal = this.objcolors.naranjo.bgmodal;
+          this.modalbutton = this.objcolors.naranjo.modalbutton;
+
         }
       })
 
@@ -347,6 +357,9 @@ export class HorarioComponent implements OnInit, OnDestroy {
       }
 
    }
+
+    reg['bgmodal'] = this.bgmodal;
+    reg['modalbutton'] = this.modalbutton;
 
     let modaldata : any = this.modalData
 

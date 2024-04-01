@@ -95,28 +95,31 @@ export class RegistroUsuarioComponent implements OnInit {
 
   }
 
-
   email_consulta() {
 
     this.usuario_encontrado = false;
 
-
     this.crud.getByEmail('usuario', this.valuesForm.value.email).pipe(
-      tap(usuario => { if(usuario && usuario.operativo == true) {
-        this.usuario = usuario;
-        this.usuario_encontrado = true;
-        this.email_asociado = 'Email asociado a usuario ya está activado'
-
-      } else {
-
+      tap(usuario => { 
+        if(usuario) {
+            this.usuario_encontrado = true;
+            this.usuario = usuario;
+            const valor = {'username': this.valuesForm.value.email.split('@')[0], 'tipousuario': usuario.tipousuarioId, 'tema': usuario.temaId}
+            if (usuario.operativo == true) { 
+                this.email_asociado = 'Email asociado a usuario ya está activado'        
+            } else {
+              this.valuesForm.patchValue(valor)
+            }
+      } else  {
+        const valor = {'username': this.valuesForm.value.email.split('@')[0]}
+        
         this.valuesForm.get('tema')?.enable()
         this.valuesForm.get('tipousuario')?.enable()
-        this.valuesForm.get('username')?.enable()
-
-        this.valuesForm.patchValue({'username': this.valuesForm.value.email.split('@')[0]})
+        this.valuesForm.get('username')?.enable() 
+        this.valuesForm.patchValue(valor)
       }
-
-    }),
+    }
+    ),
 
       take(1)
     )
