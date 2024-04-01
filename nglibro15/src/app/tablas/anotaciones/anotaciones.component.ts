@@ -53,6 +53,8 @@ export class AnotacionesComponent implements OnDestroy {
   bodybgcolor!:string;
   pagination!:string;
   tablehead!:string;
+
+  bgmodal!:string;
   modalbutton!:string;
 
   disable = true;
@@ -109,18 +111,21 @@ export class AnotacionesComponent implements OnDestroy {
           this.bodybgcolor = this.objcolors.azul.bodybgcolor;
           this.pagination = this.objcolors.azul.pagination;
           this.tablehead = this.objcolors.azul.tablehead;
+          this.bgmodal = this.objcolors.azul.bgmodal;
           this.modalbutton = this.objcolors.azul.modalbutton;
         }
         else if (color=='verde') {
           this.bodybgcolor = this.objcolors.verde.bodybgcolor;
           this.pagination = this.objcolors.verde.pagination;
           this.tablehead = this.objcolors.verde.tablehead;
+          this.bgmodal = this.objcolors.verde.bgmodal;
           this.modalbutton = this.objcolors.verde.modalbutton;
         }
         else if (color=='naranjo') {
           this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
           this.pagination = this.objcolors.naranjo.pagination;
           this.tablehead = this.objcolors.naranjo.tablehead;
+          this.bgmodal = this.objcolors.naranjo.bgmodal;
           this.modalbutton = this.objcolors.verde.modalbutton;
         }
       })
@@ -187,6 +192,10 @@ export class AnotacionesComponent implements OnDestroy {
      
 
    }
+
+    reg['bgmodal']=this.bgmodal;
+    reg['modalbutton']=this.modalbutton;
+
     let modaldata: any = this.modalDataObj;
     modaldata['title'] = `Observación: ${this.nombreAlumno}`;
     const dialogRef = this.dialog.open(ModalDialogComponent, {
