@@ -376,13 +376,19 @@ import { UserInfoService } from '../../services/user-info/user-info.service';
 
         /* Sección Ajustes */
 
+        /* horario */
+
         if (this.data.mainTable == 'horario') { ids[5] = this.registro.Dix.id }
+
+        /* matricula */
 
         if (this.data.mainTable == 'matricula') {
           ids[2] = this.registro.foraneas.apoderado,
           ids[3] = this.registro.foraneas.alumno
           if (obj['retiro'] == '') { obj['retiro'] = null }
         }
+
+        /* personTables */
 
         if (personTables.includes(this.modalData.mainTable)) {
 
@@ -392,6 +398,8 @@ import { UserInfoService } from '../../services/user-info/user-info.service';
           console.log('poronga',{id: ids[0], operativo:true})
           this.crud.putData({id: ids[0], operativo:true}, 'usuario').subscribe(res => console.log(res));
         }
+
+        /* anotaion */
 
         if (this.modalData.mainTable == 'anotacion') { ids[1] = this.usuarioId }
 

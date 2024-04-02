@@ -64,6 +64,7 @@ export class RegistroUsuarioComponent implements OnInit {
     return this.labelsService.getTableLabel(table);
   }
 
+  /*
   getModalData = (tipo: string, modal: any[], data: any = null): any[] => {
 
     var output:any={};
@@ -75,7 +76,9 @@ export class RegistroUsuarioComponent implements OnInit {
 
     return output
   };
+  */
 
+  /*
   getData = (data: any) : void => {
 
 
@@ -92,48 +95,8 @@ export class RegistroUsuarioComponent implements OnInit {
     }
 
   }
+  */
 
-  changeFunction(table: string, event: any) {
-
-  }
-
-  email_consulta() {
-
-    this.usuario_encontrado = false;
-
-    this.crud.getByEmail('usuario', this.valuesForm.value.email).pipe(
-      tap(usuario => { 
-        if(usuario) {
-            this.usuario_encontrado = true;
-            this.usuario = usuario;
-            const valor = {'username': this.valuesForm.value.email.split('@')[0], 'tipousuario': usuario.tipousuarioId, 'tema': usuario.temaId}
-            if (usuario.operativo == true) { 
-                this.email_asociado = 'Email asociado a usuario ya está activado'        
-            } else {
-              this.valuesForm.patchValue(valor)
-            }
-      } else  {
-        const valor = {'username': this.valuesForm.value.email.split('@')[0]}
-        
-        this.valuesForm.get('tema')?.enable()
-        this.valuesForm.get('tipousuario')?.enable()
-        this.valuesForm.get('username')?.enable() 
-        this.valuesForm.patchValue(valor)
-      }
-    }
-    ),
-
-      take(1)
-    )
-    .subscribe()
-
-  }
-
-  reset() {
-    this.valuesForm.reset();
-    this.mensaje = null;
-    this.disabled();
-  }
 
   constructor(
     // private mensaje: MessageService,
@@ -141,7 +104,8 @@ export class RegistroUsuarioComponent implements OnInit {
     private crud: CrudService,
     private ms : MessageService,
     private labelsService: LabelsService,
-    private selIdsService: SelectionIdsService, ) {
+    // private selIdsService: SelectionIdsService, 
+    ) {
 
       ms.disable_msg.pipe(
         tap(msg => this.disable =  (msg.tipo == 'utp')? false : true),
@@ -195,37 +159,80 @@ export class RegistroUsuarioComponent implements OnInit {
     this.valuesForm.get('tema')?.disable()
     this.valuesForm.get('tipousuario')?.disable()
     this.valuesForm.get('username')?.disable()
+  }
+
+  enabled() {
+    this.valuesForm.get('tema')?.enable()
+    this.valuesForm.get('tipousuario')?.enable()
+    this.valuesForm.get('username')?.enable()
+  }
+
+  email_consulta() {
+
+    this.usuario_encontrado = false;
+
+    this.crud.getByEmail('usuario', this.valuesForm.value.email).pipe(
+      tap(usuario => { 
+        if(usuario) {
+            this.usuario_encontrado = true;
+            this.usuario = usuario;
+            const valor = {'username': this.valuesForm.value.email.split('@')[0], 'tipousuario': usuario.tipousuarioId, 'tema': usuario.temaId}
+            if (usuario.operativo == true) { 
+                this.disabled();
+                this.email_asociado = 'Email asociado a usuario ya está activado';        
+            } else {
+              this.disabled();
+              this.valuesForm.patchValue(valor)
+            }
+      } else  {
+        const valor = {'username': this.valuesForm.value.email.split('@')[0]}
+        
+        this.enabled()
+        this.valuesForm.patchValue(valor)
+      }
+    }
+    ),
+
+      take(1)
+    )
+    .subscribe()
 
   }
 
-  closeMe(e: any) {
-
-
-    if (e?.action == 'clean') {
-      this.reset()
-    }
-
+  reset() {
+    this.valuesForm.reset();
+    this.mensaje = null;
+    this.email_asociado = '';
+    this.disabled();
   }
 
 
   addMessage(msg: any) {
-     this.mensaje = msg.message
+    
 
      if (msg.success) {
-
+      this.mensaje = msg.message
       this.openDialog(msg.usuario)
     }
    }
 
   ingresar() {
-    let u = this.valuesForm.value;
-    // console.log({username: u.username, email: u.email, id:0},'usuario', [+u.tipousuario, +u.tema])
-    this.crud.postData({username: u.username, email: u.email, id:0},'usuario', [+u.tipousuario, +u.tema])
-    .subscribe(msg => {
-      this.addMessage(msg);
-      // console.log(msg) ;
-      this.reset();
-    })
+    if (this.usuario_encontrado==false) {
+      let u = this.valuesForm.value;
+      console.log({username: u.username, email: u.email, id:0},'usuario', [+u.tipousuario, +u.tema])
+      this.crud.postData({username: u.username, email: u.email, id:0},'usuario', [+u.tipousuario, +u.tema])
+      .subscribe(msg => {
+        console.log('poronga->',msg);
+        if (msg) {
+          this.addMessage(msg);
+          this.reset();  
+        }
+
+      })
+  
+    } else {
+      this.openDialog(this.usuario)
+    }
   }
 
   openDialog(usuario:any): void {
@@ -243,7 +250,7 @@ export class RegistroUsuarioComponent implements OnInit {
     reg['bgmodal'] = this.bgmodal;
     reg['modalbutton'] = this.modalbutton;
 
-    this.ms.nextUser(usuario.id);
+    // this.ms.nextUser(usuario.id);  NO ES UTILIZADO
 
     modaldata.tables.forEach((table: string) => reg[table] = {id: 0});
     modaldata.textFields.forEach((text: string) => reg[text] = null);

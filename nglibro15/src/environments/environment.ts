@@ -415,8 +415,8 @@ export const usuarioTipo: numberString = {
   3:'apoderado',
   4:'asistente',
   5:'utp',
-  6:'sostenedor',
-  7:'admin',
+  // 6:'sostenedor',
+  // 7:'admin',
 };
 
 

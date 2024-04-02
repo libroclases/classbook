@@ -28,8 +28,7 @@
               <tr *ngFor="let table of tables; index as i" ><td>{{getTableLabel(table)}}</td>
                 <th>
                   <select class="form-select form-select-sm"
-                  [formControlName]="table"
-                  (change)="changeFunction(table, $event)">
+                  [formControlName]="table">
                     <option value=0>Ninguno</option>
                     <option *ngFor="let r of (queries[table] | async)"
                       [value]="r.id">{{getLabel(table, r)}}</option>

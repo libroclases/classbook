@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
           args: false,
           msg: "Please enter your name",
         },
-        unique: true,
+        unique: false,
       },
       email: {
         type: DataTypes.STRING,
