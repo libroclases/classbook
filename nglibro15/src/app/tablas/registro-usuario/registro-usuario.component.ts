@@ -42,7 +42,9 @@ export class RegistroUsuarioComponent implements OnInit {
   bodybgcolor!:string;
   pagination!:string;
   tablehead!:string;
-  modalbutton!:any;
+
+  bgmodal!:string;
+  modalbutton!:string;
 
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
@@ -130,6 +132,7 @@ export class RegistroUsuarioComponent implements OnInit {
   reset() {
     this.valuesForm.reset();
     this.mensaje = null;
+    this.disabled();
   }
 
   constructor(
@@ -152,6 +155,7 @@ export class RegistroUsuarioComponent implements OnInit {
           this.bodybgcolor = this.objcolors.azul.bodybgcolor;
           this.pagination = this.objcolors.azul.pagination;
           this.tablehead = this.objcolors.azul.tablehead;
+          this.bgmodal = this.objcolors.azul.bgmodal;
           this.modalbutton = this.objcolors.azul.modalbutton;
 
         }
@@ -159,6 +163,7 @@ export class RegistroUsuarioComponent implements OnInit {
           this.bodybgcolor = this.objcolors.verde.bodybgcolor;
           this.pagination = this.objcolors.verde.pagination;
           this.tablehead = this.objcolors.verde.tablehead;
+          this.bgmodal = this.objcolors.verde.bgmodal;
           this.modalbutton = this.objcolors.verde.modalbutton;
 
         }
@@ -166,6 +171,7 @@ export class RegistroUsuarioComponent implements OnInit {
           this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
           this.pagination = this.objcolors.naranjo.pagination;
           this.tablehead = this.objcolors.naranjo.tablehead;
+          this.bgmodal = this.objcolors.naranjo.bgmodal;
           this.modalbutton = this.objcolors.naranjo.modalbutton;
         }
 
@@ -182,10 +188,14 @@ export class RegistroUsuarioComponent implements OnInit {
   ngOnInit(): void {
     this.queries['tema'] = this.crud.getData('tema')!;
     this.queries['tipousuario'] = this.crud.getData('tipousuario')!;
+    this.disabled();
+  }
 
+  disabled() {
     this.valuesForm.get('tema')?.disable()
     this.valuesForm.get('tipousuario')?.disable()
     this.valuesForm.get('username')?.disable()
+
   }
 
   closeMe(e: any) {
@@ -230,6 +240,9 @@ export class RegistroUsuarioComponent implements OnInit {
     reg['id'] = 0;
     reg['usuario_id'] = usuario.id;
     
+    reg['bgmodal'] = this.bgmodal;
+    reg['modalbutton'] = this.modalbutton;
+
     this.ms.nextUser(usuario.id);
 
     modaldata.tables.forEach((table: string) => reg[table] = {id: 0});
@@ -247,7 +260,7 @@ export class RegistroUsuarioComponent implements OnInit {
    });
 
    dialogRef.afterClosed().pipe(
-     tap(res => console.log(res)),
+     tap(() => this.reset()),
    )
    .subscribe();
 

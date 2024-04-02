@@ -153,13 +153,14 @@ class Usuarios {
 
     static modify(req, res) {
     
-    const { username, email,  TipoUsuario, Tema  } = req.body
+    const { username, email, operativo, TipoUsuario, Tema  } = req.body
     return Usuario
         .findByPk(req.params.usuarioId)
         .then((usuario) => {
             usuario.update({
             email: email || usuario.email,
             username: username || usuario.username,
+            operativo: operativo || usuario.operativo,
             tipousuarioId: TipoUsuario || usuario.tipousuarioId,
             temaId: Tema || usuario.temaId, 
             
@@ -170,8 +171,9 @@ class Usuarios {
                 data: {
                 email: email || updateUsuario.email,
                 username: username || updateUsuario.username,
+                operativo: operativo || updateUsuario.operativo,
                 tipousuarioId : TipoUsuario || updateUsuario.tipousuarioId,
-                temaId : Tema || updateTema.temaId,
+                temaId : Tema || updateUsuario.temaId,
                 }
             })
     })

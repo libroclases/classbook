@@ -467,7 +467,7 @@ import Ventanas from '../controllers/ventana';
     app.get('/api/apoderado/:apoderadoId/pk',
       checkjwd, requiredScopes('read:apoderado'),
       Apoderados.getByPk);
-    app.post('/api/apoderado/:usuario/:niveleducacionalId/:sexoId/:regionId/:provincixId/:comunaId',
+    app.post('/api/apoderado/:usuarioId/:niveleducacionalId/:sexoId/:regionId/:provincixId/:comunaId',
       checkjwd, requiredScopes('create:apoderado'),
       Apoderados.create);
     app.put('/api/apoderado/:apoderadoId',

@@ -387,21 +387,15 @@ import { UserInfoService } from '../../services/user-info/user-info.service';
         if (personTables.includes(this.modalData.mainTable)) {
 
           ids[0] = this.registro.usuario_id
+
+          // If persontable we need update usuario with operativo == true
+          console.log('poronga',{id: ids[0], operativo:true})
+          this.crud.putData({id: ids[0], operativo:true}, 'usuario').subscribe(res => console.log(res));
         }
 
         if (this.modalData.mainTable == 'anotacion') { ids[1] = this.usuarioId }
 
-
-
-        /*
-
-        this.ms.userId.subscribe((userId:any) => {
-         
-          // if (userId && personTables.includes(this.modalData.mainTable)) {  ids[0] = userId   }
-          if (userId && this.modalData.mainTable == 'anotacion') { ids[1] = userId }
-        })
-        */
-
+        console.log('PORONGA',obj, this.modalData.mainTable, ids )
         this.crud.postData(obj, this.modalData.mainTable, ids).pipe(
           tap(() => this.selIdsService.notifyUpdated()),
         )
