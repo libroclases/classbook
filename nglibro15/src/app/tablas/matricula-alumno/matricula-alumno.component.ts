@@ -34,7 +34,10 @@ export class MatriculaAlumnoComponent implements OnInit {
   bodybgcolor!:string;
   pagination!:string;
   tablehead!:string;
+  
+  bgmodal!:string;
   modalbutton!:any;
+
 
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
@@ -76,6 +79,7 @@ export class MatriculaAlumnoComponent implements OnInit {
           this.bodybgcolor = this.objcolors.azul.bodybgcolor;
           this.pagination = this.objcolors.azul.pagination;
           this.tablehead = this.objcolors.azul.tablehead;
+          this.bgmodal = this.objcolors.azul.bgmodal;
           this.modalbutton = this.objcolors.azul.modalbutton;
 
         }
@@ -83,6 +87,7 @@ export class MatriculaAlumnoComponent implements OnInit {
           this.bodybgcolor = this.objcolors.verde.bodybgcolor;
           this.pagination = this.objcolors.verde.pagination;
           this.tablehead = this.objcolors.verde.tablehead;
+          this.bgmodal = this.objcolors.verde.bgmodal;
           this.modalbutton = this.objcolors.verde.modalbutton;
 
         }
@@ -90,7 +95,9 @@ export class MatriculaAlumnoComponent implements OnInit {
           this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
           this.pagination = this.objcolors.naranjo.pagination;
           this.tablehead = this.objcolors.naranjo.tablehead;
+          this.bgmodal = this.objcolors.naranjo.bgmodal;
           this.modalbutton = this.objcolors.naranjo.modalbutton;
+
         }
 
       })
@@ -131,6 +138,9 @@ export class MatriculaAlumnoComponent implements OnInit {
  
     reg['foraneas'] = { apoderado: this.apoderado.id, alumno: this.alumno.id }
     
+    reg['bgmodal'] = this.bgmodal;
+    reg['modalbutton'] = this.modalbutton;
+
     const dialogRef = this.dialog.open(ModalDialogComponent, {
      data: {
        registro: reg,
