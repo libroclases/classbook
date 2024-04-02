@@ -16,8 +16,8 @@ export class GetdatetimeService {
       const evento: number = Date.parse(fecha + 'T00:00:00+00:00');
       const epoch: number = date.getTime();
       const diff =  (epoch/1000 - evento/1000)/86400;
-  
-      return (+diff <= +days[0]['dias']) ? true : false;
+      // console.log(diff, days[0]['dias'])
+      return (diff <= days[0]['dias'] && diff > 0) ? true : false;
     }
  
 
