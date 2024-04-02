@@ -36,7 +36,7 @@ export function rutValidator(): ValidatorFn {
       
       // Casos Especiales (0 y K) 
       
-      dv = (dv === 'K') ? 10 : dv;
+      dv = (dv === 'K' || dv === 'k') ? 10 : dv;
       dv = (dv === '0') ? 11 : dv;
       
       isValid = (dv == dvEsperado) ? true : false;
