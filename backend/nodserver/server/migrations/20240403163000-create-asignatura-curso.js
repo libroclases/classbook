@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       asignaturaId: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'Asignatura',
@@ -22,7 +22,7 @@ module.exports = {
         }
       },
       cursoId: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'Curso',

@@ -12,7 +12,7 @@ export class AsignaturaProfesorComponent {
 
   mainTable: string = 'asignaturaprofesor';
   tableTitle = 'Asignatura Profesor';
-  textFields = [];
+  textFields = ['nombre'];
   dateFields = [];
   // displayFKFields: CamelCase
   displayFKFields = ['Profesor', 'Asignatura'];

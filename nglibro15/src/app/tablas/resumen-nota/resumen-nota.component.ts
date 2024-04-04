@@ -60,9 +60,9 @@ export class ResumenNotaComponent implements OnInit{
 
   // Selectores
 
-  selTables = [  "anno", "periodo", "colegio", "curso", "profesor"  ];
-  tableLabels = ['Año', 'Periodo','Colegio' ,'Curso','Profesor', ];
-  ignoreFkRequirements: string[] = [];
+  selTables = [  "anno", "periodo", "colegio", "curso", "asignaturacurso"  ];
+  tableLabels = ['Año', 'Periodo','Colegio' ,'Curso','Asignatura', ];
+  ignoreFkRequirements: string[] = ['asignatura'];
   changeFnsArray: Function[] = [];
   patchFKsFromStorage = [];
 
