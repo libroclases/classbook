@@ -43,6 +43,7 @@ const tablesArray = [
   'provincix',
   'region',
   'registroactividad',
+  'resumennota',
   'sexo',
   'tabla',
   'tema',
@@ -277,6 +278,15 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'matricula',
     'evaluacion',
   ],
+  resumennota: [
+    'anno',
+    'periodo',
+    'colegio',
+    'curso',
+    'profesor',
+    'asignatura',
+    'matricula',
+  ],  
   mes: [],
   feriado: [],
   tabla: [],
@@ -317,6 +327,7 @@ export const lowerUpperTables: stringString = {
   tema: 'Tema',
   usuario: 'Usuario',
   nota: 'Nota',
+  resumennota: 'ResumenNota',
   periodo: 'Periodo',
   profesor: 'Profesor',
   utp: 'Utp',
@@ -363,6 +374,7 @@ export const tableLabels = {
   tema: 'Tema',
   usuario: 'Usuario',
   nota: 'Nota',
+  resumennota: 'Resumen Nota',
   periodo: 'Período',
   Periodo: 'Período',
   profesor: 'Profesor',
@@ -415,8 +427,6 @@ export const usuarioTipo: numberString = {
   3:'apoderado',
   4:'asistente',
   5:'utp',
-  6:'sostenedor',
-  7:'admin',
 };
 
 
@@ -596,6 +606,10 @@ export const attributesLabels = {
     nota: 'Nota',
   },
 
+  resumennota: {
+    nota: 'Nota',
+  },
+
   periodo: {
     nombre: 'Nombre',
     anno: 'Año',
@@ -693,6 +707,7 @@ export const icons: stringStringPair = {
   '/matricula': ['bi-file-earmark-plus', 'Matrícula'],
   '/ventana': ['bi-file-earmark-plus', 'Matrícula'],
   '/nota': ['bi bi-pencil-square', 'Notas'],
+  '/resumennota': ['bi bi-pencil-square', 'Notas'],
   '/evaluacion': ['bi-bar-chart-steps', 'Evaluaciones'],
   '/horario': ['bi bi-clock', 'Horario'],
   '/feriado': ['bi bi-calendar-week', 'Feriados'],

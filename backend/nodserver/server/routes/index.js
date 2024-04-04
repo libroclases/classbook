@@ -18,7 +18,7 @@ import Utps from '../controllers/utp';
 import HorasAsignadas from '../controllers/horaasignada';
 import Usuarios from '../controllers/usuario';
 import Temas from '../controllers/tema';
-
+import ResumenNotas from '../controllers/resumennota';
 import Tablas from '../controllers/tabla';
 
 import InscripcionesColegio from '../controllers/inscripcion-colegio';
@@ -43,6 +43,7 @@ import Matriculas from '../controllers/matricula';
 import Feriados from '../controllers/feriado';
 import Ventanas from '../controllers/ventana';
 
+import AsignaturaCursos from '../controllers/asignaturacurso';
 
   const checkjwd = auth({
     audience: 'https://libroclases.cl',
@@ -302,6 +303,7 @@ import Ventanas from '../controllers/ventana';
     app.put('/api/asignaturaprofesor/:asignaturaprofesorId',
       checkjwd, requiredScopes('update:asignaturaprofesor'),
       AsignaturaProfesores.modify);
+
     app.get('/api/usuario',
       checkjwd, requiredScopes('read:usuario'),
       Usuarios.list);
@@ -657,6 +659,32 @@ import Ventanas from '../controllers/ventana';
       checkjwd, requiredScopes('delete:feriado'),
       Feriados.delete);
   
+    app.get('/api/resumennota',
+      // checkjwd, requiredScopes('read:nota'),
+      ResumenNotas.list);
+    app.get('/api/resumennota/:annoId/:periodoId/:colegioId/:cursoId/:profesorId/:asignaturaprofesorId/:matriculaId/fk',
+      // checkjwd, requiredScopes('read:nota'),
+      ResumenNotas.getByFk);
+    app.post('/api/resumennota/:annoId/:periodoId/:colegioId/:cursoId/:profesorId/:asignaturaprofesorId/:matriculaId',
+      // checkjwd, requiredScopes('create:nota'),
+      ResumenNotas.create);
+    app.put('/api/resumennota/:resumennotaId',
+      // checkjwd, requiredScopes('update:nota'),
+      ResumenNotas.modify);
+
+    app.get('/api/asignaturacurso',
+      // checkjwd, requiredScopes('read:asignaturaprofesor'),
+      AsignaturaCursos.list);
+    app.get('/api/asignaturacurso/:cursoId/:asignaturaId/fk',
+      // checkjwd, requiredScopes('read:asignaturaprofesor'),
+      AsignaturaCursos.getByFk);
+    app.post('/api/asignaturacurso/:cursoId/:asignaturaId',
+      // checkjwd, requiredScopes('create:asignaturaprofesor'),
+      AsignaturaCursos.create);
+    app.put('/api/asignaturacurso/:asignaturacursoId',
+      // checkjwd, requiredScopes('update:asignaturaprofesor'),
+      AsignaturaCursos.modify);
+
   };
 
 

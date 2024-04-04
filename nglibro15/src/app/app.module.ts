@@ -62,6 +62,7 @@ import { RegistroUsuarioComponent } from './tablas/registro-usuario/registro-usu
 import { UtpComponent } from './tablas/utp/utp.component';
 import { ProfeValidatorsDirective } from './shared/directives/profe-validator/profe-validator.directive';
 import { MessageService } from './shared/services/message/message.service';
+import { ResumenNotaComponent } from './tablas/resumen-nota/resumen-nota.component';
 
 
 // import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
@@ -99,6 +100,7 @@ const allowedTables = [
   'provincix',
   'region',
   'registroactividad',
+  'resumennota',
   'sexo',
   'tabla',
   'tema',
@@ -167,6 +169,7 @@ allowedTables.forEach((tb) => {
     RegistroUsuarioComponent,
     UtpComponent,
     ProfeValidatorsDirective,
+    ResumenNotaComponent,
    
   ],
   imports: [

@@ -1,6 +1,8 @@
 # classbook
 sudo pm2 start node app.js
 
+npx sequelize-cli model:create --name User --attributes name:string,username:string,email:string,password:string
+
 npx sequelize-cli db:migrate:undo:all --env production
 npx sequelize-cli db:migrate --env production
 
