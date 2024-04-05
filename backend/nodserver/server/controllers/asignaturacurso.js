@@ -3,7 +3,7 @@ import model from '../models';
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-const { AsignaturaCurso, Curso, Asignatura } = model;
+const { AsignaturaCurso,Colegio, Anno,  Curso, Asignatura } = model;
 
 class AsignaturaCursos {
 
@@ -13,6 +13,8 @@ class AsignaturaCursos {
           include: [
             
             { model:Asignatura, attributes:['id','nombre'], where: { } },
+            { model:Anno, attributes:['id','nombre'], where: { } },
+            { model:Colegio, attributes:['id','nombre'], where: { } },
             { model:Curso, attributes:['id','nombre'], where: { } },
  
           ]})  
@@ -29,9 +31,11 @@ class AsignaturaCursos {
   }
 
   static getByFk(req, res) {
-    const { cursoId, asignaturaId } = req.params;
+    const { annoId, colegioId, cursoId, asignaturaId } = req.params;
     let consulta = {};
     if (asignaturaId != '0') {  consulta['asignaturaId'] = asignaturaId;  }
+    if (annoId != '0') {  consulta['annoId'] = annoId;  }
+    if (colegioId != '0') {  consulta['colegioId'] = colegioId;  }
     if (cursoId != '0') {  consulta['cursoId'] = cursoId;  }
 
     return AsignaturaCurso 
@@ -39,6 +43,8 @@ class AsignaturaCursos {
         attributes: ['id','nombre'],  include: [
 
             { model:Asignatura, attributes:['id','nombre'], where: { } },
+            { model:Anno, attributes:['id','nombre'], where: { } },
+            { model:Colegio, attributes:['id','nombre'], where: { } },
             { model:Curso, attributes:['id','nombre'], where: { } },          
 
         ] })
@@ -48,11 +54,13 @@ class AsignaturaCursos {
 
   static create(req, res) {
     const { nombre } = req.body;
-    const { cursoId, asignaturaId } = req.params;
+    const { annoId, colegioId, cursoId, asignaturaId } = req.params;
     return AsignaturaCurso
       .create({
         nombre, 
         asignaturaId,
+        annoId,
+        colegioId,
         cursoId,
    
       })
@@ -64,13 +72,15 @@ class AsignaturaCursos {
     }
   
   static modify(req, res) {
-    const { nombre , Asignatura, Curso} = req.body;
+    const { nombre , Asignatura, Anno, Colegio, Curso} = req.body;
     return AsignaturaCurso
       .findByPk(req.params.asignaturacursoId)
       .then((AsignaturaCurso) => {
         AsignaturaCurso.update({
           nombre: nombre || AsignaturaCurso.nombre,
-          asignaturaId: Asignatura || AsignaturaCurso.asignaturaId, 
+          asignaturaId: Asignatura || AsignaturaCurso.asignaturaId,
+          annoId: Anno || AsignaturaCurso.annoId, 
+          colegioId: Colegio || AsignaturaCurso.colegioId,
           cursoId: Curso || AsignaturaCurso.cursoId,
     
       })
@@ -80,6 +90,8 @@ class AsignaturaCursos {
             data: {
               nombre: nombre || updateAsignaturaCurso.nombre,
               asignaturaId: Asignatura || updateAsignaturaCurso.asignaturaId,
+              annoId: Anno || updateAsignaturaCurso.annoId,
+              colegioId: Colegio || updateAsignaturaCurso.colegioId,
               cursoId: Curso || updateAsignaturaCurso.cursoId
             }
           });

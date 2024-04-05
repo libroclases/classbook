@@ -675,10 +675,10 @@ import AsignaturaCursos from '../controllers/asignaturacurso';
     app.get('/api/asignaturacurso',
       // checkjwd, requiredScopes('read:asignaturaprofesor'),
       AsignaturaCursos.list);
-    app.get('/api/asignaturacurso/:cursoId/:asignaturaId/fk',
+    app.get('/api/asignaturacurso/:annoId/:colegioId/:cursoId/:asignaturaId/fk',
       // checkjwd, requiredScopes('read:asignaturaprofesor'),
       AsignaturaCursos.getByFk);
-    app.post('/api/asignaturacurso/:cursoId/:asignaturaId',
+    app.post('/api/asignaturacurso/:annoId/:colegioId/:cursoId/:asignaturaId',
       // checkjwd, requiredScopes('create:asignaturaprofesor'),
       AsignaturaCursos.create);
     app.put('/api/asignaturacurso/:asignaturacursoId',

@@ -14,12 +14,12 @@ export class AsignaturaCursoComponent {
  textFields = ['nombre'];
  dateFields = [];
  // displayFKFields: CamelCase
- displayFKFields = ['Curso', 'Asignatura'];
+ displayFKFields = ['Anno','Colegio','Curso', 'Asignatura'];
  redirectRoutes = [];
 
  // Selectores
 
- selTables = ['curso', 'asignatura'];
+ selTables = ['anno','colegio', 'curso', 'asignatura'];
  changeFnsArray: Function[] = [];
  ignoreFkRequirements: string[] = [];
  patchFKsFromStorage = ['curso'];

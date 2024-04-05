@@ -21,6 +21,24 @@ module.exports = {
           as: 'Asignatura',
         }
       },
+      annoId: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Anno',
+          key: 'id',
+          as: 'Anno',
+        }
+      }, 
+      colegioId: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Colegio',
+          key: 'id',
+          as: 'Colegio',
+        }
+      },      
       cursoId: {
         allowNull: true,
         type: Sequelize.INTEGER,

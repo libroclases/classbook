@@ -14,14 +14,14 @@ export class EstadoAlumnoComponent {
   textFields = [];
   dateFields = ['fecha'];
   // displayFKFields: CamelCase
-  displayFKFields = ['Alumno', 'Matricula', 'TipoEstado'];
+  displayFKFields = ['Alumno','Matricula', 'TipoEstado'];
   redirectRoutes = [];
 
   // Selectores
 
   selTables = ['alumno', 'matricula', 'tipoestado'];
   changeFnsArray: Function[] = [];
-  ignoreFkRequirements: string[] = [];
+  ignoreFkRequirements: string[] = ['colegio','curso'];
   patchFKsFromStorage = [];
 
   constructor( ) { }

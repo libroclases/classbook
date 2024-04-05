@@ -195,7 +195,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
   periodo: [],
   asignatura: ['tipocolegio'],
   asignaturaprofesor: ['profesor', 'asignatura'],
-  asignaturacurso: ['curso', 'asignatura'],
+  asignaturacurso: ['anno','colegio','curso', 'asignatura'],
   colegio: ['region', 'provincix', 'comuna', 'tipocolegio'],
   curso: ['colegio', 'anno'],
   horaasignada: ['colegio'],
@@ -872,6 +872,14 @@ export const validator: any = {
     }
   },
 
+  EstadoAlumno: {
+    modalText: {
+      
+    },
+    modalDate: {
+      fecha: [Validators.required]
+    }
+  },
   Usuario: {
     modalText: {
       email: [Validators.required, emailValidator()],
@@ -1138,7 +1146,7 @@ export const modalDataObject: any = {
 
   AsignaturaCurso: {
     mainTable: 'asignaturacurso',
-    tables: ['curso', 'asignatura'],
+    tables: ['anno','colegio', 'curso', 'asignatura'],
     textFields: ['nombre'],
     dateFields: [],
     ignoreFkRequirements: [],
@@ -1190,7 +1198,7 @@ export const modalDataObject: any = {
 
   EstadoAlumno: {
     mainTable: 'estadoalumno',
-    tables: ['alumno', 'matricula', 'tipoestado'],
+    tables: ['alumno','matricula', 'tipoestado'],
     textFields: [],
     dateFields: ['fecha'],
     ignoreFkRequirements: [],

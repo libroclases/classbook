@@ -60,8 +60,8 @@ export class ResumenNotaComponent implements OnInit{
 
   // Selectores
 
-  selTables = [  "anno", "periodo", "colegio", "curso", "asignaturacurso"  ];
-  tableLabels = ['Año', 'Periodo','Colegio' ,'Curso','Asignatura', ];
+  selTables = [  "anno", "periodo", "colegio", "curso"  ];
+  tableLabels = ['Año', 'Periodo','Colegio' ,'Curso' ];
   ignoreFkRequirements: string[] = ['asignatura'];
   changeFnsArray: Function[] = [];
   patchFKsFromStorage = [];
@@ -92,17 +92,17 @@ export class ResumenNotaComponent implements OnInit{
 
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
-  margen_superior_tabla = 0;
+
 
   innerHeight=  window.innerHeight
 
-  height = window.innerHeight - (this.banner_height + this.menu_height + this.margen_superior_tabla) + 'px';
+  height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
 
   
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.height =
-      event.target.innerHeight - (this.banner_height + this.menu_height + 155) + 'px';
+      event.target.innerHeight - (this.banner_height + this.menu_height) + 'px';
   }
 
   constructor(private crud: CrudService,
@@ -153,9 +153,9 @@ export class ResumenNotaComponent implements OnInit{
   getAsignaturaData() {
 
      
-       let fkasignatura = this.getForeignKeys('asignatura')
-    
-       this.asignatura$ = this.crud.getData('asignatura', fkasignatura )!
+       let fkasignatura = this.getForeignKeys('asignaturacurso')
+       console.log('fkasignatura', fkasignatura);
+       this.asignatura$ = this.crud.getData('asignaturacurso', [this.selIdsService.getId('anno'), this.selIdsService.getId('colegio'), this.selIdsService.getId('curso'), 0] )!
        this.asignatura$.pipe(
           tap(asignatura => {
               this.ponderacion=0;
@@ -170,7 +170,9 @@ export class ResumenNotaComponent implements OnInit{
               });
            }),
        )
-       .subscribe(() => { this.getMatriculaData(); }
+       .subscribe(() => {
+        this.getMatriculaData(); 
+        }
         )
   }
 
@@ -213,97 +215,14 @@ export class ResumenNotaComponent implements OnInit{
 
   getMatriculaData():  void {
 
-      const sortByDate = (nota:any[]) : any => {
-        nota.sort((x,y) => x.Asignatura.fecha < y.Asignatura.fecha ? -1 : 1);
-        return nota;
-      }
-
-      const cleanVariables = () : void => {
-        this.promedioMatriculaMap.clear();
-        this.promedioAsignaturaMap.clear();
-
-        this.matriculaNotaMap.clear();
-
-
-      }
-
-      const getNotasData = (matriculaId:number): Observable<any> => {
-
-          let fknota:any = this.getForeignKeys('nota');
-          fknota[6] = matriculaId
-
-          let notas$ : Observable<any> = this.crud.getData('nota', fknota)!;
-          /*
-          notas$.pipe(map((data) => {
-            data.sort((a:Asignatura, b:Asignatura) => {
-                return a.fecha < b.fecha ? -1 : 1;
-             });
-            return data;
-            }
-            
-          ))
-          */
-
-          notas$.pipe(
-            tap(nota => {
-              sortByDate(nota);
-              nota.forEach((n:any) => {
-              if (n.nota) {
-                this.countNotas[n.Asignatura.id]+=1;
-            }
-          }
-
-          )
-        }),
-
-        ).subscribe();
-
-          return notas$;
-    }
-
-
-     cleanVariables();
-
+      
+ 
     let ides = [
       this.selIdsService.getId('colegio'),
       this.selIdsService.getId('curso'),
       this.selIdsService.getId('anno')
     ]
-      this.matricula$ = this.crud.getDataCustom('matricula', 'lista_curso_nombres',ides )?.pipe(
-
-      tap(mat => {
-        mat.forEach((m:any) => {
-        this.matriculaNotaMap.set(m.id, getNotasData(m.id));
-        this.promedioMatriculaMap.set(m.id, 0);
-      }
-
-      )}),
-
-      tap(() =>  {
-
-        for (let mnm of this.matriculaNotaMap.entries()) {
-          mnm[1].subscribe((m:any) => m.forEach((n:any)=>{
-
-            this.sumaPromedioMatricula(n.Matricula.id, n.nota * this.asignaturaMap.get(n.Asignatura.id).ponderacion/100 );
-            this.sumaPromedioAsignatura(n.Asignatura.id, n.nota);
-            let nota = (n.nota) ? n.nota.toString(): '0';  // OJO
-            const indice = n.Asignatura.id.toString() + '-' + n.Matricula.id.toString() + '-' + nota;
-            this.notasIndiceMap.set(n.id, indice);
-
-          }
-
-            ))
-
-        }
-
-      }),
-
-
-
-
-    )!
-
-
+      this.matricula$ = this.crud.getDataCustom('matricula', 'lista_curso_nombres',ides )
 
   }
 
@@ -323,14 +242,19 @@ export class ResumenNotaComponent implements OnInit{
 
      updateTable(notification: (Notification | null) = null) {
 
+      
+
       if ( !notification || notification.message == "updated" ) {
+        console.log(this.selIdsService.getId('anno'),
+        this.selIdsService.getId('periodo'),
+        this.selIdsService.getId('colegio'),
+        this.selIdsService.getId('curso'));
+
         if (this.selIdsService.getId('anno') *
             this.selIdsService.getId('periodo') *
             this.selIdsService.getId('colegio') *
-            this.selIdsService.getId('curso') *
-            this.selIdsService.getId('profesor') *
-            this.selIdsService.getId('asignaturaprofesor') > 0) {
-
+            this.selIdsService.getId('curso') > 0) {
+              
             this.getAsignaturaData();
 
 
