@@ -71,6 +71,7 @@ export class ResumenNotaComponent implements OnInit{
 
   asignatura$!: Observable<any>;
   matricula$!: Observable<any>;
+  resumennota$!: Observable<any>;
 
   ponderacion = 0;
   // numMatriculas = 0;
@@ -215,6 +216,31 @@ export class ResumenNotaComponent implements OnInit{
 
   getMatriculaData():  void {
 
+    const getResumenNotasData = (matriculaId:number): Observable<any> => {
+
+      let fkresumennota:any = this.getForeignKeys('resumennotanota');
+      fkresumennota[6] = matriculaId
+
+      let resumennotas$ : Observable<any> = this.crud.getData('promedio', fkresumennota)!;
+
+
+      resumennotas$.pipe(
+        tap(nota => {
+          // sortByDate(nota);
+          nota.forEach((n:any) => {
+          if (n.nota) {
+            this.countNotas[n.Evaluacion.id]+=1;
+        }
+      }
+
+      )
+    }),
+
+    ).subscribe();
+
+      return resumennotas$;
+}
+
       
  
     let ides = [
@@ -222,7 +248,18 @@ export class ResumenNotaComponent implements OnInit{
       this.selIdsService.getId('curso'),
       this.selIdsService.getId('anno')
     ]
-      this.matricula$ = this.crud.getDataCustom('matricula', 'lista_curso_nombres',ides )
+      this.matricula$ = this.crud.getDataCustom('matricula', 'lista_curso_nombres',ides )?.pipe(
+
+        tap(mat => {
+          mat.forEach((m:any) => {
+          // this.matriculaNotaMap.set(m.id, getResumenNotasData(m.id));
+          // this.promedioMatriculaMap.set(m.id, 0);
+        }
+  
+        )})
+
+      )
+      // this.resumennota$ = this.crud.getData('resumennota')!
 
   }
 

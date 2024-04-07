@@ -31,7 +31,9 @@
             </table>      
            
           </td>
-          <th>xxx</th>
+          <th><table>
+            <tr  *ngFor="let r of (resumennota$ | async)"><th>|{{r.promedio}}|{{r.Matricula.id}}|{{r.AsignaturaCurso.id}}</th></tr>
+          </table></th>
         </tr>
       </table>          
     </div>

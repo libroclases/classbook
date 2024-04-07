@@ -10,7 +10,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       promedio: {
-        type: Sequelize.FLOAT
+        type: Sequelize.FLOAT,
+        allowNull: true,
       },
 
       matriculaId: {
@@ -22,22 +23,13 @@ module.exports = {
           as: 'Matricula',
         }
       },
-      asignaturacursoId: {
+      annoId: {
         allowNull: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'AsignaturaCurso',
+          model: 'Anno',
           key: 'id',
-          as: 'AsignaturaCurso',
-        }
-      },
-      colegioId: {
-        allowNull: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Colegio',
-          key: 'id',
-          as: 'Colegio',
+          as: 'Anno',
         }
       },
       periodoId: {
@@ -49,6 +41,16 @@ module.exports = {
           as: 'Periodo',
         }
       },
+      colegioId: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Colegio',
+          key: 'id',
+          as: 'Colegio',
+        }
+      },
+
       cursoId: {
         allowNull: true,
         type: Sequelize.INTEGER,
@@ -58,15 +60,18 @@ module.exports = {
           as: 'Curso',
         }
       },
-      annoId: {
+ 
+      asignaturacursoId: {
         allowNull: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Anno',
+          model: 'AsignaturaCurso',
           key: 'id',
-          as: 'Anno',
+          as: 'AsignaturaCurso',
         }
       },
+ 
+
       
       createdAt: {
         allowNull: false,

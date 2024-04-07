@@ -25,8 +25,13 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "matriculaId",
     });
 
-    ResumenNota.belongsTo(models.AsignaturaCurso, {
-      foreignKey: "asignaturacursoId",
+    ResumenNota.belongsTo(models.Anno, {
+      foreignKey: "annoId",
+    });
+
+   
+    ResumenNota.belongsTo(models.Periodo, {
+      foreignKey: "periodoId",
     });
 
     ResumenNota.belongsTo(models.Colegio, {
@@ -37,12 +42,9 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "cursoId",
     });
 
-    ResumenNota.belongsTo(models.Anno, {
-      foreignKey: "annoId",
-    });
-    
-    ResumenNota.belongsTo(models.Periodo, {
-      foreignKey: "periodoId",
+
+    ResumenNota.belongsTo(models.AsignaturaCurso, {
+      foreignKey: "asignaturacursoId",
     });
     
 
