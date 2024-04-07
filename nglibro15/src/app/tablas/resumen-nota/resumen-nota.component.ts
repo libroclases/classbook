@@ -21,7 +21,7 @@ export class ResumenNotaComponent implements OnInit{
 
   isInVentana$!: Observable<any>;
 
-  mainTable: string = 'nota';
+  mainTable: string = 'resumennota';
 
   valorPromedio: any = [];
 

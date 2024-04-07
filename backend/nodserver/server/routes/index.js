@@ -662,10 +662,10 @@ import AsignaturaCursos from '../controllers/asignaturacurso';
     app.get('/api/resumennota',
       // checkjwd, requiredScopes('read:nota'),
       ResumenNotas.list);
-    app.get('/api/resumennota/:annoId/:periodoId/:colegioId/:cursoId/:profesorId/:asignaturaprofesorId/:matriculaId/fk',
+    app.get('/api/resumennota/:annoId/:periodoId/:colegioId/:cursoId/:asignaturacursoId/:matriculaId/fk',
       // checkjwd, requiredScopes('read:nota'),
       ResumenNotas.getByFk);
-    app.post('/api/resumennota/:annoId/:periodoId/:colegioId/:cursoId/:profesorId/:asignaturaprofesorId/:matriculaId',
+    app.post('/api/resumennota/:annoId/:periodoId/:colegioId/:cursoId/:asignaturacursoId/:matriculaId',
       // checkjwd, requiredScopes('create:nota'),
       ResumenNotas.create);
     app.put('/api/resumennota/:resumennotaId',

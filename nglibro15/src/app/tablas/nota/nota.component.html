@@ -1,17 +1,17 @@
 <div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 1%;padding-bottom: 0%"
-[style.background-color]="bodybgcolor"  [style.minHeight] = "height">
+[style.background-color]="bodybgcolor"  [style.height] = "height">
 
   <div  style="float: right; padding-bottom: 0%; height:100px; ">
-  <multi-select
-    [tables]="selTables"
+    <multi-select
+      [tables]="selTables"
 
-    [ignore-FK-requirements]="ignoreFkRequirements"
-    [change-functions]="changeFnsArray"
-    [patch-fks-from-storage]="patchFKsFromStorage">
-  </multi-select>
+      [ignore-FK-requirements]="ignoreFkRequirements"
+      [change-functions]="changeFnsArray"
+      [patch-fks-from-storage]="patchFKsFromStorage">
+    </multi-select>
   </div>
 
-   <div  [formGroup]="notasForm" class="overflow-auto p-3 bg-light"  [style.max-height]="height" style="width: 100%;">
+   <div  [formGroup]="notasForm"   class="overflow-auto p-3 bg-light"  style="width: 100%; max-height: 700px;">
 
     <!--form  [formGroup]="notasForm"-->
     

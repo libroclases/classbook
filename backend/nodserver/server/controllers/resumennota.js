@@ -1,6 +1,6 @@
 import model from '../models';
 
-const {  Colegio, Periodo, Curso, Anno, Profesor, Matricula, AsignaturaProfesor, ResumenNota } = model;
+const {  Colegio, Periodo, Curso, Anno,  Matricula, AsignaturaCurso, ResumenNota } = model;
 
 class ResumenNotas {
 
@@ -8,16 +8,14 @@ class ResumenNotas {
         return ResumenNota
             .findAll({
                 // where: getBaseQuery(req),
-                attributes: ['id','nota'],
+                attributes: ['id','promedio'],
                 include: [ 
                     { model:Matricula, attributes:['id','nombre'], where: { } },
-                    { model:AsignaturaProfesor, attributes:['id','nombre'], where: { } },
+                    { model:AsignaturaCurso, attributes:['id','nombre'], where: { } },
                     { model:Colegio, attributes:['id','nombre'], where: { } },
                     { model:Curso, attributes:['id','nombre'], where: { } },
                     { model:Anno, attributes:['id','nombre'], where: { } },
-                    { model:Periodo, attributes:['id','nombre'], where: { }},
-                    { model:Profesor, attributes:['id','nombre'], where: { } },
-                   
+                    { model:Periodo, attributes:['id','nombre'], where: { }}                   
     
 
             ],
@@ -27,50 +25,47 @@ class ResumenNotas {
     }
 
     static getByFk(req, res) {
-        const { annoId, periodoId, colegioId, cursoId, profesorId, asignaturaprofesorId, matriculaId } = req.params;
+        const { annoId, periodoId, colegioId, cursoId, asignaturacursoId, matriculaId } = req.params;
         let consulta = {};
         // let consulta = getBaseQuery(req);
 
         if (matriculaId != '0') {  consulta['matriculaId'] = matriculaId;  }
-        if (asignaturaprofesorId != '0') {  consulta['asignaturaprofesorId'] = asignaturaprofesorId;  }
+        if (asignaturacursoId != '0') {  consulta['asignaturacursoId'] = asignaturacursoId;  }
         if (colegioId != '0') {  consulta['colegioId'] = colegioId;  }
         if (cursoId != '0') {  consulta['cursoId'] = cursoId;  }
         if (annoId != '0') {  consulta['annoId'] = annoId;  }
         if (periodoId != '0') {  consulta['periodoId'] = periodoId;  }
-        if (profesorId != '0') {  consulta['profesorId'] = profesorId;  }
 
         return ResumenNota
-          .findAll({ where : consulta, attributes: ['id','nota'] ,
+          .findAll({ where : consulta, attributes: ['id','promedio'] ,
             include: [ 
             { model:Matricula, attributes:['id','nombre'], where: { } },
-            { model:AsignaturaProfesor, attributes:['id','nombre','fecha'], where: { } },
+            { model:AsignaturaCurso, attributes:['id','nombre'], where: { } },
             { model:Colegio, attributes:['id','nombre'], where: { } },
             { model:Curso, attributes:['id','nombre'], where: { } },
             { model:Anno, attributes:['id','nombre'], where: { } },
             { model:Periodo, attributes:['id','nombre'], where: { }},
-            { model:Profesor, attributes:['id','nombre'], where: { } },
             
            ],
            
        })
-          .then(nota => res.status(200).send(nota))
+          .then(promedio => res.status(200).send(promedio))
           .catch(error => res.status(400).send(error));
     }
 
     static create(req, res) {
-    const { annoId, periodoId, colegioId, cursoId, profesorId,
-        asignaturaprofesorId, matriculaId} = req.params;
-    const { nota } = req.body;
+    const { annoId, periodoId, colegioId, cursoId,
+        asignaturacursoId, matriculaId} = req.params;
+    const { promedio } = req.body;
     return ResumenNota
     .create({
-        nota,
+        promedio,
         matriculaId, 
         periodoId,
         colegioId,
         cursoId,
         annoId,
-        profesorId,
-        asignaturaprofesorId,
+        asignaturacursoId,
    
     })
     .then(notaData => res.status(201).send({
@@ -86,19 +81,19 @@ class ResumenNotas {
     // let consulta = getBaseQuery(req);
     consulta['id'] = req.params.resumennotaId;
     
-    const { nota } = req.body
+    const { promedio } = req.body
     return ResumenNota
         .findOne({ where: consulta })
         .then((notas) => {
             notas.update({
-            nota: nota || notas.nota,
+            promedio: promedio || notas.promedio,
    
     })
     .then((updatedNota) => {
         res.status(200).send({
             message: 'ResumenNota updated successfully',
                 data: {
-                nota: nota || updatedNota.nota,
+                promedio: promedio || updatedNota.promedio,
           
                 }
             })

@@ -614,7 +614,7 @@ export const attributesLabels = {
   },
 
   resumennota: {
-    nota: 'Nota',
+    promedio: 'Promedio',
   },
 
   periodo: {

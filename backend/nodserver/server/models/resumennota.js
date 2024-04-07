@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const ResumenNota = sequelize.define(
     "ResumenNota",
     {
-      nota: {
+      promedio: {
         type: DataTypes.FLOAT,
         allowNull: {
           args: true,
@@ -45,10 +45,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "periodoId",
     });
     
-    ResumenNota.belongsTo(models.Profesor, {
-      foreignKey: "profesorId",
-    });
-
 
   };
   return ResumenNota;
