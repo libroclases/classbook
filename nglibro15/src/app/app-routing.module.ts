@@ -34,6 +34,7 @@ import { VentanaComponent } from './tablas/ventana/ventana.component';
 import { RegistroUsuarioComponent } from './tablas/registro-usuario/registro-usuario.component';
 import { ResumenNotaComponent } from './tablas/resumen-nota/resumen-nota.component';
 import { AsignaturaCursoComponent } from './tablas/asignatura-curso/asignatura-curso.component';
+import { CursoProfesorComponent } from './tablas/curso-profesor/curso-profesor.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
@@ -126,6 +127,9 @@ const routes: Routes = [
   { path: 'resumennota', component: ResumenNotaComponent },
 
   { path: 'asignaturacurso', component: AsignaturaCursoComponent },
+
+  { path: 'cursoprofesor', component: CursoProfesorComponent },
+
 
   { path: '**', redirectTo: 'home' ,pathMatch: 'full' },
 

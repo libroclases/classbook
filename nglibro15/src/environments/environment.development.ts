@@ -21,6 +21,7 @@ const tablesArray = [
   'apoderado',
   'asignatura',
   'asignaturaprofesor',
+  'cursoprofesor',
   'asignaturacurso',
   'asistencia',
   'asistentecolegio',
@@ -195,6 +196,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
   periodo: [],
   asignatura: ['tipocolegio'],
   asignaturaprofesor: ['profesor', 'asignatura'],
+  cursoprofesor: ['anno','colegio','curso','profesor'],
   asignaturacurso: ['anno','colegio','curso', 'asignatura'],
   colegio: ['region', 'provincix', 'comuna', 'tipocolegio'],
   curso: ['colegio', 'anno'],
@@ -309,6 +311,7 @@ export const lowerUpperTables: stringString = {
   apoderado: 'Apoderado',
   asignatura: 'Asignatura',
   asignaturaprofesor: 'AsignaturaProfesor',
+  cursoprofesor: 'CursoProfesor',
   asignaturacurso: 'AsignaturaCurso',
   asistencia: 'Asistencia',
   asistencix: 'Asistencix',
@@ -355,6 +358,7 @@ export const tableLabels = {
   apoderado: 'Apoderado',
   asignatura: 'Asignatura',
   asignaturaprofesor: 'Asignatura Profesor',
+  cursoprofesor: 'Curso Profesor',
   asignaturacurso: 'Asignatura Curso',
   asistencia: 'Asistencia',
   asistencix: 'Asistencia',
@@ -487,6 +491,10 @@ export const attributesLabels = {
   },
 
   asignaturaprofesor: {
+    nombre: 'Nombre',
+  },
+
+  cursoprofesor: {
     nombre: 'Nombre',
   },
 
@@ -702,6 +710,7 @@ export const icons: stringStringPair = {
   '/control_asignatura': ['bi bi-layout-text-window', 'Control de Asignatura'],
   '/asignatura': ['bi bi-book', 'Asignaturas'],
   '/asignaturaprofesor': ['bi bi-book', 'Asignatura Profesores'],
+  '/cursoprofesor': ['bi bi-book', 'Asignatura Profesores'],
   '/asignaturacurso': ['bi bi-book', 'Asignatura Profesores'],
   '/profesor': ['bi bi-person-video3', 'Profesores'],
   '/utp': ['bi bi-person-video3', 'Utp'],
@@ -736,6 +745,7 @@ export const redirectRoutes: any = {
   Utp: ['/horario'],
   Asignatura: ['/profesor'],
   AsignaturaProfesor: ['/profesor'],
+  CursoProfesor:['/profesor'],
   AsignaturaCurso: ['/profesor'],
   Apoderado: ['/matricula'],
   Matricula: ['/curso'],
@@ -834,6 +844,16 @@ export const validator: any = {
     }
 
   },
+
+  CursoProfesor: {
+    modalText: {
+      nombre: [Validators.required],
+    },
+    modalDate: {
+    }
+
+  },
+
 
   AsignaturaCurso: {
     modalText: {
@@ -1140,6 +1160,19 @@ export const modalDataObject: any = {
     hidden: [],
     defaultValues: {},
     label: 'Asignatura Profesor',
+    windowHeight: '320px',
+    permission: ['utp']
+  },
+
+  CursoProfesor: {
+    mainTable: 'cursoprofesor',
+    tables: ['anno','colegio','curso','profesor'],
+    textFields: ['nombre'],
+    dateFields: [],
+    ignoreFkRequirements: [],
+    hidden: [],
+    defaultValues: {},
+    label: 'Curso Profesor',
     windowHeight: '320px',
     permission: ['utp']
   },
