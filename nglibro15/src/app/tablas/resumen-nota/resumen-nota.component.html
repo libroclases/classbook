@@ -32,7 +32,7 @@
            
           </td>
           <th><table>
-            <tr  *ngFor="let r of (resumennota$ | async)"><th>|{{r.promedio}}|{{r.Matricula.id}}|{{r.AsignaturaCurso.id}}</th></tr>
+            <tr  *ngFor="let m of (matricula$ | async)"><th   *ngFor="let p of (matriculaPromedioMap.get(m.id) | async)">{{p.promedio}}</th></tr>
           </table></th>
         </tr>
       </table>          

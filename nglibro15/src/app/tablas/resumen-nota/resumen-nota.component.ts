@@ -31,7 +31,7 @@ export class ResumenNotaComponent implements OnInit{
   countNotas: any = {};
   sumaAsignaturaMap : any = new Map<number, number>();
 
-  matriculaNotaMap: any = new Map<number, any>();
+  matriculaPromedioMap: any = new Map<number, any>();
   promedioMatriculaMap: any = new Map<number, number>();
   promedioAsignaturaMap: any = new Map<number, number>();
   asignaturaMap: any = new Map<number, object>();
@@ -152,12 +152,16 @@ export class ResumenNotaComponent implements OnInit{
   numcols = 2;
 
   getAsignaturaData() {
-
-     
-       let fkasignatura = this.getForeignKeys('asignaturacurso')
-       console.log('fkasignatura', fkasignatura);
-       this.asignatura$ = this.crud.getData('asignaturacurso', [this.selIdsService.getId('anno'), this.selIdsService.getId('colegio'), this.selIdsService.getId('curso'), 0] )!
-       this.asignatura$.pipe(
+       const fks = [
+        this.selIdsService.getId('anno'), 
+        this.selIdsService.getId('colegio'), 
+        this.selIdsService.getId('curso'), 
+        0
+      ] 
+      
+      this.asignatura$ = this.crud.getData('asignaturacurso', fks)!
+      
+      this.asignatura$.pipe(
           tap(asignatura => {
               this.ponderacion=0;
               asignatura.forEach((e:any) => {
@@ -178,70 +182,7 @@ export class ResumenNotaComponent implements OnInit{
   }
 
 
-
-  sumaPromedioMatricula(matriculaId: number, nota: number) {
-      this.promedioMatriculaMap.set(+matriculaId, nota  + this.promedioMatriculaMap.get(+matriculaId))
-    }
-
-  getSumAsignatura(e: number) : any {
-    let nota = this.sumaAsignaturaMap.get(e)/this.countNotas[e];
-    return [nota, (nota>=4) ? "blue" : "red"]
-  }
-
-
-  sumPromedioMatricula(): any {
-    let total = 0;
-    let cont = 0;
-    let nota = 0;
-    for (let valor of this.promedioMatriculaMap.values()) {
-      total+=valor;
-      cont++;
-    }
-    nota = total/cont;
-
-    return [nota, (nota>=4) ? "blue" : "red"] ;
-  }
-
-   getPromedioMatricula(m: number) : any {
-       let nota = this.promedioMatriculaMap.get(m);
-       return [(nota==0) ? "" : nota , (nota>=4) ? "blue" : "red"]
-    }
-
-   sumaPromedioAsignatura(asignaturaId: number, nota: number) {
-
-    this.sumaAsignaturaMap.set(asignaturaId, this.sumaAsignaturaMap.get(asignaturaId) + nota);
-   }
-
- colorNota(nota: number): string { return ( nota>=4.0) ? "blue" : "red"}
-
   getMatriculaData():  void {
-
-    const getResumenNotasData = (matriculaId:number): Observable<any> => {
-
-      let fkresumennota:any = this.getForeignKeys('resumennotanota');
-      fkresumennota[6] = matriculaId
-
-      let resumennotas$ : Observable<any> = this.crud.getData('promedio', fkresumennota)!;
-
-
-      resumennotas$.pipe(
-        tap(nota => {
-          // sortByDate(nota);
-          nota.forEach((n:any) => {
-          if (n.nota) {
-            this.countNotas[n.Evaluacion.id]+=1;
-        }
-      }
-
-      )
-    }),
-
-    ).subscribe();
-
-      return resumennotas$;
-}
-
-      
  
     let ides = [
       this.selIdsService.getId('colegio'),
@@ -252,18 +193,17 @@ export class ResumenNotaComponent implements OnInit{
 
         tap(mat => {
           mat.forEach((m:any) => {
-          // this.matriculaNotaMap.set(m.id, getResumenNotasData(m.id));
-          // this.promedioMatriculaMap.set(m.id, 0);
+      
+            this.matriculaPromedioMap.set(m.id, this.crud.getData('resumennota',[4,1,1,19,0,m.id]));
         }
-  
-        )})
+       )
+      }
+     )
 
-      )
-      // this.resumennota$ = this.crud.getData('resumennota')!
+    )
 
   }
 
-  getCountNotas(asignaturaId: any):number {  return this.countNotas[+asignaturaId] }
 
   getBiClass(route: string) {
       return this.iconsService.getBiClass(route);
