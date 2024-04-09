@@ -22,9 +22,9 @@
         <tr>
           <td><table class="table table-bordered"><tbody>
             <tr > 
-              <td *ngIf="asignatura$">&nbsp;</td><td *ngFor="let a of (asignatura$ | async)" >{{a.nombre}}</td>
+              <td *ngIf="asignatura$">&nbsp;</td><td *ngFor="let a of (asignatura$ | async)" >{{a.nombre}}|{{a.id}}</td>
             </tr>
-            <tr  *ngFor="let m of (matricula$ | async)"><td>{{m.nombre}}</td><td   *ngFor="let p of (matriculaPromedioMap.get(m.id) | async)">{{p.promedio}}</td></tr>
+            <tr  *ngFor="let m of (matricula$ | async)"><td>{{m.nombre}}</td><td   *ngFor="let p of (matriculaPromedioMap.get(m.id) | async)">{{p.promedio}}|{{p.AsignaturaCurso.id}}</td></tr>
           </tbody>
           </table></td>
         </tr>
