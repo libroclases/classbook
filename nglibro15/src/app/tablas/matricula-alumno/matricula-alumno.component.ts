@@ -38,13 +38,16 @@ export class MatriculaAlumnoComponent implements OnInit {
   bgmodal!:string;
   modalbutton!:any;
 
+  url!:string;
+  photo = environment.photo;
+  opacity = environment.opacity;
+  position = "center";
+  size = "cover";
 
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
 
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
-
-  url!:string;
 
   @HostListener('window:resize', ['$event'])
   onResize(event:any) {
@@ -81,6 +84,7 @@ export class MatriculaAlumnoComponent implements OnInit {
           this.tablehead = this.objcolors.azul.tablehead;
           this.bgmodal = this.objcolors.azul.bgmodal;
           this.modalbutton = this.objcolors.azul.modalbutton;
+          this.url = this.photo.azul;
 
         }
         if (color=='verde') {
@@ -89,6 +93,7 @@ export class MatriculaAlumnoComponent implements OnInit {
           this.tablehead = this.objcolors.verde.tablehead;
           this.bgmodal = this.objcolors.verde.bgmodal;
           this.modalbutton = this.objcolors.verde.modalbutton;
+          this.url = this.photo.verde;
 
         }
         if (color=='naranjo') {
@@ -97,6 +102,7 @@ export class MatriculaAlumnoComponent implements OnInit {
           this.tablehead = this.objcolors.naranjo.tablehead;
           this.bgmodal = this.objcolors.naranjo.bgmodal;
           this.modalbutton = this.objcolors.naranjo.modalbutton;
+          this.url = this.photo.naranjo;
 
         }
 

@@ -28,15 +28,20 @@ const fieldsArray = ['inasistentesHombres', 'inasistentesMujeres', 'atrasos', 'o
 })
 export class ControlAsignaturaComponent implements OnInit, OnDestroy{
 
+  url!:string;
+  photo = environment.photo;
+  opacity = environment.opacity;
+  position = "center";
+  size = "cover";
+
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
-  margen_superior_tabla = environment.cabecera.margen_superior_tabla;
 
-  height = window.innerHeight - (this.banner_height + this.menu_height + this.margen_superior_tabla) + 'px';
+  height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
 
   @HostListener('window:resize', ['$event'])
   onResize(event:any) {
-    this.height = event.target.innerHeight - (this.banner_height + this.menu_height + this.margen_superior_tabla) + 'px';
+    this.height = event.target.innerHeight - (this.banner_height + this.menu_height) + 'px';
   }
 
   profPieFormGroup!: FormGroup;
@@ -153,16 +158,19 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
           this.bodybgcolor = this.objcolors.azul.bodybgcolor;
           this.pagination = this.objcolors.azul.pagination;
           this.tablehead = this.objcolors.azul.tablehead;
+          this.url = this.photo.azul;
         }
         else if (color=='verde') {
           this.bodybgcolor = this.objcolors.verde.bodybgcolor;
           this.pagination = this.objcolors.verde.pagination;
           this.tablehead = this.objcolors.verde.tablehead;
+          this.url = this.photo.verde;
         }
         else if (color=='naranjo') {
           this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
           this.pagination = this.objcolors.naranjo.pagination;
           this.tablehead =  this.objcolors.naranjo.tablehead;
+          this.url = this.photo.naranjo;
         }
       })
 

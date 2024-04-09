@@ -23,6 +23,10 @@ export class ResumenAsistenciaComponent {
       event.target.innerHeight - (this.banner_height + this.menu_height) + 'px';
   }
 
+  url!:string;
+  photo = environment.photo;
+  position = "center";
+  size = "cover";
 
   title = 'Asistencia: Resumen mensual';
   rowLabel = 'Curso';
@@ -69,16 +73,19 @@ export class ResumenAsistenciaComponent {
           this.bodybgcolor = this.objcolors.azul.bodybgcolor;
           this.pagination = this.objcolors.azul.pagination;
           this.tablehead = this.objcolors.azul.pagination;
+          this.url = this.photo.azul;
         }
         if (color=='verde') { 
           this.bodybgcolor = this.objcolors.verde.bodybgcolor;
           this.pagination = this.objcolors.verde.pagination;
           this.tablehead = this.objcolors.verde.pagination;
+          this.url = this.photo.verde;
         }
         if (color=='naranjo') { 
           this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
           this.pagination = this.objcolors.naranjo.pagination;
-          this.tablehead = this.objcolors.naranjo.pagination; 
+          this.tablehead = this.objcolors.naranjo.pagination;
+          this.url = this.photo.naranjo; 
         }      
       })
   

@@ -31,6 +31,12 @@ export class AnotacionesComponent implements OnDestroy {
   customEndpoints = {matricula: 'lista_curso_nombres'};
   patchFksFromStorage = ['anno', 'colegio', 'profesor'];
 
+  url!:string;
+  photo = environment.photo;
+  opacity = environment.opacity;
+  position = "center";
+  size = "cover";
+
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
 
@@ -113,6 +119,7 @@ export class AnotacionesComponent implements OnDestroy {
           this.tablehead = this.objcolors.azul.tablehead;
           this.bgmodal = this.objcolors.azul.bgmodal;
           this.modalbutton = this.objcolors.azul.modalbutton;
+          this.url = this.photo.azul;
         }
         else if (color=='verde') {
           this.bodybgcolor = this.objcolors.verde.bodybgcolor;
@@ -120,6 +127,7 @@ export class AnotacionesComponent implements OnDestroy {
           this.tablehead = this.objcolors.verde.tablehead;
           this.bgmodal = this.objcolors.verde.bgmodal;
           this.modalbutton = this.objcolors.verde.modalbutton;
+          this.url = this.photo.verde;
         }
         else if (color=='naranjo') {
           this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
@@ -127,6 +135,7 @@ export class AnotacionesComponent implements OnDestroy {
           this.tablehead = this.objcolors.naranjo.tablehead;
           this.bgmodal = this.objcolors.naranjo.bgmodal;
           this.modalbutton = this.objcolors.verde.modalbutton;
+          this.url = this.photo.naranjo;
         }
       })
     }

@@ -75,10 +75,16 @@ export class ResumenNotaComponent implements OnInit{
 
   ponderacion = 0;
   // numMatriculas = 0;
-
+  url!:string;
+  photo = environment.photo;
+  opacity = environment.opacity;
+  position = "center";
+  size = "cover";
   // notasForm!: FormGroup;
 
   //   colores
+
+  numColumns = 8
 
   objcolors = environment.colors;
 
@@ -127,6 +133,7 @@ export class ResumenNotaComponent implements OnInit{
           this.tablehead = this.objcolors.azul.tablehead;
           this.bgmodal =  this.objcolors.azul.bgmodal;
           this.modalbutton = this.objcolors.azul.modalbutton;
+          this.url = this.photo.azul;
         }
         else if (color=='verde') {
           this.bodybgcolor = this.objcolors.verde.bodybgcolor;
@@ -134,6 +141,7 @@ export class ResumenNotaComponent implements OnInit{
           this.tablehead = this.objcolors.verde.tablehead;
           this.bgmodal =  this.objcolors.verde.bgmodal;
           this.modalbutton = this.objcolors.verde.modalbutton;
+          this.url = this.photo.verde;
         }
         else if (color=='naranjo') {
           this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
@@ -141,6 +149,7 @@ export class ResumenNotaComponent implements OnInit{
           this.tablehead = this.objcolors.naranjo.tablehead;
           this.bgmodal =  this.objcolors.naranjo.bgmodal;
           this.modalbutton = this.objcolors.naranjo.modalbutton;
+          this.url = this.photo.naranjo;
         }
       })
 
@@ -150,6 +159,8 @@ export class ResumenNotaComponent implements OnInit{
      }
 
   numcols = 2;
+
+ 
 
   getAsignaturaData() {
        const fks = [

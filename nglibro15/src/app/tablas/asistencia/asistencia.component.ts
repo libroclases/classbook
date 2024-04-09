@@ -32,6 +32,11 @@ export class AsistenciaComponent implements OnInit {
 
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
 
+  url!:string;
+  photo = environment.photo;
+  position = "center";
+  size = "cover";
+
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.height =
@@ -69,14 +74,20 @@ export class AsistenciaComponent implements OnInit {
       if (color == 'azul') {
         this.bodybgcolor = this.objcolors.azul.bodybgcolor;
         this.pagination = this.objcolors.azul.pagination;
+        this.url = this.photo.azul;
+ 
       }
       if (color == 'verde') {
         this.bodybgcolor = this.objcolors.verde.bodybgcolor;
         this.pagination = this.objcolors.verde.pagination;
+        this.url = this.photo.verde;
+ 
       }
       if (color == 'naranjo') {
         this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
         this.pagination = this.objcolors.naranjo.pagination;
+        this.url = this.photo.naranjo;
+ 
       }
     });
     

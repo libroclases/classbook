@@ -1,6 +1,9 @@
 
 
-<div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 1%;padding-bottom: 0%"
+<div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 1%;padding-bottom: 0%;"
+[style.background-image]="url"
+[style.background-position]="position"
+[style.background-size]="size"
 [style.background-color]="bodybgcolor" [style.height] = "height">
 
   <div  style="float: right; padding-bottom: 0%; height:100px; ">
@@ -12,28 +15,29 @@
     </multi-select>
   </div>
 
-  <div  class="overflow-auto p-3 bg-light"  style="width: 100%; max-height: 700px;"> 
+  <div  class="overflow-auto p-3 bg-light"  [style.opacity]="opacity"  style="width: 100%; max-height: 700px;"> 
       <table>
+        <tr><th [attr.colspan]="numColumns" [style.background-color]="tablehead" 
+          style="text-align: center;color:white; height:40px; width: 100%"><em [class]="getBiClass('/'+ mainTable)">&nbsp;&nbsp;</em><b>Resumen Notas</b></th></tr>
         <tr>
-          <th>&nbsp;</th>
-          <td>
-            <table  class="table table-bordered"><thead><tr><td *ngFor="let a of (asignatura$ | async)">{{a.nombre}}</td></tr></thead></table>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <table>
-              <thead>
+          <!--td>
+            <table class="table table-bordered">
+              <tbody>
+                <tr><td>aaa</td></tr>
                 <tr *ngFor="let m of (matricula$ | async)"> 
-                  <td style="width: 30%; text-align: left">{{m.nombre}}</td>
+                 <td>{{m.nombre}}</td>
                 </tr>
-              </thead>
+              </tbody>
             </table>      
            
-          </td>
-          <th><table>
-            <tr  *ngFor="let m of (matricula$ | async)"><th   *ngFor="let p of (matriculaPromedioMap.get(m.id) | async)">{{p.promedio}}</th></tr>
-          </table></th>
+          </td-->
+          <td><table class="table table-bordered"><tbody>
+            <tr > 
+              <td *ngIf="asignatura$">bbb</td><td *ngFor="let a of (asignatura$ | async)" >{{a.nombre}}</td>
+            </tr>
+            <tr  *ngFor="let m of (matricula$ | async)"><td>poronga</td><td   *ngFor="let p of (matriculaPromedioMap.get(m.id) | async)">{{p.promedio}}</td></tr>
+          </tbody>
+          </table></td>
         </tr>
       </table>          
     </div>

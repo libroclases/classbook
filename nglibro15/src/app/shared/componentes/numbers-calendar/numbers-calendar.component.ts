@@ -65,6 +65,8 @@ export class NumbersCalendarComponent  implements OnInit, OnDestroy {
   @Input('max-columns-number')
   maxColumns: number = 40;
 
+  opacity = environment.opacity;
+
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
   margen_superior_tabla = environment.cabecera.margen_superior_tabla;

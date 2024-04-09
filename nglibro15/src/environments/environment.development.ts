@@ -77,6 +77,7 @@ export const environment = {
   apiUrl: 'http://localhost',
   apiKey: 'devKey',
   userinfo: {},
+  opacity: '93%',
 
   auth0: {
     domain: 'dev-tupdibnrpuxah8p3.us.auth0.com',
@@ -135,10 +136,11 @@ export const environment = {
     },
   },
   photo: {
-    azul: 'url(assets/images/fondo_azul.png)',
+    azul: 'url(assets/images/fondo-azul2.png)',
     verde: 'url(assets/images/fondo_verde.jpeg)',
     naranjo: 'url(assets/images/fondo_naranjo.jpg)',
   },
+  
 };
 
 /*

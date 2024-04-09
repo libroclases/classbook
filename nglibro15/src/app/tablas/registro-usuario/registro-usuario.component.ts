@@ -39,6 +39,12 @@ export class RegistroUsuarioComponent implements OnInit {
 
   objcolors = environment.colors;
 
+  url!:string;
+  photo = environment.photo;
+  opacity = environment.opacity;
+  position = "center";
+  size = "cover";
+
   bodybgcolor!:string;
   pagination!:string;
   tablehead!:string;
@@ -121,6 +127,7 @@ export class RegistroUsuarioComponent implements OnInit {
           this.tablehead = this.objcolors.azul.tablehead;
           this.bgmodal = this.objcolors.azul.bgmodal;
           this.modalbutton = this.objcolors.azul.modalbutton;
+          this.url = this.photo.azul;
 
         }
         if (color=='verde') {
@@ -129,7 +136,7 @@ export class RegistroUsuarioComponent implements OnInit {
           this.tablehead = this.objcolors.verde.tablehead;
           this.bgmodal = this.objcolors.verde.bgmodal;
           this.modalbutton = this.objcolors.verde.modalbutton;
-
+          this.url = this.photo.verde;
         }
         if (color=='naranjo') {
           this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
@@ -137,6 +144,7 @@ export class RegistroUsuarioComponent implements OnInit {
           this.tablehead = this.objcolors.naranjo.tablehead;
           this.bgmodal = this.objcolors.naranjo.bgmodal;
           this.modalbutton = this.objcolors.naranjo.modalbutton;
+          this.url = this.photo.naranjo;
         }
 
       })

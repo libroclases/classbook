@@ -74,6 +74,7 @@ export const environment = {
   apiUrl: 'https://libroclases.cl',
   apiKey: 'devKey',
   userinfo: {},
+  opacity: '93%',
 
   auth0: {
     domain: 'dev-tupdibnrpuxah8p3.us.auth0.com',

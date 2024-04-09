@@ -20,6 +20,12 @@ export class FichaAlumnoComponent implements OnInit{
 
   objcolors = environment.colors;
 
+  url!:string;
+  photo = environment.photo;
+  opacity = environment.opacity;
+  position = "center";
+  size = "cover";
+
   alumnos:any = attributesLabels.alumno;
   apoderados:any = attributesLabels.apoderado;
   matriculas:any = attributesLabels.matricula;
@@ -78,17 +84,20 @@ constructor(
           this.bodybgcolor = this.objcolors.azul.bodybgcolor;
           this.pagination = this.objcolors.azul.pagination;
           this.tablehead = this.objcolors.azul.tablehead;
+          this.url = this.photo.azul;
         }
         if (color=='verde') {
           this.bodybgcolor = this.objcolors.verde.bodybgcolor;
           this.pagination = this.objcolors.verde.pagination;
           this.tablehead = this.objcolors.verde.tablehead;
+          this.url = this.photo.verde;
     
         }
         if (color=='naranjo') {
           this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
           this.pagination = this.objcolors.naranjo.pagination;
           this.tablehead = this.objcolors.naranjo.tablehead;
+          this.url = this.photo.naranjo;
         }
         
       }

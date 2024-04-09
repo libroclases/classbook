@@ -15,7 +15,9 @@ class AsignaturaProfesores {
             { model:Asignatura, attributes:['id','nombre'], where: { } },
             { model:Profesor, attributes:['id','nombre','apellido1','apellido2'], where: { } },
  
-          ]})  
+          ],
+          order: [['id','ASC']]
+        })  
           .then(AsignaturaProfesores => res.status(200).send(AsignaturaProfesores))
           .catch(error => res.status(400).send(error));
       }
@@ -41,7 +43,8 @@ class AsignaturaProfesores {
             { model:Asignatura, attributes:['id','nombre'], where: { } },
             { model:Profesor, attributes:['id','nombre', 'apellido1','apellido2'], where: { } },          
 
-        ] })
+        ],
+        order: [['id','ASC']] })
       .then(asignaturaprofesor => res.status(200).send(asignaturaprofesor))
       .catch(error => res.status(400).send(error));
   }

@@ -33,6 +33,12 @@ export class HorarioComponent implements OnInit, OnDestroy {
   idProfesor = 0;
   idDix = 0;
 
+  url!:string;
+  photo = environment.photo;
+  opacity = environment.opacity;
+  position = "center";
+  size = "cover";
+
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
 
@@ -156,6 +162,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
           this.tablehead = this.objcolors.azul.tablehead;
           this.bgmodal = this.objcolors.azul.bgmodal;
           this.modalbutton = this.objcolors.azul.modalbutton;
+          this.url = this.photo.azul;
         }
         if (color=='verde') {
           this.bodybgcolor = this.objcolors.verde.bodybgcolor;
@@ -163,6 +170,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
           this.tablehead = this.objcolors.verde.tablehead;
           this.bgmodal = this.objcolors.verde.bgmodal;
           this.modalbutton = this.objcolors.verde.modalbutton;
+          this.url = this.photo.verde;
         }
         if (color=='naranjo') {
           this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
@@ -170,6 +178,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
           this.tablehead = this.objcolors.naranjo.tablehead;
           this.bgmodal = this.objcolors.naranjo.bgmodal;
           this.modalbutton = this.objcolors.naranjo.modalbutton;
+          this.url = this.photo.naranjo;
 
         }
       })

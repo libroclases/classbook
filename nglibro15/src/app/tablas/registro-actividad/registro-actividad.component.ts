@@ -25,6 +25,12 @@ export class RegistroActividadComponent implements OnDestroy {
 
   objcolors = environment.colors;
 
+  url!:string;
+  photo = environment.photo;
+  opacity = environment.opacity;
+  position = "center";
+  size = "cover";
+
   bodybgcolor!:string;
   pagination!:string;
   tablehead!:string;
@@ -33,15 +39,16 @@ export class RegistroActividadComponent implements OnDestroy {
 
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
-  margen_superior_tabla = environment.cabecera.margen_superior_tabla;
+  
+  
+  innerHeight=  window.innerHeight
 
-  height = window.innerHeight - (this.banner_height + this.menu_height + this.margen_superior_tabla) + 'px';
+  height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
 
-  url!:string;
 
   @HostListener('window:resize', ['$event'])
   onResize(event:any) {
-    this.height = event.target.innerHeight - (this.banner_height + this.menu_height + this.margen_superior_tabla) + 'px';
+    this.height = event.target.innerHeight - (this.banner_height + this.menu_height) + 'px';
   }
 
   title = 'Registro de Actividades';
@@ -111,16 +118,19 @@ export class RegistroActividadComponent implements OnDestroy {
         this.bodybgcolor = this.objcolors.azul.bodybgcolor;
         this.pagination = this.objcolors.azul.pagination;
         this.tablehead = this.objcolors.azul.tablehead;
+        this.url = this.photo.azul;
       }
       if (color=='verde') {
         this.bodybgcolor = this.objcolors.verde.bodybgcolor;
         this.pagination = this.objcolors.verde.pagination;
         this.tablehead = this.objcolors.verde.tablehead;
+        this.url = this.photo.verde;
       }
       if (color=='naranjo') {
         this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
         this.pagination = this.objcolors.naranjo.pagination;
         this.tablehead = this.objcolors.naranjo.tablehead;
+        this.url = this.photo.naranjo;
       }
     })
 

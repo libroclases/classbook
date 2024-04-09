@@ -1,4 +1,7 @@
 <div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 1%;padding-bottom: 0%"
+[style.background-image]="url"
+[style.background-position]="position"
+[style.background-size]="size"
 [style.background-color]="bodybgcolor"  [style.height] = "height">
 
   <div  style="float: right; padding-bottom: 0%; height:100px; ">
@@ -11,17 +14,16 @@
     </multi-select>
   </div>
 
-   <div  [formGroup]="notasForm"   class="overflow-auto p-3 bg-light"  style="width: 100%; max-height: 700px;">
+   <div  [formGroup]="notasForm"   class="overflow-auto p-3 bg-light"   style="width: 100%; max-height: 700px;">
 
     <!--form  [formGroup]="notasForm"-->
     
     <table *ngIf="showtable" class="table table-bordered table-hover">
-
-      <tbody  *ngIf="evaluation$">
-        <tr><th  [attr.colspan]="numcols" [style.background-color]="tablehead" style="text-align: center;color:white; height:40px" ><em [class]="getBiClass('/nota')">&nbsp;&nbsp;</em>Notas</th></tr>
-        <tr><th style="text-align: center">&nbsp;</th><td *ngFor="let e of (evaluation$ | async)">
+      
+        <tr><th  [attr.colspan]="numcols" [style.background-color]="tablehead" style="text-align: center;color:white; height:40px" >Notas</th></tr>
+        <tr *ngIf="evaluation$"><th style="text-align: center">&nbsp;</th><td *ngFor="let e of (evaluation$ | async)">
           <a mat-button (click)="openDialog(e)" title='{{e.fecha | date}}'>{{e.nombre}}&nbsp;{{e.ponderacion}}%</a></td><td><a mat-button  (click)="openDialog()"><em class="bi bi-plus"></em></a></td></tr>
-        <tr><th style="text-align: center">&nbsp;</th><td *ngFor="let e of (evaluation$ | async)">
+        <tr *ngIf="evaluation$"><th style="text-align: center">&nbsp;</th><td *ngFor="let e of (evaluation$ | async)">
           <a *ngIf="edita==true && evaluationEdit == e.id; else cerrado" class="btn btn-link btn-sm px-3" (click)="editaEvaluacion(e.id,e.Colegio.id , e.fecha)"><em class="bi bi-unlock"></em></a>
           <ng-template #cerrado><a class="btn btn-link btn-sm px-3"  (click)="editaEvaluacion(e.id, e.Colegio.id, e.fecha)"><em class="bi bi-lock"></em></a></ng-template></td><td>{{ponderacion}}%</td>
         </tr>
@@ -55,7 +57,7 @@
            <td *ngIf="ponderacion==100"><b  [style.color]="sumPromedioMatricula()[1]">{{sumPromedioMatricula()[0] |  number:'1.1-1' }}</b></td>
         </tr>
 
-      </tbody>
+
     </table>
 
     <!--/form-->

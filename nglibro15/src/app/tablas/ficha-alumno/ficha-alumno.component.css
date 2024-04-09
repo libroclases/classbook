@@ -13,10 +13,12 @@ th {
   
 }
 
-
+p {
+  color:rgb(4, 4, 51)
+}
 
 tr , th, td {
   height: 4cap;
   width: 50%;
-  background: rgba(0,0,0,0.01);
+  
 }    

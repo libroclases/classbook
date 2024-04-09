@@ -47,7 +47,7 @@ class ResumenNotas {
             { model:Periodo, attributes:['id','nombre'], where: { }},
             
            ],
-           
+           order: [['id','ASC']]
        })
           .then(promedio => res.status(200).send(promedio))
           .catch(error => res.status(400).send(error));

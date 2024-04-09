@@ -2,11 +2,14 @@
 th {
     align-content: center;
     text-align: center;
+
 }
 
-
+  a {
+    background: rgba(254,254,254,0.001)
+  }
   
   tr , th, td {
-
-    background: rgba(0,0,0,0.01);
+    height: 3.5cap;
+    background: rgba(254,254,254)
   }    

@@ -1,10 +1,14 @@
-<div class="container-fluid" style="padding-left: 5%; padding-right: 5%;text-align:center;  padding-top: 2%;padding-bottom: 0%;"
-[style.background-color]="bodybgcolor"  [style.minHeight] = "height">
+<div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 1%;padding-bottom: 0%;"
+[style.background-image]="url"
+[style.background-position]="position"
+[style.background-size]="size"
+[style.background-color]="bodybgcolor" [style.height] = "height">
 
 
-<div class="top">
+
+
        
-        <div class="center">
+        <div class="center"  [style.opacity]="opacity">
           <h2>Registro Usuario</h2>
           <form  [formGroup]="valuesForm">
 
@@ -54,8 +58,7 @@
           <p>{{mensaje}}</p>
 
       </div>
-   <br>
-</div>
+   
 
 
 

@@ -1,5 +1,9 @@
 <div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 2%;padding-bottom: 0%;"
-[style.background-color]="bodybgcolor" [style.height] = "height"
+[style.background-color]="bodybgcolor" 
+[style.background-image]="url"
+[style.background-position]="position"
+[style.background-size]="size"
+[style.height] = "height"
 role="main">
 
 
@@ -29,7 +33,7 @@ role="main">
     </multi-select>
 </div>
 
-<div class="overflow-auto p-3 bg-light"  [style.max-height]="height" style="width: 100%; ">
+<div class="overflow-auto p-3 bg-light"  [style.max-height]="height" [style.opacity]="opacity" style="width: 100%;">
 
   <!-- Tabla Principal -->
 

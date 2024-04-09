@@ -1,10 +1,13 @@
-<div class="container-fluid" style="padding-left: 5%; padding-right: 5%;text-align:center;  padding-top: 2%;padding-bottom: 0%;"
-[style.background-color]="bodybgcolor"  [style.minHeight] = "height">
+<div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 1%;padding-bottom: 0%;"
+[style.background-image]="url"
+[style.background-position]="position"
+[style.background-size]="size"
+[style.background-color]="bodybgcolor" [style.height] = "height">
 
 
 
  
-        <div class="center">
+        <div class="center" [style.opacity]="opacity">
           <h2>Matricula Alumno</h2>
           <form  [formGroup]="formConsulta">
 
@@ -21,15 +24,15 @@
                 </td>
               </tr>
 
-                <tr><td>Nombre:</td><td>{{alumno?.nombre}}</td></tr>
-                <tr><td>Apellido Paterno:</td><td>{{alumno?.apellido1}}</td></tr>
-                <tr><td>Apellido Materno:</td><td>{{alumno?.apellido2}}</td></tr>
+                <tr><td colspan="2">Nombre:</td><td>{{alumno?.nombre}}</td></tr>
+                <tr><td colspan="2">Apellido Paterno:</td><td>{{alumno?.apellido1}}</td></tr>
+                <tr><td colspan="2">Apellido Materno:</td><td>{{alumno?.apellido2}}</td></tr>
              
             
             </thead>
           </table>
 
-          <table  class="table table-sm table-secundary table-fit">
+          <table  class="table table-sm table-secundary table-fit" >
             <thead class="table-secundary" >
               <tr><td>Rut Apoderado</td><td><input type="text" formControlName="rut_apoderado"  [disabled]="disable"/>
                 <div *ngIf="formConsulta.controls['rut_apoderado']?.invalid && (formConsulta.controls['rut_apoderado']?.dirty || formConsulta.controls['rut_apoderado']?.touched)"  class="alert alert-danger">
@@ -43,9 +46,9 @@
               </tr>
 
         
-                <tr><td>Nombre:</td><td>{{apoderado?.nombre}}</td></tr>
-                <tr><td>Apellido Paterno:</td><td>{{apoderado?.apellido1}}</td></tr>
-                <tr><td>Apellido Materno:</td><td>{{apoderado?.apellido2}}</td></tr>
+                <tr><td colspan="2">Nombre:</td><td>{{apoderado?.nombre}}</td></tr>
+                <tr><td colspan="2">Apellido Paterno:</td><td>{{apoderado?.apellido1}}</td></tr>
+                <tr><td colspan="2">Apellido Materno:</td><td>{{apoderado?.apellido2}}</td></tr>
             
             </thead>
           </table>

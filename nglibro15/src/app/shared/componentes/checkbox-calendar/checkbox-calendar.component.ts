@@ -60,6 +60,8 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
   pagination!:string;
   modalbutton!: string;
 
+  opacity = environment.opacity;
+
   daysOfWeek = ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'];
 
   rowTableUpper: string = '';
@@ -152,13 +154,13 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
         this.pagination = this.objcolors.azul.pagination;
         this.tablehead = this.objcolors.azul.tablehead;
         this.modalbutton = this.objcolors.azul.modalbutton;
+ 
       }
       if (color=='verde') {
         this.bodybgcolor = this.objcolors.verde.bodybgcolor;
         this.pagination = this.objcolors.verde.pagination;
         this.tablehead = this.objcolors.verde.tablehead;
         this.modalbutton = this.objcolors.verde.modalbutton;
-        
       }
       if (color=='naranjo') {
         this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;

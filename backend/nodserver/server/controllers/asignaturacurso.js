@@ -17,7 +17,8 @@ class AsignaturaCursos {
             { model:Colegio, attributes:['id','nombre'], where: { } },
             { model:Curso, attributes:['id','nombre'], where: { } },
  
-          ]})  
+          ],
+          order: [['id','ASC']]})  
           .then(AsignaturaCursos => res.status(200).send(AsignaturaCursos))
           .catch(error => res.status(400).send(error));
       }
@@ -47,7 +48,8 @@ class AsignaturaCursos {
             { model:Colegio, attributes:['id','nombre'], where: { } },
             { model:Curso, attributes:['id','nombre'], where: { } },          
 
-        ] })
+        ],
+        order: [['id','ASC']] })
       .then(AsignaturaCurso => res.status(200).send(AsignaturaCurso))
       .catch(error => res.status(400).send(error));
   }

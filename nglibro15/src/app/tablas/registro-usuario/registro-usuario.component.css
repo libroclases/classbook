@@ -11,34 +11,22 @@ th {
 td {
 
   text-align:justify;
-  background: rgba(0,0,0,0.01);
+  background: rgba(254,254,254,0.01);
 }
 
-.top {
-text-align: center;
-border: 1px;
-border-color:lightgrey;
-padding-top: 1cap;
-border-radius: 2%;
-border-style: solid;
-align-items: center;
-width: 60%;
-margin: 1cap auto;
-margin-top: 2cap;
-
-}
 
 .center {
   text-align: center;
   border: 1px;
+  background: lightgray;
   border-color:lightgrey;
-  padding-top: 0cap;
+  padding-top: 2cap;
   border-radius: 2%;
   border-style: solid;
   align-items: center;
-  width: 60%;
+  width: 40%;
   margin: 1cap auto;
-  margin-top: 2cap;
+  margin-top: 10cap;
 
 }
 
