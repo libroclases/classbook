@@ -20,7 +20,7 @@ export class MenuComponent implements OnInit{
     menu!:string;
     email = 'contacto@libroclases.cl';
     color!:string;
-
+    production = env.production;
     userinfo = env.userinfo;
 
     docElement!: HTMLElement;

@@ -69,6 +69,8 @@ export class ResumenNotaComponent implements OnInit{
   fatherId=0;
   father='';
 
+  resumennotaFk:any=[]
+
   asignatura$!: Observable<any>;
   matricula$!: Observable<any>;
   resumennota$!: Observable<any>;
@@ -194,18 +196,21 @@ export class ResumenNotaComponent implements OnInit{
 
 
   getMatriculaData():  void {
- 
+    let anno = this.selIdsService.getId('anno');
+    let curso = this.selIdsService.getId('curso');
+    let colegio = this.selIdsService.getId('colegio'); 
+    let periodo = this.selIdsService.getId('periodo'); 
     let ides = [
-      this.selIdsService.getId('colegio'),
-      this.selIdsService.getId('curso'),
-      this.selIdsService.getId('anno')
+      colegio,
+      curso,
+      anno
     ]
       this.matricula$ = this.crud.getDataCustom('matricula', 'lista_curso_nombres',ides )?.pipe(
 
         tap(mat => {
           mat.forEach((m:any) => {
       
-            this.matriculaPromedioMap.set(m.id, this.crud.getData('resumennota',[4,1,1,19,0,m.id]));
+            this.matriculaPromedioMap.set(m.id, this.crud.getData('resumennota',[anno,periodo,colegio,curso,0,m.id]));
         }
        )
       }
@@ -230,13 +235,13 @@ export class ResumenNotaComponent implements OnInit{
 
      updateTable(notification: (Notification | null) = null) {
 
-      
+      this.resumennotaFk = this.getForeignKeys('resumennota')
 
       if ( !notification || notification.message == "updated" ) {
-        console.log(this.selIdsService.getId('anno'),
+        /*console.log(this.selIdsService.getId('anno'),
         this.selIdsService.getId('periodo'),
         this.selIdsService.getId('colegio'),
-        this.selIdsService.getId('curso'));
+        this.selIdsService.getId('curso'));*/
 
         if (this.selIdsService.getId('anno') *
             this.selIdsService.getId('periodo') *

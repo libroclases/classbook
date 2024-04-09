@@ -20,22 +20,11 @@
         <tr><th [attr.colspan]="numColumns" [style.background-color]="tablehead" 
           style="text-align: center;color:white; height:40px; width: 100%"><em [class]="getBiClass('/'+ mainTable)">&nbsp;&nbsp;</em><b>Resumen Notas</b></th></tr>
         <tr>
-          <!--td>
-            <table class="table table-bordered">
-              <tbody>
-                <tr><td>aaa</td></tr>
-                <tr *ngFor="let m of (matricula$ | async)"> 
-                 <td>{{m.nombre}}</td>
-                </tr>
-              </tbody>
-            </table>      
-           
-          </td-->
           <td><table class="table table-bordered"><tbody>
             <tr > 
-              <td *ngIf="asignatura$">bbb</td><td *ngFor="let a of (asignatura$ | async)" >{{a.nombre}}</td>
+              <td *ngIf="asignatura$">&nbsp;</td><td *ngFor="let a of (asignatura$ | async)" >{{a.nombre}}</td>
             </tr>
-            <tr  *ngFor="let m of (matricula$ | async)"><td>poronga</td><td   *ngFor="let p of (matriculaPromedioMap.get(m.id) | async)">{{p.promedio}}</td></tr>
+            <tr  *ngFor="let m of (matricula$ | async)"><td>{{m.nombre}}</td><td   *ngFor="let p of (matriculaPromedioMap.get(m.id) | async)">{{p.promedio}}</td></tr>
           </tbody>
           </table></td>
         </tr>
