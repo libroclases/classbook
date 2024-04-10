@@ -107,9 +107,6 @@ var Usuarios = /*#__PURE__*/function () {
         } else if (tipousuarioId == 5) {
           Tipo = Utp;
         }
-        // else if ( tipousuarioId == 6 ) { Tipo = Sostenedor } 
-        // else if ( tipousuarioId == 7 ) { Tipo = Admin } 
-
         Tipo.findOne({
           where: {
             usuarioId: usuario.dataValues.id
@@ -235,12 +232,14 @@ var Usuarios = /*#__PURE__*/function () {
       var _req$body2 = req.body,
         username = _req$body2.username,
         email = _req$body2.email,
+        operativo = _req$body2.operativo,
         TipoUsuario = _req$body2.TipoUsuario,
         Tema = _req$body2.Tema;
       return Usuario.findByPk(req.params.usuarioId).then(function (usuario) {
         usuario.update({
           email: email || usuario.email,
           username: username || usuario.username,
+          operativo: operativo || usuario.operativo,
           tipousuarioId: TipoUsuario || usuario.tipousuarioId,
           temaId: Tema || usuario.temaId
         }).then(function (updateUsuario) {
@@ -249,8 +248,9 @@ var Usuarios = /*#__PURE__*/function () {
             data: {
               email: email || updateUsuario.email,
               username: username || updateUsuario.username,
+              operativo: operativo || updateUsuario.operativo,
               tipousuarioId: TipoUsuario || updateUsuario.tipousuarioId,
-              temaId: Tema || updateTema.temaId
+              temaId: Tema || updateUsuario.temaId
             }
           });
         })["catch"](function (error) {

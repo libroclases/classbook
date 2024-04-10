@@ -8,7 +8,7 @@ module.exports = function (sequelize, DataTypes) {
         args: false,
         msg: "Please enter your name"
       },
-      unique: true
+      unique: false
     },
     email: {
       type: DataTypes.STRING,
@@ -17,6 +17,14 @@ module.exports = function (sequelize, DataTypes) {
         msg: "Please enter your name"
       },
       unique: true
+    },
+    operativo: {
+      type: DataTypes.BOOLEAN,
+      allowNull: {
+        args: true,
+        msg: "Please enter your name"
+      },
+      unique: false
     }
   }, {
     sequelize: sequelize,
@@ -43,9 +51,6 @@ module.exports = function (sequelize, DataTypes) {
       foreignKey: "usuarioId"
     });
     Usuario.hasMany(models.AsistenteColegio, {
-      foreignKey: "usuarioId"
-    });
-    Usuario.hasMany(models.Acceso, {
       foreignKey: "usuarioId"
     });
   };

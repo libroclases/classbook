@@ -34,7 +34,8 @@ var AsignaturaProfesores = /*#__PURE__*/function () {
           model: Profesor,
           attributes: ['id', 'nombre', 'apellido1', 'apellido2'],
           where: {}
-        }]
+        }],
+        order: [['id', 'ASC']]
       }).then(function (_AsignaturaProfesores) {
         return res.status(200).send(_AsignaturaProfesores);
       })["catch"](function (error) {
@@ -74,7 +75,8 @@ var AsignaturaProfesores = /*#__PURE__*/function () {
           model: Profesor,
           attributes: ['id', 'nombre', 'apellido1', 'apellido2'],
           where: {}
-        }]
+        }],
+        order: [['id', 'ASC']]
       }).then(function (asignaturaprofesor) {
         return res.status(200).send(asignaturaprofesor);
       })["catch"](function (error) {

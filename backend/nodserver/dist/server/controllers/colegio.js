@@ -5,7 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 var _models = _interopRequireDefault(require("../models"));
-var _acceso = require("./acceso");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17,8 +16,7 @@ var Colegio = _models["default"].Colegio,
   Region = _models["default"].Region,
   Provincix = _models["default"].Provincix,
   Comuna = _models["default"].Comuna,
-  TipoColegio = _models["default"].TipoColegio,
-  Acceso = _models["default"].Acceso;
+  TipoColegio = _models["default"].TipoColegio;
 var Colegios = /*#__PURE__*/function () {
   function Colegios() {
     _classCallCheck(this, Colegios);

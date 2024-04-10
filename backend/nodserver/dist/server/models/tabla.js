@@ -18,9 +18,6 @@ module.exports = function (sequelize, DataTypes) {
   Tabla.associate = function (models) {
     // associations can be defined here
 
-    Tabla.hasMany(models.Acceso, {
-      foreignKey: "tablaId"
-    });
     Tabla.hasMany(models.Ventana, {
       foreignKey: "tablaId"
     });

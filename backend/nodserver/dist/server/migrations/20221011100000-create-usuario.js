@@ -21,11 +21,17 @@ module.exports = {
               },
               username: {
                 type: Sequelize.STRING,
-                unique: true
+                unique: false
               },
               email: {
                 type: Sequelize.STRING,
                 unique: true
+              },
+              operativo: {
+                allowNull: true,
+                type: Sequelize.BOOLEAN,
+                unique: false,
+                defaultValue: false
               },
               tipousuarioId: {
                 allowNull: true,

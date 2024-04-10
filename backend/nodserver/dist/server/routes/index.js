@@ -22,6 +22,7 @@ var _utp = _interopRequireDefault(require("../controllers/utp"));
 var _horaasignada = _interopRequireDefault(require("../controllers/horaasignada"));
 var _usuario = _interopRequireDefault(require("../controllers/usuario"));
 var _tema = _interopRequireDefault(require("../controllers/tema"));
+var _resumennota = _interopRequireDefault(require("../controllers/resumennota"));
 var _tabla = _interopRequireDefault(require("../controllers/tabla"));
 var _inscripcionColegio = _interopRequireDefault(require("../controllers/inscripcion-colegio"));
 var _anno = _interopRequireDefault(require("../controllers/anno"));
@@ -44,6 +45,8 @@ var _tipousuario = _interopRequireDefault(require("../controllers/tipousuario"))
 var _matricula = _interopRequireDefault(require("../controllers/matricula"));
 var _feriado = _interopRequireDefault(require("../controllers/feriado"));
 var _ventana = _interopRequireDefault(require("../controllers/ventana"));
+var _asignaturacurso = _interopRequireDefault(require("../controllers/asignaturacurso"));
+var _cursoprofesor = _interopRequireDefault(require("../controllers/cursoprofesor"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 var _require = require('express-oauth2-jwt-bearer'),
   auth = _require.auth,
@@ -196,7 +199,7 @@ appMapping = function appMapping(app) {
   app.get('/api/apoderado/:expr/rut', checkjwd, requiredScopes('read:apoderado'), _apoderado["default"].byRutSearch);
   app.get('/api/apoderado/:usuarioId/:niveleducacionalId/:sexoId/:regionId/:provincixId/:comunaId/fk', checkjwd, requiredScopes('read:apoderado'), _apoderado["default"].getByFk);
   app.get('/api/apoderado/:apoderadoId/pk', checkjwd, requiredScopes('read:apoderado'), _apoderado["default"].getByPk);
-  app.post('/api/apoderado/:usuario/:niveleducacionalId/:sexoId/:regionId/:provincixId/:comunaId', checkjwd, requiredScopes('create:apoderado'), _apoderado["default"].create);
+  app.post('/api/apoderado/:usuarioId/:niveleducacionalId/:sexoId/:regionId/:provincixId/:comunaId', checkjwd, requiredScopes('create:apoderado'), _apoderado["default"].create);
   app.put('/api/apoderado/:apoderadoId', checkjwd, requiredScopes('update:apoderado'), _apoderado["default"].modify);
   app.get('/api/asistencia', checkjwd, requiredScopes('read:asistencia'), _asistencia["default"].list);
   app.get('/api/asistencia/:matriculaId/:colegioId/:cursoId/:alumnoId/:annoId/:mesId/fk', checkjwd, requiredScopes('read:asistencia'), _asistencia["default"].getByFk);
@@ -259,5 +262,41 @@ appMapping = function appMapping(app) {
   app.post('/api/feriado', checkjwd, requiredScopes('create:feriado'), _feriado["default"].create);
   app.put('/api/feriado/:feriadoId', checkjwd, requiredScopes('update:feriado'), _feriado["default"].modify);
   app["delete"]('/api/feriado/:feriadoId', checkjwd, requiredScopes('delete:feriado'), _feriado["default"]["delete"]);
+  app.get('/api/resumennota',
+  // checkjwd, requiredScopes('read:nota'),
+  _resumennota["default"].list);
+  app.get('/api/resumennota/:annoId/:periodoId/:colegioId/:cursoId/:asignaturacursoId/:matriculaId/fk',
+  // checkjwd, requiredScopes('read:nota'),
+  _resumennota["default"].getByFk);
+  app.post('/api/resumennota/:annoId/:periodoId/:colegioId/:cursoId/:asignaturacursoId/:matriculaId',
+  // checkjwd, requiredScopes('create:nota'),
+  _resumennota["default"].create);
+  app.put('/api/resumennota/:resumennotaId',
+  // checkjwd, requiredScopes('update:nota'),
+  _resumennota["default"].modify);
+  app.get('/api/asignaturacurso',
+  // checkjwd, requiredScopes('read:asignaturaprofesor'),
+  _asignaturacurso["default"].list);
+  app.get('/api/asignaturacurso/:annoId/:colegioId/:cursoId/:asignaturaId/fk',
+  // checkjwd, requiredScopes('read:asignaturaprofesor'),
+  _asignaturacurso["default"].getByFk);
+  app.post('/api/asignaturacurso/:annoId/:colegioId/:cursoId/:asignaturaId',
+  // checkjwd, requiredScopes('create:asignaturaprofesor'),
+  _asignaturacurso["default"].create);
+  app.put('/api/asignaturacurso/:asignaturacursoId',
+  // checkjwd, requiredScopes('update:asignaturaprofesor'),
+  _asignaturacurso["default"].modify);
+  app.get('/api/cursoprofesor',
+  // checkjwd, requiredScopes('read:asignaturaprofesor'),
+  _cursoprofesor["default"].list);
+  app.get('/api/cursoprofesor/:annoId/:colegioId/:cursoId/:profesorId/fk',
+  // checkjwd, requiredScopes('read:asignaturaprofesor'),
+  _cursoprofesor["default"].getByFk);
+  app.post('/api/cursoprofesor/:annoId/:colegioId/:cursoId/:profesorId',
+  // checkjwd, requiredScopes('create:asignaturaprofesor'),
+  _cursoprofesor["default"].create);
+  app.put('/api/cursoprofesor/:cursoprofesorId',
+  // checkjwd, requiredScopes('update:asignaturaprofesor'),
+  _cursoprofesor["default"].modify);
 };
 var _default = exports["default"] = appMapping;
