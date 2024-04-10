@@ -27,6 +27,7 @@
             <tr  *ngFor="let m of (matricula$ | async)"><td>{{m.nombre}}</td>
               <td   *ngFor="let p of (matriculaPromedioMap.get(m.id) | async)"><p  [style.color]="getcolor(p.promedio)">{{p.promedio}}</p>
               </td><td><p [style.color]="getcolor(matricula[m.id] / numcols)">{{matricula[m.id] / numcols  | number:'1.1-1'}}</p></td></tr>
+              <tr><td>&nbsp;</td><td *ngFor="let a of asignatura | keyvalue"><p  [style.color]="getcolor(getnumber(a.value,numrows))">{{ getnumber(a.value,numrows)   | number:'1.1-1'}}</p></td></tr>
           </tbody>
           </table></td>
         </tr>

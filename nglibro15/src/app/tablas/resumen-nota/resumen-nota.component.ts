@@ -161,8 +161,11 @@ export class ResumenNotaComponent implements OnInit{
      }
 
   numcols = 0;
+  numrows = 0;
 
  getcolor(promedio: number):string { return (promedio>=4) ? 'black' : 'red' }
+
+ getnumber(num1:any, num2:number ) : number { return num1/num2 }
 
   getAsignaturaData() {
        const fks = [
@@ -200,7 +203,8 @@ export class ResumenNotaComponent implements OnInit{
         )
   }
 
-  matricula:any={}
+  matricula:any={};
+  asignatura:any={};
 
   getMatriculaData():  void {
     let anno = this.selIdsService.getId('anno');
@@ -213,11 +217,14 @@ export class ResumenNotaComponent implements OnInit{
       anno
     ]
       const mostranotas = (res:any) : void => {
-        let tmp:any={}
+        let tmp_mat:any={};
+        let tmp_asig:any={};
         res.forEach((r:any) => {
-          tmp[r.Matricula.id] = (this.matricula[r.Matricula.id]) ? this.matricula[r.Matricula.id] : 0;
-          // console.log(r.Matricula.id, r.AsignaturaCurso.id, r.promedio);
-          this.matricula[r.Matricula.id] = tmp[r.Matricula.id] + r.promedio 
+          tmp_mat[r.Matricula.id] = (this.matricula[r.Matricula.id]) ? this.matricula[r.Matricula.id] : 0;
+          tmp_asig[r.AsignaturaCurso.id] = (this.asignatura[r.AsignaturaCurso.id]) ? this.asignatura[r.AsignaturaCurso.id] : 0;
+
+          this.matricula[r.Matricula.id] = tmp_mat[r.Matricula.id] + r.promedio
+          this.asignatura[r.AsignaturaCurso.id] = tmp_asig[r.AsignaturaCurso.id] + r.promedio
         })
         // console.log(Object.keys(this.matricula).length)
       }
@@ -236,7 +243,8 @@ export class ResumenNotaComponent implements OnInit{
             }
           )  
        }
-      )        
+      ),
+      tap(mat => this.numrows = Object.keys(mat).length)        
     )
   }
 
