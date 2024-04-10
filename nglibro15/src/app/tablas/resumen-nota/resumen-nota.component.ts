@@ -160,9 +160,9 @@ export class ResumenNotaComponent implements OnInit{
 
      }
 
-  numcols = 2;
+  numcols = 0;
 
- 
+ getcolor(promedio: number):string { return (promedio>=4) ? 'black' : 'red' }
 
   getAsignaturaData() {
        const fks = [
@@ -176,6 +176,8 @@ export class ResumenNotaComponent implements OnInit{
       
       this.asignatura$.pipe(
           tap(asignatura => {
+            this.numcols = Object.keys(asignatura).length
+            /*
               this.ponderacion=0;
               asignatura.forEach((e:any) => {
                 this.numcols++;
@@ -185,8 +187,12 @@ export class ResumenNotaComponent implements OnInit{
 
                 this.countNotas[e.id]=0;
                 this.ponderacion+=e.ponderacion
-              });
-           }),
+                  
+              }
+            );
+            */
+           }
+          ),
        )
        .subscribe(() => {
         this.getMatriculaData(); 
@@ -194,6 +200,7 @@ export class ResumenNotaComponent implements OnInit{
         )
   }
 
+  matricula:any={}
 
   getMatriculaData():  void {
     let anno = this.selIdsService.getId('anno');
@@ -205,21 +212,33 @@ export class ResumenNotaComponent implements OnInit{
       curso,
       anno
     ]
+      const mostranotas = (res:any) : void => {
+        let tmp:any={}
+        res.forEach((r:any) => {
+          tmp[r.Matricula.id] = (this.matricula[r.Matricula.id]) ? this.matricula[r.Matricula.id] : 0;
+          // console.log(r.Matricula.id, r.AsignaturaCurso.id, r.promedio);
+          this.matricula[r.Matricula.id] = tmp[r.Matricula.id] + r.promedio 
+        })
+        // console.log(Object.keys(this.matricula).length)
+      }
+
       this.matricula$ = this.crud.getDataCustom('matricula', 'lista_curso_nombres',ides )?.pipe(
 
         tap(mat => {
           mat.forEach((m:any) => {
       
-            this.matriculaPromedioMap.set(m.id, this.crud.getData('resumennota',[anno,periodo,colegio,curso,0,m.id]));
-        }
-       )
-      }
-     )
-
+            this.matriculaPromedioMap.set(m.id, 
+              this.crud.getData('resumennota',[anno,periodo,colegio,curso,0,m.id])?.pipe(
+                tap(res => mostranotas(res)
+              )
+             )
+            )
+            }
+          )  
+       }
+      )        
     )
-
   }
-
 
   getBiClass(route: string) {
       return this.iconsService.getBiClass(route);
