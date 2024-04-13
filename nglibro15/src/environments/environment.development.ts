@@ -82,7 +82,7 @@ export const environment = {
   auth0: {
     domain: 'dev-tupdibnrpuxah8p3.us.auth0.com',
     clientId: 'oW9EH9gLFZFovbTIEaafmVNwg55iCGim',
-    callbackUrl: 'http://localhost/home',
+    callbackUrl: 'http://localhost',
     // redirectUri: window.location.origin,
     authorizationParams: {
       redirect_uri: window.location.origin,

@@ -74,7 +74,7 @@ permissions.push('delete:feriado');
 
 export const environment = {
   production: true,
-  apiUrl: 'https://libroclases.cl',
+  apiUrl: 'https:libroclases.cl',
   apiKey: 'devKey',
   userinfo: {},
   opacity: '90%',
@@ -82,7 +82,7 @@ export const environment = {
   auth0: {
     domain: 'dev-tupdibnrpuxah8p3.us.auth0.com',
     clientId: 'oW9EH9gLFZFovbTIEaafmVNwg55iCGim',
-    callbackUrl: 'https://libroclases.cl',
+    callbackUrl: 'https:libroclases.cl',
     // redirectUri: window.location.origin,
     authorizationParams: {
       redirect_uri: window.location.origin,
@@ -93,7 +93,7 @@ export const environment = {
   },
 
   api: {
-    serverUrl: 'https://libroclases.cl:3000',
+    serverUrl: 'https:libroclases.cl:3000',
   },
   cabecera: {
     banner_height: 100, menu_height: 62, margen_superior_tabla: 150
