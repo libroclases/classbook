@@ -11,3 +11,14 @@ scp -r .\dist\nglibro15\* libro@libroclases.cl:/var/www/libroclases.cl/html/
 cp -r dist/nglibro15/* /var/www/libroclases.cl/html/
 
 scp -r .\dist\* libro@libroclases.cl:/home/libro/dist/
+
+************ DEPLOY *************
+
+git status 
+git commit 
+git checkout main
+git merge branch
+
+cd nglibro15
+ng build --configuration production --aot
+
