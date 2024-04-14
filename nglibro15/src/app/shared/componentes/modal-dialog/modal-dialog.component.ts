@@ -395,7 +395,7 @@ import { UserInfoService } from '../../services/user-info/user-info.service';
           ids[0] = this.registro.usuario_id
 
           // If persontable we need update usuario with operativo == true
-          console.log('poronga',{id: ids[0], operativo:true})
+          // console.log('poronga',{id: ids[0], operativo:true})
           this.crud.putData({id: ids[0], operativo:true}, 'usuario').subscribe(res => console.log(res));
         }
 

@@ -1297,7 +1297,7 @@ export const modalDataObject: any = {
   Matricula: {
     mainTable: 'matricula',
     tables: [ 'anno', 'colegio',  'curso',  'vinculo'],
-    textFields: ['nombre', 'procedencia'],
+    textFields: ['procedencia'],
     dateFields: ['incorporacion', 'retiro'],
     ignoreFkRequirements: [],
     hidden: [], // se usan sólo para reemplazar las foreing key

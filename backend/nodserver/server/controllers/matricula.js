@@ -222,10 +222,9 @@ class Matriculas {
 
   static create(req, res) {
     const { colegioId, cursoId, apoderadoId, alumnoId, vinculoId, annoId } = req.params;
-    const { nombre, procedencia, incorporacion, retiro } = req.body;
+    const { procedencia, incorporacion, retiro } = req.body;
     return Matricula
       .create({
-        nombre,
         procedencia,
         incorporacion,
         retiro,
@@ -237,7 +236,16 @@ class Matriculas {
         vinculoId,
    
       })
+      .then(data => res.status(201).send({
+        success: true,
+        message: 'Matricula creado exitosamente',
+        data
+      }))
+      .catch(error => res.status(400).send(error));
+    }  
+      /*
       .then(matricula => {
+
         let m = matricula.dataValues;
         let consulta_evaluacion =  {
           annoId: m.annoId, colegioId: m.colegioId, cursoId: m.cursoId};
@@ -274,7 +282,8 @@ class Matriculas {
         }); 
       })
       .catch(error => res.status(400).send(error));
-  }
+      */
+  
 
   static getByPk(req, res) {
     

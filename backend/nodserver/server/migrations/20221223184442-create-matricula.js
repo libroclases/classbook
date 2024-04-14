@@ -9,7 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       nombre: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        initialAutoIncrement: 10000,
+
       },
       procedencia: {
         type: Sequelize.STRING
@@ -74,6 +77,9 @@ module.exports = {
           key: 'id',
           as: 'Vinculo',
         }
+      },
+      {
+        initialAutoIncrement: 1000,
       },
 
       createdAt: {
