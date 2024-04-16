@@ -38,13 +38,6 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Please enter your name",
         },
       },
-      www: {
-        type: DataTypes.STRING,
-        allowNull: {
-          args: false,
-          msg: "Please enter your name",
-        },
-      },
     },
     {
       sequelize,
@@ -73,11 +66,6 @@ module.exports = (sequelize, DataTypes) => {
     Colegio.hasMany(models.Curso, {
       foreignKey: "colegioId",
     });
-
-    Colegio.hasMany(models.CursoProfesor, {
-      foreignKey: "colegioId",
-    });
-
 
     Colegio.hasMany(models.HoraAsignada, {
       foreignKey: "colegioId",

@@ -44,4 +44,3 @@ COPY "TipoEstado"("nombre","createdAt","updatedAt") FROM '/var/lib/postgresql/cs
 COPY "Nota"("nota","matriculaId","evaluacionId","colegioId","cursoId","annoId","periodoId","profesorId","asignaturaprofesorId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/nota.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "ResumenNota"("promedio","matriculaId","annoId","periodoId", "colegioId","cursoId","asignaturacursoId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/resumennota.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "EstadoAlumno"("fecha","tipoestadoId","matriculaId","alumnoId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/estadoalumno.csv' DELIMITER '|' csv HEADER NULL AS 'null';
-COPY "CursoProfesor"("nombre","annoId","colegioId","cursoId","profesorId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/cursoprofesor.csv' DELIMITER '|' csv HEADER NULL AS 'null';

@@ -236,14 +236,6 @@ class Matriculas {
         vinculoId,
    
       })
-      .then(data => res.status(201).send({
-        success: true,
-        message: 'Matricula creado exitosamente',
-        data
-      }))
-      .catch(error => res.status(400).send(error));
-    }  
-      /*
       .then(matricula => {
 
         let m = matricula.dataValues;
@@ -282,7 +274,7 @@ class Matriculas {
         }); 
       })
       .catch(error => res.status(400).send(error));
-      */
+  }
   
 
   static getByPk(req, res) {

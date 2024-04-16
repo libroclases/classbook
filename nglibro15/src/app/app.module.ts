@@ -64,8 +64,6 @@ import { ProfeValidatorsDirective } from './shared/directives/profe-validator/pr
 import { MessageService } from './shared/services/message/message.service';
 import { ResumenNotaComponent } from './tablas/resumen-nota/resumen-nota.component';
 import { AsignaturaCursoComponent } from './tablas/asignatura-curso/asignatura-curso.component';
-import { CursoProfesorComponent } from './tablas/curso-profesor/curso-profesor.component';
-
 
 // import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
@@ -84,7 +82,6 @@ const allowedTables = [
   'comuna',
   'controlasignatura',
   'curso',
-  'cursoprofesor',
   'dix',
   'estadoalumno',
   'evaluacion',
@@ -175,7 +172,7 @@ allowedTables.forEach((tb) => {
     ProfeValidatorsDirective,
     ResumenNotaComponent,
     AsignaturaCursoComponent,
-    CursoProfesorComponent,
+  
    
   ],
   imports: [
