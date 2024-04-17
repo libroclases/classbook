@@ -64,6 +64,7 @@ import { ProfeValidatorsDirective } from './shared/directives/profe-validator/pr
 import { MessageService } from './shared/services/message/message.service';
 import { ResumenNotaComponent } from './tablas/resumen-nota/resumen-nota.component';
 import { AsignaturaCursoComponent } from './tablas/asignatura-curso/asignatura-curso.component';
+import { NgxsModule } from '@ngxs/store';
 
 // import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
@@ -190,6 +191,11 @@ allowedTables.forEach((tb) => {
     MatDialogModule,
     MatInputModule,
     MatIconModule,
+    
+    // ngxs
+    NgxsModule.forRoot([], {
+      developmentMode: !env.production
+    }),
 
     // Auth0
     AuthModule.forRoot({
