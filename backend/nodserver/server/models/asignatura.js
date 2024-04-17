@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
   Asignatura.associate = function (models) {
     // associations can be defined here
 
+    Asignatura.belongsTo(models.TipoColegio, {
+      foreignKey: "tipocolegioId",
+    });
+ 
     Asignatura.hasMany(models.AsignaturaProfesor, {
       foreignKey: "asignaturaId",
     });
@@ -33,9 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "asignaturaId",
     });
 
-    Asignatura.belongsTo(models.TipoColegio, {
-      foreignKey: "tipocolegioId",
-    });
+ 
  
   };
   return Asignatura;

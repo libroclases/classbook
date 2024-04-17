@@ -59,11 +59,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   Apoderado.associate = function (models) {
     // associations can be defined here
-    /*
-      Apoderado.belongsTo(models.Colegio, {
-        foreignKey: 'colegioId',
-      });
-      */
+ 
     Apoderado.belongsTo(models.NivelEducacional, {
       foreignKey: "niveleducacionalId",
     });

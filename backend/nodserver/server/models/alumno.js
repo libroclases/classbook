@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Alumno.getLabel = function () {
-    return this.apellido + ", " + this.nombre;
+    return this.apellido1 + ", " + this.apellido2 + ", " +  this.nombre;
   };
 
   Alumno.associate = function (models) {
