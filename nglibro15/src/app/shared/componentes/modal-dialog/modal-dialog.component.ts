@@ -422,8 +422,8 @@ import { ToastrService } from 'ngx-toastr';
     }
 
     showdata(msg:any) {
-      if (msg?.message) {this.toastr.success(msg?.message, this.modalData.mainTable)}
-      else {this.toastr.error(msg?.message, this.modalData.mainTable)}
+      if (msg?.message) {this.toastr.success(msg?.message, this.modalData.mainTable, {positionClass:'toast-top-right'})}
+      else {this.toastr.error(msg?.error, this.modalData.mainTable)}
     }
 
   }
