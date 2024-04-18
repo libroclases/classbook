@@ -66,6 +66,8 @@ import { ResumenNotaComponent } from './tablas/resumen-nota/resumen-nota.compone
 import { AsignaturaCursoComponent } from './tablas/asignatura-curso/asignatura-curso.component';
 import { NgxsModule } from '@ngxs/store';
 
+import { ToastrModule } from 'ngx-toastr';
+
 // import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
 const allowedTables = [
@@ -179,7 +181,6 @@ allowedTables.forEach((tb) => {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     NgbModule,
 
     ReactiveFormsModule,
@@ -192,6 +193,9 @@ allowedTables.forEach((tb) => {
     MatInputModule,
     MatIconModule,
     
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
+
     // ngxs
     NgxsModule.forRoot([], {
       developmentMode: !env.production

@@ -13,12 +13,13 @@ import { modalDataObject, lowerUpperTables, validator, environment, personTables
 import { IconsService } from '../../services/icons/icons.service';
 import { LabelsService } from '../../services/labels/labels.service';
 import { SelectionIdsService } from '../../services/selection-ids/selection-ids.service';
-import { CommonModule, DOCUMENT, NgFor, formatDate } from '@angular/common';
+import { formatDate } from '@angular/common';
 import { selectValidator } from '../../directives/select-validator/select-validator.directive';
 import { horaValidator} from '../../directives/hora-validator/hora-validator.directive';
 import { MessageService } from '../../services/message/message.service';
 import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe-validator.directive';
 import { UserInfoService } from '../../services/user-info/user-info.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'modal-dialog',
@@ -59,7 +60,7 @@ import { UserInfoService } from '../../services/user-info/user-info.service';
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private pval: ProfeValidatorsDirective,
-    @Inject(DOCUMENT) private document: Document,
+    private toastr: ToastrService,
     private crud: CrudService,
     private fKeysService: ForeignKeysService ,
     private fb: FormBuilder,
@@ -407,7 +408,7 @@ import { UserInfoService } from '../../services/user-info/user-info.service';
         this.crud.postData(obj, this.modalData.mainTable, ids).pipe(
           tap(() => this.selIdsService.notifyUpdated()),
         )
-        .subscribe(msg => this.document.defaultView?.alert(msg?.message));
+        .subscribe(msg => this.showdata(msg))
 
       }
       else {   // If PUT
@@ -415,9 +416,15 @@ import { UserInfoService } from '../../services/user-info/user-info.service';
 
         this.crud.putData(obj, this.modalData.mainTable).pipe(
           tap(() => this.selIdsService.notifyUpdated())
-          ).subscribe(msg =>  this.document.defaultView?.alert(msg?.message));
+          ).subscribe(msg =>  this.showdata(msg));
 
       }
     }
+
+    showdata(msg:any) {
+      if (msg?.message) {this.toastr.success(msg?.message, this.modalData.mainTable)}
+      else {this.toastr.error(msg?.message, this.modalData.mainTable)}
+    }
+
   }
 
