@@ -64,11 +64,14 @@ import { ProfeValidatorsDirective } from './shared/directives/profe-validator/pr
 import { MessageService } from './shared/services/message/message.service';
 import { ResumenNotaComponent } from './tablas/resumen-nota/resumen-nota.component';
 import { AsignaturaCursoComponent } from './tablas/asignatura-curso/asignatura-curso.component';
+
+// NGXS
+
 import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 import { ToastrModule } from 'ngx-toastr';
-
-// import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
 const allowedTables = [
   'access',
@@ -195,11 +198,11 @@ allowedTables.forEach((tb) => {
     
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-
+  
     // ngxs
-    NgxsModule.forRoot([], {
-      developmentMode: !env.production
-    }),
+    NgxsModule.forRoot([], { developmentMode: !env.production }),
+    NgxsReduxDevtoolsPluginModule.forRoot({disabled: env.production}),
+    NgxsLoggerPluginModule.forRoot({disabled: env.production}),
 
     // Auth0
     AuthModule.forRoot({
