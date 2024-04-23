@@ -326,7 +326,7 @@ import AsignaturaCursos from '../controllers/asignaturacurso';
       checkjwd, requiredScopes('read:usuario'),
       Usuarios.getByFk);  
     app.get('/api/usuario/:usuarioId/pk',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.getByPk);
     app.post('/api/usuario/:tipousuarioId/:temaId',
       checkjwd, requiredScopes('create:usuario'),
