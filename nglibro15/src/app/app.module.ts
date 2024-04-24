@@ -73,6 +73,7 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 
 import { ToastrModule } from 'ngx-toastr';
+import { UsuarioState } from './ngxs/usuario.state';
 
 const allowedTables = [
   'access',
@@ -165,7 +166,7 @@ allowedTables.forEach((tb) => {
     RutValidatorDirective,
     SelectValidatorDirective,
     HoraValidatorDirective,
-   
+
     MultiSelectComponent,
     ModalDialogComponent,
     AuthButtonComponent,
@@ -179,8 +180,8 @@ allowedTables.forEach((tb) => {
     ProfeValidatorsDirective,
     ResumenNotaComponent,
     AsignaturaCursoComponent,
-  
-   
+
+
   ],
   imports: [
     BrowserModule,
@@ -196,12 +197,12 @@ allowedTables.forEach((tb) => {
     MatDialogModule,
     MatInputModule,
     MatIconModule,
-    
+
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-  
+
     // ngxs
-    NgxsModule.forRoot([], { developmentMode: !env.production }),
+    NgxsModule.forRoot([UsuarioState], { developmentMode: !env.production }),
     NgxsReduxDevtoolsPluginModule.forRoot({disabled: env.production}),
     NgxsLoggerPluginModule.forRoot({disabled: env.production}),
     NgxsStoragePluginModule.forRoot(),

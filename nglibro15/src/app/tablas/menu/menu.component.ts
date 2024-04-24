@@ -8,6 +8,11 @@ import { CrudService } from '../../shared/services/crud/crud.service';
 import { UserInfoService } from '../../shared/services/user-info/user-info.service';
 import { Router } from '@angular/router';
 
+import {Select, Store} from '@ngxs/store';
+import {  Person, UsersStateModel } from '../../ngxs/usuario.model';
+import { GetUsuario } from '../../ngxs/usuario.actions'
+import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -15,6 +20,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent implements OnInit{
+
+    @Select(UsuarioState.usuario) usuario$!: Observable<Person[]>;
 
     objcolors = env.colors;
     menu!:string;
@@ -28,7 +35,8 @@ export class MenuComponent implements OnInit{
 
     ngOnInit(): void {
     this.docElement = document.documentElement;
-    
+    this.store.dispatch(new GetUsuario(1));
+
     }
 
     toggleFullScreen() {
@@ -53,6 +61,7 @@ export class MenuComponent implements OnInit{
     public userInfo: UserInfoService,
     private router: Router,
     public ms: MessageService,
+    private store: Store,
     private crud: CrudService,
     public auth: AuthService) {
 
@@ -98,7 +107,7 @@ export class MenuComponent implements OnInit{
             this.ms.nextColor(color[1]);
             sessionStorage.setItem('Color',color[1]);
           })
-   
+
         }
 
        })
