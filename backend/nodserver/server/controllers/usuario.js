@@ -3,6 +3,8 @@ import model from '../models';
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
+const anno = new Date().getFullYear();
+
 const { Usuario, TipoUsuario, Alumno, Apoderado, AsistenteColegio ,Profesor, Utp , Tema} = model;
 
 class Usuarios {
@@ -62,9 +64,10 @@ class Usuarios {
         else if ( tipousuarioId == 2 ) { Tipo = Alumno } 
         else if ( tipousuarioId == 3 ) { Tipo = Apoderado } 
         else if ( tipousuarioId == 4 ) { Tipo = AsistenteColegio } 
-        else if ( tipousuarioId == 5 ) { Tipo = Utp } 
-        else if ( tipousuarioId == 6 ) { Tipo = Administrador }
-                        
+        else if ( tipousuarioId == 5 ) { Tipo = Administrador } 
+             
+           
+
             Tipo.findOne({
                 where: { usuarioId: usuario.dataValues.id },
                 attributes: ['id','nombre','apellido1','apellido2'],
@@ -72,7 +75,11 @@ class Usuarios {
                 .then(datos_usuario => {
                 out = {'usuario':usuario, 'datos_usuario': datos_usuario};
                 })
-                .then( () => res.status(200).send(out))
+                .then( () => {
+                    if (tipousuarioId == 1) { console.log('poronga->', anno, usuario.dataValues.id, tipousuarioId);  }
+                                    
+                    res.status(200).send(out); 
+                });
         
     })
     .catch(error => res.status(400).send(error));
