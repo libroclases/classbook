@@ -1,26 +1,26 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UtpComponent } from './utp.component';
+import { AdministradorComponent } from './administrador.component';
 import { MaintainerComponent } from 'src/app/shared/componentes/maintainer/maintainer.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { MockComponent, MockedComponentFixture, MockRender } from 'ng-mocks';
 
 describe('UtpComponent', () => {
-  let component: UtpComponent;
-  let fixture: MockedComponentFixture<UtpComponent>;
+  let component: AdministradorComponent;
+  let fixture: MockedComponentFixture<AdministradorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ 
-        UtpComponent,
-        MockComponent(MaintainerComponent),       
+      declarations: [
+        AdministradorComponent,
+        MockComponent(MaintainerComponent),
       ],
       providers:[ ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     })
     .compileComponents();
 
-    fixture = MockRender(UtpComponent);
+    fixture = MockRender(AdministradorComponent);
     component = fixture.point.componentInstance;
     fixture.detectChanges();
   });

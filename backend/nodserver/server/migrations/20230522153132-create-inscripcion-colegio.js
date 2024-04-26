@@ -9,6 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      /*
       fechaInicio: {
         type: Sequelize.DATEONLY,
         allowNull: false,
@@ -17,7 +18,12 @@ module.exports = {
         type: Sequelize.DATEONLY,
         allowNull: true,
       },
+      */
       esPie: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      esUtp: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },

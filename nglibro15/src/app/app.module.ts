@@ -59,7 +59,7 @@ import { FichaAlumnoComponent } from './tablas/ficha-alumno/ficha-alumno.compone
 import { TablaComponent } from './tablas/tabla/tabla.component';
 import { VentanaComponent } from './tablas/ventana/ventana.component';
 import { RegistroUsuarioComponent } from './tablas/registro-usuario/registro-usuario.component';
-import { UtpComponent } from './tablas/utp/utp.component';
+import { AdministradorComponent } from './tablas/administrador/administrador.component';
 import { ProfeValidatorsDirective } from './shared/directives/profe-validator/profe-validator.directive';
 import { MessageService } from './shared/services/message/message.service';
 import { ResumenNotaComponent } from './tablas/resumen-nota/resumen-nota.component';
@@ -105,7 +105,7 @@ const allowedTables = [
   'perfiltabla',
   'periodo',
   'profesor',
-  'utp',
+  'administrador',
   'provincix',
   'region',
   'registroactividad',
@@ -176,7 +176,7 @@ allowedTables.forEach((tb) => {
     TablaComponent,
     VentanaComponent,
     RegistroUsuarioComponent,
-    UtpComponent,
+    AdministradorComponent,
     ProfeValidatorsDirective,
     ResumenNotaComponent,
     AsignaturaCursoComponent,

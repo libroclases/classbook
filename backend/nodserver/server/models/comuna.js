@@ -47,9 +47,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "comunaId",
     });
 
-    Comuna.hasMany(models.Utp, {
-      foreignKey: "comunaId",
-    });
 
     Comuna.hasMany(models.Administrador, {
       foreignKey: "comunaId",

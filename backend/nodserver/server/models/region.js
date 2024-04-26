@@ -52,10 +52,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "regionId",
     });
 
-    Region.hasMany(models.Utp, {
-      foreignKey: "regionId",
-    });
-
     Region.hasMany(models.Administrador, {
       foreignKey: "regionId",
     });

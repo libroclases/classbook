@@ -3,13 +3,13 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-utp',
   templateUrl: './../../shared/componentes/maintainer-template/maintainer-template.component.html',
-  styleUrls: ['./utp.component.css']
+  styleUrls: ['./administrador.component.css']
 })
-export class UtpComponent {
+export class AdministradorComponent {
   // Tabla Principal
 
-  mainTable: string = 'utp';
-  tableTitle = 'UTP';
+  mainTable: string = 'administrador';
+  tableTitle = 'Administrador';
   textFields = ['apellido1','apellido2','nombre','rut','celular','direccion'];
   dateFields = ['nacimiento'];
   // displayFKFields: CamelCase

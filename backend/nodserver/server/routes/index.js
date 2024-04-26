@@ -14,7 +14,6 @@ import Sexos from '../controllers/sexo';
 import Vinculos from '../controllers/vinculo';
 import Niveles from '../controllers/nivel';
 import Profesores from '../controllers/profesor';
-import Utps from '../controllers/utp';
 import HorasAsignadas from '../controllers/horaasignada';
 import Usuarios from '../controllers/usuario';
 import Temas from '../controllers/tema';
@@ -274,24 +273,6 @@ import AsignaturaCursos from '../controllers/asignaturacurso';
       checkjwd, requiredScopes('update:profesor'),
       Profesores.modify);
 
-    app.get('/api/utp',
-      checkjwd, requiredScopes('read:utp'),
-      Utps.list);
-    app.get('/api/utp/:expr/search',
-      checkjwd, requiredScopes('read:utp'),
-      Utps.bySearch);
-    app.get('/api/utp/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId/fk',
-      checkjwd, requiredScopes('read:utp'),
-      Utps.getByFk);
-    app.get('/api/utp/:utpId/pk',
-      checkjwd, requiredScopes('read:utp'),
-      Utps.getByPk);    
-    app.post('/api/utp/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId',
-      checkjwd, requiredScopes('create:utp'),
-      Utps.create);
-    app.put('/api/utp/:utpId',
-      checkjwd, requiredScopes('update:utp'),
-      Utps.modify);
 
     app.get('/api/administrador',
       checkjwd, requiredScopes('read:administrador'),
@@ -308,7 +289,7 @@ import AsignaturaCursos from '../controllers/asignaturacurso';
     app.post('/api/administrador/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId',
       checkjwd, requiredScopes('create:administrador'),
       Administradores.create);
-    app.put('/api/administrador/:utpId',
+    app.put('/api/administrador/:administradorId',
       checkjwd, requiredScopes('update:administrador'),
       Administradores.modify);
 
@@ -338,7 +319,7 @@ import AsignaturaCursos from '../controllers/asignaturacurso';
       checkjwd, requiredScopes('read:usuario'),
       Usuarios.getLastId); 
     app.get('/api/usuario/where',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.getPersonalInfo);   
     app.get('/api/usuario/:tipousuarioId/fk',
       checkjwd, requiredScopes('read:usuario'),

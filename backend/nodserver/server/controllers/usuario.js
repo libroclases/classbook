@@ -42,10 +42,11 @@ class Usuarios {
     
   static getPersonalInfo(req, res) {
 
-    const { email } = req.query;   
+    const { email } = req.query;
+    console.log(email)   
     Usuario.findOne({
       where: { email: email },
-      attributes: ['id'],
+      attributes: ['id','username','email'],
       include: [ 
         { model:TipoUsuario, attributes:['id','nombre'], where: { } },
         { model:Tema, attributes:['id','nombre'], where: { } },

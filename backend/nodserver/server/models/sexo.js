@@ -38,10 +38,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "sexoId",
     });
 
-    Sexo.hasMany(models.Utp, {
-      foreignKey: "sexoId",
-    });
-
     Sexo.hasMany(models.Administrador, {
       foreignKey: "sexoId",
     });

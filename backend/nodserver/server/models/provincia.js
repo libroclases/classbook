@@ -47,10 +47,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "provincixId",
     });
 
-    Provincix.hasMany(models.Utp, {
-      foreignKey: "provincixId",
-    });
-
     Provincix.hasMany(models.Administrador, {
       foreignKey: "provincixId",
     });

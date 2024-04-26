@@ -6,7 +6,7 @@ class InscripcionesColegio {
   static list(req, res) {
     return InscripcionColegio.findAll({
       // where: getBaseQuery(req),
-      attributes: ["id", "fechaInicio", "fechaTermino", "esPie"],
+      attributes: ["id", "esPie", "esUtp"],
       include: [
         {
           model: Profesor,
@@ -40,7 +40,7 @@ class InscripcionesColegio {
 
     return InscripcionColegio.findAll({
       where: consulta,
-      attributes: ["id", "fechaInicio", "fechaTermino", "EsPie"],
+      attributes: ["id", "EsPie", "EsUtp"],
       include: [
         {
           model: Profesor,
@@ -69,7 +69,7 @@ class InscripcionesColegio {
 
     return InscripcionColegio.findAll({
       where: consulta,
-      attributes: ["esPie"],
+      attributes: ["esPie", "esUtp"],
       include: [
         {
           model: Profesor,
@@ -86,8 +86,10 @@ class InscripcionesColegio {
           profes.push({
             id: inscripcion["Profesor.id"],
             nombre: inscripcion["Profesor.nombre"],
-            apellido: inscripcion["Profesor.apellido1"],
+            apellido1: inscripcion["Profesor.apellido1"],
+            apellido2: inscripcion["Profesor.apellido2"],
             esPie: inscripcion.esPie,
+            esUtp: inscripcion.esUtp,
           });
         });
         res.status(200).send(profes);
@@ -126,7 +128,8 @@ class InscripcionesColegio {
           profes.push({
             id: inscripcion["Profesor.id"],
             nombre: inscripcion["Profesor.nombre"],
-            apellido: inscripcion["Profesor.apellido1"],
+            apellido1: inscripcion["Profesor.apellido1"],
+            apellido2: inscripcion["Profesor.apellido2"]
           });
         });
         res.status(200).send(profes);
@@ -136,11 +139,10 @@ class InscripcionesColegio {
 
   static create(req, res) {
     const { profesorId, colegioId, annoId } = req.params;
-    const { fechaInicio, fechaTermino, esPie } = req.body;
+    const { esPie, esUtp } = req.body;
     return InscripcionColegio.create({
-      fechaInicio,
-      fechaTermino,
       esPie,
+      esUtp,
       profesorId,
       colegioId,
       annoId,
@@ -168,16 +170,15 @@ class InscripcionesColegio {
   static modify(req, res) {
     let consulta = getBaseQuery(req);
     consulta["id"] = req.params.inscripcioncolegioId;
-    const { fechaInicio, fechaTermino, esPie, Profesor, Colegio, Anno } =
+    const { esPie, esUtp, Profesor, Colegio, Anno } =
       req.body;
 
     return InscripcionColegio.findOne({ where: consulta })
       .then((inscripcionColegio) => {
         inscripcionColegio
           .update({
-            fechaInicio: fechaInicio || inscripcionColegio.fechaInicio,
-            fechaTermino: fechaTermino || inscripcionColegio.fechaTermino,
             esPie: esPie || inscripcionColegio.esPie,
+            esUtp: esUtp || inscripcionColegio.esUtp,
             profesorId: Profesor || inscripcionColegio.profesorId,
             colegioId: Colegio || inscripcionColegio.colegioId,
             annoId: Anno || inscripcionColegio.annoId,
@@ -187,11 +188,8 @@ class InscripcionesColegio {
             res.status(200).send({
               message: "InscripcionColegio updated successfully",
               data: {
-                fechaInicio:
-                  fechaInicio || updatedInscripcionColegio.fechaInicio,
-                fechaTermino:
-                  fechaTermino || updatedInscripcionColegio.fechaTermino,
                 esPie: esPie || updatedInscripcionColegio.esPie,
+                esUtp: esUtp || updatedInscripcionColegio.esUtp,
                 profesorId: Profesor || updatedInscripcionColegio.profesorId,
                 colegioId: Colegio || updatedInscripcionColegio.colegioId,
                 annoId: Anno || updatedInscripcionColegio.annoId,
