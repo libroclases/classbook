@@ -15,6 +15,7 @@ import { rutValidator } from '../app/shared/directives/rut-validator/rut-validat
 // --------------------------------------------------------------
 // Auth0 permissions
 const tablesArray = [
+  'administrador',
   'alumno',
   'anno',
   'anotacion',
