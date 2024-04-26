@@ -139,7 +139,7 @@ export const environment = {
     verde: 'url(assets/images/fondo_verde.jpeg)',
     naranjo: 'url(assets/images/fondo_naranjo.jpg)',
   },
-  
+
 };
 
 /*
@@ -289,7 +289,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'curso',
     'asignaturacurso',
     'matricula'
-  ],  
+  ],
   mes: [],
   feriado: [],
   tabla: [],
@@ -432,6 +432,7 @@ export const usuarioTipo: numberString = {
   3:'apoderado',
   4:'asistente',
   5:'utp',
+  6: 'administrador'
 };
 
 
@@ -875,7 +876,7 @@ export const validator: any = {
 
   EstadoAlumno: {
     modalText: {
-      
+
     },
     modalDate: {
       fecha: [Validators.required]
