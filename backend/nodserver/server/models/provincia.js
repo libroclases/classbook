@@ -46,6 +46,11 @@ module.exports = (sequelize, DataTypes) => {
     Provincix.hasMany(models.Apoderado, {
       foreignKey: "provincixId",
     });
+
+    Provincix.hasMany(models.Administrador, {
+      foreignKey: "provincixId",
+    });
+
   };
   return Provincix;
 };

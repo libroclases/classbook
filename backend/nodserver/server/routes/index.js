@@ -14,13 +14,12 @@ import Sexos from '../controllers/sexo';
 import Vinculos from '../controllers/vinculo';
 import Niveles from '../controllers/nivel';
 import Profesores from '../controllers/profesor';
-import Utps from '../controllers/utp';
 import HorasAsignadas from '../controllers/horaasignada';
 import Usuarios from '../controllers/usuario';
 import Temas from '../controllers/tema';
 import ResumenNotas from '../controllers/resumennota';
 import Tablas from '../controllers/tabla';
-
+import Administradores from '../controllers/administrador';
 import InscripcionesColegio from '../controllers/inscripcion-colegio';
 import Annos from '../controllers/anno';
 import Periodos from '../controllers/periodo';
@@ -273,24 +272,27 @@ import AsignaturaCursos from '../controllers/asignaturacurso';
     app.put('/api/profesor/:profesorId',
       checkjwd, requiredScopes('update:profesor'),
       Profesores.modify);
-    app.get('/api/utp',
-      checkjwd, requiredScopes('read:utp'),
-      Utps.list);
-    app.get('/api/utp/:expr/search',
-      checkjwd, requiredScopes('read:utp'),
-      Utps.bySearch);
-    app.get('/api/utp/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId/fk',
-      checkjwd, requiredScopes('read:utp'),
-      Utps.getByFk);
-    app.get('/api/utp/:profesorId/pk',
-      checkjwd, requiredScopes('read:utp'),
-      Utps.getByPk);    
-    app.post('/api/utp/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId',
-      checkjwd, requiredScopes('create:utp'),
-      Utps.create);
-    app.put('/api/utp/:utpId',
-      checkjwd, requiredScopes('update:utp'),
-      Utps.modify);
+
+
+    app.get('/api/administrador',
+      checkjwd, requiredScopes('read:administrador'),
+      Administradores.list);
+    app.get('/api/administrador/:expr/search',
+      checkjwd, requiredScopes('read:administrador'),
+      Administradores.bySearch);
+    app.get('/api/administrador/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId/fk',
+      checkjwd, requiredScopes('read:administrador'),
+      Administradores.getByFk);
+    app.get('/api/administrador/:administradorId/pk',
+      checkjwd, requiredScopes('read:administrador'),
+      Administradores.getByPk);    
+    app.post('/api/administrador/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId',
+      checkjwd, requiredScopes('create:administrador'),
+      Administradores.create);
+    app.put('/api/administrador/:administradorId',
+      checkjwd, requiredScopes('update:administrador'),
+      Administradores.modify);
+
     app.get('/api/asignaturaprofesor',
       checkjwd, requiredScopes('read:asignaturaprofesor'),
       AsignaturaProfesores.list);
@@ -317,7 +319,7 @@ import AsignaturaCursos from '../controllers/asignaturacurso';
       checkjwd, requiredScopes('read:usuario'),
       Usuarios.getLastId); 
     app.get('/api/usuario/where',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.getPersonalInfo);   
     app.get('/api/usuario/:tipousuarioId/fk',
       checkjwd, requiredScopes('read:usuario'),

@@ -24,7 +24,7 @@ import { RegistroActividadComponent } from './tablas/registro-actividad/registro
 import { ControlAsignaturaComponent } from './tablas/control-asignatura/control-asignatura.component'
 import { AsistenciaComponent } from './tablas/asistencia/asistencia.component';
 import { ProfesorComponent } from './tablas/profesor/profesor.component';
-import { UtpComponent } from './tablas/utp/utp.component';
+import { AdministradorComponent } from './tablas/administrador/administrador.component';
 import { ResumenAsistenciaComponent } from './tablas/resumen-asistencia/resumen-asistencia.component';
 import { AsignaturaProfesorComponent } from './tablas/asignatura-profesor/asignatura-profesor.component';
 import { EvaluacionComponent } from './tablas/evaluacion/evaluacion.component';
@@ -63,8 +63,8 @@ const routes: Routes = [
   { path: 'profesor', component: ProfesorComponent, canActivate: [AuthGuard] },
   { path: 'profesor/:id:/padre', component: ProfesorComponent, canActivate: [AuthGuard]},
 
-  { path: 'utp', component: UtpComponent, canActivate: [AuthGuard] },
-  { path: 'utp/:id:/padre', component: UtpComponent, canActivate: [AuthGuard]},
+  { path: 'administrador', component: AdministradorComponent, canActivate: [AuthGuard] },
+  { path: 'administrador/:id:/padre', component: AdministradorComponent, canActivate: [AuthGuard]},
 
   { path: 'asistentecolegio', component: AsistenteColegioComponent, canActivate: [AuthGuard] },
   { path: 'asistentecolegio/:id', component: AsistenteColegioComponent, canActivate: [AuthGuard] },

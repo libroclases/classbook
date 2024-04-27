@@ -54,7 +54,7 @@ const tablesArray = [
   'tipoevaluacion',
   'tipousuario',
   'usuario',
-  'utp',
+  'administrador',
   'ventana',
   'vinculo',
 ];
@@ -139,7 +139,7 @@ export const environment = {
     verde: 'url(assets/images/fondo_verde.jpeg)',
     naranjo: 'url(assets/images/fondo_naranjo.jpg)',
   },
-  
+
 };
 
 /*
@@ -202,7 +202,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
   curso: ['colegio', 'anno'],
   horaasignada: ['colegio'],
   profesor: ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
-  utp:  ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
+  administrador:  ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
   inscripcioncolegio: ['profesor', 'colegio', 'anno'],
   registroactividad: [
     'colegio',
@@ -289,7 +289,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'curso',
     'asignaturacurso',
     'matricula'
-  ],  
+  ],
   mes: [],
   feriado: [],
   tabla: [],
@@ -334,7 +334,7 @@ export const lowerUpperTables: stringString = {
   resumennota: 'ResumenNota',
   periodo: 'Periodo',
   profesor: 'Profesor',
-  utp: 'Utp',
+  administrador: 'Administrador',
   inscripcioncolegio: 'InscripcionColegio',
   registroactividad: 'RegistroActividad',
   provincix: 'Provincix',
@@ -383,7 +383,7 @@ export const tableLabels = {
   periodo: 'Período',
   Periodo: 'Período',
   profesor: 'Profesor',
-  utp: 'UTP',
+  administrador: 'Administrador',
   inscripcioncolegio: 'Inscripcion Colegio',
   registroactividad: 'Registro de Actividad',
   provincix: 'Provincia',
@@ -410,7 +410,7 @@ export const personTables = [
   'alumno',
   'apoderado',
   'profesor',
-  'utp',
+  'administrador',
   'asistentecolegio',
   'usuario'
 ];
@@ -419,7 +419,7 @@ export const notCreateTables = [
   'alumno',
   'apoderado',
   'profesor',
-  'utp',
+  'administrador',
   'asistentecolegio',
   'usuario',
   'matricula'
@@ -431,7 +431,7 @@ export const usuarioTipo: numberString = {
   2:'alumno',
   3:'apoderado',
   4:'asistente',
-  5:'utp',
+  5:'administrador'
 };
 
 
@@ -439,7 +439,7 @@ export const searchTables = [
   'alumno',
   'apoderado',
   'profesor',
-  'utp',
+  'administrador',
   'asistentecolegio',
   'usuario',
   'curso',
@@ -635,7 +635,7 @@ export const attributesLabels = {
     nacimiento: 'Nacimiento',
   },
 
-  utp: {
+  administrador: {
     nombre: 'Nombre(s)',
     apellido1: 'Apellido Paterno',
     apellido2: 'Apellido Materno',
@@ -706,7 +706,7 @@ export const icons: stringStringPair = {
   '/asignaturaprofesor': ['bi bi-book', 'Asignatura Profesores'],
   '/asignaturacurso': ['bi bi-book', 'Asignatura Profesores'],
   '/profesor': ['bi bi-person-video3', 'Profesores'],
-  '/utp': ['bi bi-person-video3', 'Utp'],
+  '/administrador': ['bi bi-person-video3', 'Administrador'],
   '/inscripcioncolegio': ['bi bi-bank', 'Inscripcion Colegio'],
   '/registroactividad': ['bi bi-card-list', 'Registro de Actividades'],
   '/apoderado': ['bi-person-check-fill', 'Apoderados'],
@@ -735,7 +735,7 @@ export const redirectRoutes: any = {
   HoraAsignada: [],
   Curso: ['/horario'],
   Profesor: ['/horario'],
-  Utp: ['/horario'],
+  Administrador: ['/horario'],
   Asignatura: ['/profesor'],
   AsignaturaProfesor: ['/profesor'],
   Apoderado: ['/matricula'],
@@ -783,7 +783,7 @@ export const validator: any = {
     }
   },
 
-  Utp: {
+  Administrador: {
     modalText: {
       nombre: [Validators.required],
       apellido1: [Validators.required],
@@ -875,7 +875,7 @@ export const validator: any = {
 
   EstadoAlumno: {
     modalText: {
-      
+
     },
     modalDate: {
       fecha: [Validators.required]
@@ -1051,7 +1051,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Colegio',
     windowHeight: '650px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
   Horario: {
@@ -1064,7 +1064,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Horario',
     windowHeight: '400px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
   Profesor: {
@@ -1077,20 +1077,20 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Profesor',
     windowHeight: '570px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
-  Utp: {
-    mainTable: 'utp',
+  Administrador: {
+    mainTable: 'administrador',
     tables: ['sexo', 'region', 'provincix', 'comuna'],
     textFields: ['nombre', 'apellido1','apellido2', 'rut', 'direccion', 'celular'],
     dateFields: ['nacimiento'],
     ignoreFkRequirements: [],
     hidden: [],
     defaultValues: {},
-    label: 'UTP',
+    label: 'Administrador',
     windowHeight: '570px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
   Curso: {
@@ -1103,7 +1103,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Curso',
     windowHeight: '400px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
   HoraAsignada: {
@@ -1116,7 +1116,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Hora Asignada',
     windowHeight: '400px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
   Asignatura: {
@@ -1129,7 +1129,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Asignatura',
     windowHeight: '320px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
   AsignaturaProfesor: {
@@ -1142,7 +1142,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Asignatura Profesor',
     windowHeight: '320px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
   AsignaturaCurso: {
@@ -1155,7 +1155,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Asignatura Curso',
     windowHeight: '320px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
   Apoderado: {
@@ -1168,7 +1168,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Apoderado',
     windowHeight: '590px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
   Alumno: {
@@ -1181,7 +1181,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Alumno',
     windowHeight: '680px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
   Usuario: {
@@ -1194,7 +1194,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Usuario',
     windowHeight: '680px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
   EstadoAlumno: {
@@ -1207,7 +1207,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Estado Alumno',
     windowHeight: '680px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
   TipoUsuario: {
@@ -1220,7 +1220,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Tipo Usuario',
     windowHeight: '680px',
-    permission: ['utp']
+    permission: ['administrador']
   },
   Tema: {
     mainTable: 'tema',
@@ -1232,7 +1232,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Tema',
     windowHeight: '680px',
-    permission: ['utp']
+    permission: ['administrador']
   },
     Tabla: {
     mainTable: 'tabla',
@@ -1244,7 +1244,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Tabla',
     windowHeight: '380px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
   AsistenteColegio: {
@@ -1257,7 +1257,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Profesinales (no docentes)',
     windowHeight: '680px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
   Matricula: {
@@ -1270,7 +1270,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Matricula',
     windowHeight: '600px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
   Ventana: {
@@ -1283,7 +1283,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Ventana',
     windowHeight: '300px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
   Evaluacion: {
@@ -1304,7 +1304,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Evaluación',
     windowHeight: '620px',
-    permission: ['profesor','utp']
+    permission: ['profesor','administrador']
   },
 
   Feriado: {
@@ -1317,7 +1317,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Feriado',
     windowHeight: '400px',
-    permission: ['utp']
+    permission: ['administrador']
   },
 
   Nota: {
@@ -1330,7 +1330,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Nota',
     windowHeight: '500px',
-    permission: ['profesor','utp']
+    permission: ['profesor','administrador']
   },
 
   Anotacion: {
@@ -1358,7 +1358,7 @@ export const modalDataObject: any = {
     defaultValues: { fecha: 'today' },
     label: 'Registro de Actividades',
     windowHeight: 'auto',
-    permission: ['profesor','utp']
+    permission: ['profesor','administrador']
   },
 };
 

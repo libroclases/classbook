@@ -44,14 +44,14 @@ export class CrudService {
   getByRut(table: string, rut: string): Observable<any> {
 
     const baseurl = `${this.baseurl}/${table}/${rut}/rut`;
-  
+
     return this.http.get<any>(baseurl).pipe(take(1), share());
    }
 
    getByEmail(table: string, email: string): Observable<any> {
 
     const baseurl = `${this.baseurl}/${table}/${email}/email`;
- 
+
     return this.http.get<any>(baseurl).pipe(take(1), share());
    }
 
@@ -64,7 +64,7 @@ export class CrudService {
   getLasId(): Observable<any>  {
 
     let baseurl = `${this.baseurl}/usuario/lastid`;
-  
+
     return this.http.get<any>(baseurl).pipe(take(1), share());
 
   }
@@ -118,7 +118,7 @@ export class CrudService {
     fields: any = null,
   ): Observable<any> {
     // const extraString = this.getExtraString(table);
-  
+
     let k = '';
     let baseurl = '';
     if (fk) {
@@ -141,7 +141,7 @@ export class CrudService {
     } else {
       var url = baseurl;
     }
-   
+    console.log(url)
     return this.http.get<any>(url).pipe(take(1), share());
   }
 
@@ -150,7 +150,7 @@ export class CrudService {
   putData(obj: any, table: string): Observable<any> {
     // const extraString = this.getExtraString(table);
     let baseurl = `${this.baseurl}/${table}/${obj.id}`;
-    
+
     return this.http.put(baseurl, obj, this.httpOptions).pipe(
       tap(_ => this.log(`updated ${table} id=${obj.id}`)),
       catchError(this.handleError<any>())

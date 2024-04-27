@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const InscripcionColegio = sequelize.define(
     "InscripcionColegio",
     {
+      /*
       fechaInicio: {
         type: DataTypes.DATEONLY,
         allowNull: {
@@ -17,13 +18,22 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Por favor ingrese fecha de término",
         },
       },
+      */
       esPie: {
         type: DataTypes.BOOLEAN,
         allowNull: {
           args: true,
-          msg: "Por favor ingrese si el/la docente es PIE",
+          msg: "Por favor ingrese si docente es PIE",
         },
       },
+      esUtp: {
+        type: DataTypes.BOOLEAN,
+        allowNull: {
+          args: true,
+          msg: "Por favor ingrese si docente es UTP",
+        },
+      },
+
     },
     {
       sequelize,
