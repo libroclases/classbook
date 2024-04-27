@@ -30,9 +30,10 @@ export class UsuarioState {
   constructor(private crud: CrudService){ }
 
   @Action(GetUsuario)
-  getUsuario({getState, setState}: StateContext<UsuarioStateModel>, { id }: GetUsuario) {
-
-     return this.crud.getDataPk('usuario', id)!.pipe(
+  getUsuario({getState, setState}: StateContext<UsuarioStateModel>, { email }: GetUsuario) {
+    return this.crud.getDataCustom('usuario', 'where', [], {
+      email: email,
+    })!.pipe(
       tap((res:any) => {
         const state = getState();
         setState({

@@ -21,7 +21,7 @@ import { Observable } from 'rxjs';
 })
 export class MenuComponent implements OnInit{
 
-    @Select(UsuarioState.usuario) usuario$!: Observable<Person[]>;
+    // @Select(UsuarioState.usuario) usuario$!: Observable<Person[]>;
 
     objcolors = env.colors;
     menu!:string;
@@ -35,7 +35,7 @@ export class MenuComponent implements OnInit{
 
     ngOnInit(): void {
     this.docElement = document.documentElement;
-    this.store.dispatch(new GetUsuario(1));
+    // this.store.dispatch(new GetUsuario(1));
 
     }
 

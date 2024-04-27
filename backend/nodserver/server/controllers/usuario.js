@@ -3,9 +3,9 @@ import model from '../models';
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-const anno = new Date().getFullYear();
+const anno = (new Date().getFullYear()) - 2020;
 
-const { Usuario, TipoUsuario, Alumno, Apoderado, AsistenteColegio ,Profesor, Utp , Tema} = model;
+const { Usuario, TipoUsuario, Alumno, Apoderado, AsistenteColegio ,Profesor, Administrador, InscripcionColegio , Tema} = model;
 
 class Usuarios {
 
@@ -59,26 +59,32 @@ class Usuarios {
         var out;
         var tipousuarioId = usuario.dataValues.TipoUsuario.dataValues.id;
         var Tipo;
+        var profesorId;
 
         if ( tipousuarioId == 1) {  Tipo = Profesor} 
         else if ( tipousuarioId == 2 ) { Tipo = Alumno } 
         else if ( tipousuarioId == 3 ) { Tipo = Apoderado } 
         else if ( tipousuarioId == 4 ) { Tipo = AsistenteColegio } 
         else if ( tipousuarioId == 5 ) { Tipo = Administrador } 
-             
-           
 
             Tipo.findOne({
                 where: { usuarioId: usuario.dataValues.id },
                 attributes: ['id','nombre','apellido1','apellido2'],
                 })
-                .then(datos_usuario => {
-                out = {'usuario':usuario, 'datos_usuario': datos_usuario};
+                .then(datos_tipo => {
+                profesorId=datos_tipo.dataValues.id;
+                out = {'usuario':usuario, 'datos_tipo': datos_tipo};
+                console.log('poronga->', anno, profesorId, tipousuarioId); 
                 })
                 .then( () => {
-                    if (tipousuarioId == 1) { console.log('poronga->', anno, usuario.dataValues.id, tipousuarioId);  }
+                    if (tipousuarioId == 1) {
+                          
+                        InscripcionColegio.findAll({ where : { profesorId, annoId: anno  }})
+                        .then(ins => { res.status(200).send({out, ins}); })
+                        
+                    }
                                     
-                    res.status(200).send(out); 
+                     
                 });
         
     })

@@ -22,8 +22,12 @@ export class CabeceraComponent {
     private auth: AuthService) {
 
     this.auth.isAuthenticated$.subscribe(isAuth => { if(isAuth) {
+
+      console.log('estoy autentificado');
+
       userInfo.personalInfo$.subscribe( info  => {
         if (info.usuario) {
+          console.log(info)
           this.ms.nextColor(info.usuario.Tema.nombre);
           sessionStorage.setItem('Color', info.usuario.Tema.nombre);
           this.fullName = (info.datos_usuario) ? Object.values(info.datos_usuario).slice(1).toString(): '';
