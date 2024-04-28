@@ -5,7 +5,7 @@ const Op = Sequelize.Op;
 
 const anno = (new Date().getFullYear()) - 2020;
 
-const { Usuario, TipoUsuario, Alumno, Apoderado, AsistenteColegio ,Profesor, Administrador, InscripcionColegio , Tema} = model;
+const { Usuario, TipoUsuario, Alumno, Apoderado, AsistenteColegio ,Profesor, Administrador, Anno, Colegio, InscripcionColegio , Tema} = model;
 
 class Usuarios {
 
@@ -79,7 +79,12 @@ class Usuarios {
                 .then( () => {
                     if (tipousuarioId == 1) {
                           
-                        InscripcionColegio.findAll({ where : { profesorId, annoId: anno  }})
+                        InscripcionColegio.findAll({ where : { profesorId, annoId: anno  }, attributes:['esPie','esUtp'], 
+                        include: [
+                            {model: Anno , attributes: ['id','nombre'] , where: {}},
+                            {model: Colegio, attributes: ['id','nombre'], where: {}},
+                            {model: Profesor, attributes: ['id','nombre'], where:{}}
+                        ]})
                         .then(inscripcionColegio => { res.status(200).send({personalInfo, inscripcionColegio}); })
                         
                     }

@@ -55,6 +55,7 @@ export class MenuComponent implements OnInit{
     }
 
   tipousuario:any=null;
+  esUtp=false;
 
   constructor(
 
@@ -67,8 +68,11 @@ export class MenuComponent implements OnInit{
     public auth: AuthService) {
 
     this.userInfo.personalInfo$.subscribe(info => { if (info) {
-      // console.log('poronga2',info.personalInfo.usuario.TipoUsuario.nombre)
-      this.tipousuario = info.personalInfo.usuario.TipoUsuario.nombre;
+      if (info.personalInfo) {
+        this.tipousuario = info.personalInfo.usuario.TipoUsuario.nombre;
+        this.esUtp = info.inscripcionColegio
+        console.log(this.esUtp);  
+      }
     }})
 
 
