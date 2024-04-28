@@ -56,7 +56,7 @@ class Usuarios {
     })
     .then(usuario => {
 
-        var out;
+        var personalInfo;
         var tipousuarioId = usuario.dataValues.TipoUsuario.dataValues.id;
         var Tipo;
         var profesorId;
@@ -71,16 +71,16 @@ class Usuarios {
                 where: { usuarioId: usuario.dataValues.id },
                 attributes: ['id','nombre','apellido1','apellido2'],
                 })
-                .then(datos_tipo => {
-                profesorId=datos_tipo.dataValues.id;
-                out = {'usuario':usuario, 'datos_tipo': datos_tipo};
+                .then(datos_persona => {
+                profesorId=datos_persona.dataValues.id;
+                personalInfo = {'usuario':usuario, 'datos_persona': datos_persona};
                 console.log('poronga->', anno, profesorId, tipousuarioId); 
                 })
                 .then( () => {
                     if (tipousuarioId == 1) {
                           
                         InscripcionColegio.findAll({ where : { profesorId, annoId: anno  }})
-                        .then(ins => { res.status(200).send({out, ins}); })
+                        .then(inscripcionColegio => { res.status(200).send({personalInfo, inscripcionColegio}); })
                         
                     }
                                     
