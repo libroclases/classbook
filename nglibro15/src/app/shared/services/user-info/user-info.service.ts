@@ -14,11 +14,11 @@ export class UserInfoService {
 
   personalInfo$: Observable<Object | any>;
   email$: Observable<string | undefined>;
-  // usermsg: BehaviorSubject<any>;
+  
 
   constructor(private crud: CrudService, private auth: AuthService) {
 
-    // this.usermsg = new BehaviorSubject(null);
+  
 
     this.email$ = this.auth.user$.pipe(map((user) => user?.email))
 
@@ -32,19 +32,10 @@ export class UserInfoService {
           });
         }
       }),
-      tap(info => { 
-        console.log(info);
-        // this.nextMsg(info); 
-   
-      }),
       take(1)
     );
 
   }
-  /*
-  nextMsg(msg: any) {
-    this.usermsg.next(msg);
-  }
-   */
+
 
 }

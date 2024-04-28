@@ -229,7 +229,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
   tipousuario: [],
   tema:[],
   usuario: ['tipousuario','tema'],
-  alumno: ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
+  alumno: ['usuario','colegio', 'sexo', 'region', 'provincix', 'comuna'],
   tipoestado: [],
   estadoalumno: ['alumno', 'matricula', 'tipoestado'],
   anotacion: ['matricula', 'profesor', 'anno', 'colegio', 'curso'],
@@ -1173,10 +1173,10 @@ export const modalDataObject: any = {
 
   Alumno: {
     mainTable: 'alumno',
-    tables: ['sexo', 'region', 'provincix', 'comuna'],
+    tables: ['sexo','region', 'provincix', 'comuna','colegio' ],
     textFields: ['nombre', 'apellido1','apellido2', 'rut', 'direccion', 'celular'],
     dateFields: ['nacimiento'],
-    ignoreFkRequirements: [],
+    ignoreFkRequirements: ['tipocolegio','provincix', 'comuna'],
     hidden: [],
     defaultValues: {},
     label: 'Alumno',

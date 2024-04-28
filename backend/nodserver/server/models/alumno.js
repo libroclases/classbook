@@ -65,11 +65,11 @@ module.exports = (sequelize, DataTypes) => {
     Alumno.belongsTo(models.Sexo, {
       foreignKey: "sexoId",
     });
-    /*
-      Alumno.belongsTo(models.Colegio, {
+    
+    Alumno.belongsTo(models.Colegio, {
         foreignKey: 'colegioId',
-      });
-      */
+    });
+    
     Alumno.belongsTo(models.Usuario, {
       foreignKey: "usuarioId",
     });

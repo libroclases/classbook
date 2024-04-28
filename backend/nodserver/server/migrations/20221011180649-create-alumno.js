@@ -38,6 +38,15 @@ module.exports = {
           key: 'id',
           as: 'Usuario',
         }
+      },
+      colegioId: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Colegio',
+          key: 'id',
+          as: 'Colegio',
+        }
       },   
       sexoId: {
         allowNull: true,

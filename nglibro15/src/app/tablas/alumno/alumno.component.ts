@@ -14,14 +14,14 @@ export class AlumnoComponent implements OnInit {
   textFields = ['apellido1','apellido2','nombre', 'rut', 'direccion', 'celular'];
   dateFields = ['nacimiento'];
   // displayFKFields: CamelCase
-  displayFKFields = ['Sexo', 'Region', 'Provincix','Comuna'];
+  displayFKFields = ['Region', 'Provincix','Comuna','Colegio','Sexo'];
   redirectRoutes = ['/matricula'];
 
   // Selectores
 
-  selTables = ['sexo', 'region', 'provincix', 'comuna'];
+  selTables = ['region', 'provincix', 'comuna','colegio','sexo'];
   changeFnsArray: Function[] = [];
-  ignoreFkRequirements: string[] = [];
+  ignoreFkRequirements: string[] = ['tipocolegio','provincix', 'comuna'];
   patchFKsFromStorage = [];
 
   // Route: from parent

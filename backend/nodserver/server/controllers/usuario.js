@@ -83,7 +83,7 @@ class Usuarios {
                         include: [
                             {model: Anno , attributes: ['id','nombre'] , where: {}},
                             {model: Colegio, attributes: ['id','nombre'], where: {}},
-                            {model: Profesor, attributes: ['id','nombre'], where:{}}
+                            {model: Profesor, attributes: ['id','nombre','apellido1','apellido2'], where:{}}
                         ]})
                         .then(inscripcionColegio => { res.status(200).send({personalInfo, inscripcionColegio}); })
                         

@@ -71,7 +71,7 @@ export class MenuComponent implements OnInit{
       if (info.personalInfo) {
         this.tipousuario = info.personalInfo.usuario.TipoUsuario.nombre;
         this.esUtp = info.inscripcionColegio
-        console.log(this.esUtp);  
+        // console.log(this.esUtp);  
       }
     }})
 

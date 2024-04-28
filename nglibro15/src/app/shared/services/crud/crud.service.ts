@@ -141,7 +141,7 @@ export class CrudService {
     } else {
       var url = baseurl;
     }
-    console.log(url)
+    // console.log(url)
     return this.http.get<any>(url).pipe(take(1), share());
   }
 

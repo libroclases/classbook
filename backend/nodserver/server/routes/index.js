@@ -436,7 +436,7 @@ import AsignaturaCursos from '../controllers/asignaturacurso';
       checkjwd, requiredScopes('update:niveleducacional'),
       Niveles.modify);
     app.get('/api/alumno',
-      checkjwd, requiredScopes('read:alumno'),
+      // checkjwd, requiredScopes('read:alumno'),
       Alumnos.list);
     app.get('/api/alumno/:expr/search',
       checkjwd, requiredScopes('read:alumno'),
@@ -444,13 +444,13 @@ import AsignaturaCursos from '../controllers/asignaturacurso';
     app.get('/api/alumno/:expr/rut',
       checkjwd, requiredScopes('read:alumno'),
       Alumnos.byRutSearch);
-    app.get('/api/alumno/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId/fk',
-      checkjwd, requiredScopes('read:alumno'),
+    app.get('/api/alumno/:usuarioId/:colegioId/:sexoId/:regionId/:provincixId/:comunaId/fk',
+      // checkjwd, requiredScopes('read:alumno'),
       Alumnos.getByFk);
     app.get('/api/alumno/:alumnoId/pk',
       checkjwd, requiredScopes('read:alumno'),
       Alumnos.getByPk);
-    app.post('/api/alumno/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId',
+    app.post('/api/alumno/:usuarioId/:colegioId/:sexoId/:regionId/:provincixId/:comunaId',
       checkjwd, requiredScopes('create:alumno'),
       Alumnos.create);
     app.put('/api/alumno/:alumnoId',

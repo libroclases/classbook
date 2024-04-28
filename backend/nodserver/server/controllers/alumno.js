@@ -3,7 +3,7 @@ import model from '../models';
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-const { Alumno, Usuario, Sexo, Region, Provincix, Comuna } = model;
+const { Alumno, Usuario, Colegio, Sexo, Region, Provincix, Comuna } = model;
 
 class Alumnos {
 
@@ -11,7 +11,8 @@ class Alumnos {
     static list(req, res) {
         return Alumno
             .findAll({ attributes: ['id','nombre','apellido1','apellido2','nacimiento','rut','direccion','celular'],
-            include: [  
+            include: [
+                { model: Colegio, attributes:['id','nombre'], where: { } },  
                 { model: Sexo, attributes:['id','nombre'], where: { } },
                 { model: Usuario, attributes:['id', 'username', 'email'], where: { } },
                 { model: Region, attributes:['id','nombre'], where: { } },
@@ -37,6 +38,7 @@ class Alumnos {
                 ]
                 },
             include: [
+                { model: Colegio, attributes:['id','nombre'], where: { } },
                 { model: Sexo, attributes:['id','nombre'], where: { } },
                 { model: Region, attributes: ['id','nombre'], where: { } },
                 { model: Provincix, attributes: ['id','nombre'], where: { } },
@@ -55,6 +57,7 @@ class Alumnos {
         consulta['id'] = req.params.alumnoId;
         return Alumno
         .findOne({ where: consulta, include: [
+            { model: Colegio, attributes:['id','nombre'], where: { } },
             { model: Sexo, attributes:['id','nombre'], where: { } },
             { model: Region, attributes: ['id','nombre'], where: { } },
             { model: Provincix, attributes: ['id','nombre'], where: { } },
@@ -71,6 +74,7 @@ class Alumnos {
         return Alumno
             .findOne({  
                 where: {rut : expr } , include: [
+                    { model: Colegio, attributes:['id','nombre'], where: { } },
                     { model: Sexo, attributes:['id','nombre'], where: { } },
                     { model: Region, attributes: ['id','nombre'], where: { } },
                     { model: Provincix, attributes: ['id','nombre'], where: { } },
@@ -83,11 +87,12 @@ class Alumnos {
     }
 
     static getByFk(req, res) {
-        const { usuarioId, sexoId, regionId, provincixId, comunaId } = req.params;
+        const { usuarioId, colegioId, sexoId, regionId, provincixId, comunaId } = req.params;
 
         let consulta = {};
 
-        if (usuarioId != '0') {  consulta['usuarioId'] = usuarioId; } 
+        if (usuarioId != '0') {  consulta['usuarioId'] = usuarioId; }
+        if (colegioId != '0') {  consulta['colegioId'] = colegioId;  } 
         if (sexoId != '0') {  consulta['sexoId'] = sexoId;  } 
         if (regionId != '0') {  consulta['regionId'] = regionId;  }   
         if (provincixId != '0') {  consulta['provincixId'] = provincixId;  }   
@@ -97,6 +102,7 @@ class Alumnos {
           .findAll({ where : consulta,
               include: [
                 { model: Usuario, attributes:['id', 'username', 'email'], where: { } },
+                { model: Colegio, attributes:['id','nombre'], where: { } },
                 { model: Sexo, attributes:['id', 'nombre'], where: { } },
                 { model: Region, attributes:['id','nombre'], where: { } },
                 { model: Provincix, attributes:['id','nombre'], where: { } },
@@ -109,7 +115,7 @@ class Alumnos {
     }
    
     static create(req, res) {
-    const { usuarioId, sexoId,regionId, provincixId, comunaId} = req.params;
+    const { usuarioId, colegioId, sexoId,regionId, provincixId, comunaId} = req.params;
     const {  
         nombre, 
         apellido1,
@@ -129,6 +135,7 @@ class Alumnos {
         celular, 
         nacimiento,
         usuarioId,
+        colegioId,
         sexoId,
         regionId,
         provincixId,
@@ -151,6 +158,7 @@ class Alumnos {
         rut, 
         direccion, 
         celular, 
+        Colegio,
         Sexo,
         Region,
         Provincix,
@@ -169,6 +177,7 @@ class Alumnos {
                 direccion: direccion || alumno.direccion, 
                 celular: celular || alumno.celular,
                 nacimiento: nacimiento || alumno.nacimiento, 
+                colegioId: Colegio || alumno.colegioId,
                 sexoId: Sexo || alumno.sexoId,
                 regionId: Region || alumno.regionId,
                 provincixId: Provincix || alumno.provincixId,
@@ -189,6 +198,7 @@ class Alumnos {
                     rut: rut || updateAlumno.rut,
                     direccion: direccion || updateAlumno.direccion, 
                     celular: celular || updateAlumno.celular,
+                    colegioId: Colegio || updateAlumno.colegioId, 
                     sexoId: Sexo || updateAlumno.sexoId,
                     regionId: Region || updateAlumno.regionId,
                     provincixId: Provincix || updateAlumno.provincixId,

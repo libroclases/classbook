@@ -56,6 +56,8 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   isGroupTable = false;
   searchTerm$ = new Subject<string>();
 
+  currentDate:Date = new Date();
+
   sumGroup = 0;
 
   banner_height = environment.cabecera.banner_height;
@@ -149,7 +151,6 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private ms : MessageService,
     
     private crud: CrudService,
     activatedRoute: ActivatedRoute,
@@ -162,53 +163,50 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     public userInfo: UserInfoService,) {
 
     const getPermision = (msg: any) => { if(msg) {
-      this.disable = (modalDataObject[msg.tabla].permission.includes(msg.tipo)) ? false : true;
+      const year = this.currentDate.getFullYear();
+      this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
     } 
+
+   }
+
+   const getColor = (color:string) => {
+    console.log(color);
+    if (color=='azul') {
+      this.bodybgcolor = this.objcolors.azul.bodybgcolor;
+      this.pagination = this.objcolors.azul.pagination;
+      this.tablehead = this.objcolors.azul.tablehead;
+      this.bgmodal = this.objcolors.azul.bgmodal;
+      this.modalbutton = this.objcolors.azul.modalbutton;
+      this.url = this.photo.azul;
+    }
+    if (color=='verde') {
+      this.bodybgcolor = this.objcolors.verde.bodybgcolor;
+      this.pagination = this.objcolors.verde.pagination;
+      this.tablehead = this.objcolors.verde.tablehead;
+      this.bgmodal = this.objcolors.verde.bgmodal;
+      this.modalbutton = this.objcolors.verde.modalbutton;
+      this.url = this.photo.verde;
+    }
+    if (color=='naranjo') {
+      this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
+      this.pagination = this.objcolors.naranjo.pagination;
+      this.tablehead = this.objcolors.naranjo.tablehead;
+      this.bgmodal = this.objcolors.naranjo.bgmodal;
+      this.modalbutton = this.objcolors.naranjo.modalbutton;
+      this.url = this.photo.naranjo;
+
+    }
+
   }
 
-    ms.disable_msg.pipe(
-      tap(msg => getPermision(msg)),
-      take(1)
-    ).subscribe()
 
-
-    ms.color_msg.subscribe((color:any) =>  {
-
-      
-      if (color=='azul') {
-        this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-        this.pagination = this.objcolors.azul.pagination;
-        this.tablehead = this.objcolors.azul.tablehead;
-        this.bgmodal = this.objcolors.azul.bgmodal;
-        this.modalbutton = this.objcolors.azul.modalbutton;
-        this.url = this.photo.azul;
-      }
-      if (color=='verde') {
-        this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-        this.pagination = this.objcolors.verde.pagination;
-        this.tablehead = this.objcolors.verde.tablehead;
-        this.bgmodal = this.objcolors.verde.bgmodal;
-        this.modalbutton = this.objcolors.verde.modalbutton;
-        this.url = this.photo.verde;
-      }
-      if (color=='naranjo') {
-        this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-        this.pagination = this.objcolors.naranjo.pagination;
-        this.tablehead = this.objcolors.naranjo.tablehead;
-        this.bgmodal = this.objcolors.naranjo.bgmodal;
-        this.modalbutton = this.objcolors.naranjo.modalbutton;
-        this.url = this.photo.naranjo;
-
-      }
-
-
-    })
-
+    this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
+      getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
+      getColor(info.personalInfo.usuario.Tema.nombre);
+    }))
 
 
     activatedRoute.params.subscribe((params:any) => {
-
-
 
       if ( Object.keys(params).length > 0) {
 
