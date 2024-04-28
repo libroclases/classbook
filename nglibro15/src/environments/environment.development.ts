@@ -76,7 +76,7 @@ export const environment = {
   apiUrl: 'http://localhost',
   apiKey: 'devKey',
   userinfo: {},
-  opacity: '90%',
+  opacity: '87%',
 
   auth0: {
     domain: 'dev-tupdibnrpuxah8p3.us.auth0.com',

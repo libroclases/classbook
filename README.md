@@ -1,20 +1,14 @@
 # classbook
-sudo pm2 start node app.js
 
+# crear tabla (modelo y migración inicial)
 npx sequelize-cli model:create --name User --attributes name:string,username:string,email:string,password:string
-
+# migración
 npx sequelize-cli db:migrate:undo:all --env production
 npx sequelize-cli db:migrate --env production
 
-scp -r .\dist\nglibro15\* libro@libroclases.cl:/var/www/libroclases.cl/html/
-
-
-
-scp -r .\dist\* libro@libroclases.cl:/home/libro/dist/
-
 ************ DEPLOY *************
 *** frontend ***
-1.- chequear archivos environmets
+1.- chequear archivos environmets (ambos identicos exceptp production)
 2.- git status 
 3.- git commit
 4.- git push 
@@ -32,10 +26,11 @@ scp -r .\dist\* libro@libroclases.cl:/home/libro/dist/
 4.- npx sequelize-cli db:mibrate:undo:all --env production
 5.- npx sequelize-cli db:migrate --env production
 *** digitalocean ***
+(lista no implica orden, ejecución a discreción)
 sudo docker-compose up --build -d
 sudo docker logs nodapp
 sudo docker-compose build nodapp
-
+sudo docker exec -it dbpostgres bash
 
 
 
