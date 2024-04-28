@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, concatMap, of, map, shareReplay, tap, Subject } from 'rxjs';
+import { Observable, concatMap, of, map, shareReplay, tap, Subject, take } from 'rxjs';
 import { CrudService } from '../crud/crud.service';
 import { AuthService } from '@auth0/auth0-angular';
 import { BehaviorSubject } from 'rxjs';
@@ -32,15 +32,19 @@ export class UserInfoService {
           });
         }
       }),
-      tap(info => this.nextMsg(info.usuario))
+      tap(info => { 
+        console.log(info);
+        // this.nextMsg(info); 
+   
+      }),
+      take(1)
     );
 
   }
-
+  /*
   nextMsg(msg: any) {
     this.usermsg.next(msg);
-
   }
-
+   */
 
 }

@@ -13,6 +13,7 @@ import {  Person, UsersStateModel } from '../../ngxs/usuario.model';
 import { GetUsuario } from '../../ngxs/usuario.actions'
 import { UsuarioState } from 'src/app/ngxs/usuario.state';
 import { Observable } from 'rxjs';
+import { TipoUsuario } from '../../interfaces/tipousuario.interface';
 
 @Component({
   selector: 'app-menu',
@@ -65,8 +66,9 @@ export class MenuComponent implements OnInit{
     private crud: CrudService,
     public auth: AuthService) {
 
-    this.userInfo.usermsg.subscribe(info => { if (info) {
-      this.tipousuario = info.TipoUsuario.nombre;
+    this.userInfo.personalInfo$.subscribe(info => { if (info) {
+      // console.log('poronga2',info.personalInfo.usuario.TipoUsuario.nombre)
+      this.tipousuario = info.personalInfo.usuario.TipoUsuario.nombre;
     }})
 
 

@@ -26,11 +26,12 @@ export class CabeceraComponent {
       console.log('estoy autentificado');
 
       userInfo.personalInfo$.subscribe( info  => {
-        if (info.usuario) {
-          console.log(info)
-          this.ms.nextColor(info.usuario.Tema.nombre);
-          sessionStorage.setItem('Color', info.usuario.Tema.nombre);
-          this.fullName = (info.datos_usuario) ? Object.values(info.datos_usuario).slice(1).toString(): '';
+        
+        if (info.personalInfo) {
+          // console.log('poronga',info.personalInfo.usuario.Tema.nombre);
+          this.ms.nextColor(info.personalInfo.usuario.Tema.nombre);
+          sessionStorage.setItem('Color', info.personalInfo.usuario.Tema.nombre);
+          this.fullName = (info.personalInfo.datos_persona) ? Object.values(info.personalInfo.datos_persona).slice(1).toString(): '';
         } else {
           this.fullName = '';
           
