@@ -102,8 +102,9 @@ export class MenuComponent implements OnInit{
   sendtype(tabla: string, tipo:string) { this.ms.nextType({tabla,tipo}) }
 
   mensaje(color: any) {
-
+    
     if (color) {
+      /*
       this.userInfo.usermsg.subscribe(info => {
 
         if(info) {
@@ -117,6 +118,7 @@ export class MenuComponent implements OnInit{
         }
 
        })
+       */
     }
   }
 

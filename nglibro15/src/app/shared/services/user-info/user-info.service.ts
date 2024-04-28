@@ -14,11 +14,11 @@ export class UserInfoService {
 
   personalInfo$: Observable<Object | any>;
   email$: Observable<string | undefined>;
-  usermsg: BehaviorSubject<any>;
+  // usermsg: BehaviorSubject<any>;
 
   constructor(private crud: CrudService, private auth: AuthService) {
 
-    this.usermsg = new BehaviorSubject(null);
+    // this.usermsg = new BehaviorSubject(null);
 
     this.email$ = this.auth.user$.pipe(map((user) => user?.email))
 
