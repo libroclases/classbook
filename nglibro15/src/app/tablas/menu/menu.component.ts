@@ -9,7 +9,7 @@ import { UserInfoService } from '../../shared/services/user-info/user-info.servi
 import { Router } from '@angular/router';
 
 import {Select, Store} from '@ngxs/store';
-import {  Person, UsersStateModel } from '../../ngxs/usuario.model';
+import {  Usuario, UsersStateModel } from '../../ngxs/usuario.model';
 import { GetUsuario } from '../../ngxs/usuario.actions'
 import { UsuarioState } from 'src/app/ngxs/usuario.state';
 import { Observable } from 'rxjs';

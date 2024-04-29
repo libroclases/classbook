@@ -1,16 +1,9 @@
 export class UsersStateModel {
-  usuario!: Person[];
+  usuario!: Usuario;
 }
 
 
-export class Person {
-  usuarioId!: Number;
-  tipousuarioId!:Number;
-  temaId!:Number;
-  /*
-  colegioId!: Number[];
-  nombre!:string;
-  apellido1!:string;
-  apellido2!:string;
-  */
+export class Usuario {
+  personalInfo!: any;
+  inscripcionColegio!: any;
 }
