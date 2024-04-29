@@ -40,7 +40,9 @@ export class RegistroActividadComponent implements OnDestroy {
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
   
-  
+  disable = true;
+  currentDate:Date = new Date();
+
   innerHeight=  window.innerHeight
 
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
@@ -100,39 +102,50 @@ export class RegistroActividadComponent implements OnDestroy {
 
   constructor(
     private crud: CrudService,
-    private ms : MessageService,
-    private userinfo: UserInfoService,
+    private userInfo: UserInfoService,
     public dialog: MatDialog,
     private subsManagerService: SubscriptionsManagerService,
     private fKeysService: ForeignKeysService,
     private selIdsService: SelectionIdsService,
     private iconsService: IconsService
   ) {
+    // REVISAR
+    userInfo.personalInfo$.subscribe(info => this.userId = info.personalInfo.datos_persona.id)
 
-    userinfo.personalInfo$.subscribe(info => this.userId = info.datos_usuario.id)
+    const getPermision = (msg: any) => { if(msg) {
+      const year = this.currentDate.getFullYear();
+      this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
+      } 
 
-    ms.color_msg.subscribe((color:any) =>  {
+    }
 
+   const getColor = (color:string) => {
+    
+    if (color=='azul') {
+      this.bodybgcolor = this.objcolors.azul.bodybgcolor;
+      this.pagination = this.objcolors.azul.pagination;
+      this.tablehead = this.objcolors.azul.tablehead;
+      this.url = this.photo.azul;
+    }
+    if (color=='verde') {
+      this.bodybgcolor = this.objcolors.verde.bodybgcolor;
+      this.pagination = this.objcolors.verde.pagination;
+      this.tablehead = this.objcolors.verde.tablehead;
+      this.url = this.photo.verde;
+    }
+    if (color=='naranjo') {
+      this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
+      this.pagination = this.objcolors.naranjo.pagination;
+      this.tablehead = this.objcolors.naranjo.tablehead;
+      this.url = this.photo.naranjo;
+    }
 
-      if (color=='azul') {
-        this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-        this.pagination = this.objcolors.azul.pagination;
-        this.tablehead = this.objcolors.azul.tablehead;
-        this.url = this.photo.azul;
-      }
-      if (color=='verde') {
-        this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-        this.pagination = this.objcolors.verde.pagination;
-        this.tablehead = this.objcolors.verde.tablehead;
-        this.url = this.photo.verde;
-      }
-      if (color=='naranjo') {
-        this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-        this.pagination = this.objcolors.naranjo.pagination;
-        this.tablehead = this.objcolors.naranjo.tablehead;
-        this.url = this.photo.naranjo;
-      }
-    })
+}
+  
+this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
+  getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
+  getColor(info.personalInfo.usuario.Tema.nombre);
+}))
 
 
   }

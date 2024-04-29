@@ -13,6 +13,7 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
 import { Evaluacion } from '../../interfaces/evaluacion.interface';
 import { MessageService } from '../../shared/services/message/message.service';
 import { GetdatetimeService } from 'src/app/shared/services/getdatetime/getdatetime.service';
+import { UserInfoService } from 'src/app/shared/services/user-info/user-info.service';
 
 @Component({
   selector: 'app-nota',
@@ -102,6 +103,9 @@ export class NotaComponent implements OnInit {
   bgmodal!:string;
   modalbutton!:string;
 
+  disable = true;
+  currentDate:Date = new Date();
+
   // size screen
 
   banner_height = environment.cabecera.banner_height;
@@ -121,7 +125,7 @@ export class NotaComponent implements OnInit {
 
   constructor(private crud: CrudService,
       // route: ActivatedRoute,
-      ms : MessageService,
+      private userInfo: UserInfoService,
       private selIdsService: SelectionIdsService,
       public dialog: MatDialog,
       private fkService: ForeignKeysService,
@@ -130,37 +134,46 @@ export class NotaComponent implements OnInit {
       private dt: GetdatetimeService
     ) {
 
-
-      ms.color_msg.subscribe(color =>  {
-
-
-        if (color=='azul') {
-          this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-          this.pagination = this.objcolors.azul.pagination;
-          this.tablehead = this.objcolors.azul.tablehead;
-          this.bgmodal =  this.objcolors.azul.bgmodal;
-          this.modalbutton = this.objcolors.azul.modalbutton;
-          this.url = this.photo.azul;
-        }
-        else if (color=='verde') {
-          this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-          this.pagination = this.objcolors.verde.pagination;
-          this.tablehead = this.objcolors.verde.tablehead;
-          this.bgmodal =  this.objcolors.verde.bgmodal;
-          this.modalbutton = this.objcolors.verde.modalbutton;
-          this.url = this.photo.azul;
-        }
-        else if (color=='naranjo') {
-          this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-          this.pagination = this.objcolors.naranjo.pagination;
-          this.tablehead = this.objcolors.naranjo.tablehead;
-          this.bgmodal =  this.objcolors.naranjo.bgmodal;
-          this.modalbutton = this.objcolors.naranjo.modalbutton;
-          this.url = this.photo.azul;
-        }
-      })
-
-
+      const getPermision = (msg: any) => { if(msg) {
+        const year = this.currentDate.getFullYear();
+        this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
+        } 
+  
+      }
+  
+     const getColor = (color:string) => {
+      
+      if (color=='azul') {
+        this.bodybgcolor = this.objcolors.azul.bodybgcolor;
+        this.pagination = this.objcolors.azul.pagination;
+        this.tablehead = this.objcolors.azul.tablehead;
+        this.bgmodal =  this.objcolors.azul.bgmodal;
+        this.modalbutton = this.objcolors.azul.modalbutton;
+        this.url = this.photo.azul;
+      }
+      else if (color=='verde') {
+        this.bodybgcolor = this.objcolors.verde.bodybgcolor;
+        this.pagination = this.objcolors.verde.pagination;
+        this.tablehead = this.objcolors.verde.tablehead;
+        this.bgmodal =  this.objcolors.verde.bgmodal;
+        this.modalbutton = this.objcolors.verde.modalbutton;
+        this.url = this.photo.azul;
+      }
+      else if (color=='naranjo') {
+        this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
+        this.pagination = this.objcolors.naranjo.pagination;
+        this.tablehead = this.objcolors.naranjo.tablehead;
+        this.bgmodal =  this.objcolors.naranjo.bgmodal;
+        this.modalbutton = this.objcolors.naranjo.modalbutton;
+        this.url = this.photo.azul;
+      }
+}
+    
+  this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
+    getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
+    getColor(info.personalInfo.usuario.Tema.nombre);
+  }))
+  
       this.notasForm = new FormGroup({})
 
      }

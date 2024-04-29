@@ -4,6 +4,7 @@ import { CrudService } from '../../shared/services/crud/crud.service';
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
 import { SubscriptionsManagerService } from '../../shared/services/subscriptions-manager/subscriptions-manager.service';
 import { environment } from '../../../environments/environment';
+import { UserInfoService } from 'src/app/shared/services/user-info/user-info.service';
 
 @Component({
   selector: 'app-resumen-asistencia',
@@ -53,6 +54,10 @@ export class ResumenAsistenciaComponent {
   pagination!:string;
   tablehead!:string;
 
+  disable = true;
+  currentDate:Date = new Date();
+
+
   // ----
   // paginacion
 
@@ -61,36 +66,47 @@ export class ResumenAsistenciaComponent {
   patchFksFromStorage = ['colegio', 'anno', 'mes'];
 
   constructor(private crud: CrudService,
-    ms: MessageService,
+    private userInfo: UserInfoService,
     private subsManagerService: SubscriptionsManagerService,
     private selIdsService: SelectionIdsService) { 
 
-      ms.color_msg.subscribe(color =>  {
-
-        //  TODO  Asignar dinamicamente los indices
+      const getPermision = (msg: any) => { if(msg) {
+        const year = this.currentDate.getFullYear();
+        this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
+        } 
   
-        if (color=='azul') { 
-          this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-          this.pagination = this.objcolors.azul.pagination;
-          this.tablehead = this.objcolors.azul.pagination;
-          this.url = this.photo.azul;
-        }
-        if (color=='verde') { 
-          this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-          this.pagination = this.objcolors.verde.pagination;
-          this.tablehead = this.objcolors.verde.pagination;
-          this.url = this.photo.verde;
-        }
-        if (color=='naranjo') { 
-          this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-          this.pagination = this.objcolors.naranjo.pagination;
-          this.tablehead = this.objcolors.naranjo.pagination;
-          this.url = this.photo.naranjo; 
-        }      
-      })
+      }
   
+     const getColor = (color:string) => {
 
-    }
+      if (color=='azul') { 
+        this.bodybgcolor = this.objcolors.azul.bodybgcolor;
+        this.pagination = this.objcolors.azul.pagination;
+        this.tablehead = this.objcolors.azul.pagination;
+        this.url = this.photo.azul;
+      }
+      if (color=='verde') { 
+        this.bodybgcolor = this.objcolors.verde.bodybgcolor;
+        this.pagination = this.objcolors.verde.pagination;
+        this.tablehead = this.objcolors.verde.pagination;
+        this.url = this.photo.verde;
+      }
+      if (color=='naranjo') { 
+        this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
+        this.pagination = this.objcolors.naranjo.pagination;
+        this.tablehead = this.objcolors.naranjo.pagination;
+        this.url = this.photo.naranjo; 
+      }          
+  
+  }
+    
+  this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
+    getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
+    getColor(info.personalInfo.usuario.Tema.nombre);
+  }))
+    
+
+  }
 
   ngOnInit(): void {
     this.changeFnsArray = [this.emptyFunction, this.emptyFunction,

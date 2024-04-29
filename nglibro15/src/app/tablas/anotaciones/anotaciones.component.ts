@@ -40,6 +40,9 @@ export class AnotacionesComponent implements OnDestroy {
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
 
+  disable = true;
+  currentDate:Date = new Date();
+
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
 
   @HostListener('window:resize', ['$event'])
@@ -63,8 +66,6 @@ export class AnotacionesComponent implements OnDestroy {
   bgmodal!:string;
   modalbutton!:string;
 
-  disable = true;
-
   errorAlert = {
     id: "error",
     type: "warning",
@@ -81,27 +82,55 @@ export class AnotacionesComponent implements OnDestroy {
 
   constructor(
     private crud: CrudService,
-    ms: MessageService,
+    private userInfo: UserInfoService,
     auth: AuthService,
-    userInfo: UserInfoService,
+    
     public dialog: MatDialog,
     private subsManagerService: SubscriptionsManagerService,
     private fKeysService: ForeignKeysService,
     private selIdsService: SelectionIdsService,
     private iconsService: IconsService) {
 
-    const getPermision = (msg: any) => { if(msg) {
-      
-        this.disable = (modalDataObject[msg.tabla].permission.includes(msg.tipo)) ? false : true;
-        
+      const getPermision = (msg: any) => { if(msg) {
+        const year = this.currentDate.getFullYear();
+        this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
+        } 
+  
       }
-    } 
-
-    ms.disable_msg.pipe(
-      tap(msg => getPermision(msg)),
-      take(1)
-    ).subscribe()
-
+  
+     const getColor = (color:string) => {
+      
+      if (color=='azul') {
+        this.bodybgcolor = this.objcolors.azul.bodybgcolor;
+        this.pagination = this.objcolors.azul.pagination;
+        this.tablehead = this.objcolors.azul.tablehead;
+        this.bgmodal = this.objcolors.azul.bgmodal;
+        this.modalbutton = this.objcolors.azul.modalbutton;
+        this.url = this.photo.azul;
+      }
+      else if (color=='verde') {
+        this.bodybgcolor = this.objcolors.verde.bodybgcolor;
+        this.pagination = this.objcolors.verde.pagination;
+        this.tablehead = this.objcolors.verde.tablehead;
+        this.bgmodal = this.objcolors.verde.bgmodal;
+        this.modalbutton = this.objcolors.verde.modalbutton;
+        this.url = this.photo.verde;
+      }
+      else if (color=='naranjo') {
+        this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
+        this.pagination = this.objcolors.naranjo.pagination;
+        this.tablehead = this.objcolors.naranjo.tablehead;
+        this.bgmodal = this.objcolors.naranjo.bgmodal;
+        this.modalbutton = this.objcolors.verde.modalbutton;
+        this.url = this.photo.naranjo;
+      }
+}
+    
+  this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
+    getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
+    getColor(info.personalInfo.usuario.Tema.nombre);
+  }))
+      /*
     auth.isAuthenticated$.subscribe(isAuth => { if(isAuth) { 
             userInfo.personalInfo$.subscribe(info => {
               if (info) { 
@@ -109,36 +138,8 @@ export class AnotacionesComponent implements OnDestroy {
               } 
             }  )
        }})
-
-      ms.color_msg.subscribe(color =>  {
-
-
-        if (color=='azul') {
-          this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-          this.pagination = this.objcolors.azul.pagination;
-          this.tablehead = this.objcolors.azul.tablehead;
-          this.bgmodal = this.objcolors.azul.bgmodal;
-          this.modalbutton = this.objcolors.azul.modalbutton;
-          this.url = this.photo.azul;
-        }
-        else if (color=='verde') {
-          this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-          this.pagination = this.objcolors.verde.pagination;
-          this.tablehead = this.objcolors.verde.tablehead;
-          this.bgmodal = this.objcolors.verde.bgmodal;
-          this.modalbutton = this.objcolors.verde.modalbutton;
-          this.url = this.photo.verde;
-        }
-        else if (color=='naranjo') {
-          this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-          this.pagination = this.objcolors.naranjo.pagination;
-          this.tablehead = this.objcolors.naranjo.tablehead;
-          this.bgmodal = this.objcolors.naranjo.bgmodal;
-          this.modalbutton = this.objcolors.verde.modalbutton;
-          this.url = this.photo.naranjo;
-        }
-      })
-    }
+      */
+  }
 
   ngOnInit(): void {
 

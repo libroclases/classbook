@@ -32,6 +32,11 @@ export class UserInfoService {
           });
         }
       }),
+      tap(info => { 
+        console.log(info);
+        // this.nextMsg(info); 
+   
+      }),
       take(1)
     );
 

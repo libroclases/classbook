@@ -7,6 +7,7 @@ import { SelectionIdsService } from 'src/app/shared/services/selection-ids/selec
 import { CrudService } from 'src/app/shared/services/crud/crud.service';
 import { Notification } from '../../interfaces/generic.interface';
 import { IconsService } from 'src/app/shared/services/icons/icons.service';
+import { UserInfoService } from 'src/app/shared/services/user-info/user-info.service';
 
 @Component({
   selector: 'app-ficha-alumno',
@@ -17,6 +18,9 @@ export class FichaAlumnoComponent implements OnInit{
 
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
+
+  disable = true;
+  currentDate:Date = new Date();
 
   objcolors = environment.colors;
 
@@ -69,41 +73,46 @@ patchFKsFromStorage = ['colegio', 'anno'];
 setAny(valor:any): any { return valor }
 
 constructor(
-   private ms : MessageService,
+   private userInfo: UserInfoService,
    private selIdsService: SelectionIdsService,
    private crud: CrudService,
    private iconsService: IconsService
   ) {
   
-  ms.color_msg.pipe(
-    tap(
-      (color:any) =>  {
+    const getPermision = (msg: any) => { if(msg) {
+      const year = this.currentDate.getFullYear();
+      this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
+      } 
 
+    }
 
-        if (color=='azul') {
-          this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-          this.pagination = this.objcolors.azul.pagination;
-          this.tablehead = this.objcolors.azul.tablehead;
-          this.url = this.photo.azul;
-        }
-        if (color=='verde') {
-          this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-          this.pagination = this.objcolors.verde.pagination;
-          this.tablehead = this.objcolors.verde.tablehead;
-          this.url = this.photo.verde;
+   const getColor = (color:string) => {
     
-        }
-        if (color=='naranjo') {
-          this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-          this.pagination = this.objcolors.naranjo.pagination;
-          this.tablehead = this.objcolors.naranjo.tablehead;
-          this.url = this.photo.naranjo;
-        }
-        
-      }
-    )
-  )
-  .subscribe()
+    if (color=='azul') {
+      this.bodybgcolor = this.objcolors.azul.bodybgcolor;
+      this.pagination = this.objcolors.azul.pagination;
+      this.tablehead = this.objcolors.azul.tablehead;
+      this.url = this.photo.azul;
+    }
+    if (color=='verde') {
+      this.bodybgcolor = this.objcolors.verde.bodybgcolor;
+      this.pagination = this.objcolors.verde.pagination;
+      this.tablehead = this.objcolors.verde.tablehead;
+      this.url = this.photo.verde;
+
+    }
+    if (color=='naranjo') {
+      this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
+      this.pagination = this.objcolors.naranjo.pagination;
+      this.tablehead = this.objcolors.naranjo.tablehead;
+      this.url = this.photo.naranjo;
+    }
+}
+  
+this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
+  getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
+  getColor(info.personalInfo.usuario.Tema.nombre);
+}))
 
 
 }

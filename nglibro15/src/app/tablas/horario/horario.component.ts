@@ -13,6 +13,7 @@ import { IconsService } from '../../shared/services/icons/icons.service';
 import { OriginTableIdService } from '../../shared/services/origin-table-id/origin-table-id.service';
 import { MessageService } from '../../shared/services/message/message.service';
 import { DOCUMENT } from '@angular/common';
+import { UserInfoService } from 'src/app/shared/services/user-info/user-info.service';
 
 
 
@@ -41,6 +42,9 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
+
+  disable = true;
+  currentDate:Date = new Date();
 
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
 
@@ -102,8 +106,6 @@ export class HorarioComponent implements OnInit, OnDestroy {
   fatherId=0;
   father='';
 
-  disable = true;
-
   horarios$! : Observable<any>;
   vhorario$! : Observable<any>;
 
@@ -129,7 +131,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
   constructor(private crud: CrudService,
     // route: ActivatedRoute,
     // @Inject(DOCUMENT) private document: Document,
-    ms: MessageService,
+    private userInfo: UserInfoService,
     originTableIdsService: OriginTableIdService,
     // activatedRoute: ActivatedRoute,
     private subsManagerService: SubscriptionsManagerService,
@@ -142,46 +144,45 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
 
       const getPermision = (msg: any) => { if(msg) {
-          
-          this.disable = (modalDataObject[msg.tabla].permission.includes(msg.tipo)) ? false : true;
-        }
+        const year = this.currentDate.getFullYear();
+        this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
+        } 
+  
       }
+  
+     const getColor = (color:string) => {
+      
+      if (color=='azul') {
+        this.bodybgcolor = this.objcolors.azul.bodybgcolor;
+        this.pagination = this.objcolors.azul.pagination;
+        this.tablehead = this.objcolors.azul.tablehead;
+        this.bgmodal = this.objcolors.azul.bgmodal;
+        this.modalbutton = this.objcolors.azul.modalbutton;
+        this.url = this.photo.azul;
+      }
+      if (color=='verde') {
+        this.bodybgcolor = this.objcolors.verde.bodybgcolor;
+        this.pagination = this.objcolors.verde.pagination;
+        this.tablehead = this.objcolors.verde.tablehead;
+        this.bgmodal = this.objcolors.verde.bgmodal;
+        this.modalbutton = this.objcolors.verde.modalbutton;
+        this.url = this.photo.verde;
+      }
+      if (color=='naranjo') {
+        this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
+        this.pagination = this.objcolors.naranjo.pagination;
+        this.tablehead = this.objcolors.naranjo.tablehead;
+        this.bgmodal = this.objcolors.naranjo.bgmodal;
+        this.modalbutton = this.objcolors.naranjo.modalbutton;
+        this.url = this.photo.naranjo;
 
-
-      ms.disable_msg.pipe(
-        tap(msg => getPermision(msg)),
-        take(1)
-      ).subscribe()
-
-      ms.color_msg.subscribe(color =>  {
-
-
-        if (color=='azul') {
-          this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-          this.pagination = this.objcolors.azul.pagination;
-          this.tablehead = this.objcolors.azul.tablehead;
-          this.bgmodal = this.objcolors.azul.bgmodal;
-          this.modalbutton = this.objcolors.azul.modalbutton;
-          this.url = this.photo.azul;
-        }
-        if (color=='verde') {
-          this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-          this.pagination = this.objcolors.verde.pagination;
-          this.tablehead = this.objcolors.verde.tablehead;
-          this.bgmodal = this.objcolors.verde.bgmodal;
-          this.modalbutton = this.objcolors.verde.modalbutton;
-          this.url = this.photo.verde;
-        }
-        if (color=='naranjo') {
-          this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-          this.pagination = this.objcolors.naranjo.pagination;
-          this.tablehead = this.objcolors.naranjo.tablehead;
-          this.bgmodal = this.objcolors.naranjo.bgmodal;
-          this.modalbutton = this.objcolors.naranjo.modalbutton;
-          this.url = this.photo.naranjo;
-
-        }
-      })
+      }
+}
+    
+  this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
+    getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
+    getColor(info.personalInfo.usuario.Tema.nombre);
+  }))
 
       /*
       activatedRoute.params.subscribe(params =>

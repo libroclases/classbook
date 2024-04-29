@@ -56,6 +56,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   isGroupTable = false;
   searchTerm$ = new Subject<string>();
 
+  disable = true;
   currentDate:Date = new Date();
 
   sumGroup = 0;
@@ -141,7 +142,6 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   pagination!:string;
   tablehead!:string;
 
-  disable = true;
   tipousuario:any = null;
 
   search(event: Event): void {
@@ -160,14 +160,15 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     private fkService: ForeignKeysService,
     private labelsService: LabelsService,
     private iconsService: IconsService,
-    public userInfo: UserInfoService,) {
+    public userInfo: UserInfoService
+    ) {
 
     const getPermision = (msg: any) => { if(msg) {
       const year = this.currentDate.getFullYear();
       this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-    } 
+      } 
 
-   }
+    }
 
    const getColor = (color:string) => {
     console.log(color);
@@ -204,6 +205,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
       getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
       getColor(info.personalInfo.usuario.Tema.nombre);
     }))
+    
 
 
     activatedRoute.params.subscribe((params:any) => {

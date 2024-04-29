@@ -9,6 +9,7 @@ import { SelectionIdsService } from '../../shared/services/selection-ids/selecti
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from 'src/app/shared/componentes/modal-dialog/modal-dialog.component';
+import { UserInfoService } from 'src/app/shared/services/user-info/user-info.service';
 
 @Component({
   selector: 'app-matricula-alumno',
@@ -23,7 +24,6 @@ export class MatriculaAlumnoComponent implements OnInit {
   modalDataObj!: any;
 
   msg:any;
-  disable=true;
 
   // data:any={};
   muestra_dialog=false;
@@ -37,6 +37,9 @@ export class MatriculaAlumnoComponent implements OnInit {
   
   bgmodal!:string;
   modalbutton!:any;
+
+  disable = true;
+  currentDate:Date = new Date();
 
   url!:string;
   photo = environment.photo;
@@ -66,47 +69,54 @@ export class MatriculaAlumnoComponent implements OnInit {
     private mensaje: MessageService,
     public dialog: MatDialog,
     private crud: CrudService,
-    private ms : MessageService,
+    public userInfo: UserInfoService,
     private selIdsService: SelectionIdsService, ) {
 
-      ms.disable_msg.pipe(
-        tap(msg => this.disable =  (msg.tipo == 'utp')? false : true),
-        take(1)
-      ).subscribe()
+      const getPermision = (msg: any) => { if(msg) {
+        const year = this.currentDate.getFullYear();
+        this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
+        } 
+  
+      }
+  
+     const getColor = (color:string) => {
 
+      if (color=='azul') {
+        this.bodybgcolor = this.objcolors.azul.bodybgcolor;
+        this.pagination = this.objcolors.azul.pagination;
+        this.tablehead = this.objcolors.azul.tablehead;
+        this.bgmodal = this.objcolors.azul.bgmodal;
+        this.modalbutton = this.objcolors.azul.modalbutton;
+        this.url = this.photo.azul;
 
-      ms.color_msg.subscribe((color:any) =>  {
+      }
+      if (color=='verde') {
+        this.bodybgcolor = this.objcolors.verde.bodybgcolor;
+        this.pagination = this.objcolors.verde.pagination;
+        this.tablehead = this.objcolors.verde.tablehead;
+        this.bgmodal = this.objcolors.verde.bgmodal;
+        this.modalbutton = this.objcolors.verde.modalbutton;
+        this.url = this.photo.verde;
 
+      }
+      if (color=='naranjo') {
+        this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
+        this.pagination = this.objcolors.naranjo.pagination;
+        this.tablehead = this.objcolors.naranjo.tablehead;
+        this.bgmodal = this.objcolors.naranjo.bgmodal;
+        this.modalbutton = this.objcolors.naranjo.modalbutton;
+        this.url = this.photo.naranjo;
 
-        if (color=='azul') {
-          this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-          this.pagination = this.objcolors.azul.pagination;
-          this.tablehead = this.objcolors.azul.tablehead;
-          this.bgmodal = this.objcolors.azul.bgmodal;
-          this.modalbutton = this.objcolors.azul.modalbutton;
-          this.url = this.photo.azul;
+      }
 
-        }
-        if (color=='verde') {
-          this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-          this.pagination = this.objcolors.verde.pagination;
-          this.tablehead = this.objcolors.verde.tablehead;
-          this.bgmodal = this.objcolors.verde.bgmodal;
-          this.modalbutton = this.objcolors.verde.modalbutton;
-          this.url = this.photo.verde;
+    }
+  
+  
+      this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
+        getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
+        getColor(info.personalInfo.usuario.Tema.nombre);
+      }))   
 
-        }
-        if (color=='naranjo') {
-          this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-          this.pagination = this.objcolors.naranjo.pagination;
-          this.tablehead = this.objcolors.naranjo.tablehead;
-          this.bgmodal = this.objcolors.naranjo.bgmodal;
-          this.modalbutton = this.objcolors.naranjo.modalbutton;
-          this.url = this.photo.naranjo;
-
-        }
-
-      })
 
       this.formConsulta = new FormGroup({
           rut_alumno : new FormControl('', rutValidator()),

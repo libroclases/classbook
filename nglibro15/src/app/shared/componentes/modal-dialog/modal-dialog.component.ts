@@ -74,7 +74,10 @@ import { ToastrService } from 'ngx-toastr';
 
     ) {
 
-       userinfo.personalInfo$.subscribe(info => this.usuarioId = info.datos_usuario.id);
+       userinfo.personalInfo$.subscribe(info => {
+        console.log('poronga',info);
+        this.usuarioId = info.personalInfo.datos_persona.id
+      });
    
 
       this.formModal = new FormGroup({});
