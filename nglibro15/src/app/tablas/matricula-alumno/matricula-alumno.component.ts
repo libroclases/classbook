@@ -66,7 +66,7 @@ export class MatriculaAlumnoComponent implements OnInit {
   
   constructor(
     @Inject(DOCUMENT) private document:Document,
-    private mensaje: MessageService,
+    // private mensaje: MessageService,
     public dialog: MatDialog,
     private crud: CrudService,
     public userInfo: UserInfoService,
@@ -129,14 +129,14 @@ export class MatriculaAlumnoComponent implements OnInit {
   reset() {
     this.formConsulta.reset();
     this.muestra_dialog = false;
-    this.mensaje.nextMsg({})
+    //this.mensaje.nextMsg({})
 
   }
   cancelar() {
     this.formConsulta.reset();
     this.muestra_dialog = false;
   
-    this.mensaje.nextMsg({})
+    // this.mensaje.nextMsg({})
 
   }
   

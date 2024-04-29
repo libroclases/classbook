@@ -10,6 +10,7 @@ import { environment } from '../../../../environments/environment';
 import { MessageService } from '../../services/message/message.service';
 import { NgFor, NgIf } from '@angular/common';
 import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
+import { UserInfoService } from '../../services/user-info/user-info.service';
 
 @Component({
   selector: 'app-numbers-calendar',
@@ -90,6 +91,8 @@ export class NumbersCalendarComponent  implements OnInit, OnDestroy {
   pagination!:string;
   tablehead!:string;
 
+  disable = true;
+  currentDate:Date = new Date();
 
   daysOfWeek = ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'];
 
@@ -125,7 +128,7 @@ export class NumbersCalendarComponent  implements OnInit, OnDestroy {
   entryIdToday: Map<string, number> = new Map();
 
   constructor(
-    ms: MessageService,
+    public userInfo: UserInfoService,
     private crud: CrudService,
     private selIdsService: SelectionIdsService,
     private subsManagerService: SubscriptionsManagerService,
@@ -134,10 +137,15 @@ export class NumbersCalendarComponent  implements OnInit, OnDestroy {
   ) {
     this.configAlert.dismissible = false;
 
-    ms.color_msg.subscribe(color =>  {
+    const getPermision = (msg: any) => { if(msg) {
+      const year = this.currentDate.getFullYear();
+      this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
+      } 
 
-      //  TODO  Asignar dinamicamente los indices
+    }
 
+    const getColor = (color:string) => {
+      
       if (color=='azul') { 
         this.bodybgcolor = this.objcolors.azul.bodybgcolor;
         this.pagination = this.objcolors.azul.pagination;
@@ -152,8 +160,16 @@ export class NumbersCalendarComponent  implements OnInit, OnDestroy {
         this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
         this.pagination = this.objcolors.naranjo.pagination;
         this.tablehead = this.objcolors.naranjo.tablehead; 
-      }      
-    })
+      }    
+    }
+  
+  
+      this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
+        getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
+        getColor(info.personalInfo.usuario.Tema.nombre);
+      }))
+
+ 
   }
 
   ngOnInit() {

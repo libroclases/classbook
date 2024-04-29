@@ -18,7 +18,7 @@ export class CabeceraComponent {
 
   constructor(
     private userInfo: UserInfoService,
-    private ms: MessageService,
+    // private ms: MessageService,
     private auth: AuthService) {
 
     this.auth.isAuthenticated$.subscribe(isAuth => { if(isAuth) {
@@ -29,7 +29,7 @@ export class CabeceraComponent {
         
         if (info.personalInfo) {
           // console.log('poronga',info.personalInfo.usuario.Tema.nombre);
-          this.ms.nextColor(info.personalInfo.usuario.Tema.nombre);
+          // this.ms.nextColor(info.personalInfo.usuario.Tema.nombre);
           sessionStorage.setItem('Color', info.personalInfo.usuario.Tema.nombre);
           this.fullName = (info.personalInfo.datos_persona) ? Object.values(info.personalInfo.datos_persona).slice(1).toString(): '';
         } else {
@@ -41,15 +41,15 @@ export class CabeceraComponent {
 
     } else {
        let color = sessionStorage.getItem('Color');
-       if (color) { this.ms.nextColor(color) }
-       else { this.ms.nextColor('azul'); }
+       // if (color) { this.ms.nextColor(color) }
+       // else { this.ms.nextColor('azul'); }
 
     }
 
     })
 
+    const getColor = (color:string) => {
 
-    ms.color_msg.subscribe((color:any) =>  {
       if (color=='azul') {
         this.color = this.objcolors.azul.color;
         this.lineal = this.objcolors.azul.lineal;
@@ -63,8 +63,13 @@ export class CabeceraComponent {
         this.color = this.objcolors.naranjo.color;
         this.lineal = this.objcolors.naranjo.lineal;
       }
-    })
-
+  
+    }
+  
+      this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
+        getColor(info.personalInfo.usuario.Tema.nombre);
+      }))
+      
   }
 
 }

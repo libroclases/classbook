@@ -24,8 +24,12 @@ export class AuthButtonComponent implements OnDestroy {
     @Inject(DOCUMENT) public document: Document,
     public auth: AuthService,
     private subsManager: SubscriptionsManagerService,
-    private ms : MessageService,) {
-      ms.color_msg.subscribe(color =>  {
+    public userInfo: UserInfoService
+    ) {
+
+
+      const getColor = (color:string) => {
+
         if (color=='azul') {
           this.colorMenuButton = this.objcolors.azul.colorMenuButton;
         }
@@ -35,8 +39,13 @@ export class AuthButtonComponent implements OnDestroy {
         else if (color=='naranjo') {
 
           this.colorMenuButton = this.objcolors.naranjo.colorMenuButton;
-        }
-      })
+        }    
+      }
+    
+    
+        this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
+          getColor(info.personalInfo.usuario.Tema.nombre);
+        }))
     }
 
   ngOnDestroy(): void {

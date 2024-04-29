@@ -62,7 +62,6 @@ export class MenuComponent implements OnInit{
     private iconsService: IconsService,
     public userInfo: UserInfoService,
     private router: Router,
-    public ms: MessageService,
     private store: Store,
     private crud: CrudService,
     public auth: AuthService) {
@@ -75,21 +74,20 @@ export class MenuComponent implements OnInit{
       }
     }})
 
+    const getColor = (color:string) => {
+      console.log(color);
+      if (color=='azul') {
+        this.color="azul";  this.menu = this.objcolors.azul.menu;  }
+      if (color=='verde') {
+        this.color = "verde"; this.menu = this.objcolors.verde.menu;   }
+      if (color=='naranjo') {
+        this.color = "naranjo"; this.menu = this.objcolors.naranjo.menu;    }
+  
+    }
 
-
-      ms.color_msg.subscribe(color =>  {
-        this.color = color;
-        if (color=='azul') {
-          this.menu = this.objcolors.azul.menu;
-        }
-        else if (color=='verde') {
-          this.menu = this.objcolors.verde.menu;
-        }
-        else if (color=='naranjo') {
-          this.menu = this.objcolors.naranjo.menu;
-        }
-
-      })
+    this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
+      getColor(info.personalInfo.usuario.Tema.nombre);
+    }))
 
 
   }
@@ -99,7 +97,7 @@ export class MenuComponent implements OnInit{
     return this.iconsService.getBiClass(route);
   }
 
-  sendtype(tabla: string, tipo:string) { this.ms.nextType({tabla,tipo}) }
+  // sendtype(tabla: string, tipo:string) { this.ms.nextType({tabla,tipo}) }
 
   mensaje(color: any) {
     

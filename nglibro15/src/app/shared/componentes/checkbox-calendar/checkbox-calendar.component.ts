@@ -10,6 +10,7 @@ import { Alert } from '../../../interfaces/generic.interface';
 import { IconsService } from '../../services/icons/icons.service';
 import { MessageService } from '../../services/message/message.service';
 import { environment } from '../../../../environments/environment';
+import { UserInfoService } from '../../services/user-info/user-info.service';
 
 @Component({
   selector: 'checkbox-calendar',
@@ -110,7 +111,8 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
   colToday = 0;
   currentDateInMonth = false;
 
- 
+  disable = true;
+  currentDate:Date = new Date();
 
   // ----
   // mes seleccionado
@@ -136,18 +138,24 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
 
   constructor(
     private crud: CrudService,
-    ms: MessageService,
     private fkService: ForeignKeysService,
     private selIdsService: SelectionIdsService,
     private subsManagerService: SubscriptionsManagerService,
     private labelsService: LabelsService,
     private iconsService: IconsService,
-    private configAlert: NgbAlertConfig
+    private configAlert: NgbAlertConfig,
+    private userInfo: UserInfoService
   ) {
     this.configAlert.dismissible = false;
 
-    ms.color_msg.subscribe((color:any) =>  {
+    const getPermision = (msg: any) => { if(msg) {
+      const year = this.currentDate.getFullYear();
+      this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
+      } 
 
+    }
+
+    const getColor = (color:string) => {
 
       if (color=='azul') {
         this.bodybgcolor = this.objcolors.azul.bodybgcolor;
@@ -168,9 +176,16 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
         this.tablehead = this.objcolors.naranjo.tablehead;
         this.modalbutton = this.objcolors.naranjo.modalbutton;
       }
-    })
+    }
+  
+  
+      this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
+        getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
+        getColor(info.personalInfo.usuario.Tema.nombre);
+      }))
+      
+}  
 
-  }
 
   ngOnInit() {
     this.mainTableForeignKeys = this.fkService.getFKeys(this.table)!;
