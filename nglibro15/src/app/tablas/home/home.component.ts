@@ -1,13 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { MessageService } from '../../shared/services/message/message.service';
 import { ActivatedRoute } from '@angular/router';
 import { body, intro, titles, bottom } from './datatexto';
-// import { UserInfoService } from 'src/app/shared/services/user-info/user-info.service';
-
-import {Select, Store} from '@ngxs/store';
-import { Usuario, UsersStateModel } from '../../ngxs/usuario.model';
-import { GetUsuario } from '../../ngxs/usuario.actions'
+import {Select} from '@ngxs/store';
+import { Usuario } from '../../ngxs/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario.state';
 import { Observable } from 'rxjs';
 
@@ -46,14 +42,11 @@ export class HomeComponent implements OnInit{
   }
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private store: Store,
-    // private userInfo: UserInfoService
+    activatedRoute: ActivatedRoute,
+
     ) {
 
-    this.store.dispatch(new GetUsuario('vcherrera_7@gmail.com'));
     activatedRoute.data.subscribe(data => {
-      
       this.showme = data['showme'];
     })
 
@@ -68,9 +61,9 @@ export class HomeComponent implements OnInit{
         this.color = "verde"; this.url = this.photo.verde;       }
       if (color=='naranjo') {
         this.color = "naranjo"; this.url = this.photo.naranjo;      }
-  
+
     }
-    this.usuario$.subscribe((inf:any) => getColor(inf[0].personalInfo.usuario.Tema.nombre))
+    this.usuario$.subscribe((info:any) => { if (info[0].personalInfo) {getColor(info[0].personalInfo.usuario.Tema.nombre)} } )
   }
 
 }

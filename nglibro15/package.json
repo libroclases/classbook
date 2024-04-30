@@ -24,7 +24,6 @@
     "@auth0/auth0-angular": "^2.2.3",
     "@ng-bootstrap/ng-bootstrap": "^14.2.0",
     "@ngxs/logger-plugin": "^3.8.2",
-    "@ngxs/storage-plugin": "^3.8.2",
     "@ngxs/store": "^3.8.2",
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",

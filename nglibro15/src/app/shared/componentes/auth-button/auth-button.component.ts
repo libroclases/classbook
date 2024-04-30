@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+// import { DOCUMENT } from '@angular/common';
 
 // Import the AuthService type from the SDK
 import { AuthModule, AuthService } from '@auth0/auth0-angular';
@@ -21,7 +21,7 @@ export class AuthButtonComponent implements OnDestroy {
   objcolors = environment.colors
 
   constructor(
-    @Inject(DOCUMENT) public document: Document,
+    //@Inject(DOCUMENT) public document: Document,
     public auth: AuthService,
     private subsManager: SubscriptionsManagerService,
     public userInfo: UserInfoService
@@ -39,13 +39,15 @@ export class AuthButtonComponent implements OnDestroy {
         else if (color=='naranjo') {
 
           this.colorMenuButton = this.objcolors.naranjo.colorMenuButton;
-        }    
+        }
       }
-    
-    
-        this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
-          getColor(info.personalInfo.usuario.Tema.nombre);
-        }))
+
+
+      this.userInfo.personalInfo$.subscribe(info => {
+        if (info.personalInfo) {
+             getColor(info.personalInfo.usuario.Tema.nombre);
+        }
+      })
     }
 
   ngOnDestroy(): void {
@@ -57,7 +59,7 @@ export class AuthButtonComponent implements OnDestroy {
       appState: {
         target: '/home',
       },
-    });
+    })
   }
 
   handleLogout(): void {
@@ -71,7 +73,7 @@ export class AuthButtonComponent implements OnDestroy {
   handleSignUp(): void {
     this.auth.loginWithRedirect({
       appState: {
-        target: '/formulario',
+        target: '/registro_usuario',
       },
       authorizationParams: {
         screen_hint: 'signup',

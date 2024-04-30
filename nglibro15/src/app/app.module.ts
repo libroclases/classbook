@@ -70,7 +70,6 @@ import { AsignaturaCursoComponent } from './tablas/asignatura-curso/asignatura-c
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
-import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 
 import { ToastrModule } from 'ngx-toastr';
 import { UsuarioState } from './ngxs/usuario.state';
@@ -205,7 +204,7 @@ allowedTables.forEach((tb) => {
     NgxsModule.forRoot([UsuarioState], { developmentMode: !env.production }),
     NgxsReduxDevtoolsPluginModule.forRoot({disabled: env.production}),
     NgxsLoggerPluginModule.forRoot({disabled: env.production}),
-    NgxsStoragePluginModule.forRoot(),
+
 
     // Auth0
     AuthModule.forRoot({

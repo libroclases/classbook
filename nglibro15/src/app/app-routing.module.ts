@@ -113,7 +113,7 @@ const routes: Routes = [
   { path: 'asignaturaprofesor', component: AsignaturaProfesorComponent, canActivate: [AuthGuard]},
   { path: 'asignaturaprofesor/:id/:padre', component: AsignaturaProfesorComponent, canActivate: [AuthGuard]},
 
-  { path: 'matricula-alumno', component: MatriculaAlumnoComponent, canActivate: [AuthGuard] },
+  { path: 'matricula_alumno', component: MatriculaAlumnoComponent, canActivate: [AuthGuard] },
 
   { path: 'evaluacion', component: EvaluacionComponent, canActivate: [AuthGuard]},
 
@@ -121,7 +121,7 @@ const routes: Routes = [
 
   { path: 'ventana', component: VentanaComponent, canActivate: [AuthGuard]},
 
-  { path: 'registro-usuario', component: RegistroUsuarioComponent, canActivate: [AuthGuard] },
+  { path: 'registro_usuario', component: RegistroUsuarioComponent, canActivate: [AuthGuard] },
 
   { path: 'resumennota', component: ResumenNotaComponent },
 

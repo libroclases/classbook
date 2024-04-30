@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
 import { environment as env } from '../../../environments/environment';
-import { UserInfoService } from '../../shared/services/user-info/user-info.service';
-import { MessageService } from '../../shared/services/message/message.service';
+// import { UserInfoService } from '../../shared/services/user-info/user-info.service';
+// import { MessageService } from '../../shared/services/message/message.service';
 import { AuthService } from '@auth0/auth0-angular';
+import { Select, Store } from '@ngxs/store';
+// import { GetUsuario } from 'src/app/ngxs/usuario.actions';
+import { Observable, isEmpty } from 'rxjs';
+import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Usuario } from 'src/app/ngxs/usuario.model';
 
 @Component({
   selector: 'app-cabecera',
@@ -16,41 +21,31 @@ export class CabeceraComponent {
   fullName = '';
   objcolors = env.colors;
 
-  constructor(
-    private userInfo: UserInfoService,
-    // private ms: MessageService,
-    private auth: AuthService) {
+
+   @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
+
+  constructor( private auth: AuthService) {
 
     this.auth.isAuthenticated$.subscribe(isAuth => { if(isAuth) {
-
       console.log('estoy autentificado');
+      this.usuario$.subscribe( (info:any)  => {
+        if (info[0].personalInfo) {
 
-      userInfo.personalInfo$.subscribe( info  => {
-        
-        if (info.personalInfo) {
-          // console.log('poronga',info.personalInfo.usuario.Tema.nombre);
-          // this.ms.nextColor(info.personalInfo.usuario.Tema.nombre);
-          sessionStorage.setItem('Color', info.personalInfo.usuario.Tema.nombre);
-          this.fullName = (info.personalInfo.datos_persona) ? Object.values(info.personalInfo.datos_persona).slice(1).toString(): '';
-        } else {
-          this.fullName = '';
-          
+          console.log('poronga',info[0].personalInfo.usuario.Tema.nombre);
+          getColor(info[0].personalInfo.usuario.Tema.nombre);
+          this.fullName = (info[0].personalInfo.datos_persona) ? Object.values(info[0].personalInfo.datos_persona).slice(1).toString(): '';
         }
 
       }) ;
-
-    } else {
-       let color = sessionStorage.getItem('Color');
-       // if (color) { this.ms.nextColor(color) }
-       // else { this.ms.nextColor('azul'); }
-
-    }
-
+     } else {
+        this.fullName="";
+        getColor(sessionStorage.getItem('Color'))
+      }
     })
 
-    const getColor = (color:string) => {
+    const getColor = (color:string | null) => {
 
-      if (color=='azul') {
+      if (color=='azul' || !color) { console.log('color',color)
         this.color = this.objcolors.azul.color;
         this.lineal = this.objcolors.azul.lineal;
        }
@@ -63,13 +58,9 @@ export class CabeceraComponent {
         this.color = this.objcolors.naranjo.color;
         this.lineal = this.objcolors.naranjo.lineal;
       }
-  
+
     }
-  
-      this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
-        getColor(info.personalInfo.usuario.Tema.nombre);
-      }))
-      
+
   }
 
 }
