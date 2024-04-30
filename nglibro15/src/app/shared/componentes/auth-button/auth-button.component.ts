@@ -1,54 +1,60 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 // import { DOCUMENT } from '@angular/common';
 
 // Import the AuthService type from the SDK
-import { AuthModule, AuthService } from '@auth0/auth0-angular';
+import { AuthService } from '@auth0/auth0-angular';
 import { SubscriptionsManagerService } from '../../services/subscriptions-manager/subscriptions-manager.service';
-import { tap } from 'rxjs';
-import { UserInfoService } from '../../services/user-info/user-info.service';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { MessageService } from '../../services/message/message.service';
+import { Usuario } from 'src/app/ngxs/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Select } from '@ngxs/store';
 
 @Component({
   selector: 'auth-button',
   templateUrl: './auth-button.component.html',
   styleUrls: ['./auth-button.component.css']
 })
-export class AuthButtonComponent implements OnDestroy {
+export class AuthButtonComponent implements OnInit, OnDestroy {
   // Inject the authentication service into your component through the constructor
 
   colorMenuButton!:string;
   objcolors = environment.colors
 
+  color!:string;
+  url!:string;
+
+  @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
+
   constructor(
-    //@Inject(DOCUMENT) public document: Document,
     public auth: AuthService,
     private subsManager: SubscriptionsManagerService,
-    public userInfo: UserInfoService
     ) {
 
 
-      const getColor = (color:string) => {
+    }
+  ngOnInit(): void {
+    const getColor = (color:string | null) => {
+      console.log('home color',color);
+      if (color=='azul' || !color) {
+        this.colorMenuButton = this.objcolors.azul.colorMenuButton;
+      }
+      else if (color=='verde') {
+        this.colorMenuButton = this.objcolors.verde.colorMenuButton;
+      }
+      else if (color=='naranjo') {
 
-        if (color=='azul') {
-          this.colorMenuButton = this.objcolors.azul.colorMenuButton;
-        }
-        else if (color=='verde') {
-          this.colorMenuButton = this.objcolors.verde.colorMenuButton;
-        }
-        else if (color=='naranjo') {
-
-          this.colorMenuButton = this.objcolors.naranjo.colorMenuButton;
-        }
+        this.colorMenuButton = this.objcolors.naranjo.colorMenuButton;
       }
 
-
-      this.userInfo.personalInfo$.subscribe(info => {
-        if (info.personalInfo) {
-             getColor(info.personalInfo.usuario.Tema.nombre);
-        }
-      })
     }
+    this.usuario$.subscribe((info:any) => {
+      if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
+      else { getColor(localStorage.getItem('Color')) }
+    }
+   )
+  }
+
 
   ngOnDestroy(): void {
     this.subsManager.unsubscribeAll();

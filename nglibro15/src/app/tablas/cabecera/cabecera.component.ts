@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { environment as env } from '../../../environments/environment';
-// import { UserInfoService } from '../../shared/services/user-info/user-info.service';
-// import { MessageService } from '../../shared/services/message/message.service';
 import { AuthService } from '@auth0/auth0-angular';
-import { Select, Store } from '@ngxs/store';
-// import { GetUsuario } from 'src/app/ngxs/usuario.actions';
-import { Observable, isEmpty } from 'rxjs';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { UsuarioState } from 'src/app/ngxs/usuario.state';
 import { Usuario } from 'src/app/ngxs/usuario.model';
 
@@ -31,8 +28,8 @@ export class CabeceraComponent {
       this.usuario$.subscribe( (info:any)  => {
         if (info[0].personalInfo) {
 
-          localStorage.setItem('Color', info[0].personalInfo.usuario.Tema.nombre);
-          getColor(info[0].personalInfo.usuario.Tema.nombre);
+          localStorage.setItem('Color', info.personalInfo.usuario.Tema.nombre);
+          getColor(info.personalInfo.usuario.Tema.nombre);
           this.fullName = (info[0].personalInfo.datos_persona) ? Object.values(info[0].personalInfo.datos_persona).slice(1).toString(): '';
         }
 

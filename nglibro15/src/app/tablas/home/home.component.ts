@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit{
   position = "center";
   size = "cover";
 
-  color = "";
+  color!:string;
 
   titles:any = titles;
   intro:any = intro;
@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit{
 
     }
     this.usuario$.subscribe((info:any) => {
-      if (info[0].personalInfo) {getColor(info[0].personalInfo.usuario.Tema.nombre)}
+      if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
       else { getColor(localStorage.getItem('Color')) }
     }
    )

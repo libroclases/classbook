@@ -40,7 +40,7 @@ export class MenuComponent implements OnInit{
     }
 
     this.usuario$.subscribe((info:any) => {
-          if (info[0].personalInfo) { getColor(info[0].personalInfo.usuario.Tema.nombre) }
+          if (info.personalInfo) { getColor(info.personalInfo.usuario.Tema.nombre) }
       })
     }
 

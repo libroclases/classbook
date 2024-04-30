@@ -6,11 +6,11 @@ import { GetUsuario } from './usuario.actions';
 import { tap } from 'rxjs';
 
 export class UsuarioStateModel {
-  public usuario!: Usuario[];
+  public usuario!: Usuario;
 }
 
 const defaults = {
-  usuario: [{personalInfo: null, inscripcionColegio: null}]
+  usuario: {personalInfo: null, inscripcionColegio: null}
 };
 
 @State<UsuarioStateModel>({
@@ -37,7 +37,7 @@ export class UsuarioState {
       tap((res:any) => {
         // const state = getState();
         patchState({
-          usuario: [res]
+          usuario: res
       });
      }
     )
