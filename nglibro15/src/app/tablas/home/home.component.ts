@@ -53,8 +53,8 @@ export class HomeComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    const getColor = (color:string) => {
-      console.log(color);
+    const getColor = (color:string | null) => {
+      console.log('home color',color);
       if (color=='azul') {
         this.color="azul";  this.url = this.photo.azul;      }
       if (color=='verde') {
@@ -63,7 +63,11 @@ export class HomeComponent implements OnInit{
         this.color = "naranjo"; this.url = this.photo.naranjo;      }
 
     }
-    this.usuario$.subscribe((info:any) => { if (info[0].personalInfo) {getColor(info[0].personalInfo.usuario.Tema.nombre)} } )
+    this.usuario$.subscribe((info:any) => {
+      if (info[0].personalInfo) {getColor(info[0].personalInfo.usuario.Tema.nombre)}
+      else { getColor(localStorage.getItem('Color')) }
+    }
+   )
   }
 
 }

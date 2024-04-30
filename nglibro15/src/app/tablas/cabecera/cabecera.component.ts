@@ -31,7 +31,7 @@ export class CabeceraComponent {
       this.usuario$.subscribe( (info:any)  => {
         if (info[0].personalInfo) {
 
-          console.log('poronga',info[0].personalInfo.usuario.Tema.nombre);
+          localStorage.setItem('Color', info[0].personalInfo.usuario.Tema.nombre);
           getColor(info[0].personalInfo.usuario.Tema.nombre);
           this.fullName = (info[0].personalInfo.datos_persona) ? Object.values(info[0].personalInfo.datos_persona).slice(1).toString(): '';
         }
@@ -39,7 +39,7 @@ export class CabeceraComponent {
       }) ;
      } else {
         this.fullName="";
-        getColor(sessionStorage.getItem('Color'))
+        getColor(localStorage.getItem('Color'))
       }
     })
 
