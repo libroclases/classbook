@@ -20,6 +20,9 @@ import { MessageService } from '../../services/message/message.service';
 import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe-validator.directive';
 import { UserInfoService } from '../../services/user-info/user-info.service';
 import { ToastrService } from 'ngx-toastr';
+import { Usuario } from 'src/app/ngxs/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Select } from '@ngxs/store';
 
 @Component({
     selector: 'modal-dialog',
@@ -47,6 +50,8 @@ import { ToastrService } from 'ngx-toastr';
 
     validator: any;
 
+    @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
+
     freeTables: string[] = [];
     // requiredBySelTree.get(tbl): selectors that require "tbl" to be selected
     requiredBySelTree = new Map<string, string[]>();
@@ -64,7 +69,7 @@ import { ToastrService } from 'ngx-toastr';
     private crud: CrudService,
     private fKeysService: ForeignKeysService ,
     private fb: FormBuilder,
-    userinfo: UserInfoService,
+    // userinfo: UserInfoService,
     // private validateHora: ValidaHorarioService,
     private ms : MessageService,
     private iconsService: IconsService,
@@ -74,10 +79,17 @@ import { ToastrService } from 'ngx-toastr';
 
     ) {
 
+      this.usuario$.subscribe(info => {
+        if (info.personalInfo) { this.usuarioId = info.personalInfo.datos_persona.id   }
+        // if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
+        // else { getColor(localStorage.getItem('Color')) }
+      });
+       /*
        userinfo.personalInfo$.subscribe(info => {
         console.log('poronga',info);
         this.usuarioId = info.personalInfo.datos_persona.id
       });
+      */
    
 
       this.formModal = new FormGroup({});
