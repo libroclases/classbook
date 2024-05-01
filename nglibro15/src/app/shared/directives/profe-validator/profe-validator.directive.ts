@@ -1,6 +1,6 @@
 import { Directive, inject } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, ValidatorFn, Validator } from '@angular/forms';
-import { MessageService } from '../../services/message/message.service';
+// import { MessageService } from '../../services/message/message.service';
 
 
 @Directive({
@@ -17,11 +17,11 @@ import { MessageService } from '../../services/message/message.service';
 export class ProfeValidatorsDirective {
 
   profesor = 0;
-
+  /*  
   constructor(private ms: MessageService) { 
     ms.profesor_msg.subscribe(profesor => this.profesor = profesor) 
   }
-
+  */
 
   profeValidator(valida: any, dia: number, profesor: number): ValidatorFn {
   

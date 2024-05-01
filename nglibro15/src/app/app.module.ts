@@ -61,7 +61,7 @@ import { VentanaComponent } from './tablas/ventana/ventana.component';
 import { RegistroUsuarioComponent } from './tablas/registro-usuario/registro-usuario.component';
 import { AdministradorComponent } from './tablas/administrador/administrador.component';
 import { ProfeValidatorsDirective } from './shared/directives/profe-validator/profe-validator.directive';
-import { MessageService } from './shared/services/message/message.service';
+
 import { ResumenNotaComponent } from './tablas/resumen-nota/resumen-nota.component';
 import { AsignaturaCursoComponent } from './tablas/asignatura-curso/asignatura-curso.component';
 
@@ -216,7 +216,7 @@ allowedTables.forEach((tb) => {
 
   ],
   providers: [
-    MessageService,
+    //MessageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHttpInterceptor,

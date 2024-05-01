@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { MessageService } from '../../shared/services/message/message.service';
+
 import { environment, attributesLabels, fKeysByTable, tableLabels, lowerUpperTables } from 'src/environments/environment';
 // import { ActivatedRoute } from '@angular/router';
 import { Observable, tap } from 'rxjs';

@@ -1,7 +1,7 @@
 import { Component, HostListener, Inject, Injectable, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { modalDataObject, lowerUpperTables, validator, environment } from '../../../environments/environment';
-import { MessageService } from '../../shared/services/message/message.service';
+
 import { rutValidator } from '../../shared/directives/rut-validator/rut-validator.directive';
 import { CrudService } from '../../shared/services/crud/crud.service';
 import { Observable, take, tap } from 'rxjs';

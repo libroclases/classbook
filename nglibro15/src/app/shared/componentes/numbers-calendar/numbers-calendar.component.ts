@@ -7,10 +7,9 @@ import { SelectionIdsService } from '../../services/selection-ids/selection-ids.
 import { SubscriptionsManagerService } from '../../services/subscriptions-manager/subscriptions-manager.service';
 import { IconsService } from '../../services/icons/icons.service';
 import { environment } from '../../../../environments/environment';
-import { MessageService } from '../../services/message/message.service';
-import { NgFor, NgIf } from '@angular/common';
-import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
-import { UserInfoService } from '../../services/user-info/user-info.service';
+import { Usuario } from 'src/app/ngxs/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Select } from '@ngxs/store';
 
 @Component({
   selector: 'app-numbers-calendar',
@@ -67,6 +66,8 @@ export class NumbersCalendarComponent  implements OnInit, OnDestroy {
   maxColumns: number = 40;
 
   opacity = environment.opacity;
+
+  @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
@@ -128,7 +129,6 @@ export class NumbersCalendarComponent  implements OnInit, OnDestroy {
   entryIdToday: Map<string, number> = new Map();
 
   constructor(
-    public userInfo: UserInfoService,
     private crud: CrudService,
     private selIdsService: SelectionIdsService,
     private subsManagerService: SubscriptionsManagerService,
@@ -144,7 +144,7 @@ export class NumbersCalendarComponent  implements OnInit, OnDestroy {
 
     }
 
-    const getColor = (color:string) => {
+    const getColor = (color:string | null) => {
       
       if (color=='azul') { 
         this.bodybgcolor = this.objcolors.azul.bodybgcolor;
@@ -163,12 +163,18 @@ export class NumbersCalendarComponent  implements OnInit, OnDestroy {
       }    
     }
   
-  
+
+    this.usuario$.subscribe(info => {
+      if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
+      else { getColor(localStorage.getItem('Color')) }
+    });
+
+/*    
       this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
         getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
         getColor(info.personalInfo.usuario.Tema.nombre);
       }))
-
+*/
  
   }
 

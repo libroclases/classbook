@@ -16,9 +16,9 @@ import { SelectionIdsService } from '../../services/selection-ids/selection-ids.
 import { formatDate } from '@angular/common';
 import { selectValidator } from '../../directives/select-validator/select-validator.directive';
 import { horaValidator} from '../../directives/hora-validator/hora-validator.directive';
-import { MessageService } from '../../services/message/message.service';
+
 import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe-validator.directive';
-import { UserInfoService } from '../../services/user-info/user-info.service';
+
 import { ToastrService } from 'ngx-toastr';
 import { Usuario } from 'src/app/ngxs/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario.state';
@@ -28,7 +28,7 @@ import { Select } from '@ngxs/store';
     selector: 'modal-dialog',
     templateUrl: 'modal-dialog.component.html',
     styleUrls: ['modal-dialog.component.css'],
-    providers: [ForeignKeysService, MessageService, ProfeValidatorsDirective],
+    providers: [ForeignKeysService, ProfeValidatorsDirective],
   })
   export class ModalDialogComponent implements OnInit, OnDestroy {
 
@@ -69,9 +69,6 @@ import { Select } from '@ngxs/store';
     private crud: CrudService,
     private fKeysService: ForeignKeysService ,
     private fb: FormBuilder,
-    // userinfo: UserInfoService,
-    // private validateHora: ValidaHorarioService,
-    private ms : MessageService,
     private iconsService: IconsService,
     private labelsService: LabelsService,
 
@@ -321,7 +318,7 @@ import { Select } from '@ngxs/store';
       if (table == 'profesor') {
 
         // this.selectedteacher = +event.target.value;
-        this.ms.nextProfesor(+event.target.value);
+        // this.ms.nextProfesor(+event.target.value);  REVISAR : PASAR A SUBJECT 
       }
       const newId = +event.target.value;
 
