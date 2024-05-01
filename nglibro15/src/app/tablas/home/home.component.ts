@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit{
 
   @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
-
   @HostListener('window:resize', ['$event'])
   onResize(event:any) {
     this.height = event.target.innerHeight - (this.banner_height + this.menu_height) + 'px';
@@ -54,7 +53,7 @@ export class HomeComponent implements OnInit{
   }
   ngOnInit(): void {
     const getColor = (color:string | null) => {
-      console.log('home color',color);
+      
       if (color=='azul' || !color) {
         this.color="azul";  this.url = this.photo.azul;      }
       if (color=='verde') {

@@ -1,10 +1,12 @@
 import { Component, HostListener } from '@angular/core';
-import { MessageService } from '../../shared/services/message/message.service';
-import { CrudService } from '../../shared/services/crud/crud.service';
+// import { CrudService } from '../../shared/services/crud/crud.service';
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
 import { SubscriptionsManagerService } from '../../shared/services/subscriptions-manager/subscriptions-manager.service';
 import { environment } from '../../../environments/environment';
-import { UserInfoService } from 'src/app/shared/services/user-info/user-info.service';
+import { Usuario } from 'src/app/ngxs/usuario.model';
+import { Observable } from 'rxjs';
+import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Select } from '@ngxs/store';
 
 @Component({
   selector: 'app-resumen-asistencia',
@@ -17,6 +19,8 @@ export class ResumenAsistenciaComponent {
   menu_height = environment.cabecera.menu_height;
 
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
+
+  @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -65,8 +69,7 @@ export class ResumenAsistenciaComponent {
   changeFnsArray!: Function[];
   patchFksFromStorage = ['colegio', 'anno', 'mes'];
 
-  constructor(private crud: CrudService,
-    private userInfo: UserInfoService,
+  constructor(
     private subsManagerService: SubscriptionsManagerService,
     private selIdsService: SelectionIdsService) { 
 
@@ -77,9 +80,9 @@ export class ResumenAsistenciaComponent {
   
       }
   
-     const getColor = (color:string) => {
+     const getColor = (color:string | null) => {
 
-      if (color=='azul') { 
+      if (color=='azul' || !color) { 
         this.bodybgcolor = this.objcolors.azul.bodybgcolor;
         this.pagination = this.objcolors.azul.pagination;
         this.tablehead = this.objcolors.azul.pagination;
@@ -99,12 +102,18 @@ export class ResumenAsistenciaComponent {
       }          
   
   }
-    
+   
+  this.usuario$.subscribe(info => {
+    if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
+    else { getColor(localStorage.getItem('Color')) }
+  });
+
+  /*
   this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
     getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
     getColor(info.personalInfo.usuario.Tema.nombre);
   }))
-    
+  */  
 
   }
 

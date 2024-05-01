@@ -43,7 +43,7 @@ export class CabeceraComponent {
       if (info.personalInfo) {
         getColor(info.personalInfo.usuario.Tema.nombre);
         localStorage.setItem('Color',info.personalInfo.usuario.Tema.nombre);
-        this.fullName = (info.personalInfo.datos_persona) ? Object.values(info.personalInfo.datos_persona).slice(1).toString(): ''; 
+        
       }
       else { 
         getColor(localStorage.getItem('Color'));

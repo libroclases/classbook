@@ -11,9 +11,9 @@ import { ForeignKeysService } from '../../shared/services/foreign-keys/foreign-k
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
 import { IconsService } from '../../shared/services/icons/icons.service';
 import { OriginTableIdService } from '../../shared/services/origin-table-id/origin-table-id.service';
-import { MessageService } from '../../shared/services/message/message.service';
-import { DOCUMENT } from '@angular/common';
-import { UserInfoService } from 'src/app/shared/services/user-info/user-info.service';
+import { Usuario } from 'src/app/ngxs/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Select } from '@ngxs/store';
 
 
 
@@ -39,6 +39,8 @@ export class HorarioComponent implements OnInit, OnDestroy {
   opacity = environment.opacity;
   position = "center";
   size = "cover";
+
+  @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
@@ -130,8 +132,6 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
   constructor(private crud: CrudService,
     // route: ActivatedRoute,
-    // @Inject(DOCUMENT) private document: Document,
-    private userInfo: UserInfoService,
     originTableIdsService: OriginTableIdService,
     // activatedRoute: ActivatedRoute,
     private subsManagerService: SubscriptionsManagerService,
@@ -150,9 +150,9 @@ export class HorarioComponent implements OnInit, OnDestroy {
   
       }
   
-     const getColor = (color:string) => {
+     const getColor = (color:string | null) => {
       
-      if (color=='azul') {
+      if (color=='azul' || !color) {
         this.bodybgcolor = this.objcolors.azul.bodybgcolor;
         this.pagination = this.objcolors.azul.pagination;
         this.tablehead = this.objcolors.azul.tablehead;
@@ -178,12 +178,19 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
       }
 }
-    
-  this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
+   
+
+this.usuario$.subscribe(info => {
+  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
+  else { getColor(localStorage.getItem('Color')) }
+});
+
+/*
+this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
     getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
     getColor(info.personalInfo.usuario.Tema.nombre);
   }))
-
+*/
       /*
       activatedRoute.params.subscribe(params =>
         this.crud.getDataPk('region', 1)

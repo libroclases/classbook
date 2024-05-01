@@ -1,15 +1,17 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Select } from '@ngxs/store';
 import { Observable, take, tap } from 'rxjs';
+import { Usuario } from 'src/app/ngxs/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario.state';
 import { ModalDialogComponent } from 'src/app/shared/componentes/modal-dialog/modal-dialog.component';
 import { emailValidator } from 'src/app/shared/directives/email-validator/email-validator.directive';
 import { selectValidator } from 'src/app/shared/directives/select-validator/select-validator.directive';
 import { CrudService } from 'src/app/shared/services/crud/crud.service';
 import { LabelsService } from 'src/app/shared/services/labels/labels.service';
-import { MessageService } from 'src/app/shared/services/message/message.service';
 import { SelectionIdsService } from 'src/app/shared/services/selection-ids/selection-ids.service';
-import { UserInfoService } from 'src/app/shared/services/user-info/user-info.service';
+
 import { environment, lowerUpperTables as lowerUpper, lowerUpperTables, modalDataObject, usuarioTipo, validator } from 'src/environments/environment';
 
 @Component({
@@ -53,6 +55,8 @@ export class RegistroUsuarioComponent implements OnInit {
 
   bgmodal!:string;
   modalbutton!:string;
+
+  @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
@@ -110,7 +114,7 @@ export class RegistroUsuarioComponent implements OnInit {
     // private mensaje: MessageService,
     public dialog: MatDialog,
     private crud: CrudService,
-    public userInfo: UserInfoService,
+    
     private labelsService: LabelsService,
     // private selIdsService: SelectionIdsService, 
     ) {
@@ -122,9 +126,9 @@ export class RegistroUsuarioComponent implements OnInit {
   
       }
   
-     const getColor = (color:string) => {
+     const getColor = (color:string | null) => {
 
-      if (color=='azul') {
+      if (color=='azul' || !color) {
         this.bodybgcolor = this.objcolors.azul.bodybgcolor;
         this.pagination = this.objcolors.azul.pagination;
         this.tablehead = this.objcolors.azul.tablehead;
@@ -152,11 +156,17 @@ export class RegistroUsuarioComponent implements OnInit {
   
     }
   
+this.usuario$.subscribe(info => {
+  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
+  else { getColor(localStorage.getItem('Color')) }
+});
+
+/*
       this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
         getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
         getColor(info.personalInfo.usuario.Tema.nombre);
       }))
-
+*/
       this.valuesForm = new FormGroup({
         email: new FormControl('', emailValidator()),
         username: new FormControl('', [Validators.required]),

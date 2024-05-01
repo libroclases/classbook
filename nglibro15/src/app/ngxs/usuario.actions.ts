@@ -5,6 +5,6 @@ export class GetUsuario {
 
 export class SetUsuario {
   static readonly type = '[Usuario] Set usuario';
-  constructor(public email:string, public color: string ) { }
+  constructor(public color: number, public usuario: number ) { }
 }
 

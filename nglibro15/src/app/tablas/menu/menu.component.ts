@@ -17,6 +17,8 @@ export class MenuComponent implements OnInit{
 
     @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
+    fullName!:string;
+
     objcolors = env.colors;
     menu!:string;
     color!:string;
@@ -40,7 +42,11 @@ export class MenuComponent implements OnInit{
     }
 
     this.usuario$.subscribe((info:any) => {
-          if (info.personalInfo) { getColor(info.personalInfo.usuario.Tema.nombre) }
+          if (info.personalInfo) {
+            let re = /,/gi; 
+            getColor(info.personalInfo.usuario.Tema.nombre) 
+            this.fullName = (info.personalInfo.datos_persona) ? Object.values(info.personalInfo.datos_persona).slice(1).toString().replace(re," "): ''; 
+          }
       })
     }
 

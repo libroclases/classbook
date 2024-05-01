@@ -13,10 +13,12 @@ import { Anno } from '../../interfaces/anno.interface';
 import { IconsService } from '../../shared/services/icons/icons.service';
 import { Alert } from '../../interfaces/generic.interface';
 import { ProfesorPie } from '../../interfaces/profesor.interface';
-import { MessageService } from '../../shared/services/message/message.service';
 import { AuthService } from '@auth0/auth0-angular';
-import { UserInfoService } from 'src/app/shared/services/user-info/user-info.service';
 import { TipoUsuario } from '../../interfaces/tipousuario.interface';
+import { Usuario } from 'src/app/ngxs/usuario.model';
+import { Observable } from 'rxjs';
+import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Select } from '@ngxs/store';
 
 
 const fieldsArray = ['inasistentesHombres', 'inasistentesMujeres', 'atrasos', 'observaciones'];
@@ -36,6 +38,8 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
 
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
+
+  @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
   disable = true;
   currentDate:Date = new Date();
@@ -136,8 +140,8 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
 
   constructor(
 
-    auth: AuthService,
-    private userInfo: UserInfoService,
+    // auth: AuthService,
+    
     private crud: CrudService,
     private subsManagerService: SubscriptionsManagerService,
     private fKeysService: ForeignKeysService,
@@ -154,9 +158,9 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
   
       }
   
-     const getColor = (color:string) => {
+     const getColor = (color:string | null) => {
       
-      if (color=='azul') {
+      if (color=='azul' || !color) {
         this.bodybgcolor = this.objcolors.azul.bodybgcolor;
         this.pagination = this.objcolors.azul.pagination;
         this.tablehead = this.objcolors.azul.tablehead;
@@ -176,11 +180,25 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
       }
 }
     
+
+this.usuario$.subscribe(info => {
+  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
+  else { getColor(localStorage.getItem('Color')) }
+});
+
+
+  /*
+
   this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
     getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
     getColor(info.personalInfo.usuario.Tema.nombre);
   }))
-      // REVIISAR ESTO
+
+  */ 
+
+      // REVISAR ESTO
+
+   /*   
       auth.isAuthenticated$.subscribe(isAuth => { if(isAuth) { 
         userInfo.personalInfo$.subscribe(info => {
           if (info) { 
@@ -189,7 +207,7 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
         }  )
       }})
 
- 
+    */
 
 
     this.inputIsEnabled = [];

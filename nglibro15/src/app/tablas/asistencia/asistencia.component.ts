@@ -1,10 +1,12 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { MessageService } from '../../shared/services/message/message.service';
 import { CrudService } from '../../shared/services/crud/crud.service';
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
 import { SubscriptionsManagerService } from '../../shared/services/subscriptions-manager/subscriptions-manager.service';
 import { environment } from '../../../environments/environment';
-import { UserInfoService } from 'src/app/shared/services/user-info/user-info.service';
+import { Usuario } from 'src/app/ngxs/usuario.model';
+import { Observable } from 'rxjs';
+import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Select } from '@ngxs/store';
 
 const DIAS_POR_PAGINA = 31;
 const minDiasPorPagina = 7;
@@ -61,7 +63,7 @@ export class AsistenciaComponent implements OnInit {
   // paginacion
   diasPorPagina = Math.max(DIAS_POR_PAGINA, minDiasPorPagina);
 
-  
+  @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
   selTables: string[] = ['colegio', 'anno', 'curso', 'mes'];
   changeFnsArray!: Function[];
@@ -69,7 +71,7 @@ export class AsistenciaComponent implements OnInit {
 
   constructor(
     private crud: CrudService,
-    private userInfo: UserInfoService,
+    // private userInfo: UserInfoService,
     private subsManagerService: SubscriptionsManagerService,
     private selIdsService: SelectionIdsService
   ) {
@@ -81,9 +83,9 @@ export class AsistenciaComponent implements OnInit {
 
     }
 
-   const getColor = (color:string) => {
+   const getColor = (color:string | null) => {
     
-    if (color == 'azul') {
+    if (color == 'azul' || !color) {
       this.bodybgcolor = this.objcolors.azul.bodybgcolor;
       this.pagination = this.objcolors.azul.pagination;
       this.url = this.photo.azul;
@@ -102,16 +104,28 @@ export class AsistenciaComponent implements OnInit {
 
     }
 }
-  
+
+this.usuario$.subscribe(info => {
+  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
+  else { getColor(localStorage.getItem('Color')) }
+});
+
+
+/*
 this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
   getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
   getColor(info.personalInfo.usuario.Tema.nombre);
 }))
+*/
 
 }
   
 
   ngOnInit(): void {
+
+
+
+
     this.changeFnsArray = [
       this.emptyFunction,
       this.emptyFunction,

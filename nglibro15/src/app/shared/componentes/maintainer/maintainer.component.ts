@@ -12,17 +12,9 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
 import { OriginTableIdService as OriginTableIdService } from '../../services/origin-table-id/origin-table-id.service';
-
-import { customOperator } from './custom-operator';
-import { MessageService } from '../../services/message/message.service';
-import { CommonModule, NgFor } from '@angular/common';
-import { NgxPaginationModule } from 'ngx-pagination';
-
-import { MultiSelectComponent} from '../multi-select/multi-select.component';
-import { UserInfoService } from '../../services/user-info/user-info.service';
-
-
-
+import { Usuario } from 'src/app/ngxs/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Select } from '@ngxs/store';
 
 @Component({
   selector: 'maintainer',
@@ -67,6 +59,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
 
+  @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
   @HostListener('window:resize', ['$event'])
   onResize(event:any) {
@@ -160,7 +153,6 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     private fkService: ForeignKeysService,
     private labelsService: LabelsService,
     private iconsService: IconsService,
-    public userInfo: UserInfoService
     ) {
 
     const getPermision = (msg: any) => { if(msg) {
@@ -170,9 +162,9 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
     }
 
-   const getColor = (color:string) => {
-    console.log(color);
-    if (color=='azul') {
+   const getColor = (color:string | null) => {
+    
+    if (color=='azul' || !color) {
       this.bodybgcolor = this.objcolors.azul.bodybgcolor;
       this.pagination = this.objcolors.azul.pagination;
       this.tablehead = this.objcolors.azul.tablehead;
@@ -200,12 +192,17 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
   }
 
+    this.usuario$.subscribe(info => {
+      if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
+      else { getColor(localStorage.getItem('Color')) }
+    });
 
-    this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
+/*
+    this.usuario$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
       getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
       getColor(info.personalInfo.usuario.Tema.nombre);
     }))
-    
+*/    
 
 
     activatedRoute.params.subscribe((params:any) => {

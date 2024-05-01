@@ -17,8 +17,11 @@
   border-width: 0px;
 }
 
+
+
 .col-sm-2 {
-  width:20%;
+ 
+  text-align:left;
   vertical-align: bottom;
   align-items: center;
   border-style: solid;
@@ -26,8 +29,8 @@
   border-width: 0px;
 }
 
-.col-sm-10 {
-  width:60%;
+.col-sm-8 {
+ 
   text-align: center;
   border-style: solid;
   border-color: rgb(12, 218, 39);
@@ -35,6 +38,6 @@
 }
 
 img {
-  max-width: 80%;
+  max-width: 100%;
 }
 

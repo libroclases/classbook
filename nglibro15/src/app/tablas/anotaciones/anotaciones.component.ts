@@ -1,6 +1,6 @@
 import { Component, HostListener, OnDestroy } from '@angular/core';
 import { Alert } from '../../interfaces/generic.interface';
-import { CrudService } from '../../shared/services/crud/crud.service';
+// import { CrudService } from '../../shared/services/crud/crud.service';
 import { Notification } from '../../interfaces/generic.interface';
 import { ForeignKeysService } from '../../shared/services/foreign-keys/foreign-keys.service';
 import { IconsService } from '../../shared/services/icons/icons.service';
@@ -9,10 +9,12 @@ import { SubscriptionsManagerService } from '../../shared/services/subscriptions
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../../shared/componentes/modal-dialog/modal-dialog.component';
 import { environment, lowerUpperTables, modalDataObject } from '../../../environments/environment';
-import { take, tap } from 'rxjs';
-import { MessageService } from '../../shared/services/message/message.service';
+import { Observable, take, tap } from 'rxjs';
 import { AuthService } from '@auth0/auth0-angular';
-import { UserInfoService,} from '../../shared/services/user-info/user-info.service'
+import { CrudService } from 'src/app/shared/services/crud/crud.service';
+import { Usuario } from 'src/app/ngxs/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Select } from '@ngxs/store';
 
 @Component({
   selector: 'app-anotaciones',
@@ -42,6 +44,8 @@ export class AnotacionesComponent implements OnDestroy {
 
   disable = true;
   currentDate:Date = new Date();
+
+  @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
 
@@ -82,8 +86,7 @@ export class AnotacionesComponent implements OnDestroy {
 
   constructor(
     private crud: CrudService,
-    private userInfo: UserInfoService,
-    auth: AuthService,
+    // auth: AuthService,
     
     public dialog: MatDialog,
     private subsManagerService: SubscriptionsManagerService,
@@ -98,9 +101,9 @@ export class AnotacionesComponent implements OnDestroy {
   
       }
   
-     const getColor = (color:string) => {
+     const getColor = (color:string | null) => {
       
-      if (color=='azul') {
+      if (color=='azul' || !color) {
         this.bodybgcolor = this.objcolors.azul.bodybgcolor;
         this.pagination = this.objcolors.azul.pagination;
         this.tablehead = this.objcolors.azul.tablehead;
@@ -125,20 +128,18 @@ export class AnotacionesComponent implements OnDestroy {
         this.url = this.photo.naranjo;
       }
 }
-    
+
+this.usuario$.subscribe(info => {
+  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
+  else { getColor(localStorage.getItem('Color')) }
+});
+
+/*
   this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
     getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
     getColor(info.personalInfo.usuario.Tema.nombre);
   }))
-      /*
-    auth.isAuthenticated$.subscribe(isAuth => { if(isAuth) { 
-            userInfo.personalInfo$.subscribe(info => {
-              if (info) { 
-                ms.nextUser(info.usuario.id)
-              } 
-            }  )
-       }})
-      */
+*/  
   }
 
   ngOnInit(): void {

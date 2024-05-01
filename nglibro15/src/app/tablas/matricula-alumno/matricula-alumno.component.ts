@@ -4,12 +4,15 @@ import { modalDataObject, lowerUpperTables, validator, environment } from '../..
 import { MessageService } from '../../shared/services/message/message.service';
 import { rutValidator } from '../../shared/directives/rut-validator/rut-validator.directive';
 import { CrudService } from '../../shared/services/crud/crud.service';
-import { take, tap } from 'rxjs';
+import { Observable, take, tap } from 'rxjs';
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from 'src/app/shared/componentes/modal-dialog/modal-dialog.component';
 import { UserInfoService } from 'src/app/shared/services/user-info/user-info.service';
+import { Usuario } from 'src/app/ngxs/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Select } from '@ngxs/store';
 
 @Component({
   selector: 'app-matricula-alumno',
@@ -40,6 +43,8 @@ export class MatriculaAlumnoComponent implements OnInit {
 
   disable = true;
   currentDate:Date = new Date();
+
+  @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
   url!:string;
   photo = environment.photo;
@@ -79,9 +84,9 @@ export class MatriculaAlumnoComponent implements OnInit {
   
       }
   
-     const getColor = (color:string) => {
+     const getColor = (color:string | null) => {
 
-      if (color=='azul') {
+      if (color=='azul' || !color) {
         this.bodybgcolor = this.objcolors.azul.bodybgcolor;
         this.pagination = this.objcolors.azul.pagination;
         this.tablehead = this.objcolors.azul.tablehead;
@@ -110,13 +115,20 @@ export class MatriculaAlumnoComponent implements OnInit {
       }
 
     }
-  
-  
+
+    
+this.usuario$.subscribe(info => {
+  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
+  else { getColor(localStorage.getItem('Color')) }
+});
+
+
+/*  
       this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
         getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
         getColor(info.personalInfo.usuario.Tema.nombre);
       }))   
-
+*/
 
       this.formConsulta = new FormGroup({
           rut_alumno : new FormControl('', rutValidator()),

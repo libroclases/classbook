@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { CrudService } from 'src/app/shared/services/crud/crud.service';
 import { Usuario } from './usuario.model';
-import { GetUsuario } from './usuario.actions';
+import { GetUsuario, SetUsuario } from './usuario.actions';
 import { tap } from 'rxjs';
 
 export class UsuarioStateModel {
@@ -43,5 +43,19 @@ export class UsuarioState {
     )
   )
 }
+
+@Action(SetUsuario)
+setUsuario({getState, patchState}: StateContext<UsuarioStateModel>, { color, usuario}: SetUsuario) {
+  return this.crud.putData({temaId: color, id: usuario},'usuario')!.pipe(
+    tap((res:any) => {
+      // const state = getState();
+      patchState({
+        usuario: res
+    });
+   }
+  )
+)
+}
+
 
 }
