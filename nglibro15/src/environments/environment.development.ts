@@ -114,7 +114,7 @@ export const environment = {
       color: 'green',
       lineal: 'linear-gradient(to right, #38B15C,#76FA91)',
       menu: '#dcf3dd',
-      colorMenuButton: 'rgb(82, 205, 145)',
+      colorMenuButton: '#71f48d',
       pagination: '#dcebe4',
       bodybgcolor: 'rgb(242, 248, 242)', // rgb(232, 248, 240)
       tablehead: 'lightgreen',
@@ -126,7 +126,7 @@ export const environment = {
       color: 'orange',
       lineal: 'linear-gradient(to right, #ffb505,#ffd966)',
       menu: '#FFE7C1',
-      colorMenuButton: 'orange',
+      colorMenuButton: '#ffd761',
       pagination: '#f2e6d3',
       bodybgcolor: 'rgb(255, 242, 222)',
       tablehead:  'rgb(255,212,96)',

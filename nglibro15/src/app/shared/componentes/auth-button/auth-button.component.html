@@ -2,14 +2,14 @@
   <br><br>
   <span *ngIf="auth.isAuthenticated$ | async; else loggedOut">
     <button (click)="handleLogout()"
-    type="button" class="btn text-light" [style.background-color]="colorMenuButton"><em class="bi bi-door-closed">&nbsp;Salir</em></button>
+    type="button" class="btn text-light  btn-lg" [style.background-color]="colorMenuButton"><em class="bi bi-door-closed">&nbsp;Salir</em></button>
   </span>
 
   <ng-template #loggedOut>
     <span>
       &nbsp;
       <button (click)="handleLogin()"
-      type="button"  class="btn text-light" [style.background-color]="colorMenuButton"><em class="bi bi-door-open">&nbsp;Ingresar</em>
+      type="button"  class="btn text-light btn-lg" [style.background-color]="colorMenuButton"><em class="bi bi-door-open">&nbsp;Ingresar</em>
       </button>
       &nbsp;
       <!--button routerLink="formulario" routerLinkActive="active"
