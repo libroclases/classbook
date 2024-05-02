@@ -3,10 +3,11 @@ import { IconsService } from '../../shared/services/icons/icons.service';
 import { environment as env } from '../../../environments/environment';
 import { AuthService } from '@auth0/auth0-angular';
 import { Router } from '@angular/router';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import {  Usuario } from '../../ngxs/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario.state';
-import { Observable, tap } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
+import { GetUsuario, SetUsuario } from 'src/app/ngxs/usuario.actions';
 
 @Component({
   selector: 'app-menu',
@@ -17,7 +18,7 @@ export class MenuComponent implements OnInit{
 
     @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
-    fullName!:string;
+    fullName!:any;
 
     objcolors = env.colors;
     menu!:string;
@@ -27,6 +28,7 @@ export class MenuComponent implements OnInit{
 
     docElement!: HTMLElement;
     isFullScreen: boolean = false;
+
 
     ngOnInit(): void {
     this.docElement = document.documentElement;
@@ -45,7 +47,8 @@ export class MenuComponent implements OnInit{
           if (info.personalInfo) {
             let re = /,/gi; 
             getColor(info.personalInfo.usuario.Tema.nombre) 
-            this.fullName = (info.personalInfo.datos_persona) ? Object.values(info.personalInfo.datos_persona).slice(1).toString().replace(re," "): ''; 
+            //this.fullName = (info.personalInfo.datos_persona) ? Object.values(info.personalInfo.datos_persona).slice(1).toString().replace(re," "): ''; 
+            this.fullName = (info.personalInfo.datos_persona) ? Object.values(info.personalInfo.datos_persona)[1]: ''
           }
       })
     }
@@ -60,24 +63,32 @@ export class MenuComponent implements OnInit{
        this.isFullScreen = !this.isFullScreen;
     }
 
-    goPlaces(link:string) {
-      this.router.navigate(['/', link]);
-    }
-
   tipousuario:any=null;
   esUtp=false;
 
   constructor(
     private iconsService: IconsService,
     private router: Router,
-    public auth: AuthService) {}
+    private store: Store,
+    public auth: AuthService) {
+      this.auth.user$.pipe(
+        map((user:any) => user?.email),
+        tap(user => { if (user) this.store.dispatch(new GetUsuario(user))})
+      ).subscribe()
+      ;
+    }
 
   getBiClass(route: string) {
     // para usar IconsService.getBiClass desde html
     return this.iconsService.getBiClass(route);
   }
 
-  mensaje(color:any[]) { console.log(color)}
+  mensaje(color:any) { 
+    // console.log('poronga',email);
+    this.store.dispatch(new GetUsuario('vcherrera_7@gmail.com'));
+    console.log('spapshot', this.store.snapshot())
+    // this.store.dispatch(new SetUsuario(color[1], 1));
+  }
 
   getIconLabel(route: string) {
     // para usar IconsService.getIconLabel desde html

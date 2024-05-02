@@ -35,9 +35,9 @@ export class UsuarioState {
       email: email,
     })!.pipe(
       tap((res:any) => {
-        // const state = getState();
+        console.log('poronga',res)
         patchState({
-          usuario: res
+          usuario:  res
       });
      }
     )
@@ -48,7 +48,9 @@ export class UsuarioState {
 setUsuario({getState, patchState}: StateContext<UsuarioStateModel>, { color, usuario}: SetUsuario) {
   return this.crud.putData({temaId: color, id: usuario},'usuario')!.pipe(
     tap((res:any) => {
-      // const state = getState();
+      const state = getState();
+      const todo = [state.usuario];
+      
       patchState({
         usuario: res
     });
