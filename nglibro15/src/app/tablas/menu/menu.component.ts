@@ -29,12 +29,10 @@ export class MenuComponent implements OnInit{
     docElement!: HTMLElement;
     isFullScreen: boolean = false;
 
+    usuarioId!:number;
 
-    ngOnInit(): void {
-    this.docElement = document.documentElement;
-
-    const getColor = (color:string) => {
-      console.log(color);
+    getColor(color:string)  {
+      console.log('COLOR:',color);
       if (color=='azul') {
         this.color="azul";  this.menu = this.objcolors.azul.menu;  }
       if (color=='verde') {
@@ -43,11 +41,17 @@ export class MenuComponent implements OnInit{
         this.color = "naranjo"; this.menu = this.objcolors.naranjo.menu;    }
     }
 
+    ngOnInit(): void {
+    this.docElement = document.documentElement;
+
+
+
     this.usuario$.subscribe((info:any) => {
           if (info.personalInfo) {
-            let re = /,/gi; 
-            getColor(info.personalInfo.usuario.Tema.nombre) 
-            //this.fullName = (info.personalInfo.datos_persona) ? Object.values(info.personalInfo.datos_persona).slice(1).toString().replace(re," "): ''; 
+            this.usuarioId = info.personalInfo.usuario.id;
+            // let re = /,/gi;
+            this.getColor(info.personalInfo.usuario.Tema.nombre)
+            //this.fullName = (info.personalInfo.datos_persona) ? Object.values(info.personalInfo.datos_persona).slice(1).toString().replace(re," "): '';
             this.fullName = (info.personalInfo.datos_persona) ? Object.values(info.personalInfo.datos_persona)[1]: ''
           }
       })
@@ -83,11 +87,12 @@ export class MenuComponent implements OnInit{
     return this.iconsService.getBiClass(route);
   }
 
-  mensaje(color:any) { 
-    // console.log('poronga',email);
-    this.store.dispatch(new GetUsuario('vcherrera_7@gmail.com'));
-    console.log('spapshot', this.store.snapshot())
-    // this.store.dispatch(new SetUsuario(color[1], 1));
+  mensaje(color:any) {
+    localStorage.setItem('Color', color[1])
+    this.store.dispatch(new SetUsuario(color[0], this.usuarioId)).pipe(
+      tap(() => localStorage.setItem('Color', color[1]))
+    )
+
   }
 
   getIconLabel(route: string) {

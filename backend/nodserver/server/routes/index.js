@@ -334,7 +334,7 @@ import AsignaturaCursos from '../controllers/asignaturacurso';
       checkjwd, requiredScopes('create:usuario'),
       Usuarios.create);
     app.put('/api/usuario/:usuarioId',
-      checkjwd, requiredScopes('update:usuario'),
+      // checkjwd, requiredScopes('update:usuario'),
       Usuarios.modify)
     app.get('/api/tabla',
       checkjwd, requiredScopes('read:tabla'),

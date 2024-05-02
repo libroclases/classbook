@@ -46,13 +46,13 @@ export class UsuarioState {
 
 @Action(SetUsuario)
 setUsuario({getState, patchState}: StateContext<UsuarioStateModel>, { color, usuario}: SetUsuario) {
-  return this.crud.putData({temaId: color, id: usuario},'usuario')!.pipe(
+  return this.crud.putData({Tema: color, id: usuario},'usuario')!.pipe(
     tap((res:any) => {
       const state = getState();
       const todo = [state.usuario];
-      
+      console.log('poronga res',res.data);
       patchState({
-        usuario: res
+        usuario: res.data
     });
    }
   )
