@@ -19,6 +19,10 @@ export class MenuComponent implements OnInit{
     @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
     fullName!:any;
+    tipousuario:any=null;
+    esUtp=false;
+    saludo!:string;
+
 
     objcolors = env.colors;
     menu!:string;
@@ -51,7 +55,15 @@ export class MenuComponent implements OnInit{
             // let re = /,/gi;
             getColor(info.personalInfo.usuario.Tema.nombre)
             //this.fullName = (info.personalInfo.datos_persona) ? Object.values(info.personalInfo.datos_persona).slice(1).toString().replace(re," "): '';
-            this.fullName = (info.personalInfo.datos_persona) ? Object.values(info.personalInfo.datos_persona)[1]: ''
+            if  (info.personalInfo.datos_persona) {
+              this.fullName = info.personalInfo.datos_persona.nombre + ' ' + info.personalInfo.datos_persona.apellido1;
+              const sexo = info.personalInfo.datos_persona.Sexo.id;
+              const tipousuario = info.personalInfo.usuario.TipoUsuario.nombre;
+              const saludo = 'Bienvenido';
+              this.tipousuario = (sexo == 1)? tipousuario: tipousuario + 'a';
+              this.saludo = (sexo == 1)? saludo: saludo.replace(/.$/, 'a');
+            }
+
           }
       })
     }
@@ -66,8 +78,7 @@ export class MenuComponent implements OnInit{
        this.isFullScreen = !this.isFullScreen;
     }
 
-  tipousuario:any=null;
-  esUtp=false;
+
 
   constructor(
     private iconsService: IconsService,

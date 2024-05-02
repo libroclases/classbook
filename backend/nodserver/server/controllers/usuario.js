@@ -5,7 +5,7 @@ const Op = Sequelize.Op;
 
 const anno = (new Date().getFullYear()) - 2020;
 
-const { Usuario, TipoUsuario, Alumno, Apoderado, AsistenteColegio ,Profesor, Administrador, Anno, Colegio, InscripcionColegio , Tema} = model;
+const { Usuario, TipoUsuario, Alumno, Apoderado, AsistenteColegio ,Profesor, Administrador, Anno, Colegio, Sexo, InscripcionColegio , Tema} = model;
 
 class Usuarios {
 
@@ -70,6 +70,9 @@ class Usuarios {
             Tipo.findOne({
                 where: { usuarioId: usuario.dataValues.id },
                 attributes: ['id','nombre','apellido1','apellido2'],
+                include: [ 
+                    { model:Sexo, attributes:['id','nombre'], where: { } },
+                ],          
                 })
                 .then(datos_persona => {
                 profesorId=datos_persona.dataValues.id;
