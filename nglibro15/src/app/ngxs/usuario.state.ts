@@ -35,7 +35,7 @@ export class UsuarioState {
       email: email,
     })!.pipe(
       tap((res:any) => {
-        console.log('poronga',res)
+        // console.log('poronga',res)
         patchState({
           usuario:  res
       });
@@ -50,7 +50,7 @@ setUsuario({getState, patchState}: StateContext<UsuarioStateModel>, { color, usu
     tap((res:any) => {
       const state = getState();
       const todo = [state.usuario];
-      console.log('poronga res',res.data);
+      // console.log('poronga res',res.data);
       patchState({
         usuario: res.data
     });

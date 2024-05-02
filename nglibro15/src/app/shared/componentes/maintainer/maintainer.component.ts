@@ -7,7 +7,7 @@ import { IconsService } from '../../services/icons/icons.service';
 import { Observable, Subject, Subscription, debounceTime, switchMap, take, tap } from 'rxjs';
 import { CrudService } from '../../services/crud/crud.service';
 import { redirectRoutes, modalDataObject, personTables, notCreateTables ,searchTables, groupTables,groupSum,
-  lowerUpperTables, fKeysByTable, environment } from '../../../../environments/environment';
+  lowerUpperTables,Permission ,fKeysByTable, environment } from '../../../../environments/environment';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
@@ -144,7 +144,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    
+
     private crud: CrudService,
     activatedRoute: ActivatedRoute,
     originTableIdsService: OriginTableIdService,
@@ -155,15 +155,22 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     private iconsService: IconsService,
     ) {
 
-    const getPermision = (msg: any) => { if(msg) {
+    const getPermision = (info: any) => {
       const year = this.currentDate.getFullYear();
+      console.log(Permission.Profesor);
+      console.log(info);
+      console.log(year);
+      /*
+      if(msg) {
+
       this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-      } 
+      }
+      */
 
     }
 
    const getColor = (color:string | null) => {
-    
+
     if (color=='azul' || !color) {
       this.bodybgcolor = this.objcolors.azul.bodybgcolor;
       this.pagination = this.objcolors.azul.pagination;
@@ -193,8 +200,13 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   }
 
     this.usuario$.subscribe(info => {
-      if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
+      if (info.personalInfo) {
+        getColor(info.personalInfo.usuario.Tema.nombre);
+        getPermision(info);
+      }
       else { getColor(localStorage.getItem('Color')) }
+
+
     });
 
 /*
@@ -202,7 +214,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
       getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
       getColor(info.personalInfo.usuario.Tema.nombre);
     }))
-*/    
+*/
 
 
     activatedRoute.params.subscribe((params:any) => {
@@ -225,7 +237,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
               originTableIdsService.nextMsg(this.multiSelectInitIds);
             });
         }
-        
+
 
       }
    });
@@ -236,7 +248,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     if ( !this.redirectRts ) {
       this.redirectRts = [];
     }
-   
+
     this.mainTableUpper = this.labelsService.lowerToUpperTable(this.mainTable)!;
     this.modalDataObj = modalDataObject[this.mainTableUpper];
 
@@ -302,7 +314,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
       this.searchTerm$.pipe(
           debounceTime(500),
           tap((term:any) => {
-           
+
             this.mainQuery$ = (term.length > 0) ? this.crud.makeSearch(this.mainTable, term) :   this.crud.getData(this.mainTable, fKeys)!
 
           }
@@ -369,7 +381,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
                   }),
                   tap(() => {
                     const data: Blob = new Blob(out, { type: "text/csv;charset=utf-8" });
-                    
+
                   })
     ).subscribe()
   }
@@ -416,11 +428,11 @@ export class MaintainerComponent implements OnInit, OnDestroy {
             id: this.selIdsService.getId(table.toLocaleLowerCase()) || 0});
           this.modalDataObj.textFields.forEach((text: string) => reg[text] = null);
           this.modalDataObj.dateFields.forEach((date: string) => reg[date] = null);
-  
+
        }
 
        reg['bgmodal'] = this.bgmodal;
-       reg['modalbutton'] = this.modalbutton; 
+       reg['modalbutton'] = this.modalbutton;
 
     let modaldata: any = this.modalDataObj;
     const dialogRef = this.dialog.open(ModalDialogComponent, {
