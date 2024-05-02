@@ -31,7 +31,11 @@ export class MenuComponent implements OnInit{
 
     usuarioId!:number;
 
-    getColor(color:string)  {
+
+    ngOnInit(): void {
+    this.docElement = document.documentElement;
+
+    const getColor = (color:string) => {
       console.log('COLOR:',color);
       if (color=='azul') {
         this.color="azul";  this.menu = this.objcolors.azul.menu;  }
@@ -41,16 +45,11 @@ export class MenuComponent implements OnInit{
         this.color = "naranjo"; this.menu = this.objcolors.naranjo.menu;    }
     }
 
-    ngOnInit(): void {
-    this.docElement = document.documentElement;
-
-
-
     this.usuario$.subscribe((info:any) => {
           if (info.personalInfo) {
             this.usuarioId = info.personalInfo.usuario.id;
             // let re = /,/gi;
-            this.getColor(info.personalInfo.usuario.Tema.nombre)
+            getColor(info.personalInfo.usuario.Tema.nombre)
             //this.fullName = (info.personalInfo.datos_persona) ? Object.values(info.personalInfo.datos_persona).slice(1).toString().replace(re," "): '';
             this.fullName = (info.personalInfo.datos_persona) ? Object.values(info.personalInfo.datos_persona)[1]: ''
           }
