@@ -1037,6 +1037,35 @@ export const validator: any = {
   },
 };
 
+export const Permission:any =  {
+
+  Colegio: {ver : ['profesor'], editar: ['utp'] , crear: ['admin'] },
+  Curso: { ver: ['profesor'], editar: ['utp'] },
+  Profesor: { ver : ['utp'], editar: ['utp'] },
+  Administrador: {},
+  Asignatura: { ver: ['profesor'], editar: ['utp'] },
+  AsignaturaProfesor: { ver: ['profesor'], editar: ['utp'] },
+  AsignaturaCurso: { ver: ['profesor'], editar: ['utp'] },
+  Apoderado: { ver: ['profesor'], editar: ['utp'] },
+  Matricula: { ver: ['utp'] , editar : ['utp'] , crear: ['utp']},
+  Ventana: { ver : ['profesor'] , editar : ['utp'], crear : ['admin'] },
+  Evaluacion:  { ver: ['profesor'], editar: ['utp'], crear: ['utp']},
+  HoraAsignada: { ver: ['profesor'], editar: ['utp'] },
+  Horario: { ver: ['profesor'], editar: ['utp'], crear: ['utp'] },
+  AsistenteColegio:  { ver: ['profesor'], editar: ['utp'] },
+  Alumno: { ver: ['utp'], editar: ['utp'] },
+  EstadoAlumno: { ver: ['utp'], editar: ['utp'] },
+  TipoUsuario: { ver: ['admin'], editar: ['admin'] },
+  Tema: { ver: ['profesor'], editar: ['profesor'] },
+  Tabla: { ver: ['utp'], editar: ['admin'] },
+  Usuario: { ver: ['utp'], editar: ['utp'] },
+  Anotacion: { ver: ['profesor'], editar: ['profesor'], crear:['profesor'] },
+  Feriado: { ver:['admin'], editar: ['admin'], crear: ['admin'] },
+  Nota: {ver: ['profesor'] ,editar: ['profesor'], crear: ['profesor']},
+  RegistroActividad: { ver: ['profesor'], editar: ['profesor'], crear : ['profesor'] }
+}
+
+
 // --------------------------------------------------
 //       Modal
 
@@ -1051,7 +1080,6 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Colegio',
     windowHeight: '650px',
-    permission: ['administrador']
   },
 
   Horario: {
@@ -1064,7 +1092,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Horario',
     windowHeight: '400px',
-    permission: ['administrador']
+
   },
 
   Profesor: {
@@ -1077,8 +1105,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Profesor',
     windowHeight: '570px',
-    permission: ['administrador']
-  },
+    },
 
   Administrador: {
     mainTable: 'administrador',
@@ -1090,7 +1117,6 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Administrador',
     windowHeight: '570px',
-    permission: ['administrador']
   },
 
   Curso: {
@@ -1103,7 +1129,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Curso',
     windowHeight: '400px',
-    permission: ['administrador']
+
   },
 
   HoraAsignada: {
@@ -1116,7 +1142,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Hora Asignada',
     windowHeight: '400px',
-    permission: ['administrador']
+
   },
 
   Asignatura: {
@@ -1129,7 +1155,6 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Asignatura',
     windowHeight: '320px',
-    permission: ['administrador']
   },
 
   AsignaturaProfesor: {
@@ -1142,7 +1167,6 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Asignatura Profesor',
     windowHeight: '320px',
-    permission: ['administrador']
   },
 
   AsignaturaCurso: {
@@ -1155,7 +1179,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Asignatura Curso',
     windowHeight: '320px',
-    permission: ['administrador']
+
   },
 
   Apoderado: {
@@ -1168,7 +1192,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Apoderado',
     windowHeight: '590px',
-    permission: ['administrador']
+
   },
 
   Alumno: {
@@ -1181,7 +1205,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Alumno',
     windowHeight: '680px',
-    permission: ['administrador']
+
   },
 
   Usuario: {
@@ -1194,7 +1218,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Usuario',
     windowHeight: '680px',
-    permission: ['administrador']
+
   },
 
   EstadoAlumno: {
@@ -1207,7 +1231,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Estado Alumno',
     windowHeight: '680px',
-    permission: ['administrador']
+
   },
 
   TipoUsuario: {
@@ -1220,7 +1244,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Tipo Usuario',
     windowHeight: '680px',
-    permission: ['administrador']
+
   },
   Tema: {
     mainTable: 'tema',
@@ -1232,7 +1256,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Tema',
     windowHeight: '680px',
-    permission: ['administrador']
+
   },
     Tabla: {
     mainTable: 'tabla',
@@ -1244,7 +1268,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Tabla',
     windowHeight: '380px',
-    permission: ['administrador']
+
   },
 
   AsistenteColegio: {
@@ -1255,9 +1279,8 @@ export const modalDataObject: any = {
     ignoreFkRequirements: [],
     hidden: [],
     defaultValues: {},
-    label: 'Profesinales (no docentes)',
+    label: 'Profesionales (no docentes)',
     windowHeight: '680px',
-    permission: ['administrador']
   },
 
   Matricula: {
@@ -1270,7 +1293,6 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Matricula',
     windowHeight: '600px',
-    permission: ['administrador']
   },
 
   Ventana: {
@@ -1283,7 +1305,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Ventana',
     windowHeight: '300px',
-    permission: ['administrador']
+
   },
 
   Evaluacion: {
@@ -1304,7 +1326,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Evaluación',
     windowHeight: '620px',
-    permission: ['profesor','administrador']
+
   },
 
   Feriado: {
@@ -1317,7 +1339,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Feriado',
     windowHeight: '400px',
-    permission: ['administrador']
+
   },
 
   Nota: {
@@ -1330,7 +1352,7 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Nota',
     windowHeight: '500px',
-    permission: ['profesor','administrador']
+
   },
 
   Anotacion: {
@@ -1344,7 +1366,7 @@ export const modalDataObject: any = {
     defaultValues: { fecha: 'today' },
     label: 'Observación',
     windowHeight: 'auto',
-    permission: ['profesor']
+
   },
 
   RegistroActividad: {
@@ -1358,7 +1380,7 @@ export const modalDataObject: any = {
     defaultValues: { fecha: 'today' },
     label: 'Registro de Actividades',
     windowHeight: 'auto',
-    permission: ['profesor','administrador']
+
   },
 };
 
