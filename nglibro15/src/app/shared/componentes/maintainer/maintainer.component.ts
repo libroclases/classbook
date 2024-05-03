@@ -15,7 +15,8 @@ import { OriginTableIdService as OriginTableIdService } from '../../services/ori
 import { Usuario } from 'src/app/ngxs/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario.state';
 import { Select } from '@ngxs/store';
-import { getPermission} from './custom-operator';
+import { GetPermissionService } from '../../services/get-permission/get-permission.service';
+// import { getPermission} from './custom-operator';
 
 @Component({
   selector: 'maintainer',
@@ -108,7 +109,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
   // Modal
 
-  permiso!:any;
+  permission:any =  new Map<string,boolean>();
 
   modalDataObj!: any;
 
@@ -156,6 +157,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     private fkService: ForeignKeysService,
     private labelsService: LabelsService,
     private iconsService: IconsService,
+    private getpermission: GetPermissionService
     ) {
 
     /*
@@ -235,7 +237,8 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     this.usuario$.subscribe(info => {
       if (info.personalInfo) {
         getColor(info.personalInfo.usuario.Tema.nombre);
-        this.permiso = getPermission(info);
+        // this.getpermission=this.getpermission.getPermission(info);
+        for (let p of this.getpermission.getPermission(info).entries()) { console.log(p) }
       }
       else { getColor(localStorage.getItem('Color')) }
 
