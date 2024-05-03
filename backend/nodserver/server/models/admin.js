@@ -1,7 +1,7 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const Administrador = sequelize.define(
-    "Administrador",
+  const Admin = sequelize.define(
+    "Admin",
     {
       nombre: {
         type: DataTypes.STRING,
@@ -51,35 +51,35 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       freezeTableName: true,
-      modelName: "Administrador",
-      tableName: "Administrador",
+      modelName: "Admin",
+      tableName: "Admin",
     }
   );
-  Administrador.associate = function (models) {
+  Admin.associate = function (models) {
     // associations can be defined here
 
 
 
-    Administrador.belongsTo(models.Sexo, {
+    Admin.belongsTo(models.Sexo, {
       foreignKey: "sexoId",
     });
 
-    Administrador.belongsTo(models.Usuario, {
+    Admin.belongsTo(models.Usuario, {
       foreignKey: "usuarioId",
     });
 
-    Administrador.belongsTo(models.Region, {
+    Admin.belongsTo(models.Region, {
       foreignKey: "regionId",
     });
 
-    Administrador.belongsTo(models.Provincix, {
+    Admin.belongsTo(models.Provincix, {
       foreignKey: "provincixId",
     });
 
-    Administrador.belongsTo(models.Comuna, {
+    Admin.belongsTo(models.Comuna, {
       foreignKey: "comunaId",
     });
 
   };
-  return Administrador;
+  return Admin;
 };

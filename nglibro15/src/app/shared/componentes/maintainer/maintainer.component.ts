@@ -107,6 +107,8 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
   // Modal
 
+  permiso:any = { leer: true, editar:true, crear:true }
+
   modalDataObj!: any;
 
   // PersonTable
@@ -156,15 +158,46 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     ) {
 
     const getPermision = (info: any) => {
+
+      const colegio = 1;  // REVISAR
+      let esUtp:boolean;
+
       const year = this.currentDate.getFullYear();
-      console.log(Permission.Profesor);
-      console.log(info);
+      console.log(Permission.Colegio.ver);
+      console.log(info.inscripcionColegio);
+      console.log(info.personalInfo.usuario.TipoUsuario.nombre);
       console.log(year);
+
+
+
+      switch(info.personalInfo.usuario.TipoUsuario.nombre) {
+        case 'profesor': {
+
+        info.inscripcionColegio.forEach((ins:any) => {
+              if (ins.Anno.id == (year - 2020) && ins.Colegio.id == 1) {
+
+              this.permiso.leer = !Permission.Colegio.leer.includes('profesor')
+              this.permiso.editar = (Permission.Colegio.editar.includes('utp') && ins.esUtp) ? false : true;
+              this.permiso.crear = (Permission.Colegio.crear.includes('utp') && ins.esUtp) ? false : true;
+            }
+         });
+
+          break;
+        }
+        case 'administrador': {
+           //statements;
+           break;
+        }
+        default: {
+           null
+           break;
+        }
+     }
+
       /*
-      if(msg) {
 
       this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-      }
+
       */
 
     }

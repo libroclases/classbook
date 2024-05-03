@@ -63,7 +63,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "usuarioId",
     });   
 
-    Usuario.hasMany(models.Administrador, {
+    Usuario.hasMany(models.Admin, {
       foreignKey: "usuarioId",
     });    
 

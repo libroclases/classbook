@@ -3,5 +3,4 @@ id|nombre|descripcion|createdAt|updatedAt
 2|alumno|Alumnos|2023-08-14|2023-08-14
 3|apoderado|Apoderados|2023-08-14|2023-08-14
 4|asistente|Profesionales no docentes|2023-08-14|2023-08-14
-5|utp|Asistente UTP|2023-08-14|2023-08-14
-6|administrador|Administrador|2023-08-14|2023-08-14
+5|admin|Administrador|2023-08-14|2023-08-14

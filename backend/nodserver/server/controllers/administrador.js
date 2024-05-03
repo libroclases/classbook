@@ -3,12 +3,12 @@ import model from '../models';
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-const { Administrador,  Usuario, Sexo, Region, Provincix, Comuna } = model;
+const { Admin,  Usuario, Sexo, Region, Provincix, Comuna } = model;
 
 class Administradores {
 
     static list(req, res) {
-        return Administrador
+        return Admin
             .findAll({
                 attributes: ['id', 'nombre', 'apellido1', 'apellido2', 'rut', 'direccion', 'celular',  'nacimiento'],
                 include: [ 
@@ -26,7 +26,7 @@ class Administradores {
     static bySearch(req, res) {
         const { expr } = req.params;
         
-        return Administrador
+        return Admin
         .findAll({  
             where: {
                 [Op.or] : [{ nombre : {[Op.iLike]: `%${expr}%`}},
@@ -57,7 +57,7 @@ class Administradores {
         if (comunaId != '0') {  consulta['comunaId'] = comunaId;  }
         if (sexoId != '0') {  consulta['sexoId'] = sexoId;  }
 
-        return Administrador
+        return Admin
           .findAll({
             where : consulta,
             attributes: ['id','nombre', 'apellido1','apellido2', 'rut','direccion', 'celular','nacimiento'],
@@ -76,7 +76,7 @@ class Administradores {
 
     static getByPk(req, res) {
               
-        return Administrador
+        return Admin
         .findByPk(req.params.administradorId)
         .then(admin => res.status(200).send(admin))
         .catch(error => res.status(400).send(error));
@@ -85,7 +85,7 @@ class Administradores {
     static create(req, res) {
     const { usuarioId, sexoId, regionId, provincixId, comunaId } = req.params;
     const { nombre, apellido1, apellido2 ,rut, direccion, celular, nacimiento } = req.body;
-    return Administrador
+    return Admin
     .create({
         nombre,
         apellido1,
@@ -102,7 +102,7 @@ class Administradores {
     })
     .then(data => res.status(201).send({
         success: true,
-        message: 'Administrador successfully created',
+        message: 'Admin successfully created',
         data
     }))
     .catch(error => res.status(400).send(error));
@@ -111,7 +111,7 @@ class Administradores {
     static modify(req, res) {
     
     const { nombre, apellido1, apellido2 ,rut, direccion, celular, nacimiento, Sexo, Region, Provincix, Comuna } = req.body
-    return Administrador
+    return Admin
         .findByPk(req.params.administradorId)
         .then((admin) => {
             admin.update({
@@ -129,7 +129,7 @@ class Administradores {
         })
         .then((updateAdmin) => {
             res.status(200).send({
-                message: 'Administrador updated successfully',
+                message: 'Admin updated successfully',
                 data: {
                     nombre: nombre || updateAdmin.nombre,
                     apellido1: apellido1 || updateAdmin.apellido1,

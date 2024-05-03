@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { EMPTY, Observable, Subscription, share, take, tap } from 'rxjs';
 import { CrudService } from '../../services/crud/crud.service';
 import { fkValues, tableQueries } from '../../../interfaces/generic.interface';
@@ -7,7 +7,7 @@ import { ForeignKeysService } from '../../services/foreign-keys/foreign-keys.ser
 import { LabelsService } from '../../services/labels/labels.service';
 import { SelectionIdsService } from '../../services/selection-ids/selection-ids.service';
 import { OriginTableIdService } from '../../services/origin-table-id/origin-table-id.service';
-import { CommonModule, NgFor } from '@angular/common';
+
 
 @Component({
   selector: 'multi-select',

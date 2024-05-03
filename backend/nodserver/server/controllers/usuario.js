@@ -5,7 +5,7 @@ const Op = Sequelize.Op;
 
 const anno = (new Date().getFullYear()) - 2020;
 
-const { Usuario, TipoUsuario, Alumno, Apoderado, AsistenteColegio ,Profesor, Administrador, Anno, Colegio, Sexo, InscripcionColegio , Tema} = model;
+const { Usuario, TipoUsuario, Alumno, Apoderado, AsistenteColegio ,Profesor, Admin, Anno, Colegio, Sexo, InscripcionColegio , Tema} = model;
 
 class Usuarios {
 
@@ -65,7 +65,7 @@ class Usuarios {
         else if ( tipousuarioId == 2 ) { Tipo = Alumno } 
         else if ( tipousuarioId == 3 ) { Tipo = Apoderado } 
         else if ( tipousuarioId == 4 ) { Tipo = AsistenteColegio } 
-        else if ( tipousuarioId == 5 ) { Tipo = Administrador } 
+        else if ( tipousuarioId == 5 ) { Tipo = Admin } 
 
             Tipo.findOne({
                 where: { usuarioId: usuario.dataValues.id },
