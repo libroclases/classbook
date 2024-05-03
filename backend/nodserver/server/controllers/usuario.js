@@ -77,7 +77,7 @@ class Usuarios {
                 .then(datos_persona => {
                 profesorId=datos_persona.dataValues.id;
                 personalInfo = {'usuario':usuario, 'datos_persona': datos_persona};
-                console.log('poronga->', anno, profesorId, tipousuarioId); 
+                 
                 })
                 .then( () => {
                     if (tipousuarioId == 1) {
@@ -91,9 +91,15 @@ class Usuarios {
                         .then(inscripcionColegio => { res.status(200).send({personalInfo, inscripcionColegio}); })
                         
                     }
+                    else {
+                        { res.status(200).send({personalInfo})}
+                    }
+                
+                
                                     
                      
                 });
+            
         
     })
     .catch(error => res.status(400).send(error));

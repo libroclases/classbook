@@ -307,35 +307,36 @@ import AsignaturaCursos from '../controllers/asignaturacurso';
       AsignaturaProfesores.modify);
 
     app.get('/api/usuario',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.list);
     app.get('/api/usuario/:expr/search',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.bySearch);
     app.get('/api/usuario/:expr/email',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.byEmailSearch);
     app.get('/api/usuario/lastid',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.getLastId); 
     app.get('/api/usuario/where',
       // checkjwd, requiredScopes('read:usuario'),
       Usuarios.getPersonalInfo);   
     app.get('/api/usuario/:tipousuarioId/fk',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.getByFk);
     app.get('/api/usuario/:tipousuarioId/:temaId/fk',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.getByFk);  
     app.get('/api/usuario/:usuarioId/pk',
       // checkjwd, requiredScopes('read:usuario'),
       Usuarios.getByPk);
     app.post('/api/usuario/:tipousuarioId/:temaId',
-      checkjwd, requiredScopes('create:usuario'),
+      // checkjwd, requiredScopes('create:usuario'),
       Usuarios.create);
     app.put('/api/usuario/:usuarioId',
       // checkjwd, requiredScopes('update:usuario'),
       Usuarios.modify)
+      
     app.get('/api/tabla',
       checkjwd, requiredScopes('read:tabla'),
       Tablas.list);
