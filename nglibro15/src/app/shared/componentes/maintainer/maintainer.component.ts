@@ -7,7 +7,7 @@ import { IconsService } from '../../services/icons/icons.service';
 import { Observable, Subject, Subscription, debounceTime, switchMap, take, tap } from 'rxjs';
 import { CrudService } from '../../services/crud/crud.service';
 import { redirectRoutes, modalDataObject, personTables, notCreateTables ,searchTables, groupTables,groupSum,
-  lowerUpperTables,Permission ,fKeysByTable, environment } from '../../../../environments/environment';
+  lowerUpperTables ,fKeysByTable, environment } from '../../../../environments/environment';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
@@ -15,6 +15,7 @@ import { OriginTableIdService as OriginTableIdService } from '../../services/ori
 import { Usuario } from 'src/app/ngxs/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario.state';
 import { Select } from '@ngxs/store';
+import { getPermission} from './custom-operator';
 
 @Component({
   selector: 'maintainer',
@@ -107,7 +108,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
   // Modal
 
-  permiso:any = { leer: true, editar:true, crear:true }
+  permiso!:any;
 
   modalDataObj!: any;
 
@@ -157,6 +158,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     private iconsService: IconsService,
     ) {
 
+    /*
     const getPermision = (info: any) => {
 
       const colegio = 1;  // REVISAR
@@ -184,8 +186,10 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
           break;
         }
-        case 'administrador': {
-           //statements;
+        case 'admin': {
+          this.permiso.leer = false;
+          this.permiso.editar = false;
+          this.permiso.crear = false;
            break;
         }
         default: {
@@ -194,13 +198,9 @@ export class MaintainerComponent implements OnInit, OnDestroy {
         }
      }
 
-      /*
-
-      this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-
-      */
 
     }
+    */
 
    const getColor = (color:string | null) => {
 
@@ -235,7 +235,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     this.usuario$.subscribe(info => {
       if (info.personalInfo) {
         getColor(info.personalInfo.usuario.Tema.nombre);
-        getPermision(info);
+        this.permiso = getPermission(info);
       }
       else { getColor(localStorage.getItem('Color')) }
 
