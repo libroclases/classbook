@@ -160,50 +160,6 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     private getpermission: GetPermissionService
     ) {
 
-    /*
-    const getPermision = (info: any) => {
-
-      const colegio = 1;  // REVISAR
-      let esUtp:boolean;
-
-      const year = this.currentDate.getFullYear();
-      console.log(Permission.Colegio.ver);
-      console.log(info.inscripcionColegio);
-      console.log(info.personalInfo.usuario.TipoUsuario.nombre);
-      console.log(year);
-
-
-
-      switch(info.personalInfo.usuario.TipoUsuario.nombre) {
-        case 'profesor': {
-
-        info.inscripcionColegio.forEach((ins:any) => {
-              if (ins.Anno.id == (year - 2020) && ins.Colegio.id == 1) {
-
-              this.permiso.leer = !Permission.Colegio.leer.includes('profesor')
-              this.permiso.editar = (Permission.Colegio.editar.includes('utp') && ins.esUtp) ? false : true;
-              this.permiso.crear = (Permission.Colegio.crear.includes('utp') && ins.esUtp) ? false : true;
-            }
-         });
-
-          break;
-        }
-        case 'admin': {
-          this.permiso.leer = false;
-          this.permiso.editar = false;
-          this.permiso.crear = false;
-           break;
-        }
-        default: {
-           null
-           break;
-        }
-     }
-
-
-    }
-    */
-
    const getColor = (color:string | null) => {
 
     if (color=='azul' || !color) {
@@ -237,21 +193,12 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     this.usuario$.subscribe(info => {
       if (info.personalInfo) {
         getColor(info.personalInfo.usuario.Tema.nombre);
-        // this.getpermission=this.getpermission.getPermission(info);
         for (let p of this.getpermission.getPermission(info).entries()) { console.log(p) }
       }
       else { getColor(localStorage.getItem('Color')) }
 
 
     });
-
-/*
-    this.usuario$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
-      getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
-      getColor(info.personalInfo.usuario.Tema.nombre);
-    }))
-*/
-
 
     activatedRoute.params.subscribe((params:any) => {
 

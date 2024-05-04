@@ -24,7 +24,7 @@ export class GetPermissionService {
       case 'profesor': {
 
       info.inscripcionColegio.forEach((ins:any) => {
-            if (ins.Anno.id == (year - 2020) && ins.Colegio.id == colegio) {
+            if (ins.Anno.nombre == year.toString() && ins.Colegio.id == colegio) {
 
             permission.set('leer', !Permission.Colegio.leer.includes('profesor'));
             permission.set('editar',(Permission.Colegio.editar.includes('utp') && ins.esUtp) ? false : true);
