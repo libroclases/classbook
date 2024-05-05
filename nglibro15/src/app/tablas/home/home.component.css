@@ -1,16 +1,15 @@
 
 @charset "utf-8";
 /* CSS Document */
+
+
 div {
-    width: auto;
-    padding-inline-start: 5%;
-    padding-inline-end: 5%;
-    min-width: 80%;
-
-}
-
-div.trasparente {
-
+    background-color: aliceblue;
+    border-radius: 1%;
+    border-spacing: 1cap;
+    border-style:solid;
+    border-width: 0.1cap;
+    border-color: rgb(224, 230, 235);
     opacity: 0.9;
 }
 
@@ -58,75 +57,5 @@ th.naranjo {
     font-family: Arial, Helvetica, sans-serif;
     font-size:normal ;
     width:auto;
-}
-
-div.acerca {
-
-    background-color: aliceblue;
-    border-radius: 1%;
-    border-spacing: 1cap;
-    border-style:solid;
-    border-width: 0.1cap;
-    border-color: rgb(224, 230, 235);
-    position:sticky;
-    top: 25%;
-    padding-left: 50%;
-    width: 20%;
-    padding: 5%;
-    width: fit-content;
-    opacity: 0.7;
-
-
-}
-
-div.contacto {
-
-    background-color: aliceblue;
-    border-radius: 1%;
-    border-spacing: 1cap;
-    border-style:solid;
-    border-width: 0.1cap;
-    border-color: rgb(24, 23, 23);
-    position: sticky;
-    top: 25%;
-    padding-left: 50%;
-    width: 20%;
-    padding: 5%;
-    width: fit-content;
-    opacity: 0.7;
-}
-
-div.tutoriales {
-
-    background-color: aliceblue;
-    border-radius: 1%;
-    border-spacing: 1cap;
-    border-style:solid;
-    border-width: 0.1cap;
-    border-color: rgb(17, 17, 17);
-    position:sticky;
-    top: 25%;
-    padding-left: 50%;
-    width: 20%;
-    padding: 5%;
-    width: fit-content;
-    opacity: 0.7;
-}
-
-div.preguntas {
-
-    background-color: aliceblue;
-    border-radius: 1%;
-    border-spacing: 1cap;
-    border-style:solid;
-    border-width: 0.1cap;
-    border-color: rgb(3, 3, 3);
-    position: sticky;
-    top: 25%;
-    padding-left: 50%;
-    width: 20%;
-    padding: 5%;
-    width:fit-content;
-    opacity: 0.7;
 }
 

@@ -1,10 +1,10 @@
-<div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 1%;padding-bottom: 0%"
+<div class="container-fluid" style="padding-left: 5%; padding-right: 5%;"
 [style.background-image]="url"
 [style.background-position]="position"
 [style.background-size]="size"
 [style.background-color]="bodybgcolor"  [style.height] = "height">
 
-  <div  style="float: right; padding-bottom: 0%; height:100px; ">
+  <div class="mt-4" style="float: right; height:100px; ">
     <multi-select
       [tables]="selTables"
 
@@ -14,7 +14,7 @@
     </multi-select>
   </div>
 
-   <div  [formGroup]="notasForm"   class="overflow-auto p-3 bg-light"   style="width: 100%; max-height: 700px;">
+   <div  [formGroup]="notasForm"   class="overflow-auto bg-light"   style="width: 100%; max-height: 700px;">
 
     <!--form  [formGroup]="notasForm"-->
     

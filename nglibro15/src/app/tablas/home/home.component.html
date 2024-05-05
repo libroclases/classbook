@@ -1,34 +1,35 @@
-<div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 2%;padding-bottom: 0%;"
+<div class="container-fluid py-5"
  [style.height] = "height"  
  [style.background-image]="url"
  [style.background-position]="position"
  [style.background-size]="size"
-role="main">
+>
  
 
-    <div [class]="showme" *ngIf="showme != ''">
+    <div class="container  py-5 px-5 my-auto" style="max-width: 700px;" *ngIf="showme">
       <h3 [class]="color">{{titles[showme]}}</h3>
      
       <h3 [class]="color">
         {{intro[showme]}}
       </h3>
-
-      <table class="table table-bordered">
-      <thead></thead>
-      <tbody>
-          <tr *ngFor="let b of body[showme]">
-            <th [class]="color">{{b}}</th>
-
-              <th *ngIf="showme=='tutoriales'" [class]="color" style="text-align: center;"><a href='#'>hml</a></th>
-              <th *ngIf="showme=='tutoriales'" [class]="color" style="text-align: center;"><a href='#'>pdf</a></th>
-              <th *ngIf="showme=='tutoriales'" [class]="color" style="text-align: center;"><a href='#'><em class="bi bi-youtube"></em></a></th>
-
-              <th *ngIf="showme=='preguntas' || showme=='acerca'" style="text-align: center; width: 80px;"><a href='#'>ver mas</a></th>
-
-          </tr>
-      </tbody>
-      </table>
-
+      <div class="mx-auto px-5">
+        <table class="table table-bordered">
+          <thead></thead>
+          <tbody>
+              <tr *ngFor="let b of body[showme]">
+                <th [class]="color"><a href="">{{b}}</a></th>
+    
+                  <!--th *ngIf="showme=='tutoriales'" [class]="color" style="text-align: center;"><a href='#'>hml</a></th>
+                  <th *ngIf="showme=='tutoriales'" [class]="color" style="text-align: center;"><a href='#'>pdf</a></th>
+                  <th *ngIf="showme=='tutoriales'" [class]="color" style="text-align: center;"><a href='#'><em class="bi bi-youtube"></em></a></th>
+    
+                  <th *ngIf="showme=='preguntas' || showme=='acerca'" style="text-align: center; width: 80px;"><a href='#'>ver mas</a></th-->
+    
+              </tr>
+          </tbody>
+          </table>
+    
+      </div>
       <h3 [class]="color">
         {{bottom[showme]}}
       </h3>

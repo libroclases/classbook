@@ -442,7 +442,7 @@ export const searchTables = [
   'administrador',
   'asistentecolegio',
   'usuario',
-  'curso',
+ 
 ];
 
 export const groupTables = ['horario'];
