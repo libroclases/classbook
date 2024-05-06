@@ -1,12 +1,8 @@
 div {
     text-align: right;
     vertical-align: middle ;
-    border: 0px;
     border-color: white;
     border-style: solid;
-    height: 100px;
+    border-width: 1px;
 }
 
-span {
-    vertical-align: middle;
-}

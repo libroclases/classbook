@@ -74,6 +74,8 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { ToastrModule } from 'ngx-toastr';
 import { UsuarioState } from './ngxs/usuario.state';
 
+
+
 const allowedTables = [
   'access',
   'alumno',
@@ -165,7 +167,6 @@ allowedTables.forEach((tb) => {
     RutValidatorDirective,
     SelectValidatorDirective,
     HoraValidatorDirective,
-
     MultiSelectComponent,
     ModalDialogComponent,
     AuthButtonComponent,

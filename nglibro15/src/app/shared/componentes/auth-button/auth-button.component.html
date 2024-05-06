@@ -1,22 +1,20 @@
-<div class="container-fluid">
-  <br><br>
+
+
   <span *ngIf="auth.isAuthenticated$ | async; else loggedOut">
     <button (click)="handleLogout()"
-    type="button" class="btn text-light" [style.background-color]="colorMenuButton"><em class="bi bi-door-closed">&nbsp;Salir</em></button>
+    type="button" class="btn text-light btn" [style.background-color]="colorMenuButton"><em class="bi bi-door-closed">Salir</em></button>
   </span>
 
   <ng-template #loggedOut>
     <span>
-      &nbsp;
-      <button (click)="handleLogin()"
-      type="button"  class="btn text-light" [style.background-color]="colorMenuButton"><em class="bi bi-door-open">&nbsp;Ingresar</em>
-      </button>
-      &nbsp;
-      <!--button routerLink="formulario" routerLinkActive="active"
-      type="button"  class="btn  text-light btn-sm" [style.background-color]="colorMenuButton"><em class="bi bi-arrow-up-square"></em>&nbsp;Registrarse</button-->
 
+      <button (click)="handleLogin()"
+      type="button"  class="btn text-light btn" [style.background-color]="colorMenuButton"><em class="bi bi-door-open">Ingresar</em>
+      </button>
     </span>
 
   </ng-template>
 
-</div>
+
+
+

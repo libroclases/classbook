@@ -1,7 +1,12 @@
 
 @charset "utf-8";
 /* CSS Document */
-
+.container {
+  border-radius: 4px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: hidden !important;
+}
 
 div {
     background-color: aliceblue;

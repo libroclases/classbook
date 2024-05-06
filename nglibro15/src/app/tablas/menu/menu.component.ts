@@ -8,7 +8,7 @@ import {  Usuario } from '../../ngxs/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario.state';
 import { Observable, map, tap } from 'rxjs';
 import { GetUsuario, SetUsuario } from 'src/app/ngxs/usuario.actions';
-
+import { DeviceDetectorService } from 'ngx-device-detector';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -23,6 +23,8 @@ export class MenuComponent implements OnInit{
     esUtp=false;
     saludo!:string;
 
+    deviceinfo!:any;
+    mostra=false;
 
     objcolors = env.colors;
     menu!:string;
@@ -35,12 +37,16 @@ export class MenuComponent implements OnInit{
 
     usuarioId!:number;
 
+    deviceInfo!:any;
 
     ngOnInit(): void {
+
+    this.epicFunction();
+
     this.docElement = document.documentElement;
 
     const getColor = (color:string) => {
-      console.log('COLOR:',color);
+   
       if (color=='azul') {
         this.color="azul";  this.menu = this.objcolors.azul.menu;  }
       if (color=='verde') {
@@ -84,12 +90,21 @@ export class MenuComponent implements OnInit{
     private iconsService: IconsService,
     private router: Router,
     private store: Store,
+    private deviceService: DeviceDetectorService,
     public auth: AuthService) {
       this.auth.user$.pipe(
         map((user:any) => user?.email),
         tap(user => { if (user) this.store.dispatch(new GetUsuario(user))})
       ).subscribe()
       ;
+    }
+
+    epicFunction() {
+
+      this.deviceInfo = this.deviceService.getDeviceInfo();
+      const isDesktopDevice = this.deviceService.isDesktop();
+
+      this.mostra = ( isDesktopDevice==true ) ? true : false;
     }
 
   getBiClass(route: string) {
