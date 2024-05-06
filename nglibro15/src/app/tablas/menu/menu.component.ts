@@ -46,7 +46,7 @@ export class MenuComponent implements OnInit{
     this.docElement = document.documentElement;
 
     const getColor = (color:string) => {
-   
+
       if (color=='azul') {
         this.color="azul";  this.menu = this.objcolors.azul.menu;  }
       if (color=='verde') {
@@ -103,7 +103,7 @@ export class MenuComponent implements OnInit{
 
       this.deviceInfo = this.deviceService.getDeviceInfo();
       const isDesktopDevice = this.deviceService.isDesktop();
-
+      console.log(isDesktopDevice)
       this.mostra = ( isDesktopDevice==true ) ? true : false;
     }
 

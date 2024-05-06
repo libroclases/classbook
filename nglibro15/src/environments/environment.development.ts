@@ -442,7 +442,7 @@ export const searchTables = [
   'administrador',
   'asistentecolegio',
   'usuario',
- 
+
 ];
 
 export const groupTables = ['horario'];
@@ -1039,6 +1039,7 @@ export const validator: any = {
 
 export const Permission:any =  {
 
+  Asitencia: { leer: ['profesor'] , editar: ['profesor'] , crear: ['profesor']  },
   Colegio: {leer : ['profesor'], editar: ['utp'] , crear: ['utp'] },
   Curso: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
   Profesor: { leer : ['utp'], editar: ['utp'], crear: ['utp'] },
