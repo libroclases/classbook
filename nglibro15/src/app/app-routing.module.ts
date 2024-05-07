@@ -34,6 +34,7 @@ import { VentanaComponent } from './tablas/ventana/ventana.component';
 import { RegistroUsuarioComponent } from './tablas/registro-usuario/registro-usuario.component';
 import { ResumenNotaComponent } from './tablas/resumen-nota/resumen-nota.component';
 import { AsignaturaCursoComponent } from './tablas/asignatura-curso/asignatura-curso.component';
+import { PruebaComponent } from './tablas/prueba/prueba.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
@@ -53,6 +54,8 @@ const routes: Routes = [
 
   { path: 'apoderado', component: ApoderadoComponent, canActivate: [AuthGuard] },
   { path: 'apoderado/:id/:padre', component: ApoderadoComponent, canActivate: [AuthGuard] },
+
+  { path: 'pruebas', component: PruebaComponent},
 
   { path: 'matricula', component: MatriculaComponent, canActivate: [AuthGuard] },
   { path: 'matricula/:id/:padre', component: MatriculaComponent, canActivate: [AuthGuard] },

@@ -6,7 +6,7 @@ import { LabelsService } from '../../services/labels/labels.service';
 import { IconsService } from '../../services/icons/icons.service';
 import { Observable, Subject, Subscription, debounceTime, switchMap, take, tap } from 'rxjs';
 import { CrudService } from '../../services/crud/crud.service';
-import { redirectRoutes, modalDataObject, personTables, notCreateTables ,searchTables, groupTables,groupSum,
+import { redirectRoutes, modalDataObject, personTables, notCreateTables ,searchTables, groupTables,groupSum, Permission,
   lowerUpperTables ,fKeysByTable, environment } from '../../../../environments/environment';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,7 +16,7 @@ import { Usuario } from 'src/app/ngxs/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario.state';
 import { Select } from '@ngxs/store';
 import { GetPermissionService } from '../../services/get-permission/get-permission.service';
-// import { getPermission} from './custom-operator';
+
 
 @Component({
   selector: 'maintainer',
@@ -50,7 +50,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   isGroupTable = false;
   searchTerm$ = new Subject<string>();
 
-  disable = true;
+  disable:any = {};
   currentDate:Date = new Date();
 
   sumGroup = 0;
@@ -109,7 +109,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
   // Modal
 
-  permission:any =  new Map<string,boolean>();
+  // permission:any =  {};
 
   modalDataObj!: any;
 
@@ -157,7 +157,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     private fkService: ForeignKeysService,
     private labelsService: LabelsService,
     private iconsService: IconsService,
-    private getpermission: GetPermissionService
+    getpermission: GetPermissionService
     ) {
 
    const getColor = (color:string | null) => {
@@ -190,15 +190,23 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
   }
 
-    this.usuario$.subscribe(info => {
-      if (info.personalInfo) {
-        getColor(info.personalInfo.usuario.Tema.nombre);
-        for (let p of this.getpermission.getPermission(info).entries()) { console.log(p) }
-      }
-      else { getColor(localStorage.getItem('Color')) }
+    this.usuario$?.pipe(
+      tap(info => {
+        if (info.personalInfo) {
+          getColor(info.personalInfo?.usuario.Tema.nombre);
+        }
+        else { getColor(localStorage.getItem('Color')) }
+      }),
+      tap(info => {
+        if (info.personalInfo) {
+          console.log('poronga1',info.personalInfo)
+          console.log(this.mainTableUpper);
+          this.disable = getpermission.getPermission(Permission[this.mainTableUpper],info)
+          console.log('poronga2',this.disable)
+        }
 
-
-    });
+      })
+  ).subscribe()
 
     activatedRoute.params.subscribe((params:any) => {
 

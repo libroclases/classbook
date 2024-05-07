@@ -6,7 +6,7 @@
 [style.background-size]="size"
 [style.background-color]="bodybgcolor" [style.height] = "height">
 
-  <div  style="float: right; padding-bottom: 0%; height:100px; ">
+  <div class="my-4" style="float: right;">
     <multi-select
       [tables]="selTables"
       [ignore-FK-requirements]="ignoreFkRequirements"
@@ -15,13 +15,13 @@
     </multi-select>
   </div>
 
-  <div  class="overflow-auto mt-4 bg-light"  [style.opacity]="opacity"  style="width: 100%; max-height: 700px;"> 
+  <div  class="overflow-auto mt-4 bg-light"  [style.opacity]="opacity"  style="width: 100%; max-height: 700px;">
       <table>
-        <tr><th [attr.colspan]="numColumns" [style.background-color]="tablehead" 
+        <tr><th [attr.colspan]="numColumns" [style.background-color]="tablehead"
           style="text-align: center;color:white; height:40px; width: 100%"><em [class]="getBiClass('/'+ mainTable)">&nbsp;&nbsp;</em><b>Resumen Notas</b></th></tr>
         <tr>
           <td><table class="table table-bordered"><tbody>
-            <tr > 
+            <tr >
               <td *ngIf="asignatura$">&nbsp;</td><td *ngFor="let a of (asignatura$ | async)" >{{a.nombre}}</td><td>Promedio</td>
             </tr>
             <tr  *ngFor="let m of (matricula$ | async)"><td>{{m.nombre}}</td>
@@ -31,9 +31,9 @@
           </tbody>
           </table></td>
         </tr>
-      </table>          
+      </table>
     </div>
     </div>
- 
+
 
 

@@ -12,21 +12,21 @@
 <div class="container-fluid">
   <div class="row  align-items-end">
     <div class="col-md-2 mt-4">
-      <div class="input-group" *ngIf="isSearchTable" style="width: 300px;">  
+      <div class="input-group" *ngIf="isSearchTable" style="width: 300px;">
         <input type="search" (input)="search($event)"  class="form-control rounded" id="default-search"
         placeholder="ingrese búsqueda" aria-label="Search" aria-describedby="search-addon"/>
-        <button type="button" class="btn btn-light" disabled><em class="bi bi-search"></em></button> 
+        <button type="button" class="btn btn-light" disabled><em class="bi bi-search"></em></button>
     </div>
     </div>
 
     <div class="col-md-10 mt-4">
-     
+
         <multi-select
           [tables]="selTables"
-    
+
           [change-functions]="changeFnsArray"
           [ignore-FK-requirements]="ignoreFkRequirements"
-    
+
           [patch-fks-from-storage]="patchFKsFromStorage">
         </multi-select>
     </div>
@@ -35,7 +35,7 @@
 
 </div>
 
-  
+
 
 <!--  Elimine   [init-ids]="multiSelectInitIds"  04-12-2023  -->
 
@@ -76,7 +76,7 @@
               <a></a>
             </ng-container>
             <ng-template #notCreate>
-              <a mat-button (click)="openDialog()"  disabled={{disable}} title="Nuevo"><em class="bi bi-plus-lg"></em></a>
+              <a mat-button (click)="openDialog()"  disabled={{disable.crear}} title="Nuevo">{{disable|json}}<em class="bi bi-plus-lg"></em></a>
             </ng-template>
           </th>
         </tr>
@@ -112,7 +112,7 @@
             <td *ngFor="let dateFd of dateFields">{{c[dateFd] | date:'dd/MM/YYYY'}}</td>
             <td *ngFor="let table of fkFields">{{getObjectLabel(table, c[table])}}</td>
             <th style="text-align: center;">
-             <a mat-button (click)="openDialog(c)" disabled={{disable}}> <em class="bi bi-lock"></em> </a>
+             <a mat-button (click)="openDialog(c)" disabled={{disable.editar}}>{{disable|json}}<em class="bi bi-lock"></em> </a>
             </th>
           </tr>
         </ng-template>

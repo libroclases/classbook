@@ -1,5 +1,5 @@
 
-    <nav class="navbar navbar-expand-xl navbar-light bg-light" [style.background]="menu">
+    <nav class="navbar navbar-expand-md navbar-light bg-light" [style.background]="menu">
       <div class="container-fluid">
 
 
@@ -143,7 +143,7 @@
           </ul>
 
         </div>
-        <span *ngIf="mostra == true"><span  *ngIf="auth.isAuthenticated$ | async">{{saludo}} {{tipousuario}} : {{fullName}}</span></span>
+        <span *ngIf="mostra == true"><span  *ngIf="auth.isAuthenticated$ | async">{{saludo}} {{tipousuario}} {{isUtp}} : {{fullName}}</span></span>
 
       </div>
     </nav>

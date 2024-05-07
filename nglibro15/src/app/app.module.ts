@@ -73,6 +73,7 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 import { ToastrModule } from 'ngx-toastr';
 import { UsuarioState } from './ngxs/usuario.state';
+import { PruebaComponent } from './tablas/prueba/prueba.component';
 
 
 
@@ -180,6 +181,7 @@ allowedTables.forEach((tb) => {
     ProfeValidatorsDirective,
     ResumenNotaComponent,
     AsignaturaCursoComponent,
+    PruebaComponent,
 
 
   ],

@@ -1038,32 +1038,41 @@ export const validator: any = {
 };
 
 export const Permission:any =  {
-
-  Asitencia: { leer: ['profesor'] , editar: ['profesor'] , crear: ['profesor']  },
-  Colegio: {leer : ['profesor'], editar: ['utp'] , crear: ['utp'] },
-  Curso: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
-  Profesor: { leer : ['utp'], editar: ['utp'], crear: ['utp'] },
-  Administrador: {},
-  Asignatura: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
-  AsignaturaProfesor: { leer: ['profesor'], editar: ['utp'], crear:['utp'] },
-  AsignaturaCurso: { leer: ['profesor'], editar: ['utp'], crear:['utp'] },
-  Apoderado: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
-  Matricula: { leer: ['utp'] , editar : ['utp'] , crear: ['utp']},
-  Ventana: { leer : ['profesor'] , editar : ['utp'], crear : ['utp'] },
-  Evaluacion:  { leer: ['profesor'], editar: ['profesor'], crear: ['profesor']},
-  HoraAsignada: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
-  Horario: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
-  AsistenteColegio:  { leer: ['profesor'], editar: ['utp'], crear:['utp'] },
-  Alumno: { leer: ['utp'], editar: ['utp'], crear: ['utp'] },
-  EstadoAlumno: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
-  TipoUsuario: { leer: ['profesor'], editar: ['admin'] },
-  Tema: { leer: ['profesor'], editar: ['profesor'], crear: ['admin'] },
-  Tabla: { leer: ['profesor'], editar: ['admin'], crear: ['admin'] },
-  Usuario: { leer: ['utp'], editar: ['utp'], utp: ['utp'] },
-  Anotacion: { leer: ['profesor'], editar: ['profesor'], crear:['profesor'] },
-  Feriado: { leer:['admin'], editar: ['admin'], crear: ['admin'] },
-  Nota: {leer: ['profesor'] ,editar: ['profesor'], crear: ['profesor']},
-  RegistroActividad: { leer: ['profesor'], editar: ['profesor'], crear : ['profesor'] }
+  /* Asistencia */
+  Asistencia: {leer : 'profesor', editar: 'profesor' , crear: 'profesor' },
+  ResumenAsistencia: {leer : 'profesor', editar: 'profesor' , crear: 'profesor' },
+  /* Colegio */
+  Colegio: {leer : 'profesor', editar: 'admin' , crear: 'admin' },
+  AsistenteColegio:  { leer: 'profesor', editar: 'utp', crear:'utp' },
+  Curso: { leer: 'profesor', editar: 'utp', crear: 'utp' },
+  Asignatura: { leer: 'profesor', editar: 'utp', crear: 'utp' },
+  HoraAsignada: { leer: 'profesor', editar: 'utp', crear: 'utp' },
+  /* Alumno */
+  Alumno: { leer: 'profesor', editar: 'utp', crear: 'utp' },
+  EstadoAlumno: { leer: 'profesor', editar: 'utp', crear: 'utp' },
+  Apoderado: { leer: 'profesor', editar: 'utp', crear: 'utp' },
+  Anotacion: { leer: 'profesor', editar: 'profesor', crear:'profesor' },
+  FichaAlumno: { leer: 'profesor' , editar: 'profesor' , crear: 'profesor'  },
+  Matricula: { leer: 'profesor' , editar : 'utp' , crear: 'utp'},
+  /* Profesor */
+  Profesor: { leer : 'profesor', editar: 'utp', crear: 'utp' },
+  AsignaturaProfesor: { leer: 'profesor', editar: 'utp', crear:'utp' },
+  AsignaturaCurso: { leer: 'profesor', editar: 'utp', crear:'utp' },
+  Evaluacion:  { leer: 'profesor', editar: 'utp', crear: 'utp'},
+  Nota: {leer: 'profesor' ,editar: 'profesor', crear: 'profesor'},
+  ResumenNota: {leer: 'profesor' ,editar: 'profesor', crear: 'profesor'},
+  Horario: { leer: 'profesor', editar: 'utp', crear: 'utp' },
+  HorasInscritas: { leer: 'profesor', editar: [], crear: [] },
+  ControlAsignatura: {leer: 'profesor' ,editar: 'profesor', crear: 'profesor'},
+  RegistroActividad: { leer: 'profesor', editar: 'profesor', crear : 'profesor' },
+  Ventana: { leer : 'profesor' , editar : 'utp', crear : 'utp' },
+  /* Procesos */
+  MatriculaAlumno: { leer : 'utp' , editar : 'utp', crear : 'utp' },
+  registroUsuario: { leer : 'utp' , editar : 'utp', crear : 'utp' },
+  /* Admin */
+  TipoUsuario: {leer : 'admin' , editar : 'admin', crear : 'admin'},
+  Usuario: {leer : 'admin' , editar : 'admin', crear : 'admin'},
+  Tabla: {leer : 'admin' , editar : 'admin', crear : 'admin'},
 }
 
 

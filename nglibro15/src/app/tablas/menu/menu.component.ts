@@ -39,7 +39,12 @@ export class MenuComponent implements OnInit{
 
     deviceInfo!:any;
 
+    currentDate:Date = new Date();
+    isUtp:any=null;
+
     ngOnInit(): void {
+
+    const year = this.currentDate.getFullYear().toString();
 
     this.epicFunction();
 
@@ -58,7 +63,7 @@ export class MenuComponent implements OnInit{
     this.usuario$.subscribe((info:any) => {
           if (info.personalInfo) {
             this.usuarioId = info.personalInfo.usuario.id;
-            // let re = /,/gi;
+
             getColor(info.personalInfo.usuario.Tema.nombre)
             //this.fullName = (info.personalInfo.datos_persona) ? Object.values(info.personalInfo.datos_persona).slice(1).toString().replace(re," "): '';
             if  (info.personalInfo.datos_persona) {
@@ -69,8 +74,13 @@ export class MenuComponent implements OnInit{
               this.tipousuario = (sexo == 1)? tipousuario: tipousuario + 'a';
               this.saludo = (sexo == 1)? saludo: saludo.replace(/.$/, 'a');
             }
-
+            if (info.personalInfo.usuario.TipoUsuario.id == 5) { this.isUtp = '(dios)' }
           }
+
+        if (info.inscripcionColegio) { info.inscripcionColegio?.forEach((ins:any) => {
+          if (ins.Colegio.id == 1 && ins.Anno.nombre == year && ins.esUtp) { this.isUtp = '(utp)' }
+
+        }) }
       })
     }
 

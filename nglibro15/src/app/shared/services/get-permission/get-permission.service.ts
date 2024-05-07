@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Permission } from "src/environments/environment.development";
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +12,9 @@ export class GetPermissionService {
   constructor() { }
 
 
-  getPermission(info: any): any  {
+  getPermission(Evaluacion:any, info: any): any  {
 
-    let permission:any = new Map<string,boolean>([['leer',true],['editar',true],['crear',true]])
+    let permission:any = {leer:true, editar :true, crear: true }
 
     const colegio = 1;  // REVISAR
 
@@ -23,22 +23,24 @@ export class GetPermissionService {
     switch(info.personalInfo.usuario.TipoUsuario.nombre) {
       case 'profesor': {
 
-      info.inscripcionColegio.forEach((ins:any) => {
+      info.inscripcionColegio?.forEach((ins:any) => {
+            var utp:any = (ins.esUtp) ? 'utp' : null;
+
             if (ins.Anno.nombre == year.toString() && ins.Colegio.id == colegio) {
-
-            permission.set('leer', !Permission.Colegio.leer.includes('profesor'));
-            permission.set('editar',(Permission.Colegio.editar.includes('utp') && ins.esUtp) ? false : true);
-            permission.set('crear' , (Permission.Colegio.crear.includes('utp') && ins.esUtp) ? false : true);
+            console.log('poronga3',Evaluacion)
+            permission.leer =  (Evaluacion.leer == 'profesor') ? false : true;
+            permission.editar = (Evaluacion.editar == 'utp') ? false : true; // (Permission[tableUpper].editar.includes(utp)) ? false : true
+            permission.crear = (Evaluacion.crear == 'utp') ? false : true;  //  (Permission[tableUpper].crear.includes(utp)) ? false : true)
           }
-
-       });
-
+          console.log('permission',permission)
+       }
+      )
         return permission;
       }
       case 'admin': {
-        permission.set('leer', false);
-        permission.set('editar', false);
-        permission.set('crear', false);
+        permission.leer = false;
+        permission.editar = false;
+        permission.crear = false;
         return permission;
 
       }

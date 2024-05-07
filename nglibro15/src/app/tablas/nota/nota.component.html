@@ -4,7 +4,7 @@
 [style.background-size]="size"
 [style.background-color]="bodybgcolor"  [style.height] = "height">
 
-  <div class="mt-4" style="float: right; height:100px; ">
+  <div class="my-4" style="float: right;">
     <multi-select
       [tables]="selTables"
 
@@ -17,9 +17,9 @@
    <div  [formGroup]="notasForm"   class="overflow-auto bg-light"   style="width: 100%; max-height: 700px;">
 
     <!--form  [formGroup]="notasForm"-->
-    
+
     <table *ngIf="showtable" class="table table-bordered table-hover">
-      
+
         <tr><th  [attr.colspan]="numcols" [style.background-color]="tablehead" style="text-align: center;color:white; height:40px" >Notas</th></tr>
         <tr *ngIf="evaluation$"><th style="text-align: center">&nbsp;</th><td *ngFor="let e of (evaluation$ | async)">
           <a mat-button (click)="openDialog(e)" title='{{e.fecha | date}}'>{{e.nombre}}&nbsp;{{e.ponderacion}}%</a></td><td><a mat-button  (click)="openDialog()"><em class="bi bi-plus"></em></a></td></tr>
