@@ -9,6 +9,8 @@ import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Observable, map, tap } from 'rxjs';
 import { GetUsuario, SetUsuario } from 'src/app/ngxs/usuario/usuario.actions';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { GetPermiso } from 'src/app/ngxs/permiso/permiso.actions';
+import { Permission } from 'src/environments/environment.development';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -17,6 +19,8 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 export class MenuComponent implements OnInit{
 
     @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
+
+    permission:any = Permission
 
     fullName!:any;
     tipousuario:any=null;
@@ -84,7 +88,6 @@ export class MenuComponent implements OnInit{
       })
     }
 
-    setTable(table:string) {  }
 
     toggleFullScreen() {
        if (!this.isFullScreen) {
@@ -115,13 +118,17 @@ export class MenuComponent implements OnInit{
 
       this.deviceInfo = this.deviceService.getDeviceInfo();
       const isDesktopDevice = this.deviceService.isDesktop();
-      console.log(isDesktopDevice)
+      // console.log(isDesktopDevice)
       this.mostra = ( isDesktopDevice==true ) ? true : false;
     }
 
-  getBiClass(route: string) {
-    // para usar IconsService.getBiClass desde html
-    return this.iconsService.getBiClass(route);
+  /* store functions */
+
+  setTable(table:string) {
+
+    // console.log('poronga', this.permission[table])
+    this.store.dispatch(new GetPermiso(this.permission[table]))
+
   }
 
   mensaje(color:any) {
@@ -130,6 +137,11 @@ export class MenuComponent implements OnInit{
       tap(() => localStorage.setItem('Color', color[1]))
     )
 
+  }
+
+  getBiClass(route: string) {
+    // para usar IconsService.getBiClass desde html
+    return this.iconsService.getBiClass(route);
   }
 
   getIconLabel(route: string) {

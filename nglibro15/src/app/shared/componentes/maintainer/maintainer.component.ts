@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, HostListener, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { SelectionIdsService } from '../../services/selection-ids/selection-ids.service';
 import { ForeignKeysService } from '../../services/foreign-keys/foreign-keys.service';
 import { Notification } from '../../../interfaces/generic.interface';
@@ -28,7 +28,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
   mainQuery$!:Observable<any>;
 
-  
+
 
   // mainTableForeignKeys: arreglo auxiliar, se llena solo
   mainTableForeignKeys!: string[];
@@ -189,7 +189,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     }
 
   }
-    
+
     this.usuario$?.pipe(
       tap(info => {
         if (info.personalInfo) {
@@ -199,13 +199,13 @@ export class MaintainerComponent implements OnInit, OnDestroy {
       }),
       /*
       tap(info => {
-        if (info.personalInfo) {       
-          this.disable = getpermission.getPermission({ leer: 'profesor', editar: 'utp', crear: 'utp' },info)        
+        if (info.personalInfo) {
+          this.disable = getpermission.getPermission({ leer: 'profesor', editar: 'utp', crear: 'utp' },info)
         }
-   
+
       })*/
   ).subscribe()
-  
+
 
     activatedRoute.params.subscribe((params:any) => {
 
