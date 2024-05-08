@@ -4,10 +4,10 @@ import { environment as env } from '../../../environments/environment';
 import { AuthService } from '@auth0/auth0-angular';
 import { Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
-import {  Usuario } from '../../ngxs/usuario.model';
-import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import {  Usuario } from '../../ngxs/usuario/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Observable, map, tap } from 'rxjs';
-import { GetUsuario, SetUsuario } from 'src/app/ngxs/usuario.actions';
+import { GetUsuario, SetUsuario } from 'src/app/ngxs/usuario/usuario.actions';
 import { DeviceDetectorService } from 'ngx-device-detector';
 @Component({
   selector: 'app-menu',
@@ -74,7 +74,7 @@ export class MenuComponent implements OnInit{
               this.tipousuario = (sexo == 1)? tipousuario: tipousuario + 'a';
               this.saludo = (sexo == 1)? saludo: saludo.replace(/.$/, 'a');
             }
-            if (info.personalInfo.usuario.TipoUsuario.id == 5) { this.isUtp = '(dios)' }
+            if (info.personalInfo.usuario.TipoUsuario.id == 5) { this.isUtp = '(admin)' }
           }
 
         if (info.inscripcionColegio) { info.inscripcionColegio?.forEach((ins:any) => {
@@ -83,6 +83,8 @@ export class MenuComponent implements OnInit{
         }) }
       })
     }
+
+    setTable(table:string) {  }
 
     toggleFullScreen() {
        if (!this.isFullScreen) {

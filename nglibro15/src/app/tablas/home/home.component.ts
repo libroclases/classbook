@@ -3,8 +3,8 @@ import { environment } from '../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { body, intro, titles, bottom } from './datatexto';
 import {Select} from '@ngxs/store';
-import { Usuario } from '../../ngxs/usuario.model';
-import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Usuario } from '../../ngxs/usuario/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Observable } from 'rxjs';
 
 @Component({

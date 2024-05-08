@@ -3,8 +3,8 @@ import { environment as env } from '../../../environments/environment';
 // import { AuthService } from '@auth0/auth0-angular';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { UsuarioState } from 'src/app/ngxs/usuario.state';
-import { Usuario } from 'src/app/ngxs/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
+import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
 // import { GetUsuario } from 'src/app/ngxs/usuario.actions';
 import { DeviceDetectorService } from 'ngx-device-detector';
 @Component({

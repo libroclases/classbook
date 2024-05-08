@@ -15,9 +15,9 @@ import { Alert } from '../../interfaces/generic.interface';
 import { ProfesorPie } from '../../interfaces/profesor.interface';
 import { AuthService } from '@auth0/auth0-angular';
 import { TipoUsuario } from '../../interfaces/tipousuario.interface';
-import { Usuario } from 'src/app/ngxs/usuario.model';
+import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
 import { Observable } from 'rxjs';
-import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 
 

@@ -6,17 +6,16 @@ import { LabelsService } from '../../services/labels/labels.service';
 import { IconsService } from '../../services/icons/icons.service';
 import { Observable, Subject, Subscription, debounceTime, switchMap, take, tap } from 'rxjs';
 import { CrudService } from '../../services/crud/crud.service';
-import { redirectRoutes, modalDataObject, personTables, notCreateTables ,searchTables, groupTables,groupSum, Permission,
+import { redirectRoutes, modalDataObject, personTables, notCreateTables ,searchTables, groupTables,groupSum,
   lowerUpperTables ,fKeysByTable, environment } from '../../../../environments/environment';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
 import { OriginTableIdService as OriginTableIdService } from '../../services/origin-table-id/origin-table-id.service';
-import { Usuario } from 'src/app/ngxs/usuario.model';
-import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 import { GetPermissionService } from '../../services/get-permission/get-permission.service';
-
 
 @Component({
   selector: 'maintainer',
@@ -29,6 +28,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
   mainQuery$!:Observable<any>;
 
+  
 
   // mainTableForeignKeys: arreglo auxiliar, se llena solo
   mainTableForeignKeys!: string[];
@@ -189,7 +189,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     }
 
   }
-
+    
     this.usuario$?.pipe(
       tap(info => {
         if (info.personalInfo) {
@@ -197,22 +197,22 @@ export class MaintainerComponent implements OnInit, OnDestroy {
         }
         else { getColor(localStorage.getItem('Color')) }
       }),
+      /*
       tap(info => {
-        if (info.personalInfo) {
-          console.log('poronga1',info.personalInfo)
-          console.log(this.mainTableUpper);
-          this.disable = getpermission.getPermission(Permission[this.mainTableUpper],info)
-          console.log('poronga2',this.disable)
+        if (info.personalInfo) {       
+          this.disable = getpermission.getPermission({ leer: 'profesor', editar: 'utp', crear: 'utp' },info)        
         }
-
-      })
+   
+      })*/
   ).subscribe()
+  
 
     activatedRoute.params.subscribe((params:any) => {
 
       if ( Object.keys(params).length > 0) {
 
         let originTable = params['padre'];
+        console.log('origin',originTable)
 
         const originId = parseInt(params['id']);
 

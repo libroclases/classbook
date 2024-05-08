@@ -7,8 +7,8 @@ import { SelectionIdsService } from 'src/app/shared/services/selection-ids/selec
 import { environment, modalDataObject } from 'src/environments/environment';
 
 import { Notification } from '../../interfaces/generic.interface';
-import { Usuario } from 'src/app/ngxs/usuario.model';
-import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 
 @Component({

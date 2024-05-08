@@ -7,8 +7,8 @@ import { SelectionIdsService } from '../../services/selection-ids/selection-ids.
 import { SubscriptionsManagerService } from '../../services/subscriptions-manager/subscriptions-manager.service';
 import { IconsService } from '../../services/icons/icons.service';
 import { environment } from '../../../../environments/environment';
-import { Usuario } from 'src/app/ngxs/usuario.model';
-import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 
 @Component({

@@ -6,8 +6,8 @@ import { AuthService } from '@auth0/auth0-angular';
 import { SubscriptionsManagerService } from '../../services/subscriptions-manager/subscriptions-manager.service';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Usuario } from 'src/app/ngxs/usuario.model';
-import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 
 @Component({

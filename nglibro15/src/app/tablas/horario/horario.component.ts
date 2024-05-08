@@ -11,8 +11,8 @@ import { ForeignKeysService } from '../../shared/services/foreign-keys/foreign-k
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
 import { IconsService } from '../../shared/services/icons/icons.service';
 import { OriginTableIdService } from '../../shared/services/origin-table-id/origin-table-id.service';
-import { Usuario } from 'src/app/ngxs/usuario.model';
-import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 
 

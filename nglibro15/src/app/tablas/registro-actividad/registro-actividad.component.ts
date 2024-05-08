@@ -11,9 +11,9 @@ import {
   lowerUpperTables, fullDaysOfWeek, environment,
 } from '../../../environments/environment';
 
-import { Usuario } from 'src/app/ngxs/usuario.model';
+import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
 import { Observable } from 'rxjs';
-import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 
 

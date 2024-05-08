@@ -3,9 +3,9 @@ import { CrudService } from '../../shared/services/crud/crud.service';
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
 import { SubscriptionsManagerService } from '../../shared/services/subscriptions-manager/subscriptions-manager.service';
 import { environment } from '../../../environments/environment';
-import { Usuario } from 'src/app/ngxs/usuario.model';
+import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
 import { Observable } from 'rxjs';
-import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 
 const DIAS_POR_PAGINA = 31;

@@ -10,8 +10,8 @@ import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from 'src/app/shared/componentes/modal-dialog/modal-dialog.component';
 import { UserInfoService } from 'src/app/shared/services/user-info/user-info.service';
-import { Usuario } from 'src/app/ngxs/usuario.model';
-import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 
 @Component({

@@ -20,8 +20,8 @@ import { horaValidator} from '../../directives/hora-validator/hora-validator.dir
 import { ProfeValidatorsDirective } from '../../directives/profe-validator/profe-validator.directive';
 
 import { ToastrService } from 'ngx-toastr';
-import { Usuario } from 'src/app/ngxs/usuario.model';
-import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 
 @Component({

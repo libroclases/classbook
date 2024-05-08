@@ -12,8 +12,8 @@ import { environment, lowerUpperTables, modalDataObject } from '../../../environ
 import { Observable, take, tap } from 'rxjs';
 import { AuthService } from '@auth0/auth0-angular';
 import { CrudService } from 'src/app/shared/services/crud/crud.service';
-import { Usuario } from 'src/app/ngxs/usuario.model';
-import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 
 @Component({

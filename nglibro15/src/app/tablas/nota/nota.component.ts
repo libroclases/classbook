@@ -12,8 +12,8 @@ import { ModalDialogComponent } from '../../shared/componentes/modal-dialog/moda
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Evaluacion } from '../../interfaces/evaluacion.interface';
 import { GetdatetimeService } from 'src/app/shared/services/getdatetime/getdatetime.service';
-import { Usuario } from 'src/app/ngxs/usuario.model';
-import { UsuarioState } from 'src/app/ngxs/usuario.state';
+import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 
 @Component({

@@ -25,8 +25,8 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-table'>&nbsp;Asistencia&nbsp;</em></a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item"  routerLink="/asistencia" routerLinkActive="active">Ingreso</a></li>
-                  <li><a class="dropdown-item"  routerLink="/resumen_asistencia" routerLinkActive="active">Resumen</a></li>
+                  <li><a class="dropdown-item"  routerLink="/asistencia" routerLinkActive="active" (click)="setTable('')">Ingreso</a></li>
+                  <li><a class="dropdown-item"  routerLink="/resumen_asistencia" routerLinkActive="active" (click)="setTable('')">Resumen</a></li>
 
                 </ul>
               </li>
@@ -35,47 +35,47 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-bank'>&nbsp;Colegio&nbsp;</em></a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item"  routerLink="/colegio" routerLinkActive="active">Colegio</a></li>
-                  <li><a class="dropdown-item"  routerLink="/asistentecolegio" routerLinkActive="active">Asistente Colegio</a></li>
-                  <li><a class="dropdown-item"  routerLink="/curso" routerLinkActive="active">Curso</a></li>
-                  <li><a class="dropdown-item"  routerLink="/asignatura" routerLinkActive="active">Asignatura</a></li>
-                  <li><a class="dropdown-item"  routerLink="/horaasignada" routerLinkActive="active">Hora Asignada</a></li>
+                  <li><a class="dropdown-item"  routerLink="/colegio" routerLinkActive="active" (click)="setTable('Colegio')">Colegio</a></li>
+                  <li><a class="dropdown-item"  routerLink="/asistentecolegio" routerLinkActive="active" (click)="setTable('AsistenteColegio')">Asistente Colegio</a></li>
+                  <li><a class="dropdown-item"  routerLink="/curso" routerLinkActive="active" (click)="setTable('Curso')">Curso</a></li>
+                  <li><a class="dropdown-item"  routerLink="/asignatura" routerLinkActive="active" (click)="setTable('Asignatura')">Asignatura</a></li>
+                  <li><a class="dropdown-item"  routerLink="/horaasignada" routerLinkActive="active" (click)="setTable('HoraAsignada')">Hora Asignada</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-mortarboard-fill'>&nbsp;Alumno&nbsp;</em></a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" routerLink="/alumno" routerLinkActive="active">Alumno</a></li>
-                  <li><a class="dropdown-item" routerLink="/estadoalumno" routerLinkActive="active">Estado Alumno</a></li>
-                  <li><a class="dropdown-item" routerLink="/apoderado" routerLinkActive="active">Apoderado</a></li>
-                  <li><a class="dropdown-item" routerLink="/anotaciones" routerLinkActive="active">Observaciones</a></li>
-                  <li><a class="dropdown-item" routerLink="/fichaalumno" routerLinkActive="active">Ficha Alumno</a></li>
-                  <li><a class="dropdown-item" routerLink="/matricula" routerLinkActive="active">Matrícula</a></li>
+                  <li><a class="dropdown-item" routerLink="/alumno" routerLinkActive="active" (click)="setTable('Alumno')">Alumno</a></li>
+                  <li><a class="dropdown-item" routerLink="/estadoalumno" routerLinkActive="active" (click)="setTable('EstadoAlumno')">Estado Alumno</a></li>
+                  <li><a class="dropdown-item" routerLink="/apoderado" routerLinkActive="active" (click)="setTable('Apoderado')">Apoderado</a></li>
+                  <li><a class="dropdown-item" routerLink="/anotaciones" routerLinkActive="active" (click)="setTable('Anotacion')">Observaciones</a></li>
+                  <li><a class="dropdown-item" routerLink="/fichaalumno" routerLinkActive="active" (click)="setTable('FichaAlumno')">Ficha Alumno</a></li>
+                  <li><a class="dropdown-item" routerLink="/matricula" routerLinkActive="active" (click)="setTable('Matricula')">Matrícula</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><em class='bi bi-person-video3'>&nbsp;Profesor&nbsp;</em></a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" routerLink="/profesor" routerLinkActive="active">Profesor</a></li>
-                  <li><a class="dropdown-item" routerLink="/asignaturaprofesor" routerLinkActive="active">Asignatura Profesor</a></li>
-                  <li><a class="dropdown-item" routerLink="/asignaturacurso" routerLinkActive="active">Asignatura Curso</a></li>
-                  <li><a class="dropdown-item" routerLink="/evaluacion" routerLinkActive="active">Evaluación</a></li>
-                  <li><a class="dropdown-item" routerLink="/nota" routerLinkActive="active">Notas</a></li>
-                  <li><a class="dropdown-item" routerLink="/resumennota" routerLinkActive="active">Resumen Notas</a></li>
-                  <li><a class="dropdown-item" routerLink="/horario" routerLinkActive="active">Horario</a></li>
-                  <li><a class="dropdown-item" routerLink="/horasinscritas" routerLinkActive="active">Horas Inscritas</a></li>
-                  <li><a class="dropdown-item" routerLink="/control_asignatura" routerLinkActive="active">Control Asignatura</a></li>
-                  <li><a class="dropdown-item" routerLink="/registro_actividad" routerLinkActive="active">Registro Actividad</a></li>
-                  <li><a class="dropdown-item" routerLink="/ventana" routerLinkActive="active">Ventana de Tiempo</a></li>
+                  <li><a class="dropdown-item" routerLink="/profesor" routerLinkActive="active" (click)="setTable('Profesor')">Profesor</a></li>
+                  <li><a class="dropdown-item" routerLink="/asignaturaprofesor" routerLinkActive="active" (click)="setTable('AsignaturaProfesor')">Asignatura Profesor</a></li>
+                  <li><a class="dropdown-item" routerLink="/asignaturacurso" routerLinkActive="active" (click)="setTable('AsignaturaCurso')">Asignatura Curso</a></li>
+                  <li><a class="dropdown-item" routerLink="/evaluacion" routerLinkActive="active" (click)="setTable('Evaluacion')">Evaluación</a></li>
+                  <li><a class="dropdown-item" routerLink="/nota" routerLinkActive="active" (click)="setTable('Nota')">Notas</a></li>
+                  <li><a class="dropdown-item" routerLink="/resumennota" routerLinkActive="active" (click)="setTable('ResumenNota')">Resumen Notas</a></li>
+                  <li><a class="dropdown-item" routerLink="/horario" routerLinkActive="active" (click)="setTable('Horario')">Horario</a></li>
+                  <li><a class="dropdown-item" routerLink="/horasinscritas" routerLinkActive="active" (click)="setTable('HoraInscrita')">Horas Inscritas</a></li>
+                  <li><a class="dropdown-item" routerLink="/control_asignatura" routerLinkActive="active" (click)="setTable('ControlAsignatura')">Control Asignatura</a></li>
+                  <li><a class="dropdown-item" routerLink="/registro_actividad" routerLinkActive="active" (click)="setTable('RegistroActividad')">Registro Actividad</a></li>
+                  <li><a class="dropdown-item" routerLink="/ventana" routerLinkActive="active" (click)="setTable('Ventana')">Ventana de Tiempo</a></li>
 
                 </ul>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-person-fill-lock'>&nbsp;Admin&nbsp;</em></a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" routerLink="/tipousuario" routerLinkActive="active">TipoUsuario</a></li>
-                  <li><a class="dropdown-item" routerLink="/usuario" routerLinkActive="active">Usuario</a></li>
-                  <li><a class="dropdown-item" routerLink="/tabla" routerLinkActive="active">Tabla</a></li>
+                  <li><a class="dropdown-item" routerLink="/tipousuario" routerLinkActive="active" (click)="setTable('TipoUsuario')">TipoUsuario</a></li>
+                  <li><a class="dropdown-item" routerLink="/usuario" routerLinkActive="active" (click)="setTable('Usuario')">Usuario</a></li>
+                  <li><a class="dropdown-item" routerLink="/tabla" routerLinkActive="active" (click)="setTable('Tabla')">Tabla</a></li>
 
                 </ul>
               </li>
@@ -83,9 +83,9 @@
               <li class="nav-item dropdown">
                 <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-grid'>&nbsp;Procesos&nbsp;</em></button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item"  routerLink="/matricula_alumno" routerLinkActive="active">Matrícula Alumno</a></li>
-                  <li><a class="dropdown-item" routerLink="/registro_usuario" routerLinkActive="active">Registro Usuario</a></li>
-                  <li><a class="dropdown-item" routerLink="/informar-sigue" routerLinkActive="active">Informe SIGE</a></li>
+                  <li><a class="dropdown-item"  routerLink="/matricula_alumno" routerLinkActive="active" (click)="setTable('MatriculaAlumno')">Matrícula Alumno</a></li>
+                  <li><a class="dropdown-item" routerLink="/registro_usuario" routerLinkActive="active" (click)="setTable('RegistroUsuario')">Registro Usuario</a></li>
+                  <li><a class="dropdown-item" routerLink="/informar-sigue" routerLinkActive="active" (click)="setTable('InformeSige')">Informe SIGE</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
@@ -154,7 +154,7 @@
     <h1 class="offcanvas-title">Navegación</h1>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
   </div>
-  <div class="offcanvas-body bg-light small">
+  <div class="offcanvas-body bg-light md">
     <table class="table table-bordered bg-light">
       <thead  class="table-dark">
           <tr><th>Concepto</th><th>Menu</th><th>Submenu</th></tr>
