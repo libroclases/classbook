@@ -11,6 +11,8 @@ import { GetUsuario, SetUsuario } from 'src/app/ngxs/usuario/usuario.actions';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { GetPermiso } from 'src/app/ngxs/permiso/permiso.actions';
 import { Permission } from 'src/environments/environment.development';
+import { Permiso } from 'src/app/ngxs/permiso/permiso.model';
+import { PermisoState } from 'src/app/ngxs/permiso/permiso.state';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -19,6 +21,7 @@ import { Permission } from 'src/environments/environment.development';
 export class MenuComponent implements OnInit{
 
     @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
+    @Select(PermisoState.permiso) permiso$!: Observable<Permiso>;
 
     permission:any = Permission
 
@@ -64,12 +67,14 @@ export class MenuComponent implements OnInit{
         this.color = "naranjo"; this.menu = this.objcolors.naranjo.menu;    }
     }
 
+    this.permiso$.subscribe(per => console.log('PER:',per))
+
     this.usuario$.subscribe((info:any) => {
           if (info.personalInfo) {
             this.usuarioId = info.personalInfo.usuario.id;
 
             getColor(info.personalInfo.usuario.Tema.nombre)
-            //this.fullName = (info.personalInfo.datos_persona) ? Object.values(info.personalInfo.datos_persona).slice(1).toString().replace(re," "): '';
+
             if  (info.personalInfo.datos_persona) {
               this.fullName = info.personalInfo.datos_persona.nombre + ' ' + info.personalInfo.datos_persona.apellido1;
               const sexo = info.personalInfo.datos_persona.Sexo.id;
@@ -109,9 +114,18 @@ export class MenuComponent implements OnInit{
     public auth: AuthService) {
       this.auth.user$.pipe(
         map((user:any) => user?.email),
-        tap(user => { if (user) this.store.dispatch(new GetUsuario(user))})
-      ).subscribe()
-      ;
+        tap(user => { if (user) this.store.dispatch(new GetUsuario(user))}),
+        tap(() => {
+          let menu = localStorage.getItem('Menu');
+          console.log('poronga menu', menu);
+          if (menu) {
+            this.store.dispatch(new GetPermiso(this.permission[menu]));
+           }
+
+
+        }
+        )
+      ).subscribe();
     }
 
     epicFunction() {
@@ -125,10 +139,8 @@ export class MenuComponent implements OnInit{
   /* store functions */
 
   setTable(table:string) {
-
-    // console.log('poronga', this.permission[table])
-    this.store.dispatch(new GetPermiso(this.permission[table]))
-
+      this.store.dispatch(new GetPermiso(this.permission[table]));
+      localStorage.setItem('Menu',table);
   }
 
   mensaje(color:any) {

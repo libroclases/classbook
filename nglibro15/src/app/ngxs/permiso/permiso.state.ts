@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { Permiso } from './permiso.model';
 import { GetPermiso } from './permiso.actions';
-import { from, of, tap } from 'rxjs';
+import { from, tap } from 'rxjs';
 
-export class PermisosStateModel {
+export class PermisoStateModel {
   public permiso!: Permiso;
 }
 
@@ -15,7 +15,7 @@ const defaults = {
 
 
 
-@State<PermisosStateModel>({
+@State<PermisoStateModel>({
   name: 'permiso',
   defaults
 })
@@ -24,20 +24,16 @@ const defaults = {
 export class PermisoState {
 
   @Selector()
-  static permiso(state: PermisosStateModel) {
+  static permiso(state: PermisoStateModel) {
     return state.permiso;
   }
 
-
-  // permiso:any =  { Colegio : [{leer : 'profesor', editar: 'admin' , crear: 'admin' }]}
-  constructor(){}
+  constructor(){ }
 
   @Action(GetPermiso)
-  getPermiso({getState, patchState}: StateContext<PermisosStateModel>, { permisos }: GetPermiso) {
+  getPermiso({getState, patchState}: StateContext<PermisoStateModel>, { permisos }: GetPermiso) {
     return from(permisos)!.pipe(
       tap((res:any) => {
-        console.log('poronga',res)
-
         patchState({
           permiso:  res
         });

@@ -35,7 +35,6 @@ export class UsuarioState {
       email: email,
     })!.pipe(
       tap((res:any) => {
-        // console.log('poronga',res)
         patchState({
           usuario:  res
       });

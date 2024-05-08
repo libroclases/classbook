@@ -4,7 +4,7 @@ import { ForeignKeysService } from '../../services/foreign-keys/foreign-keys.ser
 import { Notification } from '../../../interfaces/generic.interface';
 import { LabelsService } from '../../services/labels/labels.service';
 import { IconsService } from '../../services/icons/icons.service';
-import { Observable, Subject, Subscription, debounceTime, switchMap, take, tap } from 'rxjs';
+import { Observable, Subject, Subscription, debounceTime, map, switchMap, take, tap } from 'rxjs';
 import { CrudService } from '../../services/crud/crud.service';
 import { redirectRoutes, modalDataObject, personTables, notCreateTables ,searchTables, groupTables,groupSum,
   lowerUpperTables ,fKeysByTable, environment } from '../../../../environments/environment';
@@ -16,6 +16,8 @@ import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 import { GetPermissionService } from '../../services/get-permission/get-permission.service';
+import { PermisoState } from 'src/app/ngxs/permiso/permiso.state';
+import { Permiso } from 'src/app/ngxs/permiso/permiso.model';
 
 @Component({
   selector: 'maintainer',
@@ -62,6 +64,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
 
   @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
+  @Select(PermisoState.permiso) permiso$!: Observable<Permiso>;
 
   @HostListener('window:resize', ['$event'])
   onResize(event:any) {
@@ -199,11 +202,12 @@ export class MaintainerComponent implements OnInit, OnDestroy {
       }),
       /*
       tap(info => {
-        if (info.personalInfo) {
-          this.disable = getpermission.getPermission({ leer: 'profesor', editar: 'utp', crear: 'utp' },info)
-        }
-
-      })*/
+           this.permiso$?.pipe(
+            map((per:any) => getpermission.getPermission(per[0],info)),
+            tap(per => this.disable = per)
+           )
+      })
+      */
   ).subscribe()
 
 

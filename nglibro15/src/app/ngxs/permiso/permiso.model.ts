@@ -1,4 +1,4 @@
-export class PermissionStateModel {
+export class PermissionsStateModel {
     permiso!: Permiso;
   }
 
