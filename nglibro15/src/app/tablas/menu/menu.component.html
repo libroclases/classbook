@@ -143,20 +143,20 @@
           </ul>
 
         </div>
-        <span *ngIf="mostra == true"><span  *ngIf="auth.isAuthenticated$ | async">{{saludo}} {{tipousuario}} {{isUtp}} : {{fullName}}</span></span>
+        <span *ngIf="mostra == true"><span  *ngIf="auth.isAuthenticated$ | async"><i>{{saludo}} {{tipousuario}} {{isUtp}} : {{fullName}}</i></span></span>
 
       </div>
     </nav>
 
     <!-- Offcanvas Sidebar -->
-<div class="offcanvas offcanvas-bottom"  id="demo">
-  <div class="offcanvas-header  bg-light">
-    <h1 class="offcanvas-title">Navegación</h1>
+<div class="offcanvas offcanvas-bottom" style="height: 50%;" id="demo">
+  <div class="offcanvas-header  {{canvas}}  text-light">
+    <h1 class="offcanvas-title">Navegación {{canvas}} | {{color}}</h1>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
   </div>
   <div class="offcanvas-body bg-light md">
     <table class="table table-bordered bg-light">
-      <thead  class="table-dark">
+      <thead  class="{{tabletype}}">
           <tr><th>Concepto</th><th>Menu</th><th>Submenu</th></tr>
       </thead>
       <tbody>

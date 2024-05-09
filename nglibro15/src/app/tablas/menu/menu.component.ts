@@ -36,6 +36,8 @@ export class MenuComponent implements OnInit{
     objcolors = env.colors;
     menu!:string;
     color!:string;
+    canvas!:string;
+    tabletype!:string;
     production = env.production;
     userinfo = env.userinfo;
 
@@ -49,6 +51,28 @@ export class MenuComponent implements OnInit{
     currentDate:Date = new Date();
     isUtp:any=null;
 
+    getColor = (color:string) => {
+
+      if (color=='azul') {
+        this.color="azul";  
+        this.menu = this.objcolors.azul.menu;
+        this.canvas = 'bg-primary'; 
+        this.tabletype = 'table-primary'; 
+      }
+      if (color=='verde') {
+        this.color = "verde"; 
+        this.menu = this.objcolors.verde.menu;
+        this.canvas = 'bg-success';
+        this.tabletype = 'table-success'   
+      }
+      if (color=='naranjo') {
+        this.color = "naranjo"; 
+        this.menu = this.objcolors.naranjo.menu;
+        this.canvas = 'bg-warning';
+        this.tabletype = 'table-warning'    
+      }
+    }
+
     ngOnInit(): void {
 
     const year = this.currentDate.getFullYear().toString();
@@ -57,15 +81,7 @@ export class MenuComponent implements OnInit{
 
     this.docElement = document.documentElement;
 
-    const getColor = (color:string) => {
 
-      if (color=='azul') {
-        this.color="azul";  this.menu = this.objcolors.azul.menu;  }
-      if (color=='verde') {
-        this.color = "verde"; this.menu = this.objcolors.verde.menu;   }
-      if (color=='naranjo') {
-        this.color = "naranjo"; this.menu = this.objcolors.naranjo.menu;    }
-    }
 
     this.permiso$.subscribe(per => console.log('PER:',per))
 
@@ -73,7 +89,7 @@ export class MenuComponent implements OnInit{
           if (info.personalInfo) {
             this.usuarioId = info.personalInfo.usuario.id;
 
-            getColor(info.personalInfo.usuario.Tema.nombre)
+            this.getColor(info.personalInfo.usuario.Tema.nombre)
 
             if  (info.personalInfo.datos_persona) {
               this.fullName = info.personalInfo.datos_persona.nombre + ' ' + info.personalInfo.datos_persona.apellido1;
@@ -146,7 +162,8 @@ export class MenuComponent implements OnInit{
   mensaje(color:any) {
     localStorage.setItem('Color', color[1])
     this.store.dispatch(new SetUsuario(color[0], this.usuarioId)).pipe(
-      tap(() => localStorage.setItem('Color', color[1]))
+      tap(() => localStorage.setItem('Color', color[1])),
+      tap(() => this.getColor(color[1]))
     )
 
   }

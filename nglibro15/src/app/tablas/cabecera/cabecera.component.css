@@ -1,12 +1,17 @@
 table {
-  height: auto;
+ 
   border-color: aliceblue;
   border-width: 0px;
   border-style: solid;
+  height:100px;
 }
 
-td {
-  vertical-align: middle;
+td, th {
+  vertical-align:middle;
+ 
+  border-color: aliceblue;
+  border-width: 0px;
+  border-style: solid;
   background-color: transparent;
 }
 

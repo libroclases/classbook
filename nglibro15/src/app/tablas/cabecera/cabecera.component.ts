@@ -70,8 +70,8 @@ export class CabeceraComponent implements OnInit{
     console.log('istablet',isTablet);  // returns if the device us a tablet (iPad etc)
     console.log('isdestop',isDesktopDevice); // returns if the app is running on a Desktop browser.
     */
-    this.fotolibro = ( isMobile ) ? '60px' : '100px';
-    this.fototexto = ( isDesktopDevice ) ? '500px' : '170px';
+    this.fotolibro = ( isMobile ) ? '60px' : '80px';
+    this.fototexto = ( isDesktopDevice ) ? '400px' : '170px';
   }
 
   ngOnInit(): void {

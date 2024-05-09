@@ -2,7 +2,7 @@
 @charset "utf-8";
 /* CSS Document */
 .container {
-  border-radius: 4px;
+  
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: hidden !important;
@@ -10,7 +10,7 @@
 
 div {
     background-color: aliceblue;
-    border-radius: 1%;
+    border-radius: 0%;
     border-spacing: 1cap;
     border-style:solid;
     border-width: 0.1cap;

@@ -2,14 +2,14 @@
 
   <span *ngIf="auth.isAuthenticated$ | async; else loggedOut">
     <button (click)="handleLogout()"
-    type="button" class="btn text-light btn" [style.background-color]="colorMenuButton"><em class="bi bi-door-closed">Salir</em></button>
+    type="button" class="btn text-light btn-lg" [style.background-color]="colorMenuButton"><em class="bi bi-door-closed">Salir</em></button>
   </span>
 
   <ng-template #loggedOut>
     <span>
 
       <button (click)="handleLogin()"
-      type="button"  class="btn text-light btn" [style.background-color]="colorMenuButton"><em class="bi bi-door-open">Ingresar</em>
+      type="button"  class="btn text-light btn-lg" [style.background-color]="colorMenuButton"><em class="bi bi-door-open">Ingresar</em>
       </button>
     </span>
 
