@@ -87,7 +87,7 @@ export class MenuComponent implements OnInit{
 
 
 
-    this.permiso$.subscribe(per => console.log('PER:',per))
+    // this.permiso$.subscribe(per => console.log('PER:',per))
 
     this.usuario$.subscribe((info:any) => {
           if (info.personalInfo) {
@@ -137,7 +137,7 @@ export class MenuComponent implements OnInit{
         tap(user => { if (user) this.store.dispatch(new GetUsuario(user))}),
         tap(() => {
           let menu = localStorage.getItem('Menu');
-          console.log('poronga menu', menu);
+
           if (menu) {
             this.store.dispatch(new GetPermiso(this.permission[menu]));
            }

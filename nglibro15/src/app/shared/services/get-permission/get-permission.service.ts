@@ -13,10 +13,11 @@ export class GetPermissionService {
   constructor() { }
 
 
-  getPermission(Evaluacion:any, info: any): any  {
+  getPermission(Table:any, info: any): any  {
 
-    let permission:any = {leer:true, editar :true, crear: true }
-
+    let permission:any = {}
+    console.log('Table',Table)
+    console.log('TipoUsuario.nombre', info.personalInfo.usuario.TipoUsuario.nombre)
     const colegio = 1;  // REVISAR
 
     const year = this.currentDate.getFullYear();
@@ -26,14 +27,14 @@ export class GetPermissionService {
 
       info.inscripcionColegio?.forEach((ins:any) => {
             var utp:any = (ins.esUtp) ? 'utp' : null;
-
+            console.log('utp',utp);
             if (ins.Anno.nombre == year.toString() && ins.Colegio.id == colegio) {
-            console.log('poronga3',Evaluacion)
-            permission.leer =  (Evaluacion.leer == 'profesor') ? false : true;
-            permission.editar = (Evaluacion.editar == 'utp') ? false : true; // (Permission[tableUpper].editar.includes(utp)) ? false : true
-            permission.crear = (Evaluacion.crear == 'utp') ? false : true;  //  (Permission[tableUpper].crear.includes(utp)) ? false : true)
+
+            permission.leer =  (Table.leer == 'profesor') ? false : true;
+            permission.editar = (Table.editar == 'utp' && utp) ? false : true;
+            permission.crear = (Table.crear == 'utp' && utp) ? false : true;
           }
-          console.log('permission',permission)
+
        }
       )
         return permission;

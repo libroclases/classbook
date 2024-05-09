@@ -76,7 +76,7 @@
               <a></a>
             </ng-container>
             <ng-template #notCreate>
-              <a mat-button (click)="openDialog()"  disabled={{disable.crear}} title="Nuevo">{{disable|json}}<em class="bi bi-plus-lg"></em></a>
+              <a mat-button (click)="openDialog()"  disabled={{disable.crear}} title="Nuevo"><em class="bi bi-plus-lg"></em></a>
             </ng-template>
           </th>
         </tr>
@@ -112,7 +112,7 @@
             <td *ngFor="let dateFd of dateFields">{{c[dateFd] | date:'dd/MM/YYYY'}}</td>
             <td *ngFor="let table of fkFields">{{getObjectLabel(table, c[table])}}</td>
             <th style="text-align: center;">
-             <a mat-button (click)="openDialog(c)" disabled={{disable.editar}}>[{{permiso$| async |json}}]<em class="bi bi-lock"></em> </a>
+             <a mat-button (click)="openDialog(c)" disabled={{disable.editar}}><em class="bi bi-lock"></em> </a>
             </th>
           </tr>
         </ng-template>

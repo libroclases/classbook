@@ -1,7 +1,9 @@
 nav {
     height: 60px;
 }
-
+li:hover {
+  cursor:grab;
+}
 th {
     text-align: center;
     vertical-align: middle;

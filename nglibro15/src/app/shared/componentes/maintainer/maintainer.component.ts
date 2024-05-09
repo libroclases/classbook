@@ -4,9 +4,9 @@ import { ForeignKeysService } from '../../services/foreign-keys/foreign-keys.ser
 import { Notification } from '../../../interfaces/generic.interface';
 import { LabelsService } from '../../services/labels/labels.service';
 import { IconsService } from '../../services/icons/icons.service';
-import { Observable, Subject, Subscription, debounceTime, map, switchMap, take, tap } from 'rxjs';
+import { Observable, Subject, Subscription, concatMap, debounceTime, from, map, of, switchMap, take, tap } from 'rxjs';
 import { CrudService } from '../../services/crud/crud.service';
-import { redirectRoutes, modalDataObject, personTables, notCreateTables ,searchTables, groupTables,groupSum,
+import { redirectRoutes, modalDataObject, personTables, notCreateTables ,searchTables, groupTables,groupSum, Permission,
   lowerUpperTables ,fKeysByTable, environment } from '../../../../environments/environment';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -52,7 +52,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   isGroupTable = false;
   searchTerm$ = new Subject<string>();
 
-  disable:any = {};
+  disable:any = {leer:true, editar:true, crear:true};
   currentDate:Date = new Date();
 
   sumGroup = 0;
@@ -63,8 +63,6 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
 
-  @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
-  @Select(PermisoState.permiso) permiso$!: Observable<Permiso>;
 
   @HostListener('window:resize', ['$event'])
   onResize(event:any) {
@@ -150,6 +148,10 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     this.updateTable({message: 'search'})
   }
 
+  @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
+  @Select(PermisoState.permiso) permiso$!: Observable<Permiso>;
+
+
   constructor(
 
     private crud: CrudService,
@@ -193,22 +195,32 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
   }
 
-    this.usuario$?.pipe(
+  /*
+  let info = {};
+  const permiso = this.permiso$?.pipe(
+    map((p:any) => getpermission.getPermission(p[0],info)),
+    tap(p => this.disable = p),
+    tap(p => console.log('poronga',p))
+   )
+   */
+
+    this.usuario$.pipe(
       tap(info => {
-        if (info.personalInfo) {
+        //
+        if (info?.personalInfo) {
+          console.log('mainTable:',this.mainTable)
           getColor(info.personalInfo?.usuario.Tema.nombre);
+          this.disable = getpermission.getPermission(Permission['Curso'][0],info);
         }
         else { getColor(localStorage.getItem('Color')) }
       }),
-      /*
-      tap(info => {
-           this.permiso$?.pipe(
-            map((per:any) => getpermission.getPermission(per[0],info)),
-            tap(per => this.disable = per)
-           )
-      })
-      */
-  ).subscribe()
+  ).subscribe();
+
+
+
+
+
+
 
 
     activatedRoute.params.subscribe((params:any) => {

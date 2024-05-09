@@ -55,7 +55,7 @@ const routes: Routes = [
   { path: 'apoderado', component: ApoderadoComponent, canActivate: [AuthGuard] },
   { path: 'apoderado/:id/:padre', component: ApoderadoComponent, canActivate: [AuthGuard] },
 
-  { path: 'pruebas', component: PruebaComponent},
+  { path: 'prueba', component: PruebaComponent},
 
   { path: 'matricula', component: MatriculaComponent, canActivate: [AuthGuard] },
   { path: 'matricula/:id/:padre', component: MatriculaComponent, canActivate: [AuthGuard] },
