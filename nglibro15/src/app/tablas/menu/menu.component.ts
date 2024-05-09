@@ -38,6 +38,7 @@ export class MenuComponent implements OnInit{
     color!:string;
     canvas!:string;
     tabletype!:string;
+    letters!: string;
     production = env.production;
     userinfo = env.userinfo;
 
@@ -54,22 +55,25 @@ export class MenuComponent implements OnInit{
     getColor = (color:string) => {
 
       if (color=='azul') {
-        this.color="azul";  
+        this.color="azul";
         this.menu = this.objcolors.azul.menu;
-        this.canvas = 'bg-primary'; 
-        this.tabletype = 'table-primary'; 
+        this.canvas = 'bg-primary';
+        this.tabletype = 'table-primary';
+        this.letters = 'blue';
       }
       if (color=='verde') {
-        this.color = "verde"; 
+        this.color = "verde";
         this.menu = this.objcolors.verde.menu;
         this.canvas = 'bg-success';
-        this.tabletype = 'table-success'   
+        this.tabletype = 'table-success';
+        this.letters = 'green';
       }
       if (color=='naranjo') {
-        this.color = "naranjo"; 
+        this.color = "naranjo";
         this.menu = this.objcolors.naranjo.menu;
         this.canvas = 'bg-warning';
-        this.tabletype = 'table-warning'    
+        this.tabletype = 'table-warning';
+        this.letters = 'orange';
       }
     }
 
@@ -152,6 +156,8 @@ export class MenuComponent implements OnInit{
       this.mostra = ( isDesktopDevice==true ) ? true : false;
     }
 
+    mostrar_color() { this.getColor(localStorage.getItem('Color')!)}
+
   /* store functions */
 
   setTable(table:string) {
@@ -162,8 +168,8 @@ export class MenuComponent implements OnInit{
   mensaje(color:any) {
     localStorage.setItem('Color', color[1])
     this.store.dispatch(new SetUsuario(color[0], this.usuarioId)).pipe(
-      tap(() => localStorage.setItem('Color', color[1])),
-      tap(() => this.getColor(color[1]))
+      //tap(() => localStorage.setItem('Color', color[1])),
+      //tap(() => this.getColor(color[1]))
     )
 
   }
