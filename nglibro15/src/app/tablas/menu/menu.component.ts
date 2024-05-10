@@ -29,8 +29,11 @@ export class MenuComponent implements OnInit{
     esUtp=false;
     saludo!:string;
 
+
+
     deviceinfo!:any;
     mostra=false;
+    mostra_menu=true;
 
     objcolors = env.colors;
     menu!:string;
@@ -141,9 +144,9 @@ export class MenuComponent implements OnInit{
           if (menu) {
             this.store.dispatch(new GetPermiso(this.permission[menu]));
            }
-           
+
         }
-        
+
         )*/
       ).subscribe();
     }

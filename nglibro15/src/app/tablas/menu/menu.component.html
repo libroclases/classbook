@@ -45,7 +45,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-mortarboard-fill'>&nbsp;Alumno&nbsp;</em></a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" routerLink="/alumno" routerLinkActive="active" (click)="setTable('Alumno')">Alumno</a></li>
+                  <li><a class="dropdown-item" routerLink="/alumno" routerLinkActive="false" (click)="setTable('Alumno')">Alumno</a></li>
                   <li><a class="dropdown-item" routerLink="/estadoalumno" routerLinkActive="active" (click)="setTable('EstadoAlumno')">Estado Alumno</a></li>
                   <li><a class="dropdown-item" routerLink="/apoderado" routerLinkActive="active" (click)="setTable('Apoderado')">Apoderado</a></li>
                   <li><a class="dropdown-item" routerLink="/anotaciones" routerLinkActive="active" (click)="setTable('Anotacion')">Observaciones</a></li>
@@ -56,7 +56,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><em class='bi bi-person-video3'>&nbsp;Profesor&nbsp;</em></a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" routerLink="/profesor" routerLinkActive="active" (click)="setTable('Profesor')">Profesor</a></li>
+                  <li *ngIf="mostra_menu"><a class="dropdown-item" routerLink="/profesor" routerLinkActive="active" (click)="setTable('Profesor')">Profesor</a></li>
                   <li><a class="dropdown-item" routerLink="/asignaturaprofesor" routerLinkActive="active" (click)="setTable('AsignaturaProfesor')">Asignatura Profesor</a></li>
                   <li><a class="dropdown-item" routerLink="/asignaturacurso" routerLinkActive="active" (click)="setTable('AsignaturaCurso')">Asignatura Curso</a></li>
                   <li><a class="dropdown-item" routerLink="/evaluacion" routerLinkActive="active" (click)="setTable('Evaluacion')">Evaluación</a></li>
