@@ -7,8 +7,9 @@ import { MaintainerComponent } from '../maintainer/maintainer.component';
   styleUrls: ['./maintainer-template.component.css']
 })
 export class MaintainerTemplateComponent {
-  tableTitle  = "title";
-  mainTable = "table";
+  
+  tableTitle  = "";
+  mainTable = "";
   textFields = [];
   dateFields = [];
   displayFKFields = [];
@@ -17,6 +18,6 @@ export class MaintainerTemplateComponent {
   changeFnsArray = [];
   ignoreFkRequirements = [];
   patchFKsFromStorage = [];
-
+  
   constructor( ) { }
 }

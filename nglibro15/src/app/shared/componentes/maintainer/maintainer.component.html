@@ -46,7 +46,7 @@
   <table class="table table-sm  table-striped table-fit table-bordered">
     <ng-container *ngIf="isGroupTable; else notGroupTable">
       <thead>
-        <tr><th [attr.colspan]="numColumns" [style.background-color]="tablehead" style="text-align: center;color:white; height:40px"><em [class]="getBiClass('/'+ mainTable)">&nbsp;&nbsp;</em><b>{{title}}</b></th></tr>
+        <tr><th [attr.colspan]="numColumns" [style.background-color]="tablehead" style="text-align: center;color:white; height:40px"><em [class]="getBiClass('/'+ mainTable)">&nbsp;&nbsp;</em><b>xxxxxxx{{title}}|{{mainTable}}</b></th></tr>
         <tr class="table-bordered">
           <th [attr.colspan]="numRedirect" *ngIf="numRedirect > 0"  style="text-align: center;">
             <a class="btn btn-link btn-sm" data-bs-toggle="tooltip" title="Bajar Datos"
@@ -61,7 +61,7 @@
     </ng-container>
     <ng-template #notGroupTable>
       <thead>
-        <tr><th [attr.colspan]="numColumns" [style.background-color]="tablehead"  style="text-align: center;color:white; font-size: medium;"><em [class]="getBiClass('/'+ mainTable)">&nbsp;&nbsp;</em><b>{{title}}  ({{numreg}})</b></th></tr>
+        <tr><th [attr.colspan]="numColumns" [style.background-color]="tablehead"  style="text-align: center;color:white; font-size: medium;"><em [class]="getBiClass('/'+ mainTable)">&nbsp;&nbsp;</em><b>{{title}} yyyyyy {{mainTable}} ({{numreg}})</b></th></tr>
         <tr class="table-bordered">
           <th [attr.colspan]="numRedirect" *ngIf="numRedirect > 0"  style="text-align: center;">
             <a class="btn btn-link btn-sm px-3" data-bs-toggle="tooltip" title="Bajar Datos"

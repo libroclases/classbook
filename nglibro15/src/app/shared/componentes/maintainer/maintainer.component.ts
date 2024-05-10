@@ -19,6 +19,7 @@ import { GetPermissionService } from '../../services/get-permission/get-permissi
 import { PermisoState } from 'src/app/ngxs/permiso/permiso.state';
 import { Permiso } from 'src/app/ngxs/permiso/permiso.model';
 
+
 @Component({
   selector: 'maintainer',
   templateUrl: './maintainer.component.html',
@@ -103,7 +104,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
   // Router
   multiSelectInitIds: {[key: string]: number} = {};
-  lowerUpperTables = lowerUpperTables;
+  lowerUpperTables:any = lowerUpperTables;
   querySubs: Subscription | null = null;
 
   // router = ["Anno","Colegio","Curso","Profesor","AsignaturaProfesor"];
@@ -142,6 +143,8 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
   tipousuario:any = null;
 
+  poronga$!: Observable<any | undefined>;
+
   search(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
     this.searchTerm$.next(element.value);
@@ -162,65 +165,8 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     private fkService: ForeignKeysService,
     private labelsService: LabelsService,
     private iconsService: IconsService,
-    getpermission: GetPermissionService
+    private getpermission: GetPermissionService
     ) {
-
-   const getColor = (color:string | null) => {
-
-    if (color=='azul' || !color) {
-      this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-      this.pagination = this.objcolors.azul.pagination;
-      this.tablehead = this.objcolors.azul.tablehead;
-      this.bgmodal = this.objcolors.azul.bgmodal;
-      this.modalbutton = this.objcolors.azul.modalbutton;
-      this.url = this.photo.azul;
-    }
-    if (color=='verde') {
-      this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-      this.pagination = this.objcolors.verde.pagination;
-      this.tablehead = this.objcolors.verde.tablehead;
-      this.bgmodal = this.objcolors.verde.bgmodal;
-      this.modalbutton = this.objcolors.verde.modalbutton;
-      this.url = this.photo.verde;
-    }
-    if (color=='naranjo') {
-      this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-      this.pagination = this.objcolors.naranjo.pagination;
-      this.tablehead = this.objcolors.naranjo.tablehead;
-      this.bgmodal = this.objcolors.naranjo.bgmodal;
-      this.modalbutton = this.objcolors.naranjo.modalbutton;
-      this.url = this.photo.naranjo;
-
-    }
-
-  }
-
-  /*
-  let info = {};
-  const permiso = this.permiso$?.pipe(
-    map((p:any) => getpermission.getPermission(p[0],info)),
-    tap(p => this.disable = p),
-    tap(p => console.log('poronga',p))
-   )
-   */
-
-    this.usuario$.pipe(
-      tap(info => {
-        //
-        if (info?.personalInfo) {
-          console.log('mainTable:',this.mainTable)
-          getColor(info.personalInfo?.usuario.Tema.nombre);
-          this.disable = getpermission.getPermission(Permission['Curso'][0],info);
-        }
-        else { getColor(localStorage.getItem('Color')) }
-      }),
-  ).subscribe();
-
-
-
-
-
-
 
 
     activatedRoute.params.subscribe((params:any) => {
@@ -250,7 +196,47 @@ export class MaintainerComponent implements OnInit, OnDestroy {
    });
     }
 
+    getColor(color:string | null)  {
+
+      if (color=='azul' || !color) {
+        this.bodybgcolor = this.objcolors.azul.bodybgcolor;
+        this.pagination = this.objcolors.azul.pagination;
+        this.tablehead = this.objcolors.azul.tablehead;
+        this.bgmodal = this.objcolors.azul.bgmodal;
+        this.modalbutton = this.objcolors.azul.modalbutton;
+        this.url = this.photo.azul;
+      }
+      if (color=='verde') {
+        this.bodybgcolor = this.objcolors.verde.bodybgcolor;
+        this.pagination = this.objcolors.verde.pagination;
+        this.tablehead = this.objcolors.verde.tablehead;
+        this.bgmodal = this.objcolors.verde.bgmodal;
+        this.modalbutton = this.objcolors.verde.modalbutton;
+        this.url = this.photo.verde;
+      }
+      if (color=='naranjo') {
+        this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
+        this.pagination = this.objcolors.naranjo.pagination;
+        this.tablehead = this.objcolors.naranjo.tablehead;
+        this.bgmodal = this.objcolors.naranjo.bgmodal;
+        this.modalbutton = this.objcolors.naranjo.modalbutton;
+        this.url = this.photo.naranjo;
+  
+      }
+  
+    }
+  
+
   ngOnInit(): void {
+    console.log('poronga->',lowerUpperTables[this.mainTable]);
+
+    this.usuario$.pipe(
+      tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
+      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission[lowerUpperTables[this.mainTable]][0],info)}})
+      
+    ).subscribe()
+
+
     this.redirectRts = redirectRoutes[lowerUpperTables[this.mainTable]];
     if ( !this.redirectRts ) {
       this.redirectRts = [];
