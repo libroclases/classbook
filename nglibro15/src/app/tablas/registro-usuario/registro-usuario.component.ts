@@ -9,10 +9,12 @@ import { ModalDialogComponent } from 'src/app/shared/componentes/modal-dialog/mo
 import { emailValidator } from 'src/app/shared/directives/email-validator/email-validator.directive';
 import { selectValidator } from 'src/app/shared/directives/select-validator/select-validator.directive';
 import { CrudService } from 'src/app/shared/services/crud/crud.service';
+import { GetPermissionService } from 'src/app/shared/services/get-permission/get-permission.service';
 import { LabelsService } from 'src/app/shared/services/labels/labels.service';
 import { SelectionIdsService } from 'src/app/shared/services/selection-ids/selection-ids.service';
 
 import { environment, lowerUpperTables as lowerUpper, lowerUpperTables, modalDataObject, usuarioTipo, validator } from 'src/environments/environment';
+import { Permission } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -50,7 +52,7 @@ export class RegistroUsuarioComponent implements OnInit {
   pagination!:string;
   tablehead!:string;
 
-  disable = true;
+  disable = {};
   currentDate:Date = new Date();
 
   bgmodal!:string;
@@ -114,53 +116,26 @@ export class RegistroUsuarioComponent implements OnInit {
     // private mensaje: MessageService,
     public dialog: MatDialog,
     private crud: CrudService,
-    
-    private labelsService: LabelsService,
-    // private selIdsService: SelectionIdsService, 
-    ) {
 
+    private labelsService: LabelsService,
+    private getpermission: GetPermissionService
+    // private selIdsService: SelectionIdsService,
+    ) {
+      /*
       const getPermision = (msg: any) => { if(msg) {
         const year = this.currentDate.getFullYear();
         this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-        } 
-  
-      }
-  
-     const getColor = (color:string | null) => {
-
-      if (color=='azul' || !color) {
-        this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-        this.pagination = this.objcolors.azul.pagination;
-        this.tablehead = this.objcolors.azul.tablehead;
-        this.bgmodal = this.objcolors.azul.bgmodal;
-        this.modalbutton = this.objcolors.azul.modalbutton;
-        this.url = this.photo.azul;
+        }
 
       }
-      if (color=='verde') {
-        this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-        this.pagination = this.objcolors.verde.pagination;
-        this.tablehead = this.objcolors.verde.tablehead;
-        this.bgmodal = this.objcolors.verde.bgmodal;
-        this.modalbutton = this.objcolors.verde.modalbutton;
-        this.url = this.photo.verde;
-      }
-      if (color=='naranjo') {
-        this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-        this.pagination = this.objcolors.naranjo.pagination;
-        this.tablehead = this.objcolors.naranjo.tablehead;
-        this.bgmodal = this.objcolors.naranjo.bgmodal;
-        this.modalbutton = this.objcolors.naranjo.modalbutton;
-        this.url = this.photo.naranjo;
-      }
-  
-    }
-  
+      */
+
+/*
 this.usuario$.subscribe(info => {
   if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
   else { getColor(localStorage.getItem('Color')) }
 });
-
+*/
 /*
       this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
         getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
@@ -175,7 +150,46 @@ this.usuario$.subscribe(info => {
       });
 
   }
+
+    getColor = (color:string | null) => {
+
+    if (color=='azul' || !color) {
+      this.bodybgcolor = this.objcolors.azul.bodybgcolor;
+      this.pagination = this.objcolors.azul.pagination;
+      this.tablehead = this.objcolors.azul.tablehead;
+      this.bgmodal = this.objcolors.azul.bgmodal;
+      this.modalbutton = this.objcolors.azul.modalbutton;
+      this.url = this.photo.azul;
+
+    }
+    if (color=='verde') {
+      this.bodybgcolor = this.objcolors.verde.bodybgcolor;
+      this.pagination = this.objcolors.verde.pagination;
+      this.tablehead = this.objcolors.verde.tablehead;
+      this.bgmodal = this.objcolors.verde.bgmodal;
+      this.modalbutton = this.objcolors.verde.modalbutton;
+      this.url = this.photo.verde;
+    }
+    if (color=='naranjo') {
+      this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
+      this.pagination = this.objcolors.naranjo.pagination;
+      this.tablehead = this.objcolors.naranjo.tablehead;
+      this.bgmodal = this.objcolors.naranjo.bgmodal;
+      this.modalbutton = this.objcolors.naranjo.modalbutton;
+      this.url = this.photo.naranjo;
+    }
+
+  }
+
+
   ngOnInit(): void {
+
+    this.usuario$.pipe(
+      tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
+      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['RegistroUsuario'],info)}})
+
+    ).subscribe()
+
     this.queries['tema'] = this.crud.getData('tema')!;
     this.queries['tipousuario'] = this.crud.getData('tipousuario')!;
     this.disabled();
@@ -198,21 +212,21 @@ this.usuario$.subscribe(info => {
     this.usuario_encontrado = false;
 
     this.crud.getByEmail('usuario', this.valuesForm.value.email).pipe(
-      tap(usuario => { 
+      tap(usuario => {
         if(usuario) {
             this.usuario_encontrado = true;
             this.usuario = usuario;
             const valor = {'username': this.valuesForm.value.email.split('@')[0], 'tipousuario': usuario.tipousuarioId, 'tema': usuario.temaId}
-            if (usuario.operativo == true) { 
+            if (usuario.operativo == true) {
                 this.disabled();
-                this.email_asociado = 'Email asociado a usuario ya está activado';        
+                this.email_asociado = 'Email asociado a usuario ya está activado';
             } else {
               this.disabled();
               this.valuesForm.patchValue(valor)
             }
       } else  {
         const valor = {'username': this.valuesForm.value.email.split('@')[0]}
-        
+
         this.enabled()
         this.valuesForm.patchValue(valor)
       }
@@ -234,7 +248,7 @@ this.usuario$.subscribe(info => {
 
 
   addMessage(msg: any) {
-    
+
 
      if (msg.success) {
       this.mensaje = msg.message
@@ -251,11 +265,11 @@ this.usuario$.subscribe(info => {
         console.log('poronga->',msg);
         if (msg) {
           this.addMessage(msg);
-          this.reset();  
+          this.reset();
         }
 
       })
-  
+
     } else {
       this.openDialog(this.usuario)
     }
@@ -272,7 +286,7 @@ this.usuario$.subscribe(info => {
 
     reg['id'] = 0;
     reg['usuario_id'] = usuario.id;
-    
+
     reg['bgmodal'] = this.bgmodal;
     reg['modalbutton'] = this.modalbutton;
 

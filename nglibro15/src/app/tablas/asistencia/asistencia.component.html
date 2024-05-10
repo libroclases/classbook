@@ -2,7 +2,7 @@
 [style.background-color]="bodybgcolor"
 [style.background-image]="url"
 [style.background-position]="position"
-[style.background-size]="size" 
+[style.background-size]="size"
 [style.height] = "height">
 
   <div class="my-4" style="float: right;">
@@ -12,8 +12,8 @@
     [patch-fks-from-storage]="patchFksFromStorage">
     </multi-select>
   </div>
-
-  <checkbox-calendar 
+  [{{disable | json}}]
+  <checkbox-calendar [disable_check]="disable"
     [title]="title"
     [table]="table"
     [check-field]="checkField"

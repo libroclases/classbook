@@ -13,6 +13,8 @@ import { UserInfoService } from 'src/app/shared/services/user-info/user-info.ser
 import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
+import { GetPermissionService } from 'src/app/shared/services/get-permission/get-permission.service';
+import { Permission } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-matricula-alumno',
@@ -31,17 +33,17 @@ export class MatriculaAlumnoComponent implements OnInit {
   // data:any={};
   muestra_dialog=false;
 
- 
+
   objcolors = environment.colors;
 
   bodybgcolor!:string;
   pagination!:string;
   tablehead!:string;
-  
+
   bgmodal!:string;
   modalbutton!:any;
 
-  disable = true;
+  disable = {};
   currentDate:Date = new Date();
 
   @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
@@ -62,72 +64,85 @@ export class MatriculaAlumnoComponent implements OnInit {
     this.height = event.target.innerHeight - (this.banner_height + this.menu_height) + 'px';
   }
 
-  
-  ngOnInit() {}
+  getColor = (color:string | null) => {
+
+    if (color=='azul' || !color) {
+      this.bodybgcolor = this.objcolors.azul.bodybgcolor;
+      this.pagination = this.objcolors.azul.pagination;
+      this.tablehead = this.objcolors.azul.tablehead;
+      this.bgmodal = this.objcolors.azul.bgmodal;
+      this.modalbutton = this.objcolors.azul.modalbutton;
+      this.url = this.photo.azul;
+
+    }
+    if (color=='verde') {
+      this.bodybgcolor = this.objcolors.verde.bodybgcolor;
+      this.pagination = this.objcolors.verde.pagination;
+      this.tablehead = this.objcolors.verde.tablehead;
+      this.bgmodal = this.objcolors.verde.bgmodal;
+      this.modalbutton = this.objcolors.verde.modalbutton;
+      this.url = this.photo.verde;
+
+    }
+    if (color=='naranjo') {
+      this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
+      this.pagination = this.objcolors.naranjo.pagination;
+      this.tablehead = this.objcolors.naranjo.tablehead;
+      this.bgmodal = this.objcolors.naranjo.bgmodal;
+      this.modalbutton = this.objcolors.naranjo.modalbutton;
+      this.url = this.photo.naranjo;
+
+    }
+
+  }
+
+
+  ngOnInit() {
+
+    this.usuario$.pipe(
+      tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
+      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['MatriculaAlumno'],info)}})
+
+    ).subscribe()
+
+
+  }
+
 
   alumno:any = null;
   apoderado:any = null;
   matricula:any=null;
-  
+
   constructor(
     @Inject(DOCUMENT) private document:Document,
     // private mensaje: MessageService,
     public dialog: MatDialog,
     private crud: CrudService,
     public userInfo: UserInfoService,
-    private selIdsService: SelectionIdsService, ) {
+    private selIdsService: SelectionIdsService,
+    private getpermission: GetPermissionService ) {
 
+/*
       const getPermision = (msg: any) => { if(msg) {
         const year = this.currentDate.getFullYear();
         this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-        } 
-  
-      }
-  
-     const getColor = (color:string | null) => {
-
-      if (color=='azul' || !color) {
-        this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-        this.pagination = this.objcolors.azul.pagination;
-        this.tablehead = this.objcolors.azul.tablehead;
-        this.bgmodal = this.objcolors.azul.bgmodal;
-        this.modalbutton = this.objcolors.azul.modalbutton;
-        this.url = this.photo.azul;
+        }
 
       }
-      if (color=='verde') {
-        this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-        this.pagination = this.objcolors.verde.pagination;
-        this.tablehead = this.objcolors.verde.tablehead;
-        this.bgmodal = this.objcolors.verde.bgmodal;
-        this.modalbutton = this.objcolors.verde.modalbutton;
-        this.url = this.photo.verde;
+*/
 
-      }
-      if (color=='naranjo') {
-        this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-        this.pagination = this.objcolors.naranjo.pagination;
-        this.tablehead = this.objcolors.naranjo.tablehead;
-        this.bgmodal = this.objcolors.naranjo.bgmodal;
-        this.modalbutton = this.objcolors.naranjo.modalbutton;
-        this.url = this.photo.naranjo;
-
-      }
-
-    }
-
-    
+/*
 this.usuario$.subscribe(info => {
   if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
   else { getColor(localStorage.getItem('Color')) }
 });
 
-
-/*  
+*/
+/*
       this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
         getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
         getColor(info.personalInfo.usuario.Tema.nombre);
-      }))   
+      }))
 */
 
       this.formConsulta = new FormGroup({
@@ -147,11 +162,11 @@ this.usuario$.subscribe(info => {
   cancelar() {
     this.formConsulta.reset();
     this.muestra_dialog = false;
-  
+
     // this.mensaje.nextMsg({})
 
   }
-  
+
 
   openDialog(): void {
 
@@ -159,13 +174,13 @@ this.usuario$.subscribe(info => {
     let modaldata = modalDataObject['Matricula'];
 
     reg['id'] = 0;
-    
+
     modaldata?.tables.forEach((table: string) => reg[table] = {id: 0});
     modaldata.textFields.forEach((text: string) => reg[text] = null);
     modaldata.dateFields.forEach((date: string) => reg[date] = null);
- 
+
     reg['foraneas'] = { apoderado: this.apoderado.id, alumno: this.alumno.id }
-    
+
     reg['bgmodal'] = this.bgmodal;
     reg['modalbutton'] = this.modalbutton;
 
@@ -184,7 +199,7 @@ this.usuario$.subscribe(info => {
      tap(() => { this.formConsulta.reset(); console.log('cerrado')})
    )
    .subscribe();
-   
+
 
  }
 
@@ -196,9 +211,9 @@ this.usuario$.subscribe(info => {
      .subscribe(res => {
       if (res) { this.alumno = res }
       else { this.document.defaultView?.alert('No existe alumno') }
-      
+
     })
-       
+
   }
 
   rut_apoderado() {
@@ -207,9 +222,9 @@ this.usuario$.subscribe(info => {
     .subscribe(res => {
       if (res) { this.apoderado = res }
       else { this.document.defaultView?.alert('No existe apoderado') }
-      
-    })    
-       
+
+    })
+
  }
 
 

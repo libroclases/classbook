@@ -1,5 +1,5 @@
 <div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 1%;padding-bottom: 0%"
-[style.background-color]="bodybgcolor" 
+[style.background-color]="bodybgcolor"
 [style.background-image]="url"
 [style.background-position]="position"
 [style.background-size]="size"
@@ -20,18 +20,18 @@
     </div>
 
     <div class="overflow-auto p-3 bg-light"  [style.max-height]="height"  [style.opacity]="opacity"  style="width: 100%;">
-
+      {{disable | json}}
       <table class="table table-bordered table-striped table-sm">
         <thead>  <!-- [disabled]="disabledAddButton" -->
           <tr><th colspan="22" [style.background-color]="tablehead" style="color: white">
             <em [class]="getBiClass('/anotacion')"></em>&nbsp;{{title}}
               &nbsp;
-              
+
               <a mat-button (click)="openDialog()"  disabled={{disabledAddButton}} title="Nuevo" [style.background-color]="modalbutton"><em class="bi bi-plus-lg"></em></a>
 
-              <!--button type="button" class="btn btn-sm text-light"  (click)="openDialog(null)"  disabled={{disable}} title="Nuevo" 
+              <!--button type="button" class="btn btn-sm text-light"  (click)="openDialog(null)"  disabled={{disable}} title="Nuevo"
               [style.background-color]="modalbutton" ><em class="bi bi-plus-lg">{{disable}}</em></button-->
-          
+
           </th></tr>
           <tr><th colspan="22" style="background-color: rgba(0,0,0,0);"> <p style="color: blue;"> {{nombreAlumno}}</p></th></tr>
           <tr>

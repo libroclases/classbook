@@ -30,9 +30,16 @@ export class GetPermissionService {
             console.log('utp',utp);
             if (ins.Anno.nombre == year.toString() && ins.Colegio.id == colegio) {
 
-            permission.leer =  (Table.leer == 'profesor') ? false : true;
-            permission.editar = (Table.editar == 'utp' && utp) ? false : true;
-            permission.crear = (Table.crear == 'utp' && utp) ? false : true;
+                  if (utp) {
+                      permission.leer =   false;
+                      permission.editar = (Table.editar.includes('utp')) ? false : true;
+                      permission.crear = (Table.crear.includes('utp')) ? false : true;
+                  }
+                  else {
+                      permission.leer =  (Table.leer.includes('profesor')) ? false : true;
+                      permission.editar = (Table.editar.includes('profesor')) ? false : true;
+                      permission.crear = (Table.crear.includes('profesor')) ? false : true;
+                  }
           }
 
        }

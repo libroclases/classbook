@@ -12,9 +12,11 @@ import {
 } from '../../../environments/environment';
 
 import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
+import { GetPermissionService } from 'src/app/shared/services/get-permission/get-permission.service';
+import { Permission } from 'src/environments/environment.development';
 
 
 @Component({
@@ -44,8 +46,8 @@ export class RegistroActividadComponent implements OnDestroy {
 
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
-  
-  disable = true;
+
+  disable = {};
   currentDate:Date = new Date();
 
   innerHeight=  window.innerHeight
@@ -111,20 +113,40 @@ export class RegistroActividadComponent implements OnDestroy {
     private subsManagerService: SubscriptionsManagerService,
     private fKeysService: ForeignKeysService,
     private selIdsService: SelectionIdsService,
-    private iconsService: IconsService
+    private iconsService: IconsService,
+    private getpermission: GetPermissionService
   ) {
     // REVISAR
     // userInfo.personalInfo$.subscribe(info => this.userId = info.personalInfo.datos_persona.id)
 
+    /*
     const getPermision = (msg: any) => { if(msg) {
       const year = this.currentDate.getFullYear();
       this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-      } 
+      }
 
     }
+   */
 
-   const getColor = (color:string | null) => {
-    
+
+/*
+this.usuario$.subscribe(info => {
+  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
+  else { getColor(localStorage.getItem('Color')) }
+});
+*/
+
+/*
+this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
+  getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
+  getColor(info.personalInfo.usuario.Tema.nombre);
+}))
+*/
+
+  }
+
+  getColor = (color:string | null) => {
+
     if (color=='azul' || !color) {
       this.bodybgcolor = this.objcolors.azul.bodybgcolor;
       this.pagination = this.objcolors.azul.pagination;
@@ -147,21 +169,14 @@ export class RegistroActividadComponent implements OnDestroy {
 }
 
 
-this.usuario$.subscribe(info => {
-  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
-  else { getColor(localStorage.getItem('Color')) }
-});
-
-/*
-this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
-  getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
-  getColor(info.personalInfo.usuario.Tema.nombre);
-}))
-*/
-
-  }
-
   ngOnInit(): void {
+
+    this.usuario$.pipe(
+      tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
+      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['RegistroActividad'],info)}})
+
+    ).subscribe()
+
     this.editable = new Map();
     this.inputIsEnabled = new Map();
     this.isEdited = new Map();

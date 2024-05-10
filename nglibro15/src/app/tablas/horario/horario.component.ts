@@ -14,6 +14,8 @@ import { OriginTableIdService } from '../../shared/services/origin-table-id/orig
 import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
+import { GetPermissionService } from 'src/app/shared/services/get-permission/get-permission.service';
+import { Permission } from 'src/environments/environment.development';
 
 
 
@@ -45,7 +47,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
 
-  disable = true;
+  disable = {};
   currentDate:Date = new Date();
 
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
@@ -139,6 +141,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
     private selIdsService: SelectionIdsService,
     private fkService: ForeignKeysService,
     private iconsService: IconsService,
+    private getpermission: GetPermissionService
 
      ) {
 
@@ -146,45 +149,17 @@ export class HorarioComponent implements OnInit, OnDestroy {
       const getPermision = (msg: any) => { if(msg) {
         const year = this.currentDate.getFullYear();
         this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-        } 
-  
-      }
-  
-     const getColor = (color:string | null) => {
-      
-      if (color=='azul' || !color) {
-        this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-        this.pagination = this.objcolors.azul.pagination;
-        this.tablehead = this.objcolors.azul.tablehead;
-        this.bgmodal = this.objcolors.azul.bgmodal;
-        this.modalbutton = this.objcolors.azul.modalbutton;
-        this.url = this.photo.azul;
-      }
-      if (color=='verde') {
-        this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-        this.pagination = this.objcolors.verde.pagination;
-        this.tablehead = this.objcolors.verde.tablehead;
-        this.bgmodal = this.objcolors.verde.bgmodal;
-        this.modalbutton = this.objcolors.verde.modalbutton;
-        this.url = this.photo.verde;
-      }
-      if (color=='naranjo') {
-        this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-        this.pagination = this.objcolors.naranjo.pagination;
-        this.tablehead = this.objcolors.naranjo.tablehead;
-        this.bgmodal = this.objcolors.naranjo.bgmodal;
-        this.modalbutton = this.objcolors.naranjo.modalbutton;
-        this.url = this.photo.naranjo;
+        }
 
       }
-}
-   
 
+
+/*
 this.usuario$.subscribe(info => {
   if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
   else { getColor(localStorage.getItem('Color')) }
 });
-
+*/
 /*
 this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
     getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
@@ -256,9 +231,44 @@ this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((e
       ).subscribe()
   }
 
+  getColor = (color:string | null) => {
+
+    if (color=='azul' || !color) {
+      this.bodybgcolor = this.objcolors.azul.bodybgcolor;
+      this.pagination = this.objcolors.azul.pagination;
+      this.tablehead = this.objcolors.azul.tablehead;
+      this.bgmodal = this.objcolors.azul.bgmodal;
+      this.modalbutton = this.objcolors.azul.modalbutton;
+      this.url = this.photo.azul;
+    }
+    if (color=='verde') {
+      this.bodybgcolor = this.objcolors.verde.bodybgcolor;
+      this.pagination = this.objcolors.verde.pagination;
+      this.tablehead = this.objcolors.verde.tablehead;
+      this.bgmodal = this.objcolors.verde.bgmodal;
+      this.modalbutton = this.objcolors.verde.modalbutton;
+      this.url = this.photo.verde;
+    }
+    if (color=='naranjo') {
+      this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
+      this.pagination = this.objcolors.naranjo.pagination;
+      this.tablehead = this.objcolors.naranjo.tablehead;
+      this.bgmodal = this.objcolors.naranjo.bgmodal;
+      this.modalbutton = this.objcolors.naranjo.modalbutton;
+      this.url = this.photo.naranjo;
+
+    }
+}
+
 
   ngOnInit(): void {
 
+
+    this.usuario$.pipe(
+      tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
+      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['Horario'],info)}})
+
+    ).subscribe()
 
     this.horaasignada$ = this.crud.getData('horaasignada',[this.getId('colegioId')])!;
 

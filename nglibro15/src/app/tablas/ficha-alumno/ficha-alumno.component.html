@@ -2,14 +2,14 @@
 [style.background-image]="url"
 [style.background-position]="position"
 [style.background-size]="size"
-[style.background-color]="bodybgcolor" 
+[style.background-color]="bodybgcolor"
 [style.minHeight] = "height">
 
 
 
   <div class="row" [style.opacity]="opacity" >
       <div class="col-md-4" style="padding-top: 2%;">
-
+    {{disable | json}}
     <table class="table table-bordered"  style="display: block; height:75cap; overflow-y: auto;">
       <thead>
         <tr *ngFor="let l of (lista_curso_nombres$ | async)">
@@ -25,18 +25,18 @@
 
           <!-- Selectores -->
           <div class="row">
-    
+
             <div class="col-sm-12 pt-3" style="float: right; padding-bottom: 0%; height:100px; ">
               <multi-select
               [tables]="selTables"
               [labels]="tableLabels"
-        
+
               [ignore-FK-requirements]="ignoreFkRequirements"
               [change-functions]="changeFnsArray"
               [patch-fks-from-storage]="patchFKsFromStorage">
               </multi-select>
           </div>
-          </div>    
+          </div>
       <div class="row">
          <nav>
 
@@ -47,7 +47,7 @@
             <button class="nav-link" id="nav-matricula-tab" data-bs-toggle="tab" data-bs-target="#nav-matricula" type="button" role="tab" aria-controls="nav-matricula" aria-selected="false"><p>Matricula</p></button>
             <button class="nav-link" id="nav-anotacion-tab" data-bs-toggle="tab" data-bs-target="#nav-anotacion" type="button" role="tab" aria-controls="nav-anotacion" aria-selected="false"><p>Anotaciones</p></button>
           </div>
-          
+
         </nav>
 
 
@@ -64,7 +64,7 @@
                 <tr><th colspan="2">&nbsp;</th></tr>
               </tbody>
             </table>
-        
+
           </div>
           <div class="tab-pane fade" id="nav-apoderado" role="tabpanel" aria-labelledby="nav-apoderado-tab">
             <table class="table table-bordered table-sm">
@@ -78,7 +78,7 @@
                 <tr><th colspan="2"><b>&nbsp;</b></th></tr>
               </tbody>
             </table>
-        
+
           </div>
 
           <div class="tab-pane fade" id="nav-matricula" role="tabpanel" aria-labelledby="nav-matricula-tab">
@@ -86,7 +86,7 @@
               <thead>
                 <tr><th colspan="2"  style="color:white;" [style.background-color]="tablehead"><em [class]="getBiClass('/fichaalumno')"></em>&nbsp;Matricula  [
                   {{getalumno('apellido1')}} {{getalumno('apellido2')}} {{getalumno('nombre')}}]</th>
-                </tr>              
+                </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let a of matriculas | keyvalue"><td>{{matriculas[setAny([a.key])]}}</td><td>{{getmatricula(a.key)}}</td></tr>
@@ -94,7 +94,7 @@
                 <tr><th colspan="2">&nbsp;</th></tr>
               </tbody>
             </table>
-        
+
           </div>
 
           <!--div class="tab-pane fade" id="nav-matricula" role="tabpanel" aria-labelledby="nav-matricula-tab">
@@ -109,7 +109,7 @@
               <tbody>
               </tbody>
             </table>
-        
+
           </div-->
 
 
@@ -120,20 +120,20 @@
                   {{getalumno('apellido1')}} {{getalumno('apellido2')}} {{getalumno('nombre')}}]</th></tr>
                 <tr><th style="width:10%">Fecha</th><th style="width:20%">Hora</th><th style="width:70%">Observaciones</th></tr>
               </thead>
-                  
+
               <tbody><tr *ngFor="let a of anotacion"><td style="width:20%">{{a.fecha}}</td><td style="width:10%">{{a.hora}}</td><td style="width:70%">{{a.texto}}</td></tr></tbody>
-                   
-        
+
+
               <tbody>
               </tbody>
             </table>
-        
+
           </div>
 
         </div>
-  </div>      
-    
-    
+  </div>
+
+
       </div>
 
 

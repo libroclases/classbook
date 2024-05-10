@@ -7,14 +7,18 @@
 
 
 
-       
+
         <div class="center"  [style.opacity]="opacity">
+          {{disable | json}}
           <h2>Registro Usuario</h2>
           <form  [formGroup]="valuesForm">
 
           <table  class="table table-sm table-secundary table-fit">
             <tbody class="table-secundary" >
+              <!--
               <tr><td>Email</td><td><input type="text" formControlName="email" [disabled]="disable"  />
+              -->
+              <tr><td>Email</td><td><input type="text" formControlName="email"  />
                 <div *ngIf="valuesForm.controls['email']?.invalid && (valuesForm.controls['email']?.dirty || valuesForm.controls['email']?.touched)"  class="alert alert-danger">
                   <div *ngIf="valuesForm.controls['email']?.errors?.['emailValidator']">Por favor ingrese un email</div>
                 </div>
@@ -24,7 +28,10 @@
                    [style.background-color]="modalbutton" class="text-light" [disabled]="disable" >Buscar</button>
               </td>
             </tr>
+              <!--
               <tr><td>Username</td><td><input type="text" formControlName="username" [disabled]="disable" />
+              -->
+              <tr><td>Username</td><td><input type="text" formControlName="username" />
                 <div *ngIf="valuesForm.controls['username']?.invalid && (valuesForm.controls['username']?.dirty || valuesForm.controls['username']?.touched)"  class="alert alert-danger">
                   <div *ngIf="valuesForm.controls['username']?.errors?.['required']">Por favor ingrese un username</div>
                 </div>
@@ -58,7 +65,7 @@
           <p>{{mensaje}}</p>
 
       </div>
-   
+
 
 
 

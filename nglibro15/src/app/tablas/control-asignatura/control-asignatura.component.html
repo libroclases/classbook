@@ -4,6 +4,7 @@
 [style.background-size]="size"
 [style.background-color]="bodybgcolor" [style.height] = "height">
 
+
           <div class="mt-5" style="float: left;">
               <form class="row row-cols-sm-auto">
                 <div class="col-12">
@@ -26,11 +27,11 @@
                 </div>
               </form>
           </div>
-            
+
           <div class="mt-4" style="float: right;  height:100px; ">
               <multi-select
                 [tables]="fKeysSel"
-              
+
                 [change-functions]="changeFnsArray"
                 [patch-fks-from-storage]="patchFksFromStorage"
               >
@@ -38,7 +39,7 @@
           </div>
 
           <div class="overflow-auto p-3 bg-light"  [style.max-height]="height"  [style.opacity]="opacity" style="width: 100%;">
-            
+            [{{disable | json}}]
             <table class="table  table-bordered table-fix table-striped table-sm">
               <thead>
                 <tr>
@@ -247,5 +248,5 @@
 
           </div>
   </div>
-  
+
 

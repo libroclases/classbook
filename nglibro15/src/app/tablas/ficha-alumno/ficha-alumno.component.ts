@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 
-import { environment, attributesLabels, fKeysByTable, tableLabels, lowerUpperTables } from 'src/environments/environment';
+import { environment, attributesLabels, fKeysByTable, tableLabels, lowerUpperTables, Permission } from 'src/environments/environment';
 // import { ActivatedRoute } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { SelectionIdsService } from 'src/app/shared/services/selection-ids/selection-ids.service';
@@ -8,6 +8,10 @@ import { CrudService } from 'src/app/shared/services/crud/crud.service';
 import { Notification } from '../../interfaces/generic.interface';
 import { IconsService } from 'src/app/shared/services/icons/icons.service';
 import { UserInfoService } from 'src/app/shared/services/user-info/user-info.service';
+import { GetPermissionService } from 'src/app/shared/services/get-permission/get-permission.service';
+import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
+import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
+import { Select } from '@ngxs/store';
 
 @Component({
   selector: 'app-ficha-alumno',
@@ -72,65 +76,36 @@ patchFKsFromStorage = ['colegio', 'anno'];
 
 setAny(valor:any): any { return valor }
 
+@Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
+
+
 constructor(
    private userInfo: UserInfoService,
    private selIdsService: SelectionIdsService,
    private crud: CrudService,
-   private iconsService: IconsService
+   private iconsService: IconsService,
+   private getpermission: GetPermissionService
   ) {
-  
-    const getPermision = (msg: any) => { if(msg) {
-      const year = this.currentDate.getFullYear();
-      this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-      } 
-
     }
 
-   const getColor = (color:string) => {
-    
-    if (color=='azul') {
-      this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-      this.pagination = this.objcolors.azul.pagination;
-      this.tablehead = this.objcolors.azul.tablehead;
-      this.url = this.photo.azul;
-    }
-    if (color=='verde') {
-      this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-      this.pagination = this.objcolors.verde.pagination;
-      this.tablehead = this.objcolors.verde.tablehead;
-      this.url = this.photo.verde;
-
-    }
-    if (color=='naranjo') {
-      this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-      this.pagination = this.objcolors.naranjo.pagination;
-      this.tablehead = this.objcolors.naranjo.tablehead;
-      this.url = this.photo.naranjo;
-    }
-}
-  
-this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
-  getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
-  getColor(info.personalInfo.usuario.Tema.nombre);
-}))
 
 
-}
 
-actualiza_ficha(id: number) { 
+
+actualiza_ficha(id: number) {
   this.crud.getDataPk('matricula',id)
-  .subscribe(mat => { 
+  .subscribe(mat => {
     this.matricula = mat;
     this.crud.getDataPk('alumno', mat.alumnoId)
     .subscribe(alumno => this.alumno = alumno);
     this.crud.getDataPk('apoderado', mat.apoderadoId)
-    .subscribe(apoderado => this.apoderado = apoderado); 
+    .subscribe(apoderado => this.apoderado = apoderado);
     this.crud.getData('anotacion', [this.matricula.id,0,this.selIdsService.getId('anno'),
     this.selIdsService.getId('colegio'),
-    this.selIdsService.getId('curso')])?.subscribe((anotacion:any) => this.anotacion = anotacion); 
+    this.selIdsService.getId('curso')])?.subscribe((anotacion:any) => this.anotacion = anotacion);
 
- 
-  }) 
+
+  })
 }
 
 getmatricula(key:any) : any { if (this.matricula) return this.matricula[key] }
@@ -159,17 +134,44 @@ updateTable(notification: (Notification | null) = null) {
   if ( !notification || notification.message == "updated" ) {
     if (ides[0] * ides[1] * ides[2]  > 0) {
       this.lista_curso_nombres$ = this.crud.getDataCustom('matricula', 'lista_curso_nombres', ides )
-      
-     //  this.lista_curso_nombres$.subscribe(lista => console.log(lista))      
+
+     //  this.lista_curso_nombres$.subscribe(lista => console.log(lista))
     }
 
   }
 }
 
+getColor(color:string) {
+
+  if (color=='azul') {
+    this.bodybgcolor = this.objcolors.azul.bodybgcolor;
+    this.pagination = this.objcolors.azul.pagination;
+    this.tablehead = this.objcolors.azul.tablehead;
+    this.url = this.photo.azul;
+  }
+  if (color=='verde') {
+    this.bodybgcolor = this.objcolors.verde.bodybgcolor;
+    this.pagination = this.objcolors.verde.pagination;
+    this.tablehead = this.objcolors.verde.tablehead;
+    this.url = this.photo.verde;
+
+  }
+  if (color=='naranjo') {
+    this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
+    this.pagination = this.objcolors.naranjo.pagination;
+    this.tablehead = this.objcolors.naranjo.tablehead;
+    this.url = this.photo.naranjo;
+  }
+}
 
   ngOnInit(): void {
- 
-    
+
+    this.usuario$.pipe(
+      tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
+      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['FichaAlumno'],info)}})
+
+    ).subscribe()
+
     this.selIdsService.msg.pipe(
       tap((message: (Notification)) =>  this.updateTable(message))
     )

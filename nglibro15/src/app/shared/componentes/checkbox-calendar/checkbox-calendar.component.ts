@@ -21,6 +21,10 @@ import { Select } from '@ngxs/store';
   styleUrls: ['./checkbox-calendar.component.css']
 })
 export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
+
+  @Input('disable_check')
+  disable_check!:any;
+
   @Input('title')
   title = '';
 
@@ -116,7 +120,7 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
   colToday = 0;
   currentDateInMonth = false;
 
-  disable = true;
+  // disable = true;
   currentDate:Date = new Date();
 
   // ----
@@ -149,14 +153,14 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
     private labelsService: LabelsService,
     private iconsService: IconsService,
     private configAlert: NgbAlertConfig,
-    
+
   ) {
     this.configAlert.dismissible = false;
 
     const getPermision = (msg: any) => { if(msg) {
       const year = this.currentDate.getFullYear();
-      this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-      } 
+      // this.disable = this.disable_check.editar
+      }
 
     }
 
@@ -167,7 +171,7 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
         this.pagination = this.objcolors.azul.pagination;
         this.tablehead = this.objcolors.azul.tablehead;
         this.modalbutton = this.objcolors.azul.modalbutton;
- 
+
       }
       if (color=='verde') {
         this.bodybgcolor = this.objcolors.verde.bodybgcolor;
@@ -186,14 +190,14 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
       if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
       else { getColor(localStorage.getItem('Color')) }
     });
-  
+
     /*
       this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
         getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
         getColor(info.personalInfo.usuario.Tema.nombre);
       }))
-    */  
-}  
+    */
+}
 
 
   ngOnInit() {
@@ -277,7 +281,7 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
   }
 
   updateData(message: any) {
-    
+
     this.entryIdToday.clear();
     this.checkBoxesToday.clear();
     this.editedCheckBoxes.clear();
@@ -409,8 +413,8 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
     );
   }
 
-  totalAtColumn(column: number) { 
-    
+  totalAtColumn(column: number) {
+
     if (this.currentDateInMonth) {
       if (this.colToday == column) {
         return this.totalChechedToday;

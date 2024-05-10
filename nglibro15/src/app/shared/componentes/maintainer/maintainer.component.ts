@@ -218,19 +218,18 @@ export class MaintainerComponent implements OnInit, OnDestroy {
         this.bgmodal = this.objcolors.naranjo.bgmodal;
         this.modalbutton = this.objcolors.naranjo.modalbutton;
         this.url = this.photo.naranjo;
-  
+
       }
-  
+
     }
-  
+
 
   ngOnInit(): void {
-    console.log('poronga->',lowerUpperTables[this.mainTable]);
-
+    console.log('lumt',lowerUpperTables[this.mainTable])
     this.usuario$.pipe(
       tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
-      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission[lowerUpperTables[this.mainTable]][0],info)}})
-      
+      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission[lowerUpperTables[this.mainTable]],info)}})
+
     ).subscribe()
 
 

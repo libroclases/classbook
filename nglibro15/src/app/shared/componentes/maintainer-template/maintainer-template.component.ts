@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MaintainerComponent } from '../maintainer/maintainer.component';
 
 @Component({
   selector: 'maintainer-template',
@@ -7,7 +6,7 @@ import { MaintainerComponent } from '../maintainer/maintainer.component';
   styleUrls: ['./maintainer-template.component.css']
 })
 export class MaintainerTemplateComponent {
-  
+
   tableTitle  = "";
   mainTable = "";
   textFields = [];
@@ -18,6 +17,6 @@ export class MaintainerTemplateComponent {
   changeFnsArray = [];
   ignoreFkRequirements = [];
   patchFKsFromStorage = [];
-  
+
   constructor( ) { }
 }

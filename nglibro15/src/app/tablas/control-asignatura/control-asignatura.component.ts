@@ -16,9 +16,11 @@ import { ProfesorPie } from '../../interfaces/profesor.interface';
 import { AuthService } from '@auth0/auth0-angular';
 import { TipoUsuario } from '../../interfaces/tipousuario.interface';
 import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
+import { GetPermissionService } from 'src/app/shared/services/get-permission/get-permission.service';
+import { Permission } from 'src/environments/environment.development';
 
 
 const fieldsArray = ['inasistentesHombres', 'inasistentesMujeres', 'atrasos', 'observaciones'];
@@ -41,7 +43,7 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
 
   @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
-  disable = true;
+  disable = {};
   currentDate:Date = new Date();
 
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
@@ -141,7 +143,7 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
   constructor(
 
     // auth: AuthService,
-    
+
     private crud: CrudService,
     private subsManagerService: SubscriptionsManagerService,
     private fKeysService: ForeignKeysService,
@@ -149,17 +151,57 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
     private labelsService: LabelsService,
     private fb: FormBuilder,
     private ngbCalendar: NgbCalendar,
-    private iconsService: IconsService) {
-
+    private iconsService: IconsService,
+    private getpermission: GetPermissionService) {
+   /*
       const getPermision = (msg: any) => { if(msg) {
         const year = this.currentDate.getFullYear();
         this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-        } 
-  
+        }
+
       }
-  
-     const getColor = (color:string | null) => {
-      
+
+*/
+
+/*
+this.usuario$.subscribe(info => {
+  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
+  else { getColor(localStorage.getItem('Color')) }
+});
+*/
+
+  /*
+
+  this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
+    getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
+    getColor(info.personalInfo.usuario.Tema.nombre);
+  }))
+
+  */
+
+      // REVISAR ESTO
+
+   /*
+      auth.isAuthenticated$.subscribe(isAuth => { if(isAuth) {
+        userInfo.personalInfo$.subscribe(info => {
+          if (info) {
+            this.tipoUsuario = info.usuario.TipoUsuario.nombre;
+          }
+        }  )
+      }})
+
+    */
+
+
+    this.inputIsEnabled = [];
+    for ( let i=1; i<13; i++){
+      this.indicesHoras.push(i);
+      this.inputIsEnabled.push(false);
+    }
+    }
+
+    getColor = (color:string | null) => {
+
       if (color=='azul' || !color) {
         this.bodybgcolor = this.objcolors.azul.bodybgcolor;
         this.pagination = this.objcolors.azul.pagination;
@@ -179,45 +221,14 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
         this.url = this.photo.naranjo;
       }
 }
-    
-
-this.usuario$.subscribe(info => {
-  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
-  else { getColor(localStorage.getItem('Color')) }
-});
-
-
-  /*
-
-  this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
-    getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
-    getColor(info.personalInfo.usuario.Tema.nombre);
-  }))
-
-  */ 
-
-      // REVISAR ESTO
-
-   /*   
-      auth.isAuthenticated$.subscribe(isAuth => { if(isAuth) { 
-        userInfo.personalInfo$.subscribe(info => {
-          if (info) { 
-            this.tipoUsuario = info.usuario.TipoUsuario.nombre;
-          } 
-        }  )
-      }})
-
-    */
-
-
-    this.inputIsEnabled = [];
-    for ( let i=1; i<13; i++){
-      this.indicesHoras.push(i);
-      this.inputIsEnabled.push(false);
-    }
-    }
 
   ngOnInit(): void {
+
+    this.usuario$.pipe(
+      tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
+      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['ControlAsignatura'],info)}})
+
+    ).subscribe()
 
     this.profPieFormGroup = new FormGroup({});
     for ( let hr=1; hr<13; hr++) {
@@ -352,16 +363,16 @@ this.usuario$.subscribe(info => {
         this.allSelectorsSet = true;
         let subsMain = this.crud.getDataCustom(
           this.mainTable, 'porDia',
-          this.selIdsService.getIds(this.fKeysAll), 
+          this.selIdsService.getIds(this.fKeysAll),
           // {dia: this.selIdsService.getId(dayOfWeekTable)})
           {dia: this.model.day})
         .subscribe(query => {
-        
+
         const subsProfPie = this.crud.getDataCustom(
           'inscripcioncolegio', 'profesPie',
           this.selIdsService.getIds(['colegio', 'anno']))
           .subscribe((profesoresPie: ProfesorPie[]) => {
-            
+
             this.profesoresPie = profesoresPie;
             profesoresPie.forEach(profPie => {
               this.pieNombres.set(profPie.id, `${profPie.apellido}, ${profPie.nombre}`);
@@ -376,8 +387,8 @@ this.usuario$.subscribe(info => {
                   this.n_curso = this.n_mujeres + this.n_hombres;
                 }
               );
-            this.subsManagerService.registerSubscription(subsCount, "subsCount"); 
-            if ( query.length === 0 ) {   
+            this.subsManagerService.registerSubscription(subsCount, "subsCount");
+            if ( query.length === 0 ) {
               // consulta al horario para crear entradas en ControlAsignatura
 
               let subsPopulateDia = this.crud.createDataCustom(
@@ -398,7 +409,7 @@ this.usuario$.subscribe(info => {
                 });
               this.subsManagerService.registerSubscription(
                 subsPopulateDia, 'populateDia');
-            } else {  
+            } else {
               this.processQuery(query);
             }
           });
@@ -444,7 +455,7 @@ this.usuario$.subscribe(info => {
     const hora = entry.hora; // .log('isToday:',this.isToday)
     if ( this.isToday ) {
       const editable = ( this.tipoUsuario == 'profesor' );
-      
+
       this.editable.set(hora, editable);
     }
     this.nombresAsignaturas.set(hora, entry.Asignatura.nombre );
@@ -470,8 +481,8 @@ this.usuario$.subscribe(info => {
   }
 
   processQuery(query: ControlAsignatura[]) {
-    this.clearTable(); 
-    for ( let caEntry of query ) {  
+    this.clearTable();
+    for ( let caEntry of query ) {
       this.processEntry(caEntry);
     }
   }

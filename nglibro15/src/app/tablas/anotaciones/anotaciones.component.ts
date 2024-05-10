@@ -8,13 +8,14 @@ import { SelectionIdsService } from '../../shared/services/selection-ids/selecti
 import { SubscriptionsManagerService } from '../../shared/services/subscriptions-manager/subscriptions-manager.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../../shared/componentes/modal-dialog/modal-dialog.component';
-import { environment, lowerUpperTables, modalDataObject } from '../../../environments/environment';
+import { Permission, environment, lowerUpperTables, modalDataObject } from '../../../environments/environment';
 import { Observable, take, tap } from 'rxjs';
-import { AuthService } from '@auth0/auth0-angular';
+
 import { CrudService } from 'src/app/shared/services/crud/crud.service';
 import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
+import { GetPermissionService } from 'src/app/shared/services/get-permission/get-permission.service';
 
 @Component({
   selector: 'app-anotaciones',
@@ -87,66 +88,80 @@ export class AnotacionesComponent implements OnDestroy {
   constructor(
     private crud: CrudService,
     // auth: AuthService,
-    
+
     public dialog: MatDialog,
     private subsManagerService: SubscriptionsManagerService,
     private fKeysService: ForeignKeysService,
     private selIdsService: SelectionIdsService,
-    private iconsService: IconsService) {
+    private iconsService: IconsService,
+    private getpermission: GetPermissionService) {
 
+      /*
       const getPermision = (msg: any) => { if(msg) {
         const year = this.currentDate.getFullYear();
         this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-        } 
-  
-      }
-  
-     const getColor = (color:string | null) => {
-      
-      if (color=='azul' || !color) {
-        this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-        this.pagination = this.objcolors.azul.pagination;
-        this.tablehead = this.objcolors.azul.tablehead;
-        this.bgmodal = this.objcolors.azul.bgmodal;
-        this.modalbutton = this.objcolors.azul.modalbutton;
-        this.url = this.photo.azul;
-      }
-      else if (color=='verde') {
-        this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-        this.pagination = this.objcolors.verde.pagination;
-        this.tablehead = this.objcolors.verde.tablehead;
-        this.bgmodal = this.objcolors.verde.bgmodal;
-        this.modalbutton = this.objcolors.verde.modalbutton;
-        this.url = this.photo.verde;
-      }
-      else if (color=='naranjo') {
-        this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-        this.pagination = this.objcolors.naranjo.pagination;
-        this.tablehead = this.objcolors.naranjo.tablehead;
-        this.bgmodal = this.objcolors.naranjo.bgmodal;
-        this.modalbutton = this.objcolors.verde.modalbutton;
-        this.url = this.photo.naranjo;
-      }
-}
+        }
 
+      }
+      */
+
+
+/*
 this.usuario$.subscribe(info => {
   if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
   else { getColor(localStorage.getItem('Color')) }
 });
-
+*/
 /*
   this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
     getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
     getColor(info.personalInfo.usuario.Tema.nombre);
   }))
-*/  
+*/
   }
+
+  getColor(color:string | null)  {
+
+    if (color=='azul' || !color) {
+      this.bodybgcolor = this.objcolors.azul.bodybgcolor;
+      this.pagination = this.objcolors.azul.pagination;
+      this.tablehead = this.objcolors.azul.tablehead;
+      this.bgmodal = this.objcolors.azul.bgmodal;
+      this.modalbutton = this.objcolors.azul.modalbutton;
+      this.url = this.photo.azul;
+    }
+    else if (color=='verde') {
+      this.bodybgcolor = this.objcolors.verde.bodybgcolor;
+      this.pagination = this.objcolors.verde.pagination;
+      this.tablehead = this.objcolors.verde.tablehead;
+      this.bgmodal = this.objcolors.verde.bgmodal;
+      this.modalbutton = this.objcolors.verde.modalbutton;
+      this.url = this.photo.verde;
+    }
+    else if (color=='naranjo') {
+      this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
+      this.pagination = this.objcolors.naranjo.pagination;
+      this.tablehead = this.objcolors.naranjo.tablehead;
+      this.bgmodal = this.objcolors.naranjo.bgmodal;
+      this.modalbutton = this.objcolors.verde.modalbutton;
+      this.url = this.photo.naranjo;
+    }
+}
+
+
 
   ngOnInit(): void {
 
+
     this.mainTableUpper = lowerUpperTables[this.mainTable];
     this.modalDataObj = modalDataObject[this.mainTableUpper];
-    
+
+    this.usuario$.pipe(
+      tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
+      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission[lowerUpperTables[this.mainTable]],info)}})
+
+    ).subscribe()
+
     this.selIdsService.subscribe(
       'observaciones', (message: (Notification)) => this.updateData(message));
     this.alerts.push(this.successfulSaveAlert);
@@ -159,7 +174,7 @@ this.usuario$.subscribe(info => {
     this.subsManagerService.unsubscribeAll();
   }
 
-  updateData(notification: (Notification | null) = null) { 
+  updateData(notification: (Notification | null) = null) {
     if ( !notification || notification.message == 'updated' ) {
       for ( let tbl of this.fKeysSel) {
         if( this.selIdsService.getId(tbl) === 0 ) {  // just don't update
@@ -172,9 +187,9 @@ this.usuario$.subscribe(info => {
         this.fKeysService.getFKeys(this.mainTable)!, {profesor: 0}
         );
 
-      
+
       const subs = this.crud.getData(this.mainTable, fks)!
-      .subscribe( query => { 
+      .subscribe( query => {
         const subsNombre = this.crud.getDataCustom(
           "matricula", "nombreCompleto", [this.selIdsService.getId("matricula")])
         .subscribe( q => this.nombreAlumno = q.nombreCompleto );
@@ -197,10 +212,10 @@ this.usuario$.subscribe(info => {
         fecha: `${currentYear}-${currentMonth}-${currentDay}`
       };
       this.modalDataObj.tables.forEach((table: string) => {
-   
+
         reg[table] = { id: this.selIdsService.getId(table.toLocaleLowerCase()) || 0 }
       });
-     
+
 
    }
 

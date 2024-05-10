@@ -2,11 +2,12 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { CrudService } from '../../shared/services/crud/crud.service';
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
 import { SubscriptionsManagerService } from '../../shared/services/subscriptions-manager/subscriptions-manager.service';
-import { environment } from '../../../environments/environment';
+import { environment, Permission, lowerUpperTables } from '../../../environments/environment';
 import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
+import { GetPermissionService } from 'src/app/shared/services/get-permission/get-permission.service';
 
 const DIAS_POR_PAGINA = 31;
 const minDiasPorPagina = 7;
@@ -73,43 +74,24 @@ export class AsistenciaComponent implements OnInit {
     private crud: CrudService,
     // private userInfo: UserInfoService,
     private subsManagerService: SubscriptionsManagerService,
-    private selIdsService: SelectionIdsService
+    private selIdsService: SelectionIdsService,
+    private getpermission: GetPermissionService
   ) {
-    
+
+/*
     const getPermision = (msg: any) => { if(msg) {
       const year = this.currentDate.getFullYear();
       this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-      } 
+      }
 
     }
-
-   const getColor = (color:string | null) => {
-    
-    if (color == 'azul' || !color) {
-      this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-      this.pagination = this.objcolors.azul.pagination;
-      this.url = this.photo.azul;
-
-    }
-    if (color == 'verde') {
-      this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-      this.pagination = this.objcolors.verde.pagination;
-      this.url = this.photo.verde;
-
-    }
-    if (color == 'naranjo') {
-      this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-      this.pagination = this.objcolors.naranjo.pagination;
-      this.url = this.photo.naranjo;
-
-    }
-}
-
+*/
+/*
 this.usuario$.subscribe(info => {
   if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
   else { getColor(localStorage.getItem('Color')) }
 });
-
+*/
 
 /*
 this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
@@ -119,11 +101,37 @@ this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((e
 */
 
 }
-  
+
+getColor = (color:string | null) => {
+
+  if (color == 'azul' || !color) {
+    this.bodybgcolor = this.objcolors.azul.bodybgcolor;
+    this.pagination = this.objcolors.azul.pagination;
+    this.url = this.photo.azul;
+
+  }
+  if (color == 'verde') {
+    this.bodybgcolor = this.objcolors.verde.bodybgcolor;
+    this.pagination = this.objcolors.verde.pagination;
+    this.url = this.photo.verde;
+
+  }
+  if (color == 'naranjo') {
+    this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
+    this.pagination = this.objcolors.naranjo.pagination;
+    this.url = this.photo.naranjo;
+
+  }
+}
+
 
   ngOnInit(): void {
 
+    this.usuario$.pipe(
+      tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
+      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['Asistencia'],info)}})
 
+    ).subscribe()
 
 
     this.changeFnsArray = [
