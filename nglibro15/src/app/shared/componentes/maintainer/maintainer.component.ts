@@ -16,8 +16,6 @@ import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 import { GetPermissionService } from '../../services/get-permission/get-permission.service';
-import { PermisoState } from 'src/app/ngxs/permiso/permiso.state';
-import { Permiso } from 'src/app/ngxs/permiso/permiso.model';
 
 
 @Component({
@@ -152,7 +150,6 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   }
 
   @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
-  @Select(PermisoState.permiso) permiso$!: Observable<Permiso>;
 
 
   constructor(

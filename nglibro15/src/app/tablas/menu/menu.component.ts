@@ -9,10 +9,9 @@ import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Observable, map, tap } from 'rxjs';
 import { GetUsuario, SetUsuario } from 'src/app/ngxs/usuario/usuario.actions';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { GetPermiso } from 'src/app/ngxs/permiso/permiso.actions';
+
 import { Permission } from 'src/environments/environment.development';
-import { Permiso } from 'src/app/ngxs/permiso/permiso.model';
-import { PermisoState } from 'src/app/ngxs/permiso/permiso.state';
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -21,7 +20,7 @@ import { PermisoState } from 'src/app/ngxs/permiso/permiso.state';
 export class MenuComponent implements OnInit{
 
     @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
-    @Select(PermisoState.permiso) permiso$!: Observable<Permiso>;
+    // @Select(PermisoState.permiso) permiso$!: Observable<Permiso>;
 
     permission:any = Permission
 
@@ -135,16 +134,17 @@ export class MenuComponent implements OnInit{
       this.auth.user$.pipe(
         map((user:any) => user?.email),
         tap(user => { if (user) this.store.dispatch(new GetUsuario(user))}),
+        /*
         tap(() => {
           let menu = localStorage.getItem('Menu');
 
           if (menu) {
             this.store.dispatch(new GetPermiso(this.permission[menu]));
            }
-
-
+           
         }
-        )
+        
+        )*/
       ).subscribe();
     }
 
@@ -161,7 +161,7 @@ export class MenuComponent implements OnInit{
   /* store functions */
 
   setTable(table:string) {
-      this.store.dispatch(new GetPermiso(this.permission[table]));
+      // this.store.dispatch(new GetPermiso(this.permission[table]));
       localStorage.setItem('Menu',table);
   }
 

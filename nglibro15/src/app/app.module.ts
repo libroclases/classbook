@@ -74,8 +74,6 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { ToastrModule } from 'ngx-toastr';
 import { UsuarioState } from './ngxs/usuario/usuario.state';
 import { PruebaComponent } from './tablas/prueba/prueba.component';
-import { PermisoState } from './ngxs/permiso/permiso.state';
-
 
 
 const allowedTables = [
@@ -205,7 +203,7 @@ allowedTables.forEach((tb) => {
     ToastrModule.forRoot(), // ToastrModule added
 
     // ngxs
-    NgxsModule.forRoot([UsuarioState, PermisoState], { developmentMode: !env.production }),
+    NgxsModule.forRoot([UsuarioState], { developmentMode: !env.production }),
     NgxsReduxDevtoolsPluginModule.forRoot({disabled: env.production}),
     NgxsLoggerPluginModule.forRoot({disabled: env.production}),
 
