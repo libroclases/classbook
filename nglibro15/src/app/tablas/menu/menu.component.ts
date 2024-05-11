@@ -6,9 +6,9 @@ import { Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import {  Usuario } from '../../ngxs/usuario/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, map, takeLast, tap } from 'rxjs';
 import { GetUsuario, SetUsuario } from 'src/app/ngxs/usuario/usuario.actions';
-import { DeviceDetectorService } from 'ngx-device-detector';
+// import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { Permission } from 'src/environments/environment.development';
 
@@ -20,7 +20,6 @@ import { Permission } from 'src/environments/environment.development';
 export class MenuComponent implements OnInit{
 
     @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
-    // @Select(PermisoState.permiso) permiso$!: Observable<Permiso>;
 
     permission:any = Permission
 
@@ -32,9 +31,8 @@ export class MenuComponent implements OnInit{
 
 
     deviceinfo!:any;
-    mostra=false;
-    mostra_menu=true;
-
+    // mostra=false;
+    
     objcolors = env.colors;
     menu!:string;
     color!:string;
@@ -43,12 +41,12 @@ export class MenuComponent implements OnInit{
     letters!: string;
     production = env.production;
     userinfo = env.userinfo;
-
+    tipousuarioNombre!:string;
     docElement!: HTMLElement;
     isFullScreen: boolean = false;
 
     usuarioId!:number;
-
+    type!:string;
     deviceInfo!:any;
 
     currentDate:Date = new Date();
@@ -83,7 +81,7 @@ export class MenuComponent implements OnInit{
 
     const year = this.currentDate.getFullYear().toString();
 
-    this.epicFunction();
+    // this.epicFunction();
 
     this.docElement = document.documentElement;
 
@@ -101,15 +99,16 @@ export class MenuComponent implements OnInit{
               this.fullName = info.personalInfo.datos_persona.nombre + ' ' + info.personalInfo.datos_persona.apellido1;
               const sexo = info.personalInfo.datos_persona.Sexo.id;
               const tipousuario = info.personalInfo.usuario.TipoUsuario.nombre;
+              this.tipousuarioNombre = info.personalInfo.usuario.TipoUsuario.nombre;
               const saludo = 'Bienvenido';
               this.tipousuario = (sexo == 1)? tipousuario: tipousuario + 'a';
               this.saludo = (sexo == 1)? saludo: saludo.replace(/.$/, 'a');
             }
-            if (info.personalInfo.usuario.TipoUsuario.id == 5) { this.isUtp = '(admin)' }
+            if (info.personalInfo.usuario.TipoUsuario.id == 5) { this.type = '(admin)' }
           }
 
         if (info.inscripcionColegio) { info.inscripcionColegio?.forEach((ins:any) => {
-          if (ins.Colegio.id == 1 && ins.Anno.nombre == year && ins.esUtp) { this.isUtp = '(utp)' }
+          if (ins.Colegio.id == 1 && ins.Anno.nombre == year && ins.esUtp) { this.type = '(utp)' ; this.isUtp = true}
 
         }) }
       })
@@ -126,38 +125,33 @@ export class MenuComponent implements OnInit{
        this.isFullScreen = !this.isFullScreen;
     }
 
+    mostra_menu(table:string): boolean {
+       return (Permission[table].leer.includes('utp') && this.isUtp || this.tipousuarioNombre=='admin') 
+    }
 
 
   constructor(
     private iconsService: IconsService,
     private router: Router,
     private store: Store,
-    private deviceService: DeviceDetectorService,
+    // private deviceService: DeviceDetectorService,
     public auth: AuthService) {
       this.auth.user$.pipe(
         map((user:any) => user?.email),
         tap(user => { if (user) this.store.dispatch(new GetUsuario(user))}),
-        /*
-        tap(() => {
-          let menu = localStorage.getItem('Menu');
-
-          if (menu) {
-            this.store.dispatch(new GetPermiso(this.permission[menu]));
-           }
-
-        }
-
-        )*/
+        takeLast(1)
+ 
       ).subscribe();
     }
 
+    /*
     epicFunction() {
-
+     
       this.deviceInfo = this.deviceService.getDeviceInfo();
       const isDesktopDevice = this.deviceService.isDesktop();
-      // console.log(isDesktopDevice)
       this.mostra = ( isDesktopDevice==true ) ? true : false;
     }
+    */
 
     mostrar_color() { this.getColor(localStorage.getItem('Color')!)}
 

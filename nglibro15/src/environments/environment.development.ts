@@ -1050,7 +1050,7 @@ export const Permission:any =  {
   /* Alumno */
   Alumno: { leer: ['utp'], editar: ['utp'], crear: ['utp'] },
   EstadoAlumno: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
-  Apoderado: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
+  Apoderado: { leer: ['utp'], editar: ['utp'], crear: ['utp'] },
   Anotacion: { leer: ['profesor'], editar: ['profesor'], crear:['profesor'] },
   FichaAlumno: { leer: ['profesor'] , editar: ['profesor'] , crear: ['profesor']  },
   Matricula: { leer: 'profesor' , editar : 'utp' , crear: 'utp'},
@@ -1071,7 +1071,7 @@ export const Permission:any =  {
   RegistroUsuario: { leer : ['utp'] , editar : ['utp'], crear : ['utp'] },
   /* Admin */
   TipoUsuario: {leer : ['admin'] , editar : ['admin'], crear : ['admin']},
-  Usuario: {leer : ['admin'] , editar : ['admin'], crear : ['admin']},
+  Usuario: {leer : ['utp'] , editar : ['utp'], crear : ['utp']},
   Tabla: {leer : ['admin'] , editar : ['admin'], crear : ['admin']},
 }
 
