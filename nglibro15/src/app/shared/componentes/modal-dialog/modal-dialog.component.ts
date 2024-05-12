@@ -23,6 +23,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
+import { MessageService } from '../../services/message/message.service';
 
 @Component({
     selector: 'modal-dialog',
@@ -71,7 +72,7 @@ import { Select } from '@ngxs/store';
     private fb: FormBuilder,
     private iconsService: IconsService,
     private labelsService: LabelsService,
-
+    private ms : MessageService,
     private selIdsService: SelectionIdsService,
 
     ) {
@@ -318,7 +319,7 @@ import { Select } from '@ngxs/store';
       if (table == 'profesor') {
 
         // this.selectedteacher = +event.target.value;
-        // this.ms.nextProfesor(+event.target.value);  REVISAR : PASAR A SUBJECT 
+        this.ms.nextProfesor(+event.target.value); //  REVISAR : PASAR A SUBJECT 
       }
       const newId = +event.target.value;
 

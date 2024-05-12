@@ -16,8 +16,7 @@ export class GetPermissionService {
   getPermission(Table:any, info: any): any  {
 
     let permission:any = {}
-    console.log('Table',Table)
-    console.log('TipoUsuario.nombre', info.personalInfo.usuario.TipoUsuario.nombre)
+
     const colegio = 1;  // REVISAR
 
     const year = this.currentDate.getFullYear();
@@ -27,7 +26,7 @@ export class GetPermissionService {
 
       info.inscripcionColegio?.forEach((ins:any) => {
             var utp:any = (ins.esUtp) ? 'utp' : null;
-            console.log('utp',utp);
+            
             if (ins.Anno.nombre == year.toString() && ins.Colegio.id == colegio) {
 
                   if (utp) {

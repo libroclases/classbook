@@ -42,12 +42,16 @@ export class HorarioComponent implements OnInit, OnDestroy {
   position = "center";
   size = "cover";
 
+  crear = true;
+  editar = true;
+
   @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
 
-  disable = {};
+  disabled = {};
+  
   currentDate:Date = new Date();
 
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
@@ -144,34 +148,6 @@ export class HorarioComponent implements OnInit, OnDestroy {
     private getpermission: GetPermissionService
 
      ) {
-
-
-      const getPermision = (msg: any) => { if(msg) {
-        const year = this.currentDate.getFullYear();
-        this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-        }
-
-      }
-
-
-/*
-this.usuario$.subscribe(info => {
-  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
-  else { getColor(localStorage.getItem('Color')) }
-});
-*/
-/*
-this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
-    getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
-    getColor(info.personalInfo.usuario.Tema.nombre);
-  }))
-*/
-      /*
-      activatedRoute.params.subscribe(params =>
-        this.crud.getDataPk('region', 1)
-        .subscribe( () => { originTableIdsService.nextMsg(params); })
-      )
-      */
     }
 
      getBiClass(route: string) {
@@ -233,7 +209,9 @@ this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((e
 
   getColor = (color:string | null) => {
 
-    if (color=='azul' || !color) {
+    if (color == null) {  color = localStorage.getItem('Color')  }
+
+    if (color=='azul') {
       this.bodybgcolor = this.objcolors.azul.bodybgcolor;
       this.pagination = this.objcolors.azul.pagination;
       this.tablehead = this.objcolors.azul.tablehead;
@@ -266,7 +244,15 @@ this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((e
 
     this.usuario$.pipe(
       tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
-      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['Horario'],info)}})
+      tap(info => { if (info.personalInfo?.usuario) { 
+        let disabled = this.getpermission.getPermission(Permission['Horario'],info)
+        this.editar = disabled.editar;
+        this.crear = disabled.crear;
+      }
+      
+      }
+        
+      )
 
     ).subscribe()
 
@@ -332,9 +318,9 @@ this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((e
 
     if (fks[0] * fks[1] * fks[2] > 0) {
 
-      this.stateOfButtonPlus= (this.disable == false) ?  false : true;
+      this.stateOfButtonPlus= (this.crear == false) ?  false : true;
 
-      if (fks[3] > 0) { this.stateOfButtonEdit= (this.disable == false) ?  false : true;  }
+      if (fks[3] > 0) { this.stateOfButtonEdit= (this.editar == false) ?  false : true;  }
       else { this.stateOfButtonEdit = true; }
 
       this.horarios$ = this.crud.getData('horario',fks)!;
