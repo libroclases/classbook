@@ -17,6 +17,7 @@ import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 import { GetPermissionService } from 'src/app/shared/services/get-permission/get-permission.service';
 import { Permission } from 'src/environments/environment.development';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nota',
@@ -136,6 +137,7 @@ export class NotaComponent implements OnInit {
       private fb: FormBuilder,
       private dt: GetdatetimeService,
       private getpermission: GetPermissionService,
+      private toastr: ToastrService,
 
     ) {
       /*
@@ -354,7 +356,9 @@ this.usuario$.subscribe(info => {
 
     getColor = (color:string | null) => {
 
-      if (color=='azul' || !color) {
+      if (color == null) {  color = localStorage.getItem('Color')  }
+
+      if (color=='azul') {
         this.bodybgcolor = this.objcolors.azul.bodybgcolor;
         this.pagination = this.objcolors.azul.pagination;
         this.tablehead = this.objcolors.azul.tablehead;
@@ -405,7 +409,10 @@ this.usuario$.subscribe(info => {
       return valor;
     }
   */
-
+    showdata(msg:any) {
+      if (msg?.message) {this.toastr.success(msg?.message, 'Notas', {positionClass:'toast-top-right'})}
+      else {this.toastr.error(msg?.error, 'Notas')}
+    }
 
     editaValoresForm(eventoid: number) {
 
@@ -417,7 +424,7 @@ this.usuario$.subscribe(info => {
           if (keyvalue !== notasIndice) {
             this.crud.putData({id: notaid, nota: nota},'nota').pipe(
               tap(() => this.updateTable()),
-              // tap(res => console.log(res))
+              tap(res => this.showdata(res))
             )
             .subscribe();
           }
