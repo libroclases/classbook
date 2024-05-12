@@ -195,7 +195,9 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
     getColor(color:string | null)  {
 
-      if (color=='azul' || !color) {
+      if (color == null) {  color = localStorage.getItem('Color')  }
+
+      if (color=='azul') {
         this.bodybgcolor = this.objcolors.azul.bodybgcolor;
         this.pagination = this.objcolors.azul.pagination;
         this.tablehead = this.objcolors.azul.tablehead;

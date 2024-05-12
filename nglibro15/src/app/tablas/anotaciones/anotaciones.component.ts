@@ -122,7 +122,9 @@ this.usuario$.subscribe(info => {
 
   getColor(color:string | null)  {
 
-    if (color=='azul' || !color) {
+    if (color == null) {  color = localStorage.getItem('Color')  }
+
+    if (color=='azul') {
       this.bodybgcolor = this.objcolors.azul.bodybgcolor;
       this.pagination = this.objcolors.azul.pagination;
       this.tablehead = this.objcolors.azul.tablehead;
@@ -158,7 +160,7 @@ this.usuario$.subscribe(info => {
 
     this.usuario$.pipe(
       tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
-      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission[lowerUpperTables[this.mainTable]],info)}})
+      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission[lowerUpperTables[this.mainTable]],info).crear}})
 
     ).subscribe()
 
@@ -181,7 +183,7 @@ this.usuario$.subscribe(info => {
           this.disabledAddButton = true;
           return;
         }
-      }
+      } console.log('poronga',this.disable)
       if ( this.disable == false) { this.disabledAddButton = false; }
       const fks = this.selIdsService.getIds(
         this.fKeysService.getFKeys(this.mainTable)!, {profesor: 0}

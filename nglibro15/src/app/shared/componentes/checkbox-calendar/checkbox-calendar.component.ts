@@ -253,9 +253,9 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
     this.columnLabelInRed.set(colIndex, value);
   }
 
-  setColumnEnabled(colIndex: number, value: boolean) {
-    this.columnEnabled.set(colIndex, value);
-  }
+  //setColumnEnabled(colIndex: number, value: boolean) {   uvr
+  //  this.columnEnabled.set(colIndex, value);
+  //}
 
   setColumnIsGrey(colIndex: number, value: boolean) {
     this.columnIsGrey.set(colIndex, value);
@@ -321,7 +321,7 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
     const selMonthId = this.selIdsService.getId(this.monthTable);
     // week-index of first day of the month
     // this.today = new Date();
-    this.today = new Date();
+    this.today = new Date('2024-05-13T12:00:00');  // uvr
     this.colToday = this.today.getDate() - 1;
     this.currentDateInMonth =
       this.today.getMonth() === selMonthId - 1 &&
@@ -352,7 +352,8 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
           this.columnLabelInRed.set(holidayIndex, true);
         }
         if (this.currentDateInMonth && !this.columnIsGrey.get(this.colToday)) {
-          this.columnEnabled.set(this.colToday, true);
+          console.log(this.disable_check.editar); 
+          this.columnEnabled.set(this.colToday, true && !this.disable_check.editar);
         }
 
         this.selected.clear();
