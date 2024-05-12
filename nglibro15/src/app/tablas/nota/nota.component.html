@@ -29,9 +29,9 @@
         </tr>
         <tr *ngFor="let m of (matricula$ | async)">
 
-          <td style="width: 30%; text-align: left">{{m.nombre}}</td>
+          <td style="width: 30%; text-align: left ; text-indent: 1cap;">{{m.nombre}}</td>
           <td  *ngFor="let nota of (matriculaNotaMap.get(m.id) | async)">
-            <span *ngIf="edita==true && nota.Evaluacion.id == evaluationEdit && (isInVentana$ | async) ; else mostra_nota">
+            <span *ngIf="edita==true && this.disable.editar == false && nota.Evaluacion.id == evaluationEdit && (isInVentana$ | async) ; else mostra_nota">
 
             <input type="text" size="3" id="{{nota.id}}-{{nota.Evaluacion.id}}-{{nota.Matricula.id}}"  formControlName="{{nota.id}}-{{nota.Evaluacion.id}}-{{nota.Matricula.id}}">
             <div *ngIf="notasForm.controls[nota.id + '-' + nota.Evaluacion.id + '-' + nota.Matricula.id].invalid && (notasForm.controls[nota.id + '-' + nota.Evaluacion.id + '-' + nota.Matricula.id].dirty || notasForm.controls[nota.id + '-' + nota.Evaluacion.id + '-' + nota.Matricula.id].touched)"  class="alert alert-danger">

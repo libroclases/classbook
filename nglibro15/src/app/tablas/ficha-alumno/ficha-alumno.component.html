@@ -7,10 +7,10 @@
 
 
 
-  <div class="row" [style.opacity]="opacity" >
-      <div class="col-md-4" style="padding-top: 2%;">
+  <div class="row" [style.opacity]="opacity" style="height:75cap">
+      <div class="col-md-4 mt-4">
     {{disable | json}}
-    <table class="table table-bordered"  style="display: block; height:75cap; overflow-y: auto;">
+    <table class="table table-bordered"  style="display: block; height:75cap; overflow-y: auto;" [style.background-color]="bodybgcolor">
       <thead>
         <tr *ngFor="let l of (lista_curso_nombres$ | async)">
           <td><a class="btn btn-sm" (click)="actualiza_ficha(l.id)">{{l.nombre}}</a></td>
@@ -52,7 +52,7 @@
 
 
         <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane fade show active" id="nav-alumno" role="tabpanel" aria-labelledby="nav-alumno-tab">
+          <div class="tab-pane fade show active" id="nav-alumno" role="tabpanel" aria-labelledby="nav-alumno-tab"  [style.background-color]="bodybgcolor">
             <table class="table table-bordered table-sm">
               <thead>
                 <tr><th colspan="2" style="color:white;" [style.background-color]="tablehead"><em [class]="getBiClass('/fichaalumno')"></em>&nbsp;Ficha Alumno [
