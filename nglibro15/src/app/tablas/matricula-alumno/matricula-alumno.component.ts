@@ -66,6 +66,8 @@ export class MatriculaAlumnoComponent implements OnInit {
 
   getColor = (color:string | null) => {
 
+    if (color == null) {  color = localStorage.getItem('Color')  }
+
     if (color=='azul' || !color) {
       this.bodybgcolor = this.objcolors.azul.bodybgcolor;
       this.pagination = this.objcolors.azul.pagination;

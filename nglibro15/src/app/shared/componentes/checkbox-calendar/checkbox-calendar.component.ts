@@ -321,7 +321,7 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
     const selMonthId = this.selIdsService.getId(this.monthTable);
     // week-index of first day of the month
     // this.today = new Date();
-    this.today = new Date('2024-05-13T12:00:00');  // uvr
+    this.today = new Date();  // uvr
     this.colToday = this.today.getDate() - 1;
     this.currentDateInMonth =
       this.today.getMonth() === selMonthId - 1 &&

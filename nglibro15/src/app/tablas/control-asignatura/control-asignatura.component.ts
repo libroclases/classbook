@@ -44,7 +44,7 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
   @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
   disable = {};
-  currentDate:Date = new Date();
+  currentDate:Date = new Date('2024-05-13T12:00:00');
 
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
 
@@ -455,7 +455,6 @@ this.usuario$.subscribe(info => {
     const hora = entry.hora; // .log('isToday:',this.isToday)
     if ( this.isToday ) {
       const editable = ( this.tipoUsuario == 'profesor' );
-
       this.editable.set(hora, editable);
     }
     this.nombresAsignaturas.set(hora, entry.Asignatura.nombre );
