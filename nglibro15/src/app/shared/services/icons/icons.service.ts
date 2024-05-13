@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { icons } from '../../../../environments/environment';
+import { icons } from 'src/environments/environment';
 
 
 @Injectable({

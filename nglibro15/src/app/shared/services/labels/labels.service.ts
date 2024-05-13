@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Person } from '../../../interfaces/person.interface';
 import { Usuario } from '../../../interfaces/usuario.interface';
-import { lowerUpperTables, tableLabels, attributesLabels, personTables } from '../../../../environments/environment';
+import { lowerUpperTables, tableLabels, attributesLabels, personTables } from 'src/environments/environment';
 import { stringString, stringStringString } from '../../../interfaces/generic.interface';
 
 @Injectable({

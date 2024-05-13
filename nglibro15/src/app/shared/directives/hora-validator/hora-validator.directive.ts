@@ -1,7 +1,5 @@
 import { Directive, inject } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { take, takeLast, tap } from 'rxjs';
-
 
 
 export function horaValidator(valida: any, dia: number): ValidatorFn {
@@ -11,7 +9,7 @@ export function horaValidator(valida: any, dia: number): ValidatorFn {
     var isValid = true;
 
     isValid = (valida.get(+dia).includes(+control.value)) ? false : true;
-   
+
     if (isValid) {
       return null;
     } else {

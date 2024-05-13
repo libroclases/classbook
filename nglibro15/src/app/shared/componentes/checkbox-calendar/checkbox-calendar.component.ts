@@ -9,7 +9,7 @@ import { SubscriptionsManagerService } from '../../services/subscriptions-manage
 import { Alert } from '../../../interfaces/generic.interface';
 import { IconsService } from '../../services/icons/icons.service';
 
-import { environment } from '../../../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
@@ -352,7 +352,7 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
           this.columnLabelInRed.set(holidayIndex, true);
         }
         if (this.currentDateInMonth && !this.columnIsGrey.get(this.colToday)) {
-          console.log(this.disable_check.editar); 
+          console.log(this.disable_check.editar);
           this.columnEnabled.set(this.colToday, true && !this.disable_check.editar);
         }
 

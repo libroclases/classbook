@@ -14,7 +14,7 @@ import { IconsService } from '../../shared/services/icons/icons.service';
 import { Alert } from '../../interfaces/generic.interface';
 import { ProfesorPie } from '../../interfaces/profesor.interface';
 import { AuthService } from '@auth0/auth0-angular';
-import { TipoUsuario } from '../../interfaces/tipousuario.interface';
+// import { TipoUsuario } from '../../interfaces/tipousuario.interface';
 import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
 import { Observable, tap } from 'rxjs';
 import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
@@ -43,7 +43,8 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
 
   @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
-  disable = {};
+  disable: any= null;
+  editar = true;
   currentDate:Date = new Date('2024-05-13T12:00:00');
 
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
@@ -202,7 +203,9 @@ this.usuario$.subscribe(info => {
 
     getColor = (color:string | null) => {
 
-      if (color=='azul' || !color) {
+      if (color == null) {  color = localStorage.getItem('Color')  }
+
+      if (color=='azul') {
         this.bodybgcolor = this.objcolors.azul.bodybgcolor;
         this.pagination = this.objcolors.azul.pagination;
         this.tablehead = this.objcolors.azul.tablehead;
@@ -226,8 +229,9 @@ this.usuario$.subscribe(info => {
 
     this.usuario$.pipe(
       tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
-      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['ControlAsignatura'],info)}})
-
+      tap(info => this.tipoUsuario = info.personalInfo?.usuario.TipoUsuario.nombre),
+      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['ControlAsignatura'],info)}}),
+      tap(() => {if (this.disable) { this.editar = this.disable.editar}})
     ).subscribe()
 
     this.profPieFormGroup = new FormGroup({});
@@ -454,7 +458,8 @@ this.usuario$.subscribe(info => {
     this.numEntries += 1;
     const hora = entry.hora; // .log('isToday:',this.isToday)
     if ( this.isToday ) {
-      const editable = ( this.tipoUsuario == 'profesor' );
+      console.log('tipoUsuario',this.tipoUsuario)
+      const editable = ( this.tipoUsuario == 'profesor' && this.editar == false );
       this.editable.set(hora, editable);
     }
     this.nombresAsignaturas.set(hora, entry.Asignatura.nombre );

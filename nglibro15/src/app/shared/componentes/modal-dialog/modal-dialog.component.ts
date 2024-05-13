@@ -9,7 +9,7 @@ import { ModalData, fkValues, stringString, tableQueries } from '../../../interf
 import { CrudService } from '../../services/crud/crud.service';
 import { ForeignKeysService } from '../../services/foreign-keys/foreign-keys.service';
 
-import { modalDataObject, lowerUpperTables, validator, environment, personTables } from '../../../../environments/environment';
+import { modalDataObject, lowerUpperTables, validator, environment, personTables } from 'src/environments/environment';
 import { IconsService } from '../../services/icons/icons.service';
 import { LabelsService } from '../../services/labels/labels.service';
 import { SelectionIdsService } from '../../services/selection-ids/selection-ids.service';
@@ -88,7 +88,7 @@ import { MessageService } from '../../services/message/message.service';
         this.usuarioId = info.personalInfo.datos_persona.id
       });
       */
-   
+
 
       this.formModal = new FormGroup({});
       if ( !data.hasOwnProperty('title') ) {
@@ -100,7 +100,7 @@ import { MessageService } from '../../services/message/message.service';
 
       this.bgmodal = this.data.registro.bgmodal;
       this.modalbutton = this.data.registro.modalbutton;
-      
+
       if(this.data.mainTable == 'horario') {
         this.selectedteacher = this.data.registro.Profesor.id;
       }
@@ -319,7 +319,7 @@ import { MessageService } from '../../services/message/message.service';
       if (table == 'profesor') {
 
         // this.selectedteacher = +event.target.value;
-        this.ms.nextProfesor(+event.target.value); //  REVISAR : PASAR A SUBJECT 
+        this.ms.nextProfesor(+event.target.value); //  REVISAR : PASAR A SUBJECT
       }
       const newId = +event.target.value;
 

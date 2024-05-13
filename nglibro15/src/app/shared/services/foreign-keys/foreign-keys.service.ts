@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TableEntry } from '../../../interfaces/generic.interface';
-import { fKeysByTable } from '../../../../environments/environment';
+import { fKeysByTable } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

@@ -6,7 +6,7 @@ import { CrudService } from '../../services/crud/crud.service';
 import { SelectionIdsService } from '../../services/selection-ids/selection-ids.service';
 import { SubscriptionsManagerService } from '../../services/subscriptions-manager/subscriptions-manager.service';
 import { IconsService } from '../../services/icons/icons.service';
-import { environment } from '../../../../environments/environment';
+import { environment } from 'src/environments/environment';
 import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
@@ -87,7 +87,7 @@ export class NumbersCalendarComponent  implements OnInit, OnDestroy {
   //   colores
 
   objcolors = environment.colors;
-  
+
   bodybgcolor!:string;
   pagination!:string;
   tablehead!:string;
@@ -140,42 +140,42 @@ export class NumbersCalendarComponent  implements OnInit, OnDestroy {
     const getPermision = (msg: any) => { if(msg) {
       const year = this.currentDate.getFullYear();
       this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-      } 
+      }
 
     }
 
     const getColor = (color:string | null) => {
-      
-      if (color=='azul') { 
+
+      if (color=='azul') {
         this.bodybgcolor = this.objcolors.azul.bodybgcolor;
         this.pagination = this.objcolors.azul.pagination;
         this.tablehead = this.objcolors.azul.tablehead;
       }
-      if (color=='verde') { 
+      if (color=='verde') {
         this.bodybgcolor = this.objcolors.verde.bodybgcolor;
         this.pagination = this.objcolors.verde.pagination;
         this.tablehead = this.objcolors.verde.tablehead;
       }
-      if (color=='naranjo') { 
+      if (color=='naranjo') {
         this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
         this.pagination = this.objcolors.naranjo.pagination;
-        this.tablehead = this.objcolors.naranjo.tablehead; 
-      }    
+        this.tablehead = this.objcolors.naranjo.tablehead;
+      }
     }
-  
+
 
     this.usuario$.subscribe(info => {
       if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
       else { getColor(localStorage.getItem('Color')) }
     });
 
-/*    
+/*
       this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
         getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
         getColor(info.personalInfo.usuario.Tema.nombre);
       }))
 */
- 
+
   }
 
   ngOnInit() {

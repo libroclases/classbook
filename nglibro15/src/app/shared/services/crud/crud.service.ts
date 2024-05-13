@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, map, Observable, of, share, take, tap } from 'rxjs';
-import { environment } from '../../../../environments/environment';
+import { environment } from 'src/environments/environment';
 import { AuthService } from '@auth0/auth0-angular';
 
 
@@ -9,7 +9,7 @@ import { AuthService } from '@auth0/auth0-angular';
   providedIn: 'root',
 })
 export class CrudService {
-  // baseurl = `https://${environment.reserved_ip}:3000/api`;
+
   baseurl = `${environment.apiUrl}:3000/api`;
   // Http Options
   httpOptions = {
@@ -150,7 +150,7 @@ export class CrudService {
   putData(obj: any, table: string): Observable<any> {
     // const extraString = this.getExtraString(table);
     let baseurl = `${this.baseurl}/${table}/${obj.id}`;
-    
+
     return this.http.put(baseurl, obj, this.httpOptions).pipe(
       tap(_ => this.log(`updated ${table} id=${obj.id}`)),
       catchError(this.handleError<any>())

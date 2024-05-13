@@ -69,7 +69,7 @@
                   <td>&nbsp;{{ nombresAsignaturas.get(hora) }}</td>
                   <td>
                     <ng-container *ngIf="editable.get(hora); else bloqueada">
-                      <a
+                      aaa<a
                         class="btn btn-link btn-sm px-3"
                         (click)="enableDisableInput(hora)"
                       >
@@ -89,7 +89,7 @@
                   <td>H/{{ n_hombres }}</td>
                   <td>
                     <ng-container *ngIf="inputIsEnabled[hora]; else onlyShowA">
-                      <input
+                      bbb<input
                         type="text"
                         size="2"
                         style="color: blue"
@@ -118,7 +118,7 @@
                   <td>M/{{ n_mujeres }}</td>
                   <td>
                     <ng-container *ngIf="inputIsEnabled[hora]; else onlyShowB">
-                      <input
+                      ccc<input
                         type="text"
                         size="2"
                         style="color: blue"
@@ -151,7 +151,7 @@
                   </td>
                   <td>
                     <ng-container *ngIf="inputIsEnabled[hora]; else onlyShowC">
-                      <input
+                      ddd<input
                         type="text"
                         size="2"
                         style="color: blue"
