@@ -55,7 +55,7 @@ class Matriculas {
 
         ],
         order: [
-          ['nombre', 'ASC']]
+          ['nombre', 'DESC']]
         })
       .then(matricula => res.status(200).send(matricula))
       .catch(error => res.status(400).send(error));
@@ -235,12 +235,13 @@ class Matriculas {
 
   static create(req, res) {
     const { colegioId, cursoId, apoderadoId, alumnoId, vinculoId, annoId } = req.params;
-    const { procedencia, incorporacion, retiro } = req.body;
+    const { procedencia, nombre ,incorporacion, retiro } = req.body;
     return Matricula
       .create({
         procedencia,
         incorporacion,
         retiro,
+        nombre,
         apoderadoId,
         alumnoId,
         colegioId,

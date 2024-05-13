@@ -68,7 +68,7 @@ export class MatriculaAlumnoComponent implements OnInit {
 
     if (color == null) {  color = localStorage.getItem('Color')  }
 
-    if (color=='azul' || !color) {
+    if (color=='azul') {
       this.bodybgcolor = this.objcolors.azul.bodybgcolor;
       this.pagination = this.objcolors.azul.pagination;
       this.tablehead = this.objcolors.azul.tablehead;
@@ -136,13 +136,15 @@ export class MatriculaAlumnoComponent implements OnInit {
   reset() {
     this.formConsulta.reset();
     this.muestra_dialog = false;
-    //this.mensaje.nextMsg({})
-
+    this.alumno = null;
+    this.apoderado = null;
+    
   }
   cancelar() {
     this.formConsulta.reset();
     this.muestra_dialog = false;
-
+    this.alumno = null;
+    this.apoderado = null;
     // this.mensaje.nextMsg({})
 
   }
@@ -176,7 +178,7 @@ export class MatriculaAlumnoComponent implements OnInit {
 
    dialogRef.afterClosed().pipe(
      // tap(res => console.log(res)),
-     tap(() => { this.formConsulta.reset(); console.log('cerrado')})
+     tap(() => { this.reset(); console.log('cerrado')})
    )
    .subscribe();
 
