@@ -7,7 +7,7 @@ import { IconsService } from '../../services/icons/icons.service';
 import { Observable, Subject, Subscription, concatMap, debounceTime, from, map, of, switchMap, take, tap } from 'rxjs';
 import { CrudService } from '../../services/crud/crud.service';
 import { redirectRoutes, modalDataObject, personTables, notCreateTables ,searchTables, groupTables,groupSum, Permission,
-  lowerUpperTables ,fKeysByTable, environment } from '../../../../environments/environment';
+  lowerUpperTables ,fKeysByTable, environment } from 'src/environments/environment';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
