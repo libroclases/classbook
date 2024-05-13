@@ -9,8 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       nombre: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
+        type: Sequelize.STRING,
       },
       procedencia: {
         type: Sequelize.STRING

@@ -1,5 +1,7 @@
 import model, { sequelize } from '../models';
 
+const Sequelize = require("sequelize");
+
 const { Matricula, Colegio, Curso, Apoderado, Alumno, Vinculo, Anno, Periodo,
   Profesor, AsignaturaProfesor, Evaluacion, Nota } = model;
 
@@ -58,6 +60,17 @@ class Matriculas {
       .then(matricula => res.status(200).send(matricula))
       .catch(error => res.status(400).send(error));
   }
+
+  static lastMatricula(req, res) {
+              
+    return Matricula.findOne({
+        attributes: [Sequelize.fn('max', Sequelize.col('id'))],
+        raw: true,
+    })
+    .then(matricula => res.status(200).send(matricula))
+    .catch(error => res.status(400).send(error));
+  }
+
 
   static listaDeCurso(req, res) {
     const { colegioId, cursoId, annoId } = req.params;

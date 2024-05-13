@@ -1068,7 +1068,7 @@ export const Permission:any =  {
   Ventana: { leer : ['profesor'] , editar : ['utp'], crear : ['utp'] },
   /* Procesos */
   MatriculaAlumno: { leer : ['utp'] , editar : ['utp'], crear : ['utp'] },
-  RegistroUsuario: { leer : ['utp'] , editar : ['utp'], crear : ['utp'] },
+  RegistroUsuario: { leer : ['utp'] , editar : ['profesor','utp'], crear : ['utp'] },
   /* Admin */
   TipoUsuario: {leer : ['admin'] , editar : ['admin'], crear : ['admin']},
   Usuario: {leer : ['utp'] , editar : ['utp'], crear : ['utp']},

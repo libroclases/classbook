@@ -25,6 +25,26 @@ import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 import { MessageService } from '../../services/message/message.service';
 
+function zfill(number: number, width: number) {
+  var numberOutput = Math.abs(number); /* Valor absoluto del número */
+  var length = number.toString().length; /* Largo del número */
+  var zero = "0"; /* String de cero */
+
+  if (width <= length) {
+      if (number < 0) {
+           return ("-" + numberOutput.toString());
+      } else {
+           return numberOutput.toString();
+      }
+  } else {
+      if (number < 0) {
+          return ("-" + (zero.repeat(width - length)) + numberOutput.toString());
+      } else {
+          return ((zero.repeat(width - length)) + numberOutput.toString());
+      }
+  }
+}
+
 @Component({
     selector: 'modal-dialog',
     templateUrl: 'modal-dialog.component.html',
@@ -390,38 +410,56 @@ import { MessageService } from '../../services/message/message.service';
 
         /* Sección Ajustes */
 
-        /* horario */
-
-        if (this.data.mainTable == 'horario') { ids[5] = this.registro.Dix.id }
 
         /* matricula */
 
         if (this.data.mainTable == 'matricula') {
-          ids[2] = this.registro.foraneas.apoderado,
-          ids[3] = this.registro.foraneas.alumno
-          if (obj['retiro'] == '') { obj['retiro'] = null }
+
+                  this.crud.getLastMatricula().pipe(
+
+                  tap(res => {
+
+                    console.log('poronga->',res.max + 1);
+                    obj['nombre'] = zfill(res.max + 1,6);
+
+                    ids[2] = this.registro.foraneas.apoderado,
+                    ids[3] = this.registro.foraneas.alumno
+                    if (obj['retiro'] == '') { obj['retiro'] = null }
+                    console.log('ids',ids);
+                    this.crud.postData(obj, this.modalData.mainTable, ids)
+                    .subscribe(msg => this.showdata(msg))
+                    }),
+                ).subscribe()
         }
+        else {
+                /* horario */
 
-        /* personTables */
+                if (this.data.mainTable == 'horario') { ids[5] = this.registro.Dix.id }
 
-        if (personTables.includes(this.modalData.mainTable)) {
 
-          ids[0] = this.registro.usuario_id
+                /* personTables */
 
-          // If persontable we need update usuario with operativo == true
-          // console.log('poronga',{id: ids[0], operativo:true})
-          this.crud.putData({id: ids[0], operativo:true}, 'usuario').subscribe(res => console.log(res));
+                if (personTables.includes(this.modalData.mainTable)) {
+
+                  ids[0] = this.registro.usuario_id
+
+                  // If persontable we need update usuario with operativo == true
+
+                  this.crud.putData({id: ids[0], operativo:true}, 'usuario').subscribe(res => console.log(res));
+                }
+
+                /* anotacion */
+
+                if (this.modalData.mainTable == 'anotacion') { ids[1] = this.usuarioId }
+
+
+                this.crud.postData(obj, this.modalData.mainTable, ids).pipe(
+                  tap(() => this.selIdsService.notifyUpdated()),
+                )
+                .subscribe(msg => this.showdata(msg))
+
+
         }
-
-        /* anotaion */
-
-        if (this.modalData.mainTable == 'anotacion') { ids[1] = this.usuarioId }
-
-        console.log('PORONGA',obj, this.modalData.mainTable, ids )
-        this.crud.postData(obj, this.modalData.mainTable, ids).pipe(
-          tap(() => this.selIdsService.notifyUpdated()),
-        )
-        .subscribe(msg => this.showdata(msg))
 
       }
       else {   // If PUT

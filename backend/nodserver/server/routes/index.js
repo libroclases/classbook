@@ -607,6 +607,9 @@ import AsignaturaCursos from '../controllers/asignaturacurso';
     app.delete('/api/matricula/:matriculaId',
       checkjwd, requiredScopes('delete:matricula'),
       Matriculas.delete);
+    app.get('/api/matricula/lastmatricula',
+      // checkjwd, requiredScopes('read:matricula'),
+      Matriculas.lastMatricula);  
     app.get('/api/evaluacion',
       checkjwd, requiredScopes('read:evaluacion'),
       Evaluaciones.list);

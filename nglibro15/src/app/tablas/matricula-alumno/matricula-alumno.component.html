@@ -8,42 +8,43 @@
 
 
         <div class="center" [style.opacity]="opacity">
-          {{disable | json}}
+        
           <h2>Matricula Alumno</h2>
           <form  [formGroup]="formConsulta">
           <table  class="table table-sm table-secundary table-bordered">
             <thead class="table-secundary" >
-                <tr><td>Rut Alumno</td><td><input type="text" formControlName="rut_alumno" />
+                <tr>
+                  <td style="width:25%">Rut Alumno</td><td style="width: 45%"><input type="text" formControlName="rut_alumno" style="width: 100%"/>
                 <div *ngIf="formConsulta.controls['rut_alumno']?.invalid && (formConsulta.controls['rut_alumno']?.dirty || formConsulta.controls['rut_alumno']?.touched)"  class="alert alert-danger">
                   <div *ngIf="formConsulta.controls['rut_alumno']?.errors?.['rutValidator']">Por favor ingrese rut válido</div>
                 </div>
                 </td>
-                <td>
-                  <button type="button" class="btn  btn-sm"  (click)="rut_alumno()"
+                <th>
+                  <button type="button" class="btn  btn-sm"  (click)="rut_alumno()"  [disabled]="disable?.editar"
                    [style.background-color]="modalbutton" class="text-light" >Buscar</button>
-                </td>
+
               </tr>
-                <tr><td colspan="2">Nombre:</td><td>{{alumno?.nombre}}</td></tr>
-                <tr><td colspan="2">Apellido Paterno:</td><td>{{alumno?.apellido1}}</td></tr>
-                <tr><td colspan="2">Apellido Materno:</td><td>{{alumno?.apellido2}}</td></tr>
+                <tr><td>Nombre:</td><td>{{alumno?.nombre}}</td></tr>
+                <tr><td>Apellido Paterno:</td><td>{{alumno?.apellido1}}</td><td>&nbsp;</td></tr>
+                <tr><td>Apellido Materno:</td><td>{{alumno?.apellido2}}</td><td>&nbsp;</td></tr>
             </thead>
           </table>
 
           <table  class="table table-sm table-secundary table-bordered">
             <thead class="table-secundary" >
-              <tr><td>Rut Apoderado</td><td><input type="text" formControlName="rut_apoderado"/>
+              <tr><td style="width:25%">Rut Apoderado</td><td style="width: 45%"><input type="text" formControlName="rut_apoderado"  style="width: 100%"/>
               <div *ngIf="formConsulta.controls['rut_apoderado']?.invalid && (formConsulta.controls['rut_apoderado']?.dirty || formConsulta.controls['rut_apoderado']?.touched)"  class="alert alert-danger">
                 <div *ngIf="formConsulta.controls['rut_apoderado']?.errors?.['rutValidator']">Por favor ingrese rut válido</div>
               </div>
               </td>
-              <td>
-                <button type="button" class="btn  btn-sm"  (click)="rut_apoderado()"  [disabled]="disable"
+              <th>
+                <button type="button" class="btn  btn-sm"  (click)="rut_apoderado()"  [disabled]="disable?.editar"
                    [style.background-color]="modalbutton" class="text-light" >Buscar</button>
-                </td>
+
               </tr>
-              <tr><td colspan="2">Nombre:</td><td>{{apoderado?.nombre}}</td></tr>
-              <tr><td colspan="2">Apellido Paterno:</td><td>{{apoderado?.apellido1}}</td></tr>
-              <tr><td colspan="2">Apellido Materno:</td><td>{{apoderado?.apellido2}}</td></tr>
+              <tr><td>Nombre:</td><td>{{apoderado?.nombre}}</td><td>&nbsp;</td></tr>
+              <tr><td>Apellido Paterno:</td><td>{{apoderado?.apellido1}}</td><td>&nbsp;</td></tr>
+              <tr><td>Apellido Materno:</td><td>{{apoderado?.apellido2}}</td><td>&nbsp;</td></tr>
 
             </thead>
           </table>

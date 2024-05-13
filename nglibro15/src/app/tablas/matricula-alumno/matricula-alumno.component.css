@@ -1,5 +1,5 @@
 table  {
-    width: 50%;
+    width: 60%;
     margin: auto;
 }
 
@@ -16,31 +16,31 @@ td {
 
 .top {
   text-align: center;
-  border: 1px; 
+  border: 1px;
   border-color:lightgrey;
   padding-top: 10cap;
-  border-radius: 2%; 
-  border-style: solid; 
-  align-items: center;  
+  border-radius: 2%;
+  border-style: solid;
+  align-items: center;
   width: 70%;
   margin: 1cap auto;
   margin-top: 2cap;
 
-} 
+}
 
 .center {
     text-align: center;
     background: lightgray;
-    border: 1px; 
+    border: 1px;
     border-color:lightgrey;
     padding-top: 2cap;
-    border-radius: 2%; 
-    border-style: solid; 
-    align-items: center;  
+    border-radius: 2%;
+    border-style: solid;
+    align-items: center;
     width: 60%;
     margin: 1cap auto;
     margin-top: 10cap;
-  
+
   }
 
   hr {

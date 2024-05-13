@@ -43,7 +43,7 @@ export class MatriculaAlumnoComponent implements OnInit {
   bgmodal!:string;
   modalbutton!:any;
 
-  disable = {};
+  disable:any = null;
   currentDate:Date = new Date();
 
   @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
@@ -124,28 +124,6 @@ export class MatriculaAlumnoComponent implements OnInit {
     private selIdsService: SelectionIdsService,
     private getpermission: GetPermissionService ) {
 
-/*
-      const getPermision = (msg: any) => { if(msg) {
-        const year = this.currentDate.getFullYear();
-        this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-        }
-
-      }
-*/
-
-/*
-this.usuario$.subscribe(info => {
-  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
-  else { getColor(localStorage.getItem('Color')) }
-});
-
-*/
-/*
-      this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
-        getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
-        getColor(info.personalInfo.usuario.Tema.nombre);
-      }))
-*/
 
       this.formConsulta = new FormGroup({
           rut_alumno : new FormControl('', rutValidator()),

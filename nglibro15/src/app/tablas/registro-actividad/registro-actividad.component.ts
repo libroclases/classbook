@@ -47,7 +47,7 @@ export class RegistroActividadComponent implements OnDestroy {
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
 
-  disable = {};
+  disable = null;
   currentDate:Date = new Date();
 
   innerHeight=  window.innerHeight
@@ -147,7 +147,9 @@ this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((e
 
   getColor = (color:string | null) => {
 
-    if (color=='azul' || !color) {
+    if (color == null) {  color = localStorage.getItem('Color')  }
+
+    if (color=='azul') {
       this.bodybgcolor = this.objcolors.azul.bodybgcolor;
       this.pagination = this.objcolors.azul.pagination;
       this.tablehead = this.objcolors.azul.tablehead;
@@ -173,6 +175,7 @@ this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((e
 
     this.usuario$.pipe(
       tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
+      tap(info => { if (info.personalInfo?.usuario) { this.userId = info.personalInfo.usuario.id}}),
       tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['RegistroActividad'],info)}})
 
     ).subscribe()
@@ -224,7 +227,7 @@ this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((e
 
             for ( const [index, entry] of query.entries() ) {
               this.indexToId.set(index, entry.id);
-              this.editable.set(index, entry.Profesor.id == this.userId);
+              this.editable.set(index, entry.Profesor.id == this.userId); console.log(entry.Profesor.id,this.userId)
               this.inputIsEnabled.set(index, false);
               this.descripciones.set(index, entry.descripcion);
               this.descripcionesToSave.set(index, entry.descripcion);

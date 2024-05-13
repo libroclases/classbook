@@ -61,9 +61,9 @@ export class CrudService {
     return this.http.get<any>(baseurl).pipe(take(1), share());
   }
 
-  getLasId(): Observable<any>  {
+  getLastMatricula(): Observable<any>  {
 
-    let baseurl = `${this.baseurl}/usuario/lastid`;
+    let baseurl = `${this.baseurl}/matricula/lastmatricula`;
 
     return this.http.get<any>(baseurl).pipe(take(1), share());
 

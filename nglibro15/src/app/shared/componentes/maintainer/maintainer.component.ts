@@ -227,7 +227,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    console.log('lumt',lowerUpperTables[this.mainTable])
+    
     this.usuario$.pipe(
       tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
       tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission[lowerUpperTables[this.mainTable]],info)}})
