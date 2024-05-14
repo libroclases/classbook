@@ -183,7 +183,7 @@ function zfill(number: number, width: number) {
       let tables: fkValues = {};
       let texts: stringString = {};
       let dates: any =  {};
-      let hidden: any = {};
+      // let hidden: any = {};
       this.modalData.tables.forEach((tab: string) => {
 
         const aux = this.registro[tab];
@@ -196,14 +196,15 @@ function zfill(number: number, width: number) {
 
       this.modalData.textFields.forEach((text:any) => texts[text] = this.registro[text])
       this.modalData.dateFields.forEach((date:any) => dates[date] = this.registro[date])
+      /*
       this.modalData.hidden.forEach((hid:any) => {
         hidden[hid] = this.registro[lowerUpperTables[hid]].id;
       })
-
+      */
       values['tablas'] = tables;
       values['textos'] = texts;
       values['fechas'] = dates;
-      values['hidden'] = hidden;
+      // values['hidden'] = hidden;
 
       this.valores =  values;
 
@@ -257,7 +258,7 @@ function zfill(number: number, width: number) {
         this.modalData.dateFields.forEach((fecha:any) => this.formModal.addControl(fecha, this.fb.control(formatDate(this.valores['fechas'][fecha],'yyyy-MM-dd','en'), validateDateForm(fecha))));
       }
 
-      this.modalData.hidden.forEach((hidden: string) => this.formModal.addControl(hidden, this.fb.control(this.valores['hidden'][hidden])));
+      // this.modalData.hidden.forEach((hidden: string) => this.formModal.addControl(hidden, this.fb.control(this.valores['hidden'][hidden])));
     }
 
 

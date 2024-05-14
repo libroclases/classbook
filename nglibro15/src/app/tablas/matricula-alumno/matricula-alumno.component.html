@@ -8,7 +8,7 @@
 
 
         <div class="center" [style.opacity]="opacity">
-        
+          
           <h2>Matricula Alumno</h2>
           <form  [formGroup]="formConsulta">
           <table  class="table table-sm table-secundary table-bordered">
@@ -50,7 +50,7 @@
           </table>
           <br>
           <div *ngIf="alumno && apoderado">
-            <button type="button" class="btn  btn-sm"  (click)="openDialog()"
+            <button type="button" class="btn  btn-sm"  (click)="openDialog()"  [disabled]="formConsulta.invalid"
                    [style.background-color]="modalbutton" class="text-light" >Generar Matrícula</button>
           </div>
            <br>
