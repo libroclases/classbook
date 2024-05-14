@@ -72,7 +72,7 @@ permissions.push('delete:feriado');
 // --------------------------------------------------------------
 
 export const environment = {
-  production: false,
+  production: true,
   apiUrl: 'https://libroclases.cl',
   apiKey: 'devKey',
   userinfo: {},
