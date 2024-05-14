@@ -183,7 +183,7 @@ this.usuario$.subscribe(info => {
           this.disabledAddButton = true;
           return;
         }
-      } console.log('poronga',this.disable)
+      }
       if ( this.disable == false) { this.disabledAddButton = false; }
       const fks = this.selIdsService.getIds(
         this.fKeysService.getFKeys(this.mainTable)!, {profesor: 0}

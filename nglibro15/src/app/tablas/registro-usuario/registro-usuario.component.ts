@@ -213,7 +213,7 @@ export class RegistroUsuarioComponent implements OnInit {
       console.log({username: u.username, email: u.email, id:0},'usuario', [+u.tipousuario, +u.tema])
       this.crud.postData({username: u.username, email: u.email, id:0},'usuario', [+u.tipousuario, +u.tema])
       .subscribe(msg => {
-        console.log('poronga->',msg);
+        
         if (msg) {
           this.addMessage(msg);
           this.reset();

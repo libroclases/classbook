@@ -49,7 +49,7 @@ setUsuario({getState, patchState}: StateContext<UsuarioStateModel>, { color, usu
     tap((res:any) => {
       const state = getState();
       const todo = [state.usuario];
-      // console.log('poronga res',res.data);
+      
       patchState({
         usuario: res.data
     });

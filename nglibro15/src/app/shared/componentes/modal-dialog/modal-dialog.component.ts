@@ -102,12 +102,7 @@ function zfill(number: number, width: number) {
         // if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
         // else { getColor(localStorage.getItem('Color')) }
       });
-       /*
-       userinfo.personalInfo$.subscribe(info => {
-        console.log('poronga',info);
-        this.usuarioId = info.personalInfo.datos_persona.id
-      });
-      */
+
 
 
       this.formModal = new FormGroup({});
@@ -420,7 +415,7 @@ function zfill(number: number, width: number) {
 
                   tap(res => {
 
-                    console.log('poronga->',res.max + 1);
+     
                     obj['nombre'] = zfill(res.max + 1,6);
 
                     ids[2] = this.registro.foraneas.apoderado,

@@ -141,8 +141,6 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
   tipousuario:any = null;
 
-  poronga$!: Observable<any | undefined>;
-
   search(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
     this.searchTerm$.next(element.value);
@@ -227,7 +225,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    
+
     this.usuario$.pipe(
       tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
       tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission[lowerUpperTables[this.mainTable]],info)}})
