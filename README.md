@@ -18,16 +18,25 @@ npx sequelize-cli db:migrate --env production
 8.- git chechout branch
 9.- cd nglibro15
 10.- ng build --configuration production --aot
-11.- scp -r dist/nglibro15/* /var/www/libroclases.cl/html/
+11.- scp -r dist/nglibro15/* libro@libroclases.cl:/var/www/libroclases.cl/html
 *** server ***
 1.- cd .\backend\nodserver
-2.- npm run build
-3.- scp -r .\dist\* libro@libroclases.cl:/home/libro/classbook-main/backend/nodserver/dist
-4.- npx sequelize-cli db:mibrate:undo:all --env production
-5.- npx sequelize-cli db:migrate --env production
+2.- Verificar todas las rutas aseguradas 
+3.- npm run build
+4.- scp -r .\dist\* libro@libroclases.cl:/home/libro/classbook-main/backend/nodserver/dist
+5.- Abrir puerto 5432 en LibroMuralla
+6.- npx sequelize-cli db:migrate:undo:all --env production
+7.- npx sequelize-cli db:migrate --env production
+8.- scp .\csv\csv-no-id\* libro@libroclases.cl:/home/libro/classbook-main/backend/nodserver/csv/csv-no-id
+9.- sudo docker exec -it dbpostgres bash 
+10.- bash copy_csv_prod.sh
+11.- Cerrar puerto 5432 en LibroMuralla
+12.- opcional -> http://libroclases.cl:8080 (dejar cerrado puerto 8080)
 *** digitalocean ***
 (lista no implica orden, ejecución a discreción)
 sudo docker-compose up --build -d
+sudo docker system prune -a
+sudo docker-compose up -d --remove-orphans
 sudo docker logs nodapp
 sudo docker-compose build nodapp
 sudo docker exec -it dbpostgres bash
