@@ -52,7 +52,8 @@ export class RegistroUsuarioComponent implements OnInit {
   pagination!:string;
   tablehead!:string;
 
-  disable = {};
+  disable:any;
+  editar:any;
   currentDate:Date = new Date();
 
   bgmodal!:string;
@@ -78,40 +79,6 @@ export class RegistroUsuarioComponent implements OnInit {
     return this.labelsService.getTableLabel(table);
   }
 
-  /*
-  getModalData = (tipo: string, modal: any[], data: any = null): any[] => {
-
-    var output:any={};
-    if (tipo == 'tablas') {
-      modal.forEach((m:any) => output[m] = (data) ?  data[lowerUpperTables[m]] : null)
-    } else {
-      modal.forEach((m:any) =>  output[m] = (data) ? data[m] : null);
-    }
-
-    return output
-  };
-  */
-
-  /*
-  getData = (data: any) : void => {
-
-
-    let modaldata: any = modalDataObject[lowerUpperTables['usuario']];
-
-    let msg:any = { registro : {
-      id: 0,
-      tablas: this.getModalData('tablas', modaldata.tables,null),
-      textos: this.getModalData('textos',modaldata.textFields,data),
-      ocultos: this.getModalData('ocultos',modaldata.hidden,null),
-      fechas: this.getModalData('fechas',modaldata.dateFields,null),
-    },
-    tabla: lowerUpperTables['usuario']
-    }
-
-  }
-  */
-
-
   constructor(
     // private mensaje: MessageService,
     public dialog: MatDialog,
@@ -121,27 +88,7 @@ export class RegistroUsuarioComponent implements OnInit {
     private getpermission: GetPermissionService
     // private selIdsService: SelectionIdsService,
     ) {
-      /*
-      const getPermision = (msg: any) => { if(msg) {
-        const year = this.currentDate.getFullYear();
-        this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-        }
 
-      }
-      */
-
-/*
-this.usuario$.subscribe(info => {
-  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
-  else { getColor(localStorage.getItem('Color')) }
-});
-*/
-/*
-      this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
-        getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
-        getColor(info.personalInfo.usuario.Tema.nombre);
-      }))
-*/
       this.valuesForm = new FormGroup({
         email: new FormControl('', emailValidator()),
         username: new FormControl('', [Validators.required]),
@@ -186,7 +133,11 @@ this.usuario$.subscribe(info => {
 
     this.usuario$.pipe(
       tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
-      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['RegistroUsuario'],info)}})
+      tap(info => { if (info.personalInfo?.usuario) {
+          this.disable = this.getpermission.getPermission(Permission['RegistroUsuario'],info);
+          this.editar = this.disable.editar;
+        }
+      })
 
     ).subscribe()
 
