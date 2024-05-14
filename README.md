@@ -18,7 +18,9 @@ npx sequelize-cli db:migrate --env production
 8.- git chechout branch
 9.- cd nglibro15
 10.- ng build --configuration production --aot
-11.- scp -r dist/nglibro15/* libro@libroclases.cl:/var/www/libroclases.cl/html
+11.- Limpiar dist/nglibro15 local
+12.- Limpiar /var/www/libroclases.cl/html remoto
+13.- scp -r dist/nglibro15/* libro@libroclases.cl:/var/www/libroclases.cl/html
 *** server ***
 1.- cd .\backend\nodserver
 2.- Verificar todas las rutas aseguradas 
