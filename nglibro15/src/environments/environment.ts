@@ -54,7 +54,7 @@ const tablesArray = [
   'tipoevaluacion',
   'tipousuario',
   'usuario',
-  'utp',
+  'administrador',
   'ventana',
   'vinculo',
 ];
@@ -72,11 +72,11 @@ permissions.push('delete:feriado');
 // --------------------------------------------------------------
 
 export const environment = {
-  production: true,
+  production: false,
   apiUrl: 'https:libroclases.cl',
   apiKey: 'devKey',
   userinfo: {},
-  opacity: '90%',
+  opacity: '87%',
 
   auth0: {
     domain: 'dev-tupdibnrpuxah8p3.us.auth0.com',
@@ -100,7 +100,7 @@ export const environment = {
   colors: {
     azul: {
       color: 'blue',
-      lineal: 'linear-gradient(to right, #4880EC, #019CAD)',
+      lineal: 'linear-gradient(to bottom, #4880EC, #019CAD)',
       menu: '#e3e4f3',
       colorMenuButton: '#059bb0',
       pagination: '#e2e2eb',
@@ -114,7 +114,7 @@ export const environment = {
       color: 'green',
       lineal: 'linear-gradient(to right, #38B15C,#76FA91)',
       menu: '#dcf3dd',
-      colorMenuButton: 'rgb(82, 205, 145)',
+      colorMenuButton: '#71f48d',
       pagination: '#dcebe4',
       bodybgcolor: 'rgb(242, 248, 242)', // rgb(232, 248, 240)
       tablehead: 'lightgreen',
@@ -126,7 +126,7 @@ export const environment = {
       color: 'orange',
       lineal: 'linear-gradient(to right, #ffb505,#ffd966)',
       menu: '#FFE7C1',
-      colorMenuButton: 'orange',
+      colorMenuButton: '#ffd761',
       pagination: '#f2e6d3',
       bodybgcolor: 'rgb(255, 242, 222)',
       tablehead:  'rgb(255,212,96)',
@@ -202,7 +202,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
   curso: ['colegio', 'anno'],
   horaasignada: ['colegio'],
   profesor: ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
-  utp:  ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
+  administrador:  ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
   inscripcioncolegio: ['profesor', 'colegio', 'anno'],
   registroactividad: [
     'colegio',
@@ -229,7 +229,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
   tipousuario: [],
   tema:[],
   usuario: ['tipousuario','tema'],
-  alumno: ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
+  alumno: ['usuario','colegio', 'sexo', 'region', 'provincix', 'comuna'],
   tipoestado: [],
   estadoalumno: ['alumno', 'matricula', 'tipoestado'],
   anotacion: ['matricula', 'profesor', 'anno', 'colegio', 'curso'],
@@ -334,7 +334,7 @@ export const lowerUpperTables: stringString = {
   resumennota: 'ResumenNota',
   periodo: 'Periodo',
   profesor: 'Profesor',
-  utp: 'Utp',
+  administrador: 'Administrador',
   inscripcioncolegio: 'InscripcionColegio',
   registroactividad: 'RegistroActividad',
   provincix: 'Provincix',
@@ -383,7 +383,7 @@ export const tableLabels = {
   periodo: 'Período',
   Periodo: 'Período',
   profesor: 'Profesor',
-  utp: 'UTP',
+  administrador: 'Administrador',
   inscripcioncolegio: 'Inscripcion Colegio',
   registroactividad: 'Registro de Actividad',
   provincix: 'Provincia',
@@ -410,7 +410,7 @@ export const personTables = [
   'alumno',
   'apoderado',
   'profesor',
-  'utp',
+  'administrador',
   'asistentecolegio',
   'usuario'
 ];
@@ -419,7 +419,7 @@ export const notCreateTables = [
   'alumno',
   'apoderado',
   'profesor',
-  'utp',
+  'administrador',
   'asistentecolegio',
   'usuario',
   'matricula'
@@ -431,7 +431,7 @@ export const usuarioTipo: numberString = {
   2:'alumno',
   3:'apoderado',
   4:'asistente',
-  5:'utp',
+  5:'admin'
 };
 
 
@@ -439,10 +439,10 @@ export const searchTables = [
   'alumno',
   'apoderado',
   'profesor',
-  'utp',
+  'administrador',
   'asistentecolegio',
   'usuario',
-  'curso',
+
 ];
 
 export const groupTables = ['horario'];
@@ -635,7 +635,7 @@ export const attributesLabels = {
     nacimiento: 'Nacimiento',
   },
 
-  utp: {
+  administrador: {
     nombre: 'Nombre(s)',
     apellido1: 'Apellido Paterno',
     apellido2: 'Apellido Materno',
@@ -706,7 +706,7 @@ export const icons: stringStringPair = {
   '/asignaturaprofesor': ['bi bi-book', 'Asignatura Profesores'],
   '/asignaturacurso': ['bi bi-book', 'Asignatura Profesores'],
   '/profesor': ['bi bi-person-video3', 'Profesores'],
-  '/utp': ['bi bi-person-video3', 'Utp'],
+  '/administrador': ['bi bi-person-video3', 'Administrador'],
   '/inscripcioncolegio': ['bi bi-bank', 'Inscripcion Colegio'],
   '/registroactividad': ['bi bi-card-list', 'Registro de Actividades'],
   '/apoderado': ['bi-person-check-fill', 'Apoderados'],
@@ -735,10 +735,9 @@ export const redirectRoutes: any = {
   HoraAsignada: [],
   Curso: ['/horario'],
   Profesor: ['/horario'],
-  Utp: ['/horario'],
+  Administrador: ['/horario'],
   Asignatura: ['/profesor'],
   AsignaturaProfesor: ['/profesor'],
-  AsignaturaCurso: ['/profesor'],
   Apoderado: ['/matricula'],
   Matricula: ['/curso'],
   Ventana:['/curso'],
@@ -784,7 +783,7 @@ export const validator: any = {
     }
   },
 
-  Utp: {
+  Administrador: {
     modalText: {
       nombre: [Validators.required],
       apellido1: [Validators.required],
@@ -837,7 +836,7 @@ export const validator: any = {
 
   },
 
-  AsignaturaCurso: {
+   AsignaturaCurso: {
     modalText: {
       nombre: [Validators.required],
     },
@@ -1040,40 +1039,40 @@ export const validator: any = {
 
 export const Permission:any =  {
   /* Asistencia */
-  Asistencia: [{leer : 'profesor', editar: 'profesor' , crear: 'profesor' }],
-  ResumenAsistencia: [{leer : 'profesor', editar: 'profesor' , crear: 'profesor' }],
+  Asistencia: {leer : ['profesor'], editar: ['profesor'] , crear: ['profesor'] },
+  ResumenAsistencia: {leer : 'profesor', editar: 'profesor' , crear: 'profesor' },
   /* Colegio */
-  Colegio: [{leer : 'profesor', editar: 'admin' , crear: 'admin' }],
-  AsistenteColegio:  [{ leer: 'profesor', editar: 'utp', crear:'utp' }],
-  Curso: [{ leer: 'profesor', editar: 'utp', crear: 'utp' }],
-  Asignatura: [{ leer: 'profesor', editar: 'utp', crear: 'utp' }],
-  HoraAsignada: [{ leer: 'profesor', editar: 'utp', crear: 'utp' }],
+  Colegio: {leer : ['profesor'], editar: ['admin'] , crear: ['admin'] },
+  AsistenteColegio:  { leer: ['profesor'], editar: ['utp'], crear:['utp'] },
+  Curso: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
+  Asignatura: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
+  HoraAsignada: { leer: ['profesor'], editar: ['utp'], crear: ['utp']} ,
   /* Alumno */
-  Alumno: [{ leer: 'profesor', editar: 'utp', crear: 'utp' }],
-  EstadoAlumno: [{ leer: 'profesor', editar: 'utp', crear: 'utp' }],
-  Apoderado: [{ leer: 'profesor', editar: 'utp', crear: 'utp' }],
-  Anotacion: [{ leer: 'profesor', editar: 'profesor', crear:'profesor' }],
-  FichaAlumno: [{ leer: 'profesor' , editar: 'profesor' , crear: 'profesor'  }],
-  Matricula: [{ leer: 'profesor' , editar : 'utp' , crear: 'utp'}],
+  Alumno: { leer: ['utp'], editar: ['utp'], crear: ['utp'] },
+  EstadoAlumno: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
+  Apoderado: { leer: ['utp'], editar: ['utp'], crear: ['utp'] },
+  Anotacion: { leer: ['profesor'], editar: ['profesor'], crear:['profesor'] },
+  FichaAlumno: { leer: ['profesor'] , editar: ['profesor'] , crear: ['profesor']  },
+  Matricula: { leer: 'profesor' , editar : 'utp' , crear: 'utp'},
   /* Profesor */
-  Profesor: [{ leer : 'profesor', editar: 'utp', crear: 'utp' }],
-  AsignaturaProfesor: [{ leer: 'profesor', editar: 'utp', crear:'utp' }],
-  AsignaturaCurso: [{ leer: 'profesor', editar: 'utp', crear:'utp' }],
-  Evaluacion:  [{ leer: 'profesor', editar: 'utp', crear: 'utp'}],
-  Nota: [{leer: 'profesor' ,editar: 'profesor', crear: 'profesor'}],
-  ResumenNota: [{leer: 'profesor' ,editar: 'profesor', crear: 'profesor'}],
-  Horario: [{ leer: 'profesor', editar: 'utp', crear: 'utp' }],
-  HorasInscritas: [{ leer: 'profesor', editar: [], crear: [] }],
-  ControlAsignatura: [{leer: 'profesor' ,editar: 'profesor', crear: 'profesor'}],
-  RegistroActividad: [{ leer: 'profesor', editar: 'profesor', crear : 'profesor' }],
-  Ventana: [{ leer : 'profesor' , editar : 'utp', crear : 'utp' }],
+  Profesor: { leer : ['utp'], editar: ['utp'], crear: ['utp'] },
+  AsignaturaProfesor: { leer: ['profesor'], editar: ['utp'], crear:['utp'] },
+  AsignaturaCurso: { leer: ['profesor'], editar: ['utp'], crear:['utp'] },
+  Evaluacion:  { leer: ['profesor'], editar: ['utp'], crear: ['utp']},
+  Nota: {leer: ['profesor'] ,editar: ['profesor'], crear: ['profesor']},
+  ResumenNota: {leer: ['profesor'] ,editar: ['profesor'], crear: ['profesor']},
+  Horario: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
+  HorasInscritas: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
+  ControlAsignatura: {leer: ['profesor'] ,editar: ['profesor'], crear: ['profesor']},
+  RegistroActividad: { leer: ['profesor'], editar: ['profesor'], crear : ['profesor'] },
+  Ventana: { leer : ['profesor'] , editar : ['utp'], crear : ['utp'] },
   /* Procesos */
-  MatriculaAlumno: [{ leer : 'utp' , editar : 'utp', crear : 'utp' }],
-  registroUsuario: [{ leer : 'utp' , editar : 'utp', crear : 'utp' }],
+  MatriculaAlumno: { leer : ['utp'] , editar : ['utp'], crear : ['utp'] },
+  RegistroUsuario: { leer : ['utp'] , editar : ['profesor','utp'], crear : ['utp'] },
   /* Admin */
-  TipoUsuario: [{leer : 'admin' , editar : 'admin', crear : 'admin'}],
-  Usuario: [{leer : 'admin' , editar : 'admin', crear : 'admin'}],
-  Tabla: [{leer : 'admin' , editar : 'admin', crear : 'admin'}],
+  TipoUsuario: {leer : ['admin'] , editar : ['admin'], crear : ['admin']},
+  Usuario: {leer : ['utp'] , editar : ['utp'], crear : ['utp']},
+  Tabla: {leer : ['admin'] , editar : ['admin'], crear : ['admin']},
 }
 
 
@@ -1087,11 +1086,10 @@ export const modalDataObject: any = {
     textFields: ['nombre', 'telefono', 'rut', 'direccion', 'email', 'www'],
     dateFields: [],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Colegio',
     windowHeight: '650px',
-    permission: ['utp']
   },
 
   Horario: {
@@ -1100,11 +1098,11 @@ export const modalDataObject: any = {
     textFields: ['hora'],
     dateFields: [],
     ignoreFkRequirements: ['asignatura'],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Horario',
     windowHeight: '400px',
-    permission: ['utp']
+
   },
 
   Profesor: {
@@ -1113,24 +1111,22 @@ export const modalDataObject: any = {
     textFields: ['nombre', 'apellido1','apellido2', 'rut', 'direccion', 'celular'],
     dateFields: ['nacimiento'],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Profesor',
     windowHeight: '570px',
-    permission: ['utp']
-  },
+    },
 
-  Utp: {
-    mainTable: 'utp',
+  Administrador: {
+    mainTable: 'administrador',
     tables: ['sexo', 'region', 'provincix', 'comuna'],
     textFields: ['nombre', 'apellido1','apellido2', 'rut', 'direccion', 'celular'],
     dateFields: ['nacimiento'],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
-    label: 'UTP',
+    label: 'Administrador',
     windowHeight: '570px',
-    permission: ['utp']
   },
 
   Curso: {
@@ -1139,11 +1135,11 @@ export const modalDataObject: any = {
     textFields: ['nombre', 'profesor_jefe'],
     dateFields: [],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Curso',
     windowHeight: '400px',
-    permission: ['utp']
+
   },
 
   HoraAsignada: {
@@ -1152,11 +1148,11 @@ export const modalDataObject: any = {
     textFields: ['numero', 'horario'],
     dateFields: [],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Hora Asignada',
     windowHeight: '400px',
-    permission: ['utp']
+
   },
 
   Asignatura: {
@@ -1165,11 +1161,10 @@ export const modalDataObject: any = {
     textFields: ['nombre'],
     dateFields: [],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Asignatura',
     windowHeight: '320px',
-    permission: ['utp']
   },
 
   AsignaturaProfesor: {
@@ -1178,11 +1173,10 @@ export const modalDataObject: any = {
     textFields: ['nombre'],
     dateFields: [],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Asignatura Profesor',
     windowHeight: '320px',
-    permission: ['utp']
   },
 
   AsignaturaCurso: {
@@ -1191,11 +1185,11 @@ export const modalDataObject: any = {
     textFields: ['nombre'],
     dateFields: [],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Asignatura Curso',
     windowHeight: '320px',
-    permission: ['utp']
+
   },
 
   Apoderado: {
@@ -1204,24 +1198,24 @@ export const modalDataObject: any = {
     textFields: ['nombre', 'apellido1','apellido2', 'rut', 'direccion', 'celular'],
     dateFields: ['nacimiento'],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Apoderado',
     windowHeight: '590px',
-    permission: ['utp']
+
   },
 
   Alumno: {
     mainTable: 'alumno',
-    tables: ['sexo', 'region', 'provincix', 'comuna'],
+    tables: ['sexo','region', 'provincix', 'comuna','colegio' ],
     textFields: ['nombre', 'apellido1','apellido2', 'rut', 'direccion', 'celular'],
     dateFields: ['nacimiento'],
-    ignoreFkRequirements: [],
-    hidden: [],
+    ignoreFkRequirements: ['tipocolegio','provincix', 'comuna'],
+    disable: [],
     defaultValues: {},
     label: 'Alumno',
     windowHeight: '680px',
-    permission: ['utp']
+
   },
 
   Usuario: {
@@ -1230,11 +1224,11 @@ export const modalDataObject: any = {
     textFields: ['email', 'username'],
     dateFields: [],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Usuario',
     windowHeight: '680px',
-    permission: ['utp']
+
   },
 
   EstadoAlumno: {
@@ -1243,11 +1237,11 @@ export const modalDataObject: any = {
     textFields: [],
     dateFields: ['fecha'],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Estado Alumno',
     windowHeight: '680px',
-    permission: ['utp']
+
   },
 
   TipoUsuario: {
@@ -1256,11 +1250,11 @@ export const modalDataObject: any = {
     textFields: ['nombre', 'descripcion'],
     dateFields: [],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Tipo Usuario',
     windowHeight: '680px',
-    permission: ['utp']
+
   },
   Tema: {
     mainTable: 'tema',
@@ -1268,11 +1262,11 @@ export const modalDataObject: any = {
     textFields: ['nombre'],
     dateFields: [],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Tema',
     windowHeight: '680px',
-    permission: ['utp']
+
   },
     Tabla: {
     mainTable: 'tabla',
@@ -1280,11 +1274,11 @@ export const modalDataObject: any = {
     textFields: ['nombre'],
     dateFields: [],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Tabla',
     windowHeight: '380px',
-    permission: ['utp']
+
   },
 
   AsistenteColegio: {
@@ -1293,24 +1287,22 @@ export const modalDataObject: any = {
     textFields: ['nombre', 'apellido1','apellido2', 'rut', 'direccion', 'celular'],
     dateFields: ['nacimiento'],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
-    label: 'Profesinales (no docentes)',
+    label: 'Profesionales (no docentes)',
     windowHeight: '680px',
-    permission: ['utp']
   },
 
   Matricula: {
     mainTable: 'matricula',
     tables: [ 'anno', 'colegio',  'curso',  'vinculo'],
-    textFields: ['nombre', 'procedencia'],
+    textFields: ['procedencia'],
     dateFields: ['incorporacion', 'retiro'],
     ignoreFkRequirements: [],
-    hidden: [], // se usan sólo para reemplazar las foreing key
+    disable: [],
     defaultValues: {},
     label: 'Matricula',
     windowHeight: '600px',
-    permission: ['utp']
   },
 
   Ventana: {
@@ -1319,11 +1311,11 @@ export const modalDataObject: any = {
     textFields: ['dias'],
     dateFields: [],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Ventana',
     windowHeight: '300px',
-    permission: ['utp']
+
   },
 
   Evaluacion: {
@@ -1340,11 +1332,11 @@ export const modalDataObject: any = {
     textFields: ['nombre', 'hora', 'ponderacion'],
     dateFields: ['fecha'],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Evaluación',
     windowHeight: '620px',
-    permission: ['profesor','utp']
+
   },
 
   Feriado: {
@@ -1353,11 +1345,11 @@ export const modalDataObject: any = {
     textFields: ['nombre', 'lugar'],
     dateFields: ['fecha'],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Feriado',
     windowHeight: '400px',
-    permission: ['utp']
+
   },
 
   Nota: {
@@ -1366,11 +1358,11 @@ export const modalDataObject: any = {
     textFields: ['nota'],
     dateFields: [],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: {},
     label: 'Nota',
     windowHeight: '500px',
-    permission: ['profesor','utp']
+
   },
 
   Anotacion: {
@@ -1380,11 +1372,11 @@ export const modalDataObject: any = {
     textAreaFields: ['texto'],
     dateFields: ['fecha'],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: { fecha: 'today' },
     label: 'Observación',
     windowHeight: 'auto',
-    permission: ['profesor']
+
   },
 
   RegistroActividad: {
@@ -1394,11 +1386,11 @@ export const modalDataObject: any = {
     textAreaFields: ['descripcion'],
     dateFields: ['fecha'],
     ignoreFkRequirements: [],
-    hidden: [],
+    disable: [],
     defaultValues: { fecha: 'today' },
     label: 'Registro de Actividades',
     windowHeight: 'auto',
-    permission: ['profesor','utp']
+
   },
 };
 

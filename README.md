@@ -8,7 +8,7 @@ npx sequelize-cli db:migrate --env production
 
 ************ DEPLOY *************
 *** frontend ***
-1.- chequear archivos environmets (ambos identicos exceptp production)
+1.- chequear archivos environmets (ambos identicos excepto production)
 2.- git status 
 3.- git commit
 4.- git push 
