@@ -25,8 +25,8 @@ export class CabeceraComponent implements OnInit{
   isTablet=false;
   isDesktopDevice=false;
 
-  fotolibro!:any;
-  fototexto!:any;
+  fotolibro = "90px";
+  fototexto= "380px";
 
    @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
