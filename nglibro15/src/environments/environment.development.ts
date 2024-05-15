@@ -100,7 +100,7 @@ export const environment = {
   colors: {
     azul: {
       color: 'blue',
-      lineal: 'linear-gradient(to bottom, #4880EC, #019CAD)',
+      lineal: 'linear-gradient(to right, #4880EC, #019CAD)',
       menu: '#e3e4f3',
       colorMenuButton: '#059bb0',
       pagination: '#e2e2eb',

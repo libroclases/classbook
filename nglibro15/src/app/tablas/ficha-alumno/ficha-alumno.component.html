@@ -9,7 +9,7 @@
 
   <div class="row" [style.opacity]="opacity" style="height:75cap">
       <div class="col-md-4 mt-4">
-    {{disable | json}}
+
     <table class="table table-bordered"  style="display: block; height:75cap; overflow-y: auto;" [style.background-color]="bodybgcolor">
       <thead>
         <tr *ngFor="let l of (lista_curso_nombres$ | async)">
