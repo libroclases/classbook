@@ -22,6 +22,7 @@ const tablesArray = [
   'asignatura',
   'asignaturaprofesor',
   'asignaturacurso',
+  'cursoprofesor',
   'asistencia',
   'asistentecolegio',
   'colegio',
@@ -198,6 +199,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
   asignatura: ['tipocolegio'],
   asignaturaprofesor: ['profesor', 'asignatura'],
   asignaturacurso: ['anno','colegio','curso', 'asignatura'],
+  cursoprofesor: ['anno','colegio','curso','profesor'],
   colegio: ['region', 'provincix', 'comuna', 'tipocolegio'],
   curso: ['colegio', 'anno'],
   horaasignada: ['colegio'],
@@ -312,6 +314,7 @@ export const lowerUpperTables: stringString = {
   asignatura: 'Asignatura',
   asignaturaprofesor: 'AsignaturaProfesor',
   asignaturacurso: 'AsignaturaCurso',
+  cursoprofesor: 'CursoProfesor',
   asistencia: 'Asistencia',
   asistencix: 'Asistencix',
   colegio: 'Colegio',
@@ -358,6 +361,7 @@ export const tableLabels = {
   asignatura: 'Asignatura',
   asignaturaprofesor: 'Asignatura Profesor',
   asignaturacurso: 'Asignatura Curso',
+  cursoprofesor: 'Curso Profesor',
   asistencia: 'Asistencia',
   asistencix: 'Asistencia',
   colegio: 'Colegio',
@@ -496,6 +500,11 @@ export const attributesLabels = {
     nombre: 'Nombre',
   },
 
+  cursoprofesor: {
+    nombre: 'Nombre',
+  },
+
+
   asistencia: {
     fecha: 'Fecha',
     presente: 'Presente',
@@ -534,9 +543,8 @@ export const attributesLabels = {
   },
 
   inscripcioncolegio: {
-    fechaInicio: 'Fecha de Inicio',
-    fechaTermino: 'Fecha de Término',
     esPie: 'Es PIE',
+    esUtp: 'Es Utp',
   },
 
   curso: {
@@ -705,6 +713,7 @@ export const icons: stringStringPair = {
   '/asignatura': ['bi bi-book', 'Asignaturas'],
   '/asignaturaprofesor': ['bi bi-book', 'Asignatura Profesores'],
   '/asignaturacurso': ['bi bi-book', 'Asignatura Profesores'],
+  '/cursoprofesor': ['bi bi-book', 'Asignatura Profesores'],
   '/profesor': ['bi bi-person-video3', 'Profesores'],
   '/administrador': ['bi bi-person-video3', 'Administrador'],
   '/inscripcioncolegio': ['bi bi-bank', 'Inscripcion Colegio'],
@@ -738,6 +747,7 @@ export const redirectRoutes: any = {
   Administrador: ['/horario'],
   Asignatura: ['/profesor'],
   AsignaturaProfesor: ['/profesor'],
+  CursoProfesor:['/profesor'],
   Apoderado: ['/matricula'],
   Matricula: ['/curso'],
   Ventana:['/curso'],
@@ -837,6 +847,15 @@ export const validator: any = {
   },
 
    AsignaturaCurso: {
+    modalText: {
+      nombre: [Validators.required],
+    },
+    modalDate: {
+    }
+
+  },
+
+  CursoProfesor: {
     modalText: {
       nombre: [Validators.required],
     },
@@ -1191,6 +1210,31 @@ export const modalDataObject: any = {
     windowHeight: '320px',
 
   },
+
+  CursoProfesor: {
+    mainTable: 'cursoprofesor',
+    tables: ['anno','colegio','curso','profesor'],
+    textFields: ['nombre'],
+    dateFields: [],
+    ignoreFkRequirements: [],
+    disable: [],
+    defaultValues: {},
+    label: 'Curso Profesor',
+    windowHeight: '320px',
+  },
+
+  InscripcionColegio: {
+    mainTable: 'inscripcioncolegio',
+    tables: ['profesor','colegio','anno'],
+    textFields: ['esPie','esUtp'],
+    dateFields: [],
+    ignoreFkRequirements: [],
+    disable: [],
+    defaultValues: {},
+    label: 'Inscripcion Colegio',
+    windowHeight: '320px',
+  },
+
 
   Apoderado: {
     mainTable: 'apoderado',

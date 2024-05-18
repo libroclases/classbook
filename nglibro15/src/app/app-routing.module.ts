@@ -35,6 +35,8 @@ import { RegistroUsuarioComponent } from './tablas/registro-usuario/registro-usu
 import { ResumenNotaComponent } from './tablas/resumen-nota/resumen-nota.component';
 import { AsignaturaCursoComponent } from './tablas/asignatura-curso/asignatura-curso.component';
 import { PruebaComponent } from './tablas/prueba/prueba.component';
+import { CursoProfesorComponent } from './tablas/curso-profesor/curso-profesor.component';
+import { InscripcionColegioComponent } from './tablas/inscripcion-colegio/inscripcion-colegio.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
@@ -130,6 +132,9 @@ const routes: Routes = [
 
   { path: 'asignaturacurso', component: AsignaturaCursoComponent },
 
+  { path: 'cursoprofesor', component: CursoProfesorComponent },
+
+  { path: 'inscripcioncolegio', component: InscripcionColegioComponent },
 
   { path: '**', redirectTo: 'home' ,pathMatch: 'full' },
 

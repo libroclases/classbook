@@ -40,7 +40,7 @@ class InscripcionesColegio {
 
     return InscripcionColegio.findAll({
       where: consulta,
-      attributes: ["id", "EsPie", "EsUtp"],
+      attributes: ["id", "esPie", "esUtp"],
       include: [
         {
           model: Profesor,

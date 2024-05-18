@@ -43,11 +43,12 @@ import Feriados from '../controllers/feriado';
 import Ventanas from '../controllers/ventana';
 
 import AsignaturaCursos from '../controllers/asignaturacurso';
+import CursoProfesores from '../controllers/cursoprofesor';
 
-  const checkjwd = auth({
-    audience: 'https://libroclases.cl',
-    issuerBaseURL: `https://dev-tupdibnrpuxah8p3.us.auth0.com/`,
-  });
+const checkjwd = auth({
+  audience: 'https://libroclases.cl',
+  issuerBaseURL: `https://dev-tupdibnrpuxah8p3.us.auth0.com/`,
+});
 
 
   let appMapping = null;
@@ -690,6 +691,19 @@ import AsignaturaCursos from '../controllers/asignaturacurso';
     app.put('/api/asignaturacurso/:asignaturacursoId',
       checkjwd, requiredScopes('update:asignaturaprofesor'),
       AsignaturaCursos.modify);
+
+    app.get('/api/cursoprofesor',
+      // checkjwd, requiredScopes('read:asignaturaprofesor'),
+      CursoProfesores.list);
+    app.get('/api/cursoprofesor/:annoId/:colegioId/:cursoId/:profesorId/fk',
+      // checkjwd, requiredScopes('read:asignaturaprofesor'),
+      CursoProfesores.getByFk);
+    app.post('/api/cursoprofesor/:annoId/:colegioId/:cursoId/:profesorId',
+      // checkjwd, requiredScopes('create:asignaturaprofesor'),
+      CursoProfesores.create);
+    app.put('/api/cursoprofesor/:cursoprofesorId',
+      // checkjwd, requiredScopes('update:asignaturaprofesor'),
+      CursoProfesores.modify);
 
   };
 
