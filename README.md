@@ -8,7 +8,7 @@ npx sequelize-cli db:migrate --env production
 
 ************ DEPLOY *************
 *** frontend ***
-1.- chequear archivos environmets (ambos identicos excepto production)
+1.- chequear archivos environmets (ambos identicos excepto production y direcciones host)
 2.- git status 
 3.- git commit
 4.- git push 
@@ -24,7 +24,7 @@ npx sequelize-cli db:migrate --env production
 *** server ***
 1.- cd .\backend\nodserver
 2.- delete dist
-3.- Verificar todas las rutas aseguradas 
+3.- Verificar todas las rutas aseguradas en routes/index
 4.- npm run build y verificar sitio
 5.- copy dir config to dist/server
 6.- En digitalocean borrar app.js , package* y directorio server
