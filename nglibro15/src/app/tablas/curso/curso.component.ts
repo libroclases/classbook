@@ -12,6 +12,7 @@ export class CursoComponent implements OnInit {
 mainTable: string = 'curso';
 tableTitle = 'Cursos';
 textFields = ['nombre', 'profesor_jefe'];
+booleanFields = [];
 dateFields = [];
 // displayFKFields: CamelCase
 displayFKFields = ['Colegio', 'Anno'];

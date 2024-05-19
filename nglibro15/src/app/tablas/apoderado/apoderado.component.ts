@@ -13,6 +13,7 @@ export class ApoderadoComponent {
  tableTitle = 'Apoderados';
  textFields = ['apellido1','apellido2','nombre', 'rut', 'direccion', 'celular'];
  dateFields = ['nacimiento'];
+ booleanFields = [];
  // displayFKFields: CamelCase
  displayFKFields = ['NivelEducacional',  'Region', 'Provincix', 'Comuna', 'Sexo'];
  redirectRoutes = ['/matricula'];

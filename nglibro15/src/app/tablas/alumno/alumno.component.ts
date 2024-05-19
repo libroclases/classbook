@@ -13,6 +13,7 @@ export class AlumnoComponent implements OnInit {
   tableTitle = 'Alumnos';
   textFields = ['apellido1','apellido2','nombre', 'rut', 'direccion', 'celular'];
   dateFields = ['nacimiento'];
+  booleanFields = [];
   // displayFKFields: CamelCase
   displayFKFields = ['Region', 'Provincix','Comuna','Colegio','Sexo'];
   redirectRoutes = ['/matricula'];

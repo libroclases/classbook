@@ -11,6 +11,7 @@ export class AdministradorComponent {
   mainTable: string = 'administrador';
   tableTitle = 'Administrador';
   textFields = ['apellido1','apellido2','nombre','rut','celular','direccion'];
+  booleanFields = [];
   dateFields = ['nacimiento'];
   // displayFKFields: CamelCase
   displayFKFields = ['Sexo','Region','Provincix','Comuna'];

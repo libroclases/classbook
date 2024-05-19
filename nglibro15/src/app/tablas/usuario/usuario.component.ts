@@ -12,6 +12,7 @@ export class UsuarioComponent {
   mainTable: string = 'usuario';
   tableTitle = 'Usuario';
   textFields = ['username','email'];
+  booleanFields = [];
   dateFields = [];
   // displayFKFields: CamelCase
   displayFKFields = ['TipoUsuario','Tema'];

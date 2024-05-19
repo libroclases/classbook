@@ -11,6 +11,7 @@ export class TipoUsuarioComponent {
  mainTable: string = 'tipousuario';
  tableTitle = 'Tipo Usuario';
  textFields = ['nombre', 'descripcion'];
+ booleanFields = [];
  dateFields = [];
  // displayFKFields: CamelCase
  displayFKFields = [];

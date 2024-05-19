@@ -11,6 +11,7 @@ export class VentanaComponent {
 mainTable: string = 'ventana';
 tableTitle = 'Ventana Modificaciones';
 textFields = ['dias'];
+booleanFields = [];
 dateFields = [];
 // displayFKFields: CamelCase
 displayFKFields = ["Colegio","Tabla"];

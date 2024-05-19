@@ -82,6 +82,9 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   @Input('main-date-fields')
   dateFields: string[] = [];
 
+  @Input('main-boolean-fields')
+  booleanFields: string[] = [];
+
   @Input('main-FK-fields')
   // fkFields: CamelCase
   fkFields: string[] = [];
@@ -249,7 +252,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     this.mainTableForeignKeys = this.fkService.getFKeys(this.mainTable)!;
     this.numRedirect = this.redirectRts.length;
     this.numColumns = (
-      this.textFields.length + this.dateFields.length +
+      this.textFields.length + this.dateFields.length + this.booleanFields.length +
       this.fkFields.length + this.numRedirect + 1);
     this.selIdsService.subscribe(
       'maintainer', (message: (Notification)) => this.updateTable(

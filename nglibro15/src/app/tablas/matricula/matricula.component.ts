@@ -12,6 +12,7 @@ export class MatriculaComponent {
  mainTable: string = 'matricula';
  tableTitle = 'Matricula';
  textFields = ['nombre', 'procedencia'];
+ booleanFields = [];
  dateFields = ['incorporacion', 'retiro'];
  // displayFKFields: CamelCase
  displayFKFields = ['Alumno', 'Apoderado', 'Vinculo', 'Anno', 'Colegio', 'Curso'];

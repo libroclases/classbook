@@ -11,6 +11,7 @@ export class MaintainerTemplateComponent {
   mainTable = "";
   textFields = [];
   dateFields = [];
+  booleanFields = [];
   displayFKFields = [];
 
   selTables = [];

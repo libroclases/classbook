@@ -11,6 +11,7 @@ export class HoraAsignadaComponent implements OnInit {
   mainTable: string = 'horaasignada';
   tableTitle = 'Horas Asignadas';
   textFields = ['numero', 'horario'];
+  booleanFields = [];
   dateFields = [];
   // displayFKFields: CamelCase
   displayFKFields = ['Colegio'];

@@ -12,6 +12,7 @@ export class TablaComponent {
 mainTable: string = 'tabla';
 tableTitle = 'Tablas';
 textFields = ['nombre'];
+booleanFields = [];
 dateFields = [];
 // displayFKFields: CamelCase
 displayFKFields = [];

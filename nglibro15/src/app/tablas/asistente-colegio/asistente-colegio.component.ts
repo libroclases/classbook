@@ -12,6 +12,7 @@ export class AsistenteColegioComponent implements OnInit {
  mainTable: string = 'asistentecolegio';
  tableTitle = 'Profesionales no-docentes';
  textFields = ['apellido1','apellido2','nombre', 'rut', 'direccion','celular'];
+ booleanFields = [];
  dateFields = ['nacimiento'];
  // displayFKFields: CamelCase
  displayFKFields = ['TipoAsistente', 'Sexo', 'Region', 'Provincix', 'Comuna'];

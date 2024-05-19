@@ -13,6 +13,7 @@ export class HorasInscritasComponent {
  mainTable: string = 'horario';
  tableTitle = 'Horas Inscritas';
  textFields = ['TotalHoras'];
+ booleanFields = [];
  dateFields = [];
  // displayFKFields: CamelCase
  displayFKFields = ['Profesor','AsignaturaProfesor','Anno', 'Colegio', 'Curso'];

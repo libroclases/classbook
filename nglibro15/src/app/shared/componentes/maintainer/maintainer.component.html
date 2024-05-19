@@ -69,6 +69,7 @@
           </th>
           <th *ngFor="let textFd of textFields" >{{getAttributeLabel(mainTable, textFd)}}</th>
           <th *ngFor="let dateFd of dateFields">{{getAttributeLabel(mainTable, dateFd)}}</th>
+          <th *ngFor="let boolFd of booleanFields">{{boolFd}}</th>
           <th *ngFor="let tabla of fkFields">{{getTableLabel(tabla)}}</th>
 
           <th [attr.colspan]="1" style="text-align: center;">
@@ -94,6 +95,7 @@
 
             <td *ngFor="let dateFd of dateFields">{{c[dateFd] | date:'dd/MM/YYYY'}}</td>
             <td *ngFor="let table of fkFields">{{c[table].apellido}} {{c[table].nombre}}</td>
+            <th *ngFor="let boolFd of booleanFields">{{boolFd}}</th>
             <th *ngFor="let txtFd of textFields">{{c[txtFd]}}</th>
 
           </tr>
@@ -109,6 +111,7 @@
             </ng-container>
 
             <td *ngFor="let txtFd of textFields">{{c[txtFd]}}</td>
+            <td *ngFor="let boolFd of booleanFields">{{c[boolFd]}}</td>
             <td *ngFor="let dateFd of dateFields">{{c[dateFd] | date:'dd/MM/YYYY'}}</td>
             <td *ngFor="let table of fkFields">{{getObjectLabel(table, c[table])}}</td>
             <th style="text-align: center;">

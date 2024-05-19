@@ -13,6 +13,7 @@ export class ColegioComponent implements OnInit {
   mainTable: string = 'colegio';
   tableTitle = 'Colegios';
   textFields = ['nombre', 'telefono', 'direccion', 'rut', 'email'];
+  booleanFields = [];
   dateFields = [];
   // displayFKFields: CamelCase
   displayFKFields = ['Region', 'Provincix', 'Comuna', 'TipoColegio'];

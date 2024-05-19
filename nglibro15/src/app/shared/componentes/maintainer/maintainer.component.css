@@ -1,6 +1,7 @@
 
 td {
   vertical-align:middle;
+  padding-left: 1cap;
 }
 
 th {
@@ -8,7 +9,7 @@ th {
   vertical-align: bottom;
   text-align: center;
   font-weight: normal;
-  text-indent:1ch;
+  text-indent: 1cap;
 }
 
 

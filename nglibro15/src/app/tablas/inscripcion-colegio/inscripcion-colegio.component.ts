@@ -11,7 +11,8 @@ export class InscripcionColegioComponent {
 
   mainTable: string = 'inscripcioncolegio';
   tableTitle = 'Colegio Profesor';
-  textFields = ['esPie','esUtp'];
+  textFields = [];
+  booleanFields = ['esPie','esUtp'];
   dateFields = [];
   // displayFKFields: CamelCase
   displayFKFields = ['Anno','Colegio', 'Profesor'];

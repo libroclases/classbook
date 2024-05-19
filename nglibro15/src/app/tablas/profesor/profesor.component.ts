@@ -12,6 +12,7 @@ export class ProfesorComponent implements OnInit {
   mainTable: string = 'profesor';
   tableTitle = 'Profesor';
   textFields = ['nombre', 'apellido1','apellido2','rut','celular','direccion'];
+  booleanFields = [];
   dateFields = ['nacimiento'];
   // displayFKFields: CamelCase
   displayFKFields = ['Sexo','Region','Provincix','Comuna'];

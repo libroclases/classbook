@@ -12,6 +12,7 @@ export class EstadoAlumnoComponent {
   mainTable: string = 'estadoalumno';
   tableTitle = 'EstadoAlumno';
   textFields = [];
+  booleanFields = [];
   dateFields = ['fecha'];
   // displayFKFields: CamelCase
   displayFKFields = ['Matricula','Alumno'];

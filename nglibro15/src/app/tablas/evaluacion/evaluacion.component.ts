@@ -13,6 +13,7 @@ export class EvaluacionComponent {
  mainTable: string = 'evaluacion';
  tableTitle = 'Evaluaciones';
  textFields = ['nombre', 'hora', 'ponderacion'];
+ booleanFields = [];
  dateFields = ['fecha'];
  // displayFKFields: CamelCase
  displayFKFields = ['Colegio', 'Curso', 'Profesor', 'AsignaturaProfesor', 'Anno', 'Periodo', 'TipoEvaluacion'];

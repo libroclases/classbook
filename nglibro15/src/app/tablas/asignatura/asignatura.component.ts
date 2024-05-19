@@ -12,6 +12,7 @@ export class AsignaturaComponent implements OnInit{
  tableTitle = 'Asignaturas';
  textFields = ['nombre'];
  dateFields = [];
+ booleanFields = [];
  // displayFKFields: CamelCase
  displayFKFields = ['TipoColegio'];
  redirectRoutes = ['/curso', '/profesor']

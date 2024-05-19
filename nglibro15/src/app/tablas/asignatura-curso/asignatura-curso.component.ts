@@ -12,6 +12,7 @@ export class AsignaturaCursoComponent {
  mainTable: string = 'asignaturacurso';
  tableTitle = 'Asignatura Curso';
  textFields = ['nombre'];
+ booleanFields = [];
  dateFields = [];
  // displayFKFields: CamelCase
  displayFKFields = ['Anno','Colegio','Curso', 'Asignatura'];
