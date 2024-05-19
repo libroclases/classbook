@@ -10,7 +10,7 @@ export class InscripcionColegioComponent {
   // Tabla Principal
 
   mainTable: string = 'inscripcioncolegio';
-  tableTitle = 'Colegio Profesor';
+  tableTitle = 'Inscripción Colegio';
   textFields = [];
   booleanFields = ['esPie','esUtp'];
   dateFields = [];

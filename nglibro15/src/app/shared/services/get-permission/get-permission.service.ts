@@ -30,8 +30,8 @@ export class GetPermissionService {
             if (ins.Anno.nombre == year.toString() && ins.Colegio.id == colegio) {
 
                   if (utp) {
-                      permission.leer =   false;
-                      permission.editar = (Table.editar.includes('utp')) ? false : true;
+                      permission.leer =   false; console.log(Table);
+                      permission.editar = (Table.editar.includes('utp')) ? false : true; 
                       permission.crear = (Table.crear.includes('utp')) ? false : true;
                   }
                   else {

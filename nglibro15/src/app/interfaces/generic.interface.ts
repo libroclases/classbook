@@ -52,6 +52,7 @@ export interface ModalData {
   mainTable: string,
   tables: string[],
   textFields: string[],
+  booleanFields: string[],
   dateFields: string[],
   ignoreFkRequirements: string[],
   hidden: string[],

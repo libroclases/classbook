@@ -11,8 +11,8 @@ export class AsignaturaProfesorComponent {
   // Tabla Principal
 
   mainTable: string = 'asignaturaprofesor';
-  tableTitle = 'Asignatura Profesor';
-  textFields = ['nombre'];
+  tableTitle = 'Inscripción Asignatura';
+  textFields = [];
   booleanFields = [];
   dateFields = [];
   // displayFKFields: CamelCase

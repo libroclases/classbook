@@ -8,7 +8,7 @@
 
 <div class="container-fluid" style="padding-bottom: 1%">
  <form class="form" [formGroup]="formModal">
-   <table  class="table table-sm table-secundary table-fit">
+    <table  class="table table-sm table-secundary table-fit">
      <tbody class="table-secundary" >
        <tr *ngFor="let table of data.tables; index as i" ><td>{{getTableLabel(table)}}</td>
          <td>
@@ -62,12 +62,32 @@
            formControlName="{{dateField}}"/></td>
        </tr>
 
+       <tr *ngFor="let boolField of data.booleanFields">
+        <td>
+          <label for="{{boolField}}" class="form-label">{{getAttributeLabel(modalData.mainTable, boolField)}}</label>
+       </td>
+       
+        <td>
+          <div class="form-check form-switch">
+            <input  
+            class="form-check-input"
+            type="checkbox"
+            [id]="boolField" 
+            [checked]="data.registro[boolField]"
+            [formControlName]="boolField" 
+             >
+          </div>
+         </td>
+       
+
+       </tr>
+
      </tbody>
    </table>
-   <span *ngFor="let hidden of modalData.hidden">
+   <!--span *ngFor="let hidden of modalData.hidden">
        <input type="hidden"  formControlName="{{hidden}}"/>
-   </span>
-      <input type="hidden"  formControlName="id"/>
+   </span-->
+      <!--input type="hidden"  formControlName="id"/-->
 
  </form>
 </div>

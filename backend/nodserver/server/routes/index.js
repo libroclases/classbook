@@ -348,10 +348,10 @@ const checkjwd = auth({
       checkjwd, requiredScopes(['update:tabla']),
       Tablas.modify);
     app.get('/api/inscripcioncolegio',
-      checkjwd, requiredScopes('read:inscripcioncolegio'),
+      // checkjwd, requiredScopes('read:inscripcioncolegio'),
       InscripcionesColegio.list);
     app.get('/api/inscripcioncolegio/:profesorId/:colegioId/:annoId/fk',
-      checkjwd, requiredScopes('read:inscripcioncolegio'),
+      // checkjwd, requiredScopes('read:inscripcioncolegio'),
       InscripcionesColegio.getByFk);
     app.get('/api/inscripcioncolegio/:colegioId/:annoId/profes',
       checkjwd, requiredScopes('read:inscripcioncolegio'),
@@ -366,7 +366,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('create:inscripcioncolegio'),
       InscripcionesColegio.create);
     app.put('/api/inscripcioncolegio/:inscripcioncolegioId',
-      checkjwd, requiredScopes('update:inscripcioncolegio'),
+      // checkjwd, requiredScopes('update:inscripcioncolegio'),
       InscripcionesColegio.modify);
     app.get('/api/horario',
       checkjwd, requiredScopes('read:horario'),

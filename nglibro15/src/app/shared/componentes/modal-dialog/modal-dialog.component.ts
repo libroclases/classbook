@@ -62,6 +62,8 @@ function zfill(number: number, width: number) {
 
     usuarioId=0;
 
+    checked=false;
+
     selectedteacher = 0
 
     objcolors = environment.colors;
@@ -70,6 +72,8 @@ function zfill(number: number, width: number) {
     modalbutton!:string;
 
     validator: any;
+
+    saveCheck(boolField: string, event: any) { console.log('poronga',boolField, event); }
 
     @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
@@ -178,6 +182,7 @@ function zfill(number: number, width: number) {
       let tables: fkValues = {};
       let texts: stringString = {};
       let dates: any =  {};
+      let boolean: any = {};
       // let hidden: any = {};
       this.modalData.tables.forEach((tab: string) => {
 
@@ -189,17 +194,15 @@ function zfill(number: number, width: number) {
         }
       });
 
-      this.modalData.textFields.forEach((text:any) => texts[text] = this.registro[text])
-      this.modalData.dateFields.forEach((date:any) => dates[date] = this.registro[date])
-      /*
-      this.modalData.hidden.forEach((hid:any) => {
-        hidden[hid] = this.registro[lowerUpperTables[hid]].id;
-      })
-      */
+      this.modalData.textFields.forEach((text:any) => texts[text] = this.registro[text]);
+      this.modalData.dateFields.forEach((date:any) => dates[date] = this.registro[date]);
+      this.modalData.booleanFields.forEach((bool:any) => boolean[bool] = this.registro[bool]); 
+      
       values['tablas'] = tables;
       values['textos'] = texts;
       values['fechas'] = dates;
-      // values['hidden'] = hidden;
+      values['booleans'] = boolean;
+     
 
       this.valores =  values;
 
@@ -228,7 +231,7 @@ function zfill(number: number, width: number) {
       }
 
       this.formModal.addControl('id', this.fb.control(this.registro.id ));
-      if (this.registro.id == 0)
+      if (this.registro.id == 0)  // 0 significa nuevo
       {
         this.modalData.tables.forEach((table: string) => this.formModal.addControl(table, this.fb.control(this.valores['tablas'][table], selectValidator())));
         this.modalData.textFields.forEach((text: string) => {
@@ -251,6 +254,7 @@ function zfill(number: number, width: number) {
         this.modalData.tables.forEach((tabla:any) => this.formModal.addControl(tabla, this.fb.control(this.valores['tablas'][tabla], selectValidator())));
         this.modalData.textFields.forEach((texto: any) => this.formModal.addControl(texto, this.fb.control(this.valores['textos'][texto], validateTextForm(texto) )));
         this.modalData.dateFields.forEach((fecha:any) => this.formModal.addControl(fecha, this.fb.control(formatDate(this.valores['fechas'][fecha],'yyyy-MM-dd','en'), validateDateForm(fecha))));
+        this.modalData.booleanFields.forEach((bool:any) => this.formModal.addControl(bool, this.fb.control(this.valores['booleans'][bool])));
       }
 
       // this.modalData.hidden.forEach((hidden: string) => this.formModal.addControl(hidden, this.fb.control(this.valores['hidden'][hidden])));
@@ -380,10 +384,13 @@ function zfill(number: number, width: number) {
 
       let ids: any = [];
       let obj: any = {};
-
+      console.log('poronga->',this.formModal.value)
       this.modalData.textFields.forEach( (texto: string) => {
 
         obj[texto] = this.formModal.value[texto]
+      });
+      this.modalData.booleanFields.forEach( (bool: string) => {
+        obj[bool] = this.formModal.value[bool];
       });
       this.modalData.dateFields.forEach( (fecha: string) => {
         obj[fecha] = this.formModal.value[fecha];
@@ -421,7 +428,7 @@ function zfill(number: number, width: number) {
                     ids[2] = this.registro.foraneas.apoderado,
                     ids[3] = this.registro.foraneas.alumno
                     if (obj['retiro'] == '') { obj['retiro'] = null }
-                    console.log('obj ids',obj, ids);
+              
                     this.crud.postData(obj, this.modalData.mainTable, ids)
                     .subscribe(msg => this.showdata(msg))
                     }),
@@ -460,7 +467,10 @@ function zfill(number: number, width: number) {
       }
       else {   // If PUT
         this.modalData.tables.forEach((table:any) => obj[lowerUpperTables[table]] = this.formModal.value[table]);
-
+        if (this.modalData.mainTable == 'inscripcioncolegio') {
+          obj['esPie'] = Array.from(obj['esPie'].toString())[0];
+          obj['esUtp'] = Array.from(obj['esUtp'].toString())[0];  
+         }
         this.crud.putData(obj, this.modalData.mainTable).pipe(
           tap(() => this.selIdsService.notifyUpdated())
           ).subscribe(msg =>  this.showdata(msg));

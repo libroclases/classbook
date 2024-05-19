@@ -418,7 +418,9 @@ export class MaintainerComponent implements OnInit, OnDestroy {
           reg['id'] = 0;
           this.modalDataObj.tables.forEach((table: string) => reg[table] = {
             id: this.selIdsService.getId(table.toLocaleLowerCase()) || 0});
+
           this.modalDataObj.textFields.forEach((text: string) => reg[text] = null);
+          this.modalDataObj.booleanFields.forEach((bool: string) => reg[bool] = null);
           this.modalDataObj.dateFields.forEach((date: string) => reg[date] = null);
 
        }

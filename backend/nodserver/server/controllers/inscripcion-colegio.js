@@ -168,7 +168,8 @@ class InscripcionesColegio {
   }
 
   static modify(req, res) {
-    let consulta = getBaseQuery(req);
+    // let consulta = getBaseQuery(req);
+    let consulta = {};
     consulta["id"] = req.params.inscripcioncolegioId;
     const { esPie, esUtp, Profesor, Colegio, Anno } =
       req.body;

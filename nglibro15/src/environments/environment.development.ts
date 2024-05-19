@@ -1083,6 +1083,7 @@ export const Permission:any =  {
   Horario: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
   HorasInscritas: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
   ControlAsignatura: {leer: ['profesor'] ,editar: ['profesor'], crear: ['profesor']},
+  InscripcionColegio : { leer : ['profesor'] , editar : ['utp'], crear : ['utp'] },
   RegistroActividad: { leer: ['profesor'], editar: ['profesor'], crear : ['profesor'] },
   Ventana: { leer : ['profesor'] , editar : ['utp'], crear : ['utp'] },
   /* Procesos */
@@ -1202,14 +1203,14 @@ export const modalDataObject: any = {
     ignoreFkRequirements: [],
     disable: [],
     defaultValues: {},
-    label: 'Asignatura Profesor',
+    label: 'Inscripción Asignatura',
     windowHeight: '320px',
   },
 
   AsignaturaCurso: {
     mainTable: 'asignaturacurso',
     tables: ['anno','colegio', 'curso', 'asignatura'],
-    textFields: ['nombre'],
+    textFields: [],
     booleanFields:[],
     dateFields: [],
     ignoreFkRequirements: [],
@@ -1229,7 +1230,7 @@ export const modalDataObject: any = {
     ignoreFkRequirements: [],
     disable: [],
     defaultValues: {},
-    label: 'Curso Profesor',
+    label: 'Inscripción Curso',
     windowHeight: '320px',
   },
 

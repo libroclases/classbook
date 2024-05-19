@@ -150,7 +150,7 @@ export class CrudService {
   putData(obj: any, table: string): Observable<any> {
     // const extraString = this.getExtraString(table);
     let baseurl = `${this.baseurl}/${table}/${obj.id}`;
-
+    console.log('obj:',table,obj);
     return this.http.put(baseurl, obj, this.httpOptions).pipe(
       tap(_ => this.log(`updated ${table} id=${obj.id}`)),
       catchError(this.handleError<any>())
@@ -182,7 +182,7 @@ export class CrudService {
         k += `/${el}`;
       });
     }
-
+    // console.log('obj',obj);
     let baseurl = `${this.baseurl}/${table}${k}`;
     return this.http.post<any>(baseurl, obj, this.httpOptions).pipe(
       // tap((msg: any) => console.log(`added ${table} w/ id=${this.generaRegistrosTabla(table, msg, Ids )}`)),

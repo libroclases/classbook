@@ -10,8 +10,8 @@ export class CursoProfesorComponent {
   // Tabla Principal
 
   mainTable: string = 'cursoprofesor';
-  tableTitle = 'Curso Profesor';
-  textFields = ['nombre'];
+  tableTitle = 'Inscripción Curso';
+  textFields = [];
   booleanFields = [];
   dateFields = [];
   // displayFKFields: CamelCase
