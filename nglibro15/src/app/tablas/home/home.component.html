@@ -7,9 +7,9 @@
  
 
     <div class="container  py-5  my-auto" style="max-width: 700px;" *ngIf="showme">
-      <h3 [class]="color">{{titles[showme]}}</h3>
+      <h3 [class]="color" class="px-3">{{titles[showme]}}</h3>
      
-      <h3 [class]="color">
+      <h3 [class]="color" class="px-3">
         {{intro[showme]}}
       </h3>
       <div class="mx-5 pd-5">
@@ -17,20 +17,20 @@
           <thead></thead>
           <tbody>
               <tr *ngFor="let b of body[showme]">
-                <th [class]="color"><a href="">{{b}}</a></th>
+                <th [class]="color">{{b}}</th>
     
-                  <!--th *ngIf="showme=='tutoriales'" [class]="color" style="text-align: center;"><a href='#'>hml</a></th>
+                  <th *ngIf="showme=='tutoriales'" [class]="color" style="text-align: center;"><a href='#'>html</a></th>
                   <th *ngIf="showme=='tutoriales'" [class]="color" style="text-align: center;"><a href='#'>pdf</a></th>
                   <th *ngIf="showme=='tutoriales'" [class]="color" style="text-align: center;"><a href='#'><em class="bi bi-youtube"></em></a></th>
     
-                  <th *ngIf="showme=='preguntas' || showme=='acerca'" style="text-align: center; width: 80px;"><a href='#'>ver mas</a></th-->
+                  <th *ngIf="showme=='preguntas' || showme=='acerca'" style="text-align: center; width: 80px;"><a href='#'>ver mas</a></th>
     
               </tr>
           </tbody>
           </table>
     
       </div>
-      <h3 [class]="color">
+      <h3 [class]="color"  class="px-3">
         {{bottom[showme]}}
       </h3>
     </div>

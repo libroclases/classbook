@@ -11,7 +11,7 @@ export class AsignaturaProfesorComponent {
   // Tabla Principal
 
   mainTable: string = 'asignaturaprofesor';
-  tableTitle = 'Inscripción Asignatura';
+  tableTitle = 'Asignatura Profesor';
   textFields = [];
   booleanFields = [];
   dateFields = [];

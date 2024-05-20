@@ -105,7 +105,7 @@ export const environment = {
       menu: '#e3e4f3',
       colorMenuButton: '#059bb0',
       pagination: '#e2e2eb',
-      bodybgcolor: 'rgb(242,242,248)', // rgb(238, 238, 248)}
+      bodybgcolor: 'linear-gradient(to right, #4880EC, #019CAD)', // rgb(238, 238, 248)}
       tablehead: 'rgb(44,161,213)',
       bgmodal: '#0D6EFD',
       modalbutton: 'rgb(69, 130, 233)',
@@ -117,22 +117,22 @@ export const environment = {
       menu: '#dcf3dd',
       colorMenuButton: '#71f48d',
       pagination: '#dcebe4',
-      bodybgcolor: 'rgb(242, 248, 242)', // rgb(232, 248, 240)
+      bodybgcolor: 'linear-gradient(to right, #38B15C,#76FA91)', // rgb(232, 248, 240)
       tablehead: 'lightgreen',
       bgmodal: 'lightgreen',
       modalbutton: 'rgb(82, 205, 145)',
     },
 
     naranjo: {
-      color: 'orange',
-      lineal: 'linear-gradient(to right, #ffb505,#ffd966)',
-      menu: '#FFE7C1',
-      colorMenuButton: '#ffd761',
-      pagination: '#f2e6d3',
-      bodybgcolor: 'rgb(255, 242, 222)',
-      tablehead:  'rgb(255,212,96)',
-      bgmodal: 'orange',
-      modalbutton: 'orange',
+      color: 'rgb(125, 151, 255)',
+      lineal: 'linear-gradient(to right, #064ACC, #425ECC)',
+      menu: "rgb(125, 151, 255)",
+      colorMenuButton: 'rgb(61, 92, 204)',
+      pagination: 'rgb(125, 151, 255)',
+      bodybgcolor: 'linear-gradient(to right, #064ACC, #425ECC)',
+      tablehead:  'rgb(125, 151, 255)',
+      bgmodal: 'rgb(125, 151, 255)',
+      modalbutton: 'rgb(125, 151, 255)',
     },
   },
   photo: {
@@ -1197,13 +1197,13 @@ export const modalDataObject: any = {
   AsignaturaProfesor: {
     mainTable: 'asignaturaprofesor',
     tables: ['profesor', 'asignatura'],
-    textFields: ['nombre'],
+    textFields: [],
     dateFields: [],
     booleanFields:[],
     ignoreFkRequirements: [],
     disable: [],
     defaultValues: {},
-    label: 'Inscripción Asignatura',
+    label: 'Asignatura Profesor',
     windowHeight: '320px',
   },
 
