@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit{
   size = "cover";
 
   color!:string;
+  opacity="70%";
 
   titles:any = titles;
   intro:any = intro;

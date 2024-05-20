@@ -138,7 +138,7 @@ export const environment = {
   photo: {
     azul: 'url(assets/images/fondo-azul2.png)',
     verde: 'url(assets/images/fondo_verde.jpeg)',
-    naranjo: 'url(assets/images/fondo_naranjo.jpg)',
+    naranjo: 'url(assets/images/purpura.jpeg)',
   },
 
 };
