@@ -250,6 +250,10 @@ function zfill(number: number, width: number) {
           this.formModal.addControl(date, this.fb.control(value, validateDateForm(date)));
       });
 
+        this.modalData.booleanFields.forEach((bool:string) => {
+          this.formModal.addControl(bool,this.fb.control(false))
+        })
+
       } else {
         this.modalData.tables.forEach((tabla:any) => this.formModal.addControl(tabla, this.fb.control(this.valores['tablas'][tabla], selectValidator())));
         this.modalData.textFields.forEach((texto: any) => this.formModal.addControl(texto, this.fb.control(this.valores['textos'][texto], validateTextForm(texto) )));
