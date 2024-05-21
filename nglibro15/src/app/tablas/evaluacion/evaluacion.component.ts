@@ -21,10 +21,10 @@ export class EvaluacionComponent {
 
  // Selectores
 
- selTables = ["profesor", "asignaturaprofesor", "anno", "periodo" , "colegio", "curso"];
+ selTables = ["anno", "periodo" , "colegio", "curso", "profesor", "asignaturaprofesor"];
  changeFnsArray: Function[] = [];
  ignoreFkRequirements: string[] = ["asignatura"];
- patchFKsFromStorage = ['anno', 'colegio'];
+ patchFKsFromStorage = ['anno', 'colegio','periodo','curso'];
 
  constructor( ) { }
 

@@ -247,6 +247,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
 
   changeFunction(table: string, event: any) {
     const newId = +event.target.value;
+    localStorage.setItem(`${table}Id`,newId.toString());
     this.selIdsService.setId(table, newId);
     if (newId === 0) {
       this.requiredBySelTree

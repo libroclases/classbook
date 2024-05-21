@@ -22,7 +22,7 @@ export class HoraAsignadaComponent implements OnInit {
   selTables = ['colegio'];
   changeFnsArray: Function[] = [];
   ignoreFkRequirements: string[] = [];
-  patchFKsFromStorage = [];
+  patchFKsFromStorage = ['colegio'];
 
   constructor( ) { }
 

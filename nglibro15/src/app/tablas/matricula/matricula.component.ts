@@ -23,7 +23,7 @@ export class MatriculaComponent {
  selTables = ['anno', 'colegio', 'curso'];
  changeFnsArray: Function[] = [];
  ignoreFkRequirements: string[] = [];
- patchFKsFromStorage = ['anno', 'colegio'];
+ patchFKsFromStorage = ['anno', 'colegio','curso'];
 
  constructor( ) { }
 

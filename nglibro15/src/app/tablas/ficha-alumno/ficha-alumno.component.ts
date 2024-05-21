@@ -72,7 +72,7 @@ selTables = [  "colegio", "anno",  "curso" ];
 tableLabels = ['Colegio' ,'Año', 'Curso' ];
 ignoreFkRequirements: string[] = ['asignatura'];
 changeFnsArray: Function[] = [];
-patchFKsFromStorage = ['colegio', 'anno'];
+patchFKsFromStorage = ['colegio', 'anno','curso'];
 
 setAny(valor:any): any { return valor }
 

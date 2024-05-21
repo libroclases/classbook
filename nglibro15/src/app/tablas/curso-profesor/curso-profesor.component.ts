@@ -23,7 +23,7 @@ export class CursoProfesorComponent {
   selTables = ['anno', 'colegio', 'curso', 'profesor'];
   changeFnsArray: Function[] = [];
   ignoreFkRequirements: string[] = [];
-  patchFKsFromStorage = [];
+  patchFKsFromStorage = ['anno','colegio','curso'];
 
   constructor( ) { }
 

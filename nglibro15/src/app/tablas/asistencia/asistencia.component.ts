@@ -68,7 +68,7 @@ export class AsistenciaComponent implements OnInit {
 
   selTables: string[] = ['colegio', 'anno', 'curso', 'mes'];
   changeFnsArray!: Function[];
-  patchFksFromStorage = ['colegio', 'anno', 'mes'];
+  patchFksFromStorage = ['colegio', 'anno', 'curso','mes'];
 
   constructor(
     private crud: CrudService,

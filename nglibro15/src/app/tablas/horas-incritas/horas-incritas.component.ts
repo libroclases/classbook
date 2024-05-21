@@ -21,10 +21,10 @@ export class HorasInscritasComponent {
 
  // Selectores
 
- selTables = ["profesor", "asignaturaprofesor", "anno", "colegio", "curso"];
+ selTables = ["anno", "colegio", "curso", "profesor", "asignaturaprofesor"];
  changeFnsArray: Function[] = [];
  ignoreFkRequirements: string[] = ['asignatura'];
- patchFKsFromStorage = ['anno', 'colegio'];
+ patchFKsFromStorage = ['anno', 'colegio','curso'];
 
  constructor( ) { }
 

@@ -22,7 +22,7 @@ redirectRoutes!: string[];
 selTables = ["colegio","tabla"];
 changeFnsArray: Function[] = [];
 ignoreFkRequirements: string[] = [];
-patchFKsFromStorage = [];
+patchFKsFromStorage = ['colegio'];
 
 constructor( ) { }
 

@@ -17,6 +17,7 @@ export class AsignaturaProfesorComponent {
   dateFields = [];
   // displayFKFields: CamelCase
   displayFKFields = ['Profesor', 'Asignatura'];
+  patchFksFromStorage = [];
   redirectRoutes = [];
 
   // Selectores

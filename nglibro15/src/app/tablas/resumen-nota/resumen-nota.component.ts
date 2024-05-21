@@ -71,7 +71,7 @@ export class ResumenNotaComponent implements OnInit{
   tableLabels = ['Año', 'Periodo','Colegio' ,'Curso' ];
   ignoreFkRequirements: string[] = ['asignatura'];
   changeFnsArray: Function[] = [];
-  patchFKsFromStorage = [];
+  patchFKsFromStorage = ['anno','periodo','colegio'];
 
   fatherId=0;
   father='';

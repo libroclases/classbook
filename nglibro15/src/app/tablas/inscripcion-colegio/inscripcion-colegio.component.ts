@@ -23,7 +23,7 @@ export class InscripcionColegioComponent {
   selTables = ['anno', 'colegio','profesor'];
   changeFnsArray: Function[] = [];
   ignoreFkRequirements: string[] = [];
-  patchFKsFromStorage = [];
+  patchFKsFromStorage = ['anno','colegio'];
 
   constructor( ) { }
 
