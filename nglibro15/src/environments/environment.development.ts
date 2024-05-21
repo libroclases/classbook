@@ -493,15 +493,15 @@ export const attributesLabels = {
   },
 
   asignaturaprofesor: {
-    nombre: 'Nombre',
+   
   },
 
   asignaturacurso: {
-    nombre: 'Nombre',
+    
   },
 
   cursoprofesor: {
-    nombre: 'Nombre',
+   
   },
 
 
@@ -848,7 +848,7 @@ export const validator: any = {
 
    AsignaturaCurso: {
     modalText: {
-      nombre: [Validators.required],
+ 
     },
     modalDate: {
     }
@@ -857,7 +857,7 @@ export const validator: any = {
 
   CursoProfesor: {
     modalText: {
-      nombre: [Validators.required],
+   
     },
     modalDate: {
     }
@@ -1075,7 +1075,7 @@ export const Permission:any =  {
   Matricula: { leer: 'profesor' , editar : 'utp' , crear: 'utp'},
   /* Profesor */
   Profesor: { leer : ['utp'], editar: ['utp'], crear: ['utp'] },
-  AsignaturaProfesor: { leer: ['profesor'], editar: ['utp'], crear:['utp'] },
+  InscripcionCurso: { leer: ['profesor'], editar: ['utp'], crear:['utp'] },
   AsignaturaCurso: { leer: ['profesor'], editar: ['utp'], crear:['utp'] },
   Evaluacion:  { leer: ['profesor'], editar: ['utp'], crear: ['utp']},
   Nota: {leer: ['profesor'] ,editar: ['profesor'], crear: ['profesor']},
@@ -1224,7 +1224,7 @@ export const modalDataObject: any = {
   CursoProfesor: {
     mainTable: 'cursoprofesor',
     tables: ['anno','colegio','curso','profesor'],
-    textFields: ['nombre'],
+    textFields: [],
     booleanFields:[],
     dateFields: [],
     ignoreFkRequirements: [],

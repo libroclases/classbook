@@ -38,7 +38,7 @@ class AsignaturaProfesores {
 
     return AsignaturaProfesor 
       .findAll({ where : consulta,
-        attributes: ['id','nombre'],  include: [
+        attributes: ['id'],  include: [
 
             { model:Asignatura, attributes:['id','nombre'], where: { } },
             { model:Profesor, attributes:['id','nombre', 'apellido1','apellido2'], where: { } },          
@@ -50,7 +50,7 @@ class AsignaturaProfesores {
   }
 
   static create(req, res) {
-    const { nombre } = req.body;
+    const { n } = req.body;
     const { profesorId, asignaturaId } = req.params;
     return AsignaturaProfesor
       .create({
@@ -67,12 +67,11 @@ class AsignaturaProfesores {
     }
   
   static modify(req, res) {
-    const { nombre , Asignatura, Profesor} = req.body;
+    const { Asignatura, Profesor} = req.body;
     return AsignaturaProfesor
       .findByPk(req.params.asignaturaprofesorId)
       .then((AsignaturaProfesor) => {
         AsignaturaProfesor.update({
-          nombre: nombre || AsignaturaProfesor.nombre,
           asignaturaId: Asignatura || AsignaturaProfesor.asignaturaId, 
           profesorId: Profesor || AsignaturaProfesor.profesorId,
     
@@ -81,7 +80,6 @@ class AsignaturaProfesores {
           res.status(200).send({
             message: 'AsignaturaProfesor actualizado exitosamente',
             data: {
-              nombre: nombre || updateAsignaturaProfesor.nombre,
               asignaturaId: Asignatura || updateAsignaturaProfesor.asignaturaId,
               profesorId: Profesor || updateAsignaturaProfesor.profesorId
             }

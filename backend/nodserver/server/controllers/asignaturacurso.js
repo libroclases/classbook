@@ -41,7 +41,7 @@ class AsignaturaCursos {
 
     return AsignaturaCurso 
       .findAll({ where : consulta,
-        attributes: ['id','nombre'],  include: [
+        attributes: ['id'],  include: [
 
             { model:Asignatura, attributes:['id','nombre'], where: { } },
             { model:Anno, attributes:['id','nombre'], where: { } },
@@ -55,11 +55,10 @@ class AsignaturaCursos {
   }
 
   static create(req, res) {
-    const { nombre } = req.body;
+    const {  } = req.body;
     const { annoId, colegioId, cursoId, asignaturaId } = req.params;
     return AsignaturaCurso
       .create({
-        nombre, 
         asignaturaId,
         annoId,
         colegioId,
@@ -74,12 +73,11 @@ class AsignaturaCursos {
     }
   
   static modify(req, res) {
-    const { nombre , Asignatura, Anno, Colegio, Curso} = req.body;
+    const {Asignatura, Anno, Colegio, Curso} = req.body;
     return AsignaturaCurso
       .findByPk(req.params.asignaturacursoId)
       .then((AsignaturaCurso) => {
         AsignaturaCurso.update({
-          nombre: nombre || AsignaturaCurso.nombre,
           asignaturaId: Asignatura || AsignaturaCurso.asignaturaId,
           annoId: Anno || AsignaturaCurso.annoId, 
           colegioId: Colegio || AsignaturaCurso.colegioId,
@@ -90,7 +88,6 @@ class AsignaturaCursos {
           res.status(200).send({
             message: 'AsignaturaCurso actualizado exitosamente',
             data: {
-              nombre: nombre || updateAsignaturaCurso.nombre,
               asignaturaId: Asignatura || updateAsignaturaCurso.asignaturaId,
               annoId: Anno || updateAsignaturaCurso.annoId,
               colegioId: Colegio || updateAsignaturaCurso.colegioId,

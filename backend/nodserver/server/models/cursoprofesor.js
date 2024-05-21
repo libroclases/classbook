@@ -3,13 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const CursoProfesor = sequelize.define(
     "CursoProfesor",
     {
-      nombre: {
-        type: DataTypes.STRING,
-        allowNull: {
-          args: false,
-          msg: "Please enter your name",
-        },
-      },
+
     },
     {
       sequelize,

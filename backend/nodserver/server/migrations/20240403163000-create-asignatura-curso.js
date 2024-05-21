@@ -9,9 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nombre: {
-        type: Sequelize.STRING
-      },
       asignaturaId: {
         allowNull: true,
         type: Sequelize.INTEGER,
