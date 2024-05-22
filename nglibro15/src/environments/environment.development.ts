@@ -123,22 +123,22 @@ export const environment = {
       modalbutton: 'rgb(82, 205, 145)',
     },
 
-    naranjo: {
-      color: 'rgb(125, 151, 255)',
-      lineal: 'linear-gradient(to right, #064ACC, #425ECC)',
-      menu: "rgb(125, 151, 255)",
-      colorMenuButton: 'rgb(61, 92, 204)',
-      pagination: 'rgb(125, 151, 255)',
-      bodybgcolor: 'linear-gradient(to right, #064ACC, #425ECC)',
-      tablehead:  'rgb(125, 151, 255)',
-      bgmodal: 'rgb(125, 151, 255)',
-      modalbutton: 'rgb(125, 151, 255)',
+    info: {
+      color: 'rgb(13, 202, 240)',
+      lineal: 'linear-gradient(to right, #425ECC, #33D8FF)',
+      menu: "rgb(13, 202, 240)",
+      colorMenuButton: 'rgb(51, 212, 253)',
+      pagination: 'rgb(201, 252, 255)',
+      bodybgcolor: 'linear-gradient(to right, #33D8FF, #425ECC)',
+      tablehead:  'rgb(13, 202, 240)',
+      bgmodal: 'rgb(13, 202, 240)',
+      modalbutton: 'rgb(13, 202, 240)',
     },
   },
   photo: {
     azul: 'url(assets/images/fondo-azul2.png)',
     verde: 'url(assets/images/fondo_verde.jpeg)',
-    naranjo: 'url(assets/images/purpura.jpeg)',
+    info: 'url(assets/images/purpura.jpeg)',
   },
 
 };

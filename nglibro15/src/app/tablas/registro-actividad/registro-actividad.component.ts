@@ -161,11 +161,11 @@ this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((e
       this.tablehead = this.objcolors.verde.tablehead;
       this.url = this.photo.verde;
     }
-    if (color=='naranjo') {
-      this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-      this.pagination = this.objcolors.naranjo.pagination;
-      this.tablehead = this.objcolors.naranjo.tablehead;
-      this.url = this.photo.naranjo;
+    if (color=='info') {
+      this.bodybgcolor = this.objcolors.info.bodybgcolor;
+      this.pagination = this.objcolors.info.pagination;
+      this.tablehead = this.objcolors.info.tablehead;
+      this.url = this.photo.info;
     }
 
 }

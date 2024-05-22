@@ -59,8 +59,8 @@ export class HomeComponent implements OnInit{
         this.color="azul";  this.url = this.photo.azul;      }
       if (color=='verde') {
         this.color = "verde"; this.url = this.photo.verde;       }
-      if (color=='naranjo') {
-        this.color = "naranjo"; this.url = this.photo.naranjo;      }
+      if (color=='info') {
+        this.color = "info"; this.url = this.photo.info;      }
 
     }
     this.usuario$.subscribe((info:any) => {

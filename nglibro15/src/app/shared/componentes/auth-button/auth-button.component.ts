@@ -42,9 +42,9 @@ export class AuthButtonComponent implements OnInit, OnDestroy {
       else if (color=='verde') {
         this.colorMenuButton = this.objcolors.verde.colorMenuButton;
       }
-      else if (color=='naranjo') {
+      else if (color=='info') {
 
-        this.colorMenuButton = this.objcolors.naranjo.colorMenuButton;
+        this.colorMenuButton = this.objcolors.info.colorMenuButton;
       }
 
     }

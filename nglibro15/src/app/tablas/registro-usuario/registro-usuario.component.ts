@@ -117,13 +117,13 @@ export class RegistroUsuarioComponent implements OnInit {
       this.modalbutton = this.objcolors.verde.modalbutton;
       this.url = this.photo.verde;
     }
-    if (color=='naranjo') {
-      this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-      this.pagination = this.objcolors.naranjo.pagination;
-      this.tablehead = this.objcolors.naranjo.tablehead;
-      this.bgmodal = this.objcolors.naranjo.bgmodal;
-      this.modalbutton = this.objcolors.naranjo.modalbutton;
-      this.url = this.photo.naranjo;
+    if (color=='info') {
+      this.bodybgcolor = this.objcolors.info.bodybgcolor;
+      this.pagination = this.objcolors.info.pagination;
+      this.tablehead = this.objcolors.info.tablehead;
+      this.bgmodal = this.objcolors.info.bgmodal;
+      this.modalbutton = this.objcolors.info.modalbutton;
+      this.url = this.photo.info;
     }
 
   }

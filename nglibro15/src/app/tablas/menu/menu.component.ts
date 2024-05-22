@@ -68,12 +68,12 @@ export class MenuComponent implements OnInit{
         this.tabletype = 'table-success';
         this.letters = 'green';
       }
-      if (color=='naranjo') {
-        this.color = "naranjo";
-        this.menu = this.objcolors.naranjo.menu;
-        this.canvas = 'bg-warning';
-        this.tabletype = 'table-warning';
-        this.letters = 'orange';
+      if (color=='info') {
+        this.color = "info";
+        this.menu = this.objcolors.info.menu;
+        this.canvas = 'bg-info';
+        this.tabletype = 'table-info';
+        this.letters = 'info';
       }
     }
 

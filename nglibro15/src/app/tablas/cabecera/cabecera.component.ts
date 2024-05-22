@@ -42,9 +42,9 @@ export class CabeceraComponent implements OnInit{
             this.lineal = this.objcolors.verde.lineal;
 
           }
-          else if (color=='naranjo') {
-            this.color = this.objcolors.naranjo.color;
-            this.lineal = this.objcolors.naranjo.lineal;
+          else if (color=='info') {
+            this.color = this.objcolors.info.color;
+            this.lineal = this.objcolors.info.lineal;
           }
     }
     this.usuario$.subscribe((info:any) => {

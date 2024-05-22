@@ -122,7 +122,7 @@ export const environment = {
       modalbutton: 'rgb(82, 205, 145)',
     },
 
-    naranjo: {
+    info: {
       color: 'orange',
       lineal: 'linear-gradient(to right, #ffb505,#ffd966)',
       menu: '#FFE7C1',
@@ -137,7 +137,7 @@ export const environment = {
   photo: {
     azul: 'url(assets/images/fondo-azul2.png)',
     verde: 'url(assets/images/fondo_verde.jpeg)',
-    naranjo: 'url(assets/images/fondo_naranjo.jpg)',
+    info: 'url(assets/images/purpura.jpg)',
   },
 
 };

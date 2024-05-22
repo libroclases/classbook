@@ -179,11 +179,11 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
         this.tablehead = this.objcolors.verde.tablehead;
         this.modalbutton = this.objcolors.verde.modalbutton;
       }
-      if (color=='naranjo') {
-        this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-        this.pagination = this.objcolors.naranjo.pagination;
-        this.tablehead = this.objcolors.naranjo.tablehead;
-        this.modalbutton = this.objcolors.naranjo.modalbutton;
+      if (color=='info') {
+        this.bodybgcolor = this.objcolors.info.bodybgcolor;
+        this.pagination = this.objcolors.info.pagination;
+        this.tablehead = this.objcolors.info.tablehead;
+        this.modalbutton = this.objcolors.info.modalbutton;
       }
     }
     this.usuario$.subscribe(info => {

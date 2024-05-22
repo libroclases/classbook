@@ -118,10 +118,10 @@ getColor = (color:string | null) => {
     this.url = this.photo.verde;
 
   }
-  if (color == 'naranjo') {
-    this.bodybgcolor = this.objcolors.naranjo.bodybgcolor;
-    this.pagination = this.objcolors.naranjo.pagination;
-    this.url = this.photo.naranjo;
+  if (color == 'info') {
+    this.bodybgcolor = this.objcolors.info.bodybgcolor;
+    this.pagination = this.objcolors.info.pagination;
+    this.url = this.photo.info;
 
   }
 }
