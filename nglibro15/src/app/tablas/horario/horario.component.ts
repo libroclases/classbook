@@ -51,7 +51,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
   menu_height = environment.cabecera.menu_height;
 
   disabled = {};
-  
+
   currentDate:Date = new Date();
 
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
@@ -82,9 +82,9 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
   // Selectores
 
-  selTables = ["anno", "colegio", "curso", "profesor","asignaturaprofesor","dix"];
+  selTables = ["anno", "colegio", "curso", "profesor","asignatura","dix"];
   mainTable = 'horario';
-  ignoreFkRequirements = ['asignatura'];
+  ignoreFkRequirements = [];
   patchFKsFromStorage = ['colegio', 'profesor', 'anno'];
 
 
@@ -244,14 +244,14 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
     this.usuario$.pipe(
       tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
-      tap(info => { if (info.personalInfo?.usuario) { 
+      tap(info => { if (info.personalInfo?.usuario) {
         let disabled = this.getpermission.getPermission(Permission['Horario'],info)
         this.editar = disabled.editar;
         this.crear = disabled.crear;
       }
-      
+
       }
-        
+
       )
 
     ).subscribe()
@@ -289,7 +289,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
 
     horario.forEach((h:any) => horamap.set(h.hora, { id: h.id, hora: h.hora,
-      Profesor: h.Profesor,AsignaturaProfesor: h.AsignaturaProfesor,  Colegio: h.Colegio, Curso: h.Curso, Anno: h.Anno, Dix: h.Dix}))
+      Profesor: h.Profesor,Asignatura: h.Asignatura,  Colegio: h.Colegio, Curso: h.Curso, Anno: h.Anno, Dix: h.Dix}))
 
     for (let key of this.selecTablePeriod) {
         if (horamap.has(key+1)) {

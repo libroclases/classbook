@@ -1,6 +1,6 @@
 import model from '../models';
 
-const { Asignatura, TipoColegio, Colegio } = model;
+const { Asignatura, TipoColegio, Colegio, Curso } = model;
 
 class Asignaturas {
 

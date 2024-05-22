@@ -221,7 +221,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'colegio',
     'curso',
     'profesor',
-    'asignaturaprofesor',
+    'asignatura',
     'dix',
   ],
   sexo: [],
@@ -267,7 +267,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'colegio',
     'curso',
     'profesor',
-    'asignaturaprofesor',
+    'asignatura',
     'anno',
     'periodo',
     'tipoevaluacion',
@@ -280,7 +280,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'colegio',
     'curso',
     'profesor',
-    'asignaturaprofesor',
+    'asignatura',
     'matricula',
     'evaluacion',
   ],
@@ -289,7 +289,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'periodo',
     'colegio',
     'curso',
-    'asignaturacurso',
+    'asignatura',
     'matricula'
   ],
   mes: [],
@@ -493,15 +493,15 @@ export const attributesLabels = {
   },
 
   asignaturaprofesor: {
-   
+
   },
 
   asignaturacurso: {
-    
+
   },
 
   cursoprofesor: {
-   
+
   },
 
 
@@ -848,7 +848,7 @@ export const validator: any = {
 
    AsignaturaCurso: {
     modalText: {
- 
+
     },
     modalDate: {
     }
@@ -857,7 +857,7 @@ export const validator: any = {
 
   CursoProfesor: {
     modalText: {
-   
+
     },
     modalDate: {
     }
@@ -1115,11 +1115,11 @@ export const modalDataObject: any = {
 
   Horario: {
     mainTable: 'horario',
-    tables: ['profesor', 'asignaturaprofesor'],
+    tables: ['profesor', 'asignatura'],
     textFields: ['hora'],
     booleanFields:[],
     dateFields: [],
-    ignoreFkRequirements: ['asignatura'],
+    ignoreFkRequirements: [],
     disable: [],
     defaultValues: {},
     label: 'Horario',
@@ -1390,7 +1390,7 @@ export const modalDataObject: any = {
       'colegio',
       'curso',
       'profesor',
-      'asignaturaprofesor',
+      'asignatura',
       'anno',
       'periodo',
       'tipoevaluacion',

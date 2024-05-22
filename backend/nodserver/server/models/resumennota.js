@@ -43,8 +43,8 @@ module.exports = (sequelize, DataTypes) => {
     });
 
 
-    ResumenNota.belongsTo(models.AsignaturaCurso, {
-      foreignKey: "asignaturacursoId",
+    ResumenNota.belongsTo(models.Asignatura, {
+      foreignKey: "asignaturaId",
     });
     
 

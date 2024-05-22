@@ -20,9 +20,12 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   EstadoAlumno.associate = function (models) {
+  
+    /*
     EstadoAlumno.belongsTo(models.Matricula, {
       foreignKey: "matriculaId",
     });
+    */
 
     EstadoAlumno.belongsTo(models.TipoEstado, {
       foreignKey: "tipoestadoId",

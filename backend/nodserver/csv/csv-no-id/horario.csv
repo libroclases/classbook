@@ -1,4 +1,4 @@
-hora|colegioId|cursoId|asignaturaprofesorId|profesorId|annoId|dixId|createdAt|updatedAt
+hora|colegioId|cursoId|asignaturaId|profesorId|annoId|dixId|createdAt|updatedAt
 1|1|19|1|1|4|1|2023-09-24|2023-09-24
 2|1|19|1|1|4|1|2023-09-24|2023-09-24
 3|1|19|2|2|4|1|2023-09-24|2023-09-24

@@ -21,6 +21,7 @@ module.exports = {
           as: 'TipoEstado',
         }
       },
+      /*
       matriculaId: {
         allowNull: true,
         type: Sequelize.INTEGER,
@@ -30,6 +31,7 @@ module.exports = {
           as: 'Matricula',
         }
       },
+      */
       alumnoId: {
         allowNull: true,
         type: Sequelize.INTEGER,

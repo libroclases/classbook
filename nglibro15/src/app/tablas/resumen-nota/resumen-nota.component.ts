@@ -175,7 +175,7 @@ this.usuario$.subscribe(info => {
         0
       ]
 
-      this.asignatura$ = this.crud.getData('asignaturacurso', fks)!
+      this.asignatura$ = this.crud.getData('asignaturacurso',fks)!
 
       this.asignatura$.pipe(
           tap(asignatura => {
@@ -221,10 +221,10 @@ this.usuario$.subscribe(info => {
         let tmp_asig:any={};
         res.forEach((r:any) => {
           tmp_mat[r.Matricula.id] = (this.matricula[r.Matricula.id]) ? this.matricula[r.Matricula.id] : 0;
-          tmp_asig[r.AsignaturaCurso.id] = (this.asignatura[r.AsignaturaCurso.id]) ? this.asignatura[r.AsignaturaCurso.id] : 0;
+          tmp_asig[r.Asignatura.id] = (this.asignatura[r.Asignatura.id]) ? this.asignatura[r.Asignatura.id] : 0;
 
           this.matricula[r.Matricula.id] = tmp_mat[r.Matricula.id] + r.promedio
-          this.asignatura[r.AsignaturaCurso.id] = tmp_asig[r.AsignaturaCurso.id] + r.promedio
+          this.asignatura[r.Asignatura.id] = tmp_asig[r.Asignatura.id] + r.promedio
         })
         // console.log(Object.keys(this.matricula).length)
       }

@@ -1,6 +1,6 @@
 import model, { sequelize } from '../models';
 
-const { Horario, Colegio, Curso, Profesor, AsignaturaProfesor, Anno, Dix } = model;
+const { Horario, Colegio, Curso, Profesor, Asignatura, Anno, Dix } = model;
 
   class Horarios {
 
@@ -14,7 +14,7 @@ const { Horario, Colegio, Curso, Profesor, AsignaturaProfesor, Anno, Dix } = mod
           include: [
             { model:Colegio, attributes:['id','nombre'], where: { } },
             { model:Curso, attributes:['id','nombre'], where: { } },
-            { model:AsignaturaProfesor, attributes:['id','nombre'], where: { } },
+            { model:Asignatura, attributes:['id','nombre'], where: { } },
             { model:Profesor, attributes:['id','nombre', 'apellido1','apellido2'], where: { } },
             { model:Anno, attributes:['id','nombre'], where: { } },
             { model:Dix, attributes:['id','nombre'], where: { } },
@@ -45,7 +45,7 @@ const { Horario, Colegio, Curso, Profesor, AsignaturaProfesor, Anno, Dix } = mod
 
     static groupByFk(req, res) {
 
-      const {annoId, colegioId, cursoId, profesorId, asignaturaprofesorId } = req.params;  
+      const {annoId, colegioId, cursoId, profesorId, asignaturaId } = req.params;  
       let consulta = {};
       // let consulta = getBaseQuery(req);
       console.log(" consulta ");
@@ -53,19 +53,19 @@ const { Horario, Colegio, Curso, Profesor, AsignaturaProfesor, Anno, Dix } = mod
       
       if (colegioId != '0') {  consulta['colegioId'] = colegioId;  }
       if (cursoId != '0') {  consulta['cursoId'] = cursoId;  }
-      if (asignaturaprofesorId != '0') {  consulta['asignaturaprofesorId'] = asignaturaprofesorId;  }
+      if (asignaturaId != '0') {  consulta['asignaturaId'] = asignaturaId;  }
       if (profesorId != '0') {  consulta['profesorId'] = profesorId;  }
       if (annoId != '0') {  consulta['annoId'] = annoId;  }
 
       return Horario
-      .findAll({ where: consulta , group: ['Profesor.id','AsignaturaProfesor.id','Colegio.id','Curso.id','Anno.id'], 
-      attributes: ['Profesor.id','AsignaturaProfesor.id','Colegio.id','Curso.id','Anno.id', [sequelize.fn('COUNT','*'),'TotalHoras']], 
+      .findAll({ where: consulta , group: ['Profesor.id','Asignatura.id','Colegio.id','Curso.id','Anno.id'], 
+      attributes: ['Profesor.id','Asignatura.id','Colegio.id','Curso.id','Anno.id', [sequelize.fn('COUNT','*'),'TotalHoras']], 
       include: [
         { model:Profesor, attributes:['id','nombre', 'apellido1','apellido2'], where: { } },
         { model:Colegio, attributes:['id','nombre'], where: { } },
         { model:Curso, attributes:['id','nombre'], where: { } },
         { model:Anno, attributes:['id','nombre'], where: { } },
-        { model:AsignaturaProfesor, attributes:['id','nombre'], where: { }  }           
+        { model:Asignatura, attributes:['id','nombre'], where: { }  }           
         ]
       })
       .then(horarios => res.status(200).send(horarios))
@@ -75,14 +75,14 @@ const { Horario, Colegio, Curso, Profesor, AsignaturaProfesor, Anno, Dix } = mod
     static getByFk(req, res) {
 
 
-      const { annoId, colegioId, cursoId, profesorId, asignaturaprofesorId, dixId} = req.params;
+      const { annoId, colegioId, cursoId, profesorId, asignaturaId, dixId} = req.params;
       
       let consulta = {};
       // let consulta = getBaseQuery(req);
       
       if (colegioId != '0') {  consulta['colegioId'] = colegioId;  }
       if (cursoId != '0') {  consulta['cursoId'] = cursoId;  }
-      if (asignaturaprofesorId != '0') {  consulta['asignaturaprofesorId'] = asignaturaprofesorId;  }
+      if (asignaturaId != '0') {  consulta['asignaturaId'] = asignaturaId;  }
       if (profesorId != '0') {  consulta['profesorId'] = profesorId;  }
       if (annoId != '0') {  consulta['annoId'] = annoId;  }
       if (dixId != '0') {  consulta['dixId'] = dixId;  }
@@ -92,7 +92,7 @@ const { Horario, Colegio, Curso, Profesor, AsignaturaProfesor, Anno, Dix } = mod
       include: [
         { model:Colegio, attributes:['id','nombre'], where: { } },
         { model:Curso, attributes:['id','nombre'], where: { } },    
-        { model:AsignaturaProfesor, attributes:['id','nombre'], where: { } },
+        { model:Asignatura, attributes:['id','nombre'], where: { } },
         { model:Profesor, attributes:['id','nombre', 'apellido1','apellido2'], where: { } },
         { model:Anno, attributes:['id','nombre'], where: { } },
         { model:Dix, attributes:['id','nombre'], where: { } }
@@ -103,7 +103,7 @@ const { Horario, Colegio, Curso, Profesor, AsignaturaProfesor, Anno, Dix } = mod
   }
 
     static create(req, res) {
-      const { annoId, colegioId, cursoId, profesorId, asignaturaprofesorId, dixId } = req.params;
+      const { annoId, colegioId, cursoId, profesorId, asignaturaId, dixId } = req.params;
       const { hora } = req.body;
 
       return Horario
@@ -111,7 +111,7 @@ const { Horario, Colegio, Curso, Profesor, AsignaturaProfesor, Anno, Dix } = mod
             hora,
             colegioId,
             cursoId,
-            asignaturaprofesorId,
+            asignaturaId,
             profesorId,
             annoId,
             dixId,
@@ -129,7 +129,7 @@ const { Horario, Colegio, Curso, Profesor, AsignaturaProfesor, Anno, Dix } = mod
       let consulta = {};
       // let consulta = getBaseQuery(req);
       consulta['id'] = req.params.horarioId;
-      const { hora, Colegio, Curso, Profesor, AsignaturaProfesor,  Anno, Dix } = req.body
+      const { hora, Colegio, Curso, Profesor, Asignatura,  Anno, Dix } = req.body
       return Horario
         .findOne({ where: consulta })
         .then((horario) => {
@@ -137,7 +137,7 @@ const { Horario, Colegio, Curso, Profesor, AsignaturaProfesor, Anno, Dix } = mod
             hora: hora || horario.nombre,
             colegioId: Colegio || horario.colegioId,
             cursoId: Curso || horario.cursoId,
-            asignaturaprofesorId: AsignaturaProfesor ||   horario.asignaturaprofesorId,
+            asignaturaId: Asignatura ||   horario.asignaturaId,
             profesorId: Profesor || horario.profesorId,
             annoId: Anno || horario.annoId,
             dixId: Dix || horario.dixId,
@@ -150,7 +150,7 @@ const { Horario, Colegio, Curso, Profesor, AsignaturaProfesor, Anno, Dix } = mod
                 hora: hora || updatedHorario.hora,
                 colegioId: Colegio || updatedHorario.colegioId,
                 cursoId: Curso || updatedHorario.cursoId,
-                asignaturaprofesorId: AsignaturaProfesor || updatedHorario.asignaturaprofesorId,
+                asignaturaId: Asignatura || updatedHorario.asignaturaId,
                 profesorId: Profesor || updatedHorario.profesorId,
                 annoId: Anno || updatedHorario.annoId,
                 dixId: Dix || updatedHorario.dixId

@@ -61,13 +61,13 @@ module.exports = {
         }
       },
  
-      asignaturacursoId: {
+      asignaturaId: {
         allowNull: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'AsignaturaCurso',
+          model: 'Asignatura',
           key: 'id',
-          as: 'AsignaturaCurso',
+          as: 'Asignatura',
         }
       },
  

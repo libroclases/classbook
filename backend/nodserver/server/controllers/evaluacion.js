@@ -1,6 +1,6 @@
 import model from '../models';
 
-const { Evaluacion, Colegio, Curso, AsignaturaProfesor, Profesor, Anno, Periodo,
+const { Evaluacion, Colegio, Curso, Asignatura, Profesor, Anno, Periodo,
   TipoEvaluacion, Matricula, Nota } = model;
 
 
@@ -15,7 +15,7 @@ class Evaluaciones {
         include: [
           { model:Colegio, attributes:['id','nombre'], where: { } },
           { model:Curso, attributes:['id','nombre'], where: { } },
-          { model:AsignaturaProfesor, attributes:['id','nombre'], where: { } },
+          { model:Asignatura, attributes:['id','nombre'], where: { } },
           { model:Profesor, attributes:['id','nombre', 'apellido1','apellido2'], where: { } },
           { model:Anno, attributes:['id','nombre'], where: { } },
           { model:Periodo, attributes:['id','nombre'], where: { } },
@@ -29,14 +29,14 @@ class Evaluaciones {
 
   static getByFk(req, res) {
 
-    const { colegioId,cursoId, profesorId, asignaturaprofesorId, annoId,
+    const { colegioId,cursoId, profesorId, asignaturaId, annoId,
       periodoId, tipoevaluacionId } = req.params;
       let consulta = {};
     // let consulta = getBaseQuery(req);
     
     if (colegioId != '0') {  consulta['colegioId'] = colegioId;  }
     if (cursoId != '0') {  consulta['cursoId'] = cursoId;  }
-    if (asignaturaprofesorId != '0') {  consulta['asignaturaprofesorId'] = asignaturaprofesorId;  }
+    if (asignaturaId != '0') {  consulta['asignaturaId'] = asignaturaId;  }
     if (profesorId != '0') {  consulta['profesorId'] = profesorId;  }
     if (annoId != '0') {  consulta['annoId'] = annoId;  }
     if (periodoId != '0') {  consulta['periodoId'] = periodoId;  }
@@ -49,7 +49,7 @@ class Evaluaciones {
     include: [
       { model:Colegio, attributes:['id','nombre'], where: { } },
       { model:Curso, attributes:['id','nombre'], where: { } },
-      { model:AsignaturaProfesor, attributes:['id','nombre'], where: { } },
+      { model:Asignatura, attributes:['id','nombre'], where: { } },
       { model:Profesor, attributes:['id','nombre', 'apellido1','apellido2'], where: { } },
       { model:Anno, attributes:['id','nombre'], where: { } },
       { model:Periodo, attributes:['id','nombre'], where: { } },
@@ -64,7 +64,7 @@ class Evaluaciones {
   static create(req, res) {
 
     const { nombre, fecha, hora, ponderacion } = req.body;
-    const { colegioId, cursoId, profesorId, asignaturaprofesorId, annoId,  periodoId, tipoevaluacionId } = req.params;
+    const { colegioId, cursoId, profesorId, asignaturaId, annoId,  periodoId, tipoevaluacionId } = req.params;
     
     return Evaluacion
     .create({
@@ -74,7 +74,7 @@ class Evaluaciones {
       ponderacion,
       colegioId,
       cursoId,
-      asignaturaprofesorId,
+      asignaturaId,
       profesorId,
       annoId,
       periodoId,
@@ -90,8 +90,8 @@ class Evaluaciones {
         colegioId: e.colegioId,
         cursoId: e.cursoId,
         profesorId: e.profesorId,
-        asignaturaprofesorId:
-        e.asignaturaprofesorId,
+        asignaturaId:
+        e.asignaturaId,
         evaluacionId: e.id
       };
 
@@ -130,7 +130,7 @@ class Evaluaciones {
 }
 
   static modify(req, res) {
-    const { nombre, fecha, hora, ponderacion, Colegio, Curso, Profesor, AsignaturaProfesor, Anno, Periodo, TipoEvaluacion } = req.body;
+    const { nombre, fecha, hora, ponderacion, Colegio, Curso, Profesor, Asignatura, Anno, Periodo, TipoEvaluacion } = req.body;
     let consulta = {};
     // let consulta = getBaseQuery(req);
     consulta['id'] = req.params.evaluacionId;
@@ -144,7 +144,7 @@ class Evaluaciones {
           ponderacion: ponderacion || evaluacion.ponderacion,
           colegioId: Colegio || evaluacion.colegioId,
           cursoId: Curso || evaluacion.cursoId,
-          asignaturaprofesorId: AsignaturaProfesor || evaluacion.asignaturaprofesorId,
+          asignaturaId: Asignatura || evaluacion.asignaturaId,
           profesorId: Profesor || evaluacion.profesorId,
           annoId: Anno || evaluacion.annoId,
           periodoId: Periodo || evaluacion.periodoId,
@@ -161,7 +161,7 @@ class Evaluaciones {
             ponderacion: ponderacion || updatedEvaluacion.ponderacion,
             colegioId: Colegio || updatedEvaluacion.colegioId,
             cursoId: Curso || updatedEvaluacion.cursoId,
-            asignaturaprofesorId: AsignaturaProfesor || updatedEvaluacion.asignaturaprofesorId,
+            asignaturaId: Asignatura || updatedEvaluacion.asignaturaId,
             profesorId: Profesor || updatedEvaluacion.profesorId,
             annoId: Anno || updatedEvaluacion.annoId,
             periodoId: Periodo || updatedEvaluacion.periodoId,

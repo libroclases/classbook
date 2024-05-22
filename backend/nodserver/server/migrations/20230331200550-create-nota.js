@@ -77,13 +77,13 @@ module.exports = {
           as: 'Profesor',
         }
       },
-      asignaturaprofesorId: {
+      asignaturaId: {
         allowNull: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'AsignaturaProfesor',
+          model: 'Asignatura',
           key: 'id',
-          as: 'AsignaturaProfesor',
+          as: 'Asignatura',
         }
       },
 

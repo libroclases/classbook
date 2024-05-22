@@ -20,10 +20,10 @@ class EstadoAlumnos {
   }
 
   static getByFk(req, res) {
-    const { alumnoId, matriculaId, tipoestadoId } = req.params;
+    const { alumnoId,  tipoestadoId } = req.params;
     let consulta = {};
     
-    if (matriculaId != '0') { consulta['matriculaId'] = matriculaId; }
+    // if (matriculaId != '0') { consulta['matriculaId'] = matriculaId; }
     if (alumnoId != '0') { consulta['alumnoId'] = alumnoId; }
     if (tipoestadoId != '0') { consulta['tipoestadoId'] = tipoestadoId;  }
 
@@ -87,7 +87,7 @@ class EstadoAlumnos {
             message: 'EstadoAlumno updated successfully',
             data: {
               fecha: fecha || updatedEstado.fecha,
-              matriculaId: Matricula || updatedEstado.apoderadoId,
+              matriculaId: Matricula || updatedEstado.matriculaId,
               alumnoId: Alumno       || updatedEstado.alumnoId,
               tipoestadoId: TipoEstado || updatedEstado.tipoestadoId
             }

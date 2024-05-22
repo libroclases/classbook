@@ -16,12 +16,12 @@ export class HorasInscritasComponent {
  booleanFields = [];
  dateFields = [];
  // displayFKFields: CamelCase
- displayFKFields = ['Profesor','AsignaturaProfesor','Anno', 'Colegio', 'Curso'];
+ displayFKFields = ['Profesor','Asignatura','Anno', 'Colegio', 'Curso'];
  redirectRoutes = []
 
  // Selectores
 
- selTables = ["anno", "colegio", "curso", "profesor", "asignaturaprofesor"];
+ selTables = ["anno", "colegio", "curso", "profesor", "asignatura"];
  changeFnsArray: Function[] = [];
  ignoreFkRequirements: string[] = ['asignatura'];
  patchFKsFromStorage = ['anno', 'colegio','curso'];

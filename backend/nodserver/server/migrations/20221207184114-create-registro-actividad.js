@@ -50,6 +50,7 @@ module.exports = {
           as: "Asignatura",
         },
       },
+      /*
       asignaturaprofesorId: {
         allowNull: true,
         type: Sequelize.INTEGER,
@@ -59,6 +60,7 @@ module.exports = {
           as: "AsignaturaProfesor",
         },
       },
+      */
       profesorId: {
         allowNull: true,
         type: Sequelize.INTEGER,

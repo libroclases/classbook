@@ -7,7 +7,7 @@ const {
   Colegio,
   Curso,
   Asignatura,
-  AsignaturaProfesor,
+  // AsignaturaProfesor,
   Profesor,
   RegistroActividad,
   Anno,
@@ -38,7 +38,7 @@ class RegistroActividades {
       include: [
         { model: Colegio, attributes: ["id", "nombre"], where: {} },
         { model: Curso, attributes: ["id", "nombre"], where: {} },
-        { model: AsignaturaProfesor, attributes: ["id", "nombre"], where: {} },
+        //{ model: AsignaturaProfesor, attributes: ["id", "nombre"], where: {} },
         { model: Asignatura, attributes: ["id", "nombre"], where: {} },
         {
           model: Profesor,
@@ -103,7 +103,7 @@ class RegistroActividades {
       include: [
         { model: Colegio, attributes: ["id", "nombre"], where: {} },
         { model: Curso, attributes: ["id", "nombre"], where: {} },
-        { model: AsignaturaProfesor, attributes: ["id", "nombre"], where: {} },
+        // { model: AsignaturaProfesor, attributes: ["id", "nombre"], where: {} },
         { model: Asignatura, attributes: ["id", "nombre"], where: {} },
         {
           model: Profesor,

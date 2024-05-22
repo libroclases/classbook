@@ -79,9 +79,9 @@ export class NotaComponent implements OnInit {
 
   // Selectores
 
-  selTables = [  "anno", "periodo", "colegio", "curso", "profesor", "asignaturaprofesor",  ];
-  tableLabels = ['Año', 'Periodo','Colegio' ,'Curso','Profesor','AsignaturaProfesor', ];
-  ignoreFkRequirements: string[] = ['asignatura'];
+  selTables = [  "anno", "periodo", "colegio", "curso", "profesor", "asignatura",  ];
+  tableLabels = ['Año', 'Periodo','Colegio' ,'Curso','Profesor','Asignatura', ];
+  ignoreFkRequirements: string[] = [];
   changeFnsArray: Function[] = [];
   patchFKsFromStorage = ['anno','periodo','colegio','curso'];
 
@@ -344,7 +344,7 @@ this.usuario$.subscribe(info => {
             this.selIdsService.getId('colegio') *
             this.selIdsService.getId('curso') *
             this.selIdsService.getId('profesor') *
-            this.selIdsService.getId('asignaturaprofesor') > 0) {
+            this.selIdsService.getId('asignatura') > 0) {
 
             this.getEvaluationData();
 
@@ -498,7 +498,7 @@ this.usuario$.subscribe(info => {
       ids.push(this.selIdsService.getId('colegio'));
       ids.push(this.selIdsService.getId('curso'));
       ids.push(this.selIdsService.getId('profesor'));
-      ids.push(this.selIdsService.getId('asignaturaprofesor'));
+      ids.push(this.selIdsService.getId('asignatura'));
 
       return ids;
 

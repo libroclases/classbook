@@ -15,21 +15,26 @@ module.exports = (sequelize, DataTypes) => {
   AsignaturaProfesor.associate = function (models) {
     // associations can be defined here
 
+    /*
     AsignaturaProfesor.hasMany(models.Horario, {
       foreignKey: "asignaturaprofesorId",
     });
-
+    */
+    /*
     AsignaturaProfesor.hasMany(models.Evaluacion, {
       foreignKey: "asignaturaprofesorId",
     });
-
+    */
+   /*
     AsignaturaProfesor.hasMany(models.Nota, {
       foreignKey: "asignaturaprofesorId",
     });
-
+    */
+   /*
     AsignaturaProfesor.hasMany(models.RegistroActividad, {
       foreignKey: "asignaturaprofesorId",
     });
+    */
 
     AsignaturaProfesor.belongsTo(models.Asignatura, {
       foreignKey: "asignaturaId",

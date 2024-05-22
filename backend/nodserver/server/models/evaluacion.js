@@ -49,8 +49,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "cursoId",
     });
 
-    Evaluacion.belongsTo(models.AsignaturaProfesor, {
-      foreignKey: "asignaturaprofesorId",
+    Evaluacion.belongsTo(models.Asignatura, {
+      foreignKey: "asignaturaId",
     });
 
     Evaluacion.belongsTo(models.Profesor, {

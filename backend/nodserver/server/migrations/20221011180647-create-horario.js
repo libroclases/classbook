@@ -29,13 +29,13 @@ module.exports = {
           as: 'Curso',
         }
       },
-      asignaturaprofesorId: {
+      asignaturaId: {
         allowNull: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'AsignaturaProfesor',
+          model: 'Asignatura',
           key: 'id',
-          as: 'AsignaturaProfesor',
+          as: 'Asignatura',
         }
       },
       profesorId: {

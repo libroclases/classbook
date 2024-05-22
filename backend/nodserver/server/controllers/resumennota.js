@@ -1,6 +1,6 @@
 import model from '../models';
 
-const {  Colegio, Periodo, Curso, Anno,  Matricula, AsignaturaCurso, ResumenNota } = model;
+const {  Colegio, Periodo, Curso, Anno,  Matricula, Asignatura, ResumenNota } = model;
 
 class ResumenNotas {
 
@@ -11,7 +11,7 @@ class ResumenNotas {
                 attributes: ['id','promedio'],
                 include: [ 
                     { model:Matricula, attributes:['id','nombre'], where: { } },
-                    { model:AsignaturaCurso, attributes:['id','nombre'], where: { } },
+                    { model:Asignatura, attributes:['id','nombre'], where: { } },
                     { model:Colegio, attributes:['id','nombre'], where: { } },
                     { model:Curso, attributes:['id','nombre'], where: { } },
                     { model:Anno, attributes:['id','nombre'], where: { } },
@@ -25,12 +25,12 @@ class ResumenNotas {
     }
 
     static getByFk(req, res) {
-        const { annoId, periodoId, colegioId, cursoId, asignaturacursoId, matriculaId } = req.params;
+        const { annoId, periodoId, colegioId, cursoId, asignaturaId, matriculaId } = req.params;
         let consulta = {};
         // let consulta = getBaseQuery(req);
 
         if (matriculaId != '0') {  consulta['matriculaId'] = matriculaId;  }
-        if (asignaturacursoId != '0') {  consulta['asignaturacursoId'] = asignaturacursoId;  }
+        if (asignaturaId != '0') {  consulta['asignaturaId'] = asignaturaId;  }
         if (colegioId != '0') {  consulta['colegioId'] = colegioId;  }
         if (cursoId != '0') {  consulta['cursoId'] = cursoId;  }
         if (annoId != '0') {  consulta['annoId'] = annoId;  }
@@ -40,7 +40,7 @@ class ResumenNotas {
           .findAll({ where : consulta, attributes: ['id','promedio'] ,
             include: [ 
             { model:Matricula, attributes:['id','nombre'], where: { } },
-            { model:AsignaturaCurso, attributes:['id','nombre'], where: { } },
+            { model:Asignatura, attributes:['id','nombre'], where: { } },
             { model:Colegio, attributes:['id','nombre'], where: { } },
             { model:Curso, attributes:['id','nombre'], where: { } },
             { model:Anno, attributes:['id','nombre'], where: { } },
@@ -55,7 +55,7 @@ class ResumenNotas {
 
     static create(req, res) {
     const { annoId, periodoId, colegioId, cursoId,
-        asignaturacursoId, matriculaId} = req.params;
+        asignaturaId, matriculaId} = req.params;
     const { promedio } = req.body;
     return ResumenNota
     .create({
@@ -65,7 +65,7 @@ class ResumenNotas {
         colegioId,
         cursoId,
         annoId,
-        asignaturacursoId,
+        asignaturaId,
    
     })
     .then(notaData => res.status(201).send({
