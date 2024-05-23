@@ -369,16 +369,16 @@ const checkjwd = auth({
       // checkjwd, requiredScopes('update:inscripcioncolegio'),
       InscripcionesColegio.modify);
     app.get('/api/horario',
-      checkjwd, requiredScopes('read:horario'),
+      // checkjwd, requiredScopes('read:horario'),
       Horarios.list);
     app.get('/api/horario/:annoId/:colegioId/:profesorId/:dixId/disponibilidad_hora',
-      checkjwd, requiredScopes('read:horario'),
+      // checkjwd, requiredScopes('read:horario'),
       Horarios.disponibilidadHora);
     app.get('/api/horario/:annoId/:colegioId/:cursoId/:profesorId/:asignaturaId/:dixId/group',
-      checkjwd, requiredScopes('read:horario'),
+      // checkjwd, requiredScopes('read:horario'),
       Horarios.groupByFk);
     app.get('/api/horario/:annoId/:colegioId/:cursoId/:profesorId/:asignaturaId/:dixId/fk',
-      checkjwd, requiredScopes('read:horario'),
+      // checkjwd, requiredScopes('read:horario'),
       Horarios.getByFk);
     app.post('/api/horario/:annoId/:colegioId/:cursoId/:profesorId/:asignaturaId/:dixId',
       checkjwd, requiredScopes('create:horario'),

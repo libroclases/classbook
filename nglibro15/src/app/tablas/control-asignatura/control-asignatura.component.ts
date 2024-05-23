@@ -154,44 +154,7 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
     private ngbCalendar: NgbCalendar,
     private iconsService: IconsService,
     private getpermission: GetPermissionService) {
-   /*
-      const getPermision = (msg: any) => { if(msg) {
-        const year = this.currentDate.getFullYear();
-        this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-        }
 
-      }
-
-*/
-
-/*
-this.usuario$.subscribe(info => {
-  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
-  else { getColor(localStorage.getItem('Color')) }
-});
-*/
-
-  /*
-
-  this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
-    getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
-    getColor(info.personalInfo.usuario.Tema.nombre);
-  }))
-
-  */
-
-      // REVISAR ESTO
-
-   /*
-      auth.isAuthenticated$.subscribe(isAuth => { if(isAuth) {
-        userInfo.personalInfo$.subscribe(info => {
-          if (info) {
-            this.tipoUsuario = info.usuario.TipoUsuario.nombre;
-          }
-        }  )
-      }})
-
-    */
 
 
     this.inputIsEnabled = [];
@@ -244,7 +207,7 @@ this.usuario$.subscribe(info => {
     this.alerts.push(this.errorAlert);
 
     this.fKeysAll = this.fKeysService.getFKeys(this.mainTable)!;
-    this.model = this.ngbCalendar.getToday();
+    this.model = this.ngbCalendar.getToday(); console.log('this.model',this.model);
     // this.model = new NgbDate(2024, 3, 14);
     const newSubsYears = this.crud.getData(yearTable)!.subscribe(query => {
       query.forEach((yearEntry: Anno) => this.yearToTableId.set(yearEntry.numero, yearEntry.id));
@@ -379,7 +342,7 @@ this.usuario$.subscribe(info => {
 
             this.profesoresPie = profesoresPie;
             profesoresPie.forEach(profPie => {
-              this.pieNombres.set(profPie.id, `${profPie.apellido}, ${profPie.nombre}`);
+              this.pieNombres.set(profPie.id, `${profPie.apellido1} ${profPie.apellido1} ${profPie.nombre}`);
             });
             const queryIds = this.selIdsService.getIds(['colegio', 'curso', 'anno']);
             const subsCount = this.crud.getDataCustom(
@@ -459,7 +422,8 @@ this.usuario$.subscribe(info => {
     const hora = entry.hora; // .log('isToday:',this.isToday)
     if ( this.isToday ) {
       console.log('tipoUsuario',this.tipoUsuario)
-      const editable = ( this.tipoUsuario == 'profesor' && this.editar == false );
+      // const editable = ( this.tipoUsuario == 'profesor' && this.editar == false );
+      const editable = true;
       this.editable.set(hora, editable);
     }
     this.nombresAsignaturas.set(hora, entry.Asignatura.nombre );

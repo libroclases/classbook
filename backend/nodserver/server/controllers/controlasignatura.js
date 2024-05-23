@@ -271,6 +271,7 @@ class ControlAsignaturas {
   static populateDia(req, res) {
     const { colegioId, cursoId, annoId } = req.params;
     const { anno, mes, dia, diaSemana } = req.body;
+    console.log('populateDia', colegioId, cursoId, annoId,anno, mes, dia, diaSemana )
     // :colegioId/:cursoId/:asignaturaId/:profesorId/:annoId/:dixId
     if (diaSemana > 5) {
       res.status(200).send({
@@ -281,7 +282,7 @@ class ControlAsignaturas {
       return;
     }
     var consulta = { fecha: { [Op.eq]: new Date(anno, mes - 1, dia) } };
-
+    
     Feriado.findAll({
       attributes: ["id", "fecha", "nombre", "lugar"],
       where: consulta,
@@ -295,14 +296,16 @@ class ControlAsignaturas {
             cursoId,
             dixId: diaSemana,
           };
+          console.log('consulta',consulta);
           Horario.findAll({
             where: consulta,
             attributes: ["id", "hora"],
             order: [["hora", "ASC"]],
             include: [
               {
-                model: AsignaturaProfesor,
-                include: [{ model: Asignatura, attributes: ["id"] }],
+                model: Asignatura,
+                attributes: ["id","nombre"],
+                where: {} 
               },
               {
                 model: Profesor,
@@ -332,7 +335,7 @@ class ControlAsignaturas {
                     hora: horario.hora,
                     colegioId: colegioId,
                     cursoId: cursoId,
-                    asignaturaId: horario.AsignaturaProfesor.Asignatura.id,
+                    asignaturaId: horario.Asignatura.id,
                     profesorId: horario.Profesor.id,
                     profesorPieId: null,
                     annoId: annoId,

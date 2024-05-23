@@ -16,7 +16,8 @@ export interface Profesor {
   export interface ProfesorPie {
     id: number;
     nombre: string;
-    apellido: string;
+    apellido1: string;
+    apellido2: string;
     esPie: boolean;
     }
 
