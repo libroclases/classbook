@@ -40,6 +40,7 @@
 
   <!-- Tabla Principal -->
  
+
   <table class="table table-sm  table-striped table-fit table-bordered">
     <ng-container *ngIf="isGroupTable; else notGroupTable">
       <thead>
@@ -80,13 +81,15 @@
         </tr>
       </thead>
     </ng-template>
+    
       <tbody *ngIf="mainQuery$">
+       
         <ng-container *ngIf="isGroupTable; else notAGroupTable">
           <tr *ngFor="let c of (mainQuery$ | async)  | paginate: { itemsPerPage: 10, currentPage: currPage }">
 
             <ng-container *ngFor="let route of redirectRts">
               <td  style="text-align: center; width: 40px;"><a class="nav-link"
-              [routerLink]="[route, c.Anno.id,c.Colegio.id,c.Curso.id,c.Profesor.id,c.AsignaturaProfesor.id]" routerLinkActive="active"><!-- TODO  Generalizar -->
+              [routerLink]="[route, c.Anno.id,c.Colegio.id,c.Curso.id,c.Profesor.id,c.Asignatura.id]" routerLinkActive="active"><!-- TODO  Generalizar -->
               <em [class]="getBiClass(route)" [title]="getIconLabel(route)"></em></a></td>
             </ng-container>
 

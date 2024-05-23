@@ -510,22 +510,22 @@ const checkjwd = auth({
       checkjwd, requiredScopes('delete:asistencia'),
       Asistencias.delete);
     app.get('/api/controlasignatura',
-      checkjwd, requiredScopes('read:controlasignatura'),
+      // checkjwd, requiredScopes('read:controlasignatura'),
       ControlAsignaturas.list);
     app.get('/api/controlasignatura/:colegioId/:cursoId/:asignaturaId/:profesorId/:horarioId/:annoId/:mesId/fk',
-      checkjwd, requiredScopes('read:controlasignatura'),
+      // checkjwd, requiredScopes('read:controlasignatura'),
       ControlAsignaturas.getByFk);
     app.get('/api/controlasignatura/:colegioId/:cursoId/:asignaturaId/:profesorId/:horarioId/:annoId/:mesId/porDia',
-      checkjwd, requiredScopes('read:controlasignatura'),
+      // checkjwd, requiredScopes('read:controlasignatura'),
       ControlAsignaturas.getPorDia);
     app.post('/api/controlasignatura/:colegioId/:cursoId/:asignaturaId/:profesorId/:profesorPieId/:horarioId/:annoId/:mesId',
-      checkjwd, requiredScopes('create:controlasignatura'),
+      // checkjwd, requiredScopes('create:controlasignatura'),
       ControlAsignaturas.create);
     app.post('/api/controlasignatura/:colegioId/:cursoId/:annoId/populateDia',
-      checkjwd,requiredScopes(['create:controlasignatura', 'read:feriado', 'read:horario']),
+      // checkjwd,requiredScopes(['create:controlasignatura', 'read:feriado', 'read:horario']),
       ControlAsignaturas.populateDia);
     app.put('/api/controlasignatura/:controlasignaturaId',
-      checkjwd, requiredScopes('update:controlasignatura'),
+      // checkjwd, requiredScopes('update:controlasignatura'),
       ControlAsignaturas.modify);
     app.delete('/api/controlasignatura/:controlasignaturaId',
       checkjwd, requiredScopes('delete:controlasignatura'),
