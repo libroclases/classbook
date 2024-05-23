@@ -20,10 +20,10 @@ class EstadoAlumnos {
   }
 
   static getByFk(req, res) {
-    const { alumnoId,  tipoestadoId } = req.params;
+    const { alumnoId, matriculaId,  tipoestadoId } = req.params;
     let consulta = {};
     
-    // if (matriculaId != '0') { consulta['matriculaId'] = matriculaId; }
+    if (matriculaId != '0') { consulta['matriculaId'] = matriculaId; }
     if (alumnoId != '0') { consulta['alumnoId'] = alumnoId; }
     if (tipoestadoId != '0') { consulta['tipoestadoId'] = tipoestadoId;  }
 

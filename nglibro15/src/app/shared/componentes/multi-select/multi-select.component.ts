@@ -99,7 +99,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
           foreignKeys.push(tb);
           this.requiredBySelTree.get(tb)?.push(table);
         }
-      });
+      }); console.log(table,foreignKeys)
       if (foreignKeys.length === 0) {
         this.freeTables.push(table);
       } else {

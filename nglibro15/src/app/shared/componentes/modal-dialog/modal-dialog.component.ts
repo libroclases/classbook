@@ -73,7 +73,7 @@ function zfill(number: number, width: number) {
 
     validator: any;
 
-    saveCheck(boolField: string, event: any) { console.log('poronga',boolField, event); }
+    saveCheck(boolField: string, event: any) { console.log('mostra',boolField, event); }
 
     @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
@@ -388,7 +388,7 @@ function zfill(number: number, width: number) {
 
       let ids: any = [];
       let obj: any = {};
-      console.log('poronga->',this.formModal.value)
+      console.log('mostra->',this.formModal.value)
       this.modalData.textFields.forEach( (texto: string) => {
 
         obj[texto] = this.formModal.value[texto]

@@ -15,7 +15,7 @@ export class EstadoAlumnoComponent {
   booleanFields = [];
   dateFields = ['fecha'];
   // displayFKFields: CamelCase
-  displayFKFields = ['Alumno','Matricula','tipoestado'];
+  displayFKFields = ['Alumno','Matricula','TipoEstado'];
   redirectRoutes = [];
 
   // Selectores
