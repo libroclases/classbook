@@ -81,7 +81,7 @@ export class NotaComponent implements OnInit {
 
   selTables = [  "anno", "periodo", "colegio", "curso", "profesor", "asignatura",  ];
   tableLabels = ['Año', 'Periodo','Colegio' ,'Curso','Profesor','Asignatura', ];
-  ignoreFkRequirements: string[] = [];
+  ignoreFkRequirements: string[] = ['anno','colegio','curso'];
   changeFnsArray: Function[] = [];
   patchFKsFromStorage = ['anno','periodo','colegio','curso'];
 
