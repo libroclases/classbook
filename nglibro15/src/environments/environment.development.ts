@@ -125,9 +125,9 @@ export const environment = {
 
     info: {
       color: 'rgb(13, 202, 240)',
-      lineal: 'linear-gradient(to right, #425ECC, #33D8FF)',
+      lineal: 'linear-gradient(to right,#0BA5C4, #0dcaf0)',
       menu: "rgb(13, 202, 240)",
-      colorMenuButton: 'rgb(51, 212, 253)',
+      colorMenuButton: 'rgb(13, 201, 239)',
       pagination: 'rgb(201, 252, 255)',
       bodybgcolor: 'linear-gradient(to right, #33D8FF, #425ECC)',
       tablehead:  'rgb(13, 202, 240)',

@@ -123,8 +123,8 @@ export const environment = {
     },
 
     info: {
-      color: 'orange',
-      lineal: 'linear-gradient(to right, #ffb505,#ffd966)',
+      color: 'cyan',
+      lineal: 'linear-gradient(to right, #0dcaf0,#ffd966)',
       menu: '#FFE7C1',
       colorMenuButton: '#ffd761',
       pagination: '#f2e6d3',
