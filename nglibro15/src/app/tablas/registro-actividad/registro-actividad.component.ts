@@ -227,7 +227,8 @@ this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((e
 
             for ( const [index, entry] of query.entries() ) {
               this.indexToId.set(index, entry.id);
-              this.editable.set(index, entry.Profesor.id == this.userId); console.log(entry.Profesor.id,this.userId)
+              // this.editable.set(index, entry.Profesor.id == this.userId); console.log(entry.Profesor.id,this.userId) OJO
+              this.editable.set(index, true);
               this.inputIsEnabled.set(index, false);
               this.descripciones.set(index, entry.descripcion);
               this.descripcionesToSave.set(index, entry.descripcion);

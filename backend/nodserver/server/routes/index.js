@@ -531,10 +531,10 @@ const checkjwd = auth({
       checkjwd, requiredScopes('delete:controlasignatura'),
       ControlAsignaturas.delete);
     app.get('/api/registroactividad',
-      checkjwd, requiredScopes('read:registroactividad'),
+      // checkjwd, requiredScopes('read:registroactividad'),
       RegistroActividades.list);
     app.get('/api/registroactividad/:colegioId/:cursoId/:asignaturaId/:asignaturaprofesorId/:profesorId/:horarioId/:annoId/:mesId/fk',
-      checkjwd, requiredScopes('read:registroactividad'),
+      // checkjwd, requiredScopes('read:registroactividad'),
       RegistroActividades.getByFk);
     app.get('/api/registroactividad/:colegioId/:cursoId/:asignaturaId/:annoId/:mesId/registro_actividad_by_mes',
       checkjwd, requiredScopes('read:registroactividad'),
@@ -543,7 +543,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('create:registroactividad'),
       RegistroActividades.create);
     app.post('/api/registroactividad/:colegioId/:cursoId/:asignaturaId/:annoId/:mesId/populate_mes',
-      checkjwd, requiredScopes('create:registroactividad'),
+      // checkjwd, requiredScopes('create:registroactividad'),
       RegistroActividades.populateMes);
     app.put('/api/registroactividad/:registroactividadId',
       checkjwd, requiredScopes('update:registroactividad'),

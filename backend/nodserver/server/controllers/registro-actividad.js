@@ -224,10 +224,10 @@ class RegistroActividades {
       order: [['fecha', 'ASC']],
       raw: true
     })
-    .then(feriados => {
+    .then(feriados => {  console.log('feriados', feriados);
       const daysInMonth = new Date(anno, mes, 0).getDate();
       const dowFirstDay = (new Date(anno, mes-1, 1).getDay() + 6) % 7;
-      let feriadosSet = new Set();
+      let feriadosSet = new Set();console.log('dias,primerdia',daysInMonth, dowFirstDay)
       for ( let feriado of feriados ) {
         feriadosSet.add(parseInt(feriado.fecha.toString().split('-')[2]));
       }
@@ -238,11 +238,11 @@ class RegistroActividades {
           cursoId,
           annoId,
         },
-        attributes: ["id", "hora", "asignaturaprofesorId", "dixId", "profesorId"],
+        attributes: ["id", "hora", "asignaturaId", "dixId", "profesorId"],
         include: [
           {
-            model: AsignaturaProfesor,
-            attributes:[ 'asignaturaId' ],
+            model: Asignatura,
+            attributes:[ 'id' ],
           }
         ],
         order: [['dixId', 'ASC'], ['hora', 'ASC']],
@@ -267,7 +267,7 @@ class RegistroActividades {
         let horariosContiguos = [];
         let addNewObject = true;
         for ( let horario of horarios ) {
-          if ( horario['AsignaturaProfesor.asignaturaId'] != asignaturaId ) {
+          if ( horario['Asignatura.id'] != asignaturaId ) {
             continue;
           }
           addNewObject = (
@@ -283,7 +283,7 @@ class RegistroActividades {
               horarioId: horario.id,
               horaInicial: horario.hora,
               dixId: horario.dixId,
-              asignaturaprofesorId: horario.asignaturaprofesorId,
+              asignaturaId: horario.asignaturaId,
               profesorId: horario.profesorId,
             });
             numeroHoras = 1;
@@ -306,7 +306,7 @@ class RegistroActividades {
             colegioId,
             cursoId,
             asignaturaId,
-            asignaturaprofesorId: horario.asignaturaprofesorId,
+            asignaturaId: horario.asignaturaId,
             profesorId: horario.profesorId,
             annoId,
             mesId,
