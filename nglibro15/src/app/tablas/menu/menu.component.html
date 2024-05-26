@@ -132,7 +132,7 @@
           </ul>
 
         </div>
-        <span  *ngIf="auth.isAuthenticated$ | async"><i>{{saludo}} {{tipousuario}} {{type}} : {{fullName}}</i></span>
+        <span  *ngIf="mostra_usuario && (auth.isAuthenticated$ | async)"><i>{{saludo}} {{tipousuario}} {{type}} : {{fullName}}</i></span>
 
       </div>
     </nav>

@@ -11,6 +11,7 @@ import { GetUsuario, SetUsuario } from 'src/app/ngxs/usuario/usuario.actions';
 // import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { Permission } from 'src/environments/environment.development';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-menu',
@@ -31,7 +32,7 @@ export class MenuComponent implements OnInit{
 
 
     deviceinfo!:any;
-    // mostra=false;
+    mostra_usuario=false;
     
     objcolors = env.colors;
     menu!:string;
@@ -83,7 +84,8 @@ export class MenuComponent implements OnInit{
 
     const year = this.currentDate.getFullYear().toString();
 
-    // this.epicFunction();
+    this.epicFunction();
+
 
     this.docElement = document.documentElement;
 
@@ -136,7 +138,7 @@ export class MenuComponent implements OnInit{
     private iconsService: IconsService,
     private router: Router,
     private store: Store,
-    // private deviceService: DeviceDetectorService,
+    private deviceService: DeviceDetectorService,
     public auth: AuthService) {
       this.auth.user$.pipe(
         map((user:any) => user?.email),
@@ -149,14 +151,14 @@ export class MenuComponent implements OnInit{
       ).subscribe();
     }
 
-    /*
+    
     epicFunction() {
      
       this.deviceInfo = this.deviceService.getDeviceInfo();
       const isDesktopDevice = this.deviceService.isDesktop();
-      this.mostra = ( isDesktopDevice==true ) ? true : false;
+      this.mostra_usuario = ( isDesktopDevice ) ? true : false;
     }
-    */
+    
 
     mostrar_color() { this.getColor(localStorage.getItem('Color')!)}
 
