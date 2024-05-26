@@ -52,18 +52,20 @@ export class MenuComponent implements OnInit{
     currentDate:Date = new Date();
     isUtp:any=null;
 
+     email!:string;
+
     getColor = (color:string) => {
 
-      if (color=='azul') {
-        this.color="azul";
-        this.menu = this.objcolors.azul.menu;
+      if (color=='primary') {
+        this.color="primary";
+        this.menu = this.objcolors.primary.menu;
         this.canvas = 'bg-primary';
         this.tabletype = 'table-primary';
         this.letters = 'blue';
       }
-      if (color=='verde') {
-        this.color = "verde";
-        this.menu = this.objcolors.verde.menu;
+      if (color=='success') {
+        this.color = "success";
+        this.menu = this.objcolors.success.menu;
         this.canvas = 'bg-success';
         this.tabletype = 'table-success';
         this.letters = 'green';
@@ -138,7 +140,10 @@ export class MenuComponent implements OnInit{
     public auth: AuthService) {
       this.auth.user$.pipe(
         map((user:any) => user?.email),
-        tap(user => { if (user) this.store.dispatch(new GetUsuario(user))}),
+        tap(user => { if (user) { 
+          this.store.dispatch(new GetUsuario(user));
+          this.email = user;
+        } }),
         takeLast(1)
  
       ).subscribe();
@@ -158,17 +163,15 @@ export class MenuComponent implements OnInit{
   /* store functions */
 
   setTable(table:string) {
-      // this.store.dispatch(new GetPermiso(this.permission[table]));
       localStorage.setItem('Menu',table);
   }
 
   mensaje(color:any) {
-    localStorage.setItem('Color', color[1])
+    localStorage.setItem('Color', color[1]);
     this.store.dispatch(new SetUsuario(color[0], this.usuarioId)).pipe(
-      //tap(() => localStorage.setItem('Color', color[1])),
-      //tap(() => this.getColor(color[1]))
-    )
-
+      tap(() => this.store.dispatch(new GetUsuario(this.email)))
+    ).subscribe()
+    
   }
 
   getBiClass(route: string) {

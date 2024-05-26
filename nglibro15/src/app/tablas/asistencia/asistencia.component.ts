@@ -68,7 +68,7 @@ export class AsistenciaComponent implements OnInit {
 
   selTables: string[] = ['colegio', 'anno', 'curso', 'mes'];
   changeFnsArray!: Function[];
-  patchFksFromStorage = ['colegio', 'anno', 'curso','mes'];
+  patchFksFromStorage = ['colegio', 'anno', 'curso'];
 
   constructor(
     private crud: CrudService,
@@ -78,27 +78,6 @@ export class AsistenciaComponent implements OnInit {
     private getpermission: GetPermissionService
   ) {
 
-/*
-    const getPermision = (msg: any) => { if(msg) {
-      const year = this.currentDate.getFullYear();
-      this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-      }
-
-    }
-*/
-/*
-this.usuario$.subscribe(info => {
-  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
-  else { getColor(localStorage.getItem('Color')) }
-});
-*/
-
-/*
-this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
-  getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
-  getColor(info.personalInfo.usuario.Tema.nombre);
-}))
-*/
 
 }
 
@@ -106,16 +85,16 @@ getColor = (color:string | null) => {
 
   if (color == null) {  color = localStorage.getItem('Color')  }
 
-  if (color == 'azul') {
-    this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-    this.pagination = this.objcolors.azul.pagination;
-    this.url = this.photo.azul;
+  if (color == 'primary') {
+    this.bodybgcolor = this.objcolors.primary.bodybgcolor;
+    this.pagination = this.objcolors.primary.pagination;
+    this.url = this.photo.primary;
 
   }
-  if (color == 'verde') {
-    this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-    this.pagination = this.objcolors.verde.pagination;
-    this.url = this.photo.verde;
+  if (color == 'success') {
+    this.bodybgcolor = this.objcolors.success.bodybgcolor;
+    this.pagination = this.objcolors.success.pagination;
+    this.url = this.photo.success;
 
   }
   if (color == 'info') {

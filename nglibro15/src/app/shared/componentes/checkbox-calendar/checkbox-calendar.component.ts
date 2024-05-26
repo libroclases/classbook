@@ -166,18 +166,18 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
 
     const getColor = (color:string | null) => {
 
-      if (color=='azul' || !color) {
-        this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-        this.pagination = this.objcolors.azul.pagination;
-        this.tablehead = this.objcolors.azul.tablehead;
-        this.modalbutton = this.objcolors.azul.modalbutton;
+      if (color=='primary' || !color) {
+        this.bodybgcolor = this.objcolors.primary.bodybgcolor;
+        this.pagination = this.objcolors.primary.pagination;
+        this.tablehead = this.objcolors.primary.tablehead;
+        this.modalbutton = this.objcolors.primary.modalbutton;
 
       }
-      if (color=='verde') {
-        this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-        this.pagination = this.objcolors.verde.pagination;
-        this.tablehead = this.objcolors.verde.tablehead;
-        this.modalbutton = this.objcolors.verde.modalbutton;
+      if (color=='success') {
+        this.bodybgcolor = this.objcolors.success.bodybgcolor;
+        this.pagination = this.objcolors.success.pagination;
+        this.tablehead = this.objcolors.success.tablehead;
+        this.modalbutton = this.objcolors.success.modalbutton;
       }
       if (color=='info') {
         this.bodybgcolor = this.objcolors.info.bodybgcolor;

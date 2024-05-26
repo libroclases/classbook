@@ -9,6 +9,7 @@
 }
 
 div {
+    align-content: center;
     background-color: aliceblue;
     border-radius: 0%;
     border-spacing: 1cap;
@@ -18,7 +19,7 @@ div {
     opacity: 0.9;
 }
 
-h3.azul {
+h3.primary {
     color:darkblue;
     font-style: normal;
     font-family: Arial, Helvetica, sans-serif;
@@ -26,7 +27,7 @@ h3.azul {
     width:auto;
 }
 
-h3.verde {
+h3.success {
     color: darkgreen;
     font-style: normal;
     font-family: Arial, Helvetica, sans-serif;
@@ -42,14 +43,14 @@ h3.info {
     width:auto;
 }
 
-th.azul {
+th.primary {
     color:darkblue;
     font-style: normal;
     font-family: Arial, Helvetica, sans-serif;
     font-size:normal ;
     width:auto;
 }
-th.verde {
+th.success {
     color: darkgreen;
     font-style: normal;
     font-family: Arial, Helvetica, sans-serif;

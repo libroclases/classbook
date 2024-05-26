@@ -1,60 +1,67 @@
 <div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 1%;padding-bottom: 0%;"
 [style.background-color]="bodybgcolor" 
+[style.background-color]="bodybgcolor"
+[style.background-image]="url"
+[style.background-position]="position"
+[style.opacity]="opacity"
+[style.background-size]="size" 
 [style.height] = "height">
 
 
 
 
 
-        <div class="center"  [style.opacity]="opacity">
-
-          <h2>Registro Usuario</h2>
+<div class="container " style="max-width: 600px; opacity:90%">
+         
+          <h2 [class]='color_h2'>Registro Usuario</h2>
           <form  [formGroup]="valuesForm">
+            <div class="mx-5 pd-5">
+              <table  [class]="table_class">
+                <tbody>
+    
+                  <tr><td [class]="color">Email</td><td><input type="text" class="form-control" formControlName="email" />
+    
+    
+                    <div *ngIf="valuesForm.controls['email']?.invalid && (valuesForm.controls['email']?.dirty || valuesForm.controls['email']?.touched)"  class="alert alert-danger">
+                      <div *ngIf="valuesForm.controls['email']?.errors?.['emailValidator']">Por favor ingrese un email</div>
+                    </div>
+                  </td>
+                  <td>
+                    <button type="button" [class]="button_class"  (click)="email_consulta()">Buscar</button>
+                  </td>
+                </tr>
+    
+                  <tr><td [class]="color">Username</td><td><input type="text"  class="form-control"  formControlName="username" [disabled]="disable" />
+    
+                    <div *ngIf="valuesForm.controls['username']?.invalid && (valuesForm.controls['username']?.dirty || valuesForm.controls['username']?.touched)"  class="alert alert-danger">
+                      <div *ngIf="valuesForm.controls['username']?.errors?.['required']">Por favor ingrese un username</div>
+                    </div>
+                  </td><td>&nbsp;</td></tr>
+                  <tr *ngFor="let table of tables; index as i" ><td  [class]="color">{{getTableLabel(table)}}</td>
+                    <th>
+                      <select class="form-select"
+                      [formControlName]="table">
+                        <option value=0>Ninguno</option>
+                        <option *ngFor="let r of (queries[table] | async)"
+                          [value]="r.id">{{getLabel(table, r)}}</option>
+                      </select>
+                      <div *ngIf="valuesForm.controls[table]?.invalid && (valuesForm.controls[table]?.dirty || valuesForm.controls[table]?.touched)"  class="alert alert-danger">
+                          <div *ngIf="valuesForm.controls[table]?.errors?.['selectValidator']">Debe ser seleccionado</div>
+                      </div>
+                    </th><td>&nbsp;</td>
+                  </tr>
+                </tbody>
+              </table>
 
-          <table  class="table table-sm table-secundary table-fit">
-            <tbody class="table-secundary" >
+            </div>  
 
-              <tr><td>Email</td><td><input type="text" formControlName="email" [disabled]="disable.editar"  />
-
-
-                <div *ngIf="valuesForm.controls['email']?.invalid && (valuesForm.controls['email']?.dirty || valuesForm.controls['email']?.touched)"  class="alert alert-danger">
-                  <div *ngIf="valuesForm.controls['email']?.errors?.['emailValidator']">Por favor ingrese un email</div>
-                </div>
-              </td>
-              <td>
-                <button type="button" class="btn  btn-sm"  (click)="email_consulta()"
-                   [style.background-color]="modalbutton" class="text-light" [disabled]="disable.editar" >Buscar</button>
-              </td>
-            </tr>
-
-              <tr><td>Username</td><td><input type="text" formControlName="username" [disabled]="disable" />
-
-                <div *ngIf="valuesForm.controls['username']?.invalid && (valuesForm.controls['username']?.dirty || valuesForm.controls['username']?.touched)"  class="alert alert-danger">
-                  <div *ngIf="valuesForm.controls['username']?.errors?.['required']">Por favor ingrese un username</div>
-                </div>
-              </td></tr>
-              <tr *ngFor="let table of tables; index as i" ><td>{{getTableLabel(table)}}</td>
-                <th>
-                  <select class="form-select form-select-sm"
-                  [formControlName]="table">
-                    <option value=0>Ninguno</option>
-                    <option *ngFor="let r of (queries[table] | async)"
-                      [value]="r.id">{{getLabel(table, r)}}</option>
-                  </select>
-                  <div *ngIf="valuesForm.controls[table]?.invalid && (valuesForm.controls[table]?.dirty || valuesForm.controls[table]?.touched)"  class="alert alert-danger">
-                      <div *ngIf="valuesForm.controls[table]?.errors?.['selectValidator']">Debe ser seleccionado</div>
-                  </div>
-                </th>
-              </tr>
-            </tbody>
-          </table>
           <br>
-          <span *ngIf="valuesForm.valid"><em class="bi bi-check2-circle">&nbsp;Valid!</em></span>
-          <span *ngIf="!valuesForm.valid"><em class="bi bi-x-circle">&nbsp;Invalid!</em></span>
-          <span><button type="button" class="btn  btn-sm" [disabled]="valuesForm.invalid" (click)="ingresar()"
-            [style.background-color]="modalbutton" class="text-light">Ingresar</button></span>
-          <span><button type="button" class="btn  btn-sm" [disabled]="valuesForm.invalid" (click)="reset()"
-            [style.background-color]="modalbutton" class="text-light">Limpiar</button></span>
+          <span class="mx-2" *ngIf="valuesForm.valid"><em class="bi bi-check2-circle">&nbsp;Valid!</em></span>
+          <span class="mx-2" *ngIf="!valuesForm.valid"><em class="bi bi-x-circle">&nbsp;Invalid!</em></span>
+          <span class="mx-2"><button type="button" [class]="button_class" [disabled]="valuesForm.invalid" (click)="ingresar()"
+            [style.background-color]="modalbutton" [class]="button_class">Ingresar</button></span>
+            <button type="button" [class]="button_class" [disabled]="valuesForm.invalid" (click)="reset()"
+            [style.background-color]="modalbutton" class="text-light">Limpiar</button>
           </form>
           <br>
           <p *ngIf="usuario">{{email_asociado}}</p>

@@ -29,6 +29,7 @@ export class MatriculaAlumnoComponent implements OnInit {
   modalDataObj!: any;
 
   msg:any;
+  opacity="70%";
 
   // data:any={};
   muestra_dialog=false;
@@ -39,6 +40,10 @@ export class MatriculaAlumnoComponent implements OnInit {
   bodybgcolor!:string;
   pagination!:string;
   tablehead!:string;
+  color_h2!:string;
+  button_class!:any;
+  table_class!:any;
+  color!:any;
 
   bgmodal!:string;
   modalbutton!:any;
@@ -50,7 +55,6 @@ export class MatriculaAlumnoComponent implements OnInit {
 
   url!:string;
   photo = environment.photo;
-  opacity = environment.opacity;
   position = "center";
   size = "cover";
 
@@ -68,22 +72,26 @@ export class MatriculaAlumnoComponent implements OnInit {
 
     if (color == null) {  color = localStorage.getItem('Color')  }
 
-    if (color=='azul') {
-      this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-      this.pagination = this.objcolors.azul.pagination;
-      this.tablehead = this.objcolors.azul.tablehead;
-      this.bgmodal = this.objcolors.azul.bgmodal;
-      this.modalbutton = this.objcolors.azul.modalbutton;
-      this.url = this.photo.azul;
+    this.button_class= `btn btn-${color} text-light`;
+    this.table_class = `table table-${color}`;
+    this.color = color;
+
+    if (color=='primary') {
+      this.bodybgcolor = this.objcolors.primary.bodybgcolor;
+      this.pagination = this.objcolors.primary.pagination;
+      this.tablehead = this.objcolors.primary.tablehead;
+      this.bgmodal = this.objcolors.primary.bgmodal;
+      this.modalbutton = this.objcolors.primary.modalbutton;
+      this.url = this.photo.primary;
 
     }
-    if (color=='verde') {
-      this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-      this.pagination = this.objcolors.verde.pagination;
-      this.tablehead = this.objcolors.verde.tablehead;
-      this.bgmodal = this.objcolors.verde.bgmodal;
-      this.modalbutton = this.objcolors.verde.modalbutton;
-      this.url = this.photo.verde;
+    if (color=='success') {
+      this.bodybgcolor = this.objcolors.success.bodybgcolor;
+      this.pagination = this.objcolors.success.pagination;
+      this.tablehead = this.objcolors.success.tablehead;
+      this.bgmodal = this.objcolors.success.bgmodal;
+      this.modalbutton = this.objcolors.success.modalbutton;
+      this.url = this.photo.success;
 
     }
     if (color=='info') {

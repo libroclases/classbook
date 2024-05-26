@@ -36,11 +36,11 @@ export class AuthButtonComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const getColor = (color:string | null) => {
       
-      if (color=='azul' || !color) {
-        this.colorMenuButton = this.objcolors.azul.colorMenuButton;
+      if (color=='primary' || !color) {
+        this.colorMenuButton = this.objcolors.primary.colorMenuButton;
       }
-      else if (color=='verde') {
-        this.colorMenuButton = this.objcolors.verde.colorMenuButton;
+      else if (color=='success') {
+        this.colorMenuButton = this.objcolors.success.colorMenuButton;
       }
       else if (color=='info') {
 

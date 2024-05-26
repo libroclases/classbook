@@ -78,18 +78,18 @@
               <li class="nav-item dropdown">
                 <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-grid'>&nbsp;Procesos&nbsp;</em></button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item"  routerLink="/matricula_alumno" routerLinkActive="active" (click)="setTable('MatriculaAlumno')">Matrícula Alumno</a></li>
-                  <li><a class="dropdown-item" routerLink="/registro_usuario" routerLinkActive="active" (click)="setTable('RegistroUsuario')">Registro Usuario</a></li>
-                  <li><a class="dropdown-item" routerLink="/informar-sigue" routerLinkActive="active" (click)="setTable('InformeSige')">Informe SIGE</a></li>
+                  <li><a class="dropdown-item" routerLink="/registro_usuario" routerLinkActive="active" (click)="setTable('RegistroUsuario')">1- Registro Usuario</a></li>
+                  <li><a class="dropdown-item"  routerLink="/matricula_alumno" routerLinkActive="active" (click)="setTable('MatriculaAlumno')">2.- Matrícula Alumno</a></li>
+                  <li><a class="dropdown-item" routerLink="/informar-sigue" routerLinkActive="active" (click)="setTable('InformeSige')">3.- Informe SIGE</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
                 <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-palette'>&nbsp;Temas</em></button>
                 <ul class="dropdown-menu">
 
-                  <li><a class="dropdown-item" (click)="mensaje([1,'azul'])">&nbsp;Azul</a></li>
-                  <li><a class="dropdown-item" (click)="mensaje([2,'verde'])">&nbsp;Verde</a></li>
-                  <li><a class="dropdown-item" (click)="mensaje([3,'info'])">&nbsp;Cyan</a></li>
+                  <li><a class="dropdown-item" (click)="mensaje([1,'primary'])">&nbsp;Primary</a></li>
+                  <li><a class="dropdown-item" (click)="mensaje([2,'success'])">&nbsp;Success</a></li>
+                  <li><a class="dropdown-item" (click)="mensaje([3,'info'])">&nbsp;Info</a></li>
 
                 </ul>
               </li>

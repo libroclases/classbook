@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { environment as env } from '../../../environments/environment';
-// import { AuthService } from '@auth0/auth0-angular';
+
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
-// import { GetUsuario } from 'src/app/ngxs/usuario.actions';
+
 import { DeviceDetectorService } from 'ngx-device-detector';
 @Component({
   selector: 'app-cabecera',
@@ -33,13 +33,13 @@ export class CabeceraComponent implements OnInit{
 
   constructor(private deviceService: DeviceDetectorService) {
     const getColor = (color:string | null) => {
-          if (color=='azul' || !color) { 
-            this.color = this.objcolors.azul.color;
-            this.lineal = this.objcolors.azul.lineal;
+          if (color=='primary' || !color) { 
+            this.color = this.objcolors.primary.color;
+            this.lineal = this.objcolors.primary.lineal;
             }
-          else if (color=='verde') {
-            this.color = this.objcolors.verde.color;
-            this.lineal = this.objcolors.verde.lineal;
+          else if (color=='success') {
+            this.color = this.objcolors.success.color;
+            this.lineal = this.objcolors.success.lineal;
 
           }
           else if (color=='info') {

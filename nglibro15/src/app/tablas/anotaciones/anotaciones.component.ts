@@ -1,6 +1,6 @@
 import { Component, HostListener, OnDestroy } from '@angular/core';
 import { Alert } from '../../interfaces/generic.interface';
-// import { CrudService } from '../../shared/services/crud/crud.service';
+
 import { Notification } from '../../interfaces/generic.interface';
 import { ForeignKeysService } from '../../shared/services/foreign-keys/foreign-keys.service';
 import { IconsService } from '../../shared/services/icons/icons.service';
@@ -96,56 +96,34 @@ export class AnotacionesComponent implements OnDestroy {
     private iconsService: IconsService,
     private getpermission: GetPermissionService) {
 
-      /*
-      const getPermision = (msg: any) => { if(msg) {
-        const year = this.currentDate.getFullYear();
-        this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-        }
-
-      }
-      */
-
-
-/*
-this.usuario$.subscribe(info => {
-  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
-  else { getColor(localStorage.getItem('Color')) }
-});
-*/
-/*
-  this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
-    getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
-    getColor(info.personalInfo.usuario.Tema.nombre);
-  }))
-*/
   }
 
   getColor(color:string | null)  {
 
     if (color == null) {  color = localStorage.getItem('Color')  }
 
-    if (color=='azul') {
-      this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-      this.pagination = this.objcolors.azul.pagination;
-      this.tablehead = this.objcolors.azul.tablehead;
-      this.bgmodal = this.objcolors.azul.bgmodal;
-      this.modalbutton = this.objcolors.azul.modalbutton;
-      this.url = this.photo.azul;
+    if (color=='primary') {
+      this.bodybgcolor = this.objcolors.primary.bodybgcolor;
+      this.pagination = this.objcolors.primary.pagination;
+      this.tablehead = this.objcolors.primary.tablehead;
+      this.bgmodal = this.objcolors.primary.bgmodal;
+      this.modalbutton = this.objcolors.primary.modalbutton;
+      this.url = this.photo.primary;
     }
-    else if (color=='verde') {
-      this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-      this.pagination = this.objcolors.verde.pagination;
-      this.tablehead = this.objcolors.verde.tablehead;
-      this.bgmodal = this.objcolors.verde.bgmodal;
-      this.modalbutton = this.objcolors.verde.modalbutton;
-      this.url = this.photo.verde;
+    else if (color=='success') {
+      this.bodybgcolor = this.objcolors.success.bodybgcolor;
+      this.pagination = this.objcolors.success.pagination;
+      this.tablehead = this.objcolors.success.tablehead;
+      this.bgmodal = this.objcolors.success.bgmodal;
+      this.modalbutton = this.objcolors.success.modalbutton;
+      this.url = this.photo.success;
     }
     else if (color=='info') {
       this.bodybgcolor = this.objcolors.info.bodybgcolor;
       this.pagination = this.objcolors.info.pagination;
       this.tablehead = this.objcolors.info.tablehead;
       this.bgmodal = this.objcolors.info.bgmodal;
-      this.modalbutton = this.objcolors.verde.modalbutton;
+      this.modalbutton = this.objcolors.success.modalbutton;
       this.url = this.photo.info;
     }
 }

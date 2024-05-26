@@ -98,7 +98,7 @@ export const environment = {
     banner_height: 100, menu_height: 62, margen_superior_tabla: 150
   },
   colors: {
-    azul: {
+    primary: {
       color: 'blue',
       lineal: 'linear-gradient(to bottom, #4880EC, #019CAD)',
       menu: '#e3e4f3',
@@ -110,7 +110,7 @@ export const environment = {
       modalbutton: 'rgb(69, 130, 233)',
     },
 
-    verde: {
+    success: {
       color: 'green',
       lineal: 'linear-gradient(to right, #38B15C,#76FA91)',
       menu: '#dcf3dd',
@@ -135,8 +135,8 @@ export const environment = {
     },
   },
   photo: {
-    azul: 'url(assets/images/fondo-azul2.png)',
-    verde: 'url(assets/images/fondo_verde.jpeg)',
+    primary: 'url(assets/images/fondo-azul2.png)',
+    success: 'url(assets/images/fondo_verde.jpeg)',
     info: 'url(assets/images/purpura.jpg)',
   },
 

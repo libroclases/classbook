@@ -44,13 +44,18 @@ export class RegistroUsuarioComponent implements OnInit {
 
   url!:string;
   photo = environment.photo;
-  opacity = environment.opacity;
+  opacity = "70%";
+  // color_h2="text-primary my-3";
   position = "center";
   size = "cover";
 
   bodybgcolor!:string;
   pagination!:string;
   tablehead!:string;
+  color_h2!:string;
+  button_class!:any;
+  table_class!:any;
+  color!:any;
 
   disable:any;
   editar:any;
@@ -100,22 +105,31 @@ export class RegistroUsuarioComponent implements OnInit {
 
     getColor = (color:string | null) => {
 
-    if (color=='azul' || !color) {
-      this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-      this.pagination = this.objcolors.azul.pagination;
-      this.tablehead = this.objcolors.azul.tablehead;
-      this.bgmodal = this.objcolors.azul.bgmodal;
-      this.modalbutton = this.objcolors.azul.modalbutton;
-      this.url = this.photo.azul;
+    if (color == null) {  color = localStorage.getItem('Color')  }
+
+    this.button_class= `btn btn-${color} text-light`;
+    this.table_class = `table table-${color}`;
+    this.color = color;
+
+    if (color=='primary' || !color) {
+      this.bodybgcolor = this.objcolors.primary.bodybgcolor;
+      this.pagination = this.objcolors.primary.pagination;
+      this.tablehead = this.objcolors.primary.tablehead;
+      this.bgmodal = this.objcolors.primary.bgmodal;
+      this.modalbutton = this.objcolors.primary.modalbutton;
+      this.url = this.photo.primary;
+      this.color_h2 = `text-${this.objcolors.primary.color} my-3`;
+      
 
     }
-    if (color=='verde') {
-      this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-      this.pagination = this.objcolors.verde.pagination;
-      this.tablehead = this.objcolors.verde.tablehead;
-      this.bgmodal = this.objcolors.verde.bgmodal;
-      this.modalbutton = this.objcolors.verde.modalbutton;
-      this.url = this.photo.verde;
+    if (color=='success') {
+      this.bodybgcolor = this.objcolors.success.bodybgcolor;
+      this.pagination = this.objcolors.success.pagination;
+      this.tablehead = this.objcolors.success.tablehead;
+      this.bgmodal = this.objcolors.success.bgmodal;
+      this.modalbutton = this.objcolors.success.modalbutton;
+      this.url = this.photo.success;
+      this.color_h2 = `text-${this.objcolors.success.color} my-3`;
     }
     if (color=='info') {
       this.bodybgcolor = this.objcolors.info.bodybgcolor;
@@ -124,6 +138,7 @@ export class RegistroUsuarioComponent implements OnInit {
       this.bgmodal = this.objcolors.info.bgmodal;
       this.modalbutton = this.objcolors.info.modalbutton;
       this.url = this.photo.info;
+      this.color_h2 = `text-${this.objcolors.info.color} my-3`;
     }
 
   }

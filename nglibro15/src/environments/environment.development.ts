@@ -99,8 +99,8 @@ export const environment = {
     banner_height: 100, menu_height: 62, margen_superior_tabla: 150
   },
   colors: {
-    azul: {
-      color: 'blue',
+    primary: {
+      color: 'primary',
       lineal: 'linear-gradient(to right, #4880EC, #019CAD)',
       menu: '#e3e4f3',
       colorMenuButton: '#059bb0',
@@ -111,8 +111,8 @@ export const environment = {
       modalbutton: 'rgb(69, 130, 233)',
     },
 
-    verde: {
-      color: 'green',
+    success: {
+      color: 'success',
       lineal: 'linear-gradient(to right, #38B15C,#76FA91)',
       menu: '#dcf3dd',
       colorMenuButton: '#71f48d',
@@ -124,7 +124,7 @@ export const environment = {
     },
 
     info: {
-      color: 'rgb(13, 202, 240)',
+      color: 'info',
       lineal: 'linear-gradient(to right,#0BA5C4, #0dcaf0)',
       menu: "rgb(13, 202, 240)",
       colorMenuButton: 'rgb(13, 201, 239)',
@@ -136,9 +136,9 @@ export const environment = {
     },
   },
   photo: {
-    azul: 'url(assets/images/fondo-azul2.png)',
-    verde: 'url(assets/images/fondo_verde.jpeg)',
-    info: 'url(assets/images/purpura.jpeg)',
+    primary: 'url(assets/images/fondo_primary.png)',
+    success: 'url(assets/images/fondo_success.jpeg)',
+    info: 'url(assets/images/fondo_info.png)',
   },
 
 };

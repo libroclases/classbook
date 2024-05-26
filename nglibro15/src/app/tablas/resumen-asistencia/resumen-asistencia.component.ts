@@ -82,17 +82,17 @@ export class ResumenAsistenciaComponent {
   
      const getColor = (color:string | null) => {
 
-      if (color=='azul' || !color) { 
-        this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-        this.pagination = this.objcolors.azul.pagination;
-        this.tablehead = this.objcolors.azul.pagination;
-        this.url = this.photo.azul;
+      if (color=='primary' || !color) { 
+        this.bodybgcolor = this.objcolors.primary.bodybgcolor;
+        this.pagination = this.objcolors.primary.pagination;
+        this.tablehead = this.objcolors.primary.pagination;
+        this.url = this.photo.primary;
       }
-      if (color=='verde') { 
-        this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-        this.pagination = this.objcolors.verde.pagination;
-        this.tablehead = this.objcolors.verde.pagination;
-        this.url = this.photo.verde;
+      if (color=='success') { 
+        this.bodybgcolor = this.objcolors.success.bodybgcolor;
+        this.pagination = this.objcolors.success.pagination;
+        this.tablehead = this.objcolors.success.pagination;
+        this.url = this.photo.success;
       }
       if (color=='info') { 
         this.bodybgcolor = this.objcolors.info.bodybgcolor;

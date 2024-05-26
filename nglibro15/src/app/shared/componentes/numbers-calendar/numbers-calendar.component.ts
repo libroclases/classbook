@@ -146,15 +146,15 @@ export class NumbersCalendarComponent  implements OnInit, OnDestroy {
 
     const getColor = (color:string | null) => {
 
-      if (color=='azul') {
-        this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-        this.pagination = this.objcolors.azul.pagination;
-        this.tablehead = this.objcolors.azul.tablehead;
+      if (color=='primary') {
+        this.bodybgcolor = this.objcolors.primary.bodybgcolor;
+        this.pagination = this.objcolors.primary.pagination;
+        this.tablehead = this.objcolors.primary.tablehead;
       }
-      if (color=='verde') {
-        this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-        this.pagination = this.objcolors.verde.pagination;
-        this.tablehead = this.objcolors.verde.tablehead;
+      if (color=='success') {
+        this.bodybgcolor = this.objcolors.success.bodybgcolor;
+        this.pagination = this.objcolors.success.pagination;
+        this.tablehead = this.objcolors.success.tablehead;
       }
       if (color=='info') {
         this.bodybgcolor = this.objcolors.info.bodybgcolor;

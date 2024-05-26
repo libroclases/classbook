@@ -55,10 +55,10 @@ export class HomeComponent implements OnInit{
   ngOnInit(): void {
     const getColor = (color:string | null) => {
       
-      if (color=='azul' || !color) {
-        this.color="azul";  this.url = this.photo.azul;      }
-      if (color=='verde') {
-        this.color = "verde"; this.url = this.photo.verde;       }
+      if (color=='primary' || !color) {
+        this.color="primary";  this.url = this.photo.primary;      }
+      if (color=='success') {
+        this.color = "success"; this.url = this.photo.success;       }
       if (color=='info') {
         this.color = "info"; this.url = this.photo.info;      }
 

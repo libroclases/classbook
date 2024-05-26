@@ -168,17 +168,17 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
 
       if (color == null) {  color = localStorage.getItem('Color')  }
 
-      if (color=='azul') {
-        this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-        this.pagination = this.objcolors.azul.pagination;
-        this.tablehead = this.objcolors.azul.tablehead;
-        this.url = this.photo.azul;
+      if (color=='primary') {
+        this.bodybgcolor = this.objcolors.primary.bodybgcolor;
+        this.pagination = this.objcolors.primary.pagination;
+        this.tablehead = this.objcolors.primary.tablehead;
+        this.url = this.photo.primary;
       }
-      else if (color=='verde') {
-        this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-        this.pagination = this.objcolors.verde.pagination;
-        this.tablehead = this.objcolors.verde.tablehead;
-        this.url = this.photo.verde;
+      else if (color=='success') {
+        this.bodybgcolor = this.objcolors.success.bodybgcolor;
+        this.pagination = this.objcolors.success.pagination;
+        this.tablehead = this.objcolors.success.tablehead;
+        this.url = this.photo.success;
       }
       else if (color=='info') {
         this.bodybgcolor = this.objcolors.info.bodybgcolor;
@@ -200,7 +200,7 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
     this.profPieFormGroup = new FormGroup({});
     for ( let hr=1; hr<13; hr++) {
       this.profPieFormGroup.addControl(hr.toString(), this.fb.control(0));
-      this.editable.set(hr, false);
+      this.editable.set(hr, true); // OJO sale false
     }
 
     this.alerts.push(this.successfulSaveAlert);
@@ -396,7 +396,7 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
     this.nombresAsignaturas.clear();
     this.nombresProfesores.clear();
     for ( let i=0; i<13; i++ )  {
-      this.editable.set(i+1, false);
+      this.editable.set(i+1, true); // false
       this.pieIsEdited.set(i, false);
       this.pieValues.set(i, null);
       this.pieValuesToSave.set(i, null);

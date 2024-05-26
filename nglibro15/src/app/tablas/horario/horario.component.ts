@@ -211,21 +211,21 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
     if (color == null) {  color = localStorage.getItem('Color')  }
 
-    if (color=='azul') {
-      this.bodybgcolor = this.objcolors.azul.bodybgcolor;
-      this.pagination = this.objcolors.azul.pagination;
-      this.tablehead = this.objcolors.azul.tablehead;
-      this.bgmodal = this.objcolors.azul.bgmodal;
-      this.modalbutton = this.objcolors.azul.modalbutton;
-      this.url = this.photo.azul;
+    if (color=='primary') {
+      this.bodybgcolor = this.objcolors.primary.bodybgcolor;
+      this.pagination = this.objcolors.primary.pagination;
+      this.tablehead = this.objcolors.primary.tablehead;
+      this.bgmodal = this.objcolors.primary.bgmodal;
+      this.modalbutton = this.objcolors.primary.modalbutton;
+      this.url = this.photo.primary;
     }
-    if (color=='verde') {
-      this.bodybgcolor = this.objcolors.verde.bodybgcolor;
-      this.pagination = this.objcolors.verde.pagination;
-      this.tablehead = this.objcolors.verde.tablehead;
-      this.bgmodal = this.objcolors.verde.bgmodal;
-      this.modalbutton = this.objcolors.verde.modalbutton;
-      this.url = this.photo.verde;
+    if (color=='success') {
+      this.bodybgcolor = this.objcolors.success.bodybgcolor;
+      this.pagination = this.objcolors.success.pagination;
+      this.tablehead = this.objcolors.success.tablehead;
+      this.bgmodal = this.objcolors.success.bgmodal;
+      this.modalbutton = this.objcolors.success.modalbutton;
+      this.url = this.photo.success;
     }
     if (color=='info') {
       this.bodybgcolor = this.objcolors.info.bodybgcolor;
