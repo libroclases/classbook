@@ -22,6 +22,7 @@ const tablesArray = [
   'asignatura',
   'asignaturaprofesor',
   'asignaturacurso',
+  'cursoprofesor',
   'asistencia',
   'asistentecolegio',
   'colegio',
@@ -76,7 +77,7 @@ export const environment = {
   apiUrl: 'https://libroclases.cl',
   apiKey: 'devKey',
   userinfo: {},
-  opacity: '87%',
+  opacity: '100%',
 
   auth0: {
     domain: 'dev-tupdibnrpuxah8p3.us.auth0.com',
@@ -99,45 +100,45 @@ export const environment = {
   },
   colors: {
     primary: {
-      color: 'blue',
-      lineal: 'linear-gradient(to bottom, #4880EC, #019CAD)',
+      color: 'primary',
+      lineal: 'linear-gradient(to right, #4880EC, #019CAD)',
       menu: '#e3e4f3',
       colorMenuButton: '#059bb0',
       pagination: '#e2e2eb',
-      bodybgcolor: 'rgb(242,242,248)', // rgb(238, 238, 248)}
+      bodybgcolor: 'linear-gradient(to right, #4880EC, #019CAD)', // rgb(238, 238, 248)}
       tablehead: 'rgb(44,161,213)',
       bgmodal: '#0D6EFD',
       modalbutton: 'rgb(69, 130, 233)',
     },
 
     success: {
-      color: 'green',
+      color: 'success',
       lineal: 'linear-gradient(to right, #38B15C,#76FA91)',
       menu: '#dcf3dd',
       colorMenuButton: '#71f48d',
       pagination: '#dcebe4',
-      bodybgcolor: 'rgb(242, 248, 242)', // rgb(232, 248, 240)
+      bodybgcolor: 'linear-gradient(to right, #38B15C,#76FA91)', // rgb(232, 248, 240)
       tablehead: 'lightgreen',
       bgmodal: 'lightgreen',
       modalbutton: 'rgb(82, 205, 145)',
     },
 
     info: {
-      color: 'cyan',
-      lineal: 'linear-gradient(to right, #0dcaf0,#ffd966)',
-      menu: '#FFE7C1',
-      colorMenuButton: '#ffd761',
-      pagination: '#f2e6d3',
-      bodybgcolor: 'rgb(255, 242, 222)',
-      tablehead:  'rgb(255,212,96)',
-      bgmodal: 'orange',
-      modalbutton: 'orange',
+      color: 'info',
+      lineal: 'linear-gradient(to right,#0BA5C4, #0dcaf0)',
+      menu: "rgb(13, 202, 240)",
+      colorMenuButton: 'rgb(13, 201, 239)',
+      pagination: 'rgb(201, 252, 255)',
+      bodybgcolor: 'linear-gradient(to right, #33D8FF, #425ECC)',
+      tablehead:  'rgb(13, 202, 240)',
+      bgmodal: 'rgb(13, 202, 240)',
+      modalbutton: 'rgb(13, 202, 240)',
     },
   },
   photo: {
-    primary: 'url(assets/images/fondo-azul2.png)',
-    success: 'url(assets/images/fondo_verde.jpeg)',
-    info: 'url(assets/images/purpura.jpg)',
+    primary: 'url(assets/images/fondo_primary.png)',
+    success: 'url(assets/images/fondo_success.jpeg)',
+    info: 'url(assets/images/fondo_info.png)',
   },
 
 };
@@ -220,7 +221,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'colegio',
     'curso',
     'profesor',
-    'asignaturaprofesor',
+    'asignatura',
     'dix',
   ],
   sexo: [],
@@ -266,7 +267,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'colegio',
     'curso',
     'profesor',
-    'asignaturaprofesor',
+    'asignatura',
     'anno',
     'periodo',
     'tipoevaluacion',
@@ -279,7 +280,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'colegio',
     'curso',
     'profesor',
-    'asignaturaprofesor',
+    'asignatura',
     'matricula',
     'evaluacion',
   ],
@@ -288,7 +289,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'periodo',
     'colegio',
     'curso',
-    'asignaturacurso',
+    'asignatura',
     'matricula'
   ],
   mes: [],
@@ -492,15 +493,15 @@ export const attributesLabels = {
   },
 
   asignaturaprofesor: {
-    nombre: 'Nombre',
+
   },
 
   asignaturacurso: {
-    nombre: 'Nombre',
+
   },
 
   cursoprofesor: {
-    nombre: 'Nombre',
+
   },
 
 
@@ -847,7 +848,7 @@ export const validator: any = {
 
    AsignaturaCurso: {
     modalText: {
-      nombre: [Validators.required],
+
     },
     modalDate: {
     }
@@ -856,7 +857,7 @@ export const validator: any = {
 
   CursoProfesor: {
     modalText: {
-      nombre: [Validators.required],
+
     },
     modalDate: {
     }
@@ -1074,7 +1075,7 @@ export const Permission:any =  {
   Matricula: { leer: 'profesor' , editar : 'utp' , crear: 'utp'},
   /* Profesor */
   Profesor: { leer : ['utp'], editar: ['utp'], crear: ['utp'] },
-  AsignaturaProfesor: { leer: ['profesor'], editar: ['utp'], crear:['utp'] },
+  InscripcionCurso: { leer: ['profesor'], editar: ['utp'], crear:['utp'] },
   AsignaturaCurso: { leer: ['profesor'], editar: ['utp'], crear:['utp'] },
   Evaluacion:  { leer: ['profesor'], editar: ['utp'], crear: ['utp']},
   Nota: {leer: ['profesor'] ,editar: ['profesor'], crear: ['profesor']},
@@ -1082,9 +1083,9 @@ export const Permission:any =  {
   Horario: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
   HorasInscritas: { leer: ['profesor'], editar: ['utp'], crear: ['utp'] },
   ControlAsignatura: {leer: ['profesor'] ,editar: ['profesor'], crear: ['profesor']},
+  InscripcionColegio : { leer : ['profesor'] , editar : ['utp'], crear : ['utp'] },
   RegistroActividad: { leer: ['profesor'], editar: ['profesor'], crear : ['profesor'] },
   Ventana: { leer : ['profesor'] , editar : ['utp'], crear : ['utp'] },
-  InscripcionColegio : { leer : ['profesor'] , editar : ['utp'], crear : ['utp'] },
   /* Procesos */
   MatriculaAlumno: { leer : ['utp'] , editar : ['utp'], crear : ['utp'] },
   RegistroUsuario: { leer : ['utp'] , editar : ['profesor','utp'], crear : ['utp'] },
@@ -1114,11 +1115,11 @@ export const modalDataObject: any = {
 
   Horario: {
     mainTable: 'horario',
-    tables: ['profesor', 'asignaturaprofesor'],
+    tables: ['profesor', 'asignatura'],
     textFields: ['hora'],
     booleanFields:[],
     dateFields: [],
-    ignoreFkRequirements: ['asignatura'],
+    ignoreFkRequirements: [],
     disable: [],
     defaultValues: {},
     label: 'Horario',
@@ -1196,13 +1197,13 @@ export const modalDataObject: any = {
   AsignaturaProfesor: {
     mainTable: 'asignaturaprofesor',
     tables: ['profesor', 'asignatura'],
-    textFields: ['nombre'],
+    textFields: [],
     dateFields: [],
     booleanFields:[],
     ignoreFkRequirements: [],
     disable: [],
     defaultValues: {},
-    label: 'Inscripción Asignatura',
+    label: 'Asignatura Profesor',
     windowHeight: '320px',
   },
 
@@ -1223,7 +1224,7 @@ export const modalDataObject: any = {
   CursoProfesor: {
     mainTable: 'cursoprofesor',
     tables: ['anno','colegio','curso','profesor'],
-    textFields: ['nombre'],
+    textFields: [],
     booleanFields:[],
     dateFields: [],
     ignoreFkRequirements: [],
@@ -1389,7 +1390,7 @@ export const modalDataObject: any = {
       'colegio',
       'curso',
       'profesor',
-      'asignaturaprofesor',
+      'asignatura',
       'anno',
       'periodo',
       'tipoevaluacion',
