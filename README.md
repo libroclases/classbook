@@ -9,35 +9,37 @@ npx sequelize-cli db:migrate --env production
 ************ DEPLOY *************
 *** frontend ***
 1.- chequear archivos environmets (ambos identicos excepto production y direcciones host)
-2.- git status 
-3.- git commit
-4.- git push 
-5.- git checkout main
-6.- git merge branch
-7.- git push
-8.- git chechout branch
-9.- cd nglibro15
-10.- Limpiar dist/nglibro15 local
-11.- Limpiar /var/www/libroclases.cl/html remoto
-12.- ng build --configuration production --aot
-13.- scp -r dist/nglibro15/* libro@libroclases.cl:/var/www/libroclases.cl/html
+2.- Borrar mensajes por consola
+3.- git status 
+4.- git commit
+5.- git push 
+6.- git checkout main
+7.- git merge branch
+8.- git push
+9.- git chechout branch
+10.- cd nglibro15
+11.- Limpiar dist/nglibro15 local
+12.- Limpiar /var/www/libroclases.cl/html remoto
+13.- ng build --configuration production --aot
+14.- scp -r dist/nglibro15/* libro@libroclases.cl:/var/www/libroclases.cl/html
 *** server ***
 1.- cd .\backend\nodserver
-2.- delete dist
+2.- del -r dist
 3.- Verificar todas las rutas aseguradas en routes/index
 4.- npm run build y verificar sitio
-5.- copy dir config to dist/server
-6.- En digitalocean borrar app.js , package* y directorio server
+5.- copy server/config/config.js to dist/server
+6.- En digitalocean borrar app.js y directorio server
 7.- En digitalocean se mantienen los archivos Dockerfile , package.json y directorio letsencrypt
 8.- scp -r .\dist\* libro@libroclases.cl:/home/libro/classbook-main/backend/nodserver/dist
 9.- Abrir puerto 5432 en LibroMuralla
 10.- npx sequelize-cli db:migrate:undo:all --env production
 11.- npx sequelize-cli db:migrate --env production
-12.- scp .\csv\csv-no-id\* libro@libroclases.cl:/home/libro/classbook-main/backend/nodserver/csv/csv-no-id
-13.- sudo docker exec -it dbpostgres bash 
-14.- bash copy_csv_prod.sh
-15.- Cerrar puerto 5432 en LibroMuralla
-16.- opcional -> http://libroclases.cl:8080 (dejar cerrado puerto 8080)
+12.- bash copy-no-ids.sh
+13.- scp .\csv\csv-no-id\* libro@libroclases.cl:/home/libro/classbook-main/backend/nodserver/csv/csv-no-id
+14.- sudo docker exec -it dbpostgres bash 
+15.- bash copy_csv_prod.sh
+16.- Cerrar puerto 5432 en LibroMuralla
+17.- opcional -> http://libroclases.cl:8080 (dejar cerrado puerto 8080)
 *** digitalocean ***
 (lista no implica orden, ejecución a discreción)
 sudo docker-compose up --build -d
