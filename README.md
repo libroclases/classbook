@@ -51,4 +51,3 @@ sudo docker exec -it dbpostgres bash
 
 
 
-
