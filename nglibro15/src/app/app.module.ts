@@ -93,6 +93,7 @@ const allowedTables = [
   'comuna',
   'controlasignatura',
   'curso',
+  'cursoprofesor',
   'dix',
   'estadoalumno',
   'evaluacion',
