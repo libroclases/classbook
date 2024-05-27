@@ -83,6 +83,7 @@ export class MatriculaAlumnoComponent implements OnInit {
       this.bgmodal = this.objcolors.primary.bgmodal;
       this.modalbutton = this.objcolors.primary.modalbutton;
       this.url = this.photo.primary;
+      this.color_h2 = `text-${this.objcolors.primary.color} my-3`;
 
     }
     if (color=='success') {
@@ -92,6 +93,7 @@ export class MatriculaAlumnoComponent implements OnInit {
       this.bgmodal = this.objcolors.success.bgmodal;
       this.modalbutton = this.objcolors.success.modalbutton;
       this.url = this.photo.success;
+      this.color_h2 = `text-${this.objcolors.success.color} my-3`;
 
     }
     if (color=='info') {
@@ -101,6 +103,7 @@ export class MatriculaAlumnoComponent implements OnInit {
       this.bgmodal = this.objcolors.info.bgmodal;
       this.modalbutton = this.objcolors.info.modalbutton;
       this.url = this.photo.info;
+      this.color_h2 = `text-${this.objcolors.info.color} my-3`;
 
     }
 
