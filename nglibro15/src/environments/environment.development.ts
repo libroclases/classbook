@@ -22,13 +22,13 @@ const tablesArray = [
   'asignatura',
   'asignaturaprofesor',
   'asignaturacurso',
-  'cursoprofesor',
   'asistencia',
   'asistentecolegio',
   'colegio',
   'comuna',
   'controlasignatura',
   'curso',
+  'cursoprofesor',
   'dix',
   'estadoalumno',
   'evaluacion',
@@ -1464,5 +1464,4 @@ export const modalDataObject: any = {
 
   },
 };
-
 
