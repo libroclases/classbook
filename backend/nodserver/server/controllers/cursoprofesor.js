@@ -29,6 +29,7 @@ class CursoProfesores {
     .catch(error => res.status(400).send(error));
   }
 
+  
   static getByFk(req, res) {
     const { annoId, colegioId, cursoId, profesorId } = req.params;
     let consulta = {};
@@ -48,6 +49,31 @@ class CursoProfesores {
       .then(cursoprofesor => res.status(200).send(cursoprofesor))
       .catch(error => res.status(400).send(error));
   }
+
+  static getByProfesorCurso(req, res) {
+    const { annoId, colegioId, cursoId } = req.params;
+    let consulta = {};
+    if (annoId != '0') {  consulta['annoId'] = annoId;  }
+    if (colegioId != '0') {  consulta['colegioId'] = colegioId;  }
+    if (cursoId != '0') {  consulta['cursoId'] = cursoId;  }
+
+    return CursoProfesor 
+      .findAll({ where : consulta,
+        attributes: [],  include: [
+            { model:Profesor, attributes:['id','nombre','apellido1','apellido2'], where: { } },
+        ] })
+      .then(query => { 
+      let values; 
+      let profesor = [];
+      query.forEach(element => {
+        values = element.dataValues.Profesor.dataValues;
+        profesor.push({ id:values.id,nombre: `${values.apellido1} ${values.apellido2} ${values.nombre}` });
+      });
+      res.status(200).send(profesor)
+    })
+      .catch(error => res.status(400).send(error));
+  }
+
 
   static create(req, res) {
     const {} = req.body;

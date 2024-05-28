@@ -148,7 +148,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('read:asignatura'),
       Asignaturas.getByFk)
     app.get('/api/asignatura/:colegioId/asignatura_por_colegio',
-      checkjwd, requiredScopes(['read:asignatura', 'read:colegio']),
+      // checkjwd, requiredScopes(['read:asignatura', 'read:colegio']),
       Asignaturas.getByColegio) 
     app.post('/api/asignatura/:tipocolegioId',
       checkjwd, requiredScopes('create:asignatura'),
@@ -256,13 +256,13 @@ const checkjwd = auth({
       checkjwd, requiredScopes('update:curso'),
       Cursos.modify);
     app.get('/api/profesor',
-      checkjwd, requiredScopes('read:profesor'),
+      // checkjwd, requiredScopes('read:profesor'),
       Profesores.list);
     app.get('/api/profesor/:expr/search',
       checkjwd, requiredScopes('read:profesor'),
       Profesores.bySearch);
     app.get('/api/profesor/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId/fk',
-      checkjwd, requiredScopes('read:profesor'),
+      // checkjwd, requiredScopes('read:profesor'),
       Profesores.getByFk);
     app.get('/api/profesor/:profesorId/pk',
       checkjwd, requiredScopes('read:profesor'),
@@ -698,6 +698,9 @@ const checkjwd = auth({
     app.get('/api/cursoprofesor/:annoId/:colegioId/:cursoId/:profesorId/fk',
       checkjwd, requiredScopes('read:cursoprofesor'),
       CursoProfesores.getByFk);
+    app.get('/api/cursoprofesor/:annoId/:colegioId/:cursoId/profesor_por_curso',
+      // checkjwd, requiredScopes('read:cursoprofesor'),
+      CursoProfesores.getByProfesorCurso);  
     app.post('/api/cursoprofesor/:annoId/:colegioId/:cursoId/:profesorId',
       checkjwd, requiredScopes('create:cursoprofesor'),
       CursoProfesores.create);

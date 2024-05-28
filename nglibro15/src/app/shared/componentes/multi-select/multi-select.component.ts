@@ -67,22 +67,22 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.tables.forEach((table) => this.hasCustomEndpoint.set(table, false));
-    if (this.customEndpoints != null) {
-      Object.keys(this.customEndpoints).forEach((table) =>
-        this.hasCustomEndpoint.set(table, true)
-      );
+    if (this.customEndpoints != null) { console.log('poronga', this.customEndpoints)
+      Object.keys(this.customEndpoints).forEach((table) => {
+        this.hasCustomEndpoint.set(table, true); console.log('has',table,true);
+    });
     }
     let storageFks: any = {};
-    
+
     if (this.patchTablesFromStorage.length > 0) {
       this.patchTablesFromStorage.forEach((table) => {
         const newId = localStorage.getItem(`${table}Id`);
         if (newId != undefined) {
-          storageFks[table] = +newId;
+          storageFks[table] = +newId; console.log('storageFks',storageFks)
         }
       });
     }
-    
+
     this.considerReqSel = false;
     this.valuesForm = new FormGroup({});
     this.tables.forEach((table) => this.requiredBySelTree.set(table, []));
@@ -90,7 +90,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
     this.tables.forEach((table) => {
       this.valuesForm.addControl(table, new FormControl());
       const fKeyTables = this.getFKTables(table);
-      let foreignKeys: string[] = [];
+      let foreignKeys: string[] = [];console.log('fKeyTables',table,fKeyTables);
       fKeyTables?.forEach((tb) => {
         if (
           !this.ignoreFkRequirements.includes(tb) &&
@@ -99,7 +99,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
           foreignKeys.push(tb);
           this.requiredBySelTree.get(tb)?.push(table);
         }
-      }); console.log(table,foreignKeys)
+      }); console.log('ignore',table,foreignKeys)
       if (foreignKeys.length === 0) {
         this.freeTables.push(table);
       } else {
@@ -116,12 +116,12 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
       }
     }
 
-    if (!this.considerReqSel) {
+    if (!this.considerReqSel) {  console.log('PORNGA!!!!');
       this.freeTables = this.tables;
     }
-    this.freeTables.forEach((table) => this.queryTable(table));
+    this.freeTables.forEach((table) => { this.queryTable(table); console.log('free', table) });
 
-    if (Object.keys(storageFks).length > 0) {
+    if (Object.keys(storageFks).length > 0) {  console.log(storageFks)
       this.checkSelection(storageFks, true);
     } else {
       this.selIdsService.notifyUpdated();
@@ -131,7 +131,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
       .pipe(
         take(1),
         tap((msg) => {
-          this.checkSelection(msg);
+          this.checkSelection(msg); console.log('MSG',msg);
         }),
         share()
       )
@@ -156,7 +156,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
     for (let tb of this.tables) {
       const isFree = this.freeTables.includes(tb);
       // for each selector: check if all FKs are set, or part of ignoreFkRequirements
-      if (this.allForeignKeysSetOrIgnored(tb)) {
+      if (this.allForeignKeysSetOrIgnored(tb)) { console.log('PORONGOTA!!!',tb, this.getForeignKeysOfTable(tb) )
         this.queryTable(tb, isFree ? null : this.getForeignKeysOfTable(tb));
         this.valuesForm.get(tb)!.enable();
       } else {
@@ -198,8 +198,9 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
   }
 
   getFKTables(table: string) {
-    if (this.hasCustomEndpoint.get(table)) {
-      return this.fKeysService.getFKeys(this.customEndpoints[table]);
+    if (this.hasCustomEndpoint.get(table)) { console.log('poronga',this.customEndpoints[table] )
+      // return this.fKeysService.getFKeys(this.customEndpoints[table]); //  OJO !!!
+    return this.fKeysService.getFKeys(table);
     }
     return this.fKeysService.getFKeys(table);
   }
@@ -212,7 +213,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
     return fKeys;
   }
 
-  allForeignKeysSetOrIgnored(table: string) {
+  allForeignKeysSetOrIgnored(table: string) { console.log('afksoi',table)
     for (let t of this.getFKTables(table)!) {
       if (this.ignoreFkRequirements.includes(t)) {
         continue;
@@ -292,10 +293,13 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
     callback: Function | null = null
   ) {
     if (this.hasCustomEndpoint.get(table)) {
+      console.log('hasCustom',table,this.hasCustomEndpoint.get(table));
+      console.log(table,this.customEndpoints[table])
       var query = this.crud
-        .getDataCustom(table, this.customEndpoints[table], fkIds)
+        .getDataCustom(table, this.customEndpoints[table], [4,1,19])
         ?.pipe(
           tap((query) => {
+            console.log('query',table,fkIds,query);
             if (callback) {
               callback(query);
             }
