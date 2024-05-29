@@ -3,7 +3,7 @@ import model from '../models';
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-const { Profesor,  Usuario, Sexo, Region, Provincix, Comuna } = model;
+const { Profesor,  Usuario, Sexo, Region, Provincix, Comuna, CursoProfesor } = model;
 
 class Profesores {
 
@@ -74,6 +74,38 @@ class Profesores {
         .catch(error => res.status(400).send(error));
     }
 
+    static getProfesorByCurso(req, res) {
+        const { cursoId } = req.params;
+
+        let consulta = {};
+
+        if (cursoId != '0') {  consulta['curso'] = cursoId;  }
+
+        return Profesor
+          .findAll({attributes:['id','nombre']})
+          .then(profesor => {
+           
+ 
+            
+            CursoProfesor.findAll(
+                {
+                   where: { cursoId : 19 }    
+                }
+            )
+            .then(query => {
+
+                profesor.forEach(p => { console.log(p.dataValues) });
+                query.forEach(q => console.log(q.dataValues)) 
+                res.status(200).send(query) 
+            }) 
+            
+             
+        })
+          .catch(error => res.status(400).send(error));
+    }
+
+
+
     static getByPk(req, res) {
               
         return Profesor
@@ -81,6 +113,7 @@ class Profesores {
         .then(profs => res.status(200).send(profs))
         .catch(error => res.status(400).send(error));
       }
+
 
     static create(req, res) {
     const { usuarioId, sexoId, regionId, provincixId, comunaId } = req.params;
