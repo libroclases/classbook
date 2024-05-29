@@ -3,7 +3,7 @@ import model, { sequelize } from '../models';
 const Sequelize = require("sequelize");
 
 const { Matricula, Colegio, Curso, Apoderado, Alumno, Vinculo, Anno, Periodo,
-  Profesor, AsignaturaProfesor, Evaluacion, Nota } = model;
+  Profesor, Evaluacion, Nota } = model;
 
 class Matriculas {
 
@@ -250,6 +250,9 @@ class Matriculas {
         vinculoId,
    
       })
+      .then(matricula => res.status(200).send(matricula))
+      .catch(error => res.status(400).send(error));
+      /*
       .then(matricula => {
 
         let m = matricula.dataValues;
@@ -261,7 +264,7 @@ class Matriculas {
           include: [
             { model: Periodo, attributes:['id'] },
             { model: Profesor, attributes:['id'] },
-            { model: AsignaturaProfesor, attributes:['id'] },
+            { model: Asignatura, attributes:['id'] },
           ],
           raw: true
         })
@@ -271,7 +274,7 @@ class Matriculas {
             {...consulta_evaluacion,
               evaluacionId: e.id,
               profesorId: e['Profesor.id'],
-              asignaturaprofesorId: e['AsignaturaProfesor.id'],
+              asignaturaId: e['Asignatura.id'],
               periodoId: e['Periodo.id'],
               matriculaId: m.id,
  
@@ -288,6 +291,7 @@ class Matriculas {
         }); 
       })
       .catch(error => res.status(400).send(error));
+      */
   }
   
 
