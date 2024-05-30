@@ -264,9 +264,6 @@ const checkjwd = auth({
     app.get('/api/profesor/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId/fk',
       // checkjwd, requiredScopes('read:profesor'),
       Profesores.getByFk);
-    app.get('/api/profesor/:cursoId/profesor_por_curso',
-      // checkjwd, requiredScopes('read:profesor'),
-      Profesores.getProfesorByCurso);  
     app.get('/api/profesor/:profesorId/pk',
       checkjwd, requiredScopes('read:profesor'),
       Profesores.getByPk);    
@@ -701,7 +698,7 @@ const checkjwd = auth({
     app.get('/api/cursoprofesor/:annoId/:colegioId/:cursoId/:profesorId/fk',
       checkjwd, requiredScopes('read:cursoprofesor'),
       CursoProfesores.getByFk);
-    app.get('/api/cursoprofesor/:annoId/:colegioId/:cursoId/profesor_por_curso',
+    app.get('/api/cursoprofesor/:annoId/:colegioId/:cursoId/0/profesor_por_curso',
       // checkjwd, requiredScopes('read:cursoprofesor'),
       CursoProfesores.getByProfesorCurso);  
     app.post('/api/cursoprofesor/:annoId/:colegioId/:cursoId/:profesorId',
