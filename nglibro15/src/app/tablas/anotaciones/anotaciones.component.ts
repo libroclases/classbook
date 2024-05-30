@@ -32,7 +32,7 @@ export class AnotacionesComponent implements OnDestroy {
   requiredSelectorsByTable: (string[])[] = [[], [], ['anno', 'colegio'], ['anno', 'colegio', 'curso']];
   changeFnsArray!: Function[];
   customEndpoints = {matricula: 'lista_curso_nombres'};
-  patchFksFromStorage = ['anno', 'colegio', 'curso'];
+  patchFksFromStorage = ['anno', 'colegio','curso'];
 
   url!:string;
   photo = environment.photo;

@@ -361,7 +361,7 @@ export const tableLabels = {
   asignatura: 'Asignatura',
   asignaturaprofesor: 'Asignatura Profesor',
   asignaturacurso: 'Asignatura Curso',
-  cursoprofesor: 'Curso Profesor',
+  cursoprofesor: 'Inscripción Curso',
   asistencia: 'Asistencia',
   asistencix: 'Asistencia',
   colegio: 'Colegio',

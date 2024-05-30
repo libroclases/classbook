@@ -53,7 +53,7 @@ export class ResumenAsistenciaComponent {
   //   colores
 
   objcolors = environment.colors;
-  
+
   bodybgcolor!:string;
   pagination!:string;
   tablehead!:string;
@@ -67,42 +67,42 @@ export class ResumenAsistenciaComponent {
 
   selTables: string[] = ['colegio', 'anno', 'mes'];
   changeFnsArray!: Function[];
-  patchFksFromStorage = ['colegio', 'anno', 'mes'];
+  patchFksFromStorage = ['colegio', 'anno'];
 
   constructor(
     private subsManagerService: SubscriptionsManagerService,
-    private selIdsService: SelectionIdsService) { 
+    private selIdsService: SelectionIdsService) {
 
       const getPermision = (msg: any) => { if(msg) {
         const year = this.currentDate.getFullYear();
         this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-        } 
-  
+        }
+
       }
-  
+
      const getColor = (color:string | null) => {
 
-      if (color=='primary' || !color) { 
+      if (color=='primary' || !color) {
         this.bodybgcolor = this.objcolors.primary.bodybgcolor;
         this.pagination = this.objcolors.primary.pagination;
         this.tablehead = this.objcolors.primary.pagination;
         this.url = this.photo.primary;
       }
-      if (color=='success') { 
+      if (color=='success') {
         this.bodybgcolor = this.objcolors.success.bodybgcolor;
         this.pagination = this.objcolors.success.pagination;
         this.tablehead = this.objcolors.success.pagination;
         this.url = this.photo.success;
       }
-      if (color=='info') { 
+      if (color=='info') {
         this.bodybgcolor = this.objcolors.info.bodybgcolor;
         this.pagination = this.objcolors.info.pagination;
         this.tablehead = this.objcolors.info.pagination;
-        this.url = this.photo.info; 
-      }          
-  
+        this.url = this.photo.info;
+      }
+
   }
-   
+
   this.usuario$.subscribe(info => {
     if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
     else { getColor(localStorage.getItem('Color')) }
@@ -113,7 +113,7 @@ export class ResumenAsistenciaComponent {
     getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
     getColor(info.personalInfo.usuario.Tema.nombre);
   }))
-  */  
+  */
 
   }
 

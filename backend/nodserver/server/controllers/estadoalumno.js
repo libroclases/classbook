@@ -37,7 +37,7 @@ class EstadoAlumnos {
           { model:TipoEstado, attributes:['id','nombre'], where: { } },
         ],
         order: [
-          ['fecha', 'ASC']]
+          ['id', 'DESC']]
         })
       .then(estado => res.status(200).send(estado))
       .catch(error => res.status(400).send(error));

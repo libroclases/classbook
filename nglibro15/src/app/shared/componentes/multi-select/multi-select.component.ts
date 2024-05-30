@@ -73,6 +73,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
       );
     }
     let storageFks: any = {};
+
     if (this.patchTablesFromStorage.length > 0) {
       this.patchTablesFromStorage.forEach((table) => {
         const newId = localStorage.getItem(`${table}Id`);
@@ -82,7 +83,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
       });
     }
 
-    this.considerReqSel = false;  
+    this.considerReqSel = false;
     this.valuesForm = new FormGroup({});
     this.tables.forEach((table) => this.requiredBySelTree.set(table, []));
 
@@ -96,7 +97,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
           this.tables.includes(tb)
         ) {
           foreignKeys.push(tb);
-          this.requiredBySelTree.get(tb)?.push(table); console.log('REQUERIDA:', tb, this.requiredBySelTree.get(tb));
+          this.requiredBySelTree.get(tb)?.push(table);
         }
       });
       if (foreignKeys.length === 0) {
@@ -198,7 +199,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
 
   getFKTables(table: string) {
     if (this.hasCustomEndpoint.get(table)) {
-      return this.fKeysService.getFKeys(table);
+      return this.fKeysService.getFKeys(this.customEndpoints[table]);
     }
     return this.fKeysService.getFKeys(table);
   }
@@ -246,17 +247,17 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
 
   changeFunction(table: string, event: any) {
     const newId = +event.target.value;
-    this.selIdsService.setId(table, newId); console.log(table, newId , this.selIdsService.getId(table));
-    if (newId === 0) { console.log(this.requiredBySelTree.get(table));
+    this.selIdsService.setId(table, newId);
+    if (newId === 0) {
       this.requiredBySelTree
         .get(table)!
         .forEach((tb) => this.selIdsService.setId(tb, 0));
     }
-    const evtTargetOpt = event.target['options']; console.log(evtTargetOpt[evtTargetOpt.selectedIndex].text);
+    const evtTargetOpt = event.target['options'];
     this.selIdsService.setText(
       table,
       evtTargetOpt[evtTargetOpt.selectedIndex].text
-    ); console.log('this.considerReqSel',this.considerReqSel)
+    );
     if (this.considerReqSel) {
       for (let tbl of this.requiredBySelTree.get(table)!) {
         this.enableIfRequiredSelected(tbl);
