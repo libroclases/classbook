@@ -847,7 +847,7 @@ export const validator: any = {
 
   AsignaturaProfesor: {
     modalText: {
-      nombre: [Validators.required],
+
     },
     modalDate: {
     }
@@ -1479,7 +1479,7 @@ export const modalDataObject: any = {
   },
 
   RegistroActividad: {
-    mainTable: 'asignaturaprofesor',
+    mainTable: 'registroactividad',
     tables: [],
     textFields: ['descripcion', 'horaInicial', 'numeroHoras'],
     booleanFields:[],
