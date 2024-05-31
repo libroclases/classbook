@@ -233,16 +233,16 @@ const checkjwd = auth({
 
 
     app.get('/api/alumnocolegio',
-      // checkjwd, requiredScopes(['read:alumno','read:colegio']),
+      checkjwd, requiredScopes(['read:alumno','read:colegio']),
       AlumnoColegios.list);
     app.get('/api/alumnocolegio/:annoId/:colegioId/:alumnoId/fk',
-      // checkjwd, requiredScopes(['read:alumno','read:colegio']),
+      checkjwd, requiredScopes(['read:alumno','read:colegio']),
       AlumnoColegios.getByFk);
     app.post('/api/alumnocolegio/:annoId/:colegioId/:alumnoId',
-      // checkjwd, requiredScopes(['create:alumno','create:colegio']),
+      checkjwd, requiredScopes(['create:alumno','create:colegio']),
       AlumnoColegios.create);
     app.put('/api/alumnocolegio/:alumnocolegioId',
-      // checkjwd, requiredScopes(['update:alumno','update:colegio']),
+      checkjwd, requiredScopes(['update:alumno','update:colegio']),
       AlumnoColegios.modify);
 
     app.get('/api/tipocolegio',
