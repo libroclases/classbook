@@ -281,7 +281,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'periodo',
     'colegio',
     'curso',
-    'cursoprofesor',
+    'profesor',
     'asignatura',
     'matricula',
     'evaluacion',
