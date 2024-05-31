@@ -29,6 +29,7 @@ const tablesArray = [
   'controlasignatura',
   'curso',
   'cursoprofesor',
+  'alumnocolegio',
   'dix',
   'estadoalumno',
   'evaluacion',
@@ -200,6 +201,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
   asignaturaprofesor: ['profesor', 'asignatura'],
   asignaturacurso: ['anno','colegio','curso', 'asignatura'],
   cursoprofesor: ['anno','colegio','curso','profesor'],
+  alumnocolegio: ['anno','colegio','alumno'],
   colegio: ['region', 'provincix', 'comuna', 'tipocolegio'],
   curso: ['colegio', 'anno'],
   horaasignada: ['colegio'],
@@ -231,7 +233,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
   tipousuario: [],
   tema:[],
   usuario: ['tipousuario','tema'],
-  alumno: ['usuario','colegio', 'sexo', 'region', 'provincix', 'comuna'],
+  alumno: ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
   tipoestado: [],
   estadoalumno: ['alumno', 'matricula', 'tipoestado'],
   anotacion: ['matricula', 'profesor', 'anno', 'colegio', 'curso'],
@@ -315,6 +317,7 @@ export const lowerUpperTables: stringString = {
   asignaturaprofesor: 'AsignaturaProfesor',
   asignaturacurso: 'AsignaturaCurso',
   cursoprofesor: 'CursoProfesor',
+  alumnocolegio: 'AlumnoColegio',
   asistencia: 'Asistencia',
   asistencix: 'Asistencix',
   colegio: 'Colegio',
@@ -362,6 +365,7 @@ export const tableLabels = {
   asignaturaprofesor: 'Asignatura Profesor',
   asignaturacurso: 'Asignatura Curso',
   cursoprofesor: 'Inscripción Curso',
+  alumnocolegio: 'Alumno Colegio',
   asistencia: 'Asistencia',
   asistencix: 'Asistencia',
   colegio: 'Colegio',
@@ -503,6 +507,8 @@ export const attributesLabels = {
   cursoprofesor: {
 
   },
+
+  alumnocolegio: {},
 
 
   asistencia: {
@@ -714,6 +720,7 @@ export const icons: stringStringPair = {
   '/asignaturaprofesor': ['bi bi-book', 'Asignatura Profesores'],
   '/asignaturacurso': ['bi bi-book', 'Asignatura Profesores'],
   '/cursoprofesor': ['bi bi-book', 'Asignatura Profesores'],
+  '/alumnocolegio': ['bi bi-person-check-fill', 'Alumno Colegio'],
   '/profesor': ['bi bi-person-video3', 'Profesores'],
   '/administrador': ['bi bi-person-video3', 'Administrador'],
   '/inscripcioncolegio': ['bi bi-bank', 'Inscripcion Colegio'],
@@ -748,6 +755,7 @@ export const redirectRoutes: any = {
   Asignatura: ['/profesor'],
   AsignaturaProfesor: ['/profesor'],
   CursoProfesor:['/profesor'],
+  AlumnoColegio: ['/alumno'],
   Apoderado: ['/matricula'],
   Matricula: ['/curso'],
   Ventana:['/curso'],
@@ -856,6 +864,15 @@ export const validator: any = {
   },
 
   CursoProfesor: {
+    modalText: {
+
+    },
+    modalDate: {
+    }
+
+  },
+
+  AlumnoColegio: {
     modalText: {
 
     },
@@ -1233,6 +1250,18 @@ export const modalDataObject: any = {
     label: 'Inscripción Curso',
     windowHeight: '320px',
   },
+  AlumnoColegio: {
+    mainTable: 'alumnocolegio',
+    tables: ['anno','colegio','alumno'],
+    textFields: [],
+    booleanFields:[],
+    dateFields: [],
+    ignoreFkRequirements: [],
+    disable: [],
+    defaultValues: {},
+    label: 'Alumno Colegio',
+    windowHeight: '320px',
+  },
 
   InscripcionColegio: {
     mainTable: 'inscripcioncolegio',
@@ -1264,7 +1293,7 @@ export const modalDataObject: any = {
 
   Alumno: {
     mainTable: 'alumno',
-    tables: ['sexo','region', 'provincix', 'comuna','colegio' ],
+    tables: ['sexo','region', 'provincix', 'comuna' ],
     textFields: ['nombre', 'apellido1','apellido2', 'rut', 'direccion', 'celular'],
     booleanFields:[],
     dateFields: ['nacimiento'],

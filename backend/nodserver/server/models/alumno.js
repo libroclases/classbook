@@ -66,8 +66,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "sexoId",
     });
     
-    Alumno.belongsTo(models.Colegio, {
-        foreignKey: 'colegioId',
+    Alumno.hasMany(models.AlumnoColegio, {
+        foreignKey: 'alumnoId',
     });
     
     Alumno.belongsTo(models.Usuario, {

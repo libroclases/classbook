@@ -45,6 +45,8 @@ import Ventanas from '../controllers/ventana';
 import AsignaturaCursos from '../controllers/asignaturacurso';
 import CursoProfesores from '../controllers/cursoprofesor';
 
+import AlumnoColegios from '../controllers/alumnocolegio';
+
 const checkjwd = auth({
   audience: 'https://libroclases.cl',
   issuerBaseURL: `https://dev-tupdibnrpuxah8p3.us.auth0.com/`,
@@ -228,6 +230,21 @@ const checkjwd = auth({
     app.put('/api/colegio/:colegioId',
       checkjwd, requiredScopes('update:colegio'),
       Colegios.modify);
+
+
+    app.get('/api/alumnocolegio',
+      // checkjwd, requiredScopes(['read:alumno','read:colegio']),
+      AlumnoColegios.list);
+    app.get('/api/alumnocolegio/:annoId/:colegioId/:alumnoId/fk',
+      // checkjwd, requiredScopes(['read:alumno','read:colegio']),
+      AlumnoColegios.getByFk);
+    app.post('/api/alumnocolegio/:annoId/:colegioId/:alumnoId',
+      // checkjwd, requiredScopes(['create:alumno','create:colegio']),
+      AlumnoColegios.create);
+    app.put('/api/alumnocolegio/:alumnocolegioId',
+      // checkjwd, requiredScopes(['update:alumno','update:colegio']),
+      AlumnoColegios.modify);
+
     app.get('/api/tipocolegio',
       checkjwd, requiredScopes('read:tipocolegio'),
       TipoColegios.list);
@@ -446,13 +463,13 @@ const checkjwd = auth({
     app.get('/api/alumno/:expr/rut',
       checkjwd, requiredScopes('read:alumno'),
       Alumnos.byRutSearch);
-    app.get('/api/alumno/:usuarioId/:colegioId/:sexoId/:regionId/:provincixId/:comunaId/fk',
+    app.get('/api/alumno/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId/fk',
       checkjwd, requiredScopes('read:alumno'),
       Alumnos.getByFk);
     app.get('/api/alumno/:alumnoId/pk',
       checkjwd, requiredScopes('read:alumno'),
       Alumnos.getByPk);
-    app.post('/api/alumno/:usuarioId/:colegioId/:sexoId/:regionId/:provincixId/:comunaId',
+    app.post('/api/alumno/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId',
       checkjwd, requiredScopes('create:alumno'),
       Alumnos.create);
     app.put('/api/alumno/:alumnoId',
