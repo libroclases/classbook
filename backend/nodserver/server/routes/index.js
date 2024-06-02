@@ -632,7 +632,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('read:evaluacion'),
       Evaluaciones.list);
     app.get('/api/evaluacion/:colegioId/:cursoId/:profesorId/:asignaturaId/:annoId/:periodoId/:tipoevaluacionId/fk',
-      checkjwd, requiredScopes('read:evaluacion'),
+      // checkjwd, requiredScopes('read:evaluacion'),
       Evaluaciones.getByFk);
     app.post('/api/evaluacion/:colegioId/:cursoId/:profesorId/:asignaturaId/:annoId/:periodoId/:tipoevaluacionId',
       checkjwd, requiredScopes('create:evaluacion'),

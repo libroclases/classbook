@@ -429,10 +429,11 @@ function zfill(number: number, width: number) {
 
                     obj['nombre'] = zfill(res.max + 1,6);  // CODIGO MATRICULA
 
-                    ids[2] = this.registro.foraneas.apoderado,
-                    ids[3] = this.registro.foraneas.alumno
-                    if (obj['retiro'] == '') { obj['retiro'] = null }
-
+                    ids[2] = this.registro.foraneas.apoderado;
+                    ids[3] = this.registro.foraneas.alumno;
+                    console.log('retiro',obj['retiro'].length);
+                    if (obj['retiro'].length == 0) {  obj['retiro'] = null }
+                    console.log('mostra',obj, ids)
                     this.crud.postData(obj, this.modalData.mainTable, ids)
                     .subscribe(msg => this.showmsg(msg))
                     }),

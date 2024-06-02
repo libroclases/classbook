@@ -23,7 +23,7 @@ export class AlumnoComponent implements OnInit {
   selTables = ['region', 'provincix', 'comuna','sexo'];
   changeFnsArray: Function[] = [];
   ignoreFkRequirements: string[] = [];
-  patchFKsFromStorage = [];
+  patchFKsFromStorage = ['region','provincix'];
 
   // Route: from parent
   parentTable: string | null = null;
