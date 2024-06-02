@@ -699,10 +699,10 @@ const checkjwd = auth({
     app.get('/api/asignaturacurso',
       checkjwd, requiredScopes('read:asignaturacurso'),
       AsignaturaCursos.list);
-    app.get('/api/asignaturacurso/:annoId/:colegioId/:cursoId/:asignaturaId/fk',
+    app.get('/api/asignaturacurso/:annoId/:colegioId/:cursoId/:asignaturaId/:cursoId/fk',
       checkjwd, requiredScopes('read:asignaturacurso'),
       AsignaturaCursos.getByFk);
-    app.post('/api/asignaturacurso/:annoId/:colegioId/:cursoId/:asignaturaId',
+    app.post('/api/asignaturacurso/:annoId/:colegioId/:cursoId/:asignaturaId/:cursoId',
       checkjwd, requiredScopes('create:asignaturacurso'),
       AsignaturaCursos.create);
     app.put('/api/asignaturacurso/:asignaturacursoId',

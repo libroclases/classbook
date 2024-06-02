@@ -93,7 +93,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "profesorId",
     });
 
-    Profesor.hasMany(models.AsignaturaProfesor, {
+    Profesor.hasMany(models.AsignaturaCurso, {
       foreignKey: "profesorId",
     });
 

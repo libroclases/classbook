@@ -3,7 +3,7 @@ import model from '../models';
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-const { AsignaturaCurso,Colegio, Anno,  Curso, Asignatura } = model;
+const { AsignaturaCurso,Colegio, Anno,  Curso, Asignatura, Profesor } = model;
 
 class AsignaturaCursos {
 
@@ -16,7 +16,7 @@ class AsignaturaCursos {
             { model:Anno, attributes:['id','nombre'], where: { } },
             { model:Colegio, attributes:['id','nombre'], where: { } },
             { model:Curso, attributes:['id','nombre'], where: { } },
- 
+            { model:Profesor, attributes:['id','nombre','apellido1','apellido2'], where: { } },            
           ],
           order: [['id','ASC']]})  
           .then(AsignaturaCursos => res.status(200).send(AsignaturaCursos))
@@ -32,12 +32,13 @@ class AsignaturaCursos {
   }
 
   static getByFk(req, res) {
-    const { annoId, colegioId, cursoId, asignaturaId } = req.params;
+    const { annoId, colegioId, cursoId, asignaturaId, profesorId } = req.params;
     let consulta = {};
     if (asignaturaId != '0') {  consulta['asignaturaId'] = asignaturaId;  }
     if (annoId != '0') {  consulta['annoId'] = annoId;  }
     if (colegioId != '0') {  consulta['colegioId'] = colegioId;  }
     if (cursoId != '0') {  consulta['cursoId'] = cursoId;  }
+    if (profesorId != '0') {  consulta['profesorId'] = profesorId;  }
 
     return AsignaturaCurso 
       .findAll({ where : consulta,
@@ -46,7 +47,8 @@ class AsignaturaCursos {
             { model:Asignatura, attributes:['id','nombre'], where: { } },
             { model:Anno, attributes:['id','nombre'], where: { } },
             { model:Colegio, attributes:['id','nombre'], where: { } },
-            { model:Curso, attributes:['id','nombre'], where: { } },          
+            { model:Curso, attributes:['id','nombre'], where: { } },
+            { model:Profesor, attributes:['id','nombre','apellido1','apellido2'], where: { } },          
 
         ],
         order: [['id','ASC']] })
@@ -56,14 +58,14 @@ class AsignaturaCursos {
 
   static create(req, res) {
     const {  } = req.body;
-    const { annoId, colegioId, cursoId, asignaturaId } = req.params;
+    const { annoId, colegioId, cursoId, asignaturaId, profesorId } = req.params;
     return AsignaturaCurso
       .create({
         asignaturaId,
         annoId,
         colegioId,
         cursoId,
-   
+        profesorId        
       })
       .then(AsignaturaCurso => res.status(201).send({
         message: `AsignaturaCurso creado exitosamente`,
@@ -73,7 +75,7 @@ class AsignaturaCursos {
     }
   
   static modify(req, res) {
-    const {Asignatura, Anno, Colegio, Curso} = req.body;
+    const {Asignatura, Anno, Colegio, Curso, Profesor} = req.body;
     return AsignaturaCurso
       .findByPk(req.params.asignaturacursoId)
       .then((AsignaturaCurso) => {
@@ -82,7 +84,7 @@ class AsignaturaCursos {
           annoId: Anno || AsignaturaCurso.annoId, 
           colegioId: Colegio || AsignaturaCurso.colegioId,
           cursoId: Curso || AsignaturaCurso.cursoId,
-    
+          profesorId: Profesor || AsignaturaCurso.profesorId,
       })
       .then((updateAsignaturaCurso) => {
           res.status(200).send({
@@ -91,7 +93,8 @@ class AsignaturaCursos {
               asignaturaId: Asignatura || updateAsignaturaCurso.asignaturaId,
               annoId: Anno || updateAsignaturaCurso.annoId,
               colegioId: Colegio || updateAsignaturaCurso.colegioId,
-              cursoId: Curso || updateAsignaturaCurso.cursoId
+              cursoId: Curso || updateAsignaturaCurso.cursoId,
+              profesorId: Profesor || updateAsignaturaCurso.profesorId,
             }
           });
       })

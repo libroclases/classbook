@@ -9,15 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      asignaturaId: {
-        allowNull: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Asignatura',
-          key: 'id',
-          as: 'Asignatura',
-        }
-      },
       annoId: {
         allowNull: true,
         type: Sequelize.INTEGER,
@@ -43,6 +34,24 @@ module.exports = {
           model: 'Curso',
           key: 'id',
           as: 'Curso',
+        }
+      },
+      asignaturaId: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Asignatura',
+          key: 'id',
+          as: 'Asignatura',
+        }
+      },
+      profesorId: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Profesor',
+          key: 'id',
+          as: 'Profesor',
         }
       },
       createdAt: {

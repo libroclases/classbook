@@ -38,11 +38,11 @@ module.exports = (sequelize, DataTypes) => {
     Curso.hasMany(models.Horario, {
       foreignKey: "cursoId",
     });
-
+    /*
     Curso.hasMany(models.CursoProfesor, {
       foreignKey: "cursoId",
     });
-
+     */   
     Curso.hasMany(models.CursoProfesor, {
       foreignKey: "cursoId",
     });

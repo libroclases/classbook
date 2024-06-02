@@ -15,14 +15,6 @@ module.exports = (sequelize, DataTypes) => {
   AsignaturaCurso.associate = function (models) {
     // associations can be defined here
 
-    AsignaturaCurso.hasMany(models.ResumenNota, {
-      foreignKey: "asignaturacursoId",
-    });
-
-    AsignaturaCurso.belongsTo(models.Asignatura, {
-      foreignKey: "asignaturaId",
-    });
-
     AsignaturaCurso.belongsTo(models.Anno, {
       foreignKey: "annoId",
     });
@@ -34,6 +26,19 @@ module.exports = (sequelize, DataTypes) => {
     AsignaturaCurso.belongsTo(models.Curso, {
       foreignKey: "cursoId",
     });
+
+    AsignaturaCurso.hasMany(models.ResumenNota, {
+      foreignKey: "asignaturacursoId",
+    });
+
+    AsignaturaCurso.belongsTo(models.Asignatura, {
+      foreignKey: "asignaturaId",
+    });
+
+    AsignaturaCurso.belongsTo(models.Profesor, {
+      foreignKey: "profesorId",
+    });
+
 
   };
   return AsignaturaCurso;

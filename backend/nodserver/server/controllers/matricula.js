@@ -264,9 +264,15 @@ class Matriculas {
         console.log('nombre',m.id, m.nombre)
         AsignaturaCurso.findAll(consulta_asignaturas).then(asignaturas => {
           
-          
-          asignaturas.forEach(a => console.log(a.dataValues.asignaturaId))  
+          var notasObject = [];
+          var asignaturasObject = [];
+          asignaturas.forEach(a => { 
+            asignaturasObject.push(a.dataValues.asignaturaId)
+            
+            
+          })  
         
+
         
         });
         }
