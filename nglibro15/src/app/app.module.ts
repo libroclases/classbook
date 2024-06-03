@@ -76,6 +76,7 @@ import { UsuarioState } from './ngxs/usuario/usuario.state';
 import { PruebaComponent } from './tablas/prueba/prueba.component';
 import { CursoProfesorComponent } from './tablas/curso-profesor/curso-profesor.component';
 import { InscripcionColegioComponent } from './tablas/inscripcion-colegio/inscripcion-colegio.component';
+import { AlumnoColegioComponent } from './tablas/alumno-colegio/alumno-colegio.component';
 
 
 const allowedTables = [
@@ -93,6 +94,8 @@ const allowedTables = [
   'comuna',
   'controlasignatura',
   'curso',
+  'cursoprofesor',
+  'alumnocolegio',
   'dix',
   'estadoalumno',
   'evaluacion',
@@ -185,6 +188,7 @@ allowedTables.forEach((tb) => {
     PruebaComponent,
     CursoProfesorComponent,
     InscripcionColegioComponent,
+    AlumnoColegioComponent,
 
 
   ],

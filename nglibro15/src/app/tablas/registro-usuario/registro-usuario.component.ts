@@ -44,7 +44,7 @@ export class RegistroUsuarioComponent implements OnInit {
 
   url!:string;
   photo = environment.photo;
-  opacity = "70%";
+  opacity = "90%";
   // color_h2="text-primary my-3";
   position = "center";
   size = "cover";

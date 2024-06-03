@@ -1,11 +1,11 @@
 <div class="container-fluid" style="padding-left: 5%; padding-right: 5%;"
-[style.background-color]="bodybgcolor"  
+[style.background-color]="bodybgcolor"
 [style.height] = "height">
 
   <div class="my-4" style="float: right;">
     <multi-select
       [tables]="selTables"
-
+      [custom-endpoints]="customEndpoints"
       [ignore-FK-requirements]="ignoreFkRequirements"
       [change-functions]="changeFnsArray"
       [patch-fks-from-storage]="patchFKsFromStorage">
@@ -15,7 +15,7 @@
    <div  [formGroup]="notasForm"   class="overflow-auto bg-light"   style="width: 100%; max-height: 700px;">
 
     <!--form  [formGroup]="notasForm"-->
-    
+
     <table *ngIf="showtable" class="table table-bordered table-hover">
 
         <tr><th  [attr.colspan]="numcols" [style.background-color]="tablehead" style="text-align: center;color:white; height:40px" >Notas</th></tr>

@@ -3,7 +3,7 @@ import model from '../models';
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-const { Profesor,  Usuario, Sexo, Region, Provincix, Comuna } = model;
+const { Profesor,  Usuario, Sexo, Region, Provincix, Comuna, CursoProfesor } = model;
 
 class Profesores {
 
@@ -74,6 +74,8 @@ class Profesores {
         .catch(error => res.status(400).send(error));
     }
 
+
+
     static getByPk(req, res) {
               
         return Profesor
@@ -81,6 +83,7 @@ class Profesores {
         .then(profs => res.status(200).send(profs))
         .catch(error => res.status(400).send(error));
       }
+
 
     static create(req, res) {
     const { usuarioId, sexoId, regionId, provincixId, comunaId } = req.params;

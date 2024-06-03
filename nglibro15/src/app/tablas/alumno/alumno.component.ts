@@ -15,15 +15,15 @@ export class AlumnoComponent implements OnInit {
   dateFields = ['nacimiento'];
   booleanFields = [];
   // displayFKFields: CamelCase
-  displayFKFields = ['Region', 'Provincix','Comuna','Colegio','Sexo'];
+  displayFKFields = ['Region', 'Provincix','Comuna','Sexo'];
   redirectRoutes = ['/matricula'];
 
   // Selectores
 
-  selTables = ['region', 'provincix', 'comuna','colegio','sexo'];
+  selTables = ['region', 'provincix', 'comuna','sexo'];
   changeFnsArray: Function[] = [];
-  ignoreFkRequirements: string[] = ['tipocolegio','provincix', 'comuna'];
-  patchFKsFromStorage = [];
+  ignoreFkRequirements: string[] = [];
+  patchFKsFromStorage = ['region','provincix'];
 
   // Route: from parent
   parentTable: string | null = null;

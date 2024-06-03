@@ -196,13 +196,13 @@ function zfill(number: number, width: number) {
 
       this.modalData.textFields.forEach((text:any) => texts[text] = this.registro[text]);
       this.modalData.dateFields.forEach((date:any) => dates[date] = this.registro[date]);
-      this.modalData.booleanFields.forEach((bool:any) => boolean[bool] = this.registro[bool]); 
-      
+      this.modalData.booleanFields.forEach((bool:any) => boolean[bool] = this.registro[bool]);
+
       values['tablas'] = tables;
       values['textos'] = texts;
       values['fechas'] = dates;
       values['booleans'] = boolean;
-     
+
 
       this.valores =  values;
 
@@ -426,15 +426,16 @@ function zfill(number: number, width: number) {
 
                   tap(res => {
 
-     
-                    obj['nombre'] = zfill(res.max + 1,6);
 
-                    ids[2] = this.registro.foraneas.apoderado,
-                    ids[3] = this.registro.foraneas.alumno
-                    if (obj['retiro'] == '') { obj['retiro'] = null }
-              
+                    obj['nombre'] = zfill(res.max + 1,6);  // CODIGO MATRICULA
+
+                    ids[2] = this.registro.foraneas.apoderado;
+                    ids[3] = this.registro.foraneas.alumno;
+                    console.log('retiro',obj['retiro'].length);
+                    if (obj['retiro'].length == 0) {  obj['retiro'] = null }
+                    console.log('mostra',obj, ids)
                     this.crud.postData(obj, this.modalData.mainTable, ids)
-                    .subscribe(msg => this.showdata(msg))
+                    .subscribe(msg => this.showmsg(msg))
                     }),
                 ).subscribe()
         }
@@ -463,7 +464,7 @@ function zfill(number: number, width: number) {
                 this.crud.postData(obj, this.modalData.mainTable, ids).pipe(
                   tap(() => this.selIdsService.notifyUpdated()),
                 )
-                .subscribe(msg => this.showdata(msg))
+                .subscribe(msg => this.showmsg(msg))
 
 
         }
@@ -473,17 +474,17 @@ function zfill(number: number, width: number) {
         this.modalData.tables.forEach((table:any) => obj[lowerUpperTables[table]] = this.formModal.value[table]);
         if (this.modalData.mainTable == 'inscripcioncolegio') {
           obj['esPie'] = Array.from(obj['esPie'].toString())[0];
-          obj['esUtp'] = Array.from(obj['esUtp'].toString())[0];  
+          obj['esUtp'] = Array.from(obj['esUtp'].toString())[0];
          }
         this.crud.putData(obj, this.modalData.mainTable).pipe(
           tap(() => this.selIdsService.notifyUpdated())
-          ).subscribe(msg =>  this.showdata(msg));
+          ).subscribe(msg =>  this.showmsg(msg));
 
       }
     }
 
-    showdata(msg:any) {
-      if (msg?.message) {this.toastr.success(msg?.message, this.modalData.mainTable, {positionClass:'toast-top-right'})}
+    showmsg(msg:any) {
+      if (msg?.message || Object.keys(msg).length > 0 ) {this.toastr.success(msg?.message, this.modalData.mainTable, {positionClass:'toast-top-right'})}
       else {this.toastr.error(msg?.error, this.modalData.mainTable)}
     }
 

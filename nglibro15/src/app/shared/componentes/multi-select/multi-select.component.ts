@@ -73,7 +73,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
       );
     }
     let storageFks: any = {};
-    
+
     if (this.patchTablesFromStorage.length > 0) {
       this.patchTablesFromStorage.forEach((table) => {
         const newId = localStorage.getItem(`${table}Id`);
@@ -82,7 +82,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
         }
       });
     }
-    
+
     this.considerReqSel = false;
     this.valuesForm = new FormGroup({});
     this.tables.forEach((table) => this.requiredBySelTree.set(table, []));
@@ -99,7 +99,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
           foreignKeys.push(tb);
           this.requiredBySelTree.get(tb)?.push(table);
         }
-      }); console.log(table,foreignKeys)
+      });
       if (foreignKeys.length === 0) {
         this.freeTables.push(table);
       } else {
@@ -247,7 +247,6 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
 
   changeFunction(table: string, event: any) {
     const newId = +event.target.value;
-    localStorage.setItem(`${table}Id`,newId.toString());
     this.selIdsService.setId(table, newId);
     if (newId === 0) {
       this.requiredBySelTree
@@ -293,7 +292,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
   ) {
     if (this.hasCustomEndpoint.get(table)) {
       var query = this.crud
-        .getDataCustom(table, this.customEndpoints[table], fkIds)
+        .getDataCustom(table, this.customEndpoints[table], this.getForeignKeysOfTable(table))
         ?.pipe(
           tap((query) => {
             if (callback) {

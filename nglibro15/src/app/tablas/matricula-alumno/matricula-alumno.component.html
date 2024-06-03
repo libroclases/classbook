@@ -29,7 +29,7 @@
                     <button type="button" [class]="button_class"  (click)="rut_alumno()"  [disabled]="disable?.editar">Buscar</button>
   
                 </tr>
-                  <tr><td [class]="color">Nombre:</td><td>{{alumno?.nombre}}</td><td>&nbsp;</td></tr>
+                  <tr><td [class]="color">Nombre:</td><td [class]="color">{{alumno?.nombre}}</td><td>&nbsp;</td></tr>
                   <tr><td [class]="color">Apellido Paterno:</td><td [class]="color">{{alumno?.apellido1}}</td><td>&nbsp;</td></tr>
                   <tr><td [class]="color">Apellido Materno:</td><td [class]="color">{{alumno?.apellido2}}</td><td>&nbsp;</td></tr>
               </thead>
@@ -46,9 +46,9 @@
                   <button type="button" [class]="button_class" (click)="rut_apoderado()"  [disabled]="disable?.editar">Buscar</button>
   
                 </tr>
-                <tr><td [class]="color">Nombre:</td><td>{{apoderado?.nombre}}</td><td>&nbsp;</td></tr>
-                <tr><td [class]="color">Apellido Paterno:</td><td>{{apoderado?.apellido1}}</td><td>&nbsp;</td></tr>
-                <tr><td [class]="color">Apellido Materno:</td><td>{{apoderado?.apellido2}}</td><td>&nbsp;</td></tr>
+                <tr><td [class]="color">Nombre:</td><td  [class]="color">{{apoderado?.nombre}}</td><td>&nbsp;</td></tr>
+                <tr><td [class]="color">Apellido Paterno:</td><td [class]="color">{{apoderado?.apellido1}}</td><td>&nbsp;</td></tr>
+                <tr><td [class]="color">Apellido Materno:</td><td [class]="color">{{apoderado?.apellido2}}</td><td>&nbsp;</td></tr>
   
               </thead>
             </table>

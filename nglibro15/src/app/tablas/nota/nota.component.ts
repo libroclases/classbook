@@ -79,11 +79,12 @@ export class NotaComponent implements OnInit {
 
   // Selectores
 
-  selTables = [  "anno", "periodo", "colegio", "curso", "profesor", "asignatura",  ];
+  selTables = [  "anno", "periodo", "colegio", "curso", "profesor", "asignatura"  ];
   tableLabels = ['Año', 'Periodo','Colegio' ,'Curso','Profesor','Asignatura', ];
-  ignoreFkRequirements: string[] = ['anno','colegio','curso'];
+  ignoreFkRequirements: string[] = [];
   changeFnsArray: Function[] = [];
-  patchFKsFromStorage = ['anno','periodo','colegio','curso'];
+  patchFKsFromStorage = ['anno','periodo','colegio'];
+  customEndpoints = null;
 
   fatherId=0;
   father='';

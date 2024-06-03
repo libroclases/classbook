@@ -26,7 +26,7 @@ class AsignaturaProfesores {
   static getByPk(req, res) {
     return AsignaturaProfesor
     .findByPk(req.params.asignaturaprofesorId)
-    .then(asistentesColegio => res.status(200).send(asistentesColegio))
+    .then(asignaturaprofesor => res.status(200).send(asignaturaprofesor))
     .catch(error => res.status(400).send(error));
   }
 
@@ -50,11 +50,10 @@ class AsignaturaProfesores {
   }
 
   static create(req, res) {
-    const { n } = req.body;
+    
     const { profesorId, asignaturaId } = req.params;
     return AsignaturaProfesor
       .create({
-        nombre, 
         asignaturaId,
         profesorId,
    

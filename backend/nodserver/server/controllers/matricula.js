@@ -3,10 +3,10 @@ import model, { sequelize } from '../models';
 const Sequelize = require("sequelize");
 
 const { Matricula, Colegio, Curso, Apoderado, Alumno, Vinculo, Anno, Periodo,
-  Profesor, AsignaturaProfesor, Evaluacion, Nota } = model;
+  Profesor, Evaluacion, Nota, AsignaturaCurso} = model;
 
 class Matriculas {
-
+  
   static list(req, res) {
     // const consulta = getBaseQuery(req);
     let consulta = {}
@@ -232,8 +232,9 @@ class Matriculas {
       })
       .catch(error => res.status(400).send(error));
   }
-
+  
   static create(req, res) {
+    let matricula_ = 'poronga';
     const { colegioId, cursoId, apoderadoId, alumnoId, vinculoId, annoId } = req.params;
     const { procedencia, nombre ,incorporacion, retiro } = req.body;
     return Matricula
@@ -250,43 +251,27 @@ class Matriculas {
         vinculoId,
    
       })
-      .then(matricula => {
-
-        let m = matricula.dataValues;
-        let consulta_evaluacion =  {
-          annoId: m.annoId, colegioId: m.colegioId, cursoId: m.cursoId};
-        Evaluacion.findAll({
-          where: consulta_evaluacion,
-          attributes: ['id'],
-          include: [
-            { model: Periodo, attributes:['id'] },
-            { model: Profesor, attributes:['id'] },
-            { model: AsignaturaProfesor, attributes:['id'] },
-          ],
-          raw: true
-        })
-        .then(evaluacion => {
-          var notasObject = [];
-          evaluacion.forEach(e => notasObject.push(
-            {...consulta_evaluacion,
-              evaluacionId: e.id,
-              profesorId: e['Profesor.id'],
-              asignaturaprofesorId: e['AsignaturaProfesor.id'],
-              periodoId: e['Periodo.id'],
-              matriculaId: m.id,
- 
-            }
-          ));
-  
-          return Nota
-          .bulkCreate(notasObject)
-          .then(() => res.status(201).send({
-            success: true,
-            newData: true,
-            message: `Matricula creada exitosamente`
-          }));
-        }); 
+      .then(matricula => { 
+        matricula_ = matricula;
+        res.status(200).send(matricula); 
       })
+      .then(() => { 
+        let m = matricula_.dataValues;
+        let consulta_asignaturas =  {
+          annoId: m.annoId, colegioId: m.colegioId, cursoId: m.cursoId
+       };
+        console.log(consulta_asignaturas);
+        console.log('nombre',m.id, m.nombre)
+        AsignaturaCurso.findAll(consulta_asignaturas).then(asignaturas => {
+          
+          
+          asignaturas.forEach(a => console.log(a.dataValues.asignaturaId))  
+        
+        
+        });
+        }
+        
+      )
       .catch(error => res.status(400).send(error));
   }
   
