@@ -845,11 +845,6 @@ export const validator: any = {
 
   },
 
-    modalDate: {
-    }
-
-  },
-
   CursoProfesor: {
     modalText: {
 
