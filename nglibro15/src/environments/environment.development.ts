@@ -198,7 +198,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
   periodo: [],
   asignatura: ['tipocolegio'],
   asignaturaprofesor: ['profesor', 'asignatura'],
-  cursoprofesor: ['anno','colegio','curso','profesor'],
+  cursoprofesor: ['anno','colegio','curso','asignatura','profesor'],
   alumnocolegio: ['anno','colegio','alumno'],
   colegio: ['region', 'provincix', 'comuna', 'tipocolegio'],
   curso: ['colegio', 'anno'],
@@ -1207,7 +1207,7 @@ export const modalDataObject: any = {
 
   CursoProfesor: {
     mainTable: 'cursoprofesor',
-    tables: ['anno','colegio','curso','profesor'],
+    tables: ['anno','colegio','curso','asignatura','profesor'],
     textFields: [],
     booleanFields:[],
     dateFields: [],

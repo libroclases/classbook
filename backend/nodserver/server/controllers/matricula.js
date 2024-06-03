@@ -3,7 +3,7 @@ import model, { sequelize } from '../models';
 const Sequelize = require("sequelize");
 
 const { Matricula, Colegio, Curso, Apoderado, Alumno, Vinculo, Anno, Periodo,
-  Profesor, Evaluacion, Nota} = model;
+  CursoProfesor, Evaluacion, Nota} = model;
 
 class Matriculas {
   
@@ -257,11 +257,12 @@ class Matriculas {
       })
       .then(() => { 
         let m = matricula_.dataValues;
-        let consulta_asignaturas =  {
+        let consulta_cursoprofesor =  {
           annoId: m.annoId, colegioId: m.colegioId, cursoId: m.cursoId
        };
-        console.log(consulta_asignaturas);
+        console.log(consulta_cursoprofesor);
         console.log('nombre',m.id, m.nombre);
+ 
         }
         
       )

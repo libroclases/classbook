@@ -616,7 +616,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('read:matricula'),
       Matriculas.countHombresMujeres);
     app.post('/api/matricula/:colegioId/:cursoId/:apoderadoId/:alumnoId/:vinculoId/:annoId',
-      checkjwd, requiredScopes('create:matricula'),
+      // checkjwd, requiredScopes('create:matricula'),
       Matriculas.create);
     app.put('/api/matricula/:matriculaId',
       checkjwd, requiredScopes('update:matricula'),
