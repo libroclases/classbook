@@ -285,7 +285,20 @@ class Matriculas {
                   // console.log(notas)
                   notasObj.push(notas)
                   })
-                  console.log('poronga', notasObj);
+
+                  console.log(notasObj);
+                  /*
+                  Nota
+                  .bulkCreate(notasObj)
+                  .then(() => res.status(201).send({
+                    success: true,
+                    message: `Entradas de Notas creadas exitosamente`
+                  }))
+                  .catch(error => res.status(400).send({
+                    success: false,
+                    message: `Entradas de Notas NO fueron creadas con éxito`,
+                  }));
+                  */
                 })
                 
               })
