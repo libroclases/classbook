@@ -232,7 +232,6 @@ class Matriculas {
       })
       .catch(error => res.status(400).send(error));
   }
-  
   static create(req, res) {
     let matricula_ = 'poronga';
     const { colegioId, cursoId, apoderadoId, alumnoId, vinculoId, annoId } = req.params;
@@ -257,17 +256,48 @@ class Matriculas {
       })
       .then(() => { 
         let m = matricula_.dataValues;
-        let consulta_cursoprofesor =  {
+        const matricula = {matriculaId: m.id};
+        let consulta =  {
           annoId: m.annoId, colegioId: m.colegioId, cursoId: m.cursoId
        };
-        console.log(consulta_cursoprofesor);
+        // console.log(consulta);
         console.log('nombre',m.id, m.nombre);
- 
+        CursoProfesor.findAll(consulta).then(query => {
+              var notasObj=[]
+              query.forEach(q => {
+              
+                const c = q.dataValues;
+                const consulta = {annoId: c.annoId, colegioId: c.colegioId, cursoId: c.cursoId, 
+                  asignaturaId: c.asignaturaId, profesorId: c.profesorId
+                } 
+                // console.log('consulta',consulta)
+                Evaluacion.findAll({
+                  where: consulta, 
+                  attributes: ['id','periodoId'],
+                  
+                })
+                .then(evaluacion => {
+                  evaluacion.forEach(ev => {
+                  let notas = { ...matricula, ...ev.dataValues, ...consulta};
+                  // notas['evaluacionId'] = notas.pop('id');
+                  notas['evaluacionId'] = notas['id'];
+                  delete notas['id'];
+                  // console.log(notas)
+                  notasObj.push(notas)
+                  })
+                  console.log('poronga', notasObj);
+                })
+                
+              })
+                      
+        });
+          // 
         }
         
       )
       .catch(error => res.status(400).send(error));
   }
+
   
 
   static getByPk(req, res) {

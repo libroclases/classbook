@@ -589,10 +589,10 @@ const checkjwd = auth({
       checkjwd, requiredScopes('update:ventana'),
       Ventanas.modify); 
     app.get('/api/matricula',
-      checkjwd, requiredScopes('read:matricula'),
+      // checkjwd, requiredScopes('read:matricula'),
       Matriculas.list);
     app.get('/api/matricula/:colegioId/:cursoId/:apoderadoId/:alumnoId/:vinculoId/:annoId/fk',
-      checkjwd, requiredScopes('read:matricula'),
+      // checkjwd, requiredScopes('read:matricula'),
       Matriculas.getByFk);
     app.get('/api/matricula/:matriculaId/pk',
       checkjwd, requiredScopes('read:matricula'),
