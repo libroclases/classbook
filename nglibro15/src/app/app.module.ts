@@ -63,7 +63,6 @@ import { AdministradorComponent } from './tablas/administrador/administrador.com
 import { ProfeValidatorsDirective } from './shared/directives/profe-validator/profe-validator.directive';
 
 import { ResumenNotaComponent } from './tablas/resumen-nota/resumen-nota.component';
-import { AsignaturaCursoComponent } from './tablas/asignatura-curso/asignatura-curso.component';
 
 // NGXS
 
@@ -87,7 +86,6 @@ const allowedTables = [
   'apoderado',
   'asignatura',
   'asignaturaprofesor',
-  'asignaturacurso',
   'asistencia',
   'asistentecolegio',
   'colegio',
@@ -184,7 +182,6 @@ allowedTables.forEach((tb) => {
     AdministradorComponent,
     ProfeValidatorsDirective,
     ResumenNotaComponent,
-    AsignaturaCursoComponent,
     PruebaComponent,
     CursoProfesorComponent,
     InscripcionColegioComponent,

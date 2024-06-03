@@ -3,7 +3,7 @@ import model, { sequelize } from '../models';
 const Sequelize = require("sequelize");
 
 const { Matricula, Colegio, Curso, Apoderado, Alumno, Vinculo, Anno, Periodo,
-  Profesor, Evaluacion, Nota, AsignaturaCurso} = model;
+  Profesor, Evaluacion, Nota} = model;
 
 class Matriculas {
   
@@ -261,14 +261,7 @@ class Matriculas {
           annoId: m.annoId, colegioId: m.colegioId, cursoId: m.cursoId
        };
         console.log(consulta_asignaturas);
-        console.log('nombre',m.id, m.nombre)
-        AsignaturaCurso.findAll(consulta_asignaturas).then(asignaturas => {
-          
-          
-          asignaturas.forEach(a => console.log(a.dataValues.asignaturaId))  
-        
-        
-        });
+        console.log('nombre',m.id, m.nombre);
         }
         
       )

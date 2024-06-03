@@ -21,7 +21,6 @@ const tablesArray = [
   'apoderado',
   'asignatura',
   'asignaturaprofesor',
-  'asignaturacurso',
   'asistencia',
   'asistentecolegio',
   'colegio',
@@ -199,7 +198,6 @@ export const fKeysByTable: { [key: string]: string[] } = {
   periodo: [],
   asignatura: ['tipocolegio'],
   asignaturaprofesor: ['profesor', 'asignatura'],
-  asignaturacurso: ['anno','colegio','curso', 'asignatura'],
   cursoprofesor: ['anno','colegio','curso','profesor'],
   alumnocolegio: ['anno','colegio','alumno'],
   colegio: ['region', 'provincix', 'comuna', 'tipocolegio'],
@@ -315,7 +313,6 @@ export const lowerUpperTables: stringString = {
   apoderado: 'Apoderado',
   asignatura: 'Asignatura',
   asignaturaprofesor: 'AsignaturaProfesor',
-  asignaturacurso: 'AsignaturaCurso',
   cursoprofesor: 'CursoProfesor',
   alumnocolegio: 'AlumnoColegio',
   asistencia: 'Asistencia',
@@ -363,7 +360,6 @@ export const tableLabels = {
   apoderado: 'Apoderado',
   asignatura: 'Asignatura',
   asignaturaprofesor: 'Asignatura Profesor',
-  asignaturacurso: 'Asignatura Curso',
   cursoprofesor: 'Inscripción Curso',
   alumnocolegio: 'Alumno Colegio',
   asistencia: 'Asistencia',
@@ -497,10 +493,6 @@ export const attributesLabels = {
   },
 
   asignaturaprofesor: {
-
-  },
-
-  asignaturacurso: {
 
   },
 
@@ -718,7 +710,6 @@ export const icons: stringStringPair = {
   '/control_asignatura': ['bi bi-layout-text-window', 'Control de Asignatura'],
   '/asignatura': ['bi bi-book', 'Asignaturas'],
   '/asignaturaprofesor': ['bi bi-book', 'Asignatura Profesores'],
-  '/asignaturacurso': ['bi bi-book', 'Asignatura Profesores'],
   '/cursoprofesor': ['bi bi-book', 'Asignatura Profesores'],
   '/alumnocolegio': ['bi bi-person-check-fill', 'Alumno Colegio'],
   '/profesor': ['bi bi-person-video3', 'Profesores'],
@@ -854,10 +845,6 @@ export const validator: any = {
 
   },
 
-   AsignaturaCurso: {
-    modalText: {
-
-    },
     modalDate: {
     }
 
@@ -1093,7 +1080,6 @@ export const Permission:any =  {
   /* Profesor */
   Profesor: { leer : ['utp'], editar: ['utp'], crear: ['utp'] },
   InscripcionCurso: { leer: ['profesor'], editar: ['utp'], crear:['utp'] },
-  AsignaturaCurso: { leer: ['profesor'], editar: ['utp'], crear:['utp'] },
   Evaluacion:  { leer: ['profesor'], editar: ['utp'], crear: ['utp']},
   Nota: {leer: ['profesor'] ,editar: ['profesor'], crear: ['profesor']},
   ResumenNota: {leer: ['profesor'] ,editar: ['profesor'], crear: ['profesor']},
@@ -1222,20 +1208,6 @@ export const modalDataObject: any = {
     defaultValues: {},
     label: 'Asignatura Profesor',
     windowHeight: '320px',
-  },
-
-  AsignaturaCurso: {
-    mainTable: 'asignaturacurso',
-    tables: ['anno','colegio', 'curso', 'asignatura'],
-    textFields: [],
-    booleanFields:[],
-    dateFields: [],
-    ignoreFkRequirements: [],
-    disable: [],
-    defaultValues: {},
-    label: 'Asignatura Curso',
-    windowHeight: '320px',
-
   },
 
   CursoProfesor: {

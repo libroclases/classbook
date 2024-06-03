@@ -42,7 +42,6 @@ import Matriculas from '../controllers/matricula';
 import Feriados from '../controllers/feriado';
 import Ventanas from '../controllers/ventana';
 
-import AsignaturaCursos from '../controllers/asignaturacurso';
 import CursoProfesores from '../controllers/cursoprofesor';
 
 import AlumnoColegios from '../controllers/alumnocolegio';
@@ -695,19 +694,6 @@ const checkjwd = auth({
     app.put('/api/resumennota/:resumennotaId',
       checkjwd, requiredScopes('update:nota'),
       ResumenNotas.modify);
-
-    app.get('/api/asignaturacurso',
-      checkjwd, requiredScopes('read:asignaturacurso'),
-      AsignaturaCursos.list);
-    app.get('/api/asignaturacurso/:annoId/:colegioId/:cursoId/:asignaturaId/fk',
-      checkjwd, requiredScopes('read:asignaturacurso'),
-      AsignaturaCursos.getByFk);
-    app.post('/api/asignaturacurso/:annoId/:colegioId/:cursoId/:asignaturaId',
-      checkjwd, requiredScopes('create:asignaturacurso'),
-      AsignaturaCursos.create);
-    app.put('/api/asignaturacurso/:asignaturacursoId',
-      checkjwd, requiredScopes('update:asignaturacurso'),
-      AsignaturaCursos.modify);
 
     app.get('/api/cursoprofesor',
       checkjwd, requiredScopes('read:cursoprofesor'),

@@ -33,7 +33,6 @@ import { TablaComponent } from './tablas/tabla/tabla.component';
 import { VentanaComponent } from './tablas/ventana/ventana.component';
 import { RegistroUsuarioComponent } from './tablas/registro-usuario/registro-usuario.component';
 import { ResumenNotaComponent } from './tablas/resumen-nota/resumen-nota.component';
-import { AsignaturaCursoComponent } from './tablas/asignatura-curso/asignatura-curso.component';
 import { PruebaComponent } from './tablas/prueba/prueba.component';
 import { CursoProfesorComponent } from './tablas/curso-profesor/curso-profesor.component';
 import { InscripcionColegioComponent } from './tablas/inscripcion-colegio/inscripcion-colegio.component';
@@ -130,8 +129,6 @@ const routes: Routes = [
   { path: 'registro_usuario', component: RegistroUsuarioComponent, canActivate: [AuthGuard] },
 
   { path: 'resumennota', component: ResumenNotaComponent },
-
-  { path: 'asignaturacurso', component: AsignaturaCursoComponent },
 
   { path: 'cursoprofesor', component: CursoProfesorComponent },
 

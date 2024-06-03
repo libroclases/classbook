@@ -175,8 +175,6 @@ this.usuario$.subscribe(info => {
         0
       ]
 
-      this.asignatura$ = this.crud.getData('asignaturacurso',fks)!
-
       this.asignatura$.pipe(
           tap(asignatura => {
             this.numcols = Object.keys(asignatura).length
