@@ -22,7 +22,7 @@ COPY "NivelEducacional"("nombre","createdAt","updatedAt") FROM '/var/lib/postgre
 COPY "Ventana"("dias","colegioId","tablaId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/ventana.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "TipoAsistente"("nombre","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/tipoasistente.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "Profesor"("nombre","apellido1","apellido2","rut","direccion","celular","nacimiento","sexoId","usuarioId","regionId","provincixId","comunaId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/profesor.csv' DELIMITER '|' csv HEADER NULL AS 'null';
-COPY "CursoProfesor"("annoId","colegioId","cursoId","profesorId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/cursoprofesor.csv' DELIMITER '|' csv HEADER NULL AS 'null';
+COPY "CursoProfesor"("annoId","colegioId","cursoId","asignaturaId","profesorId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/cursoprofesor.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "InscripcionColegio"("esPie","esUtp","profesorId","colegioId","annoId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/inscripcioncolegio.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "HoraAsignada"("numero","horario","colegioId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/horaasignada.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "AsignaturaProfesor"("asignaturaId","profesorId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/asignaturaprofesor.csv' DELIMITER '|' csv HEADER NULL AS 'null';

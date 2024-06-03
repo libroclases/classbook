@@ -19,9 +19,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "cursoprofesorId",
     });
     */
-    CursoProfesor.belongsTo(models.Profesor, {
-      foreignKey: "profesorId",
-    });
 
     CursoProfesor.belongsTo(models.Anno, {
       foreignKey: "annoId",
@@ -30,10 +27,20 @@ module.exports = (sequelize, DataTypes) => {
     CursoProfesor.belongsTo(models.Colegio, {
       foreignKey: "colegioId",
     });
-    
+
     CursoProfesor.belongsTo(models.Curso, {
       foreignKey: "cursoId",
     });
+
+    CursoProfesor.belongsTo(models.Asignatura, {
+      foreignKey: "asignaturaId",
+    });
+
+    CursoProfesor.belongsTo(models.Profesor, {
+      foreignKey: "profesorId",
+    });
+
+    
 
   };
   return CursoProfesor;
