@@ -262,9 +262,10 @@ class Matriculas {
          
         let m = matricula_.dataValues;
         const matricula = {matriculaId: m.id};
+        const fecha = {fecha:m.incorporacion};
         let consulta_cursoprofesor =  { annoId: m.annoId, colegioId: m.colegioId, cursoId: m.cursoId };
         console.log(consulta_cursoprofesor);
-          
+          Estado.create({ ...matricula, estadoId: 1, ...consulta_cursoprofesor}, ...fecha).then(estado => { console.log(estado.dataValues) });
           CursoProfesor.findAll({where : consulta_cursoprofesor}).then(query => {
 
               var cont=0;
