@@ -6,14 +6,14 @@ const { Matricula, Colegio, Curso, Apoderado, Alumno, Vinculo, Anno, Periodo,
   CursoProfesor, Evaluacion, Nota} = model;
 
 class Matriculas {
-  
+
   static list(req, res) {
     // const consulta = getBaseQuery(req);
     let consulta = {}
     return Matricula
       .findAll( {
         where: consulta,
-        attributes: ['id', 'nombre', 'incorporacion', 'retiro', 'procedencia'], 
+        attributes: ['id', 'nombre', 'incorporacion', 'procedencia'], 
         include: [ 
           { model:Apoderado, attributes:['id','nombre','apellido1','apellido2'], where: { } },
           { model:Alumno, attributes:['id','nombre','apellido1','apellido2'], where: { } },
@@ -44,7 +44,7 @@ class Matriculas {
     return Matricula
       .findAll({
         where: consulta,
-        attributes: ['id','nombre','procedencia','incorporacion','retiro' ],
+        attributes: ['id','nombre','procedencia','incorporacion' ],
         include: [ 
           { model:Colegio, attributes:['id','nombre'], where: { } },
           { model:Curso, attributes:['id','nombre'], where: { } },
@@ -232,15 +232,18 @@ class Matriculas {
       })
       .catch(error => res.status(400).send(error));
   }
+
+  
+
   static create(req, res) {
-    let matricula_ = 'poronga';
+    let matricula_;
+    
     const { colegioId, cursoId, apoderadoId, alumnoId, vinculoId, annoId } = req.params;
-    const { procedencia, nombre ,incorporacion, retiro } = req.body;
-    return Matricula
+    const { procedencia, nombre ,incorporacion } = req.body;
+    Matricula
       .create({
         procedencia,
         incorporacion,
-        retiro,
         nombre,
         apoderadoId,
         alumnoId,
@@ -252,63 +255,59 @@ class Matriculas {
       })
       .then(matricula => { 
         matricula_ = matricula;
-        res.status(200).send(matricula); 
+        res.status(200).send(matricula);
       })
-      .then(() => { 
+      .catch(error => res.status(400).send(error))
+      .then(() => {
+         
         let m = matricula_.dataValues;
         const matricula = {matriculaId: m.id};
-        let consulta =  {
-          annoId: m.annoId, colegioId: m.colegioId, cursoId: m.cursoId
-       };
-        // console.log(consulta);
-        console.log('nombre',m.id, m.nombre);
-        CursoProfesor.findAll(consulta).then(query => {
-              var notasObj=[]
+        let consulta_cursoprofesor =  { annoId: m.annoId, colegioId: m.colegioId, cursoId: m.cursoId };
+        console.log(consulta_cursoprofesor);
+          
+          CursoProfesor.findAll({where : consulta_cursoprofesor}).then(query => {
+
+              var cont=0;
+              
               query.forEach(q => {
               
                 const c = q.dataValues;
-                const consulta = {annoId: c.annoId, colegioId: c.colegioId, cursoId: c.cursoId, 
+                const consulta_evaluacion = {
+                  annoId: c.annoId, colegioId: c.colegioId, cursoId: c.cursoId, 
                   asignaturaId: c.asignaturaId, profesorId: c.profesorId
-                } 
-                // console.log('consulta',consulta)
+                }
+                // console.log(consulta_evaluacion) 
+                let notasObj = [];
                 Evaluacion.findAll({
-                  where: consulta, 
+                  where: consulta_evaluacion, 
                   attributes: ['id','periodoId'],
                   
                 })
                 .then(evaluacion => {
                   evaluacion.forEach(ev => {
-                  let notas = { ...matricula, ...ev.dataValues, ...consulta};
-                  // notas['evaluacionId'] = notas.pop('id');
+                  let notas = { ...matricula, ...ev.dataValues, ...consulta_evaluacion};
+                  cont++;
                   notas['evaluacionId'] = notas['id'];
                   delete notas['id'];
-                  // console.log(notas)
-                  notasObj.push(notas)
+                  Nota.create(notas).then(nota => { console.log(nota.dataValues) });
+                
+               
                   })
-
-                  console.log(notasObj);
-                  /*
-                  Nota
-                  .bulkCreate(notasObj)
-                  .then(() => res.status(201).send({
-                    success: true,
-                    message: `Entradas de Notas creadas exitosamente`
-                  }))
-                  .catch(error => res.status(400).send({
-                    success: false,
-                    message: `Entradas de Notas NO fueron creadas con éxito`,
-                  }));
-                  */
+                              
                 })
+                //Nota.bulkCreate(notasObj)
                 
               })
-                      
-        });
-          // 
+        
+
+      
+          })
+         
+          
         }
         
       )
-      .catch(error => res.status(400).send(error));
+      //.catch(error => res.status(400).send(error));
   }
 
   
@@ -336,7 +335,7 @@ class Matriculas {
     let consulta = {};
     // let consulta = getBaseQuery(req);
     consulta['id'] = req.params.matriculaId;
-    const { nombre, procedencia, incorporacion, retiro, Apoderado, Alumno, Colegio, Curso, Anno, Vinculo } = req.body;
+    const { nombre, procedencia, incorporacion, Apoderado, Alumno, Colegio, Curso, Anno, Vinculo } = req.body;
     return Matricula
       .findOne({ where: consulta })
       .then((matricula) => {
@@ -344,7 +343,6 @@ class Matriculas {
           nombre: nombre || matricula.nombre,
           procedencia: procedencia || matricula.procedencia,
           incorporacion: incorporacion || matricula.incorporacion,
-          retiro: retiro || matricula.retiro,
           apoderadoId: Apoderado || matricula.apoderadoId,
           alumnoId: Alumno || matricula.alumnoId,
           colegioId: Colegio || matricula.colegioId,
@@ -360,7 +358,6 @@ class Matriculas {
               nombre: nombre || updatedMatricula.nombre,
               procedencia: procedencia || updatedMatricula.procedencia,
               incorporacion: incorporacion || updatedMatricula.incorporacion,
-              retiro: retiro || updatedMatricula.retiro,
               apoderadoId: Apoderado || updatedMatricula.apoderadoId,
               alumnoId: Alumno       || updatedMatricula.alumnoId,
               colegioId: Colegio || updatedMatricula.colegioId,

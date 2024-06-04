@@ -188,12 +188,12 @@ const checkjwd = auth({
       checkjwd, requiredScopes('update:horaasignada'),
       HorasAsignadas.modify);
     app.get('/api/estadoalumno',
-      checkjwd, requiredScopes('read:estadoalumno'),
+      // checkjwd, requiredScopes('read:estadoalumno'),
       EstadoAlumnos.list);
-    app.get('/api/estadoalumno/:alumnoId/:matriculaId/:tipoestadoId/fk',
-      checkjwd, requiredScopes('read:estadoalumno'),
+    app.get('/api/estadoalumno/:annoId/:colegioId/:cursoId/:alumnoId/:matriculaId/:tipoestadoId/fk',
+      // checkjwd, requiredScopes('read:estadoalumno'),
       EstadoAlumnos.getByFk);
-    app.post('/api/estadoalumno/:alumnoId/:matriculaId/:tipoestadoId',
+    app.post('/api/estadoalumno/:annoId/:colegioId/cursoId/:alumnoId/:matriculaId/:tipoestadoId',
       checkjwd, requiredScopes('create:estadoalumno'),
       EstadoAlumnos.create);
     app.put('/api/estadoalumno/:estadoalumnoId',

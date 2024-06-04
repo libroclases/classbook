@@ -24,13 +24,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Please enter your name",
         },
       },
-      retiro: {
-        type: DataTypes.DATEONLY,
-        allowNull: {
-          args: true,
-          msg: "Please enter your name",
-        },
-      },
+
     },
     {
       sequelize,

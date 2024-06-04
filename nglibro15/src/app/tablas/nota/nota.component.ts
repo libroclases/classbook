@@ -83,7 +83,7 @@ export class NotaComponent implements OnInit {
   tableLabels = ['Año', 'Periodo','Colegio' ,'Curso','Profesor','Asignatura', ];
   ignoreFkRequirements: string[] = [];
   changeFnsArray: Function[] = [];
-  patchFKsFromStorage = ['anno','periodo','colegio'];
+  patchFKsFromStorage = ['anno','periodo','colegio','curso','profesor'];
   customEndpoints = null;
 
   fatherId=0;

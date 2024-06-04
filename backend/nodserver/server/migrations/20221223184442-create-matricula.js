@@ -17,10 +17,6 @@ module.exports = {
       incorporacion: {
         type: Sequelize.DATEONLY
       },
-      retiro: {
-        type: Sequelize.DATEONLY,
-        allowNull: true,
-      },
       apoderadoId: {
         allowNull: false,
         type: Sequelize.INTEGER,

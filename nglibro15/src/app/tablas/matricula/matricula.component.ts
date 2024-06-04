@@ -13,7 +13,7 @@ export class MatriculaComponent {
  tableTitle = 'Matricula';
  textFields = ['nombre', 'procedencia'];
  booleanFields = [];
- dateFields = ['incorporacion', 'retiro'];
+ dateFields = ['incorporacion'];
  // displayFKFields: CamelCase
  displayFKFields = ['Alumno', 'Apoderado', 'Vinculo', 'Anno', 'Colegio', 'Curso'];
  redirectRoutes = ['/curso'];

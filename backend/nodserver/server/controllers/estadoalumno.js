@@ -1,6 +1,6 @@
 import model, { sequelize } from '../models';
 
-const { EstadoAlumno, Alumno, Matricula, TipoEstado } = model;
+const { EstadoAlumno, Alumno, Matricula, Anno, Colegio, Curso,TipoEstado } = model;
 
 class EstadoAlumnos {
 
@@ -12,6 +12,10 @@ class EstadoAlumnos {
           { model:Matricula, attributes:['id','nombre'], where: { } },
           { model:Alumno, attributes:['id','nombre','apellido1','apellido2'], where: { } },
           { model:TipoEstado, attributes:['id','nombre'], where: { } },
+          { model:Anno, attributes:['id','nombre'], where: { } },
+          { model:Colegio, attributes:['id','nombre'], where: { } },
+          { model:Curso, attributes:['id','nombre'], where: { } },
+          
 
         ],
         order: [['fecha','ASC']]})
@@ -20,12 +24,15 @@ class EstadoAlumnos {
   }
 
   static getByFk(req, res) {
-    const { alumnoId, matriculaId,  tipoestadoId } = req.params;
+    const {  annoId, colegioId, cursoId, alumnoId, matriculaId,  tipoestadoId } = req.params;
     let consulta = {};
     
     if (matriculaId != '0') { consulta['matriculaId'] = matriculaId; }
     if (alumnoId != '0') { consulta['alumnoId'] = alumnoId; }
     if (tipoestadoId != '0') { consulta['tipoestadoId'] = tipoestadoId;  }
+    if (annoId != '0') { consulta['annoId'] = annoId;  }
+    if (colegioId != '0') { consulta['colegioId'] = colegioId;  }
+    if (cursoId != '0') { consulta['cursoId'] = cursoId;  }
 
     return EstadoAlumno
       .findAll({
@@ -35,6 +42,10 @@ class EstadoAlumnos {
           { model:Matricula, attributes:['id','nombre'], where: { } },
           { model:Alumno, attributes:['id','nombre', 'apellido1','apellido2'], where: { } },
           { model:TipoEstado, attributes:['id','nombre'], where: { } },
+          { model:Anno, attributes:['id','nombre'], where: { } },
+          { model:Colegio, attributes:['id','nombre'], where: { } },
+          { model:Curso, attributes:['id','nombre'], where: { } },
+
         ],
         order: [
           ['id', 'DESC']]
@@ -44,7 +55,7 @@ class EstadoAlumnos {
   }
 
   static create(req, res) {
-    const { alumnoId, matriculaId, tipoestadoId } = req.params;
+    const { annoId, colegioId, cursoId, alumnoId, matriculaId, tipoestadoId } = req.params;
     const { fecha } = req.body;
     return EstadoAlumno
       .create({
@@ -52,6 +63,9 @@ class EstadoAlumnos {
         matriculaId,
         alumnoId,
         tipoestadoId,
+        annoId,
+        colegioId,
+        cursoId
    
       })
       .then(estado => res.status(201).send({
@@ -71,7 +85,7 @@ class EstadoAlumnos {
   }
 
   static modify(req, res) {
-    const { fecha, Alumno, Matricula, TipoEstado } = req.body;
+    const { fecha, Alumno, Matricula, TipoEstado, Anno, Colegio, Curso } = req.body;
     return EstadoAlumno
       .findByPk(req.params.estadoalumnoId)
       .then((estado) => {
@@ -80,6 +94,9 @@ class EstadoAlumnos {
           matriculaId: Matricula || estado.matriculaId,
           alumnoId: Alumno || estado.alumnoId,
           tipoestadoId: TipoEstado || estado.tipoestadoId,
+          annoId: Anno || estado.annoId,
+          colegioId: Colegio || estado.colegioId,
+          cursoId: Curso || estado.cursoId
    
       })
       .then((updatedEstado) => {
@@ -89,7 +106,10 @@ class EstadoAlumnos {
               fecha: fecha || updatedEstado.fecha,
               matriculaId: Matricula || updatedEstado.matriculaId,
               alumnoId: Alumno       || updatedEstado.alumnoId,
-              tipoestadoId: TipoEstado || updatedEstado.tipoestadoId
+              tipoestadoId: TipoEstado || updatedEstado.tipoestadoId,
+              annoId: Anno || updatedEstado.annoId,
+              colegioId: Colegio || updatedEstado.colegioId,
+              cursoId: Curso || updatedEstado.cursoId
             }
           })
       })

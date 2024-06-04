@@ -32,7 +32,7 @@ COPY "AsistenteColegio"("nombre","apellido1","apellido2","rut","celular","direcc
 COPY "Admin"("nombre","apellido1","apellido2","rut","celular","direccion","nacimiento","usuarioId","sexoId","regionId","provincixId","comunaId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/administrador.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "Horario"("hora","colegioId","cursoId","asignaturaId","profesorId","annoId","dixId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/horario.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "Vinculo"("nombre","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/vinculo.csv' DELIMITER '|' csv HEADER NULL AS 'null';
-COPY "Matricula"("nombre","procedencia","incorporacion","retiro","apoderadoId","alumnoId","colegioId","cursoId","annoId","vinculoId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/matricula.csv' DELIMITER '|' csv HEADER NULL AS 'null';
+COPY "Matricula"("nombre","procedencia","incorporacion","apoderadoId","alumnoId","colegioId","cursoId","annoId","vinculoId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/matricula.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "Feriado"("nombre","fecha","lugar","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/feriado.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "ControlAsignatura"("inasistentesHombres","inasistentesMujeres","atrasos","observaciones","fecha","dia","hora","colegioId","cursoId","asignaturaId","profesorId","profesorPieId","horarioId","annoId","mesId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/controlasignatura.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "RegistroActividad"("descripcion","fecha","dia","horaInicial","numeroHoras","colegioId","cursoId","asignaturaId","profesorId","horarioId","annoId","mesId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/registroactividad.csv' DELIMITER '|' csv HEADER NULL AS 'null';
@@ -42,5 +42,5 @@ COPY "Asistencia"("fecha","presente","dia","matriculaId","colegioId","cursoId","
 COPY "TipoEstado"("nombre","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/tipoestado.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "Nota"("nota","matriculaId","evaluacionId","colegioId","cursoId","annoId","periodoId","profesorId","asignaturaId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/nota.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "ResumenNota"("promedio","matriculaId","annoId","periodoId", "colegioId","cursoId","asignaturaId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/resumennota.csv' DELIMITER '|' csv HEADER NULL AS 'null';
-COPY "EstadoAlumno"("fecha","tipoestadoId","matriculaId","alumnoId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/estadoalumno.csv' DELIMITER '|' csv HEADER NULL AS 'null';
+COPY "EstadoAlumno"("fecha","matriculaId","tipoestadoId","colegioId","cursoId","annoId","alumnoId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/estadoalumno.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "AlumnoColegio"("annoId","alumnoId","colegioId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/alumnocolegio.csv' DELIMITER '|' csv HEADER NULL AS 'null';
