@@ -261,7 +261,6 @@ class Matriculas {
       })
       .then(matricula => { 
         matricula_ = matricula;
-        res.status(200).send(matricula);
       })
       .catch(error => res.status(400).send(error))
       .then(() => {
@@ -277,10 +276,6 @@ class Matriculas {
           EstadoAlumno.create({ ...alumno,...matricula , ...estadoalumno, ...consulta_cursoprofesor, ...fecha})
           .then(estadoalumno => { console.log(estadoalumno.dataValues) });
           
-          /*
-          Asistencia.populateMesAlumno(m.colegioId, m.cursoId, m.annoId, m.incorporacion.substring(5,7)*1, m.id)
-          .then(asistencia => { console.log('ASISTENCIA:',asistencia) });
-          */
          
           CursoProfesor.findAll({where : consulta_cursoprofesor}).then(query => {
 
@@ -306,24 +301,33 @@ class Matriculas {
                   cont++;
                   notas['evaluacionId'] = notas['id'];
                   delete notas['id'];
-                  Nota.create(notas).then(nota => { /*console.log(nota.dataValues)*/ });
+                  notasObj.push(notas);
+                  // Nota.create(notas).then(nota => { /*console.log(nota.dataValues)*/ });
                 
                
                   })
-                              
+                  Nota.bulkCreate(notasObj)
                 })
-                //Nota.bulkCreate(notasObj)
+             
+             
                 
               })
-        
 
-      
-          })
          
           
         }
         
       )
+      .then(() => res.status(201).send({
+        success: true,
+        message: `Entradas de Notas creadas exitosamente`
+      }))
+      .catch(error => res.status(400).send({
+        success: false,
+        message: `Entradas de Notas NO fueron creadas con éxito`,
+      })); 
+
+  })
       //.catch(error => res.status(400).send(error));
   }
 

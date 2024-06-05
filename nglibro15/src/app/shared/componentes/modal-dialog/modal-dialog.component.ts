@@ -432,8 +432,25 @@ function zfill(number: number, width: number) {
                     ids[2] = this.registro.foraneas.apoderado;
                     ids[3] = this.registro.foraneas.alumno;
 
-                    
-                    this.crud.postData(obj, 'matricula', ids)
+                    /* matricula:
+                       0: colegioId
+                       1: cursoId
+                       2: apoderadoId
+                       3: alumnoId
+                       4: vinculoId
+                       5: annoId
+                       asistencia:
+                       0: colegioId -> ids[0]
+                       1: cursoId -> ids[1]
+                       2: anoId -> ids[5]
+                       3: mesId -> obj['incorporacion'].substring(5,7)*1
+                       4: matriculaId -> res.max + 1
+                       5: alumnoId -> ids[3]
+                    */
+                    const fks: any = [ids[0],ids[1],ids[5],obj['incorporacion'].substring(5,7)*1,res.max + 1,ids[3]]
+                    this.crud.postData(obj, 'matricula', ids).pipe(
+                       tap(() => console.log('asistencia','populateMatriculaMes',fks))
+                    )
                     .subscribe(msg => this.showmsg(msg))
                     }),
                 ).subscribe()

@@ -247,19 +247,11 @@ class Asistencias {
     }
 
     static populateMatriculaMes(req, res) {
-      const { colegioId, cursoId, annoId, mesId, matriculaId } = req.params;
+      const { colegioId, cursoId, annoId, mesId, matriculaId, alumnoId } = req.params;
       const { anno } = req.body;
       const mes = mesId;
-    
-      var consulta = {};
-
-      consulta['colegioId'] = colegioId;
-      consulta['cursoId'] = cursoId;
-      consulta['annoId'] = annoId;
-      consulta['matriculaId'] = matriculaId;
 
       var consultaFeriado = {fecha: {[Op.between]: [new Date(anno, mes-1, 0), new Date(anno, mes, 0)]}};
-
 
       Feriado
       .findAll({
@@ -287,21 +279,32 @@ class Asistencias {
               fecha: fecha,
               presente: false,
               dia: dia,
-              matriculaId: matriculaId.toString(),
+              matriculaId: matriculaId,
               colegioId: colegioId,
               cursoId: cursoId,
-              // alumnoId: alumnoId.toString(),
+              alumnoId: alumnoId,
               annoId: annoId,
               mesId: mesId,
 
               };
-              console.log(asistencia);
+              // console.log(asistencia);
               asistenciaObjects.push(asistencia);
           }
         }
+      Asistencia
+      .bulkCreate(asistenciaObjects)
+      .then(() => res.status(201).send({
+        success: true,
+        message: `Entradas de Asistencia creadas exitosamente`
+      }))
+      .catch(error => res.status(400).send({
+        success: false,
+        message: `Entradas de Asistencia NO fueron creadas con éxito`,
+      }));
+        // console.log(asistenciaObjects);
       })
 
-      return res.status(200).send({colegioId, cursoId, annoId, mesId, matriculaId});
+      // return res.status(200).send({colegioId, cursoId, annoId, mesId, matriculaId});
     
     }
 
