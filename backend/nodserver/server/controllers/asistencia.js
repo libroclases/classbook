@@ -220,7 +220,7 @@ class Asistencias {
     }
 
   static create(req, res) {
-    const { matriculaId, colegioId, cursoId, alumnoId, annoId, mesId, userId } = req.params;
+    const { matriculaId, colegioId, cursoId, alumnoId, annoId, mesId } = req.params;
     const { fecha, presente, dia } = req.body;
 
     return Asistencia
@@ -244,6 +244,65 @@ class Asistencias {
         success: false,
         message: `Asistencia con fecha ${fecha} para Alumno ${alumnoId} NO fue creada`,
       }));
+    }
+
+    static populateMatriculaMes(req, res) {
+      const { colegioId, cursoId, annoId, mesId, matriculaId } = req.params;
+      const { anno } = req.body;
+      const mes = mesId;
+    
+      var consulta = {};
+
+      consulta['colegioId'] = colegioId;
+      consulta['cursoId'] = cursoId;
+      consulta['annoId'] = annoId;
+      consulta['matriculaId'] = matriculaId;
+
+      var consultaFeriado = {fecha: {[Op.between]: [new Date(anno, mes-1, 0), new Date(anno, mes, 0)]}};
+
+
+      Feriado
+      .findAll({
+        attributes: ['id', 'fecha'],
+        where: consultaFeriado,
+        order: [['fecha', 'ASC']],
+        raw: true
+      })
+      .then(feriados => { 
+
+        const dim = new Date(anno, mesId, 0).getDate();
+        const dowFirstDay = (new Date(anno, mesId-1, 1).getDay() + 6) % 7;
+        let feriadosSet = new Set();
+        for ( let feriado of feriados ) {
+          feriadosSet.add(parseInt(feriado.fecha.toString().split('-')[2]));
+        }
+        let asistenciaObjects = [];
+
+        for (let i = 0; i < dim; i++) {
+          const dow = (dowFirstDay + i) % 7;
+          const dia = i + 1;
+          if ( (dow < 5) && !feriadosSet.has(dia) ) {
+            const fecha = dateString(anno, mesId, dia);
+            const asistencia = {
+              fecha: fecha,
+              presente: false,
+              dia: dia,
+              matriculaId: matriculaId.toString(),
+              colegioId: colegioId,
+              cursoId: cursoId,
+              // alumnoId: alumnoId.toString(),
+              annoId: annoId,
+              mesId: mesId,
+
+              };
+              console.log(asistencia);
+              asistenciaObjects.push(asistencia);
+          }
+        }
+      })
+
+      return res.status(200).send({colegioId, cursoId, annoId, mesId, matriculaId});
+    
     }
 
     static populateMes(req, res) {

@@ -431,10 +431,9 @@ function zfill(number: number, width: number) {
 
                     ids[2] = this.registro.foraneas.apoderado;
                     ids[3] = this.registro.foraneas.alumno;
-                    console.log('retiro',obj['retiro'].length);
-                    if (obj['retiro'].length == 0) {  obj['retiro'] = null }
-                    console.log('mostra',obj, ids)
-                    this.crud.postData(obj, this.modalData.mainTable, ids)
+
+                    
+                    this.crud.postData(obj, 'matricula', ids)
                     .subscribe(msg => this.showmsg(msg))
                     }),
                 ).subscribe()

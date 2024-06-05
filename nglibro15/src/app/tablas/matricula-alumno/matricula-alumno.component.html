@@ -3,14 +3,14 @@
 [style.background-image]="url"
 [style.background-position]="position"
 [style.opacity]="opacity"
-[style.background-size]="size" 
+[style.background-size]="size"
 [style.height] = "height">
 
 
 
 
-        <div class="container  py-5  my-auto" style="max-width: 700px; opacity:90%">
-          
+        <div *ngIf="muestra_dialog" class="container  py-5  my-auto" style="max-width: 700px; opacity:90%">
+
           <h2 [class]='color_h2'>Matricula Alumno</h2>
           <form  [formGroup]="formConsulta">
 
@@ -27,14 +27,14 @@
                   </td>
                   <th [class]="color">
                     <button type="button" [class]="button_class"  (click)="rut_alumno()"  [disabled]="disable?.editar">Buscar</button>
-  
+
                 </tr>
                   <tr><td [class]="color">Nombre:</td><td [class]="color">{{alumno?.nombre}}</td><td>&nbsp;</td></tr>
                   <tr><td [class]="color">Apellido Paterno:</td><td [class]="color">{{alumno?.apellido1}}</td><td>&nbsp;</td></tr>
                   <tr><td [class]="color">Apellido Materno:</td><td [class]="color">{{alumno?.apellido2}}</td><td>&nbsp;</td></tr>
               </thead>
             </table>
-  
+
             <table  [class]="table_class">
               <thead>
                 <tr><td [class]="color">Rut Apoderado</td><td style="width: 45%"><input type="text"  class="form-control"  formControlName="rut_apoderado"  style="width: 100%"/>
@@ -44,20 +44,23 @@
                 </td>
                 <th class="color">
                   <button type="button" [class]="button_class" (click)="rut_apoderado()"  [disabled]="disable?.editar">Buscar</button>
-  
+
                 </tr>
                 <tr><td [class]="color">Nombre:</td><td  [class]="color">{{apoderado?.nombre}}</td><td>&nbsp;</td></tr>
                 <tr><td [class]="color">Apellido Paterno:</td><td [class]="color">{{apoderado?.apellido1}}</td><td>&nbsp;</td></tr>
                 <tr><td [class]="color">Apellido Materno:</td><td [class]="color">{{apoderado?.apellido2}}</td><td>&nbsp;</td></tr>
-  
+
               </thead>
             </table>
-            <br>
+            <hr>
+            <button type="button" (click)="cancelar()" [class]="button_class">Close</button>
+            <hr>
             <div *ngIf="alumno && apoderado">
+
               <button type="button" (click)="openDialog()"  [disabled]="formConsulta.invalid" [class]="button_class">Generar Matrícula</button>
             </div>
 
-          </div> 
+          </div>
         <div>
 
 

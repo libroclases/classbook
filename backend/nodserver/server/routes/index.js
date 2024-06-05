@@ -516,6 +516,12 @@ const checkjwd = auth({
     app.post('/api/asistencia/:colegioId/:cursoId/:annoId/:mesId/populateMes',
       checkjwd, requiredScopes('create:asistencia'),
       Asistencias.populateMes);
+
+    app.get('/api/asistencia/:colegioId/:cursoId/:annoId/:mesId/:matriculaId/populateMatriculaMes',
+      // checkjwd, requiredScopes('create:asistencia'),
+      Asistencias.populateMatriculaMes);
+
+
     app.post('/api/asistencia/:matriculaId/:colegioId/:cursoId/:alumnoId/:annoId/:mesId/findOrCreate',
       checkjwd, requiredScopes(['read:asistencia', 'create:asistencia']),   
       Asistencias.findOrCreate);

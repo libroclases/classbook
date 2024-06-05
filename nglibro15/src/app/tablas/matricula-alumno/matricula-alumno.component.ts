@@ -32,7 +32,7 @@ export class MatriculaAlumnoComponent implements OnInit {
   opacity="70%";
 
   // data:any={};
-  muestra_dialog=false;
+  muestra_dialog=true;
 
 
   objcolors = environment.colors;
@@ -112,6 +112,8 @@ export class MatriculaAlumnoComponent implements OnInit {
 
   ngOnInit() {
 
+    this.muestra_dialog = true
+
     this.usuario$.pipe(
       tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
       tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['MatriculaAlumno'],info)}})
@@ -149,7 +151,7 @@ export class MatriculaAlumnoComponent implements OnInit {
     this.muestra_dialog = false;
     this.alumno = null;
     this.apoderado = null;
-    
+
   }
   cancelar() {
     this.formConsulta.reset();
@@ -186,6 +188,7 @@ export class MatriculaAlumnoComponent implements OnInit {
        disableClose: true
 
    });
+
 
    dialogRef.afterClosed().pipe(
      // tap(res => console.log(res)),

@@ -2,8 +2,14 @@ import model, { sequelize } from '../models';
 
 const Sequelize = require("sequelize");
 
-const { Matricula, Colegio, Curso, Apoderado, Alumno, Vinculo, Anno, Periodo,
-  CursoProfesor, Evaluacion, Nota} = model;
+function pad(num, size) {
+  num = num.toString();
+  while (num.length < size) num = "0" + num;
+  return num;
+}
+
+const { Matricula, Colegio, Curso, Apoderado, Alumno, Vinculo, Anno, Periodo, Asistencia,
+  CursoProfesor, Evaluacion, Nota, EstadoAlumno} = model;
 
 class Matriculas {
 
@@ -263,9 +269,19 @@ class Matriculas {
         let m = matricula_.dataValues;
         const matricula = {matriculaId: m.id};
         const fecha = {fecha:m.incorporacion};
+        const estadoalumno = {tipoestadoId: 1};
+        const alumno = {alumnoId: m.alumnoId};   
+
         let consulta_cursoprofesor =  { annoId: m.annoId, colegioId: m.colegioId, cursoId: m.cursoId };
-        console.log(consulta_cursoprofesor);
-          Estado.create({ ...matricula, estadoId: 1, ...consulta_cursoprofesor}, ...fecha).then(estado => { console.log(estado.dataValues) });
+          
+          EstadoAlumno.create({ ...alumno,...matricula , ...estadoalumno, ...consulta_cursoprofesor, ...fecha})
+          .then(estadoalumno => { console.log(estadoalumno.dataValues) });
+          
+          /*
+          Asistencia.populateMesAlumno(m.colegioId, m.cursoId, m.annoId, m.incorporacion.substring(5,7)*1, m.id)
+          .then(asistencia => { console.log('ASISTENCIA:',asistencia) });
+          */
+         
           CursoProfesor.findAll({where : consulta_cursoprofesor}).then(query => {
 
               var cont=0;
@@ -290,7 +306,7 @@ class Matriculas {
                   cont++;
                   notas['evaluacionId'] = notas['id'];
                   delete notas['id'];
-                  Nota.create(notas).then(nota => { console.log(nota.dataValues) });
+                  Nota.create(notas).then(nota => { /*console.log(nota.dataValues)*/ });
                 
                
                   })
