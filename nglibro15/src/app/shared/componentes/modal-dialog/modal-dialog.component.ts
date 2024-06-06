@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators, ValidatorFn, ReactiveFormsModule } 
 
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { Observable, share, tap, EMPTY } from 'rxjs';
+import { Observable, share, tap, EMPTY, map, concatMap, of } from 'rxjs';
 import { ModalData, fkValues, stringString, tableQueries } from '../../../interfaces/generic.interface';
 import { CrudService } from '../../services/crud/crud.service';
 import { ForeignKeysService } from '../../services/foreign-keys/foreign-keys.service';
@@ -61,7 +61,7 @@ function zfill(number: number, width: number) {
     defaultValues: any = {};
 
     usuarioId=0;
-
+     
     checked=false;
 
     selectedteacher = 0
@@ -388,7 +388,7 @@ function zfill(number: number, width: number) {
 
       let ids: any = [];
       let obj: any = {};
-      console.log('mostra->',this.formModal.value)
+      // console.log('mostra->',this.formModal.value)
       this.modalData.textFields.forEach( (texto: string) => {
 
         obj[texto] = this.formModal.value[texto]
@@ -420,40 +420,42 @@ function zfill(number: number, width: number) {
 
         /* matricula */
 
+
+
         if (this.data.mainTable == 'matricula') {
+         
+          
+          ids[2] = this.registro.foraneas.apoderado;
+          ids[3] = this.registro.foraneas.alumno;
+          let fks: any = [ids[0],ids[1],ids[5],obj['incorporacion'].substring(5,7)*1,null,ids[3]]
+          
+          const anno = parseInt(obj['incorporacion'].substring(0,4));
 
-                  this.crud.getLastMatricula().pipe(
+          //  ;
 
-                  tap(res => {
+          this.crud.getLastMatricula().pipe(
+              map(last => last.max +1),
+              tap(last => { obj['nombre'] = zfill(last,6); fks[4]=last; }),
+              concatMap(() => this.crud.postData(obj, 'matricula', ids)),
+              // concatMap(() => this.crud.getDataCustom('asistencia','populateMatriculaMes',fks,{anno}))
+          ).subscribe((res) => console.log(res))
 
-
-                    obj['nombre'] = zfill(res.max + 1,6);  // CODIGO MATRICULA
-
-                    ids[2] = this.registro.foraneas.apoderado;
-                    ids[3] = this.registro.foraneas.alumno;
-
-                    /* matricula:
-                       0: colegioId
-                       1: cursoId
-                       2: apoderadoId
-                       3: alumnoId
-                       4: vinculoId
-                       5: annoId
-                       asistencia:
-                       0: colegioId -> ids[0]
-                       1: cursoId -> ids[1]
-                       2: anoId -> ids[5]
-                       3: mesId -> obj['incorporacion'].substring(5,7)*1
-                       4: matriculaId -> res.max + 1
-                       5: alumnoId -> ids[3]
-                    */
-                    const fks: any = [ids[0],ids[1],ids[5],obj['incorporacion'].substring(5,7)*1,res.max + 1,ids[3]]
-                    this.crud.postData(obj, 'matricula', ids).pipe(
-                       tap(() => console.log('asistencia','populateMatriculaMes',fks))
-                    )
-                    .subscribe(msg => this.showmsg(msg))
-                    }),
-                ).subscribe()
+          /*          
+            matricula:
+              0: colegioId
+              1: cursoId
+              2: apoderadoId
+              3: alumnoId
+              4: vinculoId
+              5: annoId
+            asistencia:
+              0: colegioId -> ids[0]
+              1: cursoId -> ids[1]
+              2: anoId -> ids[5]
+              3: mesId -> obj['incorporacion'].substring(5,7)*1
+              4: matriculaId -> res.max + 1
+              5: alumnoId -> ids[3]
+          */
         }
         else {
                 /* horario */
