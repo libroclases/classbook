@@ -2,6 +2,8 @@ import model, { sequelize } from '../models';
 
 const Sequelize = require("sequelize");
 
+const Op = require('../models').Sequelize.Op;
+
 function pad(num, size) {
   num = num.toString();
   while (num.length < size) num = "0" + num;
@@ -9,7 +11,7 @@ function pad(num, size) {
 }
 
 const { Matricula, Colegio, Curso, Apoderado, Alumno, Vinculo, Anno, Periodo, Asistencia,
-  CursoProfesor, Evaluacion, Nota, EstadoAlumno} = model;
+  CursoProfesor, Evaluacion, Nota, EstadoAlumno, Feriado} = model;
 
 class Matriculas {
 
@@ -244,6 +246,10 @@ class Matriculas {
   static create(req, res) {
     let matricula_;
     
+    // mesId, mes, anno desde incorporacion
+    // matriculaId  
+  
+
     const { colegioId, cursoId, apoderadoId, alumnoId, vinculoId, annoId } = req.params;
     const { procedencia, nombre ,incorporacion } = req.body;
     Matricula
@@ -270,13 +276,25 @@ class Matriculas {
         const fecha = {fecha:m.incorporacion};
         const estadoalumno = {tipoestadoId: 1};
         const alumno = {alumnoId: m.alumnoId};   
+        const anno = m.incorporacion.substring(0,4)*1;
+        const mes = m.incorporacion.substring(5,7)*1;
 
         let consulta_cursoprofesor =  { annoId: m.annoId, colegioId: m.colegioId, cursoId: m.cursoId };
           
           EstadoAlumno.create({ ...alumno,...matricula , ...estadoalumno, ...consulta_cursoprofesor, ...fecha})
           .then(estadoalumno => { console.log(estadoalumno.dataValues) });
+           
+          var consultaFeriado = {fecha: {[Op.between]: [new Date(anno, mes-1, 0), new Date(anno, mes, 0)]}};
           
-         
+          Feriado
+          .findAll({
+            attributes: ['id', 'fecha'],
+            where: consultaFeriado,
+            order: [['fecha', 'ASC']],
+            raw: true
+          })
+          .then(feriados => {console.log(feriados)})
+
           CursoProfesor.findAll({where : consulta_cursoprofesor}).then(query => {
 
               var cont=0;
@@ -318,13 +336,13 @@ class Matriculas {
         }
         
       )
-      .then(() => res.status(201).send({
+      .then(res.status(201).send({
         success: true,
         message: `Entradas de Notas creadas exitosamente`
       }))
       .catch(error => res.status(400).send({
         success: false,
-        message: `Entradas de Notas NO fueron creadas con éxito`,
+        message: `Entradas de Notas NO fueron creadas con éxito: ${error}`,
       })); 
 
   })
