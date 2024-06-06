@@ -12,6 +12,9 @@ th {
   text-indent: 1cap;
 }
 
+.white-icon svg {
+  fill: white;
+}
 
 tr , th, td {
 
