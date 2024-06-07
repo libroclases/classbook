@@ -10,6 +10,20 @@ function pad(num, size) {
   return num;
 }
 
+function dateString(year, month, day) {
+  const dd = doubleZeroPad(day);
+  const mm = doubleZeroPad(month);
+  return `${year}-${mm}-${dd}`
+}
+
+function doubleZeroPad(num) {
+  if ( num < 10) {
+    return `0${num}`
+  } else {
+    return num;
+  }
+}
+
 const { Matricula, Colegio, Curso, Apoderado, Alumno, Vinculo, Anno, Periodo, Asistencia,
   CursoProfesor, Evaluacion, Nota, EstadoAlumno, Feriado} = model;
 
@@ -293,7 +307,44 @@ class Matriculas {
             order: [['fecha', 'ASC']],
             raw: true
           })
-          .then(feriados => {console.log(feriados)})
+          .then(feriados => {
+
+            const dim = new Date(anno, mes, 0).getDate();
+            const dowFirstDay = (new Date(anno, mes-1, 1).getDay() + 6) % 7;
+            let feriadosSet = new Set();
+            for ( let feriado of feriados ) {
+              feriadosSet.add(parseInt(feriado.fecha.toString().split('-')[2]));
+            }
+            let asistenciaObjects = [];
+
+            for (let i = 0; i < dim; i++) {
+              const dow = (dowFirstDay + i) % 7;
+              const dia = i + 1;
+              if ( (dow < 5) && !feriadosSet.has(dia) ) {
+                const fecha = dateString(anno, mes, dia);
+                const asistencia = {
+                  fecha: fecha,
+                  presente: false,
+                  dia: dia,
+                  matriculaId: matricula.matriculaId,
+                  colegioId: colegioId,
+                  cursoId: cursoId,
+                  alumnoId: alumnoId,
+                  annoId: annoId,
+                  mesId: mes,
+    
+                  };
+                  // console.log(asistencia);
+                  asistenciaObjects.push(asistencia);
+              }
+            }
+            Asistencia
+            .bulkCreate(asistenciaObjects)
+            .catch(error => res.status(400).send({
+              success: false,
+              message: `Entradas de Asistencia NO fueron creadas con éxito`,
+            }));
+          })
 
           CursoProfesor.findAll({where : consulta_cursoprofesor}).then(query => {
 
