@@ -27,7 +27,7 @@
         </tr>
         <tr *ngFor="let m of (matricula$ | async)">
 
-          <td style="width: 30%; text-align: left ; text-indent: 1cap;">{{m | json}}</td>
+          <td style="width: 30%; text-align: left ; text-indent: 1cap;">{{m.nombre}}</td>
           <td  *ngFor="let nota of (matriculaNotaMap.get(m.id) | async)">
             <span *ngIf="edita==true && this.disable.editar == false && nota.Evaluacion.id == evaluationEdit && (isInVentana$ | async) ; else mostra_nota">
 
