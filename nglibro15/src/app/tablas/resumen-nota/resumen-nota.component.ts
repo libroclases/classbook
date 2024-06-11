@@ -172,10 +172,11 @@ this.usuario$.subscribe(info => {
         this.selIdsService.getId('anno'),
         this.selIdsService.getId('colegio'),
         this.selIdsService.getId('curso'),
+        0,
         0
       ]
 
-      this.asignatura$ = this.crud.getData('asignaturacurso',fks)!
+      this.asignatura$ = this.crud.getData('cursoprofesor',fks)!
 
       this.asignatura$.pipe(
           tap(asignatura => {
