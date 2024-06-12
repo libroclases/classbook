@@ -1,6 +1,6 @@
 import model from '../models';
 
-const {  Colegio, Periodo, Curso, Anno,  Matricula, Asignatura, ResumenNota } = model;
+const {  Colegio, Periodo, Curso, Anno,  Matricula, Asignatura,Nota,Evaluacion ,ResumenNota } = model;
 
 class ResumenNotas {
 
@@ -76,30 +76,46 @@ class ResumenNotas {
     .catch(error => res.status(400).send(error))
     }
 
-    static modify(req, res) {
+    static poblateResumenNotas(req, res) {
     let consulta = {};
-    // let consulta = getBaseQuery(req);
-    consulta['id'] = req.params.resumennotaId;
-    
-    const { promedio } = req.body
-    return ResumenNota
-        .findOne({ where: consulta })
+        
+    const { annoId, periodoId, colegioId, cursoId, asignaturaId, matriculaId } = req.params;
+
+    if (colegioId != '0') {  consulta['colegioId'] = colegioId;  }
+    if (cursoId != '0') {  consulta['cursoId'] = cursoId;  }
+    if (annoId != '0') {  consulta['annoId'] = annoId;  }
+    if (periodoId != '0') {  consulta['periodoId'] = periodoId;  }
+    if (asignaturaId != '0') {  consulta['asignaturaId'] = asignaturaId;  }
+    if (matriculaId != '0') {  consulta['matriculaId'] = matriculaId;  }
+
+    return Nota
+        .findAll({ where: consulta, attributes: ['nota'] , include: [ 
+            { model:Evaluacion, attributes:['id','ponderacion'], where: { } },
+            { model:Asignatura, attributes:['id','nombre'], where: { } },
+            { model:Matricula, attributes:['id','nombre'], where: { } },
+            { model:Colegio, attributes:['id','nombre'], where: { } },
+            { model:Curso, attributes:['id','nombre'], where: { } },
+            { model:Anno, attributes:['id','nombre'], where: { } },
+            { model:Periodo, attributes:['id','nombre'], where: { } }
+        ] })
         .then((notas) => {
-            notas.update({
-            promedio: promedio || notas.promedio,
-   
-    })
-    .then((updatedNota) => {
-        res.status(200).send({
-            message: 'ResumenNota updated successfully',
-                data: {
-                promedio: promedio || updatedNota.promedio,
-          
-                }
-            })
-    })
-    .catch(error => res.status(400).send(error));
-    })
+            notas.forEach(el => {
+                let d = el.dataValues;
+                console.log({
+                    colegioId: d.Colegio.dataValues.id,
+                    cursoId: d.Curso.dataValues.id,
+                    annoId: d.Anno.dataValues.id,
+                    periodoId: d.Periodo.dataValues.id,
+                    nota: d.nota,
+                    asignaturaId: d.Asignatura.dataValues.id,
+                    matriculaId: d.Matricula.id,
+                    ponderacion: d.Evaluacion.dataValues.ponderacion
+                });
+                
+            });
+            res.status(200).send(notas);
+        }
+        )
     .catch(error => res.status(400).send(error));
     }
 }

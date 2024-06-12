@@ -697,9 +697,9 @@ const checkjwd = auth({
     app.post('/api/resumennota/:annoId/:periodoId/:colegioId/:cursoId/:asignaturaId/:matriculaId',
       checkjwd, requiredScopes('create:nota'),
       ResumenNotas.create);
-    app.put('/api/resumennota/:resumennotaId',
-      checkjwd, requiredScopes('update:nota'),
-      ResumenNotas.modify);
+    app.get('/api/resumennota/:annoId/:periodoId/:colegioId/:cursoId/:asignaturaId/:matriculaId/poblateResumenNota',
+      // checkjwd, requiredScopes('read:nota'),
+      ResumenNotas.poblateResumenNotas);
 
     app.get('/api/cursoprofesor',
       checkjwd, requiredScopes('read:cursoprofesor'),
