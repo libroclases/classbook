@@ -108,10 +108,10 @@ class ResumenNotas {
                 suma[d.Asignatura.dataValues.id] = d.nota * d.Evaluacion.dataValues.ponderacion / 100 + (suma[d.Asignatura.dataValues.id] || 0);   
                 promedio[d.Asignatura.dataValues.id] = suma[d.Asignatura.dataValues.id];
                 
-                
+                console.log({annoId, periodoId, colegioId, cursoId, asignaturaId:d.Asignatura.dataValues.id , matriculaId:d.Matricula.dataValues.id, promedio});    
             });
 
-            console.log({annoId, periodoId, colegioId, cursoId, asignaturaId, matriculaId, promedio});
+            
 
             res.status(200).send(notas);
         }

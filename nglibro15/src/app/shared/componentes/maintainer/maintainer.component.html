@@ -47,7 +47,7 @@
         <tr><th [attr.colspan]="numColumns" [style.background-color]="tablehead" style="text-align: center;color:white; height:40px"><em [class]="getBiClass('/'+ mainTable)">&nbsp;&nbsp;</em><b>{{title}}</b></th></tr>
         <tr class="table-bordered">
           <th [attr.colspan]="numRedirect" *ngIf="numRedirect > 0" style="text-align:center" >
-            <button mat-mini-fab data-bs-target="#staticBackdrop" (click)="downloadFile()"><mat-icon class="white-icon">download</mat-icon></button>     
+            <button mat-mini-fab data-bs-target="#staticBackdrop" color="light" (click)="downloadFile()"><mat-icon class="white-icon">download</mat-icon></button>     
           </th>
 
           <th *ngFor="let dateFd of dateFields">{{getAttributeLabel(mainTable, dateFd)}}</th>
@@ -61,7 +61,7 @@
         <tr><th [attr.colspan]="numColumns" [style.background-color]="tablehead"  style="text-align: center;color:white; font-size: medium;"><em [class]="getBiClass('/'+ mainTable)">&nbsp;&nbsp;</em><b>{{title}} ({{numreg}})</b></th></tr>
         <tr class="table-bordered">
           <th [attr.colspan]="numRedirect" *ngIf="numRedirect > 0"  style="text-align: center;">
-            <button mat-mini-fab data-bs-target="#staticBackdrop" (click)="downloadFile()"><mat-icon class="white-icon">download</mat-icon></button>
+            <button mat-mini-fab data-bs-target="#staticBackdrop" color="light" (click)="downloadFile()"><mat-icon class="white-icon">download</mat-icon></button>
           </th>
           <th *ngFor="let textFd of textFields" >{{getAttributeLabel(mainTable, textFd)}}</th>
           <th *ngFor="let dateFd of dateFields">{{getAttributeLabel(mainTable, dateFd)}}</th>
