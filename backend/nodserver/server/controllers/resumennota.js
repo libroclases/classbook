@@ -99,20 +99,20 @@ class ResumenNotas {
             { model:Periodo, attributes:['id','nombre'], where: { } }
         ] })
         .then((notas) => {
+            
+            let promedio = {};
+            let suma = {};
+
             notas.forEach(el => {
-                let d = el.dataValues;
-                console.log({
-                    colegioId: d.Colegio.dataValues.id,
-                    cursoId: d.Curso.dataValues.id,
-                    annoId: d.Anno.dataValues.id,
-                    periodoId: d.Periodo.dataValues.id,
-                    nota: d.nota,
-                    asignaturaId: d.Asignatura.dataValues.id,
-                    matriculaId: d.Matricula.id,
-                    ponderacion: d.Evaluacion.dataValues.ponderacion
-                });
+                const d = el.dataValues;
+                suma[d.Asignatura.dataValues.id] = d.nota * d.Evaluacion.dataValues.ponderacion / 100 + (suma[d.Asignatura.dataValues.id] || 0);   
+                promedio[d.Asignatura.dataValues.id] = suma[d.Asignatura.dataValues.id];
+                
                 
             });
+
+            console.log({annoId, periodoId, colegioId, cursoId, asignaturaId, matriculaId, promedio});
+
             res.status(200).send(notas);
         }
         )

@@ -44,7 +44,7 @@ class Notas {
           .findAll({ where : consulta, attributes: ['id','nota'] ,
             include: [ 
             { model:Matricula, attributes:['id','nombre'], where: { } },
-            { model:Evaluacion, attributes:['id','nombre','fecha'], where: { } },
+            { model:Evaluacion, attributes:['id','nombre','fecha','ponderacion'], where: { } },
             { model:Colegio, attributes:['id','nombre'], where: { } },
             { model:Curso, attributes:['id','nombre'], where: { } },
             { model:Anno, attributes:['id','nombre'], where: { } },

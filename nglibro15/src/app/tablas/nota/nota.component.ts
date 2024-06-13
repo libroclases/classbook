@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CrudService } from '../../shared/services/crud/crud.service';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, concatMap, map, tap } from 'rxjs';
 import { Notification } from '../../interfaces/generic.interface';
 import { ForeignKeysService } from '../../shared/services/foreign-keys/foreign-keys.service';
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
@@ -171,21 +171,20 @@ this.usuario$.subscribe(info => {
 
   getEvaluationData() {
 
-       // this.getForeignKeys('evaluacion')
+    
        let fkevaluacion = this.getForeignKeys('evaluacion')
-       // fkevaluacion[3] = 1 // OJO
+
        this.evaluation$ = this.crud.getData('evaluacion', fkevaluacion )!
        this.evaluation$.pipe(
-          tap(evaluacion => {
+          tap(evaluacion => { console.log('evaluacion', evaluacion);
               this.ponderacion=0;
               evaluacion.forEach((e:any) => {
                 this.numcols++;
                 this.evaluationMap.set(e.id,e);
-
                 this.sumaEvaluacionMap.set(e.id, 0);
-
                 this.countNotas[e.id]=0;
                 this.ponderacion+=e.ponderacion
+                console.log('ponderacion', this.ponderacion) ;
               });
            }),
        )
@@ -299,7 +298,7 @@ this.usuario$.subscribe(info => {
 
         for (let mnm of this.matriculaNotaMap.entries()) {
           mnm[1].subscribe((m:any) => m.forEach((n:any)=>{
-
+            console.log('poronga', n.Matricula.id, n.nota, n.Evaluacion.ponderacion)
             this.sumaPromedioMatricula(n.Matricula.id, n.nota * this.evaluationMap.get(n.Evaluacion.id).ponderacion/100 );
             this.sumaPromedioEvaluacion(n.Evaluacion.id, n.nota);
             let nota = (n.nota) ? n.nota.toString(): '0';  // OJO
@@ -390,7 +389,7 @@ this.usuario$.subscribe(info => {
 
       this.usuario$.pipe(
         tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
-        tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['ResumenNota'],info)}})
+        tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['nota'],info)}})
 
       ).subscribe()
 
