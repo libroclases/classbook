@@ -141,27 +141,6 @@ export class NotaComponent implements OnInit {
       private toastr: ToastrService,
 
     ) {
-      /*
-      const getPermision = (msg: any) => { if(msg) {
-        const year = this.currentDate.getFullYear();
-        this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-        }
-
-      }
-     */
-
-/*
-this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
-    getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
-    getColor(info.personalInfo.usuario.Tema.nombre);
-  }))
-*/
-/*
-this.usuario$.subscribe(info => {
-  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
-  else { getColor(localStorage.getItem('Color')) }
-});
-*/
 
       this.notasForm = new FormGroup({})
 
@@ -298,8 +277,9 @@ this.usuario$.subscribe(info => {
 
         for (let mnm of this.matriculaNotaMap.entries()) {
           mnm[1].subscribe((m:any) => m.forEach((n:any)=>{
-            console.log('poronga', n.Matricula.id, n.nota, n.Evaluacion.ponderacion)
-            this.sumaPromedioMatricula(n.Matricula.id, n.nota * this.evaluationMap.get(n.Evaluacion.id).ponderacion/100 );
+            // console.log('poronga', n.Matricula.id, n.nota, n.Evaluacion.ponderacion)
+            // this.sumaPromedioMatricula(n.Matricula.id, n.nota * this.evaluationMap.get(n.Evaluacion.id).ponderacion/100 );
+            this.sumaPromedioMatricula(n.Matricula.id, n.nota * n.Evaluacion.ponderacion / 100 );
             this.sumaPromedioEvaluacion(n.Evaluacion.id, n.nota);
             let nota = (n.nota) ? n.nota.toString(): '0';  // OJO
             const indice = n.Evaluacion.id.toString() + '-' + n.Matricula.id.toString() + '-' + nota;
