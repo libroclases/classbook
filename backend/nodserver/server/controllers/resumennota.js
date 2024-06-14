@@ -97,18 +97,32 @@ class ResumenNotas {
             { model:Curso, attributes:['id','nombre'], where: { } },
             { model:Anno, attributes:['id','nombre'], where: { } },
             { model:Periodo, attributes:['id','nombre'], where: { } }
-        ] })
+        ], order: [
+            [{ model: Matricula }, 'id','ASC'] 
+        ]})
         .then((notas) => {
             
             let promedio = {};
             let suma = {};
+            
+            
+            let i=-1;
+            let j=0;
+            let asignatura=0;
+            let matricula=0;
 
             notas.forEach(el => {
                 const d = el.dataValues;
                 suma[d.Asignatura.dataValues.id] = d.nota * d.Evaluacion.dataValues.ponderacion / 100 + (suma[d.Asignatura.dataValues.id] || 0);   
                 promedio[d.Asignatura.dataValues.id] = suma[d.Asignatura.dataValues.id];
+                // console.log(i, d.Asignatura.id,d.Matricula.id,d.nota);
+                if (matricula == d.Matricula.id ) { } else { 
+                    console.log(i,matricula);
+                    matricula = d.Matricula.id;
+                    i++;   
+                };
                 
-                console.log({annoId, periodoId, colegioId, cursoId, asignaturaId:d.Asignatura.dataValues.id , matriculaId:d.Matricula.dataValues.id, promedio});    
+                // console.log({annoId, periodoId, colegioId, cursoId, asignaturaId:d.Asignatura.dataValues.id , matriculaId:d.Matricula.dataValues.id, promedio});    
             });
 
             
