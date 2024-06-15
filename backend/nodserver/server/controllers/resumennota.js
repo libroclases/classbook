@@ -115,12 +115,12 @@ class ResumenNotas {
                 
                 if (matricula == d.Matricula.id  ) {                
                            mindex++;  
-                           if (asignatura != d.Asignatura.id ) { console.log(`######### asig ${asignatura} ###########`) }
+                           if (asignatura != d.Asignatura.id ) { console.log(`######### ${matricula} | ${asignatura} ###########`) }
                            console.log('poronga1:',mindex,d.Matricula.id , d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100);
                                            
                  } else {  
                            mindex=0;
-                           console.log(`######### mat ${matricula} ###########`);
+                           console.log(`######### ${matricula} | ${asignatura} ###########`);
                             
                            console.log('poronga2:',mindex, d.Matricula.id , d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100);
                                                 
@@ -128,6 +128,8 @@ class ResumenNotas {
                     matricula = d.Matricula.id;
                     asignatura = d.Asignatura.id;       
             });
+
+            console.log(`######### ${matricula} | ${asignatura} ###########`);
      
             res.status(200).send(notas);
         }
