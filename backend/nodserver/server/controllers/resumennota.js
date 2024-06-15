@@ -90,7 +90,7 @@ class ResumenNotas {
 
     return Nota
         .findAll({ where: consulta, attributes: ['nota'] , include: [ 
-            { model:Evaluacion, attributes:['id','ponderacion'], where: { } },
+            { model:Evaluacion, attributes:['id','nombre','ponderacion'], where: { } },
             { model:Asignatura, attributes:['id','nombre'], where: { } },
             { model:Matricula, attributes:['id','nombre'], where: { } },
             { model:Colegio, attributes:['id','nombre'], where: { } },
@@ -98,34 +98,55 @@ class ResumenNotas {
             { model:Anno, attributes:['id','nombre'], where: { } },
             { model:Periodo, attributes:['id','nombre'], where: { } }
         ], order: [
-            [{ model: Matricula }, 'id','ASC'] 
+            [{ model: Matricula }, 'id','ASC'], [{ model: Asignatura }, 'id', 'ASC'] 
         ]})
         .then((notas) => {
             
-            let promedio = {};
-            let suma = {};
+            let Promedio = {};
+            let Suma = {};
+            let Ponderado = [];
+            let dictio = {};
             
             
-            let i=-1;
-            let j=0;
+            let m=0; // m -> Matricula
+            let a=0; //  -> Asignatura
             let asignatura=0;
             let matricula=0;
 
+
             notas.forEach(el => {
                 const d = el.dataValues;
-                suma[d.Asignatura.dataValues.id] = d.nota * d.Evaluacion.dataValues.ponderacion / 100 + (suma[d.Asignatura.dataValues.id] || 0);   
-                promedio[d.Asignatura.dataValues.id] = suma[d.Asignatura.dataValues.id];
+                Suma[d.Asignatura.dataValues.id] = d.nota * d.Evaluacion.dataValues.ponderacion / 100 + (Suma[d.Asignatura.dataValues.id] || 0);   
+                Promedio[d.Asignatura.dataValues.id] = Suma[d.Asignatura.dataValues.id];
                 // console.log(i, d.Asignatura.id,d.Matricula.id,d.nota);
-                if (matricula == d.Matricula.id ) { } else { 
-                    console.log(i,matricula);
+                if (matricula == d.Matricula.id  ) {
+                    if (m-1 >0) {
+                        if (d.Asignatura.id == 1 && d.Evaluacion.dataValues.nombre =='C1' ) { 
+                            console.log('poronga1:',m-1, dictio[d.Matricula.id],d.Matricula.id, d.Asignatura.dataValues.id ,d.Evaluacion.dataValues.nombre, d.Evaluacion.dataValues.ponderacion, d.nota );
+                        }
+                    }
+
+                 } else { 
+                    if (m-1 >=0) {
+                        dictio[d.Matricula.id] =  m-1;
+                        
+                        console.log('poronga2:',d.Matricula.id ,d.Asignatura.id, d.nota, d.Evaluacion.nombre, d.nota);
+                        Ponderado[m-1] = d.nota;
+                        
+                        
+                        
+                         
+                    }
                     matricula = d.Matricula.id;
-                    i++;   
+                    asignatura = d.Asignatura.id;
+                    m++;   
                 };
-                
+                // console.log(Matricula);
                 // console.log({annoId, periodoId, colegioId, cursoId, asignaturaId:d.Asignatura.dataValues.id , matriculaId:d.Matricula.dataValues.id, promedio});    
             });
-
-            
+            let i=0;
+            // console.log(dictio);
+            // Ponderado.forEach(p => { console.log(i, p); i++ });
 
             res.status(200).send(notas);
         }
