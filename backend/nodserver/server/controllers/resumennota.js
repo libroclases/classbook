@@ -98,19 +98,16 @@ class ResumenNotas {
             { model:Anno, attributes:['id','nombre'], where: { } },
             { model:Periodo, attributes:['id','nombre'], where: { } }
         ], order: [
-            [{ model: Matricula }, 'id','ASC'], [{ model: Asignatura }, 'id', 'ASC'] 
+            [{ model: Matricula }, 'id','ASC'], [{ model: Asignatura }, 'id', 'ASC'] , [{ model: Evaluacion }, 'id', 'ASC'] 
         ]})
         .then((notas) => {
             
             let Promedio = {};
             let Suma = {};
-            let Ponderado = [];
-            let dictio = {};
+            // let Ponderado = [];
+ 
             
-            
-            let m=0; // m -> Matricula
-            let a=0; //  -> Asignatura
-            let asignatura=0;
+            let mindex=0; // contador matricula
             let matricula=0;
 
 
@@ -118,36 +115,20 @@ class ResumenNotas {
                 const d = el.dataValues;
                 Suma[d.Asignatura.dataValues.id] = d.nota * d.Evaluacion.dataValues.ponderacion / 100 + (Suma[d.Asignatura.dataValues.id] || 0);   
                 Promedio[d.Asignatura.dataValues.id] = Suma[d.Asignatura.dataValues.id];
-                // console.log(i, d.Asignatura.id,d.Matricula.id,d.nota);
-                if (matricula == d.Matricula.id  ) {
-                    if (m-1 >0) {
-                        if (d.Asignatura.id == 1 && d.Evaluacion.dataValues.nombre =='C1' ) { 
-                            console.log('poronga1:',m-1, dictio[d.Matricula.id],d.Matricula.id, d.Asignatura.dataValues.id ,d.Evaluacion.dataValues.nombre, d.Evaluacion.dataValues.ponderacion, d.nota );
-                        }
+                
+                if (matricula == d.Matricula.id  ) {                
+                           mindex++;  
+                           console.log('poronga1:',mindex,d.Matricula.id ,d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100);
+                                           
+                 } else {  
+                           mindex=0;
+                           console.log(`######### ${matricula} ###########`); 
+                           console.log('poronga2:',mindex, d.Matricula.id ,d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100);
+                                                
                     }
-
-                 } else { 
-                    if (m-1 >=0) {
-                        dictio[d.Matricula.id] =  m-1;
-                        
-                        console.log('poronga2:',d.Matricula.id ,d.Asignatura.id, d.nota, d.Evaluacion.nombre, d.nota);
-                        Ponderado[m-1] = d.nota;
-                        
-                        
-                        
-                         
-                    }
-                    matricula = d.Matricula.id;
-                    asignatura = d.Asignatura.id;
-                    m++;   
-                };
-                // console.log(Matricula);
-                // console.log({annoId, periodoId, colegioId, cursoId, asignaturaId:d.Asignatura.dataValues.id , matriculaId:d.Matricula.dataValues.id, promedio});    
+                    matricula = d.Matricula.id;       
             });
-            let i=0;
-            // console.log(dictio);
-            // Ponderado.forEach(p => { console.log(i, p); i++ });
-
+     
             res.status(200).send(notas);
         }
         )
