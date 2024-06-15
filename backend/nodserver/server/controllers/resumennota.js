@@ -103,7 +103,7 @@ class ResumenNotas {
         .then((notas) => {
             
             let Matricula = [];
-            let Asignatura = [];
+            let PromedioAsignatura = [];
             
             let mindex=0; // contador matricula
             let matricula=0;
@@ -117,19 +117,19 @@ class ResumenNotas {
                            mindex++;
                           
                            if (asignatura != d.Asignatura.id ) {     
-                              console.log(`1:######### ${matricula} | ${asignatura} | ${Asignatura} ###########`);
-                              Asignatura=[];
-                              Asignatura.push((d.Evaluacion.ponderacion * d.nota)/100);  // OK 
-                           } else { Asignatura.push((d.Evaluacion.ponderacion * d.nota)/100); }
+                              console.log(`1:######### ${matricula} | ${asignatura} | ${PromedioAsignatura} ###########`);
+                              PromedioAsignatura=[];
+                              PromedioAsignatura.push((d.Evaluacion.ponderacion * d.nota)/100);  // OK 
+                           } else { PromedioAsignatura.push((d.Evaluacion.ponderacion * d.nota)/100); }
                            
-                           console.log('1:',mindex,d.Matricula.id , d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100, Asignatura);
+                           console.log('1:',mindex,d.Matricula.id , d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100, PromedioAsignatura);
                                             
                  } else { 
-                           Asignatura=[]; 
+                           PromedioAsignatura=[]; 
                            mindex=0;
                            console.log(`2:######### ${matricula} | ${asignatura} ###########`);
                         
-                           console.log('2:',mindex, d.Matricula.id , d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100, Asignatura);
+                           console.log('2:',mindex, d.Matricula.id , d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100, PromedioAsignatura);
                            // Asignatura.push((d.Evaluacion.ponderacion * d.nota)/100); 
                                               
                     }
