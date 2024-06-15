@@ -102,31 +102,31 @@ class ResumenNotas {
         ]})
         .then((notas) => {
             
-            let Promedio = {};
-            let Suma = {};
-            // let Ponderado = [];
- 
+            let Matricula = [];
+            let Asignatura = [];
             
             let mindex=0; // contador matricula
             let matricula=0;
+            let asignatura=0;
 
 
             notas.forEach(el => {
                 const d = el.dataValues;
-                Suma[d.Asignatura.dataValues.id] = d.nota * d.Evaluacion.dataValues.ponderacion / 100 + (Suma[d.Asignatura.dataValues.id] || 0);   
-                Promedio[d.Asignatura.dataValues.id] = Suma[d.Asignatura.dataValues.id];
                 
                 if (matricula == d.Matricula.id  ) {                
                            mindex++;  
-                           console.log('poronga1:',mindex,d.Matricula.id ,d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100);
+                           if (asignatura != d.Asignatura.id ) { console.log(`######### asig ${asignatura} ###########`) }
+                           console.log('poronga1:',mindex,d.Matricula.id , d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100);
                                            
                  } else {  
                            mindex=0;
-                           console.log(`######### ${matricula} ###########`); 
-                           console.log('poronga2:',mindex, d.Matricula.id ,d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100);
+                           console.log(`######### mat ${matricula} ###########`);
+                            
+                           console.log('poronga2:',mindex, d.Matricula.id , d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100);
                                                 
                     }
-                    matricula = d.Matricula.id;       
+                    matricula = d.Matricula.id;
+                    asignatura = d.Asignatura.id;       
             });
      
             res.status(200).send(notas);
