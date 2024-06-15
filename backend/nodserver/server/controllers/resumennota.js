@@ -2,6 +2,12 @@ import model from '../models';
 
 const {  Colegio, Periodo, Curso, Anno,  Matricula, Asignatura,Nota,Evaluacion ,ResumenNota } = model;
 
+function pad(num, size) {
+    num = num.toString();
+    while (num.length < size) num = "0" + num;
+    return num;
+  }
+
 class ResumenNotas {
 
     static list(req, res) {
@@ -102,7 +108,7 @@ class ResumenNotas {
         ]})
         .then((notas) => {
             
-            let Matricula = [];
+            let PromedioMatricula = [];
             let PromedioAsignatura = [];
             
             let mindex=0; // contador matricula
@@ -117,7 +123,8 @@ class ResumenNotas {
                            mindex++;
                           
                            if (asignatura != d.Asignatura.id ) {     
-                              console.log(`1:######### ${matricula} | ${asignatura} | ${PromedioAsignatura} ###########`);
+                              console.log(`1:######### ${matricula} | ${asignatura} | ${PromedioAsignatura.reduce((a, b) => a + b, 0)} ###########`);
+                              // PromedioMatricula.push(PromedioAsignatura.reduce((a, b) => a + b, 0) / PromedioAsignatura.length);
                               PromedioAsignatura=[];
                               PromedioAsignatura.push((d.Evaluacion.ponderacion * d.nota)/100);  // OK 
                            } else { PromedioAsignatura.push((d.Evaluacion.ponderacion * d.nota)/100); }
@@ -125,12 +132,13 @@ class ResumenNotas {
                            console.log('1:',mindex,d.Matricula.id , d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100, PromedioAsignatura);
                                             
                  } else { 
+                           console.log(`2:######### ${matricula} | ${asignatura} | ${PromedioAsignatura.reduce((a, b) => a + b, 0)} ###########`);
+                           // PromedioMatricula.push(PromedioAsignatura.reduce((a, b) => a + b, 0) / PromedioAsignatura.length);
                            PromedioAsignatura=[]; 
                            mindex=0;
-                           console.log(`2:######### ${matricula} | ${asignatura} ###########`);
-                        
+                           PromedioAsignatura.push((d.Evaluacion.ponderacion * d.nota)/100); 
                            console.log('2:',mindex, d.Matricula.id , d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100, PromedioAsignatura);
-                           // Asignatura.push((d.Evaluacion.ponderacion * d.nota)/100); 
+                           // 
                                               
                     }
                     matricula = d.Matricula.id;
@@ -139,8 +147,9 @@ class ResumenNotas {
 
             });
 
-            console.log(`3:######### ${matricula} | ${asignatura} ###########`);
-     
+            console.log(`3:######### ${matricula} | ${asignatura} | ${PromedioAsignatura.reduce((a, b) => a + b, 0)} ###########`);
+            // PromedioMatricula.push(PromedioAsignatura.reduce((a, b) => a + b, 0) / PromedioAsignatura.length);
+            console.log(PromedioMatricula);
             res.status(200).send(notas);
         }
         )
