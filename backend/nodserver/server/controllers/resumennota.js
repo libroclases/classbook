@@ -114,22 +114,32 @@ class ResumenNotas {
                 const d = el.dataValues;
                 
                 if (matricula == d.Matricula.id  ) {                
-                           mindex++;  
-                           if (asignatura != d.Asignatura.id ) { console.log(`######### ${matricula} | ${asignatura} ###########`) }
-                           console.log('poronga1:',mindex,d.Matricula.id , d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100);
-                                           
-                 } else {  
+                           mindex++;
+                          
+                           if (asignatura != d.Asignatura.id ) {     
+                              console.log(`1:######### ${matricula} | ${asignatura} | ${Asignatura} ###########`);
+                              Asignatura=[];
+                              Asignatura.push((d.Evaluacion.ponderacion * d.nota)/100);  // OK 
+                           } else { Asignatura.push((d.Evaluacion.ponderacion * d.nota)/100); }
+                           
+                           console.log('1:',mindex,d.Matricula.id , d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100, Asignatura);
+                                            
+                 } else { 
+                           Asignatura=[]; 
                            mindex=0;
-                           console.log(`######### ${matricula} | ${asignatura} ###########`);
-                            
-                           console.log('poronga2:',mindex, d.Matricula.id , d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100);
-                                                
+                           console.log(`2:######### ${matricula} | ${asignatura} ###########`);
+                        
+                           console.log('2:',mindex, d.Matricula.id , d.Asignatura.id, (d.Evaluacion.ponderacion * d.nota)/100, Asignatura);
+                           // Asignatura.push((d.Evaluacion.ponderacion * d.nota)/100); 
+                                              
                     }
                     matricula = d.Matricula.id;
-                    asignatura = d.Asignatura.id;       
+                    asignatura = d.Asignatura.id;
+                    // Asignatura.push((d.Evaluacion.ponderacion * d.nota)/100);
+
             });
 
-            console.log(`######### ${matricula} | ${asignatura} ###########`);
+            console.log(`3:######### ${matricula} | ${asignatura} ###########`);
      
             res.status(200).send(notas);
         }
