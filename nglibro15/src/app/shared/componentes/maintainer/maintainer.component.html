@@ -47,7 +47,8 @@
         <tr><th [attr.colspan]="numColumns" [style.background-color]="tablehead" style="text-align: center;color:white; height:40px"><em [class]="getBiClass('/'+ mainTable)">&nbsp;&nbsp;</em><b>{{title}}</b></th></tr>
         <tr class="table-bordered">
           <th [attr.colspan]="numRedirect" *ngIf="numRedirect > 0" style="text-align:center" >
-            <button mat-mini-fab data-bs-target="#staticBackdrop" color="light" (click)="downloadFile()"><mat-icon class="white-icon">download</mat-icon></button>     
+            <a class="btn btn-link btn-sm px-3" data-bs-toggle="tooltip" title="Bajar Datos"
+            data-bs-target="#staticBackdrop" (click)="downloadFile()"><em  class="bi bi-cloud-download"></em></a>     
           </th>
 
           <th *ngFor="let dateFd of dateFields">{{getAttributeLabel(mainTable, dateFd)}}</th>
@@ -61,7 +62,8 @@
         <tr><th [attr.colspan]="numColumns" [style.background-color]="tablehead"  style="text-align: center;color:white; font-size: medium;"><em [class]="getBiClass('/'+ mainTable)">&nbsp;&nbsp;</em><b>{{title}} ({{numreg}})</b></th></tr>
         <tr class="table-bordered">
           <th [attr.colspan]="numRedirect" *ngIf="numRedirect > 0"  style="text-align: center;">
-            <button mat-mini-fab data-bs-target="#staticBackdrop" color="light" (click)="downloadFile()"><mat-icon class="white-icon">download</mat-icon></button>
+            <a class="btn btn-link btn-sm px-3" data-bs-toggle="tooltip" title="Bajar Datos"
+            data-bs-target="#staticBackdrop" (click)="downloadFile()"><em  class="bi bi-cloud-download"></em></a>
           </th>
           <th *ngFor="let textFd of textFields" >{{getAttributeLabel(mainTable, textFd)}}</th>
           <th *ngFor="let dateFd of dateFields">{{getAttributeLabel(mainTable, dateFd)}}</th>
@@ -73,7 +75,7 @@
               <a></a>
             </ng-container>
             <ng-template #notCreate>
-              <button mat-mini-fab (click)="openDialog()" color="light" [disabled]="disable.crear" title="Nuevo"><mat-icon class="white-icon">add_circle</mat-icon></button>
+              <a mat-button (click)="openDialog()"  [disabled]="disable.crear" title="Nuevo"><em class="bi bi-plus-lg"></em></a>
             </ng-template>
           </th>
         </tr>
@@ -113,7 +115,7 @@
             <td *ngFor="let dateFd of dateFields">{{c[dateFd] | date:'dd/MM/YYYY'}}</td>
             <td *ngFor="let table of fkFields">{{getObjectLabel(table, c[table])}}</td>
             <th style="text-align: center;">
-             <button mat-mini-fab (click)="openDialog(c)" style="text-align: center;" color="light" [disabled]="disable.editar"><mat-icon class="white-icon">edit_square</mat-icon> </button>
+              <a mat-button (click)="openDialog(c)" [disabled]="disable.editar"><em class="bi bi-lock"></em> </a>
             </th>
           </tr>
         </ng-template>
