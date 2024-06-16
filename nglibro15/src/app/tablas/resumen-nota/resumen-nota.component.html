@@ -15,24 +15,22 @@
 
 
 
-  <div  class="overflow-auto mt-4 bg-light"  [style.opacity]="opacity"  style="width: 100%; max-height: 700px;">
+  <div  class="overflow-auto mt-4 bg-light"  [style.opacity]="opacity"  style="width: 100%; max-height: 680px;">
 
-      <table>
-        <tr><th [attr.colspan]="numColumns" [style.background-color]="tablehead"
-          style="text-align: center;color:white; height:40px; width: 100%"><em [class]="getBiClass('/'+ mainTable)">&nbsp;&nbsp;</em><b>Resumen Notas</b></th></tr>
-        <tr>
-          <td><table class="table table-bordered"><tbody>
-            <tr >
-              <td *ngIf="asignatura$">&nbsp;</td><td *ngFor="let a of (asignatura$ | async)" >{{a.Asignatura.nombre}}</td><td>Promedio</td>
-            </tr>
-            <tr  *ngFor="let m of (matricula$ | async)"><td>{{m.nombre}}</td>
-              <td   *ngFor="let p of (matriculaPromedioMap.get(m.id) | async)"><p  [style.color]="getcolor(p.promedio)">{{p.promedio}}</p>
-              </td><td><p [style.color]="getcolor(matricula[m.id] / numcols)">{{matricula[m.id] / numcols  | number:'1.1-1'}}</p></td></tr>
-              <tr><td>&nbsp;</td><td *ngFor="let a of asignatura | keyvalue"><p  [style.color]="getcolor(getnumber(a.value,numrows))">{{ getnumber(a.value,numrows)   | number:'1.1-1'}}</p></td></tr>
-          </tbody>
-          </table></td>
-        </tr>
-      </table>
+   
+    
+     
+
+    <table class="table table-bordered">
+      <!--thead><tr><td>&ngsp;</td><td *ngFor="let a of (asignatura$ | async)">{{a.Asignatura.id}}</td></tr></thead-->
+      <tbody>
+        <tr><td>&ngsp;</td><td *ngFor="let a of (asignatura$ | async)">{{a.Asignatura.id}}</td><td>&nbsp;</td></tr>
+        <tr *ngFor="let m of (matricula$ | async)">
+          <td>{{m.id}}</td><td *ngFor="let a of matriculaMap.get(m.id)">{{ a  | number:'1.1-1' }}</td><td>xxx</td>
+        </tr> 
+    </table>
+
+  
     </div>
     </div>
 

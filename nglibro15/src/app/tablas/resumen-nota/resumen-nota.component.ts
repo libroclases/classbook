@@ -18,38 +18,36 @@ import { Permission } from 'src/environments/environment.development';
   templateUrl: './resumen-nota.component.html',
   styleUrls: ['./resumen-nota.component.css']
 })
-export class ResumenNotaComponent implements OnInit{
-  idsMap!: Map<string, number>;
-  mainTableForeignKeys!: string[];
-  fkIds:any=[];
+export class ResumenNotaComponent implements OnInit {
 
-  isInVentana$!: Observable<any>;
+  // idsMap!: Map<string, number>;
+  // mainTableForeignKeys!: string[];
+  // fkIds: any = [];
+
+  // isInVentana$!: Observable<any>;
 
   mainTable: string = 'resumennota';
 
-  valorPromedio: any = [];
+  // valorPromedio: any = [];
 
   disable = {};
-  currentDate:Date = new Date();
+  // currentDate: Date = new Date();
 
-  tablaId = 5;
+  // tablaId = 5;
 
-  currPage = 0;
-  countNotas: any = {};
-  sumaAsignaturaMap : any = new Map<number, number>();
+  // currPage = 0;
+  // countNotas: any = {};
+  // sumaAsignaturaMap: any = new Map<number, number>();
 
-  matriculaPromedioMap: any = new Map<number, any>();
-  promedioMatriculaMap: any = new Map<number, number>();
-  promedioAsignaturaMap: any = new Map<number, number>();
-  asignaturaMap: any = new Map<number, object>();
+  matriculaMap: any = new Map<number,any[]>();
 
-  ponderacionMap: any = new Map<number,number>();
+  ponderacionMap: any = new Map<number, number>();
   notasIndiceMap: any = new Map<string, string>();
 
   asignaturaEdit = 0;  // marca columna a editar
   edita = false;
   showtable = true;
-  promedio: number | null = 0;
+  promedio: any = {};
 
   // Modal
 
@@ -67,24 +65,22 @@ export class ResumenNotaComponent implements OnInit{
 
   // Selectores
 
-  selTables = [  "anno", "periodo", "colegio", "curso"  ];
-  tableLabels = ['Año', 'Periodo','Colegio' ,'Curso' ];
+  selTables = ["anno", "periodo", "colegio", "curso"];
+  tableLabels = ['Año', 'Periodo', 'Colegio', 'Curso'];
   ignoreFkRequirements: string[] = ['asignatura'];
   changeFnsArray: Function[] = [];
-  patchFKsFromStorage = ['anno','periodo','colegio'];
+  patchFKsFromStorage = ['anno', 'periodo', 'colegio'];
 
-  fatherId=0;
-  father='';
-
-  resumennotaFk:any=[]
+  // fatherId = 0;
+  // father = '';
 
   asignatura$!: Observable<any>;
   matricula$!: Observable<any>;
-  resumennota$!: Observable<any>;
+  // resumennota$!: Observable<any>;
 
-  ponderacion = 0;
+ //  ponderacion = 0;
   // numMatriculas = 0;
-  url!:string;
+  url!: string;
   photo = environment.photo;
   opacity = environment.opacity;
   position = "center";
@@ -93,16 +89,16 @@ export class ResumenNotaComponent implements OnInit{
 
   //   colores
 
-  numColumns = 8
+  // numColumns = 8
 
   objcolors = environment.colors;
 
-  bodybgcolor!:string;
-  pagination!:string;
-  tablehead!:string;
+  bodybgcolor!: string;
+  pagination!: string;
+  tablehead!: string;
 
-  bgmodal!:string;
-  modalbutton!:string;
+  bgmodal!: string;
+  modalbutton!: string;
 
   @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
@@ -112,7 +108,7 @@ export class ResumenNotaComponent implements OnInit{
   menu_height = environment.cabecera.menu_height;
 
 
-  innerHeight=  window.innerHeight
+  innerHeight = window.innerHeight
 
   height = window.innerHeight - (this.banner_height + this.menu_height) + 'px';
 
@@ -124,209 +120,160 @@ export class ResumenNotaComponent implements OnInit{
   }
 
   constructor(private crud: CrudService,
-      // route: ActivatedRoute,
-      private selIdsService: SelectionIdsService,
-      // public dialog: MatDialog,
-      private fkService: ForeignKeysService,
-      private iconsService: IconsService,
-      private getpermission: GetPermissionService,
-      // private fb: FormBuilder,
-      // private dt: GetdatetimeService
-    ) {
-      /*
-      const getPermision = (msg: any) => { if(msg) {
-        const year = this.currentDate.getFullYear();
-        this.disable = (msg.esUtp && msg.anno.id == (year - 2020) && msg.colegio==1) ? false : true;
-        }
+    // route: ActivatedRoute,
+    private selIdsService: SelectionIdsService,
+    // public dialog: MatDialog,
+    private fkService: ForeignKeysService,
+    private iconsService: IconsService,
+    private getpermission: GetPermissionService,
 
-      }
-      */
+  ) {
 
-/*
 
-this.usuario$.subscribe(info => {
-  if (info.personalInfo) {getColor(info.personalInfo.usuario.Tema.nombre)}
-  else { getColor(localStorage.getItem('Color')) }
-});
 
-*/
-/*
-  this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
-    getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
-    getColor(info.personalInfo.usuario.Tema.nombre);
-  }))
-*/
-      // this.notasForm = new FormGroup({})
-
-     }
-
-  numcols = 0;
-  numrows = 0;
-
- getcolor(promedio: number):string { return (promedio>=4) ? 'black' : 'red' }
-
- getnumber(num1:any, num2:number ) : number { return num1/num2 }
-
-  getAsignaturaData() {
-       const fks = [
-        this.selIdsService.getId('anno'),
-        this.selIdsService.getId('colegio'),
-        this.selIdsService.getId('curso'),
-        0,
-        0
-      ]
-
-      this.asignatura$ = this.crud.getData('cursoprofesor',fks)!
-
-      this.asignatura$.pipe(
-          tap(asignatura => {
-            this.numcols = Object.keys(asignatura).length
-            /*
-              this.ponderacion=0;
-              asignatura.forEach((e:any) => {
-                this.numcols++;
-                this.asignaturaMap.set(e.id,e);
-
-                this.sumaAsignaturaMap.set(e.id, 0);
-
-                this.countNotas[e.id]=0;
-                this.ponderacion+=e.ponderacion
-
-              }
-            );
-            */
-           }
-          ),
-       )
-       .subscribe(() => {
-        this.getMatriculaData();
-        }
-        )
   }
 
-  matricula:any={};
-  asignatura:any={};
+  // numcols = 0;
+  // numrows = 0;
 
-  getMatriculaData():  void {
-    let anno = this.selIdsService.getId('anno');
-    let curso = this.selIdsService.getId('curso');
-    let colegio = this.selIdsService.getId('colegio');
-    let periodo = this.selIdsService.getId('periodo');
-    let ides = [
-      colegio,
-      curso,
-      anno
+
+
+
+  getAsignaturaData() {
+    const fks = [
+      this.selIdsService.getId('anno'),
+      this.selIdsService.getId('colegio'),
+      this.selIdsService.getId('curso'),
+      0,
+      0
     ]
-      const mostranotas = (res:any) : void => {
-        let tmp_mat:any={};
-        let tmp_asig:any={};
-        res.forEach((r:any) => {
-          tmp_mat[r.Matricula.id] = (this.matricula[r.Matricula.id]) ? this.matricula[r.Matricula.id] : 0;
-          tmp_asig[r.Asignatura.id] = (this.asignatura[r.Asignatura.id]) ? this.asignatura[r.Asignatura.id] : 0;
 
-          this.matricula[r.Matricula.id] = tmp_mat[r.Matricula.id] + r.promedio
-          this.asignatura[r.Asignatura.id] = tmp_asig[r.Asignatura.id] + r.promedio
-        })
-        // console.log(Object.keys(this.matricula).length)
-      }
+    this.asignatura$ = this.crud.getData('cursoprofesor', fks)!;
+    this.getMatriculaData();
+    this.getResumenNotaData();
+  }
 
-      this.matricula$ = this.crud.getDataCustom('matricula', 'lista_curso_nombres',ides )?.pipe(
 
-        tap(mat => {
-          mat.forEach((m:any) => {
+  getMatriculaData(): void {
 
-            this.matriculaPromedioMap.set(m.id,
-              this.crud.getData('resumennota',[anno,periodo,colegio,curso,0,m.id])?.pipe(
-                tap(res => mostranotas(res)
-              )
-             )
-            )
-            }
-          )
-       }
-      ),
-      tap(mat => this.numrows = Object.keys(mat).length)
-    )
+    let ides = [
+      this.selIdsService.getId('colegio'),
+      this.selIdsService.getId('curso'),
+      this.selIdsService.getId('anno')
+    ]
+
+    this.matricula$ = this.crud.getDataCustom('matricula', 'lista_curso_nombres', ides);
+
+  }
+
+  getpromedio(id:number, a:number) { 
+    
+    this.promedio[id] = a;
+
+  }
+
+  getResumenNotaData(): void {
+
+    let asignaturaMap: any = new Map<number,any[]>();
+    let tmp:any=[];
+    let mat_ant=0;
+    let cont = 0; 
+
+    let ides = [
+      this.selIdsService.getId('anno'),
+      this.selIdsService.getId('periodo'),
+      this.selIdsService.getId('colegio'),
+      this.selIdsService.getId('curso'),0,0
+    ]
+
+    this.crud.getDataCustom('resumennota', 'poblateResumenNota', ides).pipe(
+      tap(promedios => promedios.forEach((promedio: any) => {
+        let mat = promedio[0]; 
+        let asig = promedio[1]; 
+        let prom = promedio[2];
+        // if (mat == 475) console.log(cont , mat,asig, prom);
+ 
+        if (mat_ant != mat) {
+          mat_ant = mat;
+          tmp=[];
+          
+        }  
+        tmp.push(prom);
+        asignaturaMap.set(asig, tmp);
+        this.matriculaMap.set(mat, asignaturaMap.get(asig, tmp));       
+        cont++;
+      }))
+    ).subscribe();
+    
   }
 
   getBiClass(route: string) {
-      return this.iconsService.getBiClass(route);
-    }
+    return this.iconsService.getBiClass(route);
+  }
 
   getForeignKeys(table: string) {
     let fKeys = [];
-    for ( let t of this.fkService.getFKeys(table)!) {
+    for (let t of this.fkService.getFKeys(table)!) {
       fKeys.push(this.selIdsService.getId(t));
     }
     return fKeys;
   }
 
-     updateTable(notification: (Notification | null) = null) {
 
-      this.resumennotaFk = this.getForeignKeys('resumennota')
+  updateTable(notification: (Notification | null) = null) {
 
-      if ( !notification || notification.message == "updated" ) {
-        /*console.log(this.selIdsService.getId('anno'),
-        this.selIdsService.getId('periodo'),
-        this.selIdsService.getId('colegio'),
-        this.selIdsService.getId('curso'));*/
-
-        if (this.selIdsService.getId('anno') *
-            this.selIdsService.getId('periodo') *
-            this.selIdsService.getId('colegio') *
-            this.selIdsService.getId('curso') > 0) {
-
-            this.getAsignaturaData();
-
-
-        }
-
+    
+    if (!notification || notification.message == "updated")  { 
+      if (this.selIdsService.selectEnableKeys(['anno', 'periodo', 'colegio', 'curso'])) {       
+        this.getAsignaturaData();
       }
+
     }
+  }
 
-    getColor = (color:string | null) => {
+  getColor = (color: string | null) => {
 
-      if (color=='primary' || !color) {
-        this.bodybgcolor = this.objcolors.primary.bodybgcolor;
-        this.pagination = this.objcolors.primary.pagination;
-        this.tablehead = this.objcolors.primary.tablehead;
-        this.bgmodal =  this.objcolors.primary.bgmodal;
-        this.modalbutton = this.objcolors.primary.modalbutton;
-        this.url = this.photo.primary;
-      }
-      else if (color=='success') {
-        this.bodybgcolor = this.objcolors.success.bodybgcolor;
-        this.pagination = this.objcolors.success.pagination;
-        this.tablehead = this.objcolors.success.tablehead;
-        this.bgmodal =  this.objcolors.success.bgmodal;
-        this.modalbutton = this.objcolors.success.modalbutton;
-        this.url = this.photo.success;
-      }
-      else if (color=='info') {
-        this.bodybgcolor = this.objcolors.info.bodybgcolor;
-        this.pagination = this.objcolors.info.pagination;
-        this.tablehead = this.objcolors.info.tablehead;
-        this.bgmodal =  this.objcolors.info.bgmodal;
-        this.modalbutton = this.objcolors.info.modalbutton;
-        this.url = this.photo.info;
-      }
+    if (color == 'primary' || !color) {
+      this.bodybgcolor = this.objcolors.primary.bodybgcolor;
+      this.pagination = this.objcolors.primary.pagination;
+      this.tablehead = this.objcolors.primary.tablehead;
+      this.bgmodal = this.objcolors.primary.bgmodal;
+      this.modalbutton = this.objcolors.primary.modalbutton;
+      this.url = this.photo.primary;
+    }
+    else if (color == 'success') {
+      this.bodybgcolor = this.objcolors.success.bodybgcolor;
+      this.pagination = this.objcolors.success.pagination;
+      this.tablehead = this.objcolors.success.tablehead;
+      this.bgmodal = this.objcolors.success.bgmodal;
+      this.modalbutton = this.objcolors.success.modalbutton;
+      this.url = this.photo.success;
+    }
+    else if (color == 'info') {
+      this.bodybgcolor = this.objcolors.info.bodybgcolor;
+      this.pagination = this.objcolors.info.pagination;
+      this.tablehead = this.objcolors.info.tablehead;
+      this.bgmodal = this.objcolors.info.bgmodal;
+      this.modalbutton = this.objcolors.info.modalbutton;
+      this.url = this.photo.info;
+    }
+  }
+
+  ngOnInit(): void {
+
+    this.usuario$.pipe(
+      tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
+      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['Nota'], info) } })
+
+    ).subscribe()
+
+    this.modalDataObj = modalDataObject['Asignatura']
+
+    this.selIdsService.msg.pipe(
+      tap((message: (Notification)) => this.updateTable(message))
+    )
+      .subscribe();
+  }
+
+
 }
-
-    ngOnInit(): void {
-
-      this.usuario$.pipe(
-        tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
-        tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['Nota'],info)}})
-
-      ).subscribe()
-
-      this.modalDataObj = modalDataObject['Asignatura']
-
-      this.selIdsService.msg.pipe(
-        tap((message: (Notification)) =>  this.updateTable(message))
-      )
-      .subscribe() ;
-    }
-
-
- }

@@ -82,6 +82,19 @@ export class SelectionIdsService implements OnDestroy {
     return newIds;
   }
 
+  selectEnableKeys(tables: Array<string>): boolean {  
+    let fks:Array<number> = [];
+    tables.forEach( table => {
+      this.getId(table) > 0 ? fks.push(this.getId(table)) : fks.push(0)
+    })
+    if (fks.reduce((a,b) => a*b) > 0) {
+      return true
+    }
+    else {
+      return false
+    } 
+  }
+
   setText(table: string, newText: string) {
     this.textMap.set(table, newText);
   }
