@@ -100,12 +100,12 @@ export const environment = {
   },
   colors: {
     primary: {
-      color: 'primary',
+      color: 'rgb(255, 255, 255)',
       lineal: 'linear-gradient(to right, #4880EC, #019CAD)',
       menu: '#e3e4f3',
       colorMenuButton: '#059bb0',
       pagination: '#e2e2eb',
-      bodybgcolor: 'linear-gradient(to right, #4880EC, #019CAD)', // rgb(238, 238, 248)}
+      bodybgcolor: 'rgb(255, 255, 255)', //}
       tablehead: 'rgb(44,161,213)',
       bgmodal: '#0D6EFD',
       modalbutton: 'rgb(69, 130, 233)',
