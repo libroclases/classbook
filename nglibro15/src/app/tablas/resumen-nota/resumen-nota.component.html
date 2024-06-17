@@ -24,9 +24,9 @@
     <table class="table table-bordered">
       <!--thead><tr><td>&ngsp;</td><td *ngFor="let a of (asignatura$ | async)">{{a.Asignatura.id}}</td></tr></thead-->
       <tbody>
-        <tr><td>&ngsp;</td><td *ngFor="let a of (asignatura$ | async)">{{a.Asignatura.id}}</td><td>Promedio</td></tr>
+        <tr><td>&ngsp;</td><td *ngFor="let a of (asignatura$ | async)">{{a.Asignatura.nombre}}</td><td>Promedio</td></tr>
         <tr *ngFor="let m of (matricula$ | async)">
-          <td>{{m.id}}</td><td *ngFor="let a of matriculaMap.get(m.id)">{{ a  | number:'1.1-1' }}</td><td>{{promedio[m.id] | number:'1.1-1'}}</td>
+          <td>{{m.nombre}}</td><td *ngFor="let a of matriculaMap.get(m.id); index as i"  [style.color]="getcolor(a)" [title]="title[i]">{{ a  | number:'1.1-1' }}</td><td [style.color]="getcolor(promedio[m.id])">{{promedio[m.id] | number:'1.1-1'}}</td>
         </tr> 
     </table>
 

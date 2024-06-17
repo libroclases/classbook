@@ -30,7 +30,8 @@ export class ResumenNotaComponent implements OnInit {
 
   // valorPromedio: any = [];
 
-  disable = {};
+  disable:any = {};
+  title:any = {}
   // currentDate: Date = new Date();
 
   // tablaId = 5;
@@ -147,8 +148,10 @@ export class ResumenNotaComponent implements OnInit {
       0,
       0
     ]
-
-    this.asignatura$ = this.crud.getData('cursoprofesor', fks)!;
+    let i=0;
+    this.asignatura$ = this.crud.getData('cursoprofesor', fks)?.pipe(
+      tap(asig => asig.forEach((a:any) => { this.title[i] = a.Asignatura.nombre; i++;}))
+    )!;
     this.getMatriculaData();
     this.getResumenNotaData();
   }
@@ -165,6 +168,12 @@ export class ResumenNotaComponent implements OnInit {
     this.matricula$ = this.crud.getDataCustom('matricula', 'lista_curso_nombres', ides);
 
   }
+
+  getcolor(n:number) : string {
+    if (n < 4) return 'red';
+    else { return 'blue'}   
+
+  } 
 
   getpromedio(id:number, a:any) { 
     
