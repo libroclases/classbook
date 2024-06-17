@@ -166,9 +166,9 @@ export class ResumenNotaComponent implements OnInit {
 
   }
 
-  getpromedio(id:number, a:number) { 
+  getpromedio(id:number, a:any) { 
     
-    this.promedio[id] = a;
+    this.promedio[id] = a.reduce((a:number, b:number) => a + b, 0) / a.length;
 
   }
 
@@ -192,7 +192,7 @@ export class ResumenNotaComponent implements OnInit {
         let asig = promedio[1]; 
         let prom = promedio[2];
         // if (mat == 475) console.log(cont , mat,asig, prom);
- 
+        
         if (mat_ant != mat) {
           mat_ant = mat;
           tmp=[];
@@ -200,6 +200,7 @@ export class ResumenNotaComponent implements OnInit {
         }  
         tmp.push(prom);
         asignaturaMap.set(asig, tmp);
+        this.getpromedio(mat, asignaturaMap.get(asig, tmp));
         this.matriculaMap.set(mat, asignaturaMap.get(asig, tmp));       
         cont++;
       }))
