@@ -15,6 +15,7 @@ import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 import { GetPermissionService } from 'src/app/shared/services/get-permission/get-permission.service';
 import { Permission } from 'src/environments/environment.development';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-matricula-alumno',
@@ -32,7 +33,7 @@ export class MatriculaAlumnoComponent implements OnInit {
   opacity="70%";
 
   // data:any={};
-  muestra_dialog=true;
+  // muestra_dialog=true;
 
 
   objcolors = environment.colors;
@@ -72,7 +73,7 @@ export class MatriculaAlumnoComponent implements OnInit {
 
     if (color == null) {  color = localStorage.getItem('Color')  }
 
-    this.button_class= `btn btn-${color} text-light`;
+    this.button_class= `btn btn-${color} text-light mx-2 mb-3`;
     this.table_class = `table table-${color}`;
     this.color = color;
 
@@ -112,7 +113,7 @@ export class MatriculaAlumnoComponent implements OnInit {
 
   ngOnInit() {
 
-    this.muestra_dialog = true
+    // this.muestra_dialog = true
 
     this.usuario$.pipe(
       tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
@@ -133,6 +134,7 @@ export class MatriculaAlumnoComponent implements OnInit {
     // private mensaje: MessageService,
     public dialog: MatDialog,
     private crud: CrudService,
+    private router: Router,
     public userInfo: UserInfoService,
     private selIdsService: SelectionIdsService,
     private getpermission: GetPermissionService ) {
@@ -148,16 +150,17 @@ export class MatriculaAlumnoComponent implements OnInit {
 
   reset() {
     this.formConsulta.reset();
-    this.muestra_dialog = false;
+    // this.muestra_dialog = false;
     this.alumno = null;
     this.apoderado = null;
 
   }
   cancelar() {
     this.formConsulta.reset();
-    this.muestra_dialog = false;
+    // this.muestra_dialog = false;
     this.alumno = null;
     this.apoderado = null;
+    this.router.navigate(['/home'])
     // this.mensaje.nextMsg({})
 
   }

@@ -9,7 +9,7 @@
 
 
 
-        <div *ngIf="muestra_dialog" class="container  py-5  my-auto" style="max-width: 700px; opacity:90%">
+        <div  class="container  py-5  my-auto" style="max-width: 700px; opacity:90%">
 
           <h2 [class]='color_h2'>Matricula Alumno</h2>
           <form  [formGroup]="formConsulta">
@@ -52,12 +52,9 @@
 
               </thead>
             </table>
-            <hr>
-            <button type="button" (click)="cancelar()" [class]="button_class">Close</button>
-            <hr>
-            <div *ngIf="alumno && apoderado">
-
-              <button type="button" (click)="openDialog()"  [disabled]="formConsulta.invalid" [class]="button_class">Generar Matrícula</button>
+            <div>
+              <button *ngIf="alumno && apoderado" type="button" (click)="openDialog()"  [disabled]="formConsulta.invalid" [class]="button_class">Generar Matrícula</button>
+              <button type="button" (click)="cancelar()" [class]="button_class">Cancelar</button>
             </div>
 
           </div>
