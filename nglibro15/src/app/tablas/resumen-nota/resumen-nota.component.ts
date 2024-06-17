@@ -170,12 +170,12 @@ export class ResumenNotaComponent implements OnInit {
   }
 
   getcolor(n:number) : string {
-    if (n < 4) return 'red';
-    else { return 'blue'}   
+    if (n >= 3.95) return 'blue';
+    else { return 'red'}   
 
   } 
 
-  getpromedio(id:number, a:any) { 
+  getpromedioMat(id:number, a:any) { 
     
     this.promedio[id] = a.reduce((a:number, b:number) => a + b, 0) / a.length;
 
@@ -209,7 +209,7 @@ export class ResumenNotaComponent implements OnInit {
         }  
         tmp.push(prom);
         asignaturaMap.set(asig, tmp);
-        this.getpromedio(mat, asignaturaMap.get(asig, tmp));
+        this.getpromedioMat(mat, asignaturaMap.get(asig, tmp));
         this.matriculaMap.set(mat, asignaturaMap.get(asig, tmp));       
         cont++;
       }))
