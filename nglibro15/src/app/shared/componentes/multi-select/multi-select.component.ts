@@ -34,6 +34,9 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
   @Input('custom-endpoints')
   customEndpoints: any = null;
 
+  @Input('middle-tables')
+  middleTables: any = null; // UVR
+
   @Input('patch-fks-from-storage')
   patchTablesFromStorage: string[] = [];
 
@@ -47,6 +50,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
   changeFns: Map<string, Function>;
 
   hasCustomEndpoint: Map<string, boolean> = new Map();
+  hasMiddleTable: Map<string, boolean> = new Map();
 
   queries: tableQueries = {};
 
@@ -67,11 +71,19 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.tables.forEach((table) => this.hasCustomEndpoint.set(table, false));
+    this.tables.forEach((table) => this.hasMiddleTable.set(table, false));
     if (this.customEndpoints != null) {
       Object.keys(this.customEndpoints).forEach((table) =>
         this.hasCustomEndpoint.set(table, true)
       );
     }
+
+    if (this.middleTables != null) {  // uvr
+      Object.keys(this.middleTables).forEach((table) =>
+        this.hasMiddleTable.set(table, true)
+      );
+    }
+
     let storageFks: any = {};
 
     if (this.patchTablesFromStorage.length > 0) {
@@ -89,26 +101,32 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
 
     this.tables.forEach((table) => {
       this.valuesForm.addControl(table, new FormControl());
-      const fKeyTables = this.getFKTables(table);
-      let foreignKeys: string[] = [];
-      fKeyTables?.forEach((tb) => {
+      const fKeyTable = this.getFKTables(table);
+      let foreignKey: string[] = [];
+      fKeyTable?.forEach((tb) => {
         if (
           !this.ignoreFkRequirements.includes(tb) &&
           this.tables.includes(tb)
         ) {
-          foreignKeys.push(tb);
+          foreignKey.push(tb);
           this.requiredBySelTree.get(tb)?.push(table);
         }
-      });
-      if (foreignKeys.length === 0) {
+      }); 
+      if (foreignKey.length === 0) {
         this.freeTables.push(table);
       } else {
         this.valuesForm.get(table)!.disable();
         this.considerReqSel = true;
         this.selIdsService.setId(table, 0);
       }
-    });
-
+    }); 
+    
+    /**** obs logs***/
+    for (let r of this.requiredBySelTree.entries()) { console.log(r) };
+    console.log('freetables',this.freeTables);
+    console.log('considerReqSel', true);
+    console.log('changeFunctionArray', this.changeFunctionsArray)
+    /*********** */
     for (let [index, table] of this.tables.entries()) {
       this.queries[table] = EMPTY;
       if (this.changeFunctionsArray) {
@@ -119,18 +137,18 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
     if (!this.considerReqSel) {
       this.freeTables = this.tables;
     }
-    this.freeTables.forEach((table) => this.queryTable(table));
+    this.freeTables.forEach((table) => this.queryTable(table));  // ok
 
     if (Object.keys(storageFks).length > 0) {
       this.checkSelection(storageFks, true);
-    } else {
+    } else {console.log('poronga');
       this.selIdsService.notifyUpdated();
     }
-
+    
     this.originTableSubscription = this.originIdsService.msg
       .pipe(
         take(1),
-        tap((msg) => {
+        tap((msg) => { console.log('msg', msg);  // ok
           this.checkSelection(msg);
         }),
         share()
@@ -201,6 +219,9 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
     if (this.hasCustomEndpoint.get(table)) {
       return this.fKeysService.getFKeys(this.customEndpoints[table]);
     }
+    if (this.hasMiddleTable.get(table)) {  // UVR
+      return this.fKeysService.getFKeys(this.middleTables[table]);
+    }
     return this.fKeysService.getFKeys(table);
   }
 
@@ -227,16 +248,16 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
   enableIfRequiredSelected(table: string) {
     // check if all required selectors have been set
     let doEnable = true;
-    for (let tb of this.getFKTables(table)!) {
-      if (
+    for (let tb of this.getFKTables(table)!) { console.log('tb',table,tb,this.selIdsService.getId(tb) );
+      if (  
         !this.ignoreFkRequirements.includes(tb) &&
         this.selIdsService.getId(tb) === 0
       ) {
-        doEnable = false;
+        doEnable = false; 
         break;
       }
     }
-    if (doEnable) {
+    if (doEnable) {  console.log('doEnable',table, doEnable );
       this.valuesForm.get(table)!.enable();
     } else {
       this.selIdsService.setId(table, 0);

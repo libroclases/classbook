@@ -58,7 +58,7 @@ class AsistenteColegios {
 
   static getByFk(req, res) {
 
-    const { tipoasistenteId, usuarioId, sexoId, regionId, provincixId, comunaId,} = req.params;
+    const { tipoasistenteId, usuarioId, sexoId, regionId, provincixId, comunaId} = req.params;
     
     let consulta = {};
     

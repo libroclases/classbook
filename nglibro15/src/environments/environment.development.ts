@@ -403,7 +403,7 @@ export const tableLabels = {
   TipoColegio: 'Categoría',
   vinculo: 'Vínculo',
   Vinculo: 'Vínculo',
-  tipoasistente: 'Profesión',
+  tipoasistente: 'Tipo de Asistente',
   tipoestado: 'Tipo de Estado',
   asistentecolegio: 'Profesional (no docente)',
   estadoalumno: 'Estado Alumno',
