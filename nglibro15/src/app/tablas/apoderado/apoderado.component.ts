@@ -24,6 +24,7 @@ export class ApoderadoComponent {
  changeFnsArray: Function[] = [];
  ignoreFkRequirements: string[] = [];
  patchFKsFromStorage = [];
+ middleTables: any = {};
 
  // Route: from parent
  parentTable: string | null = null;

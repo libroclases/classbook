@@ -24,6 +24,7 @@ export class EstadoAlumnoComponent {
   changeFnsArray: Function[] = [];
   ignoreFkRequirements: string[] = [];
   patchFKsFromStorage = [];
+  middleTables: any = {};
 
   constructor( ) { }
 

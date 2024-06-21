@@ -15,15 +15,16 @@ export class CursoProfesorComponent {
   booleanFields = [];
   dateFields = [];
   // displayFKFields: CamelCase
-  displayFKFields = ['Anno', 'Colegio', 'Curso','Asignatura', 'Profesor'];
+  displayFKFields = ['Anno', 'Colegio', 'Curso','Asignatura','Profesor'];
   redirectRoutes = ['/curso', '/profesor']
 
   // Selectores
 
-  selTables = ['anno', 'colegio', 'curso', 'asignatura','profesor'];
+  selTables = ['anno', 'colegio', 'curso','asignatura','profesor'];
   changeFnsArray: Function[] = [];
   ignoreFkRequirements: string[] = [];
   patchFKsFromStorage = ['anno','colegio','curso'];
+  middleTables: any = {};
 
   constructor( ) { }
 

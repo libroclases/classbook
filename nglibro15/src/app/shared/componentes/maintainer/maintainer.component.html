@@ -3,7 +3,7 @@
 [style.height] = "height"
 >
 
-
+  {{bodybgcolor}}
   <!-- Search -->
 
 <div class="container-fluid">
@@ -23,7 +23,7 @@
 
           [change-functions]="changeFnsArray"
           [ignore-FK-requirements]="ignoreFkRequirements"
-
+          [middle-tables]="middleTables"
           [patch-fks-from-storage]="patchFKsFromStorage">
         </multi-select>
     </div>
@@ -39,7 +39,7 @@
 <div class="container-fluid overflow-auto bg-light mt-4"  [style.max-height]="height" [style.opacity]="opacity" style="width: 100%;">
 
   <!-- Tabla Principal -->
- 
+
 
   <table class="table table-sm  table-striped table-fit table-bordered">
     <ng-container *ngIf="isGroupTable; else notGroupTable">
@@ -48,7 +48,7 @@
         <tr class="table-bordered">
           <th [attr.colspan]="numRedirect" *ngIf="numRedirect > 0" style="text-align:center" >
             <a class="btn btn-link btn-sm px-3" data-bs-toggle="tooltip" title="Bajar Datos"
-            data-bs-target="#staticBackdrop" (click)="downloadFile()"><em  class="bi bi-cloud-download"></em></a>     
+            data-bs-target="#staticBackdrop" (click)="downloadFile()"><em  class="bi bi-cloud-download"></em></a>
           </th>
 
           <th *ngFor="let dateFd of dateFields">{{getAttributeLabel(mainTable, dateFd)}}</th>
@@ -81,9 +81,9 @@
         </tr>
       </thead>
     </ng-template>
-    
+
       <tbody *ngIf="mainQuery$">
-       
+
         <ng-container *ngIf="isGroupTable; else notAGroupTable">
           <tr *ngFor="let c of (mainQuery$ | async)  | paginate: { itemsPerPage: 10, currentPage: currPage }">
 
@@ -104,18 +104,21 @@
         <ng-template #notAGroupTable>
           <tr *ngFor="let c of (mainQuery$ | async) | paginate: { itemsPerPage: 10, currentPage: currPage }">
 
-            <ng-container *ngFor="let route of redirectRts">
-              <td  style="text-align: center; width: 40px;"><a class="nav-link"
-              [routerLink]="[route, c.id, lowerUpperTables[mainTable]]" routerLinkActive="active">
-              <em [class]="getBiClass(route)" [title]="getIconLabel(route)"></em></a></td>
-            </ng-container>
+            <td style="text-align: center;">
+              <ng-container *ngFor="let route of redirectRts">
+                <a class="nav-link"
+                [routerLink]="[route, c.id, lowerUpperTables[mainTable]]" routerLinkActive="active">
+                <em [class]="getBiClass(route)" [title]="getIconLabel(route)"></em></a>
+              </ng-container>
+            </td>
+
 
             <td *ngFor="let txtFd of textFields">{{c[txtFd]}}</td>
             <td *ngFor="let boolFd of booleanFields">{{c[boolFd]}}</td>
             <td *ngFor="let dateFd of dateFields">{{c[dateFd] | date:'dd/MM/YYYY'}}</td>
             <td *ngFor="let table of fkFields">{{getObjectLabel(table, c[table])}}</td>
             <th style="text-align: center;">
-              <a mat-button (click)="openDialog(c)" [disabled]="disable.editar"><em class="bi bi-lock"></em> </a>
+              <a mat-button (click)="openDialog(c)" [disabled]="disable.editar"><em class="bi bi-lock"></em></a>
             </th>
           </tr>
         </ng-template>

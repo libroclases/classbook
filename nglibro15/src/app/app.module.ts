@@ -4,7 +4,6 @@ import { AlumnoComponent } from './tablas/alumno/alumno.component';
 import { AnotacionesComponent } from './tablas/anotaciones/anotaciones.component';
 import { ApoderadoComponent } from './tablas/apoderado/apoderado.component';
 import { AsignaturaComponent } from './tablas/asignatura/asignatura.component';
-import { AsignaturaProfesorComponent } from './tablas/asignatura-profesor/asignatura-profesor.component';
 import { AsistenciaComponent } from './tablas/asistencia/asistencia.component';
 import { AsistenteColegioComponent } from './tablas/asistente-colegio/asistente-colegio.component';
 import { CabeceraComponent } from './tablas/cabecera/cabecera.component';
@@ -75,7 +74,6 @@ import { UsuarioState } from './ngxs/usuario/usuario.state';
 import { PruebaComponent } from './tablas/prueba/prueba.component';
 import { CursoProfesorComponent } from './tablas/curso-profesor/curso-profesor.component';
 import { InscripcionColegioComponent } from './tablas/inscripcion-colegio/inscripcion-colegio.component';
-import { AlumnoColegioComponent } from './tablas/alumno-colegio/alumno-colegio.component';
 
 
 const allowedTables = [
@@ -85,7 +83,6 @@ const allowedTables = [
   'anotacion',
   'apoderado',
   'asignatura',
-  'asignaturaprofesor',
   'asistencia',
   'asistentecolegio',
   'colegio',
@@ -93,7 +90,6 @@ const allowedTables = [
   'controlasignatura',
   'curso',
   'cursoprofesor',
-  'alumnocolegio',
   'dix',
   'estadoalumno',
   'evaluacion',
@@ -142,7 +138,6 @@ allowedTables.forEach((tb) => {
     AnotacionesComponent,
     ApoderadoComponent,
     AsignaturaComponent,
-    AsignaturaProfesorComponent,
     AsistenciaComponent,
     AsistenteColegioComponent,
     CabeceraComponent,
@@ -185,7 +180,6 @@ allowedTables.forEach((tb) => {
     PruebaComponent,
     CursoProfesorComponent,
     InscripcionColegioComponent,
-    AlumnoColegioComponent,
 
 
   ],

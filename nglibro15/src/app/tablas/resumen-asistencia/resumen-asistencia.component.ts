@@ -68,6 +68,7 @@ export class ResumenAsistenciaComponent {
   selTables: string[] = ['colegio', 'anno', 'mes'];
   changeFnsArray!: Function[];
   patchFksFromStorage = ['colegio', 'anno'];
+  middleTables: any = {};
 
   constructor(
     private subsManagerService: SubscriptionsManagerService,

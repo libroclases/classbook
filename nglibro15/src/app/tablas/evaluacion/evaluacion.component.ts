@@ -16,15 +16,16 @@ export class EvaluacionComponent {
  booleanFields = [];
  dateFields = ['fecha'];
  // displayFKFields: CamelCase
- displayFKFields = ['Colegio', 'Curso', 'Profesor', 'Asignatura', 'Anno', 'Periodo', 'TipoEvaluacion'];
+ displayFKFields = ['Anno','Periodo','Colegio', 'Curso', 'CursoProfesor', 'TipoEvaluacion'];
  redirectRoutes!: string[];
 
  // Selectores
 
- selTables = ["anno", "periodo" , "colegio", "curso", "profesor", "asignatura"];
+ selTables = ["anno", "periodo" , "colegio", "curso", "cursoprofesor","tipoevaluacion"];
  changeFnsArray: Function[] = [];
  ignoreFkRequirements: string[] = [];
  patchFKsFromStorage = ['anno', 'colegio','periodo','curso'];
+ middleTables: any = {};
 
  constructor( ) { }
 

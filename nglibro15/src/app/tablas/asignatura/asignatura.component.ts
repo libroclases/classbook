@@ -23,6 +23,7 @@ export class AsignaturaComponent implements OnInit{
  changeFnsArray: Function[] = [];
  ignoreFkRequirements: string[] = [];
  patchFKsFromStorage = [];
+ middleTables: any = {};
 
  constructor( ) { }
 

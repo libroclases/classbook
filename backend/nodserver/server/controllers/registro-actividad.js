@@ -7,7 +7,6 @@ const {
   Colegio,
   Curso,
   Asignatura,
-  // AsignaturaProfesor,
   Profesor,
   RegistroActividad,
   Anno,
@@ -38,7 +37,7 @@ class RegistroActividades {
       include: [
         { model: Colegio, attributes: ["id", "nombre"], where: {} },
         { model: Curso, attributes: ["id", "nombre"], where: {} },
-        //{ model: AsignaturaProfesor, attributes: ["id", "nombre"], where: {} },
+    
         { model: Asignatura, attributes: ["id", "nombre"], where: {} },
         {
           model: Profesor,
@@ -61,7 +60,6 @@ class RegistroActividades {
       colegioId,
       cursoId,
       asignaturaId,
-      asignaturaprofesorId,
       profesorId,
       horarioId,
       annoId,
@@ -79,9 +77,6 @@ class RegistroActividades {
     }
     if (asignaturaId != "0") {
       consulta["asignaturaId"] = asignaturaId;
-    }
-    if (asignaturaprofesorId != "0") {
-      consulta["asignaturaprofesorId"] = asignaturaprofesorId;
     }
     if (profesorId != "0") {
       consulta["profesorId"] = profesorId;
@@ -103,7 +98,6 @@ class RegistroActividades {
       include: [
         { model: Colegio, attributes: ["id", "nombre"], where: {} },
         { model: Curso, attributes: ["id", "nombre"], where: {} },
-        // { model: AsignaturaProfesor, attributes: ["id", "nombre"], where: {} },
         { model: Asignatura, attributes: ["id", "nombre"], where: {} },
         {
           model: Profesor,
@@ -170,7 +164,6 @@ class RegistroActividades {
       colegioId,
       cursoId,
       asignaturaId,
-      asignaturaprofesorId,
       profesorId,
       horarioId,
       annoId,
@@ -188,7 +181,6 @@ class RegistroActividades {
       colegioId,
       cursoId,
       asignaturaId,
-      asignaturaprofesorId,
       profesorId,
       annoId,
       mesId,
@@ -345,7 +337,6 @@ class RegistroActividades {
       Colegio,
       Curso,
       Asignatura,
-      AsignaturaProfesor,
       Profesor,
       Horario,
       Anno,
@@ -366,7 +357,6 @@ class RegistroActividades {
             colegioId: Colegio || registroActividad.colegioId,
             cursoId: Curso || registroActividad.cursoId,
             asignaturaId: Asignatura || registroActividad.asignaturaId,
-            asignaturaprofesorId: AsignaturaProfesor || registroActividad.asignaturaprofesorId,
             profesorId: Profesor || registroActividad.profesorId,
             annoId: Anno || registroActividad.annoId,
             mesId: Mes || registroActividad.mesId,
@@ -386,7 +376,6 @@ class RegistroActividades {
                 colegioId: updatedRegistroActividad.colegioId,
                 cursoId: updatedRegistroActividad.cursoId,
                 asignaturaId: updatedRegistroActividad.asignaturaId,
-                asignaturaprofesorId: updatedRegistroActividad.asignaturaprofesorId,
                 profesorId: updatedRegistroActividad.profesorId,
                 horarioId: updatedRegistroActividad.horarioId,
                 annoId: updatedRegistroActividad.annoId,

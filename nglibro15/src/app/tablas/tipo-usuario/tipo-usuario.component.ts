@@ -23,6 +23,7 @@ export class TipoUsuarioComponent {
  changeFnsArray: Function[] = [];
  ignoreFkRequirements: string[] = [];
  patchFKsFromStorage = [];
+ middleTables: any = {};
 
  constructor( ) { }
 

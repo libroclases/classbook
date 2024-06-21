@@ -5,7 +5,6 @@ import Provincixs from '../controllers/provincia';
 import Comunas from '../controllers/comuna';
 import Dixs from '../controllers/dia';
 import Asignaturas from '../controllers/asignatura';
-import AsignaturaProfesores from '../controllers/asignaturaprofesor';
 import Colegios from '../controllers/colegio';
 import Cursos from '../controllers/curso';
 import Horarios from '../controllers/horario';
@@ -43,8 +42,6 @@ import Feriados from '../controllers/feriado';
 import Ventanas from '../controllers/ventana';
 
 import CursoProfesores from '../controllers/cursoprofesor';
-
-import AlumnoColegios from '../controllers/alumnocolegio';
 
 const checkjwd = auth({
   audience: 'https://libroclases.cl',
@@ -229,21 +226,6 @@ const checkjwd = auth({
     app.put('/api/colegio/:colegioId',
       checkjwd, requiredScopes('update:colegio'),
       Colegios.modify);
-
-
-    app.get('/api/alumnocolegio',
-      checkjwd, requiredScopes(['read:alumno','read:colegio']),
-      AlumnoColegios.list);
-    app.get('/api/alumnocolegio/:annoId/:colegioId/:alumnoId/fk',
-      checkjwd, requiredScopes(['read:alumno','read:colegio']),
-      AlumnoColegios.getByFk);
-    app.post('/api/alumnocolegio/:annoId/:colegioId/:alumnoId',
-      checkjwd, requiredScopes(['create:alumno','create:colegio']),
-      AlumnoColegios.create);
-    app.put('/api/alumnocolegio/:alumnocolegioId',
-      checkjwd, requiredScopes(['update:alumno','update:colegio']),
-      AlumnoColegios.modify);
-
     app.get('/api/tipocolegio',
       checkjwd, requiredScopes('read:tipocolegio'),
       TipoColegios.list);
@@ -309,19 +291,6 @@ const checkjwd = auth({
     app.put('/api/administrador/:administradorId',
       checkjwd, requiredScopes('update:administrador'),
       Administradores.modify);
-
-    app.get('/api/asignaturaprofesor',
-      checkjwd, requiredScopes('read:asignaturaprofesor'),
-      AsignaturaProfesores.list);
-    app.get('/api/asignaturaprofesor/:profesorId/:asignaturaId/fk',
-      checkjwd, requiredScopes('read:asignaturaprofesor'),
-      AsignaturaProfesores.getByFk);
-    app.post('/api/asignaturaprofesor/:profesorId/:asignaturaId',
-      checkjwd, requiredScopes('create:asignaturaprofesor'),
-      AsignaturaProfesores.create);
-    app.put('/api/asignaturaprofesor/:asignaturaprofesorId',
-      checkjwd, requiredScopes('update:asignaturaprofesor'),
-      AsignaturaProfesores.modify);
 
     app.get('/api/usuario',
       checkjwd, requiredScopes('read:usuario'),
@@ -555,13 +524,13 @@ const checkjwd = auth({
     app.get('/api/registroactividad',
       checkjwd, requiredScopes('read:registroactividad'),
       RegistroActividades.list);
-    app.get('/api/registroactividad/:colegioId/:cursoId/:asignaturaId/:asignaturaprofesorId/:profesorId/:horarioId/:annoId/:mesId/fk',
+  app.get('/api/registroactividad/:colegioId/:cursoId/:asignaturaId/:profesorId/:horarioId/:annoId/:mesId/fk',
       checkjwd, requiredScopes('read:registroactividad'),
       RegistroActividades.getByFk);
     app.get('/api/registroactividad/:colegioId/:cursoId/:asignaturaId/:annoId/:mesId/registro_actividad_by_mes',
       checkjwd, requiredScopes('read:registroactividad'),
       RegistroActividades.getByMes);
-    app.post('/api/registroactividad/:colegioId/:cursoId/:asignaturaId/:asignaturaprofesorId/:profesorId/:horarioId/:annoId/:mesId',
+   app.post('/api/registroactividad/:colegioId/:cursoId/:asignaturaId/:profesorId/:horarioId/:annoId/:mesId',
       checkjwd, requiredScopes('create:registroactividad'),
       RegistroActividades.create);
     app.post('/api/registroactividad/:colegioId/:cursoId/:asignaturaId/:annoId/:mesId/populate_mes',
@@ -636,10 +605,10 @@ const checkjwd = auth({
     app.get('/api/evaluacion',
       checkjwd, requiredScopes('read:evaluacion'),
       Evaluaciones.list);
-    app.get('/api/evaluacion/:colegioId/:cursoId/:profesorId/:asignaturaId/:annoId/:periodoId/:tipoevaluacionId/fk',
+    app.get('/api/evaluacion/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/:tipoevaluacionId/fk',
       checkjwd, requiredScopes('read:evaluacion'),
       Evaluaciones.getByFk);
-    app.post('/api/evaluacion/:colegioId/:cursoId/:profesorId/:asignaturaId/:annoId/:periodoId/:tipoevaluacionId',
+    app.post('/api/evaluacion/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/:tipoevaluacionId',
       checkjwd, requiredScopes('create:evaluacion'),
       Evaluaciones.create);
     app.put('/api/evaluacion/:evaluacionId',
@@ -648,10 +617,10 @@ const checkjwd = auth({
     app.get('/api/nota',
       checkjwd, requiredScopes('read:nota'),
       Notas.list);
-    app.get('/api/nota/:annoId/:periodoId/:colegioId/:cursoId/:profesorId/:asignaturaId/:matriculaId/:evaluacionId/fk',
+    app.get('/api/nota/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/:matriculaId/:evaluacionId/fk',
       checkjwd, requiredScopes('read:nota'),
       Notas.getByFk);
-    app.post('/api/nota/:annoId/:periodoId/:colegioId/:cursoId/:profesorId/:asignaturaId/:matriculaId/:evaluacionId',
+    app.post('/api/nota/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/:matriculaId/:evaluacionId',
       checkjwd, requiredScopes('create:nota'),
       Notas.create);
     app.put('/api/nota/:notaId',
@@ -698,7 +667,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('create:nota'),
       ResumenNotas.create);
     app.get('/api/resumennota/:annoId/:periodoId/:colegioId/:cursoId/:asignaturaId/:matriculaId/poblateResumenNota',
-      // checkjwd, requiredScopes('read:nota'),
+      checkjwd, requiredScopes('read:nota'),
       ResumenNotas.poblateResumenNotas);
 
     app.get('/api/cursoprofesor',

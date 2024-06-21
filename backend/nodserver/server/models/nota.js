@@ -29,14 +29,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "evaluacionId",
     });
 
-    Nota.belongsTo(models.Colegio, {
-      foreignKey: "colegioId",
-    });
-
-    Nota.belongsTo(models.Curso, {
-      foreignKey: "cursoId",
-    });
-
     Nota.belongsTo(models.Anno, {
       foreignKey: "annoId",
     });
@@ -45,14 +37,23 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "periodoId",
     });
     
-    Nota.belongsTo(models.Profesor, {
-      foreignKey: "profesorId",
+    Nota.belongsTo(models.Colegio, {
+      foreignKey: "colegioId",
     });
 
+    Nota.belongsTo(models.Curso, {
+      foreignKey: "cursoId",
+    });
+
+    Nota.belongsTo(models.CursoProfesor, {
+      foreignKey: "cursoprofesorId",
+    });
+
+    /*
     Nota.belongsTo(models.Asignatura, {
       foreignKey: "asignaturaId",
     });
-
+    */
   };
   return Nota;
 };

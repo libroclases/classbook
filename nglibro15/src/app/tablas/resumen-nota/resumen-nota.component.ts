@@ -71,6 +71,7 @@ export class ResumenNotaComponent implements OnInit {
   ignoreFkRequirements: string[] = ['asignatura'];
   changeFnsArray: Function[] = [];
   patchFKsFromStorage = ['anno', 'periodo', 'colegio'];
+  middleTables: any = {};
 
   // fatherId = 0;
   // father = '';
@@ -171,12 +172,12 @@ export class ResumenNotaComponent implements OnInit {
 
   getcolor(n:number) : string {
     if (n >= 3.95) return 'blue';
-    else { return 'red'}   
+    else { return 'red'}
 
-  } 
+  }
 
-  getpromedioMat(id:number, a:any) { 
-    
+  getpromedioMat(id:number, a:any) {
+
     this.promedio[id] = a.reduce((a:number, b:number) => a + b, 0) / a.length;
 
   }
@@ -186,7 +187,7 @@ export class ResumenNotaComponent implements OnInit {
     let asignaturaMap: any = new Map<number,any[]>();
     let tmp:any=[];
     let mat_ant=0;
-    let cont = 0; 
+    let cont = 0;
 
     let ides = [
       this.selIdsService.getId('anno'),
@@ -197,24 +198,24 @@ export class ResumenNotaComponent implements OnInit {
 
     this.crud.getDataCustom('resumennota', 'poblateResumenNota', ides).pipe(
       tap(promedios => promedios.forEach((promedio: any) => {
-        let mat = promedio[0]; 
-        let asig = promedio[1]; 
+        let mat = promedio[0];
+        let asig = promedio[1];
         let prom = promedio[2];
         // if (mat == 475) console.log(cont , mat,asig, prom);
-        
+
         if (mat_ant != mat) {
           mat_ant = mat;
           tmp=[];
-          
-        }  
+
+        }
         tmp.push(prom);
         asignaturaMap.set(asig, tmp);
         this.getpromedioMat(mat, asignaturaMap.get(asig, tmp));
-        this.matriculaMap.set(mat, asignaturaMap.get(asig, tmp));       
+        this.matriculaMap.set(mat, asignaturaMap.get(asig, tmp));
         cont++;
       }))
     ).subscribe();
-    
+
   }
 
   getBiClass(route: string) {
@@ -232,9 +233,9 @@ export class ResumenNotaComponent implements OnInit {
 
   updateTable(notification: (Notification | null) = null) {
 
-    
-    if (!notification || notification.message == "updated")  { 
-      if (this.selIdsService.selectEnableKeys(['anno', 'periodo', 'colegio', 'curso'])) {       
+
+    if (!notification || notification.message == "updated")  {
+      if (this.selIdsService.selectEnableKeys(['anno', 'periodo', 'colegio', 'curso'])) {
         this.getAsignaturaData();
       }
 

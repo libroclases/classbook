@@ -1,6 +1,6 @@
 import model from '../models';
 
-const {  Colegio, Periodo, Curso, Anno, Profesor, Asignatura, Matricula, Evaluacion, Nota } = model;
+const {  Colegio, Periodo, Curso, Anno, CursoProfesor, Asignatura, Matricula, Evaluacion, Nota } = model;
 
 class Notas {
 
@@ -16,8 +16,8 @@ class Notas {
                     { model:Curso, attributes:['id','nombre'], where: { } },
                     { model:Anno, attributes:['id','nombre'], where: { } },
                     { model:Periodo, attributes:['id','nombre'], where: { }},
-                    { model:Profesor, attributes:['id','nombre'], where: { } },
-                    { model:Asignatura, attributes:['id','nombre'], where: { } },
+                    { model:CursoProfesor, attributes:['id'], where: { } },
+                    // { model:Asignatura, attributes:['id','nombre'], where: { } },
     
 
             ],
@@ -27,7 +27,7 @@ class Notas {
     }
 
     static getByFk(req, res) {
-        const { annoId, periodoId, colegioId, cursoId, profesorId, asignaturaId, matriculaId, evaluacionId } = req.params;
+        const { annoId, periodoId, colegioId, cursoId, cursoprofesorId, matriculaId, evaluacionId } = req.params;
         let consulta = {};
         // let consulta = getBaseQuery(req);
 
@@ -37,8 +37,8 @@ class Notas {
         if (cursoId != '0') {  consulta['cursoId'] = cursoId;  }
         if (annoId != '0') {  consulta['annoId'] = annoId;  }
         if (periodoId != '0') {  consulta['periodoId'] = periodoId;  }
-        if (profesorId != '0') {  consulta['profesorId'] = profesorId;  }
-        if (asignaturaId != '0') {  consulta['asignaturaId'] = asignaturaId;  }
+        if (cursoprofesorId != '0') {  consulta['cursoprofesorId'] = cursoprofesorId;  }
+        // if (asignaturaId != '0') {  consulta['asignaturaId'] = asignaturaId;  }
 
         return Nota
           .findAll({ where : consulta, attributes: ['id','nota'] ,
@@ -49,8 +49,8 @@ class Notas {
             { model:Curso, attributes:['id','nombre'], where: { } },
             { model:Anno, attributes:['id','nombre'], where: { } },
             { model:Periodo, attributes:['id','nombre'], where: { }},
-            { model:Profesor, attributes:['id','nombre'], where: { } },
-            { model:Asignatura, attributes:['id','nombre'], where: { } },
+            { model:CursoProfesor, attributes:['id'], where: { } },
+            // { model:Asignatura, attributes:['id','nombre'], where: { } },
             
            ],
             order: [['evaluacionId','ASC']] 
@@ -60,8 +60,8 @@ class Notas {
     }
 
     static create(req, res) {
-    const { annoId, periodoId, colegioId, cursoId, profesorId,
-        asignaturaId, matriculaId, evaluacionId} = req.params;
+    const { annoId, periodoId, colegioId, cursoId, cursoprofesorId,
+     matriculaId, evaluacionId} = req.params;
     const { nota } = req.body;
     return Nota
     .create({
@@ -72,8 +72,8 @@ class Notas {
         colegioId,
         cursoId,
         annoId,
-        profesorId,
-        asignaturaId,
+        cursoprofesorId,
+        // asignaturaId,
    
     })
     .then(notaData => res.status(201).send({

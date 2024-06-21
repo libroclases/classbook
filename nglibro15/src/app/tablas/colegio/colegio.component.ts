@@ -25,6 +25,7 @@ export class ColegioComponent implements OnInit {
   changeFnsArray: Function[] = [];
   ignoreFkRequirements: string[] = [];
   patchFKsFromStorage = ['region'];
+  middleTables: any = {};
 
   constructor( ) { }
 

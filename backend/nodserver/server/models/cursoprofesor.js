@@ -14,11 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   CursoProfesor.associate = function (models) {
     // associations can be defined here
-    /*
-    CursoProfesor.hasMany(models.Nota, {
-      foreignKey: "cursoprofesorId",
-    });
-    */
+
 
     CursoProfesor.belongsTo(models.Anno, {
       foreignKey: "annoId",
@@ -41,6 +37,15 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     
+    CursoProfesor.hasMany(models.Evaluacion, {
+      foreignKey: "cursoprofesorId",
+    });
+    
+  
+    CursoProfesor.hasMany(models.Nota, {
+      foreignKey: "cursoprofesorId",
+    });
+      
 
   };
   return CursoProfesor;

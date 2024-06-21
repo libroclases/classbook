@@ -26,7 +26,6 @@ import { AsistenciaComponent } from './tablas/asistencia/asistencia.component';
 import { ProfesorComponent } from './tablas/profesor/profesor.component';
 import { AdministradorComponent } from './tablas/administrador/administrador.component';
 import { ResumenAsistenciaComponent } from './tablas/resumen-asistencia/resumen-asistencia.component';
-import { AsignaturaProfesorComponent } from './tablas/asignatura-profesor/asignatura-profesor.component';
 import { EvaluacionComponent } from './tablas/evaluacion/evaluacion.component';
 import { FichaAlumnoComponent } from './tablas/ficha-alumno/ficha-alumno.component';
 import { TablaComponent } from './tablas/tabla/tabla.component';
@@ -36,7 +35,6 @@ import { ResumenNotaComponent } from './tablas/resumen-nota/resumen-nota.compone
 import { PruebaComponent } from './tablas/prueba/prueba.component';
 import { CursoProfesorComponent } from './tablas/curso-profesor/curso-profesor.component';
 import { InscripcionColegioComponent } from './tablas/inscripcion-colegio/inscripcion-colegio.component';
-import { AlumnoColegioComponent } from './tablas/alumno-colegio/alumno-colegio.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
@@ -85,7 +83,7 @@ const routes: Routes = [
   { path: 'horaasignada/:id/:padre', component: HoraAsignadaComponent, canActivate: [AuthGuard] },
 
   { path: 'horario', component: HorarioComponent, canActivate: [AuthGuard] },
-  { path: 'horario/:anno/:colegio/:curso/:profesor/:asignaturaprofesor', component: HorarioComponent, canActivate: [AuthGuard] },
+  { path: 'horario/:anno/:colegio/:curso/:cursoprofesor', component: HorarioComponent, canActivate: [AuthGuard] },
 
   { path: 'horasinscritas', component: HorasInscritasComponent, canActivate: [AuthGuard] },
 
@@ -115,9 +113,6 @@ const routes: Routes = [
   { path: 'resumen_asistencia', component: ResumenAsistenciaComponent, canActivate: [AuthGuard]},
   { path: 'resumen_asistencia/:id/:padre', component: ResumenAsistenciaComponent, canActivate: [AuthGuard]},
 
-  { path: 'asignaturaprofesor', component: AsignaturaProfesorComponent, canActivate: [AuthGuard]},
-  { path: 'asignaturaprofesor/:id/:padre', component: AsignaturaProfesorComponent, canActivate: [AuthGuard]},
-
   { path: 'matricula_alumno', component: MatriculaAlumnoComponent, canActivate: [AuthGuard] },
 
   { path: 'evaluacion', component: EvaluacionComponent, canActivate: [AuthGuard]},
@@ -133,8 +128,6 @@ const routes: Routes = [
   { path: 'cursoprofesor', component: CursoProfesorComponent },
 
   { path: 'inscripcioncolegio', component: InscripcionColegioComponent },
-
-  { path: 'alumnocolegio', component: AlumnoColegioComponent },
 
   { path: '**', redirectTo: 'home' ,pathMatch: 'full' },
 

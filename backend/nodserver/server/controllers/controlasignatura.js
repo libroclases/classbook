@@ -7,7 +7,6 @@ const {
   Colegio,
   Curso,
   Asignatura,
-  AsignaturaProfesor,
   Profesor,
   ControlAsignatura,
   Anno,

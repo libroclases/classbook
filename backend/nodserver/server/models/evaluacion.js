@@ -41,6 +41,15 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Evaluacion.associate = function (models) {
+ 
+    Evaluacion.belongsTo(models.Anno, {
+      foreignKey: "annoId",
+    });
+
+    Evaluacion.belongsTo(models.Periodo, {
+      foreignKey: "periodoId",
+    });
+ 
     Evaluacion.belongsTo(models.Colegio, {
       foreignKey: "colegioId",
     });
@@ -49,21 +58,17 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "cursoId",
     });
 
+    /*
     Evaluacion.belongsTo(models.Asignatura, {
       foreignKey: "asignaturaId",
     });
+    */
 
-    Evaluacion.belongsTo(models.Profesor, {
-      foreignKey: "profesorId",
+    Evaluacion.belongsTo(models.CursoProfesor, {
+      foreignKey: "cursoprofesorId",
     });
 
-    Evaluacion.belongsTo(models.Anno, {
-      foreignKey: "annoId",
-    });
-
-    Evaluacion.belongsTo(models.Periodo, {
-      foreignKey: "periodoId",
-    });
+ 
 
     Evaluacion.belongsTo(models.TipoEvaluacion, {
       foreignKey: "tipoevaluacionId",

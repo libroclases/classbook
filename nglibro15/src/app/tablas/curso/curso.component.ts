@@ -24,6 +24,7 @@ selTables = ['colegio', 'anno'];
 changeFnsArray: Function[] = [];
 ignoreFkRequirements: string[] = [];
 patchFKsFromStorage = ['colegio', 'anno'];
+middleTables: any = {};
 
 constructor( ) { }
 

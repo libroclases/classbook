@@ -32,13 +32,13 @@ module.exports = {
           as: 'Evaluacion',
         }
       },
-      colegioId: {
+      annoId: {
         allowNull: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Colegio',
+          model: 'Anno',
           key: 'id',
-          as: 'Colegio',
+          as: 'Anno',
         }
       },
       periodoId: {
@@ -50,6 +50,15 @@ module.exports = {
           as: 'Periodo',
         }
       },
+      colegioId: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Colegio',
+          key: 'id',
+          as: 'Colegio',
+        }
+      },
       cursoId: {
         allowNull: true,
         type: Sequelize.INTEGER,
@@ -59,24 +68,16 @@ module.exports = {
           as: 'Curso',
         }
       },
-      annoId: {
+      cursoprofesorId: {
         allowNull: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Anno',
+          model: 'CursoProfesor',
           key: 'id',
-          as: 'Anno',
+          as: 'CursoProfesor',
         }
       },
-      profesorId: {
-        allowNull: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Profesor',
-          key: 'id',
-          as: 'Profesor',
-        }
-      },
+      /*
       asignaturaId: {
         allowNull: true,
         type: Sequelize.INTEGER,
@@ -86,7 +87,7 @@ module.exports = {
           as: 'Asignatura',
         }
       },
-
+      */
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

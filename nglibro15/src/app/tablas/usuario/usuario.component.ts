@@ -24,6 +24,7 @@ export class UsuarioComponent {
   changeFnsArray: Function[] = [];
   ignoreFkRequirements: string[] = [];
   patchFKsFromStorage = [];
+  middleTables: any = {};
 
   constructor( ) { }
 

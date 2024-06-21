@@ -20,7 +20,6 @@ const tablesArray = [
   'anotacion',
   'apoderado',
   'asignatura',
-  'asignaturaprofesor',
   'asistencia',
   'asistentecolegio',
   'colegio',
@@ -72,8 +71,8 @@ permissions.push('delete:feriado');
 // --------------------------------------------------------------
 
 export const environment = {
-  production: true,
-  apiUrl: 'https://libroclases.cl',
+  production: false,
+  apiUrl: 'http://localhost',
   apiKey: 'devKey',
   userinfo: {},
   opacity: '100%',
@@ -81,7 +80,7 @@ export const environment = {
   auth0: {
     domain: 'dev-tupdibnrpuxah8p3.us.auth0.com',
     clientId: 'oW9EH9gLFZFovbTIEaafmVNwg55iCGim',
-    callbackUrl: 'https://libroclases.cl',
+    callbackUrl: 'http://localhost',
     // redirectUri: window.location.origin,
     authorizationParams: {
       redirect_uri: window.location.origin,
@@ -92,19 +91,19 @@ export const environment = {
   },
 
   api: {
-    serverUrl: 'https://libroclases.cl:3000',
+    serverUrl: 'http://localhost:3000',
   },
   cabecera: {
     banner_height: 100, menu_height: 62, margen_superior_tabla: 150
   },
   colors: {
     primary: {
-      color: 'primary',
+      color: 'rgb(255, 255, 255)',
       lineal: 'linear-gradient(to right, #4880EC, #019CAD)',
       menu: '#e3e4f3',
       colorMenuButton: '#059bb0',
       pagination: '#e2e2eb',
-      bodybgcolor: 'linear-gradient(to right, #4880EC, #019CAD)', // rgb(238, 238, 248)}
+      bodybgcolor: 'rgb(255, 255, 255)', //}
       tablehead: 'rgb(44,161,213)',
       bgmodal: '#0D6EFD',
       modalbutton: 'rgb(69, 130, 233)',
@@ -137,7 +136,7 @@ export const environment = {
   photo: {
     primary: 'url(assets/images/fondo_primary.png)',
     success: 'url(assets/images/fondo_success.jpeg)',
-    info: 'url(assets/images/fondo_info.png)',
+    info: 'url(assets/images/fondo_cyan.png)',
   },
 
 };
@@ -196,8 +195,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
   anno: [],
   periodo: [],
   asignatura: ['tipocolegio'],
-  asignaturaprofesor: ['profesor', 'asignatura'],
-  cursoprofesor: ['anno','colegio','curso','profesor'],
+  cursoprofesor: ['anno','colegio','curso','asignatura','profesor'],
   colegio: ['region', 'provincix', 'comuna', 'tipocolegio'],
   curso: ['colegio', 'anno'],
   horaasignada: ['colegio'],
@@ -208,7 +206,6 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'colegio',
     'curso',
     'asignatura',
-    'asignaturaprofesor',
     'profesor',
     'anno',
     'mes',
@@ -229,9 +226,9 @@ export const fKeysByTable: { [key: string]: string[] } = {
   tipousuario: [],
   tema:[],
   usuario: ['tipousuario','tema'],
-  alumno: ['usuario','colegio', 'sexo', 'region', 'provincix', 'comuna'],
+  alumno: ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
   tipoestado: [],
-  estadoalumno: ['alumno', 'matricula', 'tipoestado'],
+  estadoalumno: ['anno','colegio','curso','alumno', 'matricula', 'tipoestado'],
   anotacion: ['matricula', 'profesor', 'anno', 'colegio', 'curso'],
   tipoasistente: [],
   asistentecolegio: [
@@ -310,7 +307,6 @@ export const lowerUpperTables: stringString = {
   anotacion: 'Anotacion',
   apoderado: 'Apoderado',
   asignatura: 'Asignatura',
-  asignaturaprofesor: 'AsignaturaProfesor',
   cursoprofesor: 'CursoProfesor',
   asistencia: 'Asistencia',
   asistencix: 'Asistencix',
@@ -356,8 +352,7 @@ export const tableLabels = {
   anno: 'Año',
   apoderado: 'Apoderado',
   asignatura: 'Asignatura',
-  asignaturaprofesor: 'Asignatura Profesor',
-  cursoprofesor: 'Curso Profesor',
+  cursoprofesor: 'Inscripción Curso',
   asistencia: 'Asistencia',
   asistencix: 'Asistencia',
   colegio: 'Colegio',
@@ -399,7 +394,7 @@ export const tableLabels = {
   TipoColegio: 'Categoría',
   vinculo: 'Vínculo',
   Vinculo: 'Vínculo',
-  tipoasistente: 'Profesión',
+  tipoasistente: 'Tipo de Asistente',
   tipoestado: 'Tipo de Estado',
   asistentecolegio: 'Profesional (no docente)',
   estadoalumno: 'Estado Alumno',
@@ -488,14 +483,9 @@ export const attributesLabels = {
     nombre: 'Nombre',
   },
 
-  asignaturaprofesor: {
-
-  },
-
   cursoprofesor: {
 
   },
-
 
   asistencia: {
     fecha: 'Fecha',
@@ -703,7 +693,6 @@ export const icons: stringStringPair = {
   '/anotacion': ['bi bi-card-list', 'Anotacion'],
   '/control_asignatura': ['bi bi-layout-text-window', 'Control de Asignatura'],
   '/asignatura': ['bi bi-book', 'Asignaturas'],
-  '/asignaturaprofesor': ['bi bi-book', 'Asignatura Profesores'],
   '/cursoprofesor': ['bi bi-book', 'Asignatura Profesores'],
   '/profesor': ['bi bi-person-video3', 'Profesores'],
   '/administrador': ['bi bi-person-video3', 'Administrador'],
@@ -737,7 +726,6 @@ export const redirectRoutes: any = {
   Profesor: ['/horario'],
   Administrador: ['/horario'],
   Asignatura: ['/profesor'],
-  AsignaturaProfesor: ['/profesor'],
   CursoProfesor:['/profesor'],
   Apoderado: ['/matricula'],
   Matricula: ['/curso'],
@@ -828,14 +816,6 @@ export const validator: any = {
     }
   },
 
-  AsignaturaProfesor: {
-    modalText: {
-      nombre: [Validators.required],
-    },
-    modalDate: {
-    }
-
-  },
 
   CursoProfesor: {
     modalText: {
@@ -1175,23 +1155,10 @@ export const modalDataObject: any = {
     windowHeight: '320px',
   },
 
-  AsignaturaProfesor: {
-    mainTable: 'asignaturaprofesor',
-    tables: ['profesor', 'asignatura'],
-    textFields: [],
-    dateFields: [],
-    booleanFields:[],
-    ignoreFkRequirements: [],
-    disable: [],
-    defaultValues: {},
-    label: 'Asignatura Profesor',
-    windowHeight: '320px',
-  },
-
 
   CursoProfesor: {
     mainTable: 'cursoprofesor',
-    tables: ['anno','colegio','curso','profesor'],
+    tables: ['anno','colegio','curso','asignatura','profesor'],
     textFields: [],
     booleanFields:[],
     dateFields: [],
@@ -1232,7 +1199,7 @@ export const modalDataObject: any = {
 
   Alumno: {
     mainTable: 'alumno',
-    tables: ['sexo','region', 'provincix', 'comuna','colegio' ],
+    tables: ['sexo','region', 'provincix', 'comuna' ],
     textFields: ['nombre', 'apellido1','apellido2', 'rut', 'direccion', 'celular'],
     booleanFields:[],
     dateFields: ['nacimiento'],
@@ -1260,7 +1227,7 @@ export const modalDataObject: any = {
 
   EstadoAlumno: {
     mainTable: 'estadoalumno',
-    tables: ['alumno','matricula', 'tipoestado'],
+    tables: ['anno','colegio','curso','alumno','matricula', 'tipoestado'],
     textFields: [],
     booleanFields:[],
     dateFields: ['fecha'],
@@ -1330,7 +1297,7 @@ export const modalDataObject: any = {
     tables: [ 'anno', 'colegio',  'curso',  'vinculo'],
     textFields: ['procedencia'],
     booleanFields:[],
-    dateFields: ['incorporacion', 'retiro'],
+    dateFields: ['incorporacion'],
     ignoreFkRequirements: [],
     disable: [],
     defaultValues: {},
@@ -1418,7 +1385,7 @@ export const modalDataObject: any = {
   },
 
   RegistroActividad: {
-    mainTable: 'asignaturaprofesor',
+    mainTable: 'registroactividad',
     tables: [],
     textFields: ['descripcion', 'horaInicial', 'numeroHoras'],
     booleanFields:[],

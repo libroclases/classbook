@@ -6,10 +6,9 @@ export interface Evaluacion {
     ponderacion: number;
     Colegio: any;
     Curso: any;
-    AsignaturaProfesor: any;
     Profesor : any;
     Anno : any;
     Periodo: any;
     TipoEvaluacion: any;
     }
-  
+

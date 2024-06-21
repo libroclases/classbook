@@ -23,6 +23,7 @@ export class AdministradorComponent {
   changeFnsArray: Function[] = [];
   ignoreFkRequirements: string[] = [];
   patchFKsFromStorage = [];
+  middleTables: any = {};
 
   constructor( ) { }
 

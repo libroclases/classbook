@@ -20,6 +20,24 @@ module.exports = {
       ponderacion: {
         type: Sequelize.INTEGER
       },
+      annoId: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Anno',
+          key: 'id',
+          as: 'Anno',
+        }
+      },
+      periodoId: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Periodo',
+          key: 'id',
+          as: 'Periodo',
+        }
+      },
       colegioId: {
         allowNull: true,
         type: Sequelize.INTEGER,
@@ -38,6 +56,7 @@ module.exports = {
           as: 'Curso',
         }
       },
+      /*
       asignaturaId: {
         allowNull: true,
         type: Sequelize.INTEGER,
@@ -47,31 +66,14 @@ module.exports = {
           as: 'Asignatura',
         }
       },
-      profesorId: {
+      */
+      cursoprofesorId: {
         allowNull: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Profesor',
+          model: 'CursoProfesor',
           key: 'id',
-          as: 'Profesor',
-        }
-      },
-      annoId: {
-        allowNull: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Anno',
-          key: 'id',
-          as: 'Anno',
-        }
-      },
-      periodoId: {
-        allowNull: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Periodo',
-          key: 'id',
-          as: 'Periodo',
+          as: 'CursoProfesor',
         }
       },
       tipoevaluacionId: {

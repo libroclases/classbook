@@ -8,11 +8,10 @@ import { LabelsService } from '../../services/labels/labels.service';
 import { SelectionIdsService } from '../../services/selection-ids/selection-ids.service';
 import { OriginTableIdService } from '../../services/origin-table-id/origin-table-id.service';
 
-
 @Component({
   selector: 'multi-select',
   templateUrl: './multi-select.component.html',
-  styleUrls: ['./multi-select.component.css']
+  styleUrls: ['./multi-select.component.css'],
 })
 export class MultiSelectComponent implements OnInit, OnDestroy {
   @Input()
@@ -71,14 +70,14 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.tables.forEach((table) => this.hasCustomEndpoint.set(table, false));
-    this.tables.forEach((table) => this.hasMiddleTable.set(table, false));
+
     if (this.customEndpoints != null) {
       Object.keys(this.customEndpoints).forEach((table) =>
         this.hasCustomEndpoint.set(table, true)
       );
     }
 
-    if (this.middleTables != null) {  // uvr
+    if (this.middleTables != null) {
       Object.keys(this.middleTables).forEach((table) =>
         this.hasMiddleTable.set(table, true)
       );
@@ -111,7 +110,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
           foreignKey.push(tb);
           this.requiredBySelTree.get(tb)?.push(table);
         }
-      }); 
+      });
       if (foreignKey.length === 0) {
         this.freeTables.push(table);
       } else {
@@ -119,14 +118,19 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
         this.considerReqSel = true;
         this.selIdsService.setId(table, 0);
       }
-    }); 
-    
-    /**** obs logs***/
-    for (let r of this.requiredBySelTree.entries()) { console.log(r) };
-    console.log('freetables',this.freeTables);
+    });
+
+    /**** obs logs**
+    for (let r of this.requiredBySelTree.entries()) {
+      console.log('r2',r[0],r[1]);
+    }
+    console.log('patchTablesFromStorage:',this.patchTablesFromStorage);
+    console.log('middleTables:',this.middleTables);
+    console.log('storage:',storageFks);
+    console.log('freetables', this.freeTables);
     console.log('considerReqSel', true);
-    console.log('changeFunctionArray', this.changeFunctionsArray)
-    /*********** */
+    console.log('changeFunctionArray', this.changeFunctionsArray);
+    ********** */
     for (let [index, table] of this.tables.entries()) {
       this.queries[table] = EMPTY;
       if (this.changeFunctionsArray) {
@@ -137,18 +141,23 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
     if (!this.considerReqSel) {
       this.freeTables = this.tables;
     }
-    this.freeTables.forEach((table) => this.queryTable(table));  // ok
+    this.freeTables.forEach((table) => {
+        if (this.hasMiddleTable.has(table)) { console.log(table, this.middleTables[table]); }
+        else { this.queryTable(table) }
+    }); // ok
 
     if (Object.keys(storageFks).length > 0) {
       this.checkSelection(storageFks, true);
-    } else {console.log('poronga');
+    } else {
+
       this.selIdsService.notifyUpdated();
     }
-    
+
     this.originTableSubscription = this.originIdsService.msg
       .pipe(
         take(1),
-        tap((msg) => { console.log('msg', msg);  // ok
+        tap((msg) => {
+          console.log('msg poronga', msg); // ok
           this.checkSelection(msg);
         }),
         share()
@@ -195,7 +204,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
         if (this.tables.includes(tb)) {
           this.getQuery(tb).subscribe((query) => {
             query.every((entry: any) => {
-              if (entry.id == value) {
+              if (entry.id == value) { // console.log('tb, entry',tb, entry)
                 this.selIdsService.setText(tb, this.getLabel(tb, entry));
                 return false;
               }
@@ -218,9 +227,6 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
   getFKTables(table: string) {
     if (this.hasCustomEndpoint.get(table)) {
       return this.fKeysService.getFKeys(this.customEndpoints[table]);
-    }
-    if (this.hasMiddleTable.get(table)) {  // UVR
-      return this.fKeysService.getFKeys(this.middleTables[table]);
     }
     return this.fKeysService.getFKeys(table);
   }
@@ -248,16 +254,18 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
   enableIfRequiredSelected(table: string) {
     // check if all required selectors have been set
     let doEnable = true;
-    for (let tb of this.getFKTables(table)!) { console.log('tb',table,tb,this.selIdsService.getId(tb) );
-      if (  
+    for (let tb of this.getFKTables(table)!) {
+      console.log('tb', table, tb, this.selIdsService.getId(tb));
+      if (
         !this.ignoreFkRequirements.includes(tb) &&
         this.selIdsService.getId(tb) === 0
       ) {
-        doEnable = false; 
+        doEnable = false;
         break;
       }
     }
-    if (doEnable) {  console.log('doEnable',table, doEnable );
+    if (doEnable) {
+      console.log('doEnable', table, doEnable);
       this.valuesForm.get(table)!.enable();
     } else {
       this.selIdsService.setId(table, 0);
@@ -268,6 +276,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
 
   changeFunction(table: string, event: any) {
     const newId = +event.target.value;
+    localStorage.setItem(`${table}Id`, newId.toString());
     this.selIdsService.setId(table, newId);
     if (newId === 0) {
       this.requiredBySelTree
@@ -313,7 +322,11 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
   ) {
     if (this.hasCustomEndpoint.get(table)) {
       var query = this.crud
-        .getDataCustom(table, this.customEndpoints[table], this.getForeignKeysOfTable(table))
+        .getDataCustom(
+          table,
+          this.customEndpoints[table],
+          this.getForeignKeysOfTable(table)
+        )
         ?.pipe(
           tap((query) => {
             if (callback) {
@@ -334,5 +347,4 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
     }
     this.setQuery(table, query);
   }
-
 }

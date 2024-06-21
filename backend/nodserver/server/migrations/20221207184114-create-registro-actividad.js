@@ -50,17 +50,7 @@ module.exports = {
           as: "Asignatura",
         },
       },
-      /*
-      asignaturaprofesorId: {
-        allowNull: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: "AsignaturaProfesor",
-          key: "id",
-          as: "AsignaturaProfesor",
-        },
-      },
-      */
+ 
       profesorId: {
         allowNull: true,
         type: Sequelize.INTEGER,

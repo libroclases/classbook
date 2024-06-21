@@ -20,7 +20,6 @@ const tablesArray = [
   'anotacion',
   'apoderado',
   'asignatura',
-  'asignaturaprofesor',
   'asistencia',
   'asistentecolegio',
   'colegio',
@@ -28,7 +27,6 @@ const tablesArray = [
   'controlasignatura',
   'curso',
   'cursoprofesor',
-  'alumnocolegio',
   'dix',
   'estadoalumno',
   'evaluacion',
@@ -105,7 +103,7 @@ export const environment = {
       menu: '#e3e4f3',
       colorMenuButton: '#059bb0',
       pagination: '#e2e2eb',
-      bodybgcolor: 'rgb(255, 255, 255)', //}
+      bodybgcolor: '#eeffff', //}
       tablehead: 'rgb(44,161,213)',
       bgmodal: '#0D6EFD',
       modalbutton: 'rgb(69, 130, 233)',
@@ -117,7 +115,7 @@ export const environment = {
       menu: '#dcf3dd',
       colorMenuButton: '#71f48d',
       pagination: '#dcebe4',
-      bodybgcolor: 'linear-gradient(to right, #38B15C,#76FA91)', // rgb(232, 248, 240)
+      bodybgcolor: '#eeffc5', // rgb(232, 248, 240)
       tablehead: 'lightgreen',
       bgmodal: 'lightgreen',
       modalbutton: 'rgb(82, 205, 145)',
@@ -129,7 +127,7 @@ export const environment = {
       menu: "rgb(13, 202, 240)",
       colorMenuButton: 'rgb(13, 201, 239)',
       pagination: 'rgb(201, 252, 255)',
-      bodybgcolor: 'linear-gradient(to right, #33D8FF, #425ECC)',
+      bodybgcolor: '#e6ffff',
       tablehead:  'rgb(13, 202, 240)',
       bgmodal: 'rgb(13, 202, 240)',
       modalbutton: 'rgb(13, 202, 240)',
@@ -190,52 +188,11 @@ export const dayOfWeekTable = 'dix';
 //       ForeignKeysService
 
 export const fKeysByTable: { [key: string]: string[] } = {
-  region: [],
-  provincix: ['region'],
-  comuna: ['region', 'provincix'],
-  dix: [],
-  anno: [],
-  periodo: [],
-  asignatura: ['tipocolegio'],
-  asignaturaprofesor: ['profesor', 'asignatura'],
-  cursoprofesor: ['anno','colegio','curso','asignatura','profesor'],
-  alumnocolegio: ['anno','colegio','alumno'],
-  colegio: ['region', 'provincix', 'comuna', 'tipocolegio'],
-  curso: ['colegio', 'anno'],
-  horaasignada: ['colegio'],
-  profesor: ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
-  administrador:  ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
-  inscripcioncolegio: ['profesor', 'colegio', 'anno'],
-  registroactividad: [
-    'colegio',
-    'curso',
-    'asignatura',
-    'asignaturaprofesor',
-    'profesor',
-    'anno',
-    'mes',
-    'horario',
-  ],
-  horario: [
-    'anno',
-    'colegio',
-    'curso',
-    'profesor',
-    'asignatura',
-    'dix',
-  ],
-  sexo: [],
-  tipocolegio: [],
-  vinculo: [],
-  niveleducacional: [],
-  tipousuario: [],
-  tema:[],
-  usuario: ['tipousuario','tema'],
   alumno: ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
-  tipoestado: [],
-  estadoalumno: ['anno','colegio','curso','alumno', 'matricula', 'tipoestado'],
+  anno: [],
+  asignatura: ['tipocolegio'],
   anotacion: ['matricula', 'profesor', 'anno', 'colegio', 'curso'],
-  tipoasistente: [],
+  administrador:  ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
   asistentecolegio: [
     'usuario',
     'tipoasistente',
@@ -253,6 +210,11 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'comuna',
   ],
   asistencia: ['matricula', 'colegio', 'curso', 'alumno', 'anno', 'mes'],
+  asignatura_por_colegio: ['colegio'],
+  comuna: ['region', 'provincix'],
+  cursoprofesor: ['anno','colegio','curso','asignatura','profesor'],
+  colegio: ['region', 'provincix', 'comuna', 'tipocolegio'],
+  curso: ['colegio', 'anno'],
   controlasignatura: [
     'colegio',
     'curso',
@@ -262,18 +224,32 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'anno',
     'mes',
   ],
-  tipoevaluacion: [],
+  dix: [],
+  estadoalumno: ['anno','colegio','curso','alumno', 'matricula', 'tipoestado'],
   evaluacion: [
+    'anno',
+    'periodo',
+    'colegio',
+    'curso',
+    'cursoprofesor',
+    'tipoevaluacion',
+  ],
+  feriado: [],
+  horaasignada: ['colegio'],
+  horario: [
+    'anno',
     'colegio',
     'curso',
     'profesor',
     'asignatura',
-    'anno',
-    'periodo',
-    'tipoevaluacion',
+    'dix',
   ],
+  inscripcioncolegio: ['profesor', 'colegio', 'anno'],
+
   matricula: ['colegio', 'curso', 'apoderado', 'alumno', 'vinculo', 'anno'],
-  ventana: ['colegio','tabla'],
+
+  mes: [],
+  niveleducacional: [],
   nota: [
     'anno',
     'periodo',
@@ -284,6 +260,22 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'matricula',
     'evaluacion',
   ],
+  provincix: ['region'],
+  periodo: [],
+
+  profesor: ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
+
+  region: [],
+
+  registroactividad: [
+    'colegio',
+    'curso',
+    'asignatura',
+    'profesor',
+    'anno',
+    'mes',
+    'horario',
+  ],
   resumennota: [
     'anno',
     'periodo',
@@ -292,14 +284,29 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'asignatura',
     'matricula'
   ],
-  mes: [],
-  feriado: [],
+
+  sexo: [],
+  tipocolegio: [],
+  vinculo: [],
+  tipousuario: [],
+  tema:[],
+  usuario: ['tipousuario','tema'],
+
+  tipoestado: [],
+
+
+  tipoasistente: [],
+  tipoevaluacion: [],
+
+  ventana: ['colegio','tabla'],
+
+
   tabla: [],
   // endpoints especiales: usados en MultiSelect @Input('custom-endpoints')
   //  ejemplo: [custom-endpoints]="{matricula: 'lista_curso_nombres'}"
   lista_curso_nombres: ['colegio', 'curso', 'anno'],
   registro_actividad_by_mes: ['colegio', 'curso', 'asignatura', 'anno', 'mes'],
-  asignatura_por_colegio: ['colegio'],
+
 };
 
 
@@ -312,9 +319,7 @@ export const lowerUpperTables: stringString = {
   anotacion: 'Anotacion',
   apoderado: 'Apoderado',
   asignatura: 'Asignatura',
-  asignaturaprofesor: 'AsignaturaProfesor',
   cursoprofesor: 'CursoProfesor',
-  alumnocolegio: 'AlumnoColegio',
   asistencia: 'Asistencia',
   asistencix: 'Asistencix',
   colegio: 'Colegio',
@@ -359,9 +364,7 @@ export const tableLabels = {
   anno: 'Año',
   apoderado: 'Apoderado',
   asignatura: 'Asignatura',
-  asignaturaprofesor: 'Asignatura Profesor',
   cursoprofesor: 'Inscripción Curso',
-  alumnocolegio: 'Alumno Colegio',
   asistencia: 'Asistencia',
   asistencix: 'Asistencia',
   colegio: 'Colegio',
@@ -492,16 +495,9 @@ export const attributesLabels = {
     nombre: 'Nombre',
   },
 
-  asignaturaprofesor: {
-
-  },
-
   cursoprofesor: {
 
   },
-
-  alumnocolegio: {},
-
 
   asistencia: {
     fecha: 'Fecha',
@@ -709,9 +705,7 @@ export const icons: stringStringPair = {
   '/anotacion': ['bi bi-card-list', 'Anotacion'],
   '/control_asignatura': ['bi bi-layout-text-window', 'Control de Asignatura'],
   '/asignatura': ['bi bi-book', 'Asignaturas'],
-  '/asignaturaprofesor': ['bi bi-book', 'Asignatura Profesores'],
   '/cursoprofesor': ['bi bi-book', 'Asignatura Profesores'],
-  '/alumnocolegio': ['bi bi-person-check-fill', 'Alumno Colegio'],
   '/profesor': ['bi bi-person-video3', 'Profesores'],
   '/administrador': ['bi bi-person-video3', 'Administrador'],
   '/inscripcioncolegio': ['bi bi-bank', 'Inscripcion Colegio'],
@@ -744,9 +738,7 @@ export const redirectRoutes: any = {
   Profesor: ['/horario'],
   Administrador: ['/horario'],
   Asignatura: ['/profesor'],
-  AsignaturaProfesor: ['/profesor'],
   CursoProfesor:['/profesor'],
-  AlumnoColegio: ['/alumno'],
   Apoderado: ['/matricula'],
   Matricula: ['/curso'],
   Ventana:['/curso'],
@@ -836,25 +828,8 @@ export const validator: any = {
     }
   },
 
-  AsignaturaProfesor: {
-    modalText: {
-
-    },
-    modalDate: {
-    }
-
-  },
 
   CursoProfesor: {
-    modalText: {
-
-    },
-    modalDate: {
-    }
-
-  },
-
-  AlumnoColegio: {
     modalText: {
 
     },
@@ -1192,18 +1167,6 @@ export const modalDataObject: any = {
     windowHeight: '320px',
   },
 
-  AsignaturaProfesor: {
-    mainTable: 'asignaturaprofesor',
-    tables: ['profesor', 'asignatura'],
-    textFields: [],
-    dateFields: [],
-    booleanFields:[],
-    ignoreFkRequirements: [],
-    disable: [],
-    defaultValues: {},
-    label: 'Asignatura Profesor',
-    windowHeight: '320px',
-  },
 
   CursoProfesor: {
     mainTable: 'cursoprofesor',
@@ -1215,18 +1178,6 @@ export const modalDataObject: any = {
     disable: [],
     defaultValues: {},
     label: 'Inscripción Curso',
-    windowHeight: '320px',
-  },
-  AlumnoColegio: {
-    mainTable: 'alumnocolegio',
-    tables: ['anno','colegio','alumno'],
-    textFields: [],
-    booleanFields:[],
-    dateFields: [],
-    ignoreFkRequirements: [],
-    disable: [],
-    defaultValues: {},
-    label: 'Alumno Colegio',
     windowHeight: '320px',
   },
 
@@ -1383,12 +1334,11 @@ export const modalDataObject: any = {
   Evaluacion: {
     mainTable: 'evaluacion',
     tables: [
-      'colegio',
-      'curso',
-      'profesor',
-      'asignatura',
       'anno',
       'periodo',
+      'colegio',
+      'curso',
+      'cursoprofesor',
       'tipoevaluacion',
     ],
     textFields: ['nombre', 'hora', 'ponderacion'],

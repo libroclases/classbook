@@ -92,12 +92,8 @@ module.exports = (sequelize, DataTypes) => {
     Profesor.hasMany(models.Anotacion, {
       foreignKey: "profesorId",
     });
-
-    Profesor.hasMany(models.AsignaturaProfesor, {
-      foreignKey: "profesorId",
-    });
-
-  
+ 
+    
     Profesor.hasMany(models.InscripcionColegio, {
       foreignKey: "profesorId",
     });

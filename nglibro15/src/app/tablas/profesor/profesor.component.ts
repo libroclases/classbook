@@ -24,6 +24,7 @@ export class ProfesorComponent implements OnInit {
   changeFnsArray: Function[] = [];
   ignoreFkRequirements: string[] = [];
   patchFKsFromStorage = [];
+  middleTables: any = {};
 
   constructor( ) { }
 
