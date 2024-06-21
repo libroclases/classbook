@@ -23,8 +23,8 @@ export class EvaluacionComponent {
 
  selTables = ["anno", "periodo" , "colegio", "curso", "cursoprofesor","tipoevaluacion"];
  changeFnsArray: Function[] = [];
- ignoreFkRequirements: string[] = [];
- patchFKsFromStorage = ['anno', 'colegio','periodo','curso'];
+ ignoreFkRequirements: string[] = ['asignatura','profesor'];
+ patchFKsFromStorage = [];
  middleTables: any = {};
 
  constructor( ) { }

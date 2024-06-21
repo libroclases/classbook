@@ -210,7 +210,6 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'comuna',
   ],
   asistencia: ['matricula', 'colegio', 'curso', 'alumno', 'anno', 'mes'],
-  asignatura_por_colegio: ['colegio'],
   comuna: ['region', 'provincix'],
   cursoprofesor: ['anno','colegio','curso','asignatura','profesor'],
   colegio: ['region', 'provincix', 'comuna', 'tipocolegio'],
@@ -245,9 +244,7 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'dix',
   ],
   inscripcioncolegio: ['profesor', 'colegio', 'anno'],
-
   matricula: ['colegio', 'curso', 'apoderado', 'alumno', 'vinculo', 'anno'],
-
   mes: [],
   niveleducacional: [],
   nota: [
@@ -262,11 +259,8 @@ export const fKeysByTable: { [key: string]: string[] } = {
   ],
   provincix: ['region'],
   periodo: [],
-
   profesor: ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
-
   region: [],
-
   registroactividad: [
     'colegio',
     'curso',
@@ -284,26 +278,20 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'asignatura',
     'matricula'
   ],
-
   sexo: [],
+  tabla: [],
   tipocolegio: [],
   vinculo: [],
   tipousuario: [],
   tema:[],
-  usuario: ['tipousuario','tema'],
-
   tipoestado: [],
-
-
   tipoasistente: [],
   tipoevaluacion: [],
-
+  usuario: ['tipousuario','tema'],
   ventana: ['colegio','tabla'],
-
-
-  tabla: [],
   // endpoints especiales: usados en MultiSelect @Input('custom-endpoints')
   //  ejemplo: [custom-endpoints]="{matricula: 'lista_curso_nombres'}"
+  asignatura_por_colegio: ['colegio'],
   lista_curso_nombres: ['colegio', 'curso', 'anno'],
   registro_actividad_by_mes: ['colegio', 'curso', 'asignatura', 'anno', 'mes'],
 

@@ -110,7 +110,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
           foreignKey.push(tb);
           this.requiredBySelTree.get(tb)?.push(table);
         }
-      });
+      }); console.log('foreignKey',table,foreignKey);
       if (foreignKey.length === 0) {
         this.freeTables.push(table);
       } else {
@@ -120,7 +120,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
       }
     });
 
-    /**** obs logs**
+    /**** obs logs**/
     for (let r of this.requiredBySelTree.entries()) {
       console.log('r2',r[0],r[1]);
     }
@@ -130,7 +130,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
     console.log('freetables', this.freeTables);
     console.log('considerReqSel', true);
     console.log('changeFunctionArray', this.changeFunctionsArray);
-    ********** */
+    /********** */
     for (let [index, table] of this.tables.entries()) {
       this.queries[table] = EMPTY;
       if (this.changeFunctionsArray) {
@@ -141,10 +141,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
     if (!this.considerReqSel) {
       this.freeTables = this.tables;
     }
-    this.freeTables.forEach((table) => {
-        if (this.hasMiddleTable.has(table)) { console.log(table, this.middleTables[table]); }
-        else { this.queryTable(table) }
-    }); // ok
+    this.freeTables.forEach((table) => { this.queryTable(table) }); // ok
 
     if (Object.keys(storageFks).length > 0) {
       this.checkSelection(storageFks, true);

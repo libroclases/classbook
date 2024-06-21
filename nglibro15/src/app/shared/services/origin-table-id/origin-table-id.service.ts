@@ -61,6 +61,7 @@ export class OriginTableIdService implements OnDestroy{
   constructor(private crud: CrudService) {
     this.tableLevelsTree = generateLevelsTree();
     this.msg = new Subject();
+    // console.log('tableLevelsTree', this.tableLevelsTree);
   }
 
   ngOnDestroy(): void {
