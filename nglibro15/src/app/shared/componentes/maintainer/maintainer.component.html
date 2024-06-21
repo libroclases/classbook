@@ -3,7 +3,6 @@
 [style.height] = "height"
 >
 
-  {{bodybgcolor}}
   <!-- Search -->
 
 <div class="container-fluid">
@@ -41,7 +40,7 @@
   <!-- Tabla Principal -->
 
 
-  <table class="table table-sm  table-striped table-fit table-bordered">
+  <table class="table table-sm  table-striped table-fit table-bordered table-info">
     <ng-container *ngIf="isGroupTable; else notGroupTable">
       <thead>
         <tr><th [attr.colspan]="numColumns" [style.background-color]="tablehead" style="text-align: center;color:white; height:40px"><em [class]="getBiClass('/'+ mainTable)">&nbsp;&nbsp;</em><b>{{title}}</b></th></tr>

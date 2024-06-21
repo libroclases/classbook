@@ -103,7 +103,7 @@ export const environment = {
       menu: '#e3e4f3',
       colorMenuButton: '#059bb0',
       pagination: '#e2e2eb',
-      bodybgcolor: '#eeffff', //}
+      bodybgcolor: '#e8ffff', //}
       tablehead: 'rgb(44,161,213)',
       bgmodal: '#0D6EFD',
       modalbutton: 'rgb(69, 130, 233)',

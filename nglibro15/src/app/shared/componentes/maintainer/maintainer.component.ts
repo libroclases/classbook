@@ -143,7 +143,6 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   modalbutton!:string;
   pagination!:string;
   tablehead!:string;
-
   tipousuario:any = null;
 
   search(event: Event): void {
