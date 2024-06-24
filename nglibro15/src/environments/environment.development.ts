@@ -98,12 +98,12 @@ export const environment = {
   },
   colors: {
     primary: {
-      color: 'rgb(255, 255, 255)',
+      color: 'primary',
       lineal: 'linear-gradient(to right, #4880EC, #019CAD)',
       menu: '#e3e4f3',
       colorMenuButton: '#059bb0',
       pagination: '#e2e2eb',
-      bodybgcolor: '#e8ffff', //}
+      bodybgcolor: 'rgb(230,233,242)', //}
       tablehead: 'rgb(44,161,213)',
       bgmodal: '#0D6EFD',
       modalbutton: 'rgb(69, 130, 233)',
@@ -115,7 +115,7 @@ export const environment = {
       menu: '#dcf3dd',
       colorMenuButton: '#71f48d',
       pagination: '#dcebe4',
-      bodybgcolor: '#eeffc5', // rgb(232, 248, 240)
+      bodybgcolor: 'rgb(214,242,214ext)', // rgb(232, 248, 240)
       tablehead: 'lightgreen',
       bgmodal: 'lightgreen',
       modalbutton: 'rgb(82, 205, 145)',
@@ -127,7 +127,7 @@ export const environment = {
       menu: "rgb(13, 202, 240)",
       colorMenuButton: 'rgb(13, 201, 239)',
       pagination: 'rgb(201, 252, 255)',
-      bodybgcolor: '#e6ffff',
+      bodybgcolor: 'rgb(227,240,242)',
       tablehead:  'rgb(13, 202, 240)',
       bgmodal: 'rgb(13, 202, 240)',
       modalbutton: 'rgb(13, 202, 240)',

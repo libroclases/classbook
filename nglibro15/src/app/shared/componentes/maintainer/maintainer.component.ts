@@ -7,7 +7,7 @@ import { IconsService } from '../../services/icons/icons.service';
 import { Observable, Subject, Subscription, concatMap, debounceTime, from, map, of, switchMap, take, tap } from 'rxjs';
 import { CrudService } from '../../services/crud/crud.service';
 import { redirectRoutes, modalDataObject, personTables, notCreateTables ,searchTables, groupTables,groupSum, Permission,
-  lowerUpperTables ,fKeysByTable, environment } from 'src/environments/environment';
+  lowerUpperTables ,fKeysByTable, environment, } from 'src/environments/environment';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
@@ -41,7 +41,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   opacity = environment.opacity;
   position = "center";
   size = "cover";
-
+  environment = environment;
   fullScreen = false;
 
   // activate search
@@ -55,6 +55,8 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   currentDate:Date = new Date();
 
   sumGroup = 0;
+
+  colors = environment.colors;
 
   banner_height = environment.cabecera.banner_height;
   menu_height = environment.cabecera.menu_height;
@@ -144,6 +146,8 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   pagination!:string;
   tablehead!:string;
   tipousuario:any = null;
+  
+  btable!:string;
 
   search(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
@@ -165,6 +169,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     private labelsService: LabelsService,
     private iconsService: IconsService,
     private getpermission: GetPermissionService
+  
     ) {
 
 
@@ -200,14 +205,17 @@ export class MaintainerComponent implements OnInit, OnDestroy {
       if (color == null) {  color = localStorage.getItem('Color')  }
 
       if (color=='primary') {
+        this.btable = "table table-primary table-striped table-sm";
         this.bodybgcolor = this.objcolors.primary.bodybgcolor;
         this.pagination = this.objcolors.primary.pagination;
         this.tablehead = this.objcolors.primary.tablehead;
         this.bgmodal = this.objcolors.primary.bgmodal;
         this.modalbutton = this.objcolors.primary.modalbutton;
         this.url = this.photo.primary;
+        
       }
       if (color=='success') {
+        this.btable = "table table-success table-striped table-sm";
         this.bodybgcolor = this.objcolors.success.bodybgcolor;
         this.pagination = this.objcolors.success.pagination;
         this.tablehead = this.objcolors.success.tablehead;
@@ -216,6 +224,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
         this.url = this.photo.success;
       }
       if (color=='info') {
+        this.btable="table table-info table-striped table-sm";
         this.bodybgcolor = this.objcolors.info.bodybgcolor;
         this.pagination = this.objcolors.info.pagination;
         this.tablehead = this.objcolors.info.tablehead;
