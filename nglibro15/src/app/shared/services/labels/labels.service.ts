@@ -51,7 +51,7 @@ export class LabelsService {
   }
 
   getObjectLabel(table: string, object: any) {
-    const getter = this.labelGettersMap.get(table); console.log('getter',getter);
+    const getter = this.labelGettersMap.get(table); 
     if ( getter ) {
       return getter(object);
     }

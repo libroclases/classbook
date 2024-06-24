@@ -1,6 +1,6 @@
 import model from '../models';
 
-const { Evaluacion, Colegio, Curso,  CursoProfesor, Anno, Periodo,
+const { Evaluacion, Colegio, Curso,  CursoProfesor, Anno, Asignatura, Periodo,
   TipoEvaluacion, Matricula, Nota } = model;
 
 
@@ -28,7 +28,7 @@ class Evaluaciones {
 
   static getByFk(req, res) {
 
-    const { annoId,periodoId, colegioId,cursoId, cursoprofesorId, tipoevaluacionId } = req.params;
+    const { annoId,periodoId, colegioId,cursoId, cursoprofesorId, Asignatura, tipoevaluacionId } = req.params;
       let consulta = {};
     // let consulta = getBaseQuery(req);
 
@@ -48,7 +48,7 @@ class Evaluaciones {
       { model:Periodo, attributes:['id','nombre'], where: { } },
       { model:Colegio, attributes:['id','nombre'], where: { } },
       { model:Curso, attributes:['id','nombre'], where: { } },
-      { model:CursoProfesor, attributes:['id'], where: { } },
+      { model:CursoProfesor, attributes : [ 'id', 'id'], where: {} },
       { model:TipoEvaluacion, attributes:['id','nombre'], where: { } },    
       ],
       order: [['fecha','ASC'], ['hora','ASC']]
