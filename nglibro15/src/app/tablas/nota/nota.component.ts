@@ -324,8 +324,7 @@ export class NotaComponent implements OnInit {
             this.selIdsService.getId('periodo') *
             this.selIdsService.getId('colegio') *
             this.selIdsService.getId('curso') *
-            this.selIdsService.getId('profesor') *
-            this.selIdsService.getId('asignatura') > 0) {
+            this.selIdsService.getId('cursoprofesor') > 0) {
 
             this.getEvaluationData();
 
@@ -478,8 +477,7 @@ export class NotaComponent implements OnInit {
       ids.push(this.selIdsService.getId('periodo'));
       ids.push(this.selIdsService.getId('colegio'));
       ids.push(this.selIdsService.getId('curso'));
-      ids.push(this.selIdsService.getId('profesor'));
-      ids.push(this.selIdsService.getId('asignatura'));
+      ids.push(this.selIdsService.getId('cursoprofesor'));
 
       return ids;
 
