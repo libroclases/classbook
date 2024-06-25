@@ -81,9 +81,9 @@ export class NotaComponent implements OnInit {
 
   selTables = [  "anno", "periodo", "colegio", "curso", "cursoprofesor"];
 
-  ignoreFkRequirements: string[] = [];
+  ignoreFkRequirements: string[] = ['asignatura','profesor'];
   changeFnsArray: Function[] = [];
-  patchFKsFromStorage = [];
+  patchFKsFromStorage = ['anno','periodo','curso','colegio'];
   customEndpoints = null;
   middleTables = {}; // 'cursoprofesor': ['anno','colegio','curso']
 
