@@ -33,6 +33,8 @@ export class LabelsService {
     this.labelGettersMap.set('usuario', this.usuarioLabel);
     this.labelGettersMap.set('Usuario', this.usuarioLabel);
 
+    this.labelGettersMap.set('cursoprofesor', this.cursoprofesor);
+
     Object.entries(tableLabels).forEach(
       ([table, label]) => {
         this.tableLabelsMap.set(table, label);
@@ -46,12 +48,17 @@ export class LabelsService {
     // return `${person.apellido}, ${person.nombre}`;
   }
 
+  private cursoprofesor(cp: any) {
+    return cp.Profesor.apellido1 + " " + cp.Profesor.apellido2 + " " + cp.Profesor.nombre + " | " + cp.Asignatura.nombre;
+    // return `${person.apellido}, ${person.nombre}`;
+  }
+
   private usuarioLabel(usuario: Usuario) {
     return usuario.username;
   }
 
   getObjectLabel(table: string, object: any) {
-    const getter = this.labelGettersMap.get(table); 
+    const getter = this.labelGettersMap.get(table);
     if ( getter ) {
       return getter(object);
     }

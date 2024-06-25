@@ -16,7 +16,7 @@ export class EvaluacionComponent {
  booleanFields = [];
  dateFields = ['fecha'];
  // displayFKFields: CamelCase
- displayFKFields = ['Anno','Periodo','Colegio', 'Curso', 'CursoProfesor', 'TipoEvaluacion'];
+ displayFKFields = ['Anno','Periodo','Colegio', 'Curso',  'TipoEvaluacion'];
  redirectRoutes!: string[];
 
  // Selectores
@@ -24,7 +24,7 @@ export class EvaluacionComponent {
  selTables = ["anno", "periodo" , "colegio", "curso", "cursoprofesor","tipoevaluacion"];
  changeFnsArray: Function[] = [];
  ignoreFkRequirements: string[] = ['asignatura','profesor'];
- patchFKsFromStorage = [];
+ patchFKsFromStorage = ['anno','periodo','colegio','curso'];
  middleTables: any = {};
 
  constructor( ) { }
