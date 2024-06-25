@@ -48,7 +48,7 @@ class Evaluaciones {
       { model:Periodo, attributes:['id','nombre'], where: { } },
       { model:Colegio, attributes:['id','nombre'], where: { } },
       { model:Curso, attributes:['id','nombre'], where: { } },
-      { model:CursoProfesor, attributes : [ 'id', 'id'], where: {} },
+      { model:CursoProfesor, attributes : [ 'id'], where: {} },
       { model:TipoEvaluacion, attributes:['id','nombre'], where: { } },    
       ],
       order: [['fecha','ASC'], ['hora','ASC']]

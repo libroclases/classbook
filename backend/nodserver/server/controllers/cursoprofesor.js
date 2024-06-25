@@ -48,7 +48,9 @@ class CursoProfesores {
             { model:Curso, attributes:['id','nombre'], where: { } },
             { model:Asignatura, attributes:['id','nombre'], where: { }},
             { model:Profesor, attributes:['id','nombre','apellido1','apellido2'], where: { } },
-        ] })
+        ], order: [
+          [{ model: Profesor }, 'apellido1','ASC'], [{ model: Profesor }, 'apellido2', 'ASC'] , [{ model: Profesor }, 'nombre', 'ASC'] 
+      ]})
       .then(cursoprofesor => res.status(200).send(cursoprofesor))
       .catch(error => res.status(400).send(error));
   }
