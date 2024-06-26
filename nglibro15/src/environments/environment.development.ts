@@ -730,6 +730,7 @@ export const redirectRoutes: any = {
   Apoderado: ['/matricula'],
   Matricula: ['/curso'],
   Ventana:['/curso'],
+  InscripcionColegio:['/curso'],
   Evaluacion: ['/nota'],
   Horario: ['/horario'],
   AsistenteColegio: ['/asistentecolegio'],

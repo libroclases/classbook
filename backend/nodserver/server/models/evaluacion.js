@@ -58,12 +58,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "cursoId",
     });
 
-    /*
-    Evaluacion.belongsTo(models.Asignatura, {
-      foreignKey: "asignaturaId",
-    });
-    */
-
     Evaluacion.belongsTo(models.CursoProfesor, {
       foreignKey: "cursoprofesorId",
     });
@@ -73,10 +67,11 @@ module.exports = (sequelize, DataTypes) => {
     Evaluacion.belongsTo(models.TipoEvaluacion, {
       foreignKey: "tipoevaluacionId",
     });
-
+    /*
     Evaluacion.hasMany(models.Nota, {
       foreignKey: "evaluacionId",
     });
+    */
   };
 
   return Evaluacion;

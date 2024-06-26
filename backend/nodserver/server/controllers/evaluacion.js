@@ -1,6 +1,6 @@
 import model from '../models';
 
-const { Evaluacion, Colegio, Curso,  CursoProfesor, Anno, Asignatura, Periodo,
+const { Evaluacion, Colegio, Curso,  CursoProfesor, Anno, Periodo,
   TipoEvaluacion, Matricula, Nota } = model;
 
 
@@ -28,7 +28,7 @@ class Evaluaciones {
 
   static getByFk(req, res) {
 
-    const { annoId,periodoId, colegioId,cursoId, cursoprofesorId, Asignatura, tipoevaluacionId } = req.params;
+    const { annoId,periodoId, colegioId,cursoId, cursoprofesorId, tipoevaluacionId } = req.params;
       let consulta = {};
     // let consulta = getBaseQuery(req);
 
@@ -76,6 +76,14 @@ class Evaluaciones {
       tipoevaluacionId,
    
     })
+    .then(evaluacion => res.status(201).send({
+      success:true,
+      message: `Evaluacion ${nombre} creado exitosamente `,
+      evaluacion
+    }))
+    .catch(error => res.status(400).send(error));
+
+    /*
     .then(evaluacion => {
 
       let e = evaluacion.dataValues;
@@ -120,6 +128,7 @@ class Evaluaciones {
     })
   }
 );
+*/
 }
 
   static modify(req, res) {
