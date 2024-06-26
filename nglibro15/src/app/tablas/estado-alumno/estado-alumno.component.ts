@@ -23,7 +23,7 @@ export class EstadoAlumnoComponent {
   selTables = ['anno','colegio','curso','alumno','tipoestado'];
   changeFnsArray: Function[] = [];
   ignoreFkRequirements: string[] = [];
-  patchFKsFromStorage = [];
+  patchFKsFromStorage = ['anno','colegio'];
   middleTables: any = {};
 
   constructor( ) { }

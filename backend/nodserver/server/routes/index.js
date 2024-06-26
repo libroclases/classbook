@@ -190,7 +190,7 @@ const checkjwd = auth({
     app.get('/api/estadoalumno/:annoId/:colegioId/:cursoId/:alumnoId/:matriculaId/:tipoestadoId/fk',
       checkjwd, requiredScopes('read:estadoalumno'),
       EstadoAlumnos.getByFk);
-    app.post('/api/estadoalumno/:annoId/:colegioId/cursoId/:alumnoId/:matriculaId/:tipoestadoId',
+    app.post('/api/estadoalumno/:annoId/:colegioId/:cursoId/:alumnoId/:matriculaId/:tipoestadoId',
       checkjwd, requiredScopes('create:estadoalumno'),
       EstadoAlumnos.create);
     app.put('/api/estadoalumno/:estadoalumnoId',

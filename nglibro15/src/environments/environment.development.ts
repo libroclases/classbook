@@ -721,7 +721,7 @@ export const icons: stringStringPair = {
 
 export const redirectRoutes: any = {
   Colegio: ['/curso'], // ok 26-11-2023 uvr
-  HoraAsignada: [],
+  HoraAsignada: ['/horario'],
   Curso: ['/horario'],
   Profesor: ['/horario'],
   Administrador: ['/horario'],
