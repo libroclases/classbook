@@ -120,17 +120,18 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
       }
     });
 
-    /**** obs logs**/
+    /**** obs logs
     for (let r of this.requiredBySelTree.entries()) {
       console.log('r2',r[0],r[1]);
     }
+    
     console.log('patchTablesFromStorage:',this.patchTablesFromStorage);
     console.log('middleTables:',this.middleTables);
     console.log('storage:',storageFks);
     console.log('freetables', this.freeTables);
     console.log('considerReqSel', true);
     console.log('changeFunctionArray', this.changeFunctionsArray);
-    /********** */
+     */
     for (let [index, table] of this.tables.entries()) {
       this.queries[table] = EMPTY;
       if (this.changeFunctionsArray) {
@@ -154,7 +155,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
       .pipe(
         take(1),
         tap((msg) => {
-          console.log('msg poronga', msg); // ok
+          // console.log('msg poronga', msg); // ok
           this.checkSelection(msg);
         }),
         share()
@@ -252,7 +253,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
     // check if all required selectors have been set
     let doEnable = true;
     for (let tb of this.getFKTables(table)!) {
-      console.log('tb', table, tb, this.selIdsService.getId(tb));
+      // console.log('tb', table, tb, this.selIdsService.getId(tb));
       if (
         !this.ignoreFkRequirements.includes(tb) &&
         this.selIdsService.getId(tb) === 0
@@ -262,7 +263,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
       }
     }
     if (doEnable) {
-      console.log('doEnable', table, doEnable);
+      // console.log('doEnable', table, doEnable);
       this.valuesForm.get(table)!.enable();
     } else {
       this.selIdsService.setId(table, 0);

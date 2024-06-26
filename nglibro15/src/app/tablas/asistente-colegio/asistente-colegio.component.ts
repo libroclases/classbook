@@ -20,7 +20,7 @@ export class AsistenteColegioComponent implements OnInit {
 
  // Selectores
 
- selTables = ["tipoasistente", "sexo", "region", "provincix", "comuna"];
+ selTables = ["region", "provincix", "comuna","tipoasistente", "sexo", ];
  changeFnsArray: Function[] = [];
  ignoreFkRequirements: string[] = [];
  patchFKsFromStorage = [];

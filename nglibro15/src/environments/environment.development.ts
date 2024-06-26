@@ -195,11 +195,11 @@ export const fKeysByTable: { [key: string]: string[] } = {
   administrador:  ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
   asistentecolegio: [
     'usuario',
-    'tipoasistente',
-    'sexo',
     'region',
     'provincix',
     'comuna',
+    'tipoasistente',
+    'sexo'
   ],
   apoderado: [
     'usuario',
@@ -1281,7 +1281,7 @@ export const modalDataObject: any = {
 
   AsistenteColegio: {
     mainTable: 'asistentecolegio',
-    tables: ['tipoasistente', 'sexo', 'region', 'provincix', 'comuna'],
+    tables: ['region', 'provincix', 'comuna','tipoasistente', 'sexo' ],
     textFields: ['nombre', 'apellido1','apellido2', 'rut', 'direccion', 'celular'],
     booleanFields:[],
     dateFields: ['nacimiento'],
