@@ -20,7 +20,7 @@ export class ProfesorComponent implements OnInit {
 
   // Selectores
 
-  selTables = ["sexo", "region", "provincix", "comuna"];
+  selTables = ["region", "provincix", "comuna", "sexo"];
   changeFnsArray: Function[] = [];
   ignoreFkRequirements: string[] = [];
   patchFKsFromStorage = [];
