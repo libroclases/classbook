@@ -155,13 +155,13 @@ const checkjwd = auth({
       checkjwd, requiredScopes('update:asignatura'),
       Asignaturas.modify);
       app.get('/api/asistentecolegio',
-      // checkjwd, requiredScopes('read:asistentecolegio'),
+      checkjwd, requiredScopes('read:asistentecolegio'),
       AsistenteColegios.list);
     app.get('/api/asistentecolegio/:expr/search',
       checkjwd, requiredScopes('read:asistentecolegio'),
       AsistenteColegios.bySearch);
     app.get('/api/asistentecolegio/:usuarioId/:regionId/:provincixId/:comunaId/:tipoasistenteId/:sexoId/fk',
-      // checkjwd, requiredScopes('read:asistentecolegio'),
+      checkjwd, requiredScopes('read:asistentecolegio'),
       AsistenteColegios.getByFk)
     app.get('/api/asistentecolegio/:asistentecolegioId/pk',
       checkjwd, requiredScopes('read:asistentecolegio'),

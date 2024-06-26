@@ -160,6 +160,7 @@ export class AnotacionesComponent implements OnDestroy {
       for ( let tbl of this.fKeysSel) {
         if( this.selIdsService.getId(tbl) === 0 ) {  // just don't update
           this.disabledAddButton = true;
+         
           return;
         }
       }
