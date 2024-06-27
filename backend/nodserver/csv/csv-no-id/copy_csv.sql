@@ -39,5 +39,5 @@ COPY "TipoEvaluacion"("nombre","descripcion","createdAt","updatedAt") FROM '/var
 COPY "Evaluacion"("nombre","fecha","hora","ponderacion","annoId","periodoId","colegioId","cursoId","cursoprofesorId","tipoevaluacionId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/evaluacion.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "Asistencia"("fecha","presente","dia","matriculaId","colegioId","cursoId","alumnoId","annoId","mesId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/asistencia.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "TipoEstado"("nombre","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/tipoestado.csv' DELIMITER '|' csv HEADER NULL AS 'null';
-/*COPY "Nota"("nota","matriculaId","evaluacionId","annoId","periodoId","colegioId","cursoId","cursoprofesorId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/nota.csv' DELIMITER '|' csv HEADER NULL AS 'null';*/
+COPY "Nota"("nota","matriculaId","evaluacionId","annoId","periodoId","colegioId","cursoId","cursoprofesorId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/nota.csv' DELIMITER '|' csv HEADER NULL AS 'null';
 COPY "EstadoAlumno"("fecha","matriculaId","tipoestadoId","colegioId","cursoId","annoId","alumnoId","createdAt","updatedAt") FROM '/var/lib/postgresql/csv/estadoalumno.csv' DELIMITER '|' csv HEADER NULL AS 'null';

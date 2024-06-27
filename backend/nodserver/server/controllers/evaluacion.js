@@ -1,6 +1,6 @@
 import model from '../models';
 
-const { Evaluacion, Colegio, Curso,  CursoProfesor, Anno, Periodo,
+const { Evaluacion, Colegio, Curso,  CursoProfesor, Anno, Periodo, Nota, Matricula,
   TipoEvaluacion } = model;
 
 
@@ -76,14 +76,6 @@ class Evaluaciones {
       tipoevaluacionId,
    
     })
-    .then(evaluacion => res.status(201).send({
-      success:true,
-      message: `Evaluacion ${nombre} creado exitosamente `,
-      evaluacion
-    }))
-    .catch(error => res.status(400).send(error));
-
-    /*
     .then(evaluacion => {
 
       let e = evaluacion.dataValues;
@@ -128,7 +120,7 @@ class Evaluaciones {
     })
   }
 );
-*/
+
 }
 
   static modify(req, res) {

@@ -1,6 +1,6 @@
 import model from '../models';
 
-const {  Colegio, Periodo, Curso, Anno, CursoProfesor, Asignatura, Matricula, Evaluacion, Nota } = model;
+const {  Colegio, Periodo, Curso, Anno, CursoProfesor, Matricula, Evaluacion, Nota } = model;
 
 class Notas {
 
@@ -17,7 +17,7 @@ class Notas {
                     { model:Anno, attributes:['id','nombre'], where: { } },
                     { model:Periodo, attributes:['id','nombre'], where: { }},
                     { model:CursoProfesor, attributes:['id'], where: { } },
-                    // { model:Asignatura, attributes:['id','nombre'], where: { } },
+                
     
 
             ],
@@ -38,7 +38,7 @@ class Notas {
         if (annoId != '0') {  consulta['annoId'] = annoId;  }
         if (periodoId != '0') {  consulta['periodoId'] = periodoId;  }
         if (cursoprofesorId != '0') {  consulta['cursoprofesorId'] = cursoprofesorId;  }
-        // if (asignaturaId != '0') {  consulta['asignaturaId'] = asignaturaId;  }
+        
 
         return Nota
           .findAll({ where : consulta, attributes: ['id','nota'] ,
@@ -50,7 +50,7 @@ class Notas {
             { model:Anno, attributes:['id','nombre'], where: { } },
             { model:Periodo, attributes:['id','nombre'], where: { }},
             { model:CursoProfesor, attributes:['id'], where: { } },
-            // { model:Asignatura, attributes:['id','nombre'], where: { } },
+          
             
            ],
             order: [['evaluacionId','ASC']] 
@@ -73,7 +73,7 @@ class Notas {
         cursoId,
         annoId,
         cursoprofesorId,
-        // asignaturaId,
+       
    
     })
     .then(notaData => res.status(201).send({
