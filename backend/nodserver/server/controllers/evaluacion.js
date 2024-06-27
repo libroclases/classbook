@@ -1,7 +1,7 @@
 import model from '../models';
 
 const { Evaluacion, Colegio, Curso,  CursoProfesor, Anno, Periodo,
-  TipoEvaluacion, Matricula, Nota } = model;
+  TipoEvaluacion } = model;
 
 
 class Evaluaciones {
