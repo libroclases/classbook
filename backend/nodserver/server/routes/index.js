@@ -667,7 +667,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('create:nota'),
       ResumenNotas.create);
     app.get('/api/resumennota/:annoId/:periodoId/:colegioId/:cursoId/:asignaturaId/:matriculaId/poblateResumenNota',
-      checkjwd, requiredScopes('read:nota'),
+      // checkjwd, requiredScopes('read:nota'),
       ResumenNotas.poblateResumenNotas);
 
     app.get('/api/cursoprofesor',

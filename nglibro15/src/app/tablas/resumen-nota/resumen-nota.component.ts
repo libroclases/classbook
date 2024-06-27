@@ -152,7 +152,7 @@ export class ResumenNotaComponent implements OnInit {
     let i=0;
     this.asignatura$ = this.crud.getData('cursoprofesor', fks)?.pipe(
       tap(asig => asig.forEach((a:any) => { this.title[i] = a.Asignatura.nombre; i++;}))
-    )!;
+    )!; console.log('title:', this.title)
     this.getMatriculaData();
     this.getResumenNotaData();
   }
