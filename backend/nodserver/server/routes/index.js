@@ -603,16 +603,16 @@ const checkjwd = auth({
       checkjwd, requiredScopes('read:matricula'),
       Matriculas.lastMatricula);  
     app.get('/api/evaluacion',
-      // checkjwd, requiredScopes('read:evaluacion'),
+      checkjwd, requiredScopes('read:evaluacion'),
       Evaluaciones.list);
     app.get('/api/evaluacion/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/:tipoevaluacionId/fk',
-      // checkjwd, requiredScopes('read:evaluacion'),
+      checkjwd, requiredScopes('read:evaluacion'),
       Evaluaciones.getByFk);
     app.post('/api/evaluacion/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/:tipoevaluacionId',
-      // checkjwd, requiredScopes('create:evaluacion'),
+      checkjwd, requiredScopes('create:evaluacion'),
       Evaluaciones.create);
     app.put('/api/evaluacion/:evaluacionId',
-      // checkjwd, requiredScopes('update:evaluacion'),
+      checkjwd, requiredScopes('update:evaluacion'),
       Evaluaciones.modify);
     app.get('/api/nota',
       checkjwd, requiredScopes('read:nota'),
@@ -657,17 +657,8 @@ const checkjwd = auth({
       checkjwd, requiredScopes('delete:feriado'),
       Feriados.delete);
   
-    app.get('/api/resumennota',
+    app.get('/api/resumennota/:annoId/:periodoId/:colegioId/:cursoId/poblateResumenNota',
       checkjwd, requiredScopes('read:nota'),
-      ResumenNotas.list);
-    app.get('/api/resumennota/:annoId/:periodoId/:colegioId/:cursoId/:asignaturaId/:matriculaId/fk',
-      checkjwd, requiredScopes('read:nota'),
-      ResumenNotas.getByFk);
-    app.post('/api/resumennota/:annoId/:periodoId/:colegioId/:cursoId/:asignaturaId/:matriculaId',
-      checkjwd, requiredScopes('create:nota'),
-      ResumenNotas.create);
-    app.get('/api/resumennota/:annoId/:periodoId/:colegioId/:cursoId/:asignaturaId/:matriculaId/poblateResumenNota',
-      // checkjwd, requiredScopes('read:nota'),
       ResumenNotas.poblateResumenNotas);
 
     app.get('/api/cursoprofesor',

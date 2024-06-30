@@ -87,11 +87,7 @@ export class ResumenNotaComponent implements OnInit {
   opacity = environment.opacity;
   position = "center";
   size = "cover";
-  // notasForm!: FormGroup;
-
-  //   colores
-
-  // numColumns = 8
+  
 
   objcolors = environment.colors;
 
@@ -134,11 +130,6 @@ export class ResumenNotaComponent implements OnInit {
 
 
   }
-
-  // numcols = 0;
-  // numrows = 0;
-
-
 
 
   getAsignaturaData() {
@@ -193,15 +184,15 @@ export class ResumenNotaComponent implements OnInit {
       this.selIdsService.getId('anno'),
       this.selIdsService.getId('periodo'),
       this.selIdsService.getId('colegio'),
-      this.selIdsService.getId('curso'),0,0
+      this.selIdsService.getId('curso')
     ]
-
+    
     this.crud.getDataCustom('resumennota', 'poblateResumenNota', ides).pipe(
-      tap(promedios => promedios.forEach((promedio: any) => {
+      tap(promedios => promedios?.forEach((promedio: any) => {
         let mat = promedio[0];
-        let asig = promedio[1];
+        let cursoprofesor = promedio[1];
         let prom = promedio[2];
-        // if (mat == 475) console.log(cont , mat,asig, prom);
+    
 
         if (mat_ant != mat) {
           mat_ant = mat;
@@ -209,13 +200,14 @@ export class ResumenNotaComponent implements OnInit {
 
         }
         tmp.push(prom);
-        asignaturaMap.set(asig, tmp);
-        this.getpromedioMat(mat, asignaturaMap.get(asig, tmp));
-        this.matriculaMap.set(mat, asignaturaMap.get(asig, tmp));
+        asignaturaMap.set(cursoprofesor, tmp);
+        this.getpromedioMat(mat, asignaturaMap.get(cursoprofesor, tmp));
+        this.matriculaMap.set(mat, asignaturaMap.get(cursoprofesor, tmp));
         cont++;
-      }))
+      })
+    )
     ).subscribe();
-
+    
   }
 
   getBiClass(route: string) {

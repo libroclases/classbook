@@ -22,7 +22,7 @@
      
 
     <table class="table table-bordered">
-      <!--thead><tr><td>&ngsp;</td><td *ngFor="let a of (asignatura$ | async)">{{a.Asignatura.id}}</td></tr></thead-->
+     
       <tbody>
         <tr><td>&ngsp;</td><td *ngFor="let a of (asignatura$ | async)">{{a.Asignatura.nombre}}</td><td>Promedio</td></tr>
         <tr *ngFor="let m of (matricula$ | async)">
