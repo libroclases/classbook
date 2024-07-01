@@ -1,6 +1,6 @@
 import model from '../models';
 
-const {  Colegio, Periodo, Curso, Anno,  Matricula, CursoProfesor,Nota,Evaluacion ,ResumenNota } = model;
+const {  Colegio, Periodo, Curso, Anno,  Matricula, CursoProfesor,Nota,Evaluacion } = model;
 
 function pad(num, size) {
     num = num.toString();
@@ -48,27 +48,27 @@ class ResumenNotas {
             notas.forEach(el => {
                 const d = el.dataValues; 
                 console.log(d.Matricula.id, d.CursoProfesor.id, d.Evaluacion.ponderacion, d.nota);
-                // console.log(d.CursoProfesor.dataValues);
+              
                 
                 if (matricula == d.Matricula.id  ) {                
                            mindex++;
                           
                            if (cursoprofesor != d.CursoProfesor.id ) {     
-                              // console.log(`1:######### ${matricula} | ${asignatura} | ${PromedioAsignatura.reduce((a, b) => a + b, 0)} ###########`);
+                            
                               Matrix.push([matricula,cursoprofesor,PromedioAsignatura.reduce((a, b) => a + b, 0)]);
                               PromedioAsignatura=[];
                               PromedioAsignatura.push((d.Evaluacion.ponderacion * d.nota)/100);  // OK 
                            } else { PromedioAsignatura.push((d.Evaluacion.ponderacion * d.nota)/100); }
                            
-                           // console.log('1:',mindex,d.Matricula.id , d.CursoProfesor.id, (d.Evaluacion.ponderacion * d.nota)/100, PromedioAsignatura);
+                          
                                             
                  } else { 
-                           // console.log(`2:######### ${matricula} | ${asignatura} | ${PromedioAsignatura.reduce((a, b) => a + b, 0)} ###########`);
+                         
                            if (matricula > 0) Matrix.push([matricula,cursoprofesor,PromedioAsignatura.reduce((a, b) => a + b, 0)]);
                            PromedioAsignatura=[]; 
                            mindex=0;
                            PromedioAsignatura.push((d.Evaluacion.ponderacion * d.nota)/100); 
-                           // console.log('2:',mindex, d.Matricula.id , d.CursoProfesor.id, (d.Evaluacion.ponderacion * d.nota)/100, PromedioAsignatura);
+                         
                           
                                               
                     }
@@ -78,11 +78,10 @@ class ResumenNotas {
 
             });
             
-            // console.log(`3:######### ${matricula} | ${asignatura} | ${PromedioAsignatura.reduce((a, b) => a + b, 0)} ###########`);
+           
             Matrix.push([matricula,cursoprofesor,PromedioAsignatura.reduce((a, b) => a + b, 0)]);
-            // console.log(Matrix);
             res.status(200).send(Matrix);
-            // res.status(200).send({})
+           
         }
         )
     .catch(error => res.status(400).send(error));

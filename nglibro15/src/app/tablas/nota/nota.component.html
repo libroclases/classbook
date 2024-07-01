@@ -15,9 +15,18 @@
 
    <div  [formGroup]="notasForm"   class="overflow-auto bg-light"   style="width: 100%; max-height: 700px;">
 
-    <!--form  [formGroup]="notasForm"-->
+  
+    <table  class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async)" title="{{e.fecha}}">{{e.nombre}} {{e.ponderacion}} %</td>
+        </tr>
+        <tr *ngFor="let m of (matricula$ | async)"><td>{{m.id}} {{m.nombre}}</td></tr>
+      </thead>
+    </table>
+   
 
-    <table *ngIf="showtable" class="table table-bordered table-hover">
+    <!--table *ngIf="showtable" class="table table-bordered table-hover">
 
         <tr><th  [attr.colspan]="numcols" [style.background-color]="tablehead" style="text-align: center;color:white; height:40px" >Notas</th></tr>
         <tr *ngIf="evaluation$"><th style="text-align: center">&nbsp;</th><td *ngFor="let e of (evaluation$ | async)">
@@ -57,9 +66,7 @@
         </tr>
 
 
-    </table>
-
-    <!--/form-->
+    </table-->
 
   </div>
 

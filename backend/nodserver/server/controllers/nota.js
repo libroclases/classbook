@@ -21,7 +21,9 @@ class Notas {
     
 
             ],
-             order: [['id','ASC']] })
+             order: [
+                [{ model: Matricula }, 'id','ASC'], [{ model: CursoProfesor }, 'id', 'ASC'] , [{ model: Evaluacion }, 'id', 'ASC'] 
+            ] })
             .then(notas => res.status(200).send(notas))
             .catch(error => res.status(400).send(error));
     }
@@ -53,7 +55,9 @@ class Notas {
           
             
            ],
-            order: [['evaluacionId','ASC']] 
+            order:  [
+                [{ model: Matricula }, 'id','ASC'], [{ model: CursoProfesor }, 'id', 'ASC'] , [{ model: Evaluacion }, 'id', 'ASC'] 
+            ]
        })
           .then(nota => res.status(200).send(nota))
           .catch(error => res.status(400).send(error));

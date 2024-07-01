@@ -38,19 +38,7 @@ export class NotaComponent implements OnInit {
   // colorPromedioEvaluacion!:string;
   valorPromedio: any = [];
 
-  tablaId = 5;
-
-  currPage = 0;
-  countNotas: any = {};
-  sumaEvaluacionMap : any = new Map<number, number>();
-
-  matriculaNotaMap: any = new Map<number, any>();
-  promedioMatriculaMap: any = new Map<number, number>();
-  promedioEvaluacionMap: any = new Map<number, number>();
-  evaluationMap: any = new Map<number, object>();
-
-  ponderacionMap: any = new Map<number,number>();
-  notasIndiceMap: any = new Map<string, string>();
+  evaluacionMap = new Map<number, any>();
 
   evaluationEdit = 0;  // marca columna a editar
   edita = false;
@@ -122,6 +110,10 @@ export class NotaComponent implements OnInit {
 
   height = window.innerHeight - (this.banner_height + this.menu_height + this.margen_superior_tabla) + 'px';
 
+  evaluacion$: Observable<any> | undefined;
+
+  title:any = {}
+
   @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
   @HostListener('window:resize', ['$event'])
@@ -131,15 +123,10 @@ export class NotaComponent implements OnInit {
   }
 
   constructor(private crud: CrudService,
-      // route: ActivatedRoute,
-      private selIdsService: SelectionIdsService,
-      public dialog: MatDialog,
-      private fkService: ForeignKeysService,
-      private iconsService: IconsService,
-      private fb: FormBuilder,
-      private dt: GetdatetimeService,
-      private getpermission: GetPermissionService,
-      private toastr: ToastrService,
+    private selIdsService: SelectionIdsService,
+    private fkService: ForeignKeysService,
+    private iconsService: IconsService,
+    private getpermission: GetPermissionService,
 
     ) {
 
@@ -147,380 +134,131 @@ export class NotaComponent implements OnInit {
 
      }
 
-  numcols = 2;
+     getColor = (color: string | null) => {
 
-  getEvaluationData() {
-
-
-       let fkevaluacion = this.getForeignKeys('evaluacion')
-
-       this.evaluation$ = this.crud.getData('evaluacion', fkevaluacion )!
-       this.evaluation$.pipe(
-          tap(evaluacion => { console.log('evaluacion', evaluacion);
-              this.ponderacion=0;
-              evaluacion.forEach((e:any) => {
-                this.numcols++;
-                this.evaluationMap.set(e.id,e);
-                this.sumaEvaluacionMap.set(e.id, 0);
-                this.countNotas[e.id]=0;
-                this.ponderacion+=e.ponderacion
-                console.log('ponderacion', this.ponderacion) ;
-              });
-           }),
-       )
-       .subscribe(() => { this.getMatriculaData(); }
-        )
-  }
-
-
-
-  sumaPromedioMatricula(matriculaId: number, nota: number) {
-      this.promedioMatriculaMap.set(+matriculaId, nota  + this.promedioMatriculaMap.get(+matriculaId))
-    }
-
-  getSumEvaluacion(e: number) : any {
-    let nota = this.sumaEvaluacionMap.get(e)/this.countNotas[e];
-    return [nota, (nota>=4) ? "blue" : "red"]
-  }
-
-
-  sumPromedioMatricula(): any {
-    let total = 0;
-    let cont = 0;
-    let nota = 0;
-    for (let valor of this.promedioMatriculaMap.values()) {
-      total+=valor;
-      cont++;
-    }
-    nota = total/cont;
-
-    return [nota, (nota>=4) ? "blue" : "red"] ;
-  }
-
-   getPromedioMatricula(m: number) : any {
-       let nota = this.promedioMatriculaMap.get(m);
-       return [(nota==0) ? "" : nota , (nota>=4) ? "blue" : "red"]
-    }
-
-   sumaPromedioEvaluacion(evaluacionId: number, nota: number) {
-
-    this.sumaEvaluacionMap.set(evaluacionId, this.sumaEvaluacionMap.get(evaluacionId) + nota);
-   }
-
- colorNota(nota: number): string { return ( nota>=4.0) ? "blue" : "red"}
-
-  getMatriculaData():  void {
-
-      const sortByDate = (nota:any[]) : any => {
-        nota.sort((x,y) => x.Evaluacion.fecha < y.Evaluacion.fecha ? -1 : 1);
-        return nota;
-      }
-
-      const cleanVariables = () : void => {
-        this.promedioMatriculaMap.clear();
-        this.promedioEvaluacionMap.clear();
-
-        this.matriculaNotaMap.clear();
-
-
-      }
-
-      const getNotasData = (matriculaId:number): Observable<any> => {
-
-          let fknota:any = this.getForeignKeys('nota');
-          fknota[6] = matriculaId
-
-          let notas$ : Observable<any> = this.crud.getData('nota', fknota)!;
-
-          notas$.pipe(map((data) => {
-            data.sort((a:Evaluacion, b:Evaluacion) => {
-                return a.fecha < b.fecha ? -1 : 1;
-             });
-            return data;
-            }))
-
-          notas$.pipe(
-            tap(nota => {
-              sortByDate(nota);
-              nota.forEach((n:any) => {
-              if (n.nota) {
-                this.countNotas[n.Evaluacion.id]+=1;
-            }
-          }
-
-          )
-        }),
-
-        ).subscribe();
-
-          return notas$;
-    }
-
-
-     cleanVariables();
-
-    let ides = [
-      this.selIdsService.getId('colegio'),
-      this.selIdsService.getId('curso'),
-      this.selIdsService.getId('anno')
-    ]
-      this.matricula$ = this.crud.getDataCustom('matricula', 'lista_curso_nombres',ides )?.pipe(
-
-      tap(mat => {
-        mat.forEach((m:any) => {
-        this.matriculaNotaMap.set(m.id, getNotasData(m.id));
-        this.promedioMatriculaMap.set(m.id, 0);
-      }
-
-      )}),
-
-      tap(() =>  {
-
-        for (let mnm of this.matriculaNotaMap.entries()) {
-          mnm[1].subscribe((m:any) => m.forEach((n:any)=>{
-            // console.log('poronga', n.Matricula.id, n.nota, n.Evaluacion.ponderacion)
-            // this.sumaPromedioMatricula(n.Matricula.id, n.nota * this.evaluationMap.get(n.Evaluacion.id).ponderacion/100 );
-            this.sumaPromedioMatricula(n.Matricula.id, n.nota * n.Evaluacion.ponderacion / 100 );
-            this.sumaPromedioEvaluacion(n.Evaluacion.id, n.nota);
-            let nota = (n.nota) ? n.nota.toString(): '0';  // OJO
-            const indice = n.Evaluacion.id.toString() + '-' + n.Matricula.id.toString() + '-' + nota;
-            this.notasIndiceMap.set(n.id, indice);
-
-          }
-
-            ))
-
-        }
-
-      }),
-
-
-
-
-    )!
-
-
-
-  }
-
-  getCountNotas(evaluacionId: any):number {  return this.countNotas[+evaluacionId] }
-
-  getBiClass(route: string) {
-      return this.iconsService.getBiClass(route);
-    }
-
-  getForeignKeys(table: string) {
-    let fKeys = [];
-    for ( let t of this.fkService.getFKeys(table)!) {
-      fKeys.push(this.selIdsService.getId(t));
-    }
-    return fKeys;
-  }
-
-     updateTable(notification: (Notification | null) = null) {
-
-      if ( !notification || notification.message == "updated" ) {
-        if (this.selIdsService.getId('anno') *
-            this.selIdsService.getId('periodo') *
-            this.selIdsService.getId('colegio') *
-            this.selIdsService.getId('curso') *
-            this.selIdsService.getId('cursoprofesor') > 0) {
-
-            this.getEvaluationData();
-
-
-        }
-
-      }
-    }
-
-    getColor = (color:string | null) => {
-
-      if (color == null) {  color = localStorage.getItem('Color')  }
-
-      if (color=='primary') {
+      if (color == 'primary' || !color) {
         this.bodybgcolor = this.objcolors.primary.bodybgcolor;
         this.pagination = this.objcolors.primary.pagination;
         this.tablehead = this.objcolors.primary.tablehead;
-        this.bgmodal =  this.objcolors.primary.bgmodal;
+        this.bgmodal = this.objcolors.primary.bgmodal;
         this.modalbutton = this.objcolors.primary.modalbutton;
         this.url = this.photo.primary;
       }
-      else if (color=='success') {
+      else if (color == 'success') {
         this.bodybgcolor = this.objcolors.success.bodybgcolor;
         this.pagination = this.objcolors.success.pagination;
         this.tablehead = this.objcolors.success.tablehead;
-        this.bgmodal =  this.objcolors.success.bgmodal;
+        this.bgmodal = this.objcolors.success.bgmodal;
         this.modalbutton = this.objcolors.success.modalbutton;
-        this.url = this.photo.primary;
+        this.url = this.photo.success;
       }
-      else if (color=='info') {
+      else if (color == 'info') {
         this.bodybgcolor = this.objcolors.info.bodybgcolor;
         this.pagination = this.objcolors.info.pagination;
         this.tablehead = this.objcolors.info.tablehead;
-        this.bgmodal =  this.objcolors.info.bgmodal;
+        this.bgmodal = this.objcolors.info.bgmodal;
         this.modalbutton = this.objcolors.info.modalbutton;
-        this.url = this.photo.primary;
+        this.url = this.photo.info;
       }
-}
+    }
+ 
+    getMatriculaData(): void {
 
+      let ides = [
+        this.selIdsService.getId('colegio'),
+        this.selIdsService.getId('curso'),
+        this.selIdsService.getId('anno')
+      ]
+  
+      this.matricula$ = this.crud.getDataCustom('matricula', 'lista_curso_nombres', ides);
+  
+    }
 
-    ngOnInit(): void {
+    getEvaluacionData() {
+      const fks = [
+        this.selIdsService.getId('anno'),
+        this.selIdsService.getId('periodo'),
+        this.selIdsService.getId('colegio'),
+        this.selIdsService.getId('curso'),
+        this.selIdsService.getId('cursoprofesor'),
+        0,
+      ]
+      let i=0;
+      this.evaluacion$ = this.crud.getData('evaluacion', fks)?.pipe(
+        tap(eva => eva.forEach((e: Evaluacion) => { this.evaluacionMap.set(e.id, e) }))
+      )!;
+      this.getMatriculaData();
+      this.getNotaData();
+    }
 
-      this.usuario$.pipe(
-        tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
-        tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['nota'],info)}})
+    getNotaData(): void {
 
-      ).subscribe()
-
-      this.modalDataObj = modalDataObject['Evaluacion']
-
-      this.selIdsService.msg.pipe(
-        tap((message: (Notification)) =>  this.updateTable(message))
+      
+      let tmp:any=[];
+      let mat_ant=0;
+      let cont = 0;
+  
+      let ides = [
+        this.selIdsService.getId('anno'),
+        this.selIdsService.getId('periodo'),
+        this.selIdsService.getId('colegio'),
+        this.selIdsService.getId('curso'),
+        this.selIdsService.getId('cursoprofesor'),
+        0,
+        0
+      ]
+      
+      this.crud.getData('nota', ides)?.pipe(
+        tap(notas => notas?.forEach((nota: any) => {
+          let mat = nota[0];
+          let cursoprofesor = nota[1];
+          let prom = nota[2];
+      
+  
+          if (mat_ant != mat) {
+            mat_ant = mat;
+            tmp=[];
+  
+          }
+          tmp.push(prom);
+          // asignaturaMap.set(cursoprofesor, tmp);
+          // this.getpromedioMat(mat, asignaturaMap.get(cursoprofesor, tmp));
+          // this.matriculaMap.set(mat, asignaturaMap.get(cursoprofesor, tmp));
+          cont++;
+        })
       )
-      .subscribe() ;
+      ).subscribe();
+      
     }
 
 
-   /*
-    getPromedioEvaluation(promedio: any ): number {
-      let valor = promedio.value / this.getCountNotas(promedio.key);
-      this.colorPromedioEvaluacion = (valor >=4) ? 'blue' : 'red'
-      return valor;
-    }
-  */
-    showdata(msg:any) {
-      if (msg?.message) {this.toastr.success(msg?.message, 'Notas', {positionClass:'toast-top-right'})}
-      else {this.toastr.error(msg?.error, 'Notas')}
-    }
+    updateTable(notification: (Notification | null) = null) {
 
-    editaValoresForm(eventoid: number) {
 
-      Object.entries(this.notasForm.value).forEach(([key, value]) => {
-        let keyvalue = key + '-' + value;
-        if (value) { if (key.split('-')[1] == (eventoid).toString() ) {
-          const [notaid, evaluacionid, matriculaid, nota] = keyvalue.split('-');
-          const notasIndice = notaid + '-' + this.notasIndiceMap.get(+key.split('-')[0]);
-          if (keyvalue !== notasIndice) {
-            this.crud.putData({id: notaid, nota: nota},'nota').pipe(
-              tap(() => this.updateTable()),
-              tap(res => this.showdata(res))
-            )
-            .subscribe();
-          }
-        }}
-      })
-
-    }
-
-    generaForm() {
-
-      for (let notas of this.notasIndiceMap.entries()) {
-        const data = notas[1].split('-')
-
-        if (this.evaluationEdit.toString() == data[0])
-        {
-          let controlname = notas[0].toString() + '-' + data[0]+ '-' +data[1];
-          const numericNumberReg= '^-?[0-9]\\d*(\\.\\d{1,2})?$';
-          // console.log('genera', controlname)
-          this.notasForm.addControl( controlname ,  this.fb.control(data[2],
-             [Validators.required,
-              Validators.pattern(numericNumberReg),
-              Validators.min(1),
-              Validators.max(7)
-            ]));
-
+      if (!notification || notification.message == "updated")  {
+        if (this.selIdsService.selectEnableKeys(['anno', 'periodo', 'colegio', 'curso','cursoprofesor'])) {
+          this.getEvaluacionData();
         }
+  
       }
     }
 
-    deleteForm() {
+  ngOnInit(): void {
 
-      for (let notas of this.notasIndiceMap.entries()) {
-        const data = notas[1].split('-')
+    this.usuario$.pipe(
+      tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
+      tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['Nota'], info) } })
 
-        if (this.evaluationEdit.toString() == data[0])
-        {
-          let controlname = notas[0].toString() + '-' + data[0]+ '-' +data[1];
-          // console.log('delete',controlname)
-          if (this.notasForm.contains(controlname) == true) {
-            this.notasForm.removeControl( controlname );
-          }
-        }
-      }
-
-    }
-
-    editaEvaluacion(evaluacionId: number,colegioId: number, fecha: Date) {
-
-      this.isInVentana$ = this.dt.getDays(colegioId, 'nota', fecha)!
-
-      this.edita = (this.edita) ? false : true;
-      this.evaluationEdit = evaluacionId;
-      if (this.edita== true) {
-        this.generaForm();
-      }
-      else {
-        this.editaValoresForm(evaluacionId);
-        this.deleteForm();
-      }
-    }
-
-
-  openDialog(reg: any = null): void {
-
-    const getIdsNota = () : any => {
-
-      let ids:any=[];
-
-      ids.push(this.selIdsService.getId('anno'));
-      ids.push(this.selIdsService.getId('periodo'));
-      ids.push(this.selIdsService.getId('colegio'));
-      ids.push(this.selIdsService.getId('curso'));
-      ids.push(this.selIdsService.getId('cursoprofesor'));
-
-      return ids;
-
-   }
+    ).subscribe()
 
 
 
-    let matIds: any=[]
-
-    if (!reg) {
-          var reg:any = {};
-
-          reg['id'] = 0;
-          this.modalDataObj.tables.forEach((table: string) => reg[table] = {
-            id: this.selIdsService.getId(table.toLocaleLowerCase()) || 0})
-          this.modalDataObj.textFields.forEach((text: string) => reg[text] = null)
-          this.modalDataObj.dateFields.forEach((date: string) => reg[date] = null)
-       }
-
-    reg['bgmodal'] = this.bgmodal;
-    reg['modalbutton'] = this.modalbutton;
-
-
-    let modaldata: any = this.modalDataObj;
-    const dialogRef = this.dialog.open(ModalDialogComponent, {
-      data: {
-        registro: reg,
-        ...modaldata,
-        tabla: 'Evaluacion',
-        generaRegistro: matIds!,
-        generaForanea: getIdsNota()
-      },
-        height: this.modalDataObj.height, width: '600px',
-    });
-
-    dialogRef.afterClosed().pipe(
-
-      tap(result => console.log('The dialog was closed', result)),
-      // tap(() => this.updateTable()),
+    this.selIdsService.msg.pipe(
+      tap((message: (Notification)) => this.updateTable(message))
     )
-    .subscribe();
-
+      .subscribe();
   }
 
+ 
 }
 

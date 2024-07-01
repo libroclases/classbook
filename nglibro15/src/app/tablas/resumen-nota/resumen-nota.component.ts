@@ -28,17 +28,11 @@ export class ResumenNotaComponent implements OnInit {
 
   mainTable: string = 'resumennota';
 
-  // valorPromedio: any = [];
+ 
 
   disable:any = {};
   title:any = {}
-  // currentDate: Date = new Date();
-
-  // tablaId = 5;
-
-  // currPage = 0;
-  // countNotas: any = {};
-  // sumaAsignaturaMap: any = new Map<number, number>();
+ 
 
   matriculaMap: any = new Map<number,any[]>();
 
@@ -118,19 +112,17 @@ export class ResumenNotaComponent implements OnInit {
   }
 
   constructor(private crud: CrudService,
-    // route: ActivatedRoute,
     private selIdsService: SelectionIdsService,
-    // public dialog: MatDialog,
     private fkService: ForeignKeysService,
     private iconsService: IconsService,
     private getpermission: GetPermissionService,
-
   ) {
 
 
 
   }
 
+  columns = 1;
 
   getAsignaturaData() {
     const fks = [
@@ -142,8 +134,9 @@ export class ResumenNotaComponent implements OnInit {
     ]
     let i=0;
     this.asignatura$ = this.crud.getData('cursoprofesor', fks)?.pipe(
-      tap(asig => asig.forEach((a:any) => { this.title[i] = a.Asignatura.nombre; i++;}))
-    )!; console.log('title:', this.title)
+      tap(asig => asig.forEach((a:any) => { this.title[i] = a.Asignatura.nombre; this.columns = i;  i++;}))
+    )!;  
+    
     this.getMatriculaData();
     this.getResumenNotaData();
   }
@@ -270,7 +263,7 @@ export class ResumenNotaComponent implements OnInit {
 
     ).subscribe()
 
-    this.modalDataObj = modalDataObject['Asignatura']
+ 
 
     this.selIdsService.msg.pipe(
       tap((message: (Notification)) => this.updateTable(message))
