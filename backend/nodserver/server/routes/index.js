@@ -620,6 +620,9 @@ const checkjwd = auth({
     app.get('/api/nota/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/:matriculaId/:evaluacionId/fk',
       // checkjwd, requiredScopes('read:nota'),
       Notas.getByFk);
+    app.get('/api/nota/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/poblateNota',
+        // checkjwd, requiredScopes('read:nota'),
+        Notas.poblateNotas);  
     app.post('/api/nota/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/:matriculaId/:evaluacionId',
       // checkjwd, requiredScopes('create:nota'),
       Notas.create);
