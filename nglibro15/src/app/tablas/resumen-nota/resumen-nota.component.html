@@ -17,21 +17,21 @@
 
   <div  class="overflow-auto mt-4 bg-light"  [style.opacity]="opacity"  style="width: 100%; max-height: 680px;">
 
-   
-    
-     
+
+
+
 
     <table class="table table-bordered">
-     
+
       <tbody>
-        <tr><th [attr.colspan]="columns+3" [style.background-color]="tablehead" style="text-align: center;color:white; height:40px">Resumen Nota</th></tr>
+        <tr><th [attr.colspan]="columns+3" [style.background-color]="tablehead" style="text-align: center;color:white; height:40px">Resumen Notas</th></tr>
         <tr><td>&ngsp;</td><td *ngFor="let a of (asignatura$ | async)">{{a.Asignatura.nombre}}</td><td>Promedio</td></tr>
         <tr *ngFor="let m of (matricula$ | async)">
           <td>{{m.nombre}}</td><td *ngFor="let a of matriculaMap.get(m.id); index as i"  [style.color]="getcolor(a)" [title]="title[i]">{{ a  | number:'1.1-1' }}</td><th [style.color]="getcolor(promedio[m.id])">{{promedio[m.id] | number:'1.1-1'}}</th>
-        </tr> 
+        </tr>
     </table>
 
-  
+
     </div>
     </div>
 

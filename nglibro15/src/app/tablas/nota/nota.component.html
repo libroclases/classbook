@@ -18,12 +18,17 @@
 
     <table  class="table table-bordered table-hover">
       <thead>
+        <tr><th [attr.colspan]="columns+3" [style.background-color]="tablehead" style="text-align: center;color:white; height:40px">Notas</th></tr>
         <tr>
           <td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async)" title="{{e.fecha}}">{{e.nombre}} ({{e.ponderacion}}%)</td><td>Promedio</td>
         </tr>
-        <tr *ngFor="let matricula of (matricula$ | async)"><td>{{matricula.nombre}}</td>
-          <td *ngFor="let mnota of matriculasNotasMap.get(matricula.id)">{{mnota  | number:'1.1-1'}}</td>
-          <td>{{matriculasPromediosMap.get(matricula.id)  | number:'1.1-1'}}</td>
+        <tr>
+          <td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async)"><button class="btn btn-link btn-sm px-3" [disabled]="desabilitado"><em class="bi bi-lock"></em></button>
+          </td><td [style.color] = "getPonderacion(ponderacion)">{{ponderacion}}%</td>
+        </tr>
+        <tr *ngFor="let matricula of (matricula$ | async)"><td style="text-align: left;">{{matricula.nombre}}</td>
+          <td *ngFor="let mnota of matriculasNotasMap.get(matricula.id)" [style.color]="getColorNota(mnota)">{{mnota | number:'1.1-1'}}</td>
+          <td *ngIf="ponderacion == 100" [style.color]="getColorNota(matriculasPromediosMap.get(matricula.id))">{{matriculasPromediosMap.get(matricula.id)  | number:'1.1-1'}}</td>
         </tr>
       </thead>
     </table>

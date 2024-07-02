@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CrudService } from '../../shared/services/crud/crud.service';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, concatMap, map, tap } from 'rxjs';
+import { Observable, concatMap, map, share, tap } from 'rxjs';
 import { Notification } from '../../interfaces/generic.interface';
 import { ForeignKeysService } from '../../shared/services/foreign-keys/foreign-keys.service';
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
@@ -79,6 +79,8 @@ export class NotaComponent implements OnInit {
 
   fatherId=0;
   father='';
+  desabilitado=true;
+  columns = 3
 
   evaluation$!: Observable<any>;
   matricula$!: Observable<any>;
@@ -128,8 +130,6 @@ export class NotaComponent implements OnInit {
 
   constructor(private crud: CrudService,
     private selIdsService: SelectionIdsService,
-    private fkService: ForeignKeysService,
-    private iconsService: IconsService,
     private getpermission: GetPermissionService,
 
     ) {
@@ -137,6 +137,12 @@ export class NotaComponent implements OnInit {
       this.notasForm = new FormGroup({})
 
      }
+
+     getColorNota(nota: number) {
+         return  (nota < 4) ? 'red' : 'blue';
+     }
+
+     getPonderacion(ponderacion: number) { return (ponderacion == 100)? 'blue' : 'red';}
 
      getColor = (color: string | null) => {
 
@@ -187,9 +193,10 @@ export class NotaComponent implements OnInit {
         this.selIdsService.getId('cursoprofesor'),
         0,
       ]
-      let i=0;
+      this.ponderacion = 0;
       this.evaluacion$ = this.crud.getData('evaluacion', fks)?.pipe(
-        tap(eva => eva.forEach((e: Evaluacion) => { this.evaluacionMap.set(e.id, e) }))
+        tap(eva => eva.forEach((e: Evaluacion) => { this.ponderacion += e.ponderacion})),
+        share()
       )!;
       this.getMatriculaData();
       this.getNotaData();
@@ -213,9 +220,9 @@ export class NotaComponent implements OnInit {
       this.crud.getDataCustom('nota','poblateNota', ides)?.pipe(
         tap(notas => notas?.forEach((nota: any) => {
 
-          this.matriculasNotasMap.set(nota[0], nota[1]);
+          this.matriculasNotasMap.set(nota[0], nota[3]);
           this.matriculasPromediosMap.set(nota[0], nota[2]);
-          console.log(nota[0],nota[1],nota[2])
+          console.log(nota)
 
         }
 

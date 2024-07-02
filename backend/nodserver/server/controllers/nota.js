@@ -117,34 +117,33 @@ class Notas {
                 
                 
                 let NotaEvaluacion = [];
-                
-                let mindex=0; // contador matricula
+                let NotaSola = [];
                 let matricula=0;
-                let cursoprofesor=0;
-    
                 let Matrix = [];
     
                 notas.forEach(el => {
                     const d = el.dataValues; 
                          
-                    console.log(d.Matricula.id, d.Evaluacion.fecha,d.Evaluacion.id, d.Evaluacion.ponderacion, d.nota);
+                    // console.log(d.Matricula.id, d.Evaluacion.fecha,d.Evaluacion.id, d.Evaluacion.ponderacion, d.nota);
                         
                     if (matricula == d.Matricula.id  ) {                          
-                        NotaEvaluacion.push((d.Evaluacion.ponderacion * d.nota)/100); // ok                           
+                        NotaEvaluacion.push((d.Evaluacion.ponderacion * d.nota)/100); // ok
+                        NotaSola.push(d.nota);                           
                      } 
                      else {
                         if (matricula> 0) {
-                            Matrix.push([matricula,NotaEvaluacion, NotaEvaluacion.reduce((a, b) => a + b, 0)]);
+                            Matrix.push([matricula,NotaEvaluacion, NotaEvaluacion.reduce((a, b) => a + b, 0), NotaSola]);
                             NotaEvaluacion=[];
+                            NotaSola=[];
                         } 
                             NotaEvaluacion.push((d.Evaluacion.ponderacion * d.nota)/100); // ok     
-                         
+                            NotaSola.push(d.nota);
                      }
                      matricula = d.Matricula.id;
                 });
                 
                 
-                Matrix.push([matricula,NotaEvaluacion, NotaEvaluacion.reduce((a, b) => a + b, 0)]); 
+                Matrix.push([matricula,NotaEvaluacion, NotaEvaluacion.reduce((a, b) => a + b, 0), NotaSola]); 
                 res.status(200).send(Matrix);
                
             }
