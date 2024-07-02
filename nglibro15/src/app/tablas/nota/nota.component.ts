@@ -26,9 +26,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NotaComponent implements OnInit {
 
-  idsMap!: Map<string, number>;
-  mainTableForeignKeys!: string[];
-  fkIds:any=[];
+  // idsMap!: Map<string, number>;
+  // mainTableForeignKeys!: string[];
+  // fkIds:any=[];
 
   isInVentana$!: Observable<any>;
 
@@ -36,11 +36,14 @@ export class NotaComponent implements OnInit {
 
   // colorPromedio!:string;
   // colorPromedioEvaluacion!:string;
-  valorPromedio: any = [];
+  // valorPromedio: any = [];
 
-  evaluacionMap = new Map<number, any>();
+  // evaluacionMap = new Map<number, any>();
   matriculasNotasMap = new Map<number, any>();
-  matriculasPromediosMap = new Map<number, any>();
+  matriculasPonderadoMap = new Map<number, any>();
+  sumEvaluationMap = new Map<number, any>();
+
+  // indiceEvalacion:any = [];
 
   evaluationEdit = 0;  // marca columna a editar
   edita = false;
@@ -86,7 +89,8 @@ export class NotaComponent implements OnInit {
   matricula$!: Observable<any>;
 
   ponderacion = 0;
-  // numMatriculas = 0;
+  suma:any={};
+  numMatriculas = 0;
 
   notasForm!: FormGroup;
 
@@ -142,6 +146,10 @@ export class NotaComponent implements OnInit {
          return  (nota < 4) ? 'red' : 'blue';
      }
 
+     setType(valor:any): number {
+       return valor;
+     }
+
      getPonderacion(ponderacion: number) { return (ponderacion == 100)? 'blue' : 'red';}
 
      getColor = (color: string | null) => {
@@ -180,7 +188,9 @@ export class NotaComponent implements OnInit {
         this.selIdsService.getId('anno')
       ]
 
-      this.matricula$ = this.crud.getDataCustom('matricula', 'lista_curso_nombres', ides);
+      this.matricula$ = this.crud.getDataCustom('matricula', 'lista_curso_nombres', ides).pipe(
+        tap(mat => this.numMatriculas = mat.length),
+      )
 
     }
 
@@ -194,8 +204,13 @@ export class NotaComponent implements OnInit {
         0,
       ]
       this.ponderacion = 0;
+      // this.indiceEvalacion = [];
       this.evaluacion$ = this.crud.getData('evaluacion', fks)?.pipe(
-        tap(eva => eva.forEach((e: Evaluacion) => { this.ponderacion += e.ponderacion})),
+        tap(eva => eva.forEach((e: any) => {
+          this.sumEvaluationMap.set(e.id, 0);
+          // this.indiceEvalacion.push(e.id);
+          this.ponderacion += e.ponderacion
+        })),
         share()
       )!;
       this.getMatriculaData();
@@ -204,10 +219,8 @@ export class NotaComponent implements OnInit {
 
     getNotaData(): void {
 
-
-      let tmp:any=[];
-      let mat_ant=0;
       let cont = 0;
+      this.suma = {};
 
       let ides = [
         this.selIdsService.getId('anno'),
@@ -219,14 +232,25 @@ export class NotaComponent implements OnInit {
 
       this.crud.getDataCustom('nota','poblateNota', ides)?.pipe(
         tap(notas => notas?.forEach((nota: any) => {
+          cont = 0;
 
           this.matriculasNotasMap.set(nota[0], nota[3]);
-          this.matriculasPromediosMap.set(nota[0], nota[2]);
-          console.log(nota)
+          this.matriculasPonderadoMap.set(nota[0], nota[2]);
+
+          // this.indiceEvalacion.forEach((id: any) => { console.log('id',id)});
+
+          nota[3].forEach((n: any) => {
+             this.suma[cont] = (this.suma[cont] || 0) + n;
+             // console.log(cont,n, this.suma[cont]);
+             cont++;
+          })
+          console.log('****************')
 
         }
 
-      ))).subscribe();
+      )),
+    share()
+  ).subscribe(() => console.log('suma',this.suma));
 
     }
 
