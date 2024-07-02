@@ -39,6 +39,8 @@ export class NotaComponent implements OnInit {
   valorPromedio: any = [];
 
   evaluacionMap = new Map<number, any>();
+  matriculasNotasMap = new Map<number, any>();
+  matriculasPromediosMap = new Map<number, any>();
 
   evaluationEdit = 0;  // marca columna a editar
   edita = false;
@@ -114,6 +116,8 @@ export class NotaComponent implements OnInit {
 
   title:any = {}
 
+  notas$!: Observable<any>;
+
   @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
   @HostListener('window:resize', ['$event'])
@@ -161,7 +165,7 @@ export class NotaComponent implements OnInit {
         this.url = this.photo.info;
       }
     }
- 
+
     getMatriculaData(): void {
 
       let ides = [
@@ -169,9 +173,9 @@ export class NotaComponent implements OnInit {
         this.selIdsService.getId('curso'),
         this.selIdsService.getId('anno')
       ]
-  
+
       this.matricula$ = this.crud.getDataCustom('matricula', 'lista_curso_nombres', ides);
-  
+
     }
 
     getEvaluacionData() {
@@ -193,42 +197,30 @@ export class NotaComponent implements OnInit {
 
     getNotaData(): void {
 
-      
+
       let tmp:any=[];
       let mat_ant=0;
       let cont = 0;
-  
+
       let ides = [
         this.selIdsService.getId('anno'),
         this.selIdsService.getId('periodo'),
         this.selIdsService.getId('colegio'),
         this.selIdsService.getId('curso'),
-        this.selIdsService.getId('cursoprofesor'),
-        0,
-        0
+        this.selIdsService.getId('cursoprofesor')
       ]
-      
-      this.crud.getData('nota', ides)?.pipe(
+
+      this.crud.getDataCustom('nota','poblateNota', ides)?.pipe(
         tap(notas => notas?.forEach((nota: any) => {
-          let mat = nota[0];
-          let cursoprofesor = nota[1];
-          let prom = nota[2];
-      
-  
-          if (mat_ant != mat) {
-            mat_ant = mat;
-            tmp=[];
-  
-          }
-          tmp.push(prom);
-          // asignaturaMap.set(cursoprofesor, tmp);
-          // this.getpromedioMat(mat, asignaturaMap.get(cursoprofesor, tmp));
-          // this.matriculaMap.set(mat, asignaturaMap.get(cursoprofesor, tmp));
-          cont++;
-        })
-      )
-      ).subscribe();
-      
+
+          this.matriculasNotasMap.set(nota[0], nota[1]);
+          this.matriculasPromediosMap.set(nota[0], nota[2]);
+          console.log(nota[0],nota[1],nota[2])
+
+        }
+
+      ))).subscribe();
+
     }
 
 
@@ -239,7 +231,7 @@ export class NotaComponent implements OnInit {
         if (this.selIdsService.selectEnableKeys(['anno', 'periodo', 'colegio', 'curso','cursoprofesor'])) {
           this.getEvaluacionData();
         }
-  
+
       }
     }
 
@@ -259,6 +251,6 @@ export class NotaComponent implements OnInit {
       .subscribe();
   }
 
- 
+
 }
 

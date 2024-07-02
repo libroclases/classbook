@@ -615,22 +615,22 @@ const checkjwd = auth({
       checkjwd, requiredScopes('update:evaluacion'),
       Evaluaciones.modify);
     app.get('/api/nota',
-      // checkjwd, requiredScopes('read:nota'),
+      checkjwd, requiredScopes('read:nota'),
       Notas.list);
     app.get('/api/nota/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/:matriculaId/:evaluacionId/fk',
-      // checkjwd, requiredScopes('read:nota'),
+      checkjwd, requiredScopes('read:nota'),
       Notas.getByFk);
     app.get('/api/nota/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/poblateNota',
-        // checkjwd, requiredScopes('read:nota'),
+       checkjwd, requiredScopes('read:nota'),
         Notas.poblateNotas);  
     app.post('/api/nota/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/:matriculaId/:evaluacionId',
-      // checkjwd, requiredScopes('create:nota'),
+      checkjwd, requiredScopes('create:nota'),
       Notas.create);
     app.put('/api/nota/:notaId',
-      // checkjwd, requiredScopes('update:nota'),
+      checkjwd, requiredScopes('update:nota'),
       Notas.modify);
     app.get('/api/mes',
-      // checkjwd, requiredScopes('read:mes'),
+      checkjwd, requiredScopes('read:mes'),
       Meses.list);
     app.post('/api/mes',
       checkjwd, requiredScopes('create:mes'),
