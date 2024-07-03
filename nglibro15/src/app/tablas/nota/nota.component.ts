@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CrudService } from '../../shared/services/crud/crud.service';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, concatMap, map, share, tap } from 'rxjs';
+import { Observable, Observer, concatMap, map, share, tap } from 'rxjs';
 import { Notification } from '../../interfaces/generic.interface';
 import { ForeignKeysService } from '../../shared/services/foreign-keys/foreign-keys.service';
 import { SelectionIdsService } from '../../shared/services/selection-ids/selection-ids.service';
@@ -26,7 +26,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NotaComponent implements OnInit {
 
-  isInVentana$!: Observable<any>;
+
 
   mainTable: string = 'nota';
 
@@ -70,10 +70,10 @@ export class NotaComponent implements OnInit {
 
   fatherId=0;
   father='';
-  desabilitado=true;
+
   columns:any = 0;
 
-  // evaluation$!: Observable<any>;
+
   matricula$!: Observable<any>;
 
   ponderacion = 0;
@@ -123,6 +123,7 @@ export class NotaComponent implements OnInit {
   constructor(private crud: CrudService,
     private selIdsService: SelectionIdsService,
     private getpermission: GetPermissionService,
+    private dt: GetdatetimeService,
 
     ) {
 
@@ -137,6 +138,12 @@ export class NotaComponent implements OnInit {
      setType(valor:any): number {
        return valor;
      }
+
+     desabilitado(fecha: Date): any{
+      // const date = new Date();
+      // console.log('fecha',fecha,date)
+      return false
+    }
 
      getPonderacion(ponderacion: number) { return (ponderacion == 100)? 'blue' : 'red';}
 
@@ -202,6 +209,8 @@ export class NotaComponent implements OnInit {
         })),
         share()
       )!;
+
+
       this.getMatriculaData();
       this.getNotaData();
     }
@@ -222,18 +231,14 @@ export class NotaComponent implements OnInit {
       this.crud.getDataCustom('nota','poblateNota', ides)?.pipe(
         tap(notas => notas?.forEach((nota: any) => {
           cont = 0;
-
+          // nota[0] -> matricula_id , nota[1] -> ponderacion , nota[2] -> final,  notas[3] -> notas
           this.matriculasNotasMap.set(nota[0], nota[3]);
           this.matriculasPonderadoMap.set(nota[0], nota[2]);
 
-          // this.indiceEvalacion.forEach((id: any) => { console.log('id',id)});
-
           nota[3].forEach((n: any) => {
              this.suma[cont] = (this.suma[cont] || 0) + n;
-             // console.log(cont,n, this.suma[cont]);
              cont++;
           })
-          console.log('****************')
 
         }
 
@@ -256,6 +261,10 @@ export class NotaComponent implements OnInit {
     }
 
   ngOnInit(): void {
+
+
+
+
 
     this.usuario$.pipe(
       tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),

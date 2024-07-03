@@ -15,17 +15,17 @@
 
    <div  [formGroup]="notasForm"   class="overflow-auto bg-light"   style="width: 100%; max-height: 700px;">
 
-
     <table  [class]="btable" >
       <thead>
         <tr><th [attr.colspan]="columns+2" [style.background-color]="tablehead" style="text-align: center; vertical-align: middle;color:white; height:40px">Notas</th></tr>
       </thead>
       <tbody>
         <tr>
-          <td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async)" title="{{e.fecha}}">{{e.nombre}} ({{e.ponderacion}}%)</td><td>Ponderado</td>
+          <td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async)">{{e.nombre}} ({{e.ponderacion}}%)</td><td>Ponderado</td>
         </tr>
+        <tr><td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async)">{{e.fecha}}</td></tr>
         <tr>
-          <td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async)"><button class="btn btn-link btn-sm px-3" [disabled]="desabilitado"><em class="bi bi-lock"></em></button>
+          <td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async)"><button class="btn btn-link btn-sm px-3" [disabled]="desabilitado(e.fecha)"><em class="bi bi-lock"></em></button>
           </td><td [style.color] = "getPonderacion(ponderacion)">{{ponderacion}}%</td>
         </tr>
         <tr *ngFor="let matricula of (matricula$ | async)"><td style="text-align: left;">{{matricula.nombre}}</td>
