@@ -11,5 +11,7 @@ td {
 
   tr , th, td {
     height: 3.5cap;
-    background: rgba(254,254,254)
+    background: rgba(254,254,254);
+    color: darkblue;
+    text-indent: 1cap;
   }

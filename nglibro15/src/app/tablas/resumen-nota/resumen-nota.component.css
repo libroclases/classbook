@@ -1,8 +1,17 @@
-table {
-    width:  100%;
+td {
+  align-content: center;
+  text-align: center;
+
 }
 
-th {
-    color: white;
-    text-align: center;
+a {
+  background: rgba(254,254,254,0.001)
 }
+
+tr , th, td {
+  height: 3.5cap;
+  background: rgba(254,254,254);
+  color: darkblue;
+  text-indent: 1cap;
+}
+

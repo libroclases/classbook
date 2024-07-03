@@ -26,24 +26,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NotaComponent implements OnInit {
 
-  // idsMap!: Map<string, number>;
-  // mainTableForeignKeys!: string[];
-  // fkIds:any=[];
-
   isInVentana$!: Observable<any>;
 
   mainTable: string = 'nota';
 
-  // colorPromedio!:string;
-  // colorPromedioEvaluacion!:string;
-  // valorPromedio: any = [];
-
-  // evaluacionMap = new Map<number, any>();
   matriculasNotasMap = new Map<number, any>();
   matriculasPonderadoMap = new Map<number, any>();
-  sumEvaluationMap = new Map<number, any>();
-
-  // indiceEvalacion:any = [];
 
   evaluationEdit = 0;  // marca columna a editar
   edita = false;
@@ -83,15 +71,15 @@ export class NotaComponent implements OnInit {
   fatherId=0;
   father='';
   desabilitado=true;
-  columns = 3
+  columns:any = 0;
 
-  evaluation$!: Observable<any>;
+  // evaluation$!: Observable<any>;
   matricula$!: Observable<any>;
 
   ponderacion = 0;
   suma:any={};
   numMatriculas = 0;
-
+  btable!:string;
   notasForm!: FormGroup;
 
   //   colores
@@ -155,6 +143,7 @@ export class NotaComponent implements OnInit {
      getColor = (color: string | null) => {
 
       if (color == 'primary' || !color) {
+        this.btable = "table table-primary table-striped table-bordered table-sm";
         this.bodybgcolor = this.objcolors.primary.bodybgcolor;
         this.pagination = this.objcolors.primary.pagination;
         this.tablehead = this.objcolors.primary.tablehead;
@@ -163,6 +152,7 @@ export class NotaComponent implements OnInit {
         this.url = this.photo.primary;
       }
       else if (color == 'success') {
+        this.btable = "table table-success table-striped table-bordered table-sm";
         this.bodybgcolor = this.objcolors.success.bodybgcolor;
         this.pagination = this.objcolors.success.pagination;
         this.tablehead = this.objcolors.success.tablehead;
@@ -171,6 +161,7 @@ export class NotaComponent implements OnInit {
         this.url = this.photo.success;
       }
       else if (color == 'info') {
+        this.btable = "table table-info table-striped table-bordered table-sm";
         this.bodybgcolor = this.objcolors.info.bodybgcolor;
         this.pagination = this.objcolors.info.pagination;
         this.tablehead = this.objcolors.info.tablehead;
@@ -204,12 +195,10 @@ export class NotaComponent implements OnInit {
         0,
       ]
       this.ponderacion = 0;
-      // this.indiceEvalacion = [];
       this.evaluacion$ = this.crud.getData('evaluacion', fks)?.pipe(
         tap(eva => eva.forEach((e: any) => {
-          this.sumEvaluationMap.set(e.id, 0);
-          // this.indiceEvalacion.push(e.id);
-          this.ponderacion += e.ponderacion
+          this.ponderacion += e.ponderacion;
+          this.columns +=1;
         })),
         share()
       )!;
@@ -277,7 +266,7 @@ export class NotaComponent implements OnInit {
 
 
     this.selIdsService.msg.pipe(
-      tap((message: (Notification)) => this.updateTable(message))
+      tap((message: (Notification)) => this.updateTable(message)), share()
     )
       .subscribe();
   }

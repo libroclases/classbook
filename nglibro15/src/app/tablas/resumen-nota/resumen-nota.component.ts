@@ -28,11 +28,11 @@ export class ResumenNotaComponent implements OnInit {
 
   mainTable: string = 'resumennota';
 
- 
+
 
   disable:any = {};
   title:any = {}
- 
+
 
   matriculaMap: any = new Map<number,any[]>();
 
@@ -81,7 +81,8 @@ export class ResumenNotaComponent implements OnInit {
   opacity = environment.opacity;
   position = "center";
   size = "cover";
-  
+
+  btable!:string;
 
   objcolors = environment.colors;
 
@@ -135,8 +136,8 @@ export class ResumenNotaComponent implements OnInit {
     let i=0;
     this.asignatura$ = this.crud.getData('cursoprofesor', fks)?.pipe(
       tap(asig => asig.forEach((a:any) => { this.title[i] = a.Asignatura.nombre; this.columns = i;  i++;}))
-    )!;  
-    
+    )!;
+
     this.getMatriculaData();
     this.getResumenNotaData();
   }
@@ -179,13 +180,13 @@ export class ResumenNotaComponent implements OnInit {
       this.selIdsService.getId('colegio'),
       this.selIdsService.getId('curso')
     ]
-    
+
     this.crud.getDataCustom('resumennota', 'poblateResumenNota', ides).pipe(
       tap(promedios => promedios?.forEach((promedio: any) => {
         let mat = promedio[0];
         let cursoprofesor = promedio[1];
         let prom = promedio[2];
-    
+
 
         if (mat_ant != mat) {
           mat_ant = mat;
@@ -200,7 +201,7 @@ export class ResumenNotaComponent implements OnInit {
       })
     )
     ).subscribe();
-    
+
   }
 
   getBiClass(route: string) {
@@ -230,6 +231,7 @@ export class ResumenNotaComponent implements OnInit {
   getColor = (color: string | null) => {
 
     if (color == 'primary' || !color) {
+      this.btable = "table table-primary table-striped  table-bordered  table-sm";
       this.bodybgcolor = this.objcolors.primary.bodybgcolor;
       this.pagination = this.objcolors.primary.pagination;
       this.tablehead = this.objcolors.primary.tablehead;
@@ -238,6 +240,7 @@ export class ResumenNotaComponent implements OnInit {
       this.url = this.photo.primary;
     }
     else if (color == 'success') {
+      this.btable = "table table-success table-striped table-bordered  table-sm";
       this.bodybgcolor = this.objcolors.success.bodybgcolor;
       this.pagination = this.objcolors.success.pagination;
       this.tablehead = this.objcolors.success.tablehead;
@@ -246,6 +249,7 @@ export class ResumenNotaComponent implements OnInit {
       this.url = this.photo.success;
     }
     else if (color == 'info') {
+      this.btable = "table table-info table-striped table-bordered  table-sm";
       this.bodybgcolor = this.objcolors.info.bodybgcolor;
       this.pagination = this.objcolors.info.pagination;
       this.tablehead = this.objcolors.info.tablehead;
@@ -263,7 +267,7 @@ export class ResumenNotaComponent implements OnInit {
 
     ).subscribe()
 
- 
+
 
     this.selIdsService.msg.pipe(
       tap((message: (Notification)) => this.updateTable(message))
