@@ -25,11 +25,12 @@
         </tr>
         <tr><td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async)">{{e.fecha}}</td></tr>
         <tr>
-          <td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async)"><button class="btn btn-link btn-sm px-3" [disabled]="desabilitado(e.fecha)"><em class="bi bi-lock"></em></button>
+          <td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async); index as i"><button class="btn btn-link btn-sm px-3" (click)="editar(i)" [disabled]="desabilitado(e.fecha)"><em class="bi bi-lock"></em></button>
           </td><td [style.color] = "getPonderacion(ponderacion)">{{ponderacion}}%</td>
         </tr>
         <tr *ngFor="let matricula of (matricula$ | async)"><td style="text-align: left;">{{matricula.nombre}}</td>
-          <td *ngFor="let mnota of matriculasNotasMap.get(matricula.id)" [style.color]="getColorNota(mnota)">{{mnota | number:'1.1-1'}}</td>
+          <td *ngFor="let mnota of matriculasNotasMap.get(matricula.id); index as i" [style.color]="getColorNota(mnota)">
+            <span *ngIf="this.editarcolumn==i && this.edita; else mostra"><input type="text" size="3" formControlName="{{matricula.id}}-{{i}}"></span><ng-template #mostra>{{mnota | number:'1.1-1'}}</ng-template></td>
           <td *ngIf="ponderacion == 100" [style.color]="getColorNota(matriculasPonderadoMap.get(matricula.id))">{{matriculasPonderadoMap.get(matricula.id)  | number:'1.1-1'}}</td>
         </tr>
         <tr><td>&nbsp;</td><td [style.color]="getColorNota(setType(s.value)/numMatriculas)" *ngFor="let s of (suma | keyvalue)">{{setType(s.value)/numMatriculas | number:'1.1-1' }}</td></tr>

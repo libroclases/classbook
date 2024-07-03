@@ -38,6 +38,7 @@ export class NotaComponent implements OnInit {
   showtable = true;
   promedio: number | null = 0;
 
+
   url!:string;
   photo = environment.photo;
   opacity = environment.opacity;
@@ -72,7 +73,7 @@ export class NotaComponent implements OnInit {
   father='';
 
   columns:any = 0;
-
+  editarcolumn = 0;
 
   matricula$!: Observable<any>;
 
@@ -124,12 +125,15 @@ export class NotaComponent implements OnInit {
     private selIdsService: SelectionIdsService,
     private getpermission: GetPermissionService,
     private dt: GetdatetimeService,
+    private fb: FormBuilder,
 
     ) {
 
       this.notasForm = new FormGroup({})
 
      }
+
+
 
      getColorNota(nota: number) {
          return  (nota < 4) ? 'red' : 'blue';
@@ -140,9 +144,44 @@ export class NotaComponent implements OnInit {
      }
 
      desabilitado(fecha: Date): any{
-      // const date = new Date();
-      // console.log('fecha',fecha,date)
-      return false
+      const date = (new Date).getTime()
+      const evento: number = Date.parse(fecha + 'T00:00:00+00:00');
+      let diff = (date/1000 - evento/1000)/86400;
+
+      return (diff > 7) ? true : false;
+    }
+
+    generaForm() {
+
+      for (let notas of this.matriculasNotasMap.entries()) {
+
+        let controlname = notas[0].toString() + '-' + this.editarcolumn;
+        const numericNumberReg= '^-?[0-9]\\d*(\\.\\d{1,2})?$';
+
+        this.notasForm.addControl( controlname ,  this.fb.control(notas[1][this.editarcolumn],
+          [Validators.required,
+           Validators.pattern(numericNumberReg),
+           Validators.min(1),
+           Validators.max(7)
+         ]));
+
+      }
+    }
+
+    deleteForm() {
+      for (let notas of this.matriculasNotasMap.entries()) {
+        let controlname = notas[0].toString() + '-' + this.editarcolumn;
+        if (this.notasForm.contains(controlname) == true) {
+        this.notasForm.removeControl(controlname);
+        }
+      }
+    }
+
+
+     editar(col:number) {
+      this.edita = !this.edita;
+      this.editarcolumn = col;
+      if (this.edita) { this.generaForm() } else { this.deleteForm() }
     }
 
      getPonderacion(ponderacion: number) { return (ponderacion == 100)? 'blue' : 'red';}
