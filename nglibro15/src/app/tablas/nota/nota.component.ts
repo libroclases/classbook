@@ -141,7 +141,7 @@ export class NotaComponent implements OnInit {
      }
 
      setType(valor:any): number {
-       return valor;
+       return +valor;
      }
 
      desabilitado(fecha: Date): any{
@@ -182,10 +182,13 @@ export class NotaComponent implements OnInit {
 
       Object.entries(this.notasForm.value).forEach(([key, value]) => {
         if ( value != this.matriculasNotasMap.get(+key.split('-')[0])![+key.split('-')[1]]) {
-             // console.log(key, value, this.matriculasNotasMap.get(+key.split('-')[0])![+key.split('-')[1]]);
              let [matriculaId, columna] = key.split('-');
              let evaluacionId = this.indexEvaluation[columna];
-             console.log(matriculaId, evaluacionId,columna, value);
+             this.crud.putParamsData({nota: this.setType(value)},'nota',[this.setType(matriculaId), evaluacionId]).pipe(
+              tap(msg => console.log(msg)),
+              tap(_ => this.updateTable())
+             )
+             .subscribe();
         }
        }
       )
@@ -305,7 +308,7 @@ export class NotaComponent implements OnInit {
 
       )),
     share()
-  ).subscribe(() => console.log('suma',this.suma));
+  ).subscribe();
 
     }
 

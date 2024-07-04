@@ -154,11 +154,15 @@ class Notas {
     
 
     static modify(req, res) {
-    let consulta = {};
-    // let consulta = getBaseQuery(req);
-    consulta['id'] = req.params.notaId;
-    
+
+    const { matriculaId, evaluacionId } = req.params;
     const { nota } = req.body
+
+    let consulta = {};
+
+    if (matriculaId != '0') {  consulta['matriculaId'] = matriculaId;  }
+    if (evaluacionId != '0') {  consulta['evaluacionId'] = evaluacionId;  }
+    
     return Nota
         .findOne({ where: consulta })
         .then((notas) => {

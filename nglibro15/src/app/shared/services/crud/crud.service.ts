@@ -157,6 +157,23 @@ export class CrudService {
     );
   }
 
+  putParamsData(obj: any,table:string, fk: any[]): Observable<any> {
+
+    let k = '';
+
+    if (fk) {
+      fk.forEach((el: string) => {
+        k += `/${el}`;
+      });
+    }
+    let baseurl = `${this.baseurl}/${table}${k}`;
+    console.log('obj:',table,obj,fk);
+    return this.http.put(baseurl, obj, this.httpOptions).pipe(
+      tap(_ => this.log(`updated ${table} succefuly`)),
+      catchError(this.handleError<any>())
+    );
+  }
+
   deleteData(id: number, table: string): Observable<any> {
     // const extraString = this.getExtraString(table);
     let baseurl = `${this.baseurl}/${table}/${id}`;

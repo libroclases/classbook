@@ -626,7 +626,7 @@ const checkjwd = auth({
     app.post('/api/nota/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/:matriculaId/:evaluacionId',
       checkjwd, requiredScopes('create:nota'),
       Notas.create);
-    app.put('/api/nota/:notaId',
+    app.put('/api/nota/:matriculaId/:evaluacionId',
       checkjwd, requiredScopes('update:nota'),
       Notas.modify);
     app.get('/api/mes',
