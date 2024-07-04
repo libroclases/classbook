@@ -25,7 +25,12 @@
         </tr>
         <tr><td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async)">{{e.fecha}}</td></tr>
         <tr>
-          <td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async); index as i"><button class="btn btn-link btn-sm px-3" (click)="editar(i)" [disabled]="desabilitado(e.fecha)"><em [class]="classlock"></em></button>
+          <td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async); index as i">
+            <button class="btn btn-link btn-sm px-3" (click)="editar(i,e.id)" [disabled]="desabilitado(e.fecha)">
+              <span *ngIf="editarcolumn == i && edita==true; else misenor"><em class="bi bi-unlock"></em></span>
+              <ng-template #misenor><em class="bi bi-lock"></em></ng-template>
+              
+            </button>
           </td><td [style.color] = "getPonderacion(ponderacion)">{{ponderacion}}%</td>
         </tr>
         <tr *ngFor="let matricula of (matricula$ | async)"><td style="text-align: left;">{{matricula.nombre}}</td>

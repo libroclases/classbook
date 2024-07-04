@@ -33,11 +33,12 @@ export class NotaComponent implements OnInit {
   matriculasNotasMap = new Map<number, any>();
   matriculasPonderadoMap = new Map<number, any>();
 
-  evaluationEdit = 0;  // marca columna a editar
+  // evaluationEdit = 0;  // marca columna a editar
   edita = false;
   showtable = true;
   promedio: number | null = 0;
-  indexEvaluation:any={};
+  
+  evaluacionId = 0;
   classlock = "bi bi-lock";
 
   url!:string;
@@ -183,8 +184,8 @@ export class NotaComponent implements OnInit {
       Object.entries(this.notasForm.value).forEach(([key, value]) => {
         if ( value != this.matriculasNotasMap.get(+key.split('-')[0])![+key.split('-')[1]]) {
              let [matriculaId, columna] = key.split('-');
-             let evaluacionId = this.indexEvaluation[columna];
-             this.crud.putParamsData({nota: this.setType(value)},'nota',[this.setType(matriculaId), evaluacionId]).pipe(
+             
+             this.crud.putParamsData({nota: this.setType(value)},'nota',[this.setType(matriculaId), this.evaluacionId]).pipe(
               tap(msg => console.log(msg)),
               tap(_ => this.updateTable())
              )
@@ -196,16 +197,20 @@ export class NotaComponent implements OnInit {
     }
 
 
-     editar(col:number) {
+     editar(col:number, evaluacionId: number) {
+      this.evaluacionId = evaluacionId;
       this.edita = !this.edita;
+      
       this.editarcolumn = col;
       if (this.edita) {
-        this.classlock = "bi bi-unlock"; 
+        // this.classlock = "bi bi-unlock"; 
         this.generaForm() 
       } else {
-        this.classlock= "bi bi-lock" 
+        // this.classlock= "bi bi-lock" 
         this.editarValoresForm(); 
-        this.deleteForm() }
+        this.deleteForm() 
+      }
+      
     }
 
      getPonderacion(ponderacion: number) { return (ponderacion == 100)? 'blue' : 'red';}
@@ -268,8 +273,7 @@ export class NotaComponent implements OnInit {
       this.evaluacion$ = this.crud.getData('evaluacion', fks)?.pipe(
         tap(eva => eva.forEach((e: any) => {
           this.ponderacion += e.ponderacion;
-          this.indexEvaluation[this.columns]=e.id;
-          this.columns +=1;
+          this.columns += 1;
         })),
         share()
       )!;
