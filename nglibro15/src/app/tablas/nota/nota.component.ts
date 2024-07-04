@@ -37,7 +37,8 @@ export class NotaComponent implements OnInit {
   edita = false;
   showtable = true;
   promedio: number | null = 0;
-
+  indexEvaluation:any={};
+  classlock = "bi bi-lock";
 
   url!:string;
   photo = environment.photo;
@@ -118,7 +119,7 @@ export class NotaComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.height =
-      event.target.innerHeight - (this.banner_height + this.menu_height + 155) + 'px';
+      event.target.innerHeight - (this.banner_height + this.menu_height +  this.margen_superior_tabla) + 'px';
   }
 
   constructor(private crud: CrudService,
@@ -181,21 +182,11 @@ export class NotaComponent implements OnInit {
 
       Object.entries(this.notasForm.value).forEach(([key, value]) => {
         if ( value != this.matriculasNotasMap.get(+key.split('-')[0])![+key.split('-')[1]]) {
-             console.log(key, value, this.matriculasNotasMap.get(+key.split('-')[0])![+key.split('-')[1]]);
+             // console.log(key, value, this.matriculasNotasMap.get(+key.split('-')[0])![+key.split('-')[1]]);
+             let [matriculaId, columna] = key.split('-');
+             let evaluacionId = this.indexEvaluation[columna];
+             console.log(matriculaId, evaluacionId,columna, value);
         }
-        /*
-        if (value) { if (key.split('-')[1] == (eventoid).toString() ) {
-          const [notaid, evaluacionid, matriculaid, nota] = keyvalue.split('-');
-          const notasIndice = notaid + '-' + this.notasIndiceMap.get(+key.split('-')[0]);
-          if (keyvalue !== notasIndice) {
-            this.crud.putData({id: notaid, nota: nota},'nota').pipe(
-              tap(() => this.updateTable()),
-              tap(res => this.showdata(res))
-            )
-            .subscribe();
-          }
-        }
-        */
        }
       )
 
@@ -205,7 +196,13 @@ export class NotaComponent implements OnInit {
      editar(col:number) {
       this.edita = !this.edita;
       this.editarcolumn = col;
-      if (this.edita) { this.generaForm() } else { this.editarValoresForm(); this.deleteForm() }
+      if (this.edita) {
+        this.classlock = "bi bi-unlock"; 
+        this.generaForm() 
+      } else {
+        this.classlock= "bi bi-lock" 
+        this.editarValoresForm(); 
+        this.deleteForm() }
     }
 
      getPonderacion(ponderacion: number) { return (ponderacion == 100)? 'blue' : 'red';}
@@ -268,6 +265,7 @@ export class NotaComponent implements OnInit {
       this.evaluacion$ = this.crud.getData('evaluacion', fks)?.pipe(
         tap(eva => eva.forEach((e: any) => {
           this.ponderacion += e.ponderacion;
+          this.indexEvaluation[this.columns]=e.id;
           this.columns +=1;
         })),
         share()
