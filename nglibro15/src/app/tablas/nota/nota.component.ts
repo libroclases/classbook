@@ -177,11 +177,35 @@ export class NotaComponent implements OnInit {
       }
     }
 
+    editarValoresForm() {
+
+      Object.entries(this.notasForm.value).forEach(([key, value]) => {
+        if ( value != this.matriculasNotasMap.get(+key.split('-')[0])![+key.split('-')[1]]) {
+             console.log(key, value, this.matriculasNotasMap.get(+key.split('-')[0])![+key.split('-')[1]]);
+        }
+        /*
+        if (value) { if (key.split('-')[1] == (eventoid).toString() ) {
+          const [notaid, evaluacionid, matriculaid, nota] = keyvalue.split('-');
+          const notasIndice = notaid + '-' + this.notasIndiceMap.get(+key.split('-')[0]);
+          if (keyvalue !== notasIndice) {
+            this.crud.putData({id: notaid, nota: nota},'nota').pipe(
+              tap(() => this.updateTable()),
+              tap(res => this.showdata(res))
+            )
+            .subscribe();
+          }
+        }
+        */
+       }
+      )
+
+    }
+
 
      editar(col:number) {
       this.edita = !this.edita;
       this.editarcolumn = col;
-      if (this.edita) { this.generaForm() } else { this.deleteForm() }
+      if (this.edita) { this.generaForm() } else { this.editarValoresForm(); this.deleteForm() }
     }
 
      getPonderacion(ponderacion: number) { return (ponderacion == 100)? 'blue' : 'red';}
