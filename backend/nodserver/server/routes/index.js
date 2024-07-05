@@ -185,16 +185,16 @@ const checkjwd = auth({
       checkjwd, requiredScopes('update:horaasignada'),
       HorasAsignadas.modify);
     app.get('/api/estadoalumno',
-      checkjwd, requiredScopes('read:estadoalumno'),
+      // checkjwd, requiredScopes('read:estadoalumno'),
       EstadoAlumnos.list);
     app.get('/api/estadoalumno/:annoId/:colegioId/:cursoId/:alumnoId/:matriculaId/:tipoestadoId/fk',
-      checkjwd, requiredScopes('read:estadoalumno'),
+      // checkjwd, requiredScopes('read:estadoalumno'),
       EstadoAlumnos.getByFk);
     app.post('/api/estadoalumno/:annoId/:colegioId/:cursoId/:alumnoId/:matriculaId/:tipoestadoId',
-      checkjwd, requiredScopes('create:estadoalumno'),
+      // checkjwd, requiredScopes('create:estadoalumno'),
       EstadoAlumnos.create);
     app.put('/api/estadoalumno/:estadoalumnoId',
-      checkjwd, requiredScopes('update:estadoalumno'),
+      // checkjwd, requiredScopes('update:estadoalumno'),
       EstadoAlumnos.modify);
     app.get('/api/anotacion',
       checkjwd, requiredScopes('read:anotacion'),
@@ -564,10 +564,10 @@ const checkjwd = auth({
       checkjwd, requiredScopes('update:ventana'),
       Ventanas.modify); 
     app.get('/api/matricula',
-      checkjwd, requiredScopes('read:matricula'),
+      // checkjwd, requiredScopes('read:matricula'),
       Matriculas.list);
     app.get('/api/matricula/:colegioId/:cursoId/:apoderadoId/:alumnoId/:vinculoId/:annoId/fk',
-      checkjwd, requiredScopes('read:matricula'),
+      // checkjwd, requiredScopes('read:matricula'),
       Matriculas.getByFk);
     app.get('/api/matricula/:matriculaId/pk',
       checkjwd, requiredScopes('read:matricula'),
@@ -591,7 +591,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('read:matricula'),
       Matriculas.countHombresMujeres);
     app.post('/api/matricula/:colegioId/:cursoId/:apoderadoId/:alumnoId/:vinculoId/:annoId',
-      checkjwd, requiredScopes('create:matricula'),
+      // checkjwd, requiredScopes('create:matricula'),
       Matriculas.create);
     app.put('/api/matricula/:matriculaId',
       checkjwd, requiredScopes('update:matricula'),

@@ -295,6 +295,9 @@ class Matriculas {
 
         let consulta_cursoprofesor =  { annoId: m.annoId, colegioId: m.colegioId, cursoId: m.cursoId };
           
+          console.log('create_estado_alumno', {...alumno,...matricula , ...estadoalumno, ...consulta_cursoprofesor, ...fecha});
+
+
           EstadoAlumno.create({ ...alumno,...matricula , ...estadoalumno, ...consulta_cursoprofesor, ...fecha})
           .then(estadoalumno => { console.log(estadoalumno.dataValues) });
            
@@ -354,11 +357,13 @@ class Matriculas {
               
                 const c = q.dataValues;
                 const consulta_evaluacion = {
-                  annoId: c.annoId, colegioId: c.colegioId, cursoId: c.cursoId, 
-                  asignaturaId: c.asignaturaId, profesorId: c.profesorId
+                  annoId: c.annoId,  colegioId: c.colegioId, cursoId: c.cursoId
                 }
-                // console.log(consulta_evaluacion) 
+
+                console.log('consulta_evaluacion',consulta_evaluacion);
+            
                 let notasObj = [];
+                
                 Evaluacion.findAll({
                   where: consulta_evaluacion, 
                   attributes: ['id','periodoId'],
@@ -371,16 +376,17 @@ class Matriculas {
                   notas['evaluacionId'] = notas['id'];
                   delete notas['id'];
                   notasObj.push(notas);
-                  // Nota.create(notas).then(nota => { /*console.log(nota.dataValues)*/ });
+                  console.log('notas',{...notas, nota: null});
+                  Nota.create(notas).then(nota => { console.log(nota.dataValues) });
                 
                
                   })
-                  Nota.bulkCreate(notasObj)
+                  // Nota.bulkCreate(notasObj)
                 })
-             
-             
-                
-              })
+                             
+              }
+            
+            )
 
          
           
