@@ -24,7 +24,6 @@ export class MatriculaComponent {
  changeFnsArray: Function[] = [];
  ignoreFkRequirements: string[] = ['colegio'];
  patchFKsFromStorage = ['anno', 'colegio','curso'];
- middleTables: any = {};
 
  constructor( ) { }
 

@@ -105,9 +105,6 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   @Input("patch-fks-from-storage")
   patchFKsFromStorage: string[] = [];
 
-  @Input("middle-tables")
-  middleTables: any = {};
-
   // Router
   multiSelectInitIds: {[key: string]: number} = {};
   lowerUpperTables:any = lowerUpperTables;

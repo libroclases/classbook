@@ -24,7 +24,6 @@ export class AlumnoComponent implements OnInit {
   changeFnsArray: Function[] = [];
   ignoreFkRequirements: string[] = [];
   patchFKsFromStorage = ['region','provincix'];
-  middleTables: any = {};
 
   // Route: from parent
   parentTable: string | null = null;

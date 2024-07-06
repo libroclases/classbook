@@ -73,7 +73,6 @@ tableLabels = ['Colegio' ,'Año', 'Curso' ];
 ignoreFkRequirements: string[] = ['asignatura'];
 changeFnsArray: Function[] = [];
 patchFKsFromStorage = ['colegio', 'anno','curso'];
-middleTables: any = {};
 
 setAny(valor:any): any { return valor }
 

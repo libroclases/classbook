@@ -24,7 +24,6 @@ selTables = [];
 changeFnsArray: Function[] = [];
 ignoreFkRequirements: string[] = [];
 patchFKsFromStorage = [];
-middleTables: any = {};
 
 constructor( ) { }
 

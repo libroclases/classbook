@@ -65,7 +65,6 @@ export class ResumenNotaComponent implements OnInit {
   ignoreFkRequirements: string[] = ['asignatura'];
   changeFnsArray: Function[] = [];
   patchFKsFromStorage = ['anno', 'periodo', 'colegio'];
-  middleTables: any = {};
 
   // fatherId = 0;
   // father = '';

@@ -357,7 +357,7 @@ class Matriculas {
               
                 const c = q.dataValues;
                 const consulta_evaluacion = {
-                  annoId: c.annoId,  colegioId: c.colegioId, cursoId: c.cursoId
+                  annoId: c.annoId,  colegioId: c.colegioId, cursoId: c.cursoId, cursoprofesorId: c.id
                 }
 
                 console.log('consulta_evaluacion',consulta_evaluacion);

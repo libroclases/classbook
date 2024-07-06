@@ -69,7 +69,6 @@ export class NotaComponent implements OnInit {
   changeFnsArray: Function[] = [];
   patchFKsFromStorage = ['anno','periodo','curso','colegio'];
   customEndpoints = null;
-  middleTables = {}; // 'cursoprofesor': ['anno','colegio','curso']
 
   fatherId=0;
   father='';

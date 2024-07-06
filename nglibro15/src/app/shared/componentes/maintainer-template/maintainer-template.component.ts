@@ -18,7 +18,6 @@ export class MaintainerTemplateComponent {
   changeFnsArray = [];
   ignoreFkRequirements = [];
   patchFKsFromStorage = [];
-  middleTables:any = {};
 
   constructor( ) { }
 }

@@ -86,8 +86,6 @@ export class HorarioComponent implements OnInit, OnDestroy {
   mainTable = 'horario';
   ignoreFkRequirements = [];
   patchFKsFromStorage = ['colegio', 'curso', 'anno'];
-  middleTables: any = {};
-
 
   // Principal
 

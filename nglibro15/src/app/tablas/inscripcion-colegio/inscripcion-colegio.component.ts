@@ -24,7 +24,6 @@ export class InscripcionColegioComponent {
   changeFnsArray: Function[] = [];
   ignoreFkRequirements: string[] = [];
   patchFKsFromStorage = ['anno','colegio'];
-  middleTables: any = {};
 
   constructor( ) { }
 

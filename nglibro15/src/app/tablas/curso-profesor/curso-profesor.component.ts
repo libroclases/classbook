@@ -24,7 +24,6 @@ export class CursoProfesorComponent {
   changeFnsArray: Function[] = [];
   ignoreFkRequirements: string[] = [];
   patchFKsFromStorage = ['anno','colegio','curso'];
-  middleTables: any = {};
 
   constructor( ) { }
 

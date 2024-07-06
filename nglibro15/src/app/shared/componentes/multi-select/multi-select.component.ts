@@ -33,9 +33,6 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
   @Input('custom-endpoints')
   customEndpoints: any = null;
 
-  @Input('middle-tables')
-  middleTables: any = null; // UVR
-
   @Input('patch-fks-from-storage')
   patchTablesFromStorage: string[] = [];
 
@@ -74,12 +71,6 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
     if (this.customEndpoints != null) {
       Object.keys(this.customEndpoints).forEach((table) =>
         this.hasCustomEndpoint.set(table, true)
-      );
-    }
-
-    if (this.middleTables != null) {
-      Object.keys(this.middleTables).forEach((table) =>
-        this.hasMiddleTable.set(table, true)
       );
     }
 
@@ -126,7 +117,6 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
     }
     
     console.log('patchTablesFromStorage:',this.patchTablesFromStorage);
-    console.log('middleTables:',this.middleTables);
     console.log('storage:',storageFks);
     console.log('freetables', this.freeTables);
     console.log('considerReqSel', true);

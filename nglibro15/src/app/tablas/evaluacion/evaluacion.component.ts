@@ -25,7 +25,6 @@ export class EvaluacionComponent {
  changeFnsArray: Function[] = [];
  ignoreFkRequirements: string[] = ['asignatura','profesor'];
  patchFKsFromStorage = ['anno','periodo','colegio','curso'];
- middleTables: any = {};
 
  constructor( ) { }
 
