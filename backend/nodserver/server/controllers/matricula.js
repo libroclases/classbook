@@ -377,11 +377,11 @@ class Matriculas {
                   delete notas['id'];
                   notasObj.push(notas);
                   console.log('notas',{...notas, nota: null});
-                  Nota.create(notas).then(nota => { console.log(nota.dataValues) });
+                  //Nota.create(notas).then(nota => { console.log(nota.dataValues) });
                 
                
                   })
-                  // Nota.bulkCreate(notasObj)
+                  Nota.bulkCreate(notasObj)
                 })
                              
               }
