@@ -82,7 +82,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
   // Selectores
 
-  selTables = ["anno", "colegio", "curso", "profesor","asignatura","dix"];
+  selTables = ["anno", "colegio", "curso","dix"];
   mainTable = 'horario';
   ignoreFkRequirements = [];
   patchFKsFromStorage = ['colegio', 'curso', 'anno'];
@@ -104,7 +104,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
   multiSelectInitIds: {[key: string]: number} = {};
 
   days: any = [{ id:1, nombre: 'Lunes'}, {id:2, nombre: 'Martes'}, {id:3 , nombre: 'Miercoles'}, {id:4 , nombre: 'Jueves'},
-   {id:5, nombre: 'Viernes'}, {id:6, nombre: 'Sabados'}];
+   {id:5, nombre: 'Viernes'}];
 
   mostraHorario = false;
 
@@ -308,12 +308,15 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
 
     // Validadiones
+
+    /*
     if (this.mainTable=='horario') {
       this.vhorario$ = this.crud.getData('horario',[fks[0],fks[1],fks[2],0,0,0])! // validar tipo 1 => mismo horario
       this.initValidators1()
       this.phorario$ = this.crud.getData('horario',[fks[0],fks[1],0,0,0,0])! // validar tipo 2 => profesor distintos cursos
       this.initValidators2()
     }
+    */
 
     if (fks[0] * fks[1] * fks[2] > 0) {
 

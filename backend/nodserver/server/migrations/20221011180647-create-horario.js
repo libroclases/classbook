@@ -11,6 +11,15 @@ module.exports = {
       hora: {
         type: Sequelize.INTEGER
       },
+      annoId: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Anno',
+          key: 'id',
+          as: 'Anno',
+        }
+      },
       colegioId: {
         allowNull: true,
         type: Sequelize.INTEGER,
@@ -29,31 +38,13 @@ module.exports = {
           as: 'Curso',
         }
       },
-      asignaturaId: {
+      cursoprofesorId: {
         allowNull: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Asignatura',
+          model: 'CursoProfesor',
           key: 'id',
-          as: 'Asignatura',
-        }
-      },
-      profesorId: {
-        allowNull: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Profesor',
-          key: 'id',
-          as: 'Profesor',
-        }
-      },
-      annoId: {
-        allowNull: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Anno',
-          key: 'id',
-          as: 'Anno',
+          as: 'CursoProfesor',
         }
       },
       dixId: {

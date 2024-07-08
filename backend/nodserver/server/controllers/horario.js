@@ -1,6 +1,6 @@
 import model, { sequelize } from '../models';
 
-const { Horario, Colegio, Curso, Profesor, Asignatura, Anno, Dix } = model;
+const { Horario, Colegio, Curso, CursoProfesor, Anno, Dix } = model;
 
   class Horarios {
 
@@ -10,29 +10,28 @@ const { Horario, Colegio, Curso, Profesor, Asignatura, Anno, Dix } = model;
         .findAll({
           // where: getBaseQuery(req),
           attributes: ['id','hora'],
-          order: [['hora','ASC']],
           include: [
+            { model:Anno, attributes:['id','nombre'], where: { } },
             { model:Colegio, attributes:['id','nombre'], where: { } },
             { model:Curso, attributes:['id','nombre'], where: { } },
-            { model:Asignatura, attributes:['id','nombre'], where: { } },
-            { model:Profesor, attributes:['id','nombre', 'apellido1','apellido2'], where: { } },
-            { model:Anno, attributes:['id','nombre'], where: { } },
+            { model:CursoProfesor, attributes:['id'], where: { } },
             { model:Dix, attributes:['id','nombre'], where: { } },
- 
-                ]
+         ],
+         order: [[{ model: Dix }, 'id','ASC'], ['hora','ASC']],
+
       })
         .then(horarios => res.status(200).send(horarios))
         .catch(error => res.status(400).send(error));
     }
  
     static disponibilidadHora (req, res) {
-      const {annoId, colegioId, profesorId, dixId } = req.params;
+      const {annoId, colegioId, cursoprofesorId, dixId } = req.params;
       let consulta = {};
       // let consulta = getBaseQuery(req);
 
       if (annoId != '0') {  consulta['annoId'] = annoId;  }
       if (colegioId != '0') {  consulta['colegioId'] = colegioId;  }
-      if (profesorId != '0') {  consulta['profesorId'] = profesorId;  }
+      if (cursoprofesorId != '0') {  consulta['cursoprofesorId'] = cursoprofesorId;  }
       if (dixId != '0') {  consulta['dixId'] = dixId;  }
 
 
@@ -45,28 +44,23 @@ const { Horario, Colegio, Curso, Profesor, Asignatura, Anno, Dix } = model;
 
     static groupByFk(req, res) {
 
-      const {annoId, colegioId, cursoId, profesorId, asignaturaId } = req.params;  
+      const {annoId, colegioId, cursoId, cursoprofesorId } = req.params;  
       let consulta = {};
-      // let consulta = getBaseQuery(req);
-      console.log(" consulta ");
-
       
       if (colegioId != '0') {  consulta['colegioId'] = colegioId;  }
       if (cursoId != '0') {  consulta['cursoId'] = cursoId;  }
-      if (asignaturaId != '0') {  consulta['asignaturaId'] = asignaturaId;  }
-      if (profesorId != '0') {  consulta['profesorId'] = profesorId;  }
+      if (cursoprofesorId != '0') {  consulta['cursoprofesorId'] = cursoprofesorId;  }
       if (annoId != '0') {  consulta['annoId'] = annoId;  }
 
       return Horario
-      .findAll({ where: consulta , group: ['Profesor.id','Asignatura.id','Colegio.id','Curso.id','Anno.id'], 
-      attributes: ['Profesor.id','Asignatura.id','Colegio.id','Curso.id','Anno.id', [sequelize.fn('COUNT','*'),'TotalHoras']], 
+      .findAll({ where: consulta , group: ['Profesor.id','Colegio.id','Curso.id','CursoProfesor.id','Anno.id'], 
+      attributes: ['Profesor.id','Colegio.id','Curso.id','CursoProfesor.id','Anno.id', [sequelize.fn('COUNT','*'),'TotalHoras']], 
       include: [
         { model:Profesor, attributes:['id','nombre', 'apellido1','apellido2'], where: { } },
         { model:Colegio, attributes:['id','nombre'], where: { } },
-        { model:Curso, attributes:['id','nombre'], where: { } },
-        { model:Anno, attributes:['id','nombre'], where: { } },
-        { model:Asignatura, attributes:['id','nombre'], where: { }  }           
-        ]
+        { model:CursoProfesor, attributes:['id'], where: { } },
+        { model:Anno, attributes:['id','nombre'], where: { } },           
+        ] 
       })
       .then(horarios => res.status(200).send(horarios))
       .catch(error => res.status(400).send(error));
@@ -75,35 +69,32 @@ const { Horario, Colegio, Curso, Profesor, Asignatura, Anno, Dix } = model;
     static getByFk(req, res) {
 
 
-      const { annoId, colegioId, cursoId, profesorId, asignaturaId, dixId} = req.params;
+      const { annoId, colegioId, cursoId, cursoprofesorId, dixId} = req.params;
       
       let consulta = {};
-      // let consulta = getBaseQuery(req);
       
+      if (annoId != '0') {  consulta['annoId'] = annoId;  }
       if (colegioId != '0') {  consulta['colegioId'] = colegioId;  }
       if (cursoId != '0') {  consulta['cursoId'] = cursoId;  }
-      if (asignaturaId != '0') {  consulta['asignaturaId'] = asignaturaId;  }
-      if (profesorId != '0') {  consulta['profesorId'] = profesorId;  }
-      if (annoId != '0') {  consulta['annoId'] = annoId;  }
+      if (cursoprofesorId != '0') {  consulta['cursoprofesorId'] = cursoprofesorId;  }
       if (dixId != '0') {  consulta['dixId'] = dixId;  }
 
       return Horario
       .findAll({ where: consulta , attributes: ['id','hora'], order: [['hora','ASC']],
       include: [
-        { model:Colegio, attributes:['id','nombre'], where: { } },
-        { model:Curso, attributes:['id','nombre'], where: { } },    
-        { model:Asignatura, attributes:['id','nombre'], where: { } },
-        { model:Profesor, attributes:['id','nombre', 'apellido1','apellido2'], where: { } },
-        { model:Anno, attributes:['id','nombre'], where: { } },
+       //  { model:Anno, attributes:['id','nombre'], where: { } },
+       //  { model:Colegio, attributes:['id','nombre'], where: { } },
+       //  { model:Curso, attributes:['id','nombre'], where: { } },    
+         { model:CursoProfesor, attributes:['id',], where: { } },
         { model:Dix, attributes:['id','nombre'], where: { } }
-                ]
+        ], order: [[{ model: Dix }, 'id','ASC'], ['hora','ASC']], 
       })
       .then(horarios => res.status(200).send(horarios))
       .catch(error => res.status(400).send(error));
   }
 
     static create(req, res) {
-      const { annoId, colegioId, cursoId, profesorId, asignaturaId, dixId } = req.params;
+      const { annoId, colegioId, cursoId, cursoprofesorId,  dixId } = req.params;
       const { hora } = req.body;
 
       return Horario
@@ -111,8 +102,7 @@ const { Horario, Colegio, Curso, Profesor, Asignatura, Anno, Dix } = model;
             hora,
             colegioId,
             cursoId,
-            asignaturaId,
-            profesorId,
+            cursoprofesorId,
             annoId,
             dixId,
    
@@ -129,7 +119,7 @@ const { Horario, Colegio, Curso, Profesor, Asignatura, Anno, Dix } = model;
       let consulta = {};
       // let consulta = getBaseQuery(req);
       consulta['id'] = req.params.horarioId;
-      const { hora, Colegio, Curso, Profesor, Asignatura,  Anno, Dix } = req.body
+      const { hora, Colegio, Curso, CursoProfesor, Anno, Dix } = req.body
       return Horario
         .findOne({ where: consulta })
         .then((horario) => {
@@ -137,8 +127,7 @@ const { Horario, Colegio, Curso, Profesor, Asignatura, Anno, Dix } = model;
             hora: hora || horario.nombre,
             colegioId: Colegio || horario.colegioId,
             cursoId: Curso || horario.cursoId,
-            asignaturaId: Asignatura ||   horario.asignaturaId,
-            profesorId: Profesor || horario.profesorId,
+            cursoprofesorId: CursoProfesor || horario.cursoprofesorId,
             annoId: Anno || horario.annoId,
             dixId: Dix || horario.dixId,
     
@@ -150,8 +139,7 @@ const { Horario, Colegio, Curso, Profesor, Asignatura, Anno, Dix } = model;
                 hora: hora || updatedHorario.hora,
                 colegioId: Colegio || updatedHorario.colegioId,
                 cursoId: Curso || updatedHorario.cursoId,
-                asignaturaId: Asignatura || updatedHorario.asignaturaId,
-                profesorId: Profesor || updatedHorario.profesorId,
+                cursoprofesorId: CursoProfesor || updatedHorario.cursoprofesorId,
                 annoId: Anno || updatedHorario.annoId,
                 dixId: Dix || updatedHorario.dixId
               }
@@ -164,7 +152,7 @@ const { Horario, Colegio, Curso, Profesor, Asignatura, Anno, Dix } = model;
 
   static delete(req, res) {
     let consulta = {};
-    // let consulta = getBaseQuery(req);
+
     consulta['id'] = req.params.horarioId;
     return Horario
       .findOne({ where: consulta })

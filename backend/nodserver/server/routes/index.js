@@ -359,13 +359,13 @@ const checkjwd = auth({
     app.get('/api/horario/:annoId/:colegioId/:profesorId/:dixId/disponibilidad_hora',
       checkjwd, requiredScopes('read:horario'),
       Horarios.disponibilidadHora);
-    app.get('/api/horario/:annoId/:colegioId/:cursoId/:profesorId/:asignaturaId/:dixId/group',
-      checkjwd, requiredScopes('read:horario'),
+    app.get('/api/horario/:annoId/:colegioId/:cursoId/:cursoprofesorId/:dixId/group',
+      // checkjwd, requiredScopes('read:horario'),
       Horarios.groupByFk);
-    app.get('/api/horario/:annoId/:colegioId/:cursoId/:profesorId/:asignaturaId/:dixId/fk',
-      checkjwd, requiredScopes('read:horario'),
+    app.get('/api/horario/:annoId/:colegioId/:cursoId/:cursoprofesorId/:dixId/fk',
+      // checkjwd, requiredScopes('read:horario'),
       Horarios.getByFk);
-    app.post('/api/horario/:annoId/:colegioId/:cursoId/:profesorId/:asignaturaId/:dixId',
+    app.post('/api/horario/:annoId/:colegioId/:cursoId/:cursoprofesorId/:dixId',
       checkjwd, requiredScopes('create:horario'),
       Horarios.create);
     app.put('/api/horario/:horarioId',

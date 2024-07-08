@@ -19,6 +19,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   Horario.associate = function (models) {
+
+    Horario.belongsTo(models.Anno, {
+      foreignKey: "annoId",
+    });
+
     Horario.belongsTo(models.Colegio, {
       foreignKey: "colegioId",
     });
@@ -27,17 +32,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "cursoId",
     });
 
-    Horario.belongsTo(models.Asignatura, {
-      foreignKey: "asignaturaId",
+    Horario.belongsTo(models.CursoProfesor, {
+      foreignKey: "cursoprofesorId",
     });
 
-    Horario.belongsTo(models.Profesor, {
-      foreignKey: "profesorId",
-    });
-
-    Horario.belongsTo(models.Anno, {
-      foreignKey: "annoId",
-    });
 
     Horario.belongsTo(models.Dix, {
       foreignKey: "dixId",
