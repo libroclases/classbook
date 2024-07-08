@@ -1075,7 +1075,7 @@ export const modalDataObject: any = {
 
   Horario: {
     mainTable: 'horario',
-    tables: ['profesor', 'asignatura'],
+    tables: ['cursoprofesor'],
     textFields: ['hora'],
     booleanFields:[],
     dateFields: [],

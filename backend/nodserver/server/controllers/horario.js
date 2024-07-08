@@ -100,10 +100,10 @@ const { Horario, Colegio, Curso, CursoProfesor, Anno, Dix } = model;
       return Horario
         .create({
             hora,
+            annoId,
             colegioId,
             cursoId,
             cursoprofesorId,
-            annoId,
             dixId,
    
       })

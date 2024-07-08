@@ -58,10 +58,6 @@ module.exports = (sequelize, DataTypes) => {
   Profesor.associate = function (models) {
     // associations can be defined here
 
-    Profesor.hasMany(models.Horario, {
-      foreignKey: "profesorId",
-    });
-
     Profesor.hasMany(models.CursoProfesor, {
       foreignKey: "profesorId",
     });

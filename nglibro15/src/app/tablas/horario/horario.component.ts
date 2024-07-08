@@ -82,9 +82,9 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
   // Selectores
 
-  selTables = ["anno", "colegio", "curso","dix"];
+  selTables = ["anno", "colegio", "curso","cursoprofesor","dix"];
   mainTable = 'horario';
-  ignoreFkRequirements = [];
+  ignoreFkRequirements = ['profesor','asignatura'];
   patchFKsFromStorage = ['colegio', 'curso', 'anno'];
 
   // Principal
@@ -168,7 +168,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
     this.takenDaysMap.set(3,[]);
     this.takenDaysMap.set(4,[]);
     this.takenDaysMap.set(5,[]);
-    this.takenDaysMap.set(6,[]);
+
 
     const busca1 = (val:any):any => {
 
@@ -196,7 +196,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
     this.takenDaysProf = [];
     const busca2 = (val:any):any => {
 
-       val.forEach((v:any) => this.takenDaysProf.push({hora: v.hora, dia: v.Dix.id, profesor: v.Profesor.id}))
+       val.forEach((v:any) => this.takenDaysProf.push({hora: v.hora, dia: v.Dix.id, cursoprofesor: v.CursoProfesor.id}))
 
     }
 
@@ -282,17 +282,17 @@ export class HorarioComponent implements OnInit, OnDestroy {
   }
 
   obtenerHorasAsignadas(horario: any, dia: number)  {
-    let i=0
-    let horamap = new Map<number, any>();
+    // let i=0
+    let horaMap = new Map<number, any>();
     let vjson:any[] = [];
 
 
-    horario.forEach((h:any) => horamap.set(h.hora, { id: h.id, hora: h.hora,
-      Profesor: h.Profesor,Asignatura: h.Asignatura,  Colegio: h.Colegio, Curso: h.Curso, Anno: h.Anno, Dix: h.Dix}))
+    horario.forEach((h:any) => horaMap.set(h.hora, { id: h.id, hora: h.hora,
+        Colegio: h.Colegio, Curso: h.Curso, CursoProfesor: h.CursoProfesor, Anno: h.Anno, Dix: h.Dix}))
 
     for (let key of this.selecTablePeriod) {
-        if (horamap.has(key+1)) {
-          vjson.push(horamap.get(key+1)) // para validador hora
+        if (horaMap.has(key+1)) {
+          vjson.push(horaMap.get(key+1)) // para validador hora
         } else {
           vjson.push({})
         } ;
@@ -305,18 +305,19 @@ export class HorarioComponent implements OnInit, OnDestroy {
   getDaysOfWeek(): void {
 
     let fks = this.getForeignKeysOfMainTable()
+    // let fks = [4,1,19,0,0]
 
 
     // Validadiones
 
-    /*
+    
     if (this.mainTable=='horario') {
-      this.vhorario$ = this.crud.getData('horario',[fks[0],fks[1],fks[2],0,0,0])! // validar tipo 1 => mismo horario
+      this.vhorario$ = this.crud.getData('horario',[fks[0],fks[1],fks[2],0,0])! // validar tipo 1 => mismo horario
       this.initValidators1()
-      this.phorario$ = this.crud.getData('horario',[fks[0],fks[1],0,0,0,0])! // validar tipo 2 => profesor distintos cursos
+      this.phorario$ = this.crud.getData('horario',[fks[0],fks[1],0,0,0])! // validar tipo 2 => profesor distintos cursos
       this.initValidators2()
     }
-    */
+    
 
     if (fks[0] * fks[1] * fks[2] > 0) {
 

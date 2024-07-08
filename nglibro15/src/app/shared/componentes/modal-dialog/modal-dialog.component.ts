@@ -121,7 +121,7 @@ function zfill(number: number, width: number) {
       this.modalbutton = this.data.registro.modalbutton;
 
       if(this.data.mainTable == 'horario') {
-        this.selectedteacher = this.data.registro.Profesor.id;
+        this.selectedteacher = this.data.registro.CursoProfesor.id;
       }
       this.modalData = modalDataObject[this.data.tabla];
 
@@ -460,7 +460,7 @@ function zfill(number: number, width: number) {
         else {
                 /* horario */
 
-                if (this.data.mainTable == 'horario') { ids[5] = this.registro.Dix.id }
+                if (this.data.mainTable == 'horario') { ids[4] = this.registro.Dix.id }
 
 
                 /* personTables */

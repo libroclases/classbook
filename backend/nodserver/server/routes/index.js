@@ -366,7 +366,7 @@ const checkjwd = auth({
       // checkjwd, requiredScopes('read:horario'),
       Horarios.getByFk);
     app.post('/api/horario/:annoId/:colegioId/:cursoId/:cursoprofesorId/:dixId',
-      checkjwd, requiredScopes('create:horario'),
+      // checkjwd, requiredScopes('create:horario'),
       Horarios.create);
     app.put('/api/horario/:horarioId',
       checkjwd, requiredScopes('update:horario'),

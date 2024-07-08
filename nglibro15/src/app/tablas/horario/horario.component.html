@@ -60,19 +60,18 @@
               <tbody>
 
                 <tr *ngFor="let dayOf of dayOfWeekMap.get(d.id-1)">
-
-                    <td *ngIf="dayOf.Asignatura">
-
-                            <button class="btn btn-outline-light text-dark btn-sm" data-bs-toggle="tooltip"  [disabled]="stateOfButtonEdit"
-                               title=" {{dayOf.Profesor.apellido1}} {{dayOf.Profesor.apellido2}} {{dayOf.Profesor.nombre}}"
-                              (click)="openDialog(dayOf,'update')">{{dayOf.Asignatura.nombre}}
-                            </button>
-
-                    </td>
-                    <td *ngIf="!dayOf.Asignatura">
-                      &nbsp;
-                    </td>
-
+                    
+                      <td>
+                        <ng-container  *ngIf="dayOf.CursoProfesor; else Nulo">
+                           <button class="btn btn-outline-light text-dark btn-sm" data-bs-toggle="tooltip"  [disabled]="stateOfButtonEdit"
+                           title="poronga"
+                           (click)="openDialog(dayOf,'update')">{{dayOf.CursoProfesor.id}}
+                           </button>
+                        </ng-container>
+                        <ng-template #Nulo>&nbsp;</ng-template>                    
+                      </td>
+                      
+              
                 </tr>
 
 
