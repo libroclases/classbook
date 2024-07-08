@@ -281,6 +281,8 @@ export class HorarioComponent implements OnInit, OnDestroy {
     return this.selIdsService.getId(table);
   }
 
+ 
+
   obtenerHorasAsignadas(horario: any, dia: number)  {
     // let i=0
     let horaMap = new Map<number, any>();
