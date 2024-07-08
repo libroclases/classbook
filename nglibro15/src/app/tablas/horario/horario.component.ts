@@ -82,7 +82,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
   // Selectores
 
-  selTables = ["anno", "colegio", "curso","cursoprofesor","dix"];
+  selTables = ["anno", "colegio", "curso","cursoprofesor"];
   mainTable = 'horario';
   ignoreFkRequirements = ['profesor','asignatura'];
   patchFKsFromStorage = ['colegio', 'curso', 'anno'];
