@@ -146,11 +146,15 @@ export class NotaComponent implements OnInit {
      }
 
      desabilitado(fecha: Date): any{
-      const date = (new Date).getTime()
-      const evento: number = Date.parse(fecha + 'T00:00:00+00:00');
-      this.diff = Math.round((evento/1000 - date/1000)/86400)+1;
+      // const date = (new Date).getTime()
+      // const evento: number = Date.parse(fecha + 'T00:00:00+00:00');
+      // this.diff = Math.round((evento/1000 - date/1000)/86400)+1;
+      // const fechaInicial = fecha;
+      //const fechaFinal = new Date();
+      let dias:any = this.dt.calcularDiasHabiles(new Date(fecha + 'T00:00:00+00:00'),new Date())-1;
 
-      return (this.diff >= -5 && this.diff <= 0) ? false : true;
+      this.diff = dias;
+      return (dias <=3  && dias >= 0) ? false : true;
     }
 
     generaForm() {
