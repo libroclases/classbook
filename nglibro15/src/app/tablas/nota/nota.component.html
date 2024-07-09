@@ -25,10 +25,10 @@
         <tr><td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async)">{{e.fecha}}</td></tr>
         <tr>
           <td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async); index as i">
-            <button class="btn btn-link btn-sm px-3" (click)="editar(i,e.id)" [disabled]="desabilitado(e.fecha)">
+            <button class="btn btn-link btn-sm px-3" (click)="editar(i,e.id)" [disabled]="desabilitado(e.fecha)">[{{diff}}]
               <span *ngIf="editarcolumn == i && edita==true; else misenor"><em class="bi bi-unlock"></em></span>
               <ng-template #misenor><em class="bi bi-lock"></em></ng-template>
-              
+
             </button>
           </td><td [style.color] = "getPonderacion(ponderacion)">{{ponderacion}}%</td>
         </tr>
@@ -49,49 +49,6 @@
       </tbody>
     </table>
 
-
-
-    <!--table *ngIf="showtable" class="table table-bordered table-hover">
-
-        <tr><th  [attr.colspan]="numcols" [style.background-color]="tablehead" style="text-align: center;color:white; height:40px" >Notas</th></tr>
-        <tr *ngIf="evaluation$"><th style="text-align: center">&nbsp;</th><td *ngFor="let e of (evaluation$ | async)">
-          <a mat-button (click)="openDialog(e)" title='{{e.fecha | date}}'>{{e.nombre}}&nbsp;{{e.ponderacion}}%</a></td><td><a mat-button  (click)="openDialog()"><em class="bi bi-plus"></em></a></td></tr>
-        <tr *ngIf="evaluation$"><th style="text-align: center">&nbsp;</th><td *ngFor="let e of (evaluation$ | async)">
-          <a *ngIf="edita==true && evaluationEdit == e.id; else cerrado" class="btn btn-link btn-sm px-3" (click)="editaEvaluacion(e.id,e.Colegio.id , e.fecha)"><em class="bi bi-unlock"></em></a>
-          <ng-template #cerrado><a class="btn btn-link btn-sm px-3"  (click)="editaEvaluacion(e.id, e.Colegio.id, e.fecha)"><em class="bi bi-lock"></em></a></ng-template></td><td>{{ponderacion}}%</td>
-        </tr>
-        <tr *ngFor="let m of (matricula$ | async)">
-
-          <td style="width: 30%; text-align: left ; text-indent: 1cap;">{{m | json}}</td>
-          <td  *ngFor="let nota of (matriculaNotaMap.get(m.id) | async)">
-            <span *ngIf="edita==true && this.disable.editar == false && nota.Evaluacion.id == evaluationEdit && (isInVentana$ | async) ; else mostra_nota">
-
-            <input type="text" size="3" id="{{nota.id}}-{{nota.Evaluacion.id}}-{{nota.Matricula.id}}"  formControlName="{{nota.id}}-{{nota.Evaluacion.id}}-{{nota.Matricula.id}}">
-            <div *ngIf="notasForm.controls[nota.id + '-' + nota.Evaluacion.id + '-' + nota.Matricula.id].invalid && (notasForm.controls[nota.id + '-' + nota.Evaluacion.id + '-' + nota.Matricula.id].dirty || notasForm.controls[nota.id + '-' + nota.Evaluacion.id + '-' + nota.Matricula.id].touched)"  class="alert alert-danger">
-              <div *ngIf="notasForm.controls[nota.id + '-' + nota.Evaluacion.id + '-' + nota.Matricula.id]?.errors?.['required']">Por favor ingrese nota</div>
-              <div *ngIf="notasForm.controls[nota.id + '-' + nota.Evaluacion.id + '-' + nota.Matricula.id]?.errors?.['pattern']">Sólo números</div>
-              <div *ngIf="notasForm.controls[nota.id + '-' + nota.Evaluacion.id + '-' + nota.Matricula.id]?.errors?.['min']">Nota mínima 1</div>
-              <div *ngIf="notasForm.controls[nota.id + '-' + nota.Evaluacion.id + '-' + nota.Matricula.id]?.errors?.['max']">Nota Máxima 7</div>
-            </div>
-          </span>
-
-            <ng-template #mostra_nota><span [style.color]="colorNota(nota.nota)">{{nota.nota  | number:'1.1-1'}}</span></ng-template>
-          <td>
-            <b *ngIf="ponderacion==100" [style.color]="getPromedioMatricula(m.id)[1]">{{ getPromedioMatricula(m.id)[0] | number:'1.1-1'}}</b>
-          </td>
-
-        </tr>
-        <tr>
-        <td>&nbsp;</td><td *ngFor="let e of (evaluation$ | async)">
-          <span>
-            <b *ngIf="ponderacion==100"  [style.color]="getSumEvaluacion(e.id)[1]">{{ getSumEvaluacion(e.id)[0]  | number:'1.1-1' }}</b>
-          </span>
-        </td>
-           <td *ngIf="ponderacion==100"><b  [style.color]="sumPromedioMatricula()[1]">{{sumPromedioMatricula()[0] |  number:'1.1-1' }}</b></td>
-        </tr>
-
-
-    </table-->
 
   </div>
 

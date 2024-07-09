@@ -37,7 +37,7 @@ export class NotaComponent implements OnInit {
   edita = false;
   showtable = true;
   promedio: number | null = 0;
-  
+
   evaluacionId = 0;
   classlock = "bi bi-lock";
 
@@ -75,6 +75,7 @@ export class NotaComponent implements OnInit {
 
   columns:any = 0;
   editarcolumn = 0;
+  diff = 0;
 
   matricula$!: Observable<any>;
 
@@ -147,9 +148,9 @@ export class NotaComponent implements OnInit {
      desabilitado(fecha: Date): any{
       const date = (new Date).getTime()
       const evento: number = Date.parse(fecha + 'T00:00:00+00:00');
-      let diff = (date/1000 - evento/1000)/86400;
+      this.diff = Math.round((evento/1000 - date/1000)/86400)+1;
 
-      return (diff > 7) ? true : false;
+      return (this.diff >= -5 && this.diff <= 0) ? false : true;
     }
 
     generaForm() {
@@ -183,7 +184,7 @@ export class NotaComponent implements OnInit {
       Object.entries(this.notasForm.value).forEach(([key, value]) => {
         if ( value != this.matriculasNotasMap.get(+key.split('-')[0])![+key.split('-')[1]]) {
              let [matriculaId, columna] = key.split('-');
-             
+
              this.crud.putParamsData({nota: this.setType(value)},'nota',[this.setType(matriculaId), this.evaluacionId]).pipe(
               tap(msg => console.log(msg)),
               tap(_ => this.updateTable())
@@ -199,17 +200,17 @@ export class NotaComponent implements OnInit {
      editar(col:number, evaluacionId: number) {
       this.evaluacionId = evaluacionId;
       this.edita = !this.edita;
-      
+
       this.editarcolumn = col;
       if (this.edita) {
-        // this.classlock = "bi bi-unlock"; 
-        this.generaForm() 
+        // this.classlock = "bi bi-unlock";
+        this.generaForm()
       } else {
-        // this.classlock= "bi bi-lock" 
-        this.editarValoresForm(); 
-        this.deleteForm() 
+        // this.classlock= "bi bi-lock"
+        this.editarValoresForm();
+        this.deleteForm()
       }
-      
+
     }
 
      getPonderacion(ponderacion: number) { return (ponderacion == 100)? 'blue' : 'red';}
@@ -328,10 +329,6 @@ export class NotaComponent implements OnInit {
     }
 
   ngOnInit(): void {
-
-
-
-
 
     this.usuario$.pipe(
       tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
