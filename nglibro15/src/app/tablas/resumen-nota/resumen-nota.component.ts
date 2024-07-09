@@ -229,7 +229,9 @@ export class ResumenNotaComponent implements OnInit {
 
   getColor = (color: string | null) => {
 
-    if (color == 'primary' || !color) {
+    if (color == null) {  color = localStorage.getItem('Color')  }
+
+    if (color == 'primary') {
       this.btable = "table table-primary table-striped  table-bordered  table-sm";
       this.bodybgcolor = this.objcolors.primary.bodybgcolor;
       this.pagination = this.objcolors.primary.pagination;

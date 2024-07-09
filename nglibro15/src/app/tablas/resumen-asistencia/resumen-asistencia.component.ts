@@ -83,6 +83,8 @@ export class ResumenAsistenciaComponent {
 
      const getColor = (color:string | null) => {
 
+      if (color == null) {  color = localStorage.getItem('Color')  }
+
       if (color=='primary' || !color) {
         this.bodybgcolor = this.objcolors.primary.bodybgcolor;
         this.pagination = this.objcolors.primary.pagination;

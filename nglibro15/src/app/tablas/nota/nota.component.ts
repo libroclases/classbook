@@ -146,12 +146,8 @@ export class NotaComponent implements OnInit {
      }
 
      desabilitado(fecha: Date): any{
-      // const date = (new Date).getTime()
-      // const evento: number = Date.parse(fecha + 'T00:00:00+00:00');
-      // this.diff = Math.round((evento/1000 - date/1000)/86400)+1;
-      // const fechaInicial = fecha;
-      //const fechaFinal = new Date();
-      let dias:any = this.dt.calcularDiasHabiles(new Date(fecha + 'T00:00:00+00:00'),new Date())-1;
+
+      let dias:any = this.dt.calcularDiasHabiles(new Date(fecha + 'T00:00:00+00:00'),new Date());
 
       this.diff = dias;
       return (dias <=3  && dias >= 0) ? false : true;
@@ -220,6 +216,8 @@ export class NotaComponent implements OnInit {
      getPonderacion(ponderacion: number) { return (ponderacion == 100)? 'blue' : 'red';}
 
      getColor = (color: string | null) => {
+
+      if (color == null) {  color = localStorage.getItem('Color')  }
 
       if (color == 'primary' || !color) {
         this.btable = "table table-primary table-striped table-bordered table-sm";

@@ -141,7 +141,9 @@ updateTable(notification: (Notification | null) = null) {
   }
 }
 
-getColor(color:string) {
+getColor(color:string | null) {
+
+  if (color == null) {  color = localStorage.getItem('Color')  }
 
   if (color=='primary') {
     this.bodybgcolor = this.objcolors.primary.bodybgcolor;
