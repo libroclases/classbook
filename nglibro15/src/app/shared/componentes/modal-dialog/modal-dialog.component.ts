@@ -61,7 +61,7 @@ function zfill(number: number, width: number) {
     defaultValues: any = {};
 
     usuarioId=0;
-     
+
     checked=false;
 
     selectedteacher = 0
@@ -423,12 +423,12 @@ function zfill(number: number, width: number) {
 
 
         if (this.data.mainTable == 'matricula') {
-         
-          
+
+
           ids[2] = this.registro.foraneas.apoderado;
           ids[3] = this.registro.foraneas.alumno;
           let fks: any = [ids[0],ids[1],ids[5],obj['incorporacion'].substring(5,7)*1,null,ids[3]]
-          
+
           const anno = parseInt(obj['incorporacion'].substring(0,4));
 
           //  ;
@@ -440,7 +440,7 @@ function zfill(number: number, width: number) {
               // concatMap(() => this.crud.getDataCustom('asistencia','populateMatriculaMes',fks,{anno}))
           ).subscribe((res) => console.log(res))
 
-          /*          
+          /*
             matricula:
               0: colegioId
               1: cursoId
@@ -499,6 +499,12 @@ function zfill(number: number, width: number) {
           ).subscribe(msg =>  this.showmsg(msg));
 
       }
+    }
+
+    borrar(value:any) {
+      console.log('mostra',value);
+      let resultado = confirm('desea borrar el registro?');
+      alert(resultado);
     }
 
     showmsg(msg:any) {

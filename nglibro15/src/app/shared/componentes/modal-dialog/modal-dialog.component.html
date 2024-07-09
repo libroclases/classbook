@@ -66,19 +66,19 @@
         <td>
           <label for="{{boolField}}" class="form-label">{{getAttributeLabel(modalData.mainTable, boolField)}}</label>
        </td>
-       
+
         <td>
           <div class="form-check form-switch">
-            <input  
+            <input
             class="form-check-input"
             type="checkbox"
-            [id]="boolField" 
+            [id]="boolField"
             [checked]="data.registro[boolField]"
-            [formControlName]="boolField" 
+            [formControlName]="boolField"
              >
           </div>
          </td>
-       
+
 
        </tr>
 
@@ -100,7 +100,8 @@
  <span *ngIf="formModal.valid"><em class="bi bi-check2-circle">&nbsp;Valid!</em></span>
  <span *ngIf="!formModal.valid"><em class="bi bi-x-circle">&nbsp;Invalid!</em></span>
  <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<button mat-raised-button mat-dialog-close 
+<button mat-raised-button mat-dialog-close
  [disabled]="formModal.invalid"  (click)="onSubmit()" [style.background-color]="modalbutton" class="text-light">Ejecutar</button>
 <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+<button *ngIf="modalData.mainTable=='horario'" (click)="borrar(formModal.value)" mat-raised-button mat-dialog-close color="warn">Borrar</button>
 </div>
