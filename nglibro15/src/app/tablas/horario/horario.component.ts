@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, HostListener, Inject } from '@angular/core';
 import { CrudService } from '../../shared/services/crud/crud.service';
 // import { ActivatedRoute, RouterModule } from '@angular/router';
-import { map, Observable, of, Subscription, take, tap } from 'rxjs';
+import { map, Observable, of, share, Subscription, take, tap } from 'rxjs';
 import { SubscriptionsManagerService } from '../../shared/services/subscriptions-manager/subscriptions-manager.service';
 import { Notification } from '../../interfaces/generic.interface';
 import { modalDataObject, lowerUpperTables, fKeysByTable, environment  } from '../../../environments/environment';
@@ -75,6 +75,8 @@ export class HorarioComponent implements OnInit, OnDestroy {
   // selecTablePeriodMap: any = new Map<number, any[]>();
   // selecTableDays:number[]=[...Array(6).keys()];
 
+  cursoProfesorMap:any =  new Map<number, any>();
+
   mainQuery$!:Observable<any>;
   mainTableForeignKeys!: string[];
   changeFnsArray: Function[] = [];
@@ -137,7 +139,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
   constructor(private crud: CrudService,
     // route: ActivatedRoute,
-    originTableIdsService: OriginTableIdService,
+    // originTableIdsService: OriginTableIdService,
     // activatedRoute: ActivatedRoute,
     private subsManagerService: SubscriptionsManagerService,
     public dialog: MatDialog,
@@ -188,7 +190,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
       this.vhorario$!.pipe(
         map((val:any) => busca1(val)),
-        take(1)
+        share()
       ).subscribe()
   }
 
@@ -251,7 +253,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
       }
 
-      )
+      ),share()
 
     ).subscribe()
 
@@ -281,7 +283,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
     return this.selIdsService.getId(table);
   }
 
- 
+
 
   obtenerHorasAsignadas(horario: any, dia: number)  {
     // let i=0
@@ -290,10 +292,12 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
 
     horario.forEach((h:any) => horaMap.set(h.hora, { id: h.id, hora: h.hora,
-        Colegio: h.Colegio, Curso: h.Curso, CursoProfesor: h.CursoProfesor, Anno: h.Anno, Dix: h.Dix}))
+         CursoProfesor: {...h.CursoProfesor, asignatura:this.cursoProfesorMap.get(h.CursoProfesor.id)[1]},
+         profesor: this.cursoProfesorMap.get(h.CursoProfesor.id)[0], Dix: h.Dix})
+        )
 
     for (let key of this.selecTablePeriod) {
-        if (horaMap.has(key+1)) {
+        if (horaMap.has(key+1)) {  // console.log(horaMap.get(key+1));
           vjson.push(horaMap.get(key+1)) // para validador hora
         } else {
           vjson.push({})
@@ -312,18 +316,27 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
     // Validadiones
 
-    
+
     if (this.mainTable=='horario') {
       this.vhorario$ = this.crud.getData('horario',[fks[0],fks[1],fks[2],0,0])! // validar tipo 1 => mismo horario
       this.initValidators1()
       this.phorario$ = this.crud.getData('horario',[fks[0],fks[1],0,0,0])! // validar tipo 2 => profesor distintos cursos
       this.initValidators2()
     }
-    
+
 
     if (fks[0] * fks[1] * fks[2] > 0) {
 
-      this.stateOfButtonPlus= (this.crear == false) ?  false : true;
+      this.crud.getData('cursoprofesor',[fks[0],fks[1],fks[2],0,0])!.pipe(
+        tap(val => val.forEach((v:any) => this.cursoProfesorMap.set(
+            v.id,[v.Profesor.apellido1 + ' ' + v.Profesor.apellido2 + ' ' + v.Profesor.nombre, v.Asignatura.nombre]
+          )
+        )),
+      ).subscribe()
+
+      // this.stateOfButtonPlus= (this.crear == false) ?  false : true;
+
+      this.stateOfButtonPlus=false;
 
       if (fks[3] > 0) { this.stateOfButtonEdit= (this.editar == false) ?  false : true;  }
       else { this.stateOfButtonEdit = true; }
@@ -334,7 +347,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
       const subscribe:any =  this.horarios$.pipe(
         map(horario => horario.filter((h:any) => +h.Dix.id == d.id)),
         tap(horario => this.obtenerHorasAsignadas(horario, d.id-1)),
-
+        share()
       ).subscribe(() => this.subsManagerService.registerSubscription(subscribe, "sh-msg"))
       })
     }
@@ -390,7 +403,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
       tap(result => {
           this.updateTable();
           console.log('The dialog was closed', result);
-      })
+      }),share()
     )
     .subscribe();
   }
