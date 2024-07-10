@@ -36,6 +36,15 @@ class TokenModels {
         });
 
         if(verified) {
+
+          TokenModel.update({
+            authIsSet: true
+          }, {
+            where: {
+              id: userId
+            }
+          });
+          
           return res.status(200).send({
               status: "success",
               message: "Token is valid",
