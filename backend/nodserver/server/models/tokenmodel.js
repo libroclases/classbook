@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const TokenModel = sequelize.define(
     "TokenModel",
     {
+
       secret: {
         type: DataTypes.STRING,
         allowNull: {
@@ -12,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       authIsSet: {
         type: DataTypes.BOOLEAN,
+        defaultValue: false,
         allowNull: {
           args: false,
           msg: "Please enter your name",

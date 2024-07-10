@@ -1,3 +1,5 @@
+
+
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -5,15 +7,16 @@ module.exports = {
     await queryInterface.createTable('TokenModel', {
       id: {
         allowNull: false,
-        autoIncrement: true,
+        // autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
       },
       secret: {
         type: Sequelize.STRING
       },
       authIsSet: {
         type: Sequelize.BOOLEAN,
+        defaultValue: false,
         allowNull: true,
       },
       createdAt: {

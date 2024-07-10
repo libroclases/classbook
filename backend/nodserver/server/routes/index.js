@@ -375,10 +375,17 @@ const checkjwd = auth({
     app.delete('/api/horario/:horarioId',
       checkjwd, requiredScopes('delete:horario'),
       Horarios.delete);
-    app.post('/api/generate-secret',
+
+      app.post('/api/generate-secret',
         // checkjwd, requiredScopes('create:tokenmodel'),
       TokenModels.create);  
-    app.get('/api/sexo',
+
+      app.post('/api/verify-token',
+        // checkjwd, requiredScopes('create:tokenmodel'),
+      TokenModels.veifyToken);  
+
+
+      app.get('/api/sexo',
       checkjwd, requiredScopes('read:sexo'),
       Sexos.list);
     app.post('/api/sexo',
