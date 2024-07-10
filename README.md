@@ -51,3 +51,4 @@ sudo docker exec -it dbpostgres bash
 
 
 
+https://sachini-dissanayaka.medium.com/implementation-of-two-factor-authentication-with-totp-using-speakeasy-c92ce23e1aab
