@@ -64,10 +64,10 @@ tablesArray.forEach((table) => {
   permissions.push(`update:${table}`);
 });
 permissions.push('delete:horario');
-permissions.push('delete:asistencia');
-permissions.push('delete:controlasignatura');
-permissions.push('delete:matricula');
-permissions.push('delete:feriado');
+// permissions.push('delete:asistencia');
+// permissions.push('delete:controlasignatura');
+// permissions.push('delete:matricula');
+// permissions.push('delete:feriado');
 // --------------------------------------------------------------
 
 export const environment = {

@@ -1,4 +1,4 @@
-<div class="container-fluid" style="padding-left: 5%; padding-right: 5%; padding-top: 1%;padding-bottom: 0%; padding-top: 2%;"
+<div class="container-fluid px-3" 
 [style.background-color]="bodybgcolor"
 [style.minHeight] = "height">
 
@@ -22,15 +22,15 @@
    <!-- Tabla Principal -->
 
 
-   <div class="overflow-auto p-3 bg-light"  [style.max-height]="height"  [style.opacity]="opacity" style="width: 100%;">
+   <div class="overflow-auto  bg-light"  [style.max-height]="height"  [style.opacity]="opacity" style="width: 100%;">
      <table  class="table table-sm  table-bordered">
-    <thead class="table-bordered">
+ 
       <tr>
         <th [style.background-color]="tablehead"><a class="btn btn-link btn-sm" data-bs-toggle="tooltip" title="Imprimir"
           data-bs-target="#staticBackdrop" (click)="onPrint()"><em  class="bi bi-printer"></em></a>
         </th>
         <th colspan="6" style="text-align: center; color:white"  [style.background-color]="tablehead">
-          <em [class]="getBiClass('/'+ mainTable)">&nbsp;&nbsp;&nbsp;&nbsp;</em>
+          <em [class]="getBiClass('/'+ mainTable)"></em>
           {{titulo}}
         </th>
       </tr>
@@ -41,23 +41,23 @@
             <a mat-button  title="Nuevo" (click)="openDialog({Dix: d.id},'create')"  [disabled]="stateOfButtonPlus"><em class="bi bi-plus-lg"></em></a>
           </th>
       </tr>
-    </thead>
-    <tbody>
+
+
       <tr>
         <td>
           <table  class="table table-sm table-fit table-bordered">
-            <thead>
+    
 
               <tr *ngFor="let h of (horaasignada$ | async)">
                 <td style="text-align: center;">{{h.numero}}</td><td  style="text-align: center;">{{h.horario}}</td>
               </tr>
 
-            </thead>
+    
           </table>
         </td>
           <td *ngFor="let d of days">
             <table  class="table table-sm table-fit table-bordered">
-              <tbody>
+        
 
                 <tr *ngFor="let dayOf of dayOfWeekMap.get(d.id-1); index as i">
 
@@ -75,12 +75,12 @@
                 </tr>
 
 
-              </tbody>
+        
             </table>
           </td>
 
       </tr>
-    </tbody>
+
      </table>
    </div>
 

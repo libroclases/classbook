@@ -504,8 +504,10 @@ function zfill(number: number, width: number) {
     borrar(value:any) {
       console.log('mostra',value);
       let resultado = confirm('desea borrar el registro?');
-      alert(resultado);
+      if (resultado) {
+        this.crud.deleteData(value.id, this.modalData.mainTable).subscribe(msg => this.showmsg(msg))
     }
+  }
 
     showmsg(msg:any) {
       if (msg?.message || Object.keys(msg).length > 0 ) {this.toastr.success(msg?.message, this.modalData.mainTable, {positionClass:'toast-top-right'})}

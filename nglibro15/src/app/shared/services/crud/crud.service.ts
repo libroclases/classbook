@@ -175,10 +175,10 @@ export class CrudService {
   }
 
   deleteData(id: number, table: string): Observable<any> {
-    // const extraString = this.getExtraString(table);
+    
     let baseurl = `${this.baseurl}/${table}/${id}`;
     return this.http.delete<any>(baseurl, this.httpOptions).pipe(
-      // tap((msg: any) => this.log(`delete ${table} w/ id=${msg.id}`)),
+      tap((msg: any) => this.log(`delete ${table} w/ id=${msg.id}`)),
       catchError(this.handleError<any>(`delete ${table}`))
     );
   }
