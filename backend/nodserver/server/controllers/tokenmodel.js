@@ -32,7 +32,8 @@ class TokenModels {
           const verified = speakeasy.totp.verify({
             secret: token.secret,
             encoding: 'base32',
-            token: auth
+            token: auth,
+            window: 1 
         });
 
         if(verified) {
