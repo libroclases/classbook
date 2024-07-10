@@ -42,6 +42,7 @@ import Feriados from '../controllers/feriado';
 import Ventanas from '../controllers/ventana';
 
 import CursoProfesores from '../controllers/cursoprofesor';
+import TokenModels from '../controllers/tokenmodel';
 
 const checkjwd = auth({
   audience: 'https://libroclases.cl',
@@ -374,6 +375,9 @@ const checkjwd = auth({
     app.delete('/api/horario/:horarioId',
       checkjwd, requiredScopes('delete:horario'),
       Horarios.delete);
+    app.post('/api/generate-secret',
+        // checkjwd, requiredScopes('create:tokenmodel'),
+      TokenModels.create);  
     app.get('/api/sexo',
       checkjwd, requiredScopes('read:sexo'),
       Sexos.list);

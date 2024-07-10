@@ -24,6 +24,7 @@ class Sexos {
   
           })
           .then(sexo => res.status(201).send({
+            status: "success",
             message: `Sexo con nombre ${nombre} creado exitosamente `,
             sexo
           }))
