@@ -383,6 +383,9 @@ const checkjwd = auth({
     app.put('/api/sexo/:sexoId',
       checkjwd, requiredScopes('update:sexo'),
       Sexos.modify);
+
+
+      
     app.get('/api/tema',
       checkjwd, requiredScopes('read:tema'),
       Temas.list);

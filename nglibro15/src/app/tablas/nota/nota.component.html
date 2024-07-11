@@ -16,7 +16,13 @@
 
     <table  [class]="btable" >
       <thead>
-        <tr><th [attr.colspan]="columns+2" [style.background-color]="tablehead" style="text-align: center; vertical-align: middle;color:white; height:40px">Notas</th></tr>
+        <tr>
+          <th [attr.colspan]="columns+2" [style.background-color]="tablehead"
+          style="text-align: center; vertical-align: middle;color:white; height:40px">Notas
+          <button class="btn btn-sm btn-outline-info" style="color: aliceblue" type="button"  data-bs-toggle="modal" data-bs-target="#myModal"
+          (click)="consultarCodigo()"><em class="bi bi-check-lg ms-1">Validarse</em></button>
+        </th>
+      </tr>
       </thead>
       <tbody>
         <tr>
@@ -25,8 +31,8 @@
         <tr><td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async)">{{e.fecha}}</td></tr>
         <tr>
           <td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async); index as i">
-            <button class="btn btn-link btn-sm px-3" (click)="editar(i,e.id)" [disabled]="desabilitado(e.fecha)">
-              <span *ngIf="editarcolumn == i && edita==true; else misenor"><em class="bi bi-unlock"></em></span>
+            <button class="btn btn-link btn-sm px-3" (click)="editar(i,e.id)"  [disabled]="desabilitado(e.fecha)">
+              <span *ngIf="editarcolumn==i && edita==true; else misenor"><em class="bi bi-unlock"></em></span>
               <ng-template #misenor><em class="bi bi-lock"></em></ng-template>
 
             </button>
@@ -54,4 +60,38 @@
 
 </div>
 
+<!-- The Modal -->
+<div class="modal fade" id="myModal" data-bs-backdrop="static">
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
 
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Autenticicación</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body modal-body-cyan">
+        <form #codeForm="ngForm">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal" (click)="consultarCodigo()" >Consultar</button>
+          </div>
+          <input type="text" class="form-control ms-1" [(ngModel)]="codigo" id="codigo" name="codigo"
+          placeholder="Ingresar código autentificación de google" aria-label="poronga" aria-describedby="basic-addon1" required>
+        </div>
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+
+        {{codigo}}
+
+        <button type="button" class="btn btn-outline-sm btn-danger ms-5" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+</div>

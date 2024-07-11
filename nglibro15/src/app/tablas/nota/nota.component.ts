@@ -41,6 +41,9 @@ export class NotaComponent implements OnInit {
   evaluacionId = 0;
   classlock = "bi bi-lock";
 
+  codigo!: string;  // codigo de autentificación google
+  codigoValidado = false;
+
   url!:string;
   photo = environment.photo;
   opacity = environment.opacity;
@@ -75,7 +78,7 @@ export class NotaComponent implements OnInit {
 
   columns:any = 0;
   editarcolumn = 0;
-  diff = 0;
+
 
   matricula$!: Observable<any>;
 
@@ -135,7 +138,10 @@ export class NotaComponent implements OnInit {
 
      }
 
-
+    consultarCodigo() {
+      
+      this.codigoValidado = true;
+    }
 
      getColorNota(nota: number) {
          return  (nota < 4) ? 'red' : 'blue';
@@ -149,7 +155,6 @@ export class NotaComponent implements OnInit {
 
       let dias:any = this.dt.calcularDiasHabiles(new Date(fecha + 'T00:00:00+00:00'),new Date());
 
-      this.diff = dias;
       return (dias <=3  && dias >= 0) ? false : true;
     }
 
@@ -168,12 +173,17 @@ export class NotaComponent implements OnInit {
          ]));
 
       }
+      /*
+      if (this.codigoValidado == false) {
+         Object.values(this.notasForm?.controls).forEach((control: any) => {control.disable({onlySelf: true, emitEvent: false})});
+      }
+         */
     }
 
     deleteForm() {
       for (let notas of this.matriculasNotasMap.entries()) {
         let controlname = notas[0].toString() + '-' + this.editarcolumn;
-        if (this.notasForm.contains(controlname) == true) {
+        if (this.notasForm.contains(controlname) == true) { console.log(`${controlname} removido`)
         this.notasForm.removeControl(controlname);
         }
       }
@@ -199,17 +209,24 @@ export class NotaComponent implements OnInit {
 
      editar(col:number, evaluacionId: number) {
       this.evaluacionId = evaluacionId;
-      this.edita = !this.edita;
+
 
       this.editarcolumn = col;
-      if (this.edita) {
-        // this.classlock = "bi bi-unlock";
-        this.generaForm()
-      } else {
-        // this.classlock= "bi bi-lock"
-        this.editarValoresForm();
-        this.deleteForm()
+
+
+      if(this.codigoValidado == true) {
+
+        this.edita = !this.edita;
+        if (this.edita) {
+          this.generaForm()
+        } else {
+          this.editarValoresForm();
+          this.deleteForm()
+        }
+
       }
+
+
 
     }
 

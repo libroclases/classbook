@@ -1,4 +1,4 @@
-<div class="container-fluid px-3" 
+<div class="container-fluid px-3"
 [style.background-color]="bodybgcolor"
 [style.minHeight] = "height">
 
@@ -24,15 +24,12 @@
 
    <div class="overflow-auto  bg-light"  [style.max-height]="height"  [style.opacity]="opacity" style="width: 100%;">
      <table  class="table table-sm  table-bordered">
- 
+
       <tr>
-        <th [style.background-color]="tablehead"><a class="btn btn-link btn-sm" data-bs-toggle="tooltip" title="Imprimir"
+        <!--th [style.background-color]="tablehead"><a class="btn btn-link btn-sm" data-bs-toggle="tooltip" title="Imprimir"
           data-bs-target="#staticBackdrop" (click)="onPrint()"><em  class="bi bi-printer"></em></a>
-        </th>
-        <th colspan="6" style="text-align: center; color:white"  [style.background-color]="tablehead">
-          <em [class]="getBiClass('/'+ mainTable)"></em>
-          {{titulo}}
-        </th>
+        </th-->
+        <th colspan="6" [style.background-color]="tablehead"><!--em [class]="getBiClass('/'+ mainTable)"></em-->{{titulo}}</th>
       </tr>
       <tr>
         <th style="width: 14.2%">Hora</th>
@@ -46,18 +43,18 @@
       <tr>
         <td>
           <table  class="table table-sm table-fit table-bordered">
-    
+
 
               <tr *ngFor="let h of (horaasignada$ | async)">
                 <td style="text-align: center;">{{h.numero}}</td><td  style="text-align: center;">{{h.horario}}</td>
               </tr>
 
-    
+
           </table>
         </td>
           <td *ngFor="let d of days">
             <table  class="table table-sm table-fit table-bordered">
-        
+
 
                 <tr *ngFor="let dayOf of dayOfWeekMap.get(d.id-1); index as i">
 
@@ -75,7 +72,7 @@
                 </tr>
 
 
-        
+
             </table>
           </td>
 
