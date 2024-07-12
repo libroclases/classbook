@@ -24,6 +24,23 @@ module.exports = {
         unique: false,
         defaultValue: false
       },
+      uid: {
+        allowNull: true,
+        type: Sequelize.UUID,
+      },
+      secret: {
+        type: Sequelize.STRING,
+        allowNull: true,        
+      },
+      authIsSet: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+        allowNull: true,
+      },
+      lastLogin: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
       tipousuarioId: {
         allowNull: true,
         type: Sequelize.INTEGER,

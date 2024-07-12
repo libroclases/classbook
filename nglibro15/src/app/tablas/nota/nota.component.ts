@@ -138,8 +138,10 @@ export class NotaComponent implements OnInit {
 
      }
 
-    consultarCodigo() {
+    consultarCodigo(codigo:string) {
       
+      console.log(codigo);
+
       this.codigoValidado = true;
     }
 
@@ -155,7 +157,7 @@ export class NotaComponent implements OnInit {
 
       let dias:any = this.dt.calcularDiasHabiles(new Date(fecha + 'T00:00:00+00:00'),new Date());
 
-      return (dias <=3  && dias >= 0) ? false : true;
+      return (dias <=5  && dias >= 0) ? false : true;
     }
 
     generaForm() {

@@ -27,13 +27,42 @@ module.exports = (sequelize, DataTypes) => {
         },
         unique: false,
       },
-    },
-    
-    {
-      sequelize,
-      freezeTableName: true,
-      modelName: "Usuario",
-      tableName: "Usuario",
+      uid: {
+        type: DataTypes.UUID,
+        allowNull: {
+          args: true,
+          msg: "Please enter your name",
+        },
+      },
+      secret: {
+        type: DataTypes.STRING,
+        allowNull: {
+          args: true,
+          msg: "Please enter your name",
+        },
+      },
+      authIsSet: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: {
+          args: true,
+          msg: "Please enter your name",
+        },
+      },
+      lastLogin: {
+        type: DataTypes.DATE,
+        defaultValue: false,
+        allowNull: {
+          args: true,
+          msg: "Please enter your name",
+        },
+      },
+     },
+     {
+       sequelize,
+       freezeTableName: true,
+       modelName: "Usuario",
+       tableName: "Usuario",
     }
   );
   Usuario.associate = function (models) {

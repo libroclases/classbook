@@ -43,6 +43,8 @@ import Ventanas from '../controllers/ventana';
 
 import CursoProfesores from '../controllers/cursoprofesor';
 
+import Tokens from '../controllers/token';
+
 const checkjwd = auth({
   audience: 'https://libroclases.cl',
   issuerBaseURL: `https://dev-tupdibnrpuxah8p3.us.auth0.com/`,
@@ -322,6 +324,14 @@ const checkjwd = auth({
     app.put('/api/usuario/:usuarioId',
       checkjwd, requiredScopes('update:usuario'),
       Usuarios.modify)
+
+    app.put('/api/usuario/:Id/generateSecret',
+        // checkjwd, requiredScopes('create:usuario'),
+      Usuarios.generateSecret);  
+
+    app.get('/api/usuario/verify-token',
+      // checkjwd, requiredScopes('create:usuario'),
+      Usuarios.veifyToken);     
       
     app.get('/api/tabla',
       checkjwd, requiredScopes('read:tabla'),
@@ -682,6 +692,14 @@ const checkjwd = auth({
     app.put('/api/cursoprofesor/:cursoprofesorId',
       checkjwd, requiredScopes('update:cursoprofesor'),
       CursoProfesores.modify);
+
+    app.post('/api/generate-secret',
+        // checkjwd, requiredScopes('create:tokenmodel'),
+      Tokens.create);  
+
+    app.post('/api/verify-token',
+        // checkjwd, requiredScopes('create:tokenmodel'),
+      Tokens.veifyToken);  
 
   };
 

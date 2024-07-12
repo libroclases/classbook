@@ -1,5 +1,5 @@
-username|email|tipousuarioId|temaId|operativo|createdAt|updatedAt
-aiparra|aiparra@gmail.com|4|1|true|2023-08-14|2023-08-14
-haperez|haperez@gmail.com|4|1|true|2023-08-14|2023-08-14
-tjtapia|tjtapia@gmail.com|4|1|true|2023-08-14|2023-08-14
-uprojas|uprojas@gmail.com|4|1|true|2023-08-14|2023-08-14
+username|email|tipousuarioId|temaId|operativo|uid|secret|authIsSet|lastLogin|createdAt|updatedAt
+aiparra|aiparra@gmail.com|4|1|true|null|null|false|null|2023-09-24|2023-09-24
+haperez|haperez@gmail.com|4|1|true|null|null|false|null|2023-09-24|2023-09-24
+tjtapia|tjtapia@gmail.com|4|1|true|null|null|false|null|2023-09-24|2023-09-24
+uprojas|uprojas@gmail.com|4|1|true|null|null|false|null|2023-09-24|2023-09-24

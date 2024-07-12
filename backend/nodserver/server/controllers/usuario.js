@@ -3,6 +3,9 @@ import model from '../models';
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
+const speakeasy = require('speakeasy');
+const uuid =  require('uuid');
+
 const anno = (new Date().getFullYear()) - 2020;
 
 const { Usuario, TipoUsuario, Alumno, Apoderado, AsistenteColegio ,Profesor, Admin, Anno, Colegio, Sexo, InscripcionColegio , Tema} = model;
@@ -45,7 +48,7 @@ class Usuarios {
   static getPersonalInfo(req, res) {
 
     const { email } = req.query;
-    console.log(email)   
+    // console.log(email)   
     Usuario.findOne({
       where: { email: email },
       attributes: ['id','username','email'],
@@ -209,6 +212,70 @@ class Usuarios {
     })
     .catch(error => res.status(400).send(error));
     }
+
+    static generateSecret(req, res) {
+        const secret = speakeasy.generateSecret({ length: 20});
+        const uid = uuid.v4();
+        return Usuario.findByPk(req.params.Id)
+        .then((usuario) => {
+            usuario.update({
+                secret: secret.base32,
+                uid
+            }).then((up) => {
+              res.status(200).send({
+                message: 'Usuario actualizado exitosamente',
+                    data: {
+                    secret: secret || up.secret,
+                    uid: uid || up.uid,
+              }
+            }
+          )
+          .catch(error => res.status(400).send(error));
+            
+        }
+       )
+      }
+     )
+    }
+
+    static veifyToken(req, res) {
+        
+      const { uid, auth } = req.body;
+
+        Usuario.findOne({where: {uid}}).then((token) => { 
+          console.log('poronga:',token.secret, auth);
+          const verified = speakeasy.totp.verify({
+            secret: token.secret,
+            encoding: 'base32',
+            token: auth,
+        });
+
+        if(verified) {
+
+          Usuario.update({
+            authIsSet: true
+          }, {
+            where: {
+              id: Id
+            }
+          });
+          
+          return res.status(200).send({
+              status: "success",
+              message: "Token is valid",
+          });
+      } else {
+          return res.status(400).send({
+              status: "error",
+              message: "Token is invalid",
+          });
+      }
+
+
+        });
+
+    }
+
 }
 
 export default Usuarios;

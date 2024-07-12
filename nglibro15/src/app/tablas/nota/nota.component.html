@@ -20,7 +20,7 @@
           <th [attr.colspan]="columns+2" [style.background-color]="tablehead"
           style="text-align: center; vertical-align: middle;color:white; height:40px">Notas
           <button class="btn btn-sm btn-outline-info" style="color: aliceblue" type="button"  data-bs-toggle="modal" data-bs-target="#myModal"
-          (click)="consultarCodigo()"><em class="bi bi-check-lg ms-1">Validarse</em></button>
+          ><em class="bi bi-check-lg ms-1">Validarse</em></button>
         </th>
       </tr>
       </thead>
@@ -76,7 +76,7 @@
         <form #codeForm="ngForm">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal" (click)="consultarCodigo()" >Consultar</button>
+            <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal" (click)="consultarCodigo(codigo)" >Consultar</button>
           </div>
           <input type="text" class="form-control ms-1" [(ngModel)]="codigo" id="codigo" name="codigo"
           placeholder="Ingresar código autentificación de google" aria-label="poronga" aria-describedby="basic-addon1" required>

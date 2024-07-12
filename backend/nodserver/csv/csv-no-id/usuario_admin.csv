@@ -1,2 +1,2 @@
-username|email|tipousuarioId|temaId|operativo|createdAt|updatedAt
-admin|admin@libroclases.cl|5|2|true|2023-09-24|2023-09-24
+username|email|tipousuarioId|temaId|operativo|uid|secret|authIsSet|lastLogin|createdAt|updatedAt
+admin|admin@libroclases.cl|5|2|true|null|null|false|null|2023-09-24|2023-09-24
