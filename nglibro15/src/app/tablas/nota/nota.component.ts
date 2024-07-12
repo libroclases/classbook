@@ -129,6 +129,7 @@ export class NotaComponent implements OnInit {
   constructor(private crud: CrudService,
     private selIdsService: SelectionIdsService,
     private getpermission: GetPermissionService,
+    private toastr: ToastrService,
     private dt: GetdatetimeService,
     private fb: FormBuilder,
 
@@ -139,11 +140,22 @@ export class NotaComponent implements OnInit {
      }
 
     consultarCodigo(codigo:string) {
+      this.crud.postData({userId: 'e9abdc2a-75f6-4c7a-b910-745d4f58c343', auth: codigo},'token').pipe(
+        tap(msg => {
+          this.showmsg(msg)
+        })
+      ).subscribe();
       
-      console.log(codigo);
+      // console.log(codigo);
 
-      this.codigoValidado = true;
+ 
     }
+
+    IdPed(event: any) {
+      this.codigo = event.target.value;
+    }
+
+    reset() { this.codigo = ''; }
 
      getColorNota(nota: number) {
          return  (nota < 4) ? 'red' : 'blue';
@@ -152,6 +164,17 @@ export class NotaComponent implements OnInit {
      setType(valor:any): number {
        return +valor;
      }
+
+     showmsg(msg:any) {   
+      if (msg?.message && Object.keys(msg)?.length > 0 ) {
+        this.codigoValidado = true;
+        this.toastr.success(msg.message, 'Notas', {positionClass:'toast-top-right'})
+      }
+      else {
+        this.codigoValidado = false;
+        this.toastr.error(msg.error, 'Notas')
+      }
+    }
 
      desabilitado(fecha: Date): any{
 
@@ -175,17 +198,13 @@ export class NotaComponent implements OnInit {
          ]));
 
       }
-      /*
-      if (this.codigoValidado == false) {
-         Object.values(this.notasForm?.controls).forEach((control: any) => {control.disable({onlySelf: true, emitEvent: false})});
-      }
-         */
+   
     }
 
     deleteForm() {
       for (let notas of this.matriculasNotasMap.entries()) {
         let controlname = notas[0].toString() + '-' + this.editarcolumn;
-        if (this.notasForm.contains(controlname) == true) { console.log(`${controlname} removido`)
+        if (this.notasForm.contains(controlname) == true) { // console.log(`${controlname} removido`)
         this.notasForm.removeControl(controlname);
         }
       }

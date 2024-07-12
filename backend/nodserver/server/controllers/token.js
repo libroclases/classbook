@@ -49,7 +49,7 @@ class Tokens {
           return res.status(200).send({
               status: "success",
               message: "Token is valid",
-          });
+          })
       } else {
           return res.status(400).send({
               status: "error",
@@ -58,7 +58,7 @@ class Tokens {
       }
 
 
-        });
+        }).catch(error => res.status(400).send(error));
 
     }  
 
