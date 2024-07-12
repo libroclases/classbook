@@ -24,13 +24,16 @@
 
    <div class="overflow-auto  bg-light"  [style.max-height]="height"  [style.opacity]="opacity" style="width: 100%;">
      <table  class="table table-sm  table-bordered">
-
-      <tr>
-        <!--th [style.background-color]="tablehead"><a class="btn btn-link btn-sm" data-bs-toggle="tooltip" title="Imprimir"
-          data-bs-target="#staticBackdrop" (click)="onPrint()"><em  class="bi bi-printer"></em></a>
-        </th-->
-        <th colspan="6" [style.background-color]="tablehead"><!--em [class]="getBiClass('/'+ mainTable)"></em-->{{titulo}}</th>
-      </tr>
+      <thead>
+        <tr>
+          <!--th [style.background-color]="tablehead"><a class="btn btn-link btn-sm" data-bs-toggle="tooltip" title="Imprimir"
+            data-bs-target="#staticBackdrop" (click)="onPrint()"><em  class="bi bi-printer"></em></a>
+          </th-->
+          <th colspan="6" [style.background-color]="tablehead" style="text-align: center; vertical-align: middle; height:40px">   
+              <em class="bi bi-clock mx-2"></em>{{titulo}}
+          </th>
+        </tr>  
+      </thead>
       <tr>
         <th style="width: 14.2%">Hora</th>
 
