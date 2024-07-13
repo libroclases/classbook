@@ -29,57 +29,60 @@
           <!--th [style.background-color]="tablehead"><a class="btn btn-link btn-sm" data-bs-toggle="tooltip" title="Imprimir"
             data-bs-target="#staticBackdrop" (click)="onPrint()"><em  class="bi bi-printer"></em></a>
           </th-->
-          <th colspan="6" [style.background-color]="tablehead" style="text-align: center; vertical-align: middle; height:40px">   
+          <th colspan="6" [style.background-color]="tablehead" style="text-align: center; vertical-align: middle; height:40px; color:aliceblue">   
               <em class="bi bi-clock mx-2"></em>{{titulo}}
           </th>
         </tr>  
       </thead>
-      <tr>
-        <th style="width: 14.2%">Hora</th>
-
-          <th  *ngFor="let d of days" style="width: 14.2%">{{d.nombre}}
-            <a mat-button  title="Nuevo" (click)="openDialog({Dix: d.id},'create')"  [disabled]="stateOfButtonPlus"><em class="bi bi-plus-lg"></em></a>
-          </th>
-      </tr>
-
-
-      <tr>
-        <td>
-          <table  class="table table-sm table-fit table-bordered">
-
-
-              <tr *ngFor="let h of (horaasignada$ | async)">
-                <td style="text-align: center;">{{h.numero}}</td><td  style="text-align: center;">{{h.horario}}</td>
-              </tr>
-
-
-          </table>
-        </td>
-          <td *ngFor="let d of days">
+      <tbody>
+        <tr>
+          <th style="width: 14.2%">Hora</th>
+  
+            <th  *ngFor="let d of days" style="width: 14.2%">{{d.nombre}}
+              <a mat-button  title="Nuevo" (click)="openDialog({Dix: d.id},'create')"  [disabled]="stateOfButtonPlus"><em class="bi bi-plus-lg"></em></a>
+            </th>
+        </tr>
+  
+  
+        <tr>
+          <td>
             <table  class="table table-sm table-fit table-bordered">
-
-
-                <tr *ngFor="let dayOf of dayOfWeekMap.get(d.id-1); index as i">
-
-                      <td>
-                        <ng-container  *ngIf="dayOf.CursoProfesor;  else Nulo">
-                           <button class="btn btn-outline-light text-dark btn-sm" data-bs-toggle="tooltip"  [disabled]="stateOfButtonEdit"
-                           title="{{dayOf.CursoProfesor.profesor}}"
-                           (click)="openDialog(dayOf,'update')">{{dayOf.CursoProfesor.asignatura}}
-                           </button>
-                        </ng-container>
-                        <ng-template #Nulo>&nbsp;</ng-template>
-                      </td>
-
-
+  
+  
+                <tr *ngFor="let h of (horaasignada$ | async)">
+                  <td style="text-align: center;">{{h.numero}}</td><td  style="text-align: center;">{{h.horario}}</td>
                 </tr>
-
-
-
+  
+  
             </table>
           </td>
-
-      </tr>
+            <td *ngFor="let d of days">
+              <table  class="table table-sm table-fit table-bordered">
+  
+  
+                  <tr *ngFor="let dayOf of dayOfWeekMap.get(d.id-1); index as i">
+  
+                        <td>
+                          <ng-container  *ngIf="dayOf.CursoProfesor;  else Nulo">
+                             <button class="btn btn-outline-light text-dark btn-sm" data-bs-toggle="tooltip"  [disabled]="stateOfButtonEdit"
+                             title="{{dayOf.CursoProfesor.profesor}}"
+                             (click)="openDialog(dayOf,'update')">{{dayOf.CursoProfesor.asignatura}}
+                             </button>
+                          </ng-container>
+                          <ng-template #Nulo>&nbsp;</ng-template>
+                        </td>
+  
+  
+                  </tr>
+  
+  
+  
+              </table>
+            </td>
+  
+        </tr>
+  
+      </tbody>
 
      </table>
    </div>

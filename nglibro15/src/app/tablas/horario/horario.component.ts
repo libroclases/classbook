@@ -289,13 +289,13 @@ export class HorarioComponent implements OnInit, OnDestroy {
     // let i=0
     let horaMap = new Map<number, any>();
     let vjson:any[] = [];
+    console.log('poronga',horario);
 
-
-    horario.forEach((h:any) => horaMap.set(h.hora, { id: h.id, hora: h.hora,
+    /*horario.forEach((h:any) => horaMap.set(h.hora, { id: h.id, hora: h.hora,
          CursoProfesor: {...h.CursoProfesor, asignatura:this.cursoProfesorMap.get(h.CursoProfesor.id)[1]},
          profesor: this.cursoProfesorMap.get(h.CursoProfesor.id)[0], Dix: h.Dix})
         )
-
+    */
     for (let key of this.selecTablePeriod) {
         if (horaMap.has(key+1)) {  // console.log(horaMap.get(key+1));
           vjson.push(horaMap.get(key+1)) // para validador hora

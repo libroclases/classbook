@@ -134,7 +134,7 @@ export const environment = {
     },
   },
   photo: {
-    primary: 'url(assets/images/fondo_primary.png)',
+    primary: 'url(assets/images/fondo_primary.jpg)',
     success: 'url(assets/images/fondo_success.jpeg)',
     info: 'url(assets/images/fondo_cyan.png)',
   },

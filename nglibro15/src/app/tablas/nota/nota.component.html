@@ -13,18 +13,18 @@
   </div>
 
    <div  [formGroup]="notasForm"   class="overflow-auto bg-light"   style="width: 100%; max-height: 600px;">
-    {{codigoValidado}}
+    
     <table  [class]="btable" >
       <thead>
         <tr>
           <th [attr.colspan]="columns+2" [style.background-color]="tablehead"
           style="text-align: center; vertical-align: middle;color:white; height:40px">Notas
-          <button class="btn btn-sm btn-outline-info" style="color: aliceblue" type="button"  data-bs-toggle="modal" data-bs-target="#myModal" (click)="reset()"
-          ><em class="bi bi-check-lg ms-1">Validarse</em></button>
+          <button class="btn btn-sm btn-outline-info mx-2" style="color: aliceblue" type="button"  data-bs-toggle="modal" data-bs-target="#myModal" (click)="reset()"
+          ><em class="bi bi-check-lg"></em></button>{{codigoValidado}}
         </th>
       </tr>
       </thead>
-      <tbody>
+      <tbody *ngIf="mostra_tabla==true">
         <tr>
           <td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async)">{{e.nombre}} ({{e.ponderacion}}%)</td><td>Ponderado</td>
         </tr>

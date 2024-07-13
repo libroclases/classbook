@@ -119,6 +119,7 @@ export class NotaComponent implements OnInit {
   notas$!: Observable<any>;
 
   @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
+  mostra_tabla=false;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -310,11 +311,13 @@ export class NotaComponent implements OnInit {
         0,
       ]
       this.ponderacion = 0;
+      if (fks[0]*fks[1]*fks[2]*fks[3]*fks[4]>0) { this.mostra_tabla=true;} else {this.mostra_tabla=false;}
       this.evaluacion$ = this.crud.getData('evaluacion', fks)?.pipe(
         tap(eva => eva.forEach((e: any) => {
           this.ponderacion += e.ponderacion;
           this.columns += 1;
         })),
+        tap(() => {if (fks[0]*fks[1]*fks[2]*fks[3]*fks[4]>0) { this.mostra_tabla=true;} else {this.mostra_tabla=false;}}),
         share()
       )!;
 
