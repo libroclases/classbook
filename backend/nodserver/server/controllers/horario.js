@@ -47,20 +47,20 @@ const { Horario, Colegio, Curso, CursoProfesor, Anno, Dix } = model;
       const {annoId, colegioId, cursoId, cursoprofesorId } = req.params;  
       let consulta = {};
       
-      if (colegioId != '0') {  consulta['colegioId'] = colegioId;  }
-      // if (cursoId != '0') {  consulta['cursoId'] = cursoId;  }
-      // if (cursoprofesorId != '0') {  consulta['cursoprofesorId'] = cursoprofesorId;  }
       if (annoId != '0') {  consulta['annoId'] = annoId;  }
-
+      if (colegioId != '0') {  consulta['colegioId'] = colegioId;  }
+      if (cursoId != '0') {  consulta['cursoId'] = cursoId;  }
+      if (cursoprofesorId != '0') {  consulta['cursoprofesorId'] = cursoprofesorId;  }
+ 
       return Horario
-      .findAll({ where: consulta , group: ['Anno.id','Colegio.id'], attributes: ['Colegio.id','Anno.id', [sequelize.fn('COUNT','*'),'TotalHoras']], 
-      // group: ['Colegio.id','Curso.id','CursoProfesor.id','Anno.id'], 
-      // attributes: ['Colegio.id','Curso.id','CursoProfesor.id','Anno.id', [sequelize.fn('COUNT','*'),'TotalHoras']], 
+      .findAll({ where: consulta , group: ['Anno.id','Colegio.id','Curso.id','CursoProfesor.id'], 
+        attributes: ['Anno.id', 'Colegio.id','Curso.id','CursoProfesor.id', [sequelize.fn('COUNT','*'),'TotalHoras']], 
       include: [
-        // { model:Profesor, attributes:['id','nombre', 'apellido1','apellido2'], where: { } },
+        { model:Anno, attributes:['id','nombre'], where: { } },
         { model:Colegio, attributes:['id','nombre'], where: { } },
-        // { model:CursoProfesor, attributes:['id'], where: { } },
-        { model:Anno, attributes:['id','nombre'], where: { } },           
+        { model:Curso, attributes:['id','nombre'], where: { } },
+        { model:CursoProfesor, attributes:['id'], where: { } },
+                   
         ] 
       })
       .then(horarios => res.status(200).send(horarios))
