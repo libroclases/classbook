@@ -13,19 +13,6 @@ export class PruebaComponent implements OnInit {
 ngOnInit(): void {
 
 
-const source = of(2000, 1000);
-
-const example = source.pipe(
-  concatMap(val => of(`Delayed by: ${val}ms`).pipe(delay(val)))
-);
-
-example.subscribe(val =>
-  console.log(`With concatMap: ${val}`)
-);
-
-
-
-
 }
 
 

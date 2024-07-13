@@ -289,11 +289,15 @@ export class HorarioComponent implements OnInit, OnDestroy {
     // let i=0
     let horaMap = new Map<number, any>();
     let vjson:any[] = [];
-    console.log('poronga',horario);
 
-    horario?.forEach((h:any) => horaMap.set(h.hora, { id: h.id, hora: h.hora,
+    horario?.forEach((h:any) => {
+         // console.log('h:', h.CursoProfesor.id, this.cursoProfesorMap.get(h.CursoProfesor.id));
+         
+         horaMap.set(h.hora, { id: h.id, hora: h.hora,
          CursoProfesor: {...h.CursoProfesor, asignatura:this.cursoProfesorMap.get(h.CursoProfesor.id)[1]},
          profesor: this.cursoProfesorMap.get(h.CursoProfesor.id)[0], Dix: h.Dix})
+         
+        }
         )
     
     for (let key of this.selecTablePeriod) {
@@ -311,11 +315,8 @@ export class HorarioComponent implements OnInit, OnDestroy {
   getDaysOfWeek(): void {
 
     let fks = this.getForeignKeysOfMainTable()
-    // let fks = [4,1,19,0,0]
-
 
     // Validadiones
-
 
     if (this.mainTable=='horario') {
       this.vhorario$ = this.crud.getData('horario',[fks[0],fks[1],fks[2],0,0])! // validar tipo 1 => mismo horario
@@ -324,37 +325,42 @@ export class HorarioComponent implements OnInit, OnDestroy {
       this.initValidators2()
     }
 
+    const getHorarios = () => {
+ 
+      this.days.forEach((d:any) => {
+
+        const subscribe:any =  this.horarios$.pipe(
+          map(horario => horario.filter((h:any) => +h.Dix.id == d.id)),
+          tap(horario => this.obtenerHorasAsignadas(horario, d.id-1)),
+          share()
+        ).subscribe(() => this.subsManagerService.registerSubscription(subscribe, "sh-msg"))
+        })
+    }
+    /*  else {
+        this.dayOfWeekMap.clear();
+        this.stateOfButtonPlus=true;
+    }*/  
+     
+    //}
 
     if (fks[0] * fks[1] * fks[2] > 0) {
+
+      this.horarios$ = this.crud.getData('horario',fks)!;
 
       this.crud.getData('cursoprofesor',[fks[0],fks[1],fks[2],0,0])!.pipe(
         tap(val => val.forEach((v:any) => this.cursoProfesorMap.set(
             v.id,[v.Profesor.apellido1 + ' ' + v.Profesor.apellido2 + ' ' + v.Profesor.nombre, v.Asignatura.nombre]
           )
         )),
-      ).subscribe()
-
-      // this.stateOfButtonPlus= (this.crear == false) ?  false : true;
+      ).subscribe(() => getHorarios())
 
       this.stateOfButtonPlus=false;
 
       if (fks[3] > 0) { this.stateOfButtonEdit= (this.editar == false) ?  false : true;  }
       else { this.stateOfButtonEdit = true; }
 
-      this.horarios$ = this.crud.getData('horario',fks)!;
-      this.days.forEach((d:any) => {
-
-      const subscribe:any =  this.horarios$.pipe(
-        map(horario => horario.filter((h:any) => +h.Dix.id == d.id)),
-        tap(horario => this.obtenerHorasAsignadas(horario, d.id-1)),
-        share()
-      ).subscribe(() => this.subsManagerService.registerSubscription(subscribe, "sh-msg"))
-      })
     }
-    else {
-      this.dayOfWeekMap.clear();
-      this.stateOfButtonPlus=true;
-    }
+ 
   }
 
   ngOnDestroy() {
