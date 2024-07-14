@@ -47,8 +47,8 @@
           </th>
 
           <th *ngFor="let dateFd of dateFields">{{getAttributeLabel(mainTable, dateFd)}}</th>
-          <th *ngFor="let tabla of fkFields">{{getTableLabel(tabla)}}</th>
-          <th *ngFor="let textFd of textFields" >{{getAttributeLabel(mainTable, textFd)}}</th>
+          <th *ngFor="let tabla of fkFields">bbb{{getTableLabel(tabla)}}</th>
+          <th *ngFor="let textFd of textFields" >aaa{{getAttributeLabel(mainTable, textFd)}}</th>
         </tr>
       </thead>
     </ng-container>
@@ -84,14 +84,14 @@
 
             <ng-container *ngFor="let route of redirectRts">
               <td  style="text-align: center; width: 40px;"><a class="nav-link"
-              [routerLink]="[route, c.Anno.id,c.Colegio.id,c.Curso.id,c.Profesor.id,c.Asignatura.id]" routerLinkActive="active"><!-- TODO  Generalizar -->
+              [routerLink]="[route, c.Anno.id,c.Colegio.id,c.Curso.id,c.CursoProfesor.id]" routerLinkActive="active"><!-- TODO  Generalizar -->
               <em [class]="getBiClass(route)" [title]="getIconLabel(route)"></em></a></td>
             </ng-container>
 
             <td *ngFor="let dateFd of dateFields">{{c[dateFd] | date:'dd/MM/YYYY'}}</td>
-            <td *ngFor="let table of fkFields">{{c[table].apellido}} {{c[table].nombre}}</td>
+            <td *ngFor="let table of fkFields">zzz{{getObjectLabel(table, c[table])}}|{{table}}|{{c[table] | json}}</td>
             <th *ngFor="let boolFd of booleanFields">{{boolFd}}</th>
-            <th *ngFor="let txtFd of textFields">{{c[txtFd]}}</th>
+            <th *ngFor="let txtFd of textFields">yyy{{c[txtFd]}}</th>
 
           </tr>
           <tr><th *ngFor="let c of columns">&nbsp;</th><th>{{sumGroup}}</th></tr>
@@ -108,10 +108,10 @@
             </td>
 
 
-            <td *ngFor="let txtFd of textFields">{{c[txtFd]}}</td>
+            <td *ngFor="let txtFd of textFields">aaa{{c[txtFd]}}</td>
             <td *ngFor="let boolFd of booleanFields">{{c[boolFd]}}</td>
             <td *ngFor="let dateFd of dateFields">{{c[dateFd] | date:'dd/MM/YYYY'}}</td>
-            <td *ngFor="let table of fkFields">{{getObjectLabel(table, c[table])}}</td>
+            <td *ngFor="let table of fkFields">ppp{{getObjectLabel(table, c[table])}}</td>
             <th style="text-align: center;">
               <a mat-button (click)="openDialog(c)" [disabled]="disable.editar"><em class="bi bi-lock"></em></a>
             </th>

@@ -1,6 +1,8 @@
 import model, { sequelize } from '../models';
 
-const { Horario, Colegio, Curso, CursoProfesor, Anno, Dix } = model;
+const { Horario, Colegio, Curso, CursoProfesor, Anno, Dix,
+  //  Profesor, Asignatura 
+  } = model;
 
   class Horarios {
 
@@ -60,7 +62,8 @@ const { Horario, Colegio, Curso, CursoProfesor, Anno, Dix } = model;
         { model:Colegio, attributes:['id','nombre'], where: { } },
         { model:Curso, attributes:['id','nombre'], where: { } },
         { model:CursoProfesor, attributes:['id'], where: { } },
-                   
+        //{ model:Profesor, attributes:['id','nombre'], where: { } },
+        // { model:Asignatura, attributes:['id','nombre'], where: { } },           
         ] 
       })
       .then(horarios => res.status(200).send(horarios))

@@ -380,6 +380,7 @@ export const tableLabels = {
   profesor: 'Profesor',
   administrador: 'Administrador',
   inscripcioncolegio: 'Inscripcion Colegio',
+  inscripcioncurso: 'Inscripcion Curso',
   registroactividad: 'Registro de Actividad',
   provincix: 'Provincia',
   Provincix: 'Provincia',

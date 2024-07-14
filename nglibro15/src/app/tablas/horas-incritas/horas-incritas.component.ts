@@ -16,15 +16,15 @@ export class HorasInscritasComponent {
  booleanFields = [];
  dateFields = [];
  // displayFKFields: CamelCase
- displayFKFields = ['Anno', 'Colegio', 'Curso'];
+ displayFKFields = ['Anno', 'Colegio', 'Curso','CursoProfesor'];
  redirectRoutes = []
 
  // Selectores
 
  selTables = ["anno", "colegio", "curso", "cursoprofesor"];
  changeFnsArray: Function[] = [];
- ignoreFkRequirements: string[] = [];
- patchFKsFromStorage = ['asignatura', 'profesor'];
+ ignoreFkRequirements: string[] = ['asignatura', 'profesor'];
+ patchFKsFromStorage = ['anno','colegio', 'curso'];
 
  constructor( ) { }
 

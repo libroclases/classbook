@@ -331,12 +331,12 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   }
 
   getObjectLabel(table: string, object: any) {
-    // permite acceder a labelsService.getObjectLabel desde html
+
     return this.labelsService.getObjectLabel(table, object);
   }
 
   getTableLabel(table: string) {
-    // permite acceder a labelsService.getTableLabel desde html
+ 
     return this.labelsService.getTableLabel(table);
   }
 
