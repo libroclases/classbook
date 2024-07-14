@@ -42,6 +42,8 @@ export class HorarioComponent implements OnInit, OnDestroy {
   position = "center";
   size = "cover";
 
+  btable!:string;
+
   crear = true;
   editar = true;
 
@@ -213,6 +215,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
     if (color == null) {  color = localStorage.getItem('Color')  }
 
     if (color=='primary') {
+      this.btable = "table table-primary table-striped table-bordered table-sm";
       this.bodybgcolor = this.objcolors.primary.bodybgcolor;
       this.pagination = this.objcolors.primary.pagination;
       this.tablehead = this.objcolors.primary.tablehead;
@@ -221,6 +224,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
       this.url = this.photo.primary;
     }
     if (color=='success') {
+      this.btable = "table table-success table-striped table-bordered table-sm";
       this.bodybgcolor = this.objcolors.success.bodybgcolor;
       this.pagination = this.objcolors.success.pagination;
       this.tablehead = this.objcolors.success.tablehead;
@@ -229,6 +233,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
       this.url = this.photo.success;
     }
     if (color=='info') {
+      this.btable = "table table-info table-striped table-bordered table-sm";
       this.bodybgcolor = this.objcolors.info.bodybgcolor;
       this.pagination = this.objcolors.info.pagination;
       this.tablehead = this.objcolors.info.tablehead;

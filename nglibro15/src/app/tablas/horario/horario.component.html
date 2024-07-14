@@ -23,7 +23,7 @@
 
 
    <div class="overflow-auto  bg-light"  [style.max-height]="height"  [style.opacity]="opacity" style="width: 100%;">
-     <table  class="table table-sm  table-bordered">
+     <table    [class]="btable">
       <thead>
         <tr>
           <!--th [style.background-color]="tablehead"><a class="btn btn-link btn-sm" data-bs-toggle="tooltip" title="Imprimir"
@@ -46,7 +46,7 @@
   
         <tr>
           <td>
-            <table  class="table table-sm table-fit table-bordered">
+            <table  [class]="btable">
   
   
                 <tr *ngFor="let h of (horaasignada$ | async)">
@@ -57,23 +57,22 @@
             </table>
           </td>
             <td *ngFor="let d of days">
-              <table  class="table table-sm table-fit table-bordered">
+              <table  [class]="btable">
+                  
+                  <tbody>
+                    <tr *ngFor="let dayOf of dayOfWeekMap.get(d.id-1); index as i">
   
-  
-                  <tr *ngFor="let dayOf of dayOfWeekMap.get(d.id-1); index as i">
-  
-                        <td>
-                          <ng-container  *ngIf="dayOf.CursoProfesor;  else Nulo">
-                             <button class="btn btn-outline-light text-dark btn-sm" data-bs-toggle="tooltip"  [disabled]="stateOfButtonEdit"
-                             title="{{dayOf.CursoProfesor.profesor}}"
-                             (click)="openDialog(dayOf,'update')">{{dayOf.CursoProfesor.asignatura}}
-                             </button>
-                          </ng-container>
-                          <ng-template #Nulo>&nbsp;</ng-template>
-                        </td>
-  
-  
+                      <td>
+                        <ng-container  *ngIf="dayOf.CursoProfesor;  else Nulo">
+                           <button class="btn btn-outline-light text-dark btn-sm" data-bs-toggle="tooltip"  [disabled]="stateOfButtonEdit"
+                           title="{{dayOf.CursoProfesor.profesor}}"
+                           (click)="openDialog(dayOf,'update')">{{dayOf.CursoProfesor.asignatura}}
+                           </button>
+                        </ng-container>
+                        <ng-template #Nulo>&nbsp;</ng-template>
+                      </td>
                   </tr>
+                  </tbody>
   
   
   
