@@ -187,16 +187,16 @@ const checkjwd = auth({
       checkjwd, requiredScopes('update:horaasignada'),
       HorasAsignadas.modify);
     app.get('/api/estadoalumno',
-      // checkjwd, requiredScopes('read:estadoalumno'),
+      checkjwd, requiredScopes('read:estadoalumno'),
       EstadoAlumnos.list);
     app.get('/api/estadoalumno/:annoId/:colegioId/:cursoId/:alumnoId/:matriculaId/:tipoestadoId/fk',
-      // checkjwd, requiredScopes('read:estadoalumno'),
+      checkjwd, requiredScopes('read:estadoalumno'),
       EstadoAlumnos.getByFk);
     app.post('/api/estadoalumno/:annoId/:colegioId/:cursoId/:alumnoId/:matriculaId/:tipoestadoId',
-      // checkjwd, requiredScopes('create:estadoalumno'),
+      checkjwd, requiredScopes('create:estadoalumno'),
       EstadoAlumnos.create);
     app.put('/api/estadoalumno/:estadoalumnoId',
-      // checkjwd, requiredScopes('update:estadoalumno'),
+      checkjwd, requiredScopes('update:estadoalumno'),
       EstadoAlumnos.modify);
     app.get('/api/anotacion',
       checkjwd, requiredScopes('read:anotacion'),
@@ -324,15 +324,15 @@ const checkjwd = auth({
     app.put('/api/usuario/:usuarioId',
       checkjwd, requiredScopes('update:usuario'),
       Usuarios.modify)
-
+    /*
     app.put('/api/usuario/:Id/generateSecret',
-        // checkjwd, requiredScopes('create:usuario'),
+      checkjwd, requiredScopes('create:usuario'),
       Usuarios.generateSecret);  
 
     app.get('/api/usuario/verify-token',
-      // checkjwd, requiredScopes('create:usuario'),
+      checkjwd, requiredScopes('create:usuario'),
       Usuarios.veifyToken);     
-      
+    */  
     app.get('/api/tabla',
       checkjwd, requiredScopes('read:tabla'),
       Tablas.list);
@@ -370,13 +370,13 @@ const checkjwd = auth({
       checkjwd, requiredScopes('read:horario'),
       Horarios.disponibilidadHora);
     app.get('/api/horario/:annoId/:colegioId/:cursoId/:cursoprofesorId/:dixId/group',
-      // checkjwd, requiredScopes('read:horario'),
+      checkjwd, requiredScopes('read:horario'),
       Horarios.groupByFk);
     app.get('/api/horario/:annoId/:colegioId/:cursoId/:cursoprofesorId/:dixId/fk',
-      // checkjwd, requiredScopes('read:horario'),
+      checkjwd, requiredScopes('read:horario'),
       Horarios.getByFk);
     app.post('/api/horario/:annoId/:colegioId/:cursoId/:cursoprofesorId/:dixId',
-      // checkjwd, requiredScopes('create:horario'),
+      checkjwd, requiredScopes('create:horario'),
       Horarios.create);
     app.put('/api/horario/:horarioId',
       checkjwd, requiredScopes('update:horario'),
@@ -577,10 +577,10 @@ const checkjwd = auth({
       checkjwd, requiredScopes('update:ventana'),
       Ventanas.modify); 
     app.get('/api/matricula',
-      // checkjwd, requiredScopes('read:matricula'),
+      checkjwd, requiredScopes('read:matricula'),
       Matriculas.list);
     app.get('/api/matricula/:colegioId/:cursoId/:apoderadoId/:alumnoId/:vinculoId/:annoId/fk',
-      // checkjwd, requiredScopes('read:matricula'),
+      checkjwd, requiredScopes('read:matricula'),
       Matriculas.getByFk);
     app.get('/api/matricula/:matriculaId/pk',
       checkjwd, requiredScopes('read:matricula'),
@@ -604,7 +604,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('read:matricula'),
       Matriculas.countHombresMujeres);
     app.post('/api/matricula/:colegioId/:cursoId/:apoderadoId/:alumnoId/:vinculoId/:annoId',
-      // checkjwd, requiredScopes('create:matricula'),
+      checkjwd, requiredScopes('create:matricula'),
       Matriculas.create);
     app.put('/api/matricula/:matriculaId',
       checkjwd, requiredScopes('update:matricula'),
@@ -681,7 +681,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('read:cursoprofesor'),
       CursoProfesores.list);
     app.get('/api/cursoprofesor/:annoId/:colegioId/:cursoId/:asignaturaId/:profesorId/fk',
-      // checkjwd, requiredScopes('read:cursoprofesor'),
+      checkjwd, requiredScopes('read:cursoprofesor'),
       CursoProfesores.getByFk);
     app.get('/api/cursoprofesor/:annoId/:colegioId/:cursoId/0/profesor_por_curso',
       checkjwd, requiredScopes('read:cursoprofesor'),

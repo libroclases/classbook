@@ -67,6 +67,7 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
   tablehead!:string;
   pagination!:string;
   modalbutton!: string;
+  matbutton!: string;
 
   opacity = environment.opacity;
 
@@ -170,7 +171,8 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
         this.bodybgcolor = this.objcolors.primary.bodybgcolor;
         this.pagination = this.objcolors.primary.pagination;
         this.tablehead = this.objcolors.primary.tablehead;
-        this.modalbutton = this.objcolors.primary.matbutton;
+        this.modalbutton = this.objcolors.primary.modalbutton;
+        this.matbutton = this.objcolors.primary.matbutton;
 
       }
       if (color=='success') {
@@ -178,12 +180,14 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
         this.pagination = this.objcolors.success.pagination;
         this.tablehead = this.objcolors.success.tablehead;
         this.modalbutton = this.objcolors.success.modalbutton;
+        this.matbutton = this.objcolors.success.matbutton;
       }
       if (color=='info') {
         this.bodybgcolor = this.objcolors.info.bodybgcolor;
         this.pagination = this.objcolors.info.pagination;
         this.tablehead = this.objcolors.info.tablehead;
         this.modalbutton = this.objcolors.info.modalbutton;
+        this.matbutton = this.objcolors.info.matbutton;
       }
     }
     this.usuario$.subscribe(info => {

@@ -138,6 +138,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
   bgmodal!:string;
   modalbutton!:string;
+  matbutton!:string;
 
   constructor(private crud: CrudService,
     // route: ActivatedRoute,
@@ -220,7 +221,8 @@ export class HorarioComponent implements OnInit, OnDestroy {
       this.pagination = this.objcolors.primary.pagination;
       this.tablehead = this.objcolors.primary.tablehead;
       this.bgmodal = this.objcolors.primary.bgmodal;
-      this.modalbutton = this.objcolors.primary.matbutton;
+      this.modalbutton = this.objcolors.primary.modalbutton;
+      this.matbutton = this.objcolors.primary.matbutton
       this.url = this.photo.primary;
     }
     if (color=='success') {
@@ -230,6 +232,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
       this.tablehead = this.objcolors.success.tablehead;
       this.bgmodal = this.objcolors.success.bgmodal;
       this.modalbutton = this.objcolors.success.modalbutton;
+      this.matbutton = this.objcolors.success.matbutton;
       this.url = this.photo.success;
     }
     if (color=='info') {
@@ -239,6 +242,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
       this.tablehead = this.objcolors.info.tablehead;
       this.bgmodal = this.objcolors.info.bgmodal;
       this.modalbutton = this.objcolors.info.modalbutton;
+      this.matbutton = this.objcolors.info.matbutton;
       this.url = this.photo.info;
 
     }
@@ -297,14 +301,14 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
     horario?.forEach((h:any) => {
          // console.log('h:', h.CursoProfesor.id, this.cursoProfesorMap.get(h.CursoProfesor.id));
-         
+
          horaMap.set(h.hora, { id: h.id, hora: h.hora,
          CursoProfesor: {...h.CursoProfesor, asignatura:this.cursoProfesorMap.get(h.CursoProfesor.id)[1]},
          profesor: this.cursoProfesorMap.get(h.CursoProfesor.id)[0], Dix: h.Dix})
-         
+
         }
         )
-    
+
     for (let key of this.selecTablePeriod) {
         if (horaMap.has(key+1)) {  // console.log(horaMap.get(key+1));
           vjson.push(horaMap.get(key+1)) // para validador hora
@@ -331,7 +335,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
     }
 
     const getHorarios = () => {
- 
+
       this.days.forEach((d:any) => {
 
         const subscribe:any =  this.horarios$.pipe(
@@ -344,8 +348,8 @@ export class HorarioComponent implements OnInit, OnDestroy {
     /*  else {
         this.dayOfWeekMap.clear();
         this.stateOfButtonPlus=true;
-    }*/  
-     
+    }*/
+
     //}
 
     if (fks[0] * fks[1] * fks[2] > 0) {
@@ -365,7 +369,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
       else { this.stateOfButtonEdit = true; }
 
     }
- 
+
   }
 
   ngOnDestroy() {

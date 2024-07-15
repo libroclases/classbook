@@ -4,7 +4,7 @@ import { ForeignKeysService } from '../../services/foreign-keys/foreign-keys.ser
 import { Notification } from '../../../interfaces/generic.interface';
 import { LabelsService } from '../../services/labels/labels.service';
 import { IconsService } from '../../services/icons/icons.service';
-import { Observable, Subject, Subscription, concatMap, debounceTime, from, map, of, switchMap, take, tap } from 'rxjs';
+import { Observable, Subject, Subscription, concatMap, debounceTime, from, map, of, share, switchMap, take, tap } from 'rxjs';
 import { CrudService } from '../../services/crud/crud.service';
 import { redirectRoutes, modalDataObject, personTables, notCreateTables ,searchTables, groupTables,groupSum, Permission,
   lowerUpperTables ,fKeysByTable, environment, } from 'src/environments/environment';
@@ -143,7 +143,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   pagination!:string;
   tablehead!:string;
   tipousuario:any = null;
-  
+
   btable!:string;
 
   search(event: Event): void {
@@ -166,7 +166,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     private labelsService: LabelsService,
     private iconsService: IconsService,
     private getpermission: GetPermissionService
-  
+
     ) {
 
 
@@ -209,7 +209,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
         this.bgmodal = this.objcolors.primary.bgmodal;
         this.matbutton = this.objcolors.primary.matbutton;
         this.url = this.photo.primary;
-        
+
       }
       if (color=='success') {
         this.btable = "table table-success table-striped table-sm";
@@ -295,7 +295,14 @@ export class MaintainerComponent implements OnInit, OnDestroy {
             tap(() => this.currPage = 0))!;
       } else {
         this.mainQuery$ = this.crud.getData(
-          this.mainTable, fKeys)?.pipe(tap(() => this.currPage = 0))!;
+          this.mainTable, fKeys)?.pipe(
+            tap(query => query.forEach((q:any) => {
+              q['CursoProfesor'] = {id: q.CursoProfesor.id, nombre: 'acme' }
+              console.log(q)
+            })),
+            tap(() => this.currPage = 0),
+            share()
+          )!;
       }
       this.mainQuery$.subscribe((data:any) => { this.numreg = data.length;   })
     }
@@ -336,7 +343,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   }
 
   getTableLabel(table: string) {
- 
+
     return this.labelsService.getTableLabel(table);
   }
 

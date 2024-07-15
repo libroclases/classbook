@@ -16,7 +16,7 @@ export class EvaluacionComponent {
  booleanFields = [];
  dateFields = ['fecha'];
  // displayFKFields: CamelCase
- displayFKFields = ['Anno','Periodo','Colegio', 'Curso',  'TipoEvaluacion'];
+ displayFKFields = ['Anno','Periodo','Colegio', 'Curso', 'CursoProfesor', 'TipoEvaluacion'];
  redirectRoutes!: string[];
 
  // Selectores

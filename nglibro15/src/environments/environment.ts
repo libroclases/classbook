@@ -107,7 +107,7 @@ export const environment = {
       tablehead: 'rgb(44,161,213)',
       bgmodal: '#0D6EFD',
       modalbutton: 'btn btn-primary',
-      matButton: 'rgb(69, 130, 233)'
+      matbutton: 'rgb(69, 130, 233)'
     },
 
     success: {

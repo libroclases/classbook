@@ -13,13 +13,13 @@
   </div>
 
    <div  [formGroup]="notasForm"   class="overflow-auto bg-light"   style="width: 100%; max-height: 600px;">
-    
+
     <table  [class]="btable" >
       <thead>
         <tr>
           <th [attr.colspan]="columns+2" [style.background-color]="tablehead"
           style="text-align: center; vertical-align: middle;color:white; height:40px">Notas
-          <button class="btn btn-sm btn-outline-info mx-2" style="color: aliceblue" type="button"  
+          <button class="btn btn-sm btn-outline-info mx-2" style="color: aliceblue" type="button"
           data-bs-toggle="modal" data-bs-target="#myModal" (click)="reset()"
           >
           <span  *ngIf="codigoValidado==false; else otro" ><em class="bi bi-check-lg"></em></span>
@@ -77,19 +77,19 @@
 
       <!-- Modal body -->
       <div class="modal-body modal-body-cyan">
-   
+
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <button [class]="modalbutton" type="button" data-bs-dismiss="modal" (click)="consultarCodigo(codigo)" >Consultar</button>
           </div>
-          <input type="text" class="form-control ms-1" [(ngModel)]="codigo" id="codigo" 
+          <input type="text" class="form-control ms-1" [(ngModel)]="codigo" id="codigo"
           placeholder="Ingrese código de autentificación">
         </div>
         <!--div *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)" class="alert">
-          <div *ngIf="codigo.errors?.['required']">Código es requerido.</div>  
-       
+          <div *ngIf="codigo.errors?.['required']">Código es requerido.</div>
+
       </div-->
-   
+
       <!-- Modal footer -->
       <div class="modal-footer">
 
