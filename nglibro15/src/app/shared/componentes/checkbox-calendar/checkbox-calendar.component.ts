@@ -170,7 +170,7 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
         this.bodybgcolor = this.objcolors.primary.bodybgcolor;
         this.pagination = this.objcolors.primary.pagination;
         this.tablehead = this.objcolors.primary.tablehead;
-        this.modalbutton = this.objcolors.primary.modalbutton;
+        this.modalbutton = this.objcolors.primary.matbutton;
 
       }
       if (color=='success') {

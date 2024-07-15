@@ -69,7 +69,7 @@ function zfill(number: number, width: number) {
     objcolors = environment.colors;
 
     bgmodal!:string;
-    modalbutton!:string;
+    matbutton!:string;
 
     validator: any;
 
@@ -118,7 +118,7 @@ function zfill(number: number, width: number) {
     ngOnInit(): void {
 
       this.bgmodal = this.data.registro.bgmodal;
-      this.modalbutton = this.data.registro.modalbutton;
+      this.matbutton = this.data.registro.modalbutton;
 
       if(this.data.mainTable == 'horario') {
         this.selectedteacher = this.data.registro.CursoProfesor.id;

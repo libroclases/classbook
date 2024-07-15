@@ -101,7 +101,7 @@
  <span *ngIf="!formModal.valid"><em class="bi bi-x-circle">&nbsp;Invalid!</em></span>
  <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 <button mat-raised-button mat-dialog-close
- [disabled]="formModal.invalid"  (click)="onSubmit()" [style.background-color]="modalbutton" class="text-light">Ejecutar</button>
+ [disabled]="formModal.invalid"  (click)="onSubmit()" [style.background-color]="matbutton" class="text-light">Ejecutar</button>
 <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
 <button *ngIf="modalData.mainTable=='horario'" (click)="borrar(formModal.value)" mat-raised-button mat-dialog-close color="warn">Borrar</button>
 </div>

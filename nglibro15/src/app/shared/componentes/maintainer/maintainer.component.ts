@@ -139,7 +139,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
   bodybgcolor!:string;
   bgmodal!:string;
-  modalbutton!:string;
+  matbutton!:string;
   pagination!:string;
   tablehead!:string;
   tipousuario:any = null;
@@ -207,7 +207,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
         this.pagination = this.objcolors.primary.pagination;
         this.tablehead = this.objcolors.primary.tablehead;
         this.bgmodal = this.objcolors.primary.bgmodal;
-        this.modalbutton = this.objcolors.primary.modalbutton;
+        this.matbutton = this.objcolors.primary.matbutton;
         this.url = this.photo.primary;
         
       }
@@ -217,7 +217,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
         this.pagination = this.objcolors.success.pagination;
         this.tablehead = this.objcolors.success.tablehead;
         this.bgmodal = this.objcolors.success.bgmodal;
-        this.modalbutton = this.objcolors.success.modalbutton;
+        this.matbutton = this.objcolors.success.matbutton;
         this.url = this.photo.success;
       }
       if (color=='info') {
@@ -226,7 +226,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
         this.pagination = this.objcolors.info.pagination;
         this.tablehead = this.objcolors.info.tablehead;
         this.bgmodal = this.objcolors.info.bgmodal;
-        this.modalbutton = this.objcolors.info.modalbutton;
+        this.matbutton = this.objcolors.info.matbutton;
         this.url = this.photo.info;
 
       }
@@ -433,7 +433,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
        }
 
        reg['bgmodal'] = this.bgmodal;
-       reg['modalbutton'] = this.modalbutton;
+       reg['modalbutton'] = this.matbutton;
 
     let modaldata: any = this.modalDataObj;
     const dialogRef = this.dialog.open(ModalDialogComponent, {

@@ -106,7 +106,8 @@ export const environment = {
       bodybgcolor: 'rgb(255, 255, 255)', //}
       tablehead: 'rgb(44,161,213)',
       bgmodal: '#0D6EFD',
-      modalbutton: 'rgb(69, 130, 233)',
+      modalbutton: 'btn btn-primary',
+      matButton: 'rgb(69, 130, 233)'
     },
 
     success: {
@@ -118,7 +119,8 @@ export const environment = {
       bodybgcolor: 'linear-gradient(to right, #38B15C,#76FA91)', // rgb(232, 248, 240)
       tablehead: 'lightgreen',
       bgmodal: 'lightgreen',
-      modalbutton: 'rgb(82, 205, 145)',
+      modalbutton: 'btn btn-success',
+      matbutton: 'rgb(82, 205, 145)'
     },
 
     info: {
@@ -130,7 +132,9 @@ export const environment = {
       bodybgcolor: 'linear-gradient(to right, #33D8FF, #425ECC)',
       tablehead:  'rgb(13, 202, 240)',
       bgmodal: 'rgb(13, 202, 240)',
-      modalbutton: 'rgb(13, 202, 240)',
+      modalbutton: 'btn btn-info',
+      matbutton: 'rgb(13, 202, 240)'
+
     },
   },
   photo: {

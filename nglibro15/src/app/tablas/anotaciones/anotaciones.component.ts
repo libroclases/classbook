@@ -107,7 +107,7 @@ export class AnotacionesComponent implements OnDestroy {
       this.pagination = this.objcolors.primary.pagination;
       this.tablehead = this.objcolors.primary.tablehead;
       this.bgmodal = this.objcolors.primary.bgmodal;
-      this.modalbutton = this.objcolors.primary.modalbutton;
+      this.modalbutton = this.objcolors.primary.matbutton;
       this.url = this.photo.primary;
     }
     else if (color=='success') {

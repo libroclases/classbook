@@ -21,7 +21,10 @@
           style="text-align: center; vertical-align: middle;color:white; height:40px">Notas
           <button class="btn btn-sm btn-outline-info mx-2" style="color: aliceblue" type="button"  
           data-bs-toggle="modal" data-bs-target="#myModal" (click)="reset()"
-          ><em class="bi bi-check-lg"></em><i class="bi bi-x-lg"></i></button>
+          >
+          <span  *ngIf="codigoValidado==false; else otro" ><em class="bi bi-check-lg"></em></span>
+        </button>
+        <ng-template #otro> <em class="bi bi-x-lg"></em></ng-template>
         </th>
       </tr>
       </thead>

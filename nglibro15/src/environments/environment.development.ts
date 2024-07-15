@@ -11,6 +11,7 @@ import {
 import { emailValidator } from '../app/shared/directives/email-validator/email-validator.directive';
 // import { horaValidator } from "src/app/shared/directives/hora-validator.directive";
 import { rutValidator } from '../app/shared/directives/rut-validator/rut-validator.directive';
+import { MatButton } from '@angular/material/button';
 
 // --------------------------------------------------------------
 // Auth0 permissions
@@ -107,6 +108,7 @@ export const environment = {
       tablehead: 'rgb(44,161,213)',
       bgmodal: '#0D6EFD',
       modalbutton: 'btn btn-primary',
+      matButton: 'rgb(69, 130, 233)'
     },
 
     success: {
@@ -119,6 +121,7 @@ export const environment = {
       tablehead: 'lightgreen',
       bgmodal: 'lightgreen',
       modalbutton: 'btn btn-success',
+      matbutton: 'rgb(82, 205, 145)'
     },
 
     info: {
@@ -131,6 +134,7 @@ export const environment = {
       tablehead:  'rgb(13, 202, 240)',
       bgmodal: 'rgb(13, 202, 240)',
       modalbutton: 'btn btn-info',
+      matbutton: 'rgb(13, 202, 240)'
     },
   },
   photo: {
