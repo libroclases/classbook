@@ -310,7 +310,8 @@ export class MaintainerComponent implements OnInit, OnDestroy {
             this.sumGroup+=+q[groupSum[this.mainTable]]
           })
         }),   // TODO   hacer variable general
-         tap(() => this.currPage = 0)
+         tap(() => this.currPage = 0),
+         tap(query => this.numreg = query.length),
          )!;
     }
 
@@ -329,6 +330,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
            })
           })),
           tap(() => this.currPage = 0),
+          tap(query => this.numreg = query.length),
           share()
         )!;
      }
@@ -338,7 +340,9 @@ export class MaintainerComponent implements OnInit, OnDestroy {
       if ( fKeys.length === 0) {
         // console.log('ACME2');
         this.mainQuery$ = this.crud.getData(this.mainTable)?.pipe(
-            tap(() => this.currPage = 0))!;
+            tap(() => this.currPage = 0),
+            tap(query => this.numreg = query.length)
+          )!;
       } else {
 
         this.mainTableForeignKeys.forEach(mt => {
@@ -362,7 +366,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
       }
 
-      this.mainQuery$.subscribe((data:any) => { this.numreg = data.length;   })
+      // this.mainQuery$.subscribe((data:any) => { this.numreg = data.length;   })
     }
     else if ( !notification || notification.message == "group" ) {
       // let fKeys = this.getForeignKeysOfMainTable();
