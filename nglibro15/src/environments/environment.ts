@@ -446,6 +446,7 @@ export const searchTables = [
 ];
 
 export const groupTables = ['horario'];
+export const middleTables = ['cursoprofesor'];
 export const groupSum: any = { horario: 'TotalHoras' };
 
 // ....  LabelsService.attributesLabelsMap

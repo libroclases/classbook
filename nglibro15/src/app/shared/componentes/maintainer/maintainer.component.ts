@@ -6,7 +6,7 @@ import { LabelsService } from '../../services/labels/labels.service';
 import { IconsService } from '../../services/icons/icons.service';
 import { Observable, Subject, Subscription, concatMap, debounceTime, from, map, of, share, switchMap, take, tap } from 'rxjs';
 import { CrudService } from '../../services/crud/crud.service';
-import { redirectRoutes, modalDataObject, personTables, notCreateTables ,searchTables, groupTables,groupSum, Permission,
+import { redirectRoutes, modalDataObject, personTables, notCreateTables ,searchTables, groupTables,middleTables,groupSum, Permission,
   lowerUpperTables ,fKeysByTable, environment, } from 'src/environments/environment';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -49,7 +49,12 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   isNotCreateTable = false;
   isSearchTable = false;
   isGroupTable = false;
+  isMiddleTable = false;
   searchTerm$ = new Subject<string>();
+
+  tieneTablaIntermedia = false;
+
+  cursoProfesorMap:any =  new Map<number, any>();
 
   disable:any = {leer:true, editar:true, crear:true};
   currentDate:Date = new Date();
@@ -256,11 +261,21 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     this.isSearchTable = (searchTables.includes(this.mainTable)) ? true : false;
     this.isGroupTable = (groupTables.includes(this.mainTable)) ? true : false;
 
+
     this.mainTableForeignKeys = this.fkService.getFKeys(this.mainTable)!;
     this.numRedirect = this.redirectRts.length;
     this.numColumns = (
       this.textFields.length + this.dateFields.length + this.booleanFields.length +
       this.fkFields.length + this.numRedirect + 1);
+      /*
+      this.crud.getData('cursoprofesor',[4,1,19,0,0])!.pipe(
+        tap(val => val.forEach((v:any) => this.cursoProfesorMap.set(
+            v.id,[v.Profesor.apellido1 + ' ' + v.Profesor.apellido2 + ' ' + v.Profesor.nombre, v.Asignatura.nombre]
+          )
+        )),
+      ).subscribe(() => console.log('ACME',this.cursoProfesorMap))
+      */
+
     this.selIdsService.subscribe(
       'maintainer', (message: (Notification)) => this.updateTable(
         this.isGroupTable ? {message: "group"} : message));
@@ -288,23 +303,55 @@ export class MaintainerComponent implements OnInit, OnDestroy {
 
   updateTable(notification: (Notification | null) = null) {
     let fKeys = this.getForeignKeysOfMainTable();
+
+    const querytable = () => {
+
+      this.mainQuery$ = this.crud.getData(
+        this.mainTable, fKeys)?.pipe(
+          tap(query => query.forEach((q:any) => {
+
+            Object.keys(q).forEach(k=>{
+
+              if (k == 'CursoProfesor') {
+                  const tmp = this.cursoProfesorMap.get(+q[k].id);
+                  q[k] = {id: q[k].id, nombre: tmp[0] + ' | ' + tmp[1]  };
+              }
+           })
+          })),
+          tap(() => this.currPage = 0),
+          share()
+        )!;
+     }
+
     if ( !notification || notification.message == "updated" ) {
 
       if ( fKeys.length === 0) {
         this.mainQuery$ = this.crud.getData(this.mainTable)?.pipe(
             tap(() => this.currPage = 0))!;
       } else {
-        this.mainQuery$ = this.crud.getData(
-          this.mainTable, fKeys)?.pipe(
-            tap(query => query.forEach((q:any) => {
-              q['CursoProfesor'] = {id: q.CursoProfesor.id, nombre: 'acme' }
-              console.log(q)
-            })),
-            tap(() => this.currPage = 0),
-            share()
-          )!;
+
+        this.mainTableForeignKeys.forEach(mt => {
+          if (middleTables.includes(mt)) {
+            this.tieneTablaIntermedia=true;
+            console.log('PORONGA1', this.tieneTablaIntermedia);
+            this.crud.getData('cursoprofesor',[fKeys[0],fKeys[1],fKeys[3],0,0])!.pipe(
+              tap(val => val.forEach((v:any) => this.cursoProfesorMap.set(
+                  v.id,[v.Profesor.apellido1 + ' ' + v.Profesor.apellido2 + ' ' + v.Profesor.nombre, v.Asignatura.nombre]
+                )
+              )),
+            ).subscribe(() => querytable())
+          }
+        }
+      )
+        if(this.tieneTablaIntermedia==false) {
+          console.log('PORONGA3', this.tieneTablaIntermedia)
+          querytable();
+        }
+
+
       }
-      this.mainQuery$.subscribe((data:any) => { this.numreg = data.length;   })
+
+      // this.mainQuery$.subscribe((data:any) => { this.numreg = data.length;   })
     }
     else if ( !notification || notification.message == "group" ) {
       // let fKeys = this.getForeignKeysOfMainTable();
