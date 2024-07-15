@@ -44,7 +44,7 @@ const { Horario, Colegio, Curso, CursoProfesor, Anno, Dix,
 
     }
 
-    static groupByFk(req, res) {
+    static groupByFk(req, res) {    
 
       const {annoId, colegioId, cursoId, cursoprofesorId } = req.params;  
       let consulta = {};
@@ -61,10 +61,8 @@ const { Horario, Colegio, Curso, CursoProfesor, Anno, Dix,
         { model:Anno, attributes:['id','nombre'], where: { } },
         { model:Colegio, attributes:['id','nombre'], where: { } },
         { model:Curso, attributes:['id','nombre'], where: { } },
-        { model:CursoProfesor, attributes:['id'], where: { } },
-        //{ model:Profesor, attributes:['id','nombre'], where: { } },
-        // { model:Asignatura, attributes:['id','nombre'], where: { } },           
-        ] 
+        { model:CursoProfesor, attributes:['id'], where: { } },         
+        ] , order: [ [{ model: CursoProfesor }, 'id','ASC'] ]
       })
       .then(horarios => res.status(200).send(horarios))
       .catch(error => res.status(400).send(error));

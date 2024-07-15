@@ -180,7 +180,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
       if ( Object.keys(params).length > 0) {
 
         let originTable = params['padre'];
-        console.log('origin',originTable)
+        // console.log('origin',originTable)
 
         const originId = parseInt(params['id']);
 
@@ -267,14 +267,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     this.numColumns = (
       this.textFields.length + this.dateFields.length + this.booleanFields.length +
       this.fkFields.length + this.numRedirect + 1);
-      /*
-      this.crud.getData('cursoprofesor',[4,1,19,0,0])!.pipe(
-        tap(val => val.forEach((v:any) => this.cursoProfesorMap.set(
-            v.id,[v.Profesor.apellido1 + ' ' + v.Profesor.apellido2 + ' ' + v.Profesor.nombre, v.Asignatura.nombre]
-          )
-        )),
-      ).subscribe(() => console.log('ACME',this.cursoProfesorMap))
-      */
+
 
     this.selIdsService.subscribe(
       'maintainer', (message: (Notification)) => this.updateTable(
@@ -304,6 +297,23 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   updateTable(notification: (Notification | null) = null) {
     let fKeys = this.getForeignKeysOfMainTable();
 
+    const querytablegroup = () => {
+      this.sumGroup = 0;
+      this.mainQuery$ = this.crud.getDataCustom(this.mainTable,'group',fKeys)?.pipe(
+         tap((query:any) => {
+          query.forEach((q:any) => { // console.log(q)
+            if (q.CursoProfesor) {
+               // console.log('ACME0');
+               const tmp = this.cursoProfesorMap.get(+q['CursoProfesor'].id);
+               q['CursoProfesor'] = {id: q['CursoProfesor'].id, nombre: tmp[0] + ' | ' + tmp[1]  };
+          }
+            this.sumGroup+=+q[groupSum[this.mainTable]]
+          })
+        }),   // TODO   hacer variable general
+         tap(() => this.currPage = 0)
+         )!;
+    }
+
     const querytable = () => {
 
       this.mainQuery$ = this.crud.getData(
@@ -326,6 +336,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
     if ( !notification || notification.message == "updated" ) {
 
       if ( fKeys.length === 0) {
+        // console.log('ACME2');
         this.mainQuery$ = this.crud.getData(this.mainTable)?.pipe(
             tap(() => this.currPage = 0))!;
       } else {
@@ -333,8 +344,8 @@ export class MaintainerComponent implements OnInit, OnDestroy {
         this.mainTableForeignKeys.forEach(mt => {
           if (middleTables.includes(mt)) {
             this.tieneTablaIntermedia=true;
-            console.log('PORONGA1', this.tieneTablaIntermedia);
-            this.crud.getData('cursoprofesor',[fKeys[0],fKeys[1],fKeys[3],0,0])!.pipe(
+            // console.log('ACME1', this.tieneTablaIntermedia);
+            this.crud.getData(mt,[fKeys[0],fKeys[1],fKeys[3],0,0])!.pipe(
               tap(val => val.forEach((v:any) => this.cursoProfesorMap.set(
                   v.id,[v.Profesor.apellido1 + ' ' + v.Profesor.apellido2 + ' ' + v.Profesor.nombre, v.Asignatura.nombre]
                 )
@@ -344,24 +355,31 @@ export class MaintainerComponent implements OnInit, OnDestroy {
         }
       )
         if(this.tieneTablaIntermedia==false) {
-          console.log('PORONGA3', this.tieneTablaIntermedia)
+          // console.log('ACME3', this.tieneTablaIntermedia)
           querytable();
         }
 
 
       }
 
-      // this.mainQuery$.subscribe((data:any) => { this.numreg = data.length;   })
+      this.mainQuery$.subscribe((data:any) => { this.numreg = data.length;   })
     }
     else if ( !notification || notification.message == "group" ) {
       // let fKeys = this.getForeignKeysOfMainTable();
-      this.sumGroup = 0;
-      this.mainQuery$ = this.crud.getDataCustom(this.mainTable,'group',fKeys)?.pipe(
-         tap((data:any) => {
-          data.forEach((d:any) => this.sumGroup+=+d[groupSum[this.mainTable]])
-        }),   // TODO   hacer variable general
-         tap(() => this.currPage = 0)
-         )!;
+
+      this.mainTableForeignKeys.forEach(mt => {
+        if (middleTables.includes(mt)) {
+          this.tieneTablaIntermedia=true;
+          // console.log('ACME4', this.tieneTablaIntermedia);
+          this.crud.getData(mt,[fKeys[0],fKeys[1],fKeys[3],0,0])!.pipe(
+            tap(val => val.forEach((v:any) => this.cursoProfesorMap.set(
+                v.id,[v.Profesor.apellido1 + ' ' + v.Profesor.apellido2 + ' ' + v.Profesor.nombre, v.Asignatura.nombre]
+              )
+            )),
+          ).subscribe(() => querytablegroup())
+        }
+      })
+
     }
     else if (notification.message == "search") {
       this.searchTerm$.pipe(
