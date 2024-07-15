@@ -1,13 +1,14 @@
-<div class="container-fluid" style="padding-left: 5%; ;padding-right: 5%"
+<div class="container-fluid px-5 pt-3"
 [style.background-color]="bodybgcolor"
 [style.height] = "height"
 >
 
   <!-- Search -->
 
-<div class="container-fluid">
+<div class="container-fluid pb-2">
   <div class="row  align-items-end">
-    <div class="col-md-2 mt-4">
+
+    <div class="col-md-2">
       <div class="input-group" *ngIf="isSearchTable" style="width: 300px;">
         <input type="search" (input)="search($event)"  class="form-control rounded" id="default-search"
         placeholder="ingrese búsqueda" aria-label="Search" aria-describedby="search-addon"/>
@@ -15,7 +16,9 @@
     </div>
     </div>
 
-    <div class="col-md-10 mt-4">
+    <!-- MultiSelect -->
+
+    <div class="col-md-10 pb-2">
 
         <multi-select
           [tables]="selTables"
@@ -32,7 +35,7 @@
 
 <!--  Elimine   [init-ids]="multiSelectInitIds"  04-12-2023  -->
 
-<div class="container-fluid overflow-auto bg-light mt-4"  [style.max-height]="height" [style.opacity]="opacity" style="width: 100%;">
+<!--div class="container-fluid overflow-auto bg-light mt-4"  [style.max-height]="height" [style.opacity]="opacity" style="width: 100%;"-->
 
   <!-- Tabla Principal -->
 
@@ -47,8 +50,8 @@
           </th>
 
           <th *ngFor="let dateFd of dateFields">{{getAttributeLabel(mainTable, dateFd)}}</th>
-          <th *ngFor="let tabla of fkFields">bbb{{getTableLabel(tabla)}}</th>
-          <th *ngFor="let textFd of textFields" >aaa{{getAttributeLabel(mainTable, textFd)}}</th>
+          <th *ngFor="let tabla of fkFields">{{getTableLabel(tabla)}}</th>
+          <th *ngFor="let textFd of textFields" >{{getAttributeLabel(mainTable, textFd)}}</th>
         </tr>
       </thead>
     </ng-container>
@@ -89,9 +92,9 @@
             </ng-container>
 
             <td *ngFor="let dateFd of dateFields">{{c[dateFd] | date:'dd/MM/YYYY'}}</td>
-            <td *ngFor="let table of fkFields">zzz{{getObjectLabel(table, c[table])}}|{{table}}|{{c[table] | json}}</td>
+            <td *ngFor="let table of fkFields">{{getObjectLabel(table, c[table])}}</td>
             <th *ngFor="let boolFd of booleanFields">{{boolFd}}</th>
-            <th *ngFor="let txtFd of textFields">yyy{{c[txtFd]}}</th>
+            <th *ngFor="let txtFd of textFields">{{c[txtFd]}}</th>
 
           </tr>
           <tr><th *ngFor="let c of columns">&nbsp;</th><th>{{sumGroup}}</th></tr>
@@ -108,10 +111,10 @@
             </td>
 
 
-            <td *ngFor="let txtFd of textFields">aaa{{c[txtFd]}}</td>
+            <td *ngFor="let txtFd of textFields">{{c[txtFd]}}</td>
             <td *ngFor="let boolFd of booleanFields">{{c[boolFd]}}</td>
             <td *ngFor="let dateFd of dateFields">{{c[dateFd] | date:'dd/MM/YYYY'}}</td>
-            <td *ngFor="let table of fkFields">ppp{{getObjectLabel(table, c[table])}}</td>
+            <td *ngFor="let table of fkFields">{{getObjectLabel(table, c[table])}}</td>
             <th style="text-align: center;">
               <a mat-button (click)="openDialog(c)" [disabled]="disable.editar"><em class="bi bi-lock"></em></a>
             </th>
@@ -121,7 +124,7 @@
 
 
   </table>
-</div>
+<!--/div-->
 
 <div class="container-fluid" [style.background-color]="pagination">
   <pagination-controls (pageChange)="currPage=$event"></pagination-controls>

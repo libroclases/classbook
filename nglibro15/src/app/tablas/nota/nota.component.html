@@ -19,14 +19,15 @@
         <tr>
           <th [attr.colspan]="columns+2" [style.background-color]="tablehead"
           style="text-align: center; vertical-align: middle;color:white; height:40px">Notas
-          <button class="btn btn-sm btn-outline-info mx-2" style="color: aliceblue" type="button"  data-bs-toggle="modal" data-bs-target="#myModal" (click)="reset()"
-          ><em class="bi bi-check-lg"></em></button>{{codigoValidado}}
+          <button class="btn btn-sm btn-outline-info mx-2" style="color: aliceblue" type="button"  
+          data-bs-toggle="modal" data-bs-target="#myModal" (click)="reset()"
+          ><em class="bi bi-check-lg"></em><i class="bi bi-x-lg"></i></button>
         </th>
       </tr>
       </thead>
       <tbody *ngIf="mostra_tabla==true">
         <tr>
-          <td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async)">{{e.nombre}} ({{e.ponderacion}}%)</td><td>Ponderado</td>
+          <td>Código Validado : <span [style.color]="getColorValida()">{{codigoValidado}}</span></td><td *ngFor="let e of (evaluacion$ | async)">{{e.nombre}} ({{e.ponderacion}}%)</td><td>Ponderado</td>
         </tr>
         <tr><td>&nbsp;</td><td *ngFor="let e of (evaluacion$ | async)">{{e.fecha}}</td></tr>
         <tr>
@@ -67,23 +68,25 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Autenticicación</h4>
+        <h4 class="modal-title">Autentificación</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body modal-body-cyan">
-        <!-- form #codeForm="ngForm" -->
+   
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal" (click)="consultarCodigo(codigo)" >Consultar</button>
+            <button [class]="modalbutton" type="button" data-bs-dismiss="modal" (click)="consultarCodigo(codigo)" >Consultar</button>
           </div>
-          <input type="text" class="form-control ms-1" [(ngModel)]="codigo" id="codigo" name="codigo" (keyup)="IdPed($event)"
-          placeholder="Ingresar código autentificación de google" aria-label="poronga" aria-describedby="basic-addon1" required>
+          <input type="text" class="form-control ms-1" [(ngModel)]="codigo" id="codigo" 
+          placeholder="Ingrese código de autentificación">
         </div>
-        <!--/form-->
-      </div>
-
+        <!--div *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)" class="alert">
+          <div *ngIf="codigo.errors?.['required']">Código es requerido.</div>  
+       
+      </div-->
+   
       <!-- Modal footer -->
       <div class="modal-footer">
 

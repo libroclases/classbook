@@ -92,7 +92,7 @@ export class CrudService {
     } else {
       baseurl = `${this.baseurl}/${table}`;
     }
-
+    
     return this.http.get<any>(baseurl).pipe(take(1), share());
   }
 

@@ -681,7 +681,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('read:cursoprofesor'),
       CursoProfesores.list);
     app.get('/api/cursoprofesor/:annoId/:colegioId/:cursoId/:asignaturaId/:profesorId/fk',
-      checkjwd, requiredScopes('read:cursoprofesor'),
+      // checkjwd, requiredScopes('read:cursoprofesor'),
       CursoProfesores.getByFk);
     app.get('/api/cursoprofesor/:annoId/:colegioId/:cursoId/0/profesor_por_curso',
       checkjwd, requiredScopes('read:cursoprofesor'),

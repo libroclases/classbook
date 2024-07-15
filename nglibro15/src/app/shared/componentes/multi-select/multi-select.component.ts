@@ -188,9 +188,9 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
     this.selIdsService.notifyUpdated();
 
     if (setSelectionIdsTexts) {
-      for (const [tb, value] of Object.entries(fks)) {
+      for (const [tb, value] of Object.entries(fks)) { 
         if (this.tables.includes(tb)) {
-          this.getQuery(tb).subscribe((query) => {
+          this.getQuery(tb).subscribe((query) => { // console.log(query);
             query.every((entry: any) => {
               if (entry.id == value) { // console.log('tb, entry',tb, entry)
                 this.selIdsService.setText(tb, this.getLabel(tb, entry));

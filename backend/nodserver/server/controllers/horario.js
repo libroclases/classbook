@@ -1,7 +1,7 @@
 import model, { sequelize } from '../models';
 
 const { Horario, Colegio, Curso, CursoProfesor, Anno, Dix,
-  //  Profesor, Asignatura 
+   Profesor, Asignatura 
   } = model;
 
   class Horarios {

@@ -152,15 +152,16 @@ export class NotaComponent implements OnInit {
  
     }
 
-    IdPed(event: any) {
-      this.codigo = event.target.value;
-    }
 
     reset() { this.codigo = ''; }
 
      getColorNota(nota: number) {
          return  (nota < 4) ? 'red' : 'blue';
      }
+
+     getColorValida() {
+      return  (this.codigoValidado == true) ? 'blue' : 'red';
+  }
 
      setType(valor:any): number {
        return +valor;
