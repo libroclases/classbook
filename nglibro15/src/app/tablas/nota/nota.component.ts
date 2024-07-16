@@ -87,6 +87,7 @@ export class NotaComponent implements OnInit {
   numMatriculas = 0;
   btable!:string;
   notasForm!: FormGroup;
+  codigoForm!: FormGroup;
 
   //   colores
 
@@ -153,7 +154,7 @@ export class NotaComponent implements OnInit {
     }
 
 
-    reset() { this.codigo = ''; this.codigoValidado = !this.codigoValidado; }
+    reset() { this.codigo = ''; }
     
      getColorNota(nota: number) {
          return  (nota < 4) ? 'red' : 'blue';
@@ -259,13 +260,13 @@ export class NotaComponent implements OnInit {
 
       if (color == null) {  color = localStorage.getItem('Color')  }
 
-      if (color == 'primary' || !color) {
+      if (color == 'primary') {
         this.btable = "table table-primary table-striped table-bordered table-sm";
         this.bodybgcolor = this.objcolors.primary.bodybgcolor;
         this.pagination = this.objcolors.primary.pagination;
         this.tablehead = this.objcolors.primary.tablehead;
         this.bgmodal = this.objcolors.primary.bgmodal;
-        this.modalbutton = this.objcolors.primary.matbutton;
+        this.modalbutton = this.objcolors.primary.modalbutton;
         this.url = this.photo.primary;
       }
       else if (color == 'success') {
