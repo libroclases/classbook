@@ -42,7 +42,7 @@ export class NotaComponent implements OnInit {
   classlock = "bi bi-lock";
 
   codigo!: string;  // codigo de autentificación google
-  codigoValidado = false;
+  codigoValidado = true;
 
   url!:string;
   photo = environment.photo;
@@ -137,7 +137,7 @@ export class NotaComponent implements OnInit {
 
     ) {
 
-      this.notasForm = new FormGroup({})
+      this.notasForm = new FormGroup({});
 
      }
 
@@ -375,13 +375,18 @@ export class NotaComponent implements OnInit {
 
   ngOnInit(): void {
 
+    const numericNumberReg= '^[0-9]{6}$';
+
+    this.codigoForm = this.fb.group({
+
+      codigo: ['', [Validators.required, Validators.pattern(numericNumberReg)]]
+    })
+
     this.usuario$.pipe(
       tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
       tap(info => { if (info.personalInfo?.usuario) { this.disable = this.getpermission.getPermission(Permission['Nota'], info) } })
 
     ).subscribe()
-
-
 
     this.selIdsService.msg.pipe(
       tap((message: (Notification)) => this.updateTable(message)), share()

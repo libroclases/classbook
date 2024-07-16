@@ -46,7 +46,8 @@
           <td *ngFor="let mnota of matriculasNotasMap.get(matricula.id); index as i" [style.color]="getColorNota(mnota)">
             <span *ngIf="this.editarcolumn==i && this.edita; else mostra">
               <input type="text" size="3" formControlName="{{matricula.id}}-{{i}}">
-              <div *ngIf="notasForm.controls[matricula.id + '-' + i].invalid && (notasForm.controls[matricula.id + '-' + i].dirty || notasForm.controls[matricula.id + '-' + i].touched)"  class="alert alert-danger">
+              <div *ngIf="notasForm.controls[matricula.id + '-' + i].invalid && (notasForm.controls[matricula.id + '-' + i].dirty || notasForm.controls[matricula.id + '-' + i].touched)" 
+              class="alert alert-danger">
                 <div *ngIf="notasForm.controls[matricula.id + '-' + i]?.errors?.['required']">Por favor ingrese nota</div>
                 <div *ngIf="notasForm.controls[matricula.id + '-' + i]?.errors?.['pattern']">Sólo números</div>
                 <div *ngIf="notasForm.controls[matricula.id + '-' + i]?.errors?.['min']">Nota mínima 1</div>
@@ -76,19 +77,18 @@
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body modal-body-cyan">
+      <div   [formGroup]="codigoForm" class="modal-body modal-body-cyan">
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <button [class]="modalbutton" type="button" data-bs-dismiss="modal" (click)="consultarCodigo(codigo)" >Consultar</button>
+            <button [class]="modalbutton" [disabled]="codigoForm.invalid" type="button" data-bs-dismiss="modal" (click)="consultarCodigo(codigo)" >Consultar</button>
           </div>
-          <input type="text" class="form-control ms-1" id="codigo"
-          placeholder="Ingrese código de autentificación">
+          <input type="text"  class="form-control mx-3" id="codigo" formControlName="codigo"  placeholder="Ingrese código de autentificación">
         </div>
-        <!--div *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)" class="alert">
-          <div *ngIf="codigo.errors?.['required']">Código es requerido.</div>
-
-      </div-->
+        <div *ngIf="codigoForm.get('codigo')?.invalid && (codigoForm.get('codigo')?.dirty || codigoForm.get('codigo')?.touched)" class="alert alert-danger">
+          <div *ngIf="codigoForm.get('codigo')?.errors?.['required']">Código es requerido.</div>
+          <div *ngIf="codigoForm.get('codigo')?.errors?.['pattern']">6 dígitos solamente.</div>
+        </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
