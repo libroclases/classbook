@@ -61,16 +61,16 @@
   
                       <td>
                         <ng-container  *ngIf="dayOf.CursoProfesor;  else Nulo">
-                           <span *ngIf="stateOfButtonEdit==false; else disable">
+                           <span *ngIf="stateOfButtonEdit==false; else disable"> {{i+1}} 
                             <button class="btn btn-outline-light text-dark btn-sm" data-bs-toggle="tooltip"  [disabled]="stateOfButtonEdit"
                             title="{{dayOf.profesor}}"
                             (click)="openDialog(dayOf,'update')">{{dayOf.CursoProfesor.asignatura}}
                             </button>
                              
                            </span>
-                           <ng-template #disable><span title="{{dayOf.profesor}}">{{dayOf.CursoProfesor.asignatura}}</span></ng-template>
+                           <ng-template #disable><span title="{{dayOf.profesor}}">{{i+1}} {{dayOf.CursoProfesor.asignatura}}</span></ng-template>
                         </ng-container>
-                        <ng-template #Nulo>&nbsp;</ng-template>
+                        <ng-template #Nulo>{{i+1}}</ng-template>
                       </td>
                   </tr>
                   </tbody>
