@@ -33,7 +33,6 @@ class Tokens {
             secret: token.secret,
             encoding: 'base32',
             token: auth,
-            window: 1 
         });
 
         if(verified) {

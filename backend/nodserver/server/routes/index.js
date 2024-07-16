@@ -693,11 +693,11 @@ const checkjwd = auth({
       checkjwd, requiredScopes('update:cursoprofesor'),
       CursoProfesores.modify);
 
-      /*
+      
       app.post('/api/token/generate-secret',
         // checkjwd, requiredScopes('create:tokenmodel'),
       Tokens.create);  
-      */
+      
      
     app.post('/api/token',   // verificar token
         // checkjwd, requiredScopes('create:tokenmodel'),

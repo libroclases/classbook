@@ -18,14 +18,13 @@
       <thead>
         <tr>
           <th [attr.colspan]="columns+2" [style.background-color]="tablehead"
-          style="text-align: center; vertical-align: middle;color:white; height:40px">Notas
-          <button class="btn btn-sm btn-outline-info mx-2" style="color: aliceblue" type="button"
-          data-bs-toggle="modal" data-bs-target="#myModal" (click)="reset()"
-          >
-          <span  *ngIf="codigoValidado==false; else otro" ><em class="bi bi-check-lg"></em></span>
-        </button>
-        <ng-template #otro> <em class="bi bi-x-lg"></em></ng-template>
-        </th>
+            style="text-align: center; vertical-align: middle;color:white; height:40px">Notas
+            <span *ngIf="codigoValidado==false && mostra_tabla==true; else novalido" >
+              <button class="btn btn-sm btn-outline-info mx-2" style="color: aliceblue" type="button"
+                    data-bs-toggle="modal" data-bs-target="#myModal" (click)="reset()"><em class="bi bi-check-lg"></em></button>
+            </span>
+            <ng-template #novalido> <button *ngIf="mostra_tabla==true" class="btn btn-sm btn-outline-info mx-2" style="color: aliceblue" (click)="desactivar()" type="button"><em class="bi bi-x-lg"></em></button></ng-template>
+          </th>
       </tr>
       </thead>
       <tbody *ngIf="mostra_tabla==true">

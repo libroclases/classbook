@@ -39,10 +39,10 @@ export class NotaComponent implements OnInit {
   promedio: number | null = 0;
 
   evaluacionId = 0;
-  classlock = "bi bi-lock";
+  // classlock = "bi bi-lock";
 
   codigo!: string;  // codigo de autentificación google
-  codigoValidado = true;
+  codigoValidado = false;
 
   url!:string;
   photo = environment.photo;
@@ -120,6 +120,7 @@ export class NotaComponent implements OnInit {
   notas$!: Observable<any>;
 
   @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
+  
   mostra_tabla=false;
 
   @HostListener('window:resize', ['$event'])
@@ -142,17 +143,19 @@ export class NotaComponent implements OnInit {
      }
 
     consultarCodigo(codigo:string) {
+      /*
       this.crud.postData({userId: 'e9abdc2a-75f6-4c7a-b910-745d4f58c343', auth: codigo},'token').pipe(
         tap(msg => {
           this.showmsg(msg)
         })
       ).subscribe();
-      
-      // console.log(codigo);
-
+      */
+    console.log(codigo);
+     this.codigoValidado = true; 
  
     }
 
+    desactivar() {  this.codigoValidado = false; }
 
     reset() { this.codigo = ''; }
     
@@ -313,7 +316,7 @@ export class NotaComponent implements OnInit {
         0,
       ]
       this.ponderacion = 0;
-      if (fks[0]*fks[1]*fks[2]*fks[3]*fks[4]>0) { this.mostra_tabla=true;} else {this.mostra_tabla=false;}
+      
       this.evaluacion$ = this.crud.getData('evaluacion', fks)?.pipe(
         tap(eva => eva.forEach((e: any) => {
           this.ponderacion += e.ponderacion;
@@ -364,6 +367,15 @@ export class NotaComponent implements OnInit {
 
     updateTable(notification: (Notification | null) = null) {
 
+      const fks = [
+        this.selIdsService.getId('anno'),
+        this.selIdsService.getId('periodo'),
+        this.selIdsService.getId('colegio'),
+        this.selIdsService.getId('curso'),
+        this.selIdsService.getId('cursoprofesor'),
+        0,
+      ]
+      if (fks[0]*fks[1]*fks[2]*fks[3]*fks[4]>0) { this.mostra_tabla=true;} else {this.mostra_tabla=false;}
 
       if (!notification || notification.message == "updated")  {
         if (this.selIdsService.selectEnableKeys(['anno', 'periodo', 'colegio', 'curso','cursoprofesor'])) {
