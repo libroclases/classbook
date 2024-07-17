@@ -324,8 +324,12 @@ const checkjwd = auth({
     app.put('/api/usuario/:usuarioId',
       checkjwd, requiredScopes('update:usuario'),
       Usuarios.modify)
-    /*
-    app.put('/api/usuario/:Id/generateSecret',
+/*
+    app.put('/api/usuario/enable2fa/:id', 
+      // checkjwd, requiredScopes('update:usuario'),
+      Usuarios.enable2fa);
+
+      app.put('/api/usuario/:Id/generateSecret',
       checkjwd, requiredScopes('create:usuario'),
       Usuarios.generateSecret);  
 
@@ -692,14 +696,17 @@ const checkjwd = auth({
     app.put('/api/cursoprofesor/:cursoprofesorId',
       checkjwd, requiredScopes('update:cursoprofesor'),
       CursoProfesores.modify);
-
-      
+    /*
+      app.put('/api/usuario/enable2fa/:id', 
+        // checkjwd, requiredScopes('update:usuario'),
+        Usuarios.enable2fa);
+    */  
       app.post('/api/token/generate-secret',
         // checkjwd, requiredScopes('create:tokenmodel'),
       Tokens.create);  
       
      
-    app.post('/api/token',   // verificar token
+    app.get('/api/token/verify-token',   // verificar token
         // checkjwd, requiredScopes('create:tokenmodel'),
       Tokens.veifyToken);  
 

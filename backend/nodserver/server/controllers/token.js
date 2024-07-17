@@ -4,6 +4,8 @@ const { Token } = model;
 const speakeasy = require('speakeasy');
 const uuid =  require('uuid');
 
+const  QRCode = require('qrcode');
+
 
 class Tokens {
 
@@ -13,6 +15,7 @@ class Tokens {
         return Token
           .create({
             secret: secret.base32,
+            secret_url: secret.otpauth_url,
             id: id
         })
           .then(token => res.status(201).send({

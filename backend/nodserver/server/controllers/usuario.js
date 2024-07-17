@@ -1,4 +1,9 @@
 import model from '../models';
+// import * as crypto from "crypto";
+// import {encode} from "hi-base32";
+// import OTPAuth from "otpauth";
+// import QRCode from "qrcode";
+
 
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
@@ -213,6 +218,69 @@ class Usuarios {
     .catch(error => res.status(400).send(error));
     }
 
+    /*
+    static enable2fa(req, res) {        
+
+
+        const generateBase32Secret = () => {
+            const buffer = crypto.randomBytes(15);
+            const base32 = encode(buffer).replace(/=/g, "").substring(0, 24);
+            return base32;
+          };
+
+        // Generate a secret key for the user
+        const base32_secret = generateBase32Secret();
+
+        // Generate a QR code URL for the user to scan
+        let totp = new OTPAuth.TOTP({
+            issuer: "libroclases.cl",
+            label: "libroclases",
+            algorithm: "SHA1",
+            digits: 6,
+            secret: base32_secret,
+        });
+
+        let otpauth_url = totp.toString();
+
+          // Generate and send the QR code as a response
+        QRCode.toDataURL(otpauth_url, (err) => {
+         if(err) {
+            return res.status(500).json({
+               status: 'fail',
+               message: "Error while generating QR Code"
+            })
+        }
+        res.json({
+           status: "success",
+           data: {
+              qrCodeUrl: otpauth_url,
+              secret: base32_secret
+            }
+        })
+      });
+
+   
+
+        return Usuario
+            .findByPk(req.params.usuarioId)
+            .then((usuario) => {
+                usuario.update({
+                  secret: base32_secret || usuario.secret,                   
+        })
+        .then((updateUsuario) => {
+            res.status(200).send({
+                message: 'Usuario actualizado exitosamente',
+                    data: {
+                    secret: secret || updateUsuario.secret,
+                    }
+                })
+        })
+        .catch(error => res.status(400).send(error));
+        })
+        .catch(error => res.status(400).send(error));
+        }
+    */
+    /*
     static generateSecret(req, res) {
         const secret = speakeasy.generateSecret({ length: 20});
         const uid = uuid.v4();
@@ -275,7 +343,7 @@ class Usuarios {
         });
 
     }
-
+    */
 }
 
 export default Usuarios;
