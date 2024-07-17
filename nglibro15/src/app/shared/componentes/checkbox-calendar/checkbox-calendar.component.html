@@ -92,7 +92,7 @@ style="width: 100%;">
                 <ng-template #someData>
                   <ng-container
                     *ngIf="
-                      columnEnabled.get(col);
+                      columnEnabled.get(col) && this.codigoValidado;
                       then isEnabled;
                       else isDisabled
                     "

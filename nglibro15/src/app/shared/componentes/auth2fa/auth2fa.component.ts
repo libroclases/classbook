@@ -39,7 +39,7 @@ export class Auth2faComponent implements OnInit {
    ngOnInit(): void {
 
     this.usuario$.pipe(
-      tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),
+      tap(info => { this.getColor(info.personalInfo?.usuario.Tema.nombre) }),
     ).subscribe()
 
     const numericNumberReg= '^[0-9]{6}$';

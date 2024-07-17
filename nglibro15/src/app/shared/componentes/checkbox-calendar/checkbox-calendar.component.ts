@@ -205,7 +205,7 @@ getColorValida() {
 
   validarCodigo(event: any) {
     this.codigoValidado = event;
-  }
+}
 
   ngOnInit() {
     this.mainTableForeignKeys = this.fkService.getFKeys(this.table)!;
@@ -359,8 +359,8 @@ getColorValida() {
           this.columnLabelInRed.set(holidayIndex, true);
         }
         if (this.currentDateInMonth && !this.columnIsGrey.get(this.colToday)) {
-          console.log(this.disable_check.editar);
-          this.columnEnabled.set(this.colToday, true && !this.disable_check.editar);
+
+          this.columnEnabled.set(this.colToday, !this.disable_check.editar);
         }
 
         this.selected.clear();

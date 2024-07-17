@@ -107,7 +107,7 @@ export const environment = {
       bodybgcolor: 'rgb(230, 233, 242)', //  rgb(230, 233, 242)
       tablehead: 'rgb(44,161,213)',
       bgmodal: '#0D6EFD',
-      modalbutton: 'btn btn-primary',
+      modalbutton: 'btn btn-primary text-light',
       matbutton: 'rgb(69, 130, 233)'
     },
 
@@ -120,7 +120,7 @@ export const environment = {
       bodybgcolor: 'rgb(214,242,214)', // rgb(214,242,214)
       tablehead: 'lightgreen',
       bgmodal: 'lightgreen',
-      modalbutton: 'btn btn-success',
+      modalbutton: 'btn btn-success text-light',
       matbutton: 'rgb(82, 205, 145)'
     },
 
@@ -133,7 +133,7 @@ export const environment = {
       bodybgcolor: 'rgb(227, 240, 242)', // rgb(227, 240, 242)
       tablehead:  'rgb(13, 202, 240)',
       bgmodal: 'rgb(13, 202, 240)',
-      modalbutton: 'btn btn-info',
+      modalbutton: 'btn btn-info text-light',
       matbutton: 'rgb(13, 202, 240)'
     },
   },
