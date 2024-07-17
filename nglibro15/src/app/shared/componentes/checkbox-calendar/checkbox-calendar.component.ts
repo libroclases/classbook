@@ -71,6 +71,8 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
 
   opacity = environment.opacity;
 
+  codigoValidado: boolean = false;
+
   daysOfWeek = ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'];
 
   rowTableUpper: string = '';
@@ -195,14 +197,15 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
       else { getColor(localStorage.getItem('Color')) }
     });
 
-    /*
-      this.userInfo.personalInfo$.subscribe(info => info.inscripcionColegio.forEach((el:any) => {
-        getPermision({esUtp: el.esUtp,anno: el.Anno, colegio: el.Colegio.id});
-        getColor(info.personalInfo.usuario.Tema.nombre);
-      }))
-    */
 }
 
+getColorValida() {
+  return  (this.codigoValidado == true) ? 'blue' : 'red';
+}
+
+  validarCodigo(event: any) {
+    this.codigoValidado = event;
+  }
 
   ngOnInit() {
     this.mainTableForeignKeys = this.fkService.getFKeys(this.table)!;

@@ -12,14 +12,15 @@ style="width: 100%;">
       <th colspan="33"  [style.background-color]="tablehead" style="color:white; height: 40px">
         <em [class]="getBiClass('/asistencia')">&nbsp;&nbsp;</em><b>{{ title }}</b>
         &nbsp;
-        <button
+        <app-auth2fa *ngIf="currentDateInMonth" (newItemEvent)="validarCodigo($event)" ></app-auth2fa>
+        <!--button
         type="button"
         class="btn btn-sm"
         *ngIf="currentDateInMonth"
         [disabled]="saveValuesDisabled"
         [style.background-color]="modalbutton"
         (click)="saveValues()"
-      >Guardar</button>
+      >Guardar</button-->
 
 
       </th>
@@ -30,7 +31,7 @@ style="width: 100%;">
     <ng-container *ngIf="nRows > 0">
       <tr class="table-bordered">
         <th style="width: 2.5%"></th>
-        <th></th>
+        <th>Código Validado: <span [style.color]="getColorValida()">{{codigoValidado}}</span></th>
         <ng-container *ngFor="let c of colIndices">
           <th style="width: 2.5%; text-align: center">
             {{ daysOfWeek[dayIndicesInWeek[c]] }}
