@@ -87,7 +87,6 @@ export class NotaComponent implements OnInit {
   numMatriculas = 0;
   btable!:string;
   notasForm!: FormGroup;
-  codigoForm!: FormGroup;
 
   //   colores
 
@@ -120,7 +119,7 @@ export class NotaComponent implements OnInit {
   notas$!: Observable<any>;
 
   @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
-  
+
   mostra_tabla=false;
 
   @HostListener('window:resize', ['$event'])
@@ -142,23 +141,10 @@ export class NotaComponent implements OnInit {
 
      }
 
-    consultarCodigo(codigo:string) {
-      /*
-      this.crud.postData({userId: 'e9abdc2a-75f6-4c7a-b910-745d4f58c343', auth: codigo},'token').pipe(
-        tap(msg => {
-          this.showmsg(msg)
-        })
-      ).subscribe();
-      */
-    console.log(codigo);
-     this.codigoValidado = true; 
- 
+    validarCodigo(event: any) {
+      this.codigoValidado = event;
     }
 
-    desactivar() {  this.codigoValidado = false; }
-
-    reset() { this.codigo = ''; }
-    
      getColorNota(nota: number) {
          return  (nota < 4) ? 'red' : 'blue';
      }
@@ -170,17 +156,6 @@ export class NotaComponent implements OnInit {
      setType(valor:any): number {
        return +valor;
      }
-
-     showmsg(msg:any) {   
-      if (msg?.message && Object.keys(msg)?.length > 0 ) {
-        this.codigoValidado = true;
-        this.toastr.success(msg.message, 'Notas', {positionClass:'toast-top-right'})
-      }
-      else {
-        this.codigoValidado = false;
-        this.toastr.error(msg.error, 'Notas')
-      }
-    }
 
      desabilitado(fecha: Date): any{
 
@@ -204,7 +179,7 @@ export class NotaComponent implements OnInit {
          ]));
 
       }
-   
+
     }
 
     deleteForm() {
@@ -316,7 +291,7 @@ export class NotaComponent implements OnInit {
         0,
       ]
       this.ponderacion = 0;
-      
+
       this.evaluacion$ = this.crud.getData('evaluacion', fks)?.pipe(
         tap(eva => eva.forEach((e: any) => {
           this.ponderacion += e.ponderacion;
@@ -386,13 +361,6 @@ export class NotaComponent implements OnInit {
     }
 
   ngOnInit(): void {
-
-    const numericNumberReg= '^[0-9]{6}$';
-
-    this.codigoForm = this.fb.group({
-
-      codigo: ['', [Validators.required, Validators.pattern(numericNumberReg)]]
-    })
 
     this.usuario$.pipe(
       tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre)),

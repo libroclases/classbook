@@ -19,11 +19,7 @@
         <tr>
           <th [attr.colspan]="columns+2" [style.background-color]="tablehead"
             style="text-align: center; vertical-align: middle;color:white; height:40px">Notas
-            <span *ngIf="codigoValidado==false && mostra_tabla==true; else novalido" >
-              <button class="btn btn-sm btn-outline-info mx-2" style="color: aliceblue" type="button"
-                    data-bs-toggle="modal" data-bs-target="#myModal" (click)="reset()"><em class="bi bi-check-lg"></em></button>
-            </span>
-            <ng-template #novalido> <button *ngIf="mostra_tabla==true" class="btn btn-sm btn-outline-info mx-2" style="color: aliceblue" (click)="desactivar()" type="button"><em class="bi bi-x-lg"></em></button></ng-template>
+               <app-auth2fa *ngIf="mostra_tabla==true" (newItemEvent)="validarCodigo($event)" ></app-auth2fa>
           </th>
       </tr>
       </thead>
@@ -45,7 +41,7 @@
           <td *ngFor="let mnota of matriculasNotasMap.get(matricula.id); index as i" [style.color]="getColorNota(mnota)">
             <span *ngIf="this.editarcolumn==i && this.edita; else mostra">
               <input type="text" size="3" formControlName="{{matricula.id}}-{{i}}">
-              <div *ngIf="notasForm.controls[matricula.id + '-' + i].invalid && (notasForm.controls[matricula.id + '-' + i].dirty || notasForm.controls[matricula.id + '-' + i].touched)" 
+              <div *ngIf="notasForm.controls[matricula.id + '-' + i].invalid && (notasForm.controls[matricula.id + '-' + i].dirty || notasForm.controls[matricula.id + '-' + i].touched)"
               class="alert alert-danger">
                 <div *ngIf="notasForm.controls[matricula.id + '-' + i]?.errors?.['required']">Por favor ingrese nota</div>
                 <div *ngIf="notasForm.controls[matricula.id + '-' + i]?.errors?.['pattern']">Sólo números</div>
@@ -64,37 +60,3 @@
 
 </div>
 
-<!-- The Modal -->
-<div class="modal fade" id="myModal" data-bs-backdrop="static">
-  <div class="modal-dialog  modal-dialog-centered">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Autentificación</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <!-- Modal body -->
-      <div   [formGroup]="codigoForm" class="modal-body modal-body-cyan">
-
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <button [class]="modalbutton" [disabled]="codigoForm.invalid" type="button" data-bs-dismiss="modal" (click)="consultarCodigo(codigo)" >Consultar</button>
-          </div>
-          <input type="text"  class="form-control mx-3" id="codigo" formControlName="codigo"  placeholder="Ingrese código de autentificación">
-        </div>
-        <div *ngIf="codigoForm.get('codigo')?.invalid && (codigoForm.get('codigo')?.dirty || codigoForm.get('codigo')?.touched)" class="alert alert-danger">
-          <div *ngIf="codigoForm.get('codigo')?.errors?.['required']">Código es requerido.</div>
-          <div *ngIf="codigoForm.get('codigo')?.errors?.['pattern']">6 dígitos solamente.</div>
-        </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-
-        <button type="button" class="btn btn-outline-sm btn-danger ms-5" data-bs-dismiss="modal">Cerrar</button>
-      </div>
-
-    </div>
-  </div>
-</div>

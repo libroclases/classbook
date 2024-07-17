@@ -71,9 +71,9 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 import { ToastrModule } from 'ngx-toastr';
 import { UsuarioState } from './ngxs/usuario/usuario.state';
-import { PruebaComponent } from './tablas/prueba/prueba.component';
 import { CursoProfesorComponent } from './tablas/curso-profesor/curso-profesor.component';
 import { InscripcionColegioComponent } from './tablas/inscripcion-colegio/inscripcion-colegio.component';
+import { Auth2faComponent } from './shared/componentes/auth2fa/auth2fa.component';
 
 
 const allowedTables = [
@@ -177,9 +177,9 @@ allowedTables.forEach((tb) => {
     AdministradorComponent,
     ProfeValidatorsDirective,
     ResumenNotaComponent,
-    PruebaComponent,
     CursoProfesorComponent,
     InscripcionColegioComponent,
+    Auth2faComponent,
 
 
   ],
