@@ -24,6 +24,7 @@ module.exports = {
         unique: false,
         defaultValue: false
       },
+      /*
       uid: {
         allowNull: true,
         type: Sequelize.UUID,
@@ -37,6 +38,7 @@ module.exports = {
         defaultValue: false,
         allowNull: true,
       },
+      */
       lastLogin: {
         type: Sequelize.DATE,
         allowNull: true,

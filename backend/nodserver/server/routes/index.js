@@ -701,7 +701,7 @@ const checkjwd = auth({
         // checkjwd, requiredScopes('update:usuario'),
         Usuarios.enable2fa);
     */  
-      app.post('/api/token/generate-secret',
+      app.post('/api/token/generate-secret/:usuarioId',
         // checkjwd, requiredScopes('create:tokenmodel'),
       Tokens.create);  
       
@@ -710,6 +710,9 @@ const checkjwd = auth({
         // checkjwd, requiredScopes('create:tokenmodel'),
       Tokens.veifyToken);  
 
+    app.get('/api/token/validate-token',   // verificar token
+        // checkjwd, requiredScopes('create:tokenmodel'),
+      Tokens.validateToken);    
   };
 
 

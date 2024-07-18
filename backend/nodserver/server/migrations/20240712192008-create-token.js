@@ -11,12 +11,26 @@ module.exports = {
         type: Sequelize.UUID,
       },
       secret: {
+        allowNull: false,
         type: Sequelize.STRING
+      },
+      dataUrl: {
+        allowNull: true,
+        type: Sequelize.TEXT
       },
       authIsSet: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
         allowNull: true,
+      },
+      usuarioId: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Usuario',
+          key: 'id',
+          as: 'Usuario',
+        }
       },
       createdAt: {
         allowNull: false,

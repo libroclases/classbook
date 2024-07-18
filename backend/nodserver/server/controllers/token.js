@@ -3,20 +3,27 @@ const { Token } = model;
 
 const speakeasy = require('speakeasy');
 const uuid =  require('uuid');
-
 const  QRCode = require('qrcode');
-
 
 class Tokens {
 
     static create(req, res) {
-        const secret = speakeasy.generateSecret({ length: 20});
+        
+        
+        const tmp_secret = speakeasy.generateSecret({ length: 20});
+        // var  urlcode = tmp_secret.otpauth_url;
+        var urlcode = '';
         const id = uuid.v4();
-        return Token
+
+        QRCode.toDataURL(tmp_secret.otpauth_url, function(err, url) {
+
+          return Token
           .create({
-            secret: secret.base32,
-            secret_url: secret.otpauth_url,
-            id: id
+            secret: tmp_secret.base32,
+            dataUrl: url,
+            id: id,
+            authIsSet: false,
+            usuarioId: req.params.usuarioId
         })
           .then(token => res.status(201).send({
             status: "success",
@@ -24,6 +31,10 @@ class Tokens {
             token
           }))
           .catch(error => res.status(400).send(error));
+            
+        });
+         
+
         }
 
     static veifyToken(req, res) {
@@ -64,6 +75,23 @@ class Tokens {
 
     }  
 
+    static validateToken(req, res) {
+        
+      const { userId, auth } = req.body;
+
+        Token.findByPk(userId).then((token) => { 
+
+          const validated = speakeasy.totp.verify({
+            secret: token.secret,
+            encoding: 'base32',
+            token: auth,
+            windows: 1
+        });
+
+        if(validated) { return res.status(200).send({ validated: true });
+        } else { return res.status(200).send({ validated: false }) }
+      }
+      ).catch(error => res.status(400).send(error));}
 }
 
 export default Tokens;

@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         unique: false,
       },
+      /*
       uid: {
         type: DataTypes.UUID,
         allowNull: {
@@ -49,6 +50,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Please enter your name",
         },
       },
+      */
       lastLogin: {
         type: DataTypes.DATE,
         defaultValue: false,
@@ -77,6 +79,10 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Usuario.hasMany(models.Profesor, {
+      foreignKey: "usuarioId",
+    });
+
+    Usuario.hasMany(models.Token, {
       foreignKey: "usuarioId",
     });
 

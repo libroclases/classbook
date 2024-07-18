@@ -11,6 +11,13 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Please enter your name",
         },
       },
+      dataUrl: {
+        type: DataTypes.TEXT,
+        allowNull: {
+          args: true,
+          msg: "Please enter your name",
+        },
+      },
       authIsSet: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
@@ -32,7 +39,9 @@ module.exports = (sequelize, DataTypes) => {
 
   Token.associate = function (models) {
     // associations can be defined here
-
+    Token.belongsTo(models.Usuario, {
+      foreignKey: "usuarioId",
+    });
 
   };
   return Token;
