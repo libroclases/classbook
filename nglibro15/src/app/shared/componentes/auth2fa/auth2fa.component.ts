@@ -7,6 +7,7 @@ import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Output, EventEmitter } from '@angular/core';
 import { CrudService } from '../../services/crud/crud.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class Auth2faComponent implements OnInit {
    modalbutton!:string;
    objcolors = environment.colors;
 
-   constructor(private fb: FormBuilder, private crud: CrudService) { }
+   constructor(private fb: FormBuilder, private crud: CrudService, private toastr: ToastrService) { }
 
    ngOnInit(): void {
 
@@ -70,13 +71,17 @@ export class Auth2faComponent implements OnInit {
     
     this.crud.postData({ userId: '83bab0dc-aa45-4ae9-989f-e6029a13323a', auth: this.codigoForm.value.codigo }, 'token').pipe(
       tap(msg => {
-        console.log('msg',msg)
+        console.log('msg',msg.validated);
+        if (msg.validated == true) {
+          this.codigoValidado = true;
+          this.newItemEvent.emit(true);
+          this.toastr.success('Código Validado', 'Ok', { timeOut: 3000 });       
+        }
+        else { this.toastr.error('Código Incorrecto', 'Error',{ timeOut: 4000 }); }
       })
     ).subscribe();
     
   
-   this.codigoValidado = true;
-   this.newItemEvent.emit(true);
   }
 
 }
