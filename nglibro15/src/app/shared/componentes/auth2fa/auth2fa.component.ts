@@ -75,9 +75,9 @@ export class Auth2faComponent implements OnInit {
         if (msg.validated == true) {
           this.codigoValidado = true;
           this.newItemEvent.emit(true);
-          this.toastr.success('Código Validado', 'Ok', { timeOut: 3000 });       
+          this.toastr.success('Código Validado', 'Correcto');       
         }
-        else { this.toastr.error('Código Incorrecto', 'Error',{ timeOut: 4000 }); }
+        else { this.toastr.error('Código Incorrecto', 'Error'); }
       })
     ).subscribe();
     

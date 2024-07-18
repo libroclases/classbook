@@ -199,7 +199,11 @@ allowedTables.forEach((tb) => {
     MatIconModule,
 
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), // ToastrModule added
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }), // ToastrModule added
 
     // ngxs
     NgxsModule.forRoot([UsuarioState], { developmentMode: !env.production }),
