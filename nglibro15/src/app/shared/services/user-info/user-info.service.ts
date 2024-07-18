@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, concatMap, of, map, shareReplay, tap, Subject, take, share } from 'rxjs';
+import { Observable, concatMap, of, map, share } from 'rxjs';
 import { CrudService } from '../crud/crud.service';
 import { AuthService } from '@auth0/auth0-angular';
 

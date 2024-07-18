@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment.development';
 import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Output, EventEmitter } from '@angular/core';
+import { CrudService } from '../../services/crud/crud.service';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class Auth2faComponent implements OnInit {
    modalbutton!:string;
    objcolors = environment.colors;
 
-   constructor(private fb: FormBuilder) { }
+   constructor(private fb: FormBuilder, private crud: CrudService) { }
 
    ngOnInit(): void {
 
@@ -66,14 +67,14 @@ export class Auth2faComponent implements OnInit {
 
 
    validarCodigo() {
-    /*
-    this.crud.postData({userId: 'e9abdc2a-75f6-4c7a-b910-745d4f58c343', auth: codigo},'token').pipe(
+    
+    this.crud.postData({ userId: '83bab0dc-aa45-4ae9-989f-e6029a13323a', auth: this.codigoForm.value.codigo }, 'token').pipe(
       tap(msg => {
-        this.showmsg(msg)
+        console.log('msg',msg)
       })
     ).subscribe();
-    */
-  console.log('Codigo: ', this.codigoForm.value.codigo);
+    
+  
    this.codigoValidado = true;
    this.newItemEvent.emit(true);
   }

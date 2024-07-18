@@ -710,7 +710,7 @@ const checkjwd = auth({
         // checkjwd, requiredScopes('create:tokenmodel'),
       Tokens.veifyToken);  
 
-    app.get('/api/token/validate-token',   // verificar token
+    app.post('/api/token',   // verificar token
         // checkjwd, requiredScopes('create:tokenmodel'),
       Tokens.validateToken);    
   };
