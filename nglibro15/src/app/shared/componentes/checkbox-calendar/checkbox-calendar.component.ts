@@ -96,7 +96,7 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
     this.height =
       event.target.innerHeight - (this.banner_height + this.menu_height + 155) + 'px';
   }
-
+  /*
   errorAlert = {
     id: 'error',
     type: 'warning',
@@ -109,7 +109,9 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
     message: 'Datos guardados con éxito.',
     show: false,
   };
-  alerts: Alert[] = [];
+  */
+
+  // alerts: Alert[] = [];
 
   emptyTable = true;
   nRows = 0;
@@ -214,8 +216,8 @@ getColorValida() {
     this.selIdsService.subscribe('checkbox-grid', (q: any) =>
       this.updateData(q)
     );
-    this.alerts.push(this.successfulSaveAlert);
-    this.alerts.push(this.errorAlert);
+    // this.alerts.push(this.successfulSaveAlert);
+    // this.alerts.push(this.errorAlert);
   }
 
   ngOnDestroy() {
@@ -230,6 +232,7 @@ getColorValida() {
     return this.iconsService.getBiClass(route);
   }
 
+  /*
   displayAlert(alerta: Alert, delayMilliseconds: number) {
     alerta.show = true;
     this.closeAlert(alerta, delayMilliseconds);
@@ -242,6 +245,7 @@ getColorValida() {
       alert.show = false;
     }
   }
+  */
 
   setGridSize(rowNumber: number, columnNumber: number) {
     if (rowNumber) {
@@ -461,11 +465,11 @@ getColorValida() {
         if (counter === numEditedInicial) {
           if (this.numEditedCheckBoxes === 0) {
             // exito!
-            this.displayAlert(this.successfulSaveAlert, 800);
+            // this.displayAlert(this.successfulSaveAlert, 800);
             this.saveValuesDisabled = true;
           } else {
             // algo no se guardo
-            this.displayAlert(this.errorAlert, 3000);
+            // this.displayAlert(this.errorAlert, 3000);
           }
         }
       });
