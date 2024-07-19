@@ -5,20 +5,17 @@
 
   <!-- Search -->
 
-<div class="container-fluid pb-2">
-  <div class="row  align-items-end">
-
-    <div class="col-md-3">
-      <div class="input-group" *ngIf="isSearchTable" style="width: 300px;">
-        <input type="search" (input)="search($event)"  class="form-control rounded" id="default-search"
-        placeholder="ingrese búsqueda" aria-label="Search" aria-describedby="search-addon"/>
-        <button type="button" class="btn btn-light" disabled><em class="bi bi-search"></em></button>
-    </div>
-    </div>
+      <div class="mt-4" style="float: left;">
+         <div class="input-group" *ngIf="isSearchTable" style="width: 300px;">
+            <input type="search" (input)="search($event)"  class="form-control rounded" id="default-search"
+            placeholder="ingrese búsqueda" aria-label="Search" aria-describedby="search-addon"/>
+            <button type="button" class="btn btn-light" disabled><em class="bi bi-search"></em></button>
+          </div>
+      </div>
 
     <!-- MultiSelect -->
 
-    <div class="col-md-10 pb-3">
+    <div class="mt-1" style="float: right;  height:100px; ">
 
         <multi-select
           [tables]="selTables"
@@ -28,14 +25,12 @@
           [patch-fks-from-storage]="patchFKsFromStorage">
         </multi-select>
     </div>
-  </div>
 
 
-</div>
 
 <!--  Elimine   [init-ids]="multiSelectInitIds"  04-12-2023  -->
 
-<!--div class="container-fluid overflow-auto bg-light mt-4"  [style.max-height]="height" [style.opacity]="opacity" style="width: 100%;"-->
+<div class="container-fluid overflow-auto bg-light mt-4"  [style.max-height]="height" [style.opacity]="opacity" style="width: 100%;">
 
   <!-- Tabla Principal -->
 
@@ -125,7 +120,7 @@
 
 
   </table>
-<!--/div-->
+</div>
 
 <div class="container-fluid" [style.background-color]="pagination">
   <pagination-controls (pageChange)="currPage=$event"></pagination-controls>
