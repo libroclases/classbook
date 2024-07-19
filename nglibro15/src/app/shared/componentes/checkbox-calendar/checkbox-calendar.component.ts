@@ -8,7 +8,7 @@ import { SelectionIdsService } from '../../services/selection-ids/selection-ids.
 import { SubscriptionsManagerService } from '../../services/subscriptions-manager/subscriptions-manager.service';
 import { Alert } from '../../../interfaces/generic.interface';
 import { IconsService } from '../../services/icons/icons.service';
-
+import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 
 import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
@@ -158,6 +158,7 @@ export class CheckboxCalendarComponent  implements OnInit, OnDestroy {
     private labelsService: LabelsService,
     private iconsService: IconsService,
     private configAlert: NgbAlertConfig,
+    private toastr: ToastrService
 
   ) {
     this.configAlert.dismissible = false;
@@ -466,10 +467,12 @@ getColorValida() {
           if (this.numEditedCheckBoxes === 0) {
             // exito!
             // this.displayAlert(this.successfulSaveAlert, 800);
+            this.toastr.success('Transacción Exitosa', 'Correcto');
             this.saveValuesDisabled = true;
           } else {
             // algo no se guardo
             // this.displayAlert(this.errorAlert, 3000);
+            this.toastr.error('Transacción Fallida', 'Error');
           }
         }
       });
