@@ -334,8 +334,8 @@ class ControlAsignaturas {
                     hora: horario.hora,
                     colegioId: colegioId,
                     cursoId: cursoId,
-                    asignaturaId: horario.Asignatura.id,
-                    profesorId: horario.Profesor.id,
+                    asignaturaId: 1,  //  horario.Asignatura.id 
+                    profesorId: 1, // horario.Profesor.id,
                     profesorPieId: null,
                     annoId: annoId,
                     mesId: mes,

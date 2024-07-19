@@ -31,7 +31,7 @@
                   </td>
                 </tr>
     
-                  <tr><td [class]="color">Username</td><td><input type="text"  class="form-control"  formControlName="username" [disabled]="disable" />
+                  <tr><td [class]="color">Username</td><td><input type="text"  class="form-control"  formControlName="username" />
     
                     <div *ngIf="valuesForm.controls['username']?.invalid && (valuesForm.controls['username']?.dirty || valuesForm.controls['username']?.touched)"  class="alert alert-danger">
                       <div *ngIf="valuesForm.controls['username']?.errors?.['required']">Por favor ingrese un username</div>

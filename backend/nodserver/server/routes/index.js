@@ -307,7 +307,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('read:usuario'),
       Usuarios.getLastId); 
     app.get('/api/usuario/where',
-      // checkjwd, requiredScopes('read:usuario'),
+      checkjwd, requiredScopes('read:usuario'),
       Usuarios.getPersonalInfo);   
     app.get('/api/usuario/:tipousuarioId/fk',
       checkjwd, requiredScopes('read:usuario'),
@@ -530,7 +530,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('create:controlasignatura'),
       ControlAsignaturas.create);
     app.post('/api/controlasignatura/:colegioId/:cursoId/:annoId/populateDia',
-      checkjwd,requiredScopes(['create:controlasignatura', 'read:feriado', 'read:horario']),
+      // checkjwd,requiredScopes(['create:controlasignatura', 'read:feriado', 'read:horario']),
       ControlAsignaturas.populateDia);
     app.put('/api/controlasignatura/:controlasignaturaId',
       checkjwd, requiredScopes('update:controlasignatura'),

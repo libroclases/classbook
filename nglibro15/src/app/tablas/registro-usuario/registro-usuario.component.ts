@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Select } from '@ngxs/store';
-import { Observable, take, tap } from 'rxjs';
+import { from, Observable, of, take, tap } from 'rxjs';
 import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
 import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { ModalDialogComponent } from 'src/app/shared/componentes/modal-dialog/modal-dialog.component';
@@ -156,8 +156,10 @@ export class RegistroUsuarioComponent implements OnInit {
 
     ).subscribe()
 
+    
+    // this.queries['tipousuario'] = this.crud.getData('tipousuario')!;
+    this.queries['tipousuario'] = of([{id: 1, nombre: 'Profesor'}, { id: 4, nombre: 'Asistente' }]);
     this.queries['tema'] = this.crud.getData('tema')!;
-    this.queries['tipousuario'] = this.crud.getData('tipousuario')!;
     this.disabled();
   }
 
