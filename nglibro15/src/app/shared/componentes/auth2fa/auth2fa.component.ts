@@ -19,6 +19,7 @@ export class Auth2faComponent implements OnInit {
 
    codigoValidado: boolean = false;
    mostra_tabla: boolean = true;
+   uuid!: string;
 
    codigoForm!: FormGroup;
 
@@ -41,7 +42,8 @@ export class Auth2faComponent implements OnInit {
    ngOnInit(): void {
 
     this.usuario$.pipe(
-      tap(info => { this.getColor(info.personalInfo?.usuario.Tema.nombre) }),
+      tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre) ),
+      tap(info => this.uuid = info.uuid)
     ).subscribe()
 
     const numericNumberReg= '^[0-9]{6}$';
@@ -69,7 +71,7 @@ export class Auth2faComponent implements OnInit {
 
    validarCodigo() {
     
-    this.crud.postData({ userId: '83bab0dc-aa45-4ae9-989f-e6029a13323a', auth: this.codigoForm.value.codigo }, 'token').pipe(
+    this.crud.postData({ userId: this.uuid, auth: this.codigoForm.value.codigo }, 'token').pipe(
       tap(msg => {
         console.log('msg',msg.validated);
         if (msg.validated == true) {

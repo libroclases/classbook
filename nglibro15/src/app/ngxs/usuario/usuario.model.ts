@@ -6,4 +6,5 @@ export class UsersStateModel {
 export class Usuario {
   personalInfo!: any;
   inscripcionColegio!: any;
+  uuid!:any;
 }

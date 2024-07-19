@@ -13,7 +13,7 @@ const uuid =  require('uuid');
 
 const anno = (new Date().getFullYear()) - 2020;
 
-const { Usuario, TipoUsuario, Alumno, Apoderado, AsistenteColegio ,Profesor, Admin, Anno, Colegio, Sexo, InscripcionColegio , Tema} = model;
+const { Usuario, TipoUsuario, Alumno, Apoderado, AsistenteColegio ,Profesor, Admin, Anno, Colegio, Sexo, InscripcionColegio , Tema, Token} = model;
 
 class Usuarios {
 
@@ -52,6 +52,8 @@ class Usuarios {
     
   static getPersonalInfo(req, res) {
 
+    var authInfo;
+    
     const { email } = req.query;
     // console.log(email)   
     Usuario.findOne({
@@ -65,6 +67,7 @@ class Usuarios {
     .then(usuario => {
 
         var personalInfo;
+        
         var tipousuarioId = usuario.dataValues.TipoUsuario.dataValues.id;
         var Tipo;
         var profesorId;
@@ -83,8 +86,9 @@ class Usuarios {
                 ],          
                 })
                 .then(datos_persona => {
+
                 profesorId=datos_persona.dataValues.id;
-                personalInfo = {'usuario':usuario, 'datos_persona': datos_persona};
+                personalInfo = {'usuario':usuario, 'datos_persona': datos_persona, ...authInfo};
                  
                 })
                 .then( () => {
@@ -96,11 +100,22 @@ class Usuarios {
                             {model: Colegio, attributes: ['id','nombre'], where: {}},
                             {model: Profesor, attributes: ['id','nombre','apellido1','apellido2'], where:{}}
                         ]})
-                        .then(inscripcionColegio => { res.status(200).send({personalInfo, inscripcionColegio}); })
+                        .then(inscripcionColegio => { 
+                          console.log('personalInfo', personalInfo.usuario.dataValues.id);
+                          Token.findOne({ where : {usuarioId: 1, authIsSet: true}}).then(token => { 
+                            authInfo = { 'uuid': token.dataValues.id };
+                            res.status(200).send({ personalInfo, inscripcionColegio, ...authInfo }); 
+                          } ); 
+                        
+                           
+                        })
                         
                     }
                     else {
-                        { res.status(200).send({personalInfo})}
+                        {
+                          res.status(200).send({personalInfo})
+                        }
+
                     }
                 
                 

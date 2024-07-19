@@ -10,7 +10,7 @@ export class UsuarioStateModel {
 }
 
 const defaults = {
-  usuario: {personalInfo: null, inscripcionColegio: null}
+  usuario: {personalInfo: null, inscripcionColegio: null, uuid: null}
 };
 
 @State<UsuarioStateModel>({
