@@ -23,7 +23,7 @@ export class MenuComponent implements OnInit{
     @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
     permission:any = Permission
-
+    poronga = true;
     fullName!:any;
     tipousuario:any=null;
     esUtp=false;

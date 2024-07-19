@@ -20,8 +20,8 @@
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item"  routerLink="/asistencia" routerLinkActive="active" (click)="setTable('Asistencia')">Ingreso</a></li>
                   <li><a class="dropdown-item"  routerLink="/resumen_asistencia" routerLinkActive="active" (click)="setTable('Asistencia')">Resumen Asistencia</a></li>
-                  <li><a class="dropdown-item" routerLink="/control_asignatura" routerLinkActive="active" (click)="setTable('ControlAsignatura')">Control Asignatura</a></li>
-                  <li><a class="dropdown-item" routerLink="/registro_actividad" routerLinkActive="active" (click)="setTable('RegistroActividad')">Registro Actividad</a></li>
+                  <li><a [class.disabled]="poronga" class="dropdown-item" routerLink="/control_asignatura" routerLinkActive="disabled" (click)="setTable('ControlAsignatura')" disabled>Control Asignatura</a></li>
+                  <li><a [class.disabled]="poronga" class="dropdown-item" routerLink="/registro_actividad" routerLinkActive="disable" (click)="setTable('RegistroActividad')" disable>Registro Actividad</a></li>
                 </ul>
               </li>
 
