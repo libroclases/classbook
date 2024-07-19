@@ -43,7 +43,7 @@ export class Auth2faComponent implements OnInit {
 
     this.usuario$.pipe(
       tap(info => this.getColor(info.personalInfo?.usuario.Tema.nombre) ),
-      tap(info => this.uuid = info.uuid)
+      tap(info => this.uuid = info?.uuid)
     ).subscribe()
 
     const numericNumberReg= '^[0-9]{6}$';
@@ -71,17 +71,22 @@ export class Auth2faComponent implements OnInit {
 
    validarCodigo() {
     
-    this.crud.postData({ userId: this.uuid, auth: this.codigoForm.value.codigo }, 'token').pipe(
-      tap(msg => {
-        console.log('msg',msg.validated);
-        if (msg.validated == true) {
-          this.codigoValidado = true;
-          this.newItemEvent.emit(true);
-          this.toastr.success('Código Validado', 'Correcto');       
-        }
-        else { this.toastr.error('Código Incorrecto', 'Error'); }
-      })
-    ).subscribe();
+    if (this.uuid) {
+      this.crud.postData({ userId: this.uuid, auth: this.codigoForm.value.codigo }, 'token').pipe(
+        tap(msg => {
+          console.log('msg',msg.validated);
+          if (msg.validated == true) {
+            this.codigoValidado = true;
+            this.newItemEvent.emit(true);
+            this.toastr.success('Código Validado', 'Correcto');       
+          }
+          else { this.toastr.error('Código Incorrecto', 'Error'); }
+        })
+      ).subscribe();  
+    } else {
+      this.toastr.error('Usuario no posee código', 'Error');
+    }
+
     
   
   }

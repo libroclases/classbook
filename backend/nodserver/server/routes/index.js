@@ -307,7 +307,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('read:usuario'),
       Usuarios.getLastId); 
     app.get('/api/usuario/where',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.getPersonalInfo);   
     app.get('/api/usuario/:tipousuarioId/fk',
       checkjwd, requiredScopes('read:usuario'),

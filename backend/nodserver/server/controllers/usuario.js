@@ -102,8 +102,8 @@ class Usuarios {
                         ]})
                         .then(inscripcionColegio => { 
                           console.log('personalInfo', personalInfo.usuario.dataValues.id);
-                          Token.findOne({ where : {usuarioId: 1, authIsSet: true}}).then(token => { 
-                            authInfo = { 'uuid': token.dataValues.id };
+                          Token.findOne({ where : {usuarioId: personalInfo?.usuario.dataValues.id, authIsSet: true}}).then(token => { 
+                            authInfo = { 'uuid': token?.dataValues.id };
                             res.status(200).send({ personalInfo, inscripcionColegio, ...authInfo }); 
                           } ); 
                         
