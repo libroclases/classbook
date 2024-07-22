@@ -1,6 +1,6 @@
 
-    <nav class="navbar navbar-expand-md navbar-light bg-light" [style.background]="menu">
-      <div class="container-fluid">
+<nav class="navbar navbar-expand-md navbar-light bg-light" [style.background]="menu">
+    <div class="container-fluid">
 
 
         <a class="navbar-brand" routerLink="/home"  routerLinkActive="active" title="Home" title="Páginia Inicio"><em class='bi bi-house-door'></em></a>
@@ -18,126 +18,58 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-table'>&nbsp;Asistencia&nbsp;</em></a>
                 <ul class="dropdown-menu">
-
-                  <li *ngFor="let menu of menuTables">
-                    <a [class.disabled]="poronga" class="dropdown-item"  routerLink="{{menu.submenu}}" routerLinkActive="active">{{menu.nombre | json}}</a>
+                  <li *ngFor="let menu of menuTables[0]">
+                    <a [class.disabled]="menu.disable" class="dropdown-item"  routerLink="{{menu.submenu}}" routerLinkActive="active">{{menu.nombre}}</a>
                   </li>
-
-                  <!--li><a class="dropdown-item"  routerLink="/asistencia" routerLinkActive="active" (click)="setTable('Asistencia')">Ingreso</a></li>
-                  <li><a class="dropdown-item"  routerLink="/resumen_asistencia" routerLinkActive="active" (click)="setTable('Asistencia')">Resumen Asistencia</a></li>
-                  <li><a [class.disabled]="poronga" class="dropdown-item" routerLink="/control_asignatura" routerLinkActive="disabled" (click)="setTable('ControlAsignatura')" disabled>Control Asignatura</a></li>
-                  <li><a [class.disabled]="poronga" class="dropdown-item" routerLink="/registro_actividad" routerLinkActive="disable" (click)="setTable('RegistroActividad')" disable>Registro Actividad</a></li-->
                 </ul>
               </li>
-
-
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-bank'>&nbsp;Colegio&nbsp;</em></a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item"  routerLink="/colegio" routerLinkActive="active" (click)="setTable('Colegio')">Colegio</a></li>
-                  <li><a class="dropdown-item"  routerLink="/asistentecolegio" routerLinkActive="active" (click)="setTable('AsistenteColegio')">Asistente Colegio</a></li>
-                  <li><a class="dropdown-item"  routerLink="/curso" routerLinkActive="active" (click)="setTable('Curso')">Curso</a></li>
-                  <li><a class="dropdown-item"  routerLink="/asignatura" routerLinkActive="active" (click)="setTable('Asignatura')">Asignatura</a></li>
-                  <li><a class="dropdown-item"  routerLink="/horaasignada" routerLinkActive="active" (click)="setTable('HoraAsignada')">Hora Asignada</a></li>
+                  <li *ngFor="let menu of menuTables[1]">
+                      <a [class.disabled]="menu.disable" class="dropdown-item"  routerLink="{{menu.submenu}}" routerLinkActive="active">{{menu.nombre}}</a>
+                    </li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-mortarboard-fill'>&nbsp;Alumno&nbsp;</em></a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" routerLink="/alumno" routerLinkActive="false" (click)="setTable('Alumno')">Alumno</a></li>
-                  <li><a class="dropdown-item" routerLink="/estadoalumno" routerLinkActive="active" (click)="setTable('EstadoAlumno')">Estado Alumno</a></li>
-                  <li><a class="dropdown-item" routerLink="/apoderado" routerLinkActive="active" (click)="setTable('Apoderado')">Apoderado</a></li>
-                  <li><a class="dropdown-item" routerLink="/anotaciones" routerLinkActive="active" (click)="setTable('Anotacion')">Observaciones</a></li>
-                  <li><a class="dropdown-item" routerLink="/fichaalumno" routerLinkActive="active" (click)="setTable('FichaAlumno')">Ficha Alumno</a></li>
-                  <li><a class="dropdown-item" routerLink="/matricula" routerLinkActive="active" (click)="setTable('Matricula')">Matrícula</a></li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><em class='bi bi-person-video3'>&nbsp;Profesor&nbsp;</em></a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" routerLink="/profesor" routerLinkActive="active" (click)="setTable('Profesor')">Profesor</a></li>
-                  <li><a class="dropdown-item" routerLink="/inscripcioncolegio" routerLinkActive="active" (click)="setTable('InscripcionColegio')">Inscripción Colegio</a></li>
-                  <li><a class="dropdown-item" routerLink="/cursoprofesor" routerLinkActive="active" (click)="setTable('CursoProfesor')">Inscripcion Curso</a></li>
-                  <li><a class="dropdown-item" routerLink="/evaluacion" routerLinkActive="active" (click)="setTable('Evaluacion')">Evaluación</a></li>
-                  <li><a class="dropdown-item" routerLink="/nota" routerLinkActive="active" (click)="setTable('Nota')">Notas</a></li>
-                  <li><a class="dropdown-item" routerLink="/resumennota" routerLinkActive="active" (click)="setTable('ResumenNota')">Resumen Notas</a></li>
-                  <li><a class="dropdown-item" routerLink="/horario" routerLinkActive="active" (click)="setTable('Horario')">Horario</a></li>
-                  <li><a class="dropdown-item" routerLink="/horasinscritas" routerLinkActive="active" (click)="setTable('HoraInscrita')">Horas Inscritas</a></li>
-                  <!--li><a class="dropdown-item" routerLink="/ventana" routerLinkActive="active" (click)="setTable('Ventana')">Ventana de Tiempo</a></li-->
 
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-person-fill-lock'>&nbsp;Admin&nbsp;</em></a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" routerLink="/tipousuario" routerLinkActive="active" (click)="setTable('TipoUsuario')">TipoUsuario</a></li>
-                  <li><a class="dropdown-item" routerLink="/usuario" routerLinkActive="active" (click)="setTable('Usuario')">Usuario</a></li>
-                  <!--li><a class="dropdown-item" routerLink="/tabla" routerLinkActive="active" (click)="setTable('Tabla')">Tabla</a></li-->
-
+                  <li *ngFor="let menu of menuTables[2]">
+                  <a [class.disabled]="menu.disable" class="dropdown-item"  routerLink="{{menu.submenu}}" routerLinkActive="active">{{menu.nombre}}</a>
+                  </li>
                 </ul>
               </li>
 
               <li class="nav-item dropdown">
-                <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-grid'>&nbsp;Procesos&nbsp;</em></button>
+                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-person-video3'>&nbsp;Profesor&nbsp;</em></a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" routerLink="/registro_usuario" routerLinkActive="active" (click)="setTable('RegistroUsuario')">1- Registro Usuario</a></li>
-                  <li><a class="dropdown-item"  routerLink="/matricula_alumno" routerLinkActive="active" (click)="setTable('MatriculaAlumno')">2.- Matrícula Alumno</a></li>
-                  <li><a class="dropdown-item" routerLink="/informar-sigue" routerLinkActive="active" (click)="setTable('InformeSige')">3.- Informe SIGE</a></li>
+                  <li *ngFor="let menu of menuTables[3]">
+                    <a [class.disabled]="menu.disable" class="dropdown-item"  routerLink="{{menu.submenu}}" routerLinkActive="active">{{menu.nombre}}</a>
+                  </li>
                 </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-palette'>&nbsp;Temas</em></button>
-                <ul class="dropdown-menu">
-
-                  <li><a class="dropdown-item" (click)="mensaje([1,'primary'])">&nbsp;Primary</a></li>
-                  <li><a class="dropdown-item" (click)="mensaje([2,'success'])">&nbsp;Success</a></li>
-                  <li><a class="dropdown-item" (click)="mensaje([3,'info'])">&nbsp;Info</a></li>
-
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-person-fill-lock'>&nbsp;Administracíon&nbsp;</em></a>
+                  <ul class="dropdown-menu">
+                    <li *ngFor="let menu of menuTables[4]">
+                      <a [class.disabled]="menu.disable" class="dropdown-item"  routerLink="{{menu.submenu}}" routerLinkActive="active">{{menu.nombre}}</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-grid'>&nbsp;Procesos&nbsp;</em></a>
+                    <ul class="dropdown-menu">
+                  <li *ngFor="let menu of menuTables[5]">
+                    <a [class.disabled]="menu.disable" class="dropdown-item"  routerLink="{{menu.submenu}}" routerLinkActive="active">{{menu.nombre}}</a>
+                  </li>
                 </ul>
               </li>
             </ng-container>
 
-            <ng-container>
-
-            <!--li class="nav-item">
-              <a class="nav-link"  title="navegación"
-              type="button" data-bs-toggle="offcanvas" data-bs-target="#demo"
-             ><em class='bi bi-compass' (click)="mostrar_color()">&nbsp;Navegación</em></a>
-            </li-->
-
-            <li class="nav-item" *ngIf="!isFullScreen">
-              <a class="nav-link"  title="Expandir"
-              type="button" (click)="toggleFullScreen()"
-             ><em class="bi bi-arrows-fullscreen">&nbsp;Expandir</em></a>
-            </li>
-
-            <li class="nav-item" *ngIf="isFullScreen">
-              <a class="nav-link"  title="Contraer"
-              type="button" (click)="toggleFullScreen()"
-             ><em class="bi bi-fullscreen-exit">&nbsp;Contraer</em></a>
-            </li>
-
-
-            <li class="nav-item dropdown">
-                <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-question-square'>&nbsp;Ayuda&nbsp;</em></button>
-                <ul class="dropdown-menu">
-
-                  <li><a class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#demo"   (click)="mostrar_color()"> &nbsp;Navegación</a></li>
-                  <li><a class="dropdown-item" routerLink="/home/tutoriales" routerLinkActive="active">&nbsp;Tutoriales en línea</a></li>
-                  <li><a class="dropdown-item" routerLink="/home/preguntas" routerLinkActive="active">&nbsp;Preguntas Frecuentes</a></li>
-                  <li><a class="dropdown-item"  routerLink="/home/acerca" routerLinkActive="active">Acerca de</a></li>
-                  <li><a class="dropdown-item" routerLink="/home/contacto" routerLinkActive="active">Contáctenos</a></li>
-                </ul>
-            </li>
-
-          </ng-container>
           </ul>
-
         </div>
-        <span class="mx-2" *ngIf="mostra_usuario && (auth.isAuthenticated$ | async)"><i>{{saludo}} {{tipousuario}} {{type}} : {{fullName}}</i></span>
-
-      </div>
-    </nav>
+    </div>
+</nav>
 
     <!-- Offcanvas Sidebar -->
 <div class="offcanvas offcanvas-bottom" style="height: 50%;" id="demo">

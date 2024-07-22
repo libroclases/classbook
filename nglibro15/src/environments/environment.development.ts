@@ -872,6 +872,7 @@ export const validator: any = {
       username: [Validators.required],
     },
     modalDate: {
+      lastLogin: null,
    }
   },
 
@@ -1219,7 +1220,7 @@ export const modalDataObject: any = {
     mainTable: 'usuario',
     tables: ['tipousuario','tema'],
     textFields: ['email', 'username'],
-    booleanFields:[],
+    booleanFields:['operativo'],
     dateFields: [],
     ignoreFkRequirements: [],
     disable: [],

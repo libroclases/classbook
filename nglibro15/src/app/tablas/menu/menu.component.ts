@@ -33,7 +33,7 @@ export class MenuComponent implements OnInit{
 
     deviceinfo!:any;
     mostra_usuario=false;
-    
+
     objcolors = env.colors;
     menu!:string;
     color!:string;
@@ -59,13 +59,48 @@ export class MenuComponent implements OnInit{
 
 
 
-    menuTables:any = [ 
-        {'submenu':'asistencia', 'nombre': 'Ingreso',  'disable':false}, 
-        {'submenu':'resumen_asistencia', 'nombre' : 'Resumen Asistencia', 'disable':false}, 
-        {'submenu':'control_asignatura', 'nombre' : 'Control Asignatura', 'disable':false}, 
+    menuTables:any = [
+      [
+        {'submenu':'asistencia', 'nombre': 'Ingreso',  'disable':false},
+        {'submenu':'resumen_asistencia', 'nombre' : 'Resumen Asistencia', 'disable':false},
+        {'submenu':'control_asignatura', 'nombre' : 'Control Asignatura', 'disable':false},
         {'submenu':'registro_actividad', 'nombre' : 'Registro Actividad', 'disable':false}
+      ],
+      [
+        {'submenu': 'colegio', 'nombre': 'Colegio', 'disable':false },
+        {'submenu': 'curso', 'nombre': 'Curso', 'disable':false },
+        {'submenu': 'asistentecolegio', 'nombre': 'Asistente Colegio', 'disable':false },
+        {'submenu': 'asignatura', 'nombre': 'Asignatura', 'disable':false },
+        {'submenu': 'horaasignada', 'nombre': 'Hora Asignada', 'disable':false },
+      ],
+      [
+        {'submenu': 'alumno', 'nombre': 'Alumno', 'disable':false },
+        {'submenu': 'estadoalumno', 'nombre': 'Estado Alumno', 'disable':false },
+        {'submenu': 'apoderado', 'nombre': 'Apoderado', 'disable':false },
+        {'submenu': 'anotaciones', 'nombre': 'Anotaciones', 'disable':false },
+        {'submenu': 'fichaalumno', 'nombre': 'Ficha Alumno', 'disable':false },
+        {'submenu': 'matricula', 'nombre': 'Matricula', 'disable':false },
+      ],
+      [
+        {'submenu': 'profesor', 'nombre': 'Profesor', 'disable':false },
+        {'submenu': 'inscripcioncolegio', 'nombre': 'Inscripción Colegio', 'disable':false },
+        {'submenu': 'cursoprofesor', 'nombre': 'Curso Profesor', 'disable':false },
+        {'submenu': 'evaluacion', 'nombre': 'Evaluación', 'disable':false },
+        {'submenu': 'nota', 'nombre': 'Nota', 'disable':false },
+        {'submenu': 'resumennota', 'nombre': 'Resumen Nota', 'disable':false },
+        {'submenu': 'horario', 'nombre': 'Horario', 'disable':false },
+        {'submenu': 'horasinscritas', 'nombre': 'Horas Inscritas', 'disable':false },
+      ],
+      [
+        {'submenu': 'usuario', 'nombre': 'Usuario', 'disable':false },
+        {'submenu': 'tipousuario', 'nombre': 'Tipo Usuario', 'disable':false },
+      ],
+      [
+        {'submenu': 'registro_usuario', 'nombre': 'Registro Usuario', 'disable':false },
+        {'submenu': 'matricula_alumno', 'nombre': 'Matricula Alumno', 'disable':false },
       ]
-    
+    ]
+
 
     setType(valor:any): any {
       return valor;
@@ -146,7 +181,7 @@ export class MenuComponent implements OnInit{
     }
 
     mostra_menu(table:string): boolean {
-       return (Permission[table].leer.includes('utp') && this.isUtp || this.tipousuarioNombre=='admin') 
+       return (Permission[table].leer.includes('utp') && this.isUtp || this.tipousuarioNombre=='admin')
     }
 
 
@@ -158,23 +193,23 @@ export class MenuComponent implements OnInit{
     public auth: AuthService) {
       this.auth.user$.pipe(
         map((user:any) => user?.email),
-        tap(user => { if (user) { 
+        tap(user => { if (user) {
           this.store.dispatch(new GetUsuario(user));
           this.email = user;
         } }),
         takeLast(1)
- 
+
       ).subscribe();
     }
 
-    
+
     epicFunction() {
-     
+
       this.deviceInfo = this.deviceService.getDeviceInfo();
       const isDesktopDevice = this.deviceService.isDesktop();
       this.mostra_usuario = ( isDesktopDevice ) ? true : false;
     }
-    
+
 
     mostrar_color() { this.getColor(localStorage.getItem('Color')!)}
 
@@ -189,7 +224,7 @@ export class MenuComponent implements OnInit{
     this.store.dispatch(new SetUsuario(color[0], this.usuarioId)).pipe(
       tap(() => this.store.dispatch(new GetUsuario(this.email)))
     ).subscribe()
-    
+
   }
 
   getBiClass(route: string) {
