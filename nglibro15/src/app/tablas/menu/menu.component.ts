@@ -23,7 +23,7 @@ export class MenuComponent implements OnInit{
     @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
     permission:any = Permission
-    poronga = true;
+    poronga = false;
     fullName!:any;
     tipousuario:any=null;
     esUtp=false;
@@ -53,7 +53,23 @@ export class MenuComponent implements OnInit{
     currentDate:Date = new Date();
     isUtp:any=null;
 
-     email!:string;
+    email!:string;
+
+    menuTableMap = new Map<string, any>();
+
+
+
+    menuTables:any = [ 
+        {'submenu':'asistencia', 'nombre': 'Ingreso',  'disable':false}, 
+        {'submenu':'resumen_asistencia', 'nombre' : 'Resumen Asistencia', 'disable':false}, 
+        {'submenu':'control_asignatura', 'nombre' : 'Control Asignatura', 'disable':false}, 
+        {'submenu':'registro_actividad', 'nombre' : 'Registro Actividad', 'disable':false}
+      ]
+    
+
+    setType(valor:any): any {
+      return valor;
+    }
 
     getColor = (color:string) => {
 

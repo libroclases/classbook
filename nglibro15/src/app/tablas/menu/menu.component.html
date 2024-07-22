@@ -18,10 +18,15 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-table'>&nbsp;Asistencia&nbsp;</em></a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item"  routerLink="/asistencia" routerLinkActive="active" (click)="setTable('Asistencia')">Ingreso</a></li>
+
+                  <li *ngFor="let menu of menuTables">
+                    <a [class.disabled]="poronga" class="dropdown-item"  routerLink="{{menu.submenu}}" routerLinkActive="active">{{menu.nombre | json}}</a>
+                  </li>
+
+                  <!--li><a class="dropdown-item"  routerLink="/asistencia" routerLinkActive="active" (click)="setTable('Asistencia')">Ingreso</a></li>
                   <li><a class="dropdown-item"  routerLink="/resumen_asistencia" routerLinkActive="active" (click)="setTable('Asistencia')">Resumen Asistencia</a></li>
                   <li><a [class.disabled]="poronga" class="dropdown-item" routerLink="/control_asignatura" routerLinkActive="disabled" (click)="setTable('ControlAsignatura')" disabled>Control Asignatura</a></li>
-                  <li><a [class.disabled]="poronga" class="dropdown-item" routerLink="/registro_actividad" routerLinkActive="disable" (click)="setTable('RegistroActividad')" disable>Registro Actividad</a></li>
+                  <li><a [class.disabled]="poronga" class="dropdown-item" routerLink="/registro_actividad" routerLinkActive="disable" (click)="setTable('RegistroActividad')" disable>Registro Actividad</a></li-->
                 </ul>
               </li>
 
