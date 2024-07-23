@@ -74,6 +74,7 @@ import { UsuarioState } from './ngxs/usuario/usuario.state';
 import { CursoProfesorComponent } from './tablas/curso-profesor/curso-profesor.component';
 import { InscripcionColegioComponent } from './tablas/inscripcion-colegio/inscripcion-colegio.component';
 import { Auth2faComponent } from './shared/componentes/auth2fa/auth2fa.component';
+import { AyudaComponent } from './tablas/menu/ayuda/ayuda.component';
 
 
 const allowedTables = [
@@ -180,6 +181,7 @@ allowedTables.forEach((tb) => {
     CursoProfesorComponent,
     InscripcionColegioComponent,
     Auth2faComponent,
+    AyudaComponent,
 
 
   ],

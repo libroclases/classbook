@@ -38,8 +38,6 @@ export class MenuComponent implements OnInit{
     menu!:string;
     color!:string;
     canvas!:string;
-    tabletype!:string;
-    letters!: string;
     production = env.production;
     userinfo = env.userinfo;
     tipousuarioNombre!:string;
@@ -56,8 +54,8 @@ export class MenuComponent implements OnInit{
     email!:string;
 
     menuTableMap = new Map<string, any>();
-
-
+    menuIcons:any = ['bi bi-house-door', 'bi bi-table', 'bi bi-bank', 'bi bi-mortarboard-fill', 'bi bi-person-video3', 'bi bi-person-fill-lock','bi bi-question-square']; 
+    menuTitles:any = ['Asistencia', 'Colegio', 'Alumno', 'Profesor', 'Administración', 'Procesos','Ayuda'];
 
     menuTables:any = [
       [
@@ -98,6 +96,11 @@ export class MenuComponent implements OnInit{
       [
         {'submenu': 'registro_usuario', 'nombre': 'Registro Usuario', 'disable':false },
         {'submenu': 'matricula_alumno', 'nombre': 'Matricula Alumno', 'disable':false },
+      ],
+      [
+        {'submenu': 'home/tutoriales', 'nombre': 'Tutoriales', 'disable':false },
+        {'submenu': 'home/preguntas', 'nombre': 'Preguntas', 'disable':false },
+        {'submenu': 'home/acerca', 'nombre': 'Acerca', 'disable':false },
       ]
     ]
 
@@ -112,22 +115,17 @@ export class MenuComponent implements OnInit{
         this.color="primary";
         this.menu = this.objcolors.primary.menu;
         this.canvas = 'bg-primary';
-        this.tabletype = 'table-primary';
-        this.letters = 'blue';
       }
       if (color=='success') {
         this.color = "success";
         this.menu = this.objcolors.success.menu;
         this.canvas = 'bg-success';
-        this.tabletype = 'table-success';
-        this.letters = 'green';
+ 
       }
       if (color=='info') {
         this.color = "info";
         this.menu = this.objcolors.info.menu;
         this.canvas = 'bg-info';
-        this.tabletype = 'table-info';
-        this.letters = 'info';
       }
     }
 

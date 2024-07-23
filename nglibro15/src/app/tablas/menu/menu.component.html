@@ -14,56 +14,23 @@
           <ul class="navbar-nav">
 
             <ng-container *ngIf="auth.isAuthenticated$ | async">
-
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-table'>&nbsp;Asistencia&nbsp;</em></a>
+              <li *ngFor="let title of menuTitles; index as i" class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class={{menuIcons[i]}}>&nbsp;{{title}}</em></a>
                 <ul class="dropdown-menu">
-                  <li *ngFor="let menu of menuTables[0]">
+                  <li *ngFor="let menu of menuTables[i]">
                     <a [class.disabled]="menu.disable" class="dropdown-item"  routerLink="{{menu.submenu}}" routerLinkActive="active">{{menu.nombre}}</a>
                   </li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-bank'>&nbsp;Colegio&nbsp;</em></a>
+                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-browser-safari'>&nbsp;Navegación</em></a>
                 <ul class="dropdown-menu">
-                  <li *ngFor="let menu of menuTables[1]">
-                      <a [class.disabled]="menu.disable" class="dropdown-item"  routerLink="{{menu.submenu}}" routerLinkActive="active">{{menu.nombre}}</a>
-                    </li>
+                <li><a class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#demo"   (click)="mostrar_color()">Navegación</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-mortarboard-fill'>&nbsp;Alumno&nbsp;</em></a>
-                <ul class="dropdown-menu">
+            </ng-container>
+            <ng-container>
 
-                  <li *ngFor="let menu of menuTables[2]">
-                  <a [class.disabled]="menu.disable" class="dropdown-item"  routerLink="{{menu.submenu}}" routerLinkActive="active">{{menu.nombre}}</a>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-person-video3'>&nbsp;Profesor&nbsp;</em></a>
-                <ul class="dropdown-menu">
-                  <li *ngFor="let menu of menuTables[3]">
-                    <a [class.disabled]="menu.disable" class="dropdown-item"  routerLink="{{menu.submenu}}" routerLinkActive="active">{{menu.nombre}}</a>
-                  </li>
-                </ul>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-person-fill-lock'>&nbsp;Administracíon&nbsp;</em></a>
-                  <ul class="dropdown-menu">
-                    <li *ngFor="let menu of menuTables[4]">
-                      <a [class.disabled]="menu.disable" class="dropdown-item"  routerLink="{{menu.submenu}}" routerLinkActive="active">{{menu.nombre}}</a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-grid'>&nbsp;Procesos&nbsp;</em></a>
-                    <ul class="dropdown-menu">
-                  <li *ngFor="let menu of menuTables[5]">
-                    <a [class.disabled]="menu.disable" class="dropdown-item"  routerLink="{{menu.submenu}}" routerLinkActive="active">{{menu.nombre}}</a>
-                  </li>
-                </ul>
-              </li>
               <li class="nav-item dropdown">
                 <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-palette'>&nbsp;Temas</em></button>
                 <ul class="dropdown-menu">
@@ -73,41 +40,28 @@
                   <li><a class="dropdown-item" (click)="mensaje([3,'info'])">&nbsp;Info</a></li>
 
                 </ul>
-              </li>
+              </li>                        
 
-            </ng-container>
-            <ng-container>
-  
               <li class="nav-item" *ngIf="!isFullScreen">
                 <a class="nav-link"  title="Expandir"
-                type="button" (click)="toggleFullScreen()"
-               ><em class="bi bi-arrows-fullscreen">&nbsp;Expandir</em></a>
+                type="button" (click)="toggleFullScreen()"><em class="bi bi-arrows-fullscreen">&nbsp;Expandir</em></a>
               </li>
   
               <li class="nav-item" *ngIf="isFullScreen">
-                <a class="nav-link"  title="Contraer"
-                type="button" (click)="toggleFullScreen()"
+                <a class="nav-link"  title="Contraer" type="button" (click)="toggleFullScreen()"
                ><em class="bi bi-fullscreen-exit">&nbsp;Contraer</em></a>
               </li>
   
-  
-              <li class="nav-item dropdown">
-                  <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-question-square'>&nbsp;Ayuda&nbsp;</em></button>
-                  <ul class="dropdown-menu">
-  
-                    <li><a class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#demo"   (click)="mostrar_color()"> &nbsp;Navegación</a></li>
-                    <li><a class="dropdown-item" routerLink="/home/tutoriales" routerLinkActive="active">&nbsp;Tutoriales en línea</a></li>
-                    <li><a class="dropdown-item" routerLink="/home/preguntas" routerLinkActive="active">&nbsp;Preguntas Frecuentes</a></li>
-                    <li><a class="dropdown-item"  routerLink="/home/acerca" routerLinkActive="active">Acerca de</a></li>
-                    <li><a class="dropdown-item" routerLink="/home/contacto" routerLinkActive="active">Contáctenos</a></li>
-                  </ul>
+              <li class="nav-item">
+                <a class="nav-link"  title="Contáctenos"  type="button"><em class="bi bi-envelope">&nbsp;Contáctenos</em></a>
               </li>
-  
+
             </ng-container>
   
           </ul>
         </div>
         <span class="mx-2" *ngIf="mostra_usuario && (auth.isAuthenticated$ | async)"><i>{{saludo}} {{tipousuario}} {{type}} : {{fullName}}</i></span>
+        
     </div>
 </nav>
 
@@ -118,61 +72,7 @@
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
   </div>
   <div class="offcanvas-body bg-light md">
-    <table class="table table-bordered bg-light">
-      <thead  class="{{tabletype}}">
-          <tr><th style="color: '{{letters}}'">Concepto</th><th style="color: '{{letters}}'">Menu</th><th style="color: '{{letters}}'">Submenu</th></tr>
-      </thead>
-      <tbody>
-          <tr><td>Ingreso Asistencia por curso</td><th rowspan="2"><em class='bi bi-table'>&nbsp;Asistencia&nbsp;</em></th><td>Ingreso</td></tr>
-          <tr><td>Resumen Asistencia por cursos</td><td>Resumen</td></tr>
-          <!--tr><td>Control Asignatura</td><td rowspan="3">Principal</td><td rowspan="3"></td></tr-->
-          <!--tr><td>Registro de Actividades</td></tr-->
-
-          <!--tr><td>Horario de Profesores</td><td rowspan="2">horario</td><td>Horario</td></tr-->
-          <!--tr><td>Horas Inscritas Profesor</td><td>Horas Inscritas</td></tr-->
-
-          <tr><td>Mantenedor Colegios</td><th rowspan="5"><em class='bi bi-bank'>&nbsp;Colegio&nbsp;</em></th><td>Colegio</td></tr>
-          <tr><td>Asistentes por colegio</td><td>Asistente Colegio</td></tr>
-          <tr><td>Cursos por Colegio</td><td>Curso</td></tr>
-          <tr><td>Asignatura</td><td>Asignatura</td></tr>
-          <tr><td>Asignación de horarios</td><td>Hora Asignada</td></tr>
-
-          <tr><td>Mantenedor Alumno</td><th rowspan="7"><em class='bi bi-mortarboard-fill'>&nbsp;Alumno&nbsp;</em></th><td>Alumno</td><tr>
-          <tr><td>Estado Alumno</td><td>Estados del Alumno</td></tr>
-          <tr><td>Mantenedor Apoderado</td><td>Apoderado</td></tr>
-          <tr><td>Observaciones Alumno</td><td>Observaciones</td></tr>
-          <tr><td>Ficha de Alumno</td><td>Ficha Alumno</td></tr>
-          <tr><td>Mantenedor Matrícula Alumno</td><td>Matrícula</td></tr>
-
-          <tr><td>Mantenedor Profesor</td><th rowspan="8"><em class='bi bi-person-video3'>&nbsp;Profesor&nbsp;</em></th><td>Profesor</td></tr>
-          <tr><td>Asignaturas por profesor</td><td>Asignatura Profesor</td></tr>
-          <tr><td>Programación de Evaluaciones</td><td>Evaluación</td></tr>
-          <tr><td>Notas de Alumno</td><td>Notas</td></tr>
-          <tr><td>Horario de Profesores</td><td>Horarios</td></tr>
-          <tr><td>Horas inscritas por profesor</td><td>Horas Inscritas</td></tr>
-          <tr><td>Control Asignatura</td><td>Control Asignatura</td></tr>
-          <tr><td>Registro Actividad</td><td>registro Actividad</td></tr>
-
-
-
-          <tr><td>Tipo Usuario</td><th rowspan="4"><em class='bi bi-person-fill-lock'>&nbsp;Administración&nbsp;</em></th><td>Tipo usuario</td></tr>
-          <tr><td>Usuario</td><td>Usuario</td></tr>
-          <tr><td>Tablas de asignación ventanas</td><td>Tablas</td></tr>
-          <tr><td>Ventanas de Tiempo Correciones</td><td>Ventanas</td></tr>
-
-          <tr><td>Matricula Alumno</td><th rowspan="3"><em class='bi bi-grid'>&nbsp;Procesos&nbsp;</em></th><td>Matricula Alumno</td></tr>
-          <tr><td>Registro Usuario</td><td>Registro Usuario</td></tr>
-          <tr><td>Informe SIGE</td><td>Informe SIGE</td></tr>
-
-          <tr><td>Tutoriales en Línea</td><th rowspan="2"><em class='bi bi-question-square'>&nbsp;Ayuda&nbsp;</em></th><td>Tutoriales</td></tr>
-          <tr><td>Preguntas Frecuentes</td><td>Preguntas Frecuentes</td></tr>
-
-          <tr><td>Acerca de</td><th rowspan="2"><em class='bi bi-info-square'>&nbsp;Acerca de&nbsp;</em></th><td>Acerca de</td></tr>
-          <tr><td>Contáctenos</td><td>Contáctenos</td></tr>
-
-          </tbody>
-  </table>
-
+    <app-ayuda></app-ayuda>
   </div>
 </div>
 
