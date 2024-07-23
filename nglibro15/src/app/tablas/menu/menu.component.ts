@@ -101,6 +101,7 @@ export class MenuComponent implements OnInit{
         {'submenu': 'home/tutoriales', 'nombre': 'Tutoriales', 'disable':false },
         {'submenu': 'home/preguntas', 'nombre': 'Preguntas', 'disable':false },
         {'submenu': 'home/acerca', 'nombre': 'Acerca', 'disable':false },
+        {'submenu': '#', 'nombre': 'Contáctenos', 'disable':false },
       ]
     ]
 
