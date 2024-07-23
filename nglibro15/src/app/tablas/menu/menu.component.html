@@ -64,10 +64,50 @@
                   </li>
                 </ul>
               </li>
-            </ng-container>
+              <li class="nav-item dropdown">
+                <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-palette'>&nbsp;Temas</em></button>
+                <ul class="dropdown-menu">
 
+                  <li><a class="dropdown-item" (click)="mensaje([1,'primary'])">&nbsp;Primary</a></li>
+                  <li><a class="dropdown-item" (click)="mensaje([2,'success'])">&nbsp;Success</a></li>
+                  <li><a class="dropdown-item" (click)="mensaje([3,'info'])">&nbsp;Info</a></li>
+
+                </ul>
+              </li>
+
+            </ng-container>
+            <ng-container>
+  
+              <li class="nav-item" *ngIf="!isFullScreen">
+                <a class="nav-link"  title="Expandir"
+                type="button" (click)="toggleFullScreen()"
+               ><em class="bi bi-arrows-fullscreen">&nbsp;Expandir</em></a>
+              </li>
+  
+              <li class="nav-item" *ngIf="isFullScreen">
+                <a class="nav-link"  title="Contraer"
+                type="button" (click)="toggleFullScreen()"
+               ><em class="bi bi-fullscreen-exit">&nbsp;Contraer</em></a>
+              </li>
+  
+  
+              <li class="nav-item dropdown">
+                  <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-question-square'>&nbsp;Ayuda&nbsp;</em></button>
+                  <ul class="dropdown-menu">
+  
+                    <li><a class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#demo"   (click)="mostrar_color()"> &nbsp;Navegación</a></li>
+                    <li><a class="dropdown-item" routerLink="/home/tutoriales" routerLinkActive="active">&nbsp;Tutoriales en línea</a></li>
+                    <li><a class="dropdown-item" routerLink="/home/preguntas" routerLinkActive="active">&nbsp;Preguntas Frecuentes</a></li>
+                    <li><a class="dropdown-item"  routerLink="/home/acerca" routerLinkActive="active">Acerca de</a></li>
+                    <li><a class="dropdown-item" routerLink="/home/contacto" routerLinkActive="active">Contáctenos</a></li>
+                  </ul>
+              </li>
+  
+            </ng-container>
+  
           </ul>
         </div>
+        <span class="mx-2" *ngIf="mostra_usuario && (auth.isAuthenticated$ | async)"><i>{{saludo}} {{tipousuario}} {{type}} : {{fullName}}</i></span>
     </div>
 </nav>
 
