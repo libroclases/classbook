@@ -18,14 +18,13 @@
                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class={{menuIcons[i]}}>&nbsp;{{title}}</em></a>
                 <ul class="dropdown-menu">
                   <li *ngFor="let menu of menuTables[i]">
-                    <a [class.disabled]="menu.disable" class="dropdown-item"  routerLink="{{menu.submenu}}" routerLinkActive="active">{{menu.nombre}}</a>
+
+                    <a *ngIf="menu.submenu=='navegacion'; else demas" [class.disabled]="menu.disable" class="dropdown-item"  
+                    data-bs-toggle="offcanvas" data-bs-target="#demo"   (click)="obtener_color()">{{menu.nombre}}</a>
+                    <ng-template #demas>
+                      <a [class.disabled]="menu.disable" class="dropdown-item"  routerLink="{{menu.submenu}}" routerLinkActive="active">{{menu.nombre}}</a>
+                    </ng-template>
                   </li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"><em class='bi bi-browser-safari'>&nbsp;Navegación</em></a>
-                <ul class="dropdown-menu">
-                <li><a class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#demo"   (click)="mostrar_color()">Navegación</a></li>
                 </ul>
               </li>
             </ng-container>

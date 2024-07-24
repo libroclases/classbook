@@ -98,6 +98,7 @@ export class MenuComponent implements OnInit{
         {'submenu': 'matricula_alumno', 'nombre': 'Matricula Alumno', 'disable':false },
       ],
       [
+        {'submenu': 'navegacion', 'nombre': 'Navegación', 'disable':false },
         {'submenu': 'home/tutoriales', 'nombre': 'Tutoriales', 'disable':false },
         {'submenu': 'home/preguntas', 'nombre': 'Preguntas', 'disable':false },
         {'submenu': 'home/acerca', 'nombre': 'Acerca', 'disable':false },
@@ -210,7 +211,7 @@ export class MenuComponent implements OnInit{
     }
 
 
-    mostrar_color() { this.getColor(localStorage.getItem('Color')!)}
+    obtener_color() { this.getColor(localStorage.getItem('Color')!)}
 
   /* store functions */
 
