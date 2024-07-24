@@ -119,6 +119,7 @@ const allowedTables = [
   'tipoestado',
   'tipoevaluacion',
   'tipousuario',
+  'token',
   'usuario',
   'usuarioperfil',
   'ventana',

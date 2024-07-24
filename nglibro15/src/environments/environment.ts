@@ -52,6 +52,7 @@ const tablesArray = [
   'tipoestado',
   'tipoevaluacion',
   'tipousuario',
+  'token',
   'usuario',
   'administrador',
   'ventana',

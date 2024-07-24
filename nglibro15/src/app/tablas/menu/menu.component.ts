@@ -220,10 +220,12 @@ export class MenuComponent implements OnInit{
 
   mensaje(color:any) {
     localStorage.setItem('Color', color[1]);
+    console.log('color:',color[0] + ' ' + color[1] + ' ' + this.usuarioId);
+    
     this.store.dispatch(new SetUsuario(color[0], this.usuarioId)).pipe(
       tap(() => this.store.dispatch(new GetUsuario(this.email)))
     ).subscribe()
-
+    
   }
 
   getBiClass(route: string) {

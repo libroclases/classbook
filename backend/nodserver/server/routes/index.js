@@ -307,7 +307,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('read:usuario'),
       Usuarios.getLastId); 
     app.get('/api/usuario/where',
-      // checkjwd, requiredScopes('read:usuario'),
+      checkjwd, requiredScopes('read:usuario'),
       Usuarios.getPersonalInfo);   
     app.get('/api/usuario/:tipousuarioId/fk',
       checkjwd, requiredScopes('read:usuario'),
@@ -319,14 +319,14 @@ const checkjwd = auth({
       checkjwd, requiredScopes('read:usuario'),
       Usuarios.getByPk);
     app.post('/api/usuario/:tipousuarioId/:temaId',
-      // checkjwd, requiredScopes('create:usuario'),
+      checkjwd, requiredScopes('create:usuario'),
       Usuarios.create);
     app.put('/api/usuario/:usuarioId',
       checkjwd, requiredScopes('update:usuario'),
       Usuarios.modify)
 /*
     app.put('/api/usuario/enable2fa/:id', 
-      // checkjwd, requiredScopes('update:usuario'),
+      checkjwd, requiredScopes('update:usuario'),
       Usuarios.enable2fa);
 
       app.put('/api/usuario/:Id/generateSecret',
@@ -530,7 +530,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('create:controlasignatura'),
       ControlAsignaturas.create);
     app.post('/api/controlasignatura/:colegioId/:cursoId/:annoId/populateDia',
-      // checkjwd,requiredScopes(['create:controlasignatura', 'read:feriado', 'read:horario']),
+      checkjwd,requiredScopes(['create:controlasignatura', 'read:feriado', 'read:horario']),
       ControlAsignaturas.populateDia);
     app.put('/api/controlasignatura/:controlasignaturaId',
       checkjwd, requiredScopes('update:controlasignatura'),
@@ -698,20 +698,20 @@ const checkjwd = auth({
       CursoProfesores.modify);
     /*
       app.put('/api/usuario/enable2fa/:id', 
-        // checkjwd, requiredScopes('update:usuario'),
+        checkjwd, requiredScopes('update:usuario'),
         Usuarios.enable2fa);
     */  
       app.post('/api/token/generate-secret/:usuarioId',
-        // checkjwd, requiredScopes('create:tokenmodel'),
+        checkjwd, requiredScopes(['create:token','read:token']),
       Tokens.create);  
       
      
     app.get('/api/token/verify-token',   // verificar token
-        // checkjwd, requiredScopes('create:tokenmodel'),
+        checkjwd, requiredScopes(['create:token','read:token']),
       Tokens.veifyToken);  
-
+    
     app.post('/api/token',   // verificar token
-        // checkjwd, requiredScopes('create:tokenmodel'),
+        checkjwd, requiredScopes(['create:token','read:token']),
       Tokens.validateToken);    
   };
 
