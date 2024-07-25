@@ -159,7 +159,7 @@ export class RegistroUsuarioComponent implements OnInit {
 
     
     // this.queries['tipousuario'] = this.crud.getData('tipousuario')!;
-    this.queries['tipousuario'] = of([{id: 1, nombre: 'Profesor'}, { id: 4, nombre: 'Asistente' }]);
+    this.queries['tipousuario'] = of([{id: 1, nombre: 'Profesor'}, { id: 4, nombre: 'Asistente Colegio' }]);
     this.queries['tema'] = this.crud.getData('tema')!;
     this.disabled();
   }
@@ -253,7 +253,7 @@ export class RegistroUsuarioComponent implements OnInit {
     let table = usuarioTipo[usuario.tipousuarioId]
 
     let modaldata = modalDataObject[lowerUpperTables[table]];
-
+    console.log('modaldata->',table, lowerUpperTables[table] );  
 
     reg['id'] = 0;
     reg['usuario_id'] = usuario.id;
@@ -262,7 +262,7 @@ export class RegistroUsuarioComponent implements OnInit {
     reg['modalbutton'] = this.modalbutton;
 
     // this.ms.nextUser(usuario.id);  NO ES UTILIZADO
-
+    console.log('poronga->',modaldata)
     modaldata.tables.forEach((table: string) => reg[table] = {id: 0});
     modaldata.textFields.forEach((text: string) => reg[text] = null);
     modaldata.dateFields.forEach((date: string) => reg[date] = null);

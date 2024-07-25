@@ -431,7 +431,7 @@ export const usuarioTipo: numberString = {
   1:'profesor',
   2:'alumno',
   3:'apoderado',
-  4:'asistente',
+  4:'asistentecolegio',
   5:'admin'
 };
 
