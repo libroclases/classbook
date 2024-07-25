@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators, ValidatorFn, ReactiveFormsModule } 
 
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { Observable, share, tap, EMPTY, map, concatMap, of } from 'rxjs';
+import { Observable, share, tap, EMPTY, map, concatMap, concat } from 'rxjs';
 import { ModalData, fkValues, stringString, tableQueries } from '../../../interfaces/generic.interface';
 import { CrudService } from '../../services/crud/crud.service';
 import { ForeignKeysService } from '../../services/foreign-keys/foreign-keys.service';
@@ -460,9 +460,12 @@ function zfill(number: number, width: number) {
 
               ids[0] = this.registro.usuario_id
               // If persontable we need update usuario with operativo == true
-              console.log({id: ids[0], operativo:true}, 'usuario')
-              this.crud.putData({id: ids[0], operativo:true}, 'usuario')
-              .subscribe(res => console.log(res));
+              // Luego generar un token para autorización 2FA
+              const usuario$ = this.crud.putData({id: ids[0], operativo:true}, 'usuario');
+              const token$ = this.crud.createDataCustom({}, 'token','generate-secret',[ids[0]]);
+              const concatened$ = usuario$.pipe(concatMap(() => token$));
+              concatened$.subscribe((res) => console.log(res));
+              
         }
         else if (this.modalData.mainTable == 'anotacion') { ids[1] = this.usuarioId } // If anotacion
 
