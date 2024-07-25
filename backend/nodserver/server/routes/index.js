@@ -319,7 +319,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('read:usuario'),
       Usuarios.getByPk);
     app.post('/api/usuario/:tipousuarioId/:temaId',
-      // checkjwd, requiredScopes('create:usuario'),
+      checkjwd, requiredScopes('create:usuario'),
       Usuarios.create);
     app.put('/api/usuario/:usuarioId',
       checkjwd, requiredScopes('update:usuario'),
