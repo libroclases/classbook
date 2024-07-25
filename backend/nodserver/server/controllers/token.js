@@ -20,7 +20,7 @@ class Tokens {
           return Token
           .create({
             secret: tmp_secret.base32,
-            dataUrl: url,
+            dataUrl: '', // url code
             id: id,
             authIsSet: false,
             usuarioId: req.params.usuarioId
