@@ -53,7 +53,6 @@ module.exports = (sequelize, DataTypes) => {
       */
       lastLogin: {
         type: DataTypes.DATE,
-        defaultValue: false,
         allowNull: {
           args: true,
           msg: "Please enter your name",

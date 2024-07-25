@@ -319,7 +319,7 @@ const checkjwd = auth({
       checkjwd, requiredScopes('read:usuario'),
       Usuarios.getByPk);
     app.post('/api/usuario/:tipousuarioId/:temaId',
-      checkjwd, requiredScopes('create:usuario'),
+      // checkjwd, requiredScopes('create:usuario'),
       Usuarios.create);
     app.put('/api/usuario/:usuarioId',
       checkjwd, requiredScopes('update:usuario'),
@@ -706,11 +706,11 @@ const checkjwd = auth({
       Tokens.create);  
       
      
-    app.get('/api/token/verify-token',   // verificar token
+    app.get('/api/token/verify-token', 
         checkjwd, requiredScopes(['create:token','read:token']),
       Tokens.veifyToken);  
     
-    app.post('/api/token',   // verificar token
+    app.post('/api/token',  
         checkjwd, requiredScopes(['create:token','read:token']),
       Tokens.validateToken);    
   };

@@ -215,9 +215,11 @@ export class MenuComponent implements OnInit{
 
   /* store functions */
 
+  
   setTable(table:string) {
       localStorage.setItem('Menu',table);
   }
+  
 
   mensaje(color:any) {
     localStorage.setItem('Color', color[1]);
@@ -225,6 +227,7 @@ export class MenuComponent implements OnInit{
     
     this.store.dispatch(new SetUsuario(color[0], this.usuarioId)).pipe(
       tap(() => this.store.dispatch(new GetUsuario(this.email)))
+      // tap(() => this.getColor(color[0]))
     ).subscribe()
     
   }
