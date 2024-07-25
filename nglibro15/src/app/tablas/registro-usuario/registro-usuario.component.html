@@ -58,10 +58,12 @@
           <br>
           <span class="mx-2" *ngIf="valuesForm.valid"><em class="bi bi-check2-circle">&nbsp;Valid!</em></span>
           <span class="mx-2" *ngIf="!valuesForm.valid"><em class="bi bi-x-circle">&nbsp;Invalid!</em></span>
-          <span class="mx-2"><button type="button" [class]="button_class" [disabled]="valuesForm.invalid" (click)="ingresar()"
-            [style.background-color]="modalbutton" [class]="button_class">Ingresar</button></span>
+          
+            <button type="button" [class]="button_class" [disabled]="valuesForm.invalid" (click)="ingresar()"
+            [style.background-color]="modalbutton" [class]="button_class">Ingresar</button>
             <button type="button" [class]="button_class" [disabled]="valuesForm.invalid" (click)="reset()"
             [style.background-color]="modalbutton" class="text-light">Limpiar</button>
+            <button type="button" (click)="cancelar()" [class]="button_class">Cancelar</button>
           </form>
           <br>
           <p *ngIf="usuario">{{email_asociado}}</p>

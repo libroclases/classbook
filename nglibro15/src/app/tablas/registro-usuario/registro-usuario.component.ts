@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Select } from '@ngxs/store';
 import { from, Observable, of, take, tap } from 'rxjs';
 import { Usuario } from 'src/app/ngxs/usuario/usuario.model';
@@ -88,7 +89,7 @@ export class RegistroUsuarioComponent implements OnInit {
     // private mensaje: MessageService,
     public dialog: MatDialog,
     private crud: CrudService,
-
+    private router: Router,
     private labelsService: LabelsService,
     private getpermission: GetPermissionService
     // private selIdsService: SelectionIdsService,
@@ -107,7 +108,7 @@ export class RegistroUsuarioComponent implements OnInit {
 
     if (color == null) {  color = localStorage.getItem('Color')  }
 
-    this.button_class= `btn btn-${color} text-light`;
+    this.button_class= `btn btn-${color} text-light mx-1`;
     this.table_class = `table table-${color}`;
     this.color = color;
 
@@ -214,6 +215,8 @@ export class RegistroUsuarioComponent implements OnInit {
     this.disabled();
   }
 
+  cancelar() { this.router.navigate(['/home']) }
+  
 
   addMessage(msg: any) {
 

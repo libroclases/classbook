@@ -388,7 +388,7 @@ function zfill(number: number, width: number) {
 
       let ids: any = [];
       let obj: any = {};
-      // console.log('mostra->',this.formModal.value)
+
       this.modalData.textFields.forEach( (texto: string) => {
 
         obj[texto] = this.formModal.value[texto]
@@ -416,10 +416,6 @@ function zfill(number: number, width: number) {
         );
 
         /* Sección Ajustes */
-
-
-        /* matricula */
-
 
 
         if (this.data.mainTable == 'matricula') {
@@ -457,35 +453,25 @@ function zfill(number: number, width: number) {
               5: alumnoId -> ids[3]
           */
         }
-        else {
-                /* horario */
-
-                if (this.data.mainTable == 'horario') { ids[4] = this.registro.Dix.id }
-
-
-                /* personTables */
-
-                if (personTables.includes(this.modalData.mainTable)) {
-
-                  ids[0] = this.registro.usuario_id
-
-                  // If persontable we need update usuario with operativo == true
-
-                  this.crud.putData({id: ids[0], operativo:true}, 'usuario').subscribe(res => console.log(res));
-                }
-
-                /* anotacion */
-
-                if (this.modalData.mainTable == 'anotacion') { ids[1] = this.usuarioId }
-
-
-                this.crud.postData(obj, this.modalData.mainTable, ids).pipe(
-                  tap(() => this.selIdsService.notifyUpdated()),
-                )
-                .subscribe(msg => this.showmsg(msg))
-
-
+        else if (this.data.mainTable == 'horario') { // If horario
+                ids[4] = this.registro.Dix.id;
         }
+        else if (personTables.includes(this.modalData.mainTable)) { // If personTable
+
+              ids[0] = this.registro.usuario_id
+              // If persontable we need update usuario with operativo == true
+              console.log({id: ids[0], operativo:true}, 'usuario')
+              this.crud.putData({id: ids[0], operativo:true}, 'usuario')
+              .subscribe(res => console.log(res));
+        }
+        else if (this.modalData.mainTable == 'anotacion') { ids[1] = this.usuarioId } // If anotacion
+
+
+        this.crud.postData(obj, this.modalData.mainTable, ids).pipe(
+          tap(() => this.selIdsService.notifyUpdated()),
+        )
+        .subscribe(msg => this.showmsg(msg))
+        
 
       }
       else {   // If PUT
