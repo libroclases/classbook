@@ -18,10 +18,8 @@
             <div class="mx-5 pd-5">
               <table  [class]="table_class">
                 <tbody>
-    
-                  <tr><td [class]="color">Email</td><td><input type="text" class="form-control" formControlName="email" />
-    
-    
+                  <tr>
+                    <td [class]="color">Email</td><td><input type="text" class="form-control" formControlName="email" />
                     <div *ngIf="valuesForm.controls['email']?.invalid && (valuesForm.controls['email']?.dirty || valuesForm.controls['email']?.touched)"  class="alert alert-danger">
                       <div *ngIf="valuesForm.controls['email']?.errors?.['emailValidator']">Por favor ingrese un email</div>
                     </div>
@@ -30,8 +28,8 @@
                     <button type="button" [class]="button_class"  (click)="email_consulta()">Buscar</button>
                   </td>
                 </tr>
-    
-                  <tr><td [class]="color">Username</td><td><input type="text"  class="form-control"  formControlName="username" />
+                <tr>
+                  <td [class]="color">Username</td><td><input type="text"  class="form-control"  formControlName="username" />
     
                     <div *ngIf="valuesForm.controls['username']?.invalid && (valuesForm.controls['username']?.dirty || valuesForm.controls['username']?.touched)"  class="alert alert-danger">
                       <div *ngIf="valuesForm.controls['username']?.errors?.['required']">Por favor ingrese un username</div>
@@ -56,19 +54,19 @@
             </div>  
 
           <br>
-          <span class="mx-2" *ngIf="valuesForm.valid"><em class="bi bi-check2-circle">&nbsp;Valid!</em></span>
-          <span class="mx-2" *ngIf="!valuesForm.valid"><em class="bi bi-x-circle">&nbsp;Invalid!</em></span>
+          <button class="btn btn-light  mx-1 mb-5" *ngIf="valuesForm.valid" disabled="true"><em class="bi bi-check2-circle">&nbsp;Valid!</em></button>
+          <button class="btn btn-light  mx-1 mb-5" *ngIf="!valuesForm.valid" disabled="true"><em class="bi bi-x-circle">&nbsp;Invalid!</em></button>
           
             <button type="button" [class]="button_class" [disabled]="valuesForm.invalid" (click)="ingresar()"
             [style.background-color]="modalbutton" [class]="button_class">Ingresar</button>
-            <button type="button" [class]="button_class" [disabled]="valuesForm.invalid" (click)="reset()"
-            [style.background-color]="modalbutton" class="text-light">Limpiar</button>
+            <button type="button" (click)="reset()" [class]="button_class" [disabled]="valuesForm.invalid">Limpiar</button>
             <button type="button" (click)="cancelar()" [class]="button_class">Cancelar</button>
+            <p  style="color: green;" *ngIf="usuario">&nbsp;{{email_asociado}}</p>
           </form>
-          <br>
-          <p *ngIf="usuario">{{email_asociado}}</p>
-          <br>
-          <p>{{mensaje}}</p>
+         
+          
+          
+          
 
       </div>
 

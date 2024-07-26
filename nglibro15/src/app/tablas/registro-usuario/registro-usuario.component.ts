@@ -27,7 +27,7 @@ export class RegistroUsuarioComponent implements OnInit {
   valuesForm!: FormGroup;
 
   modalDataObj!: any;
-
+  
   tables = ['tema','tipousuario']
   queries:any={}
 
@@ -189,6 +189,7 @@ export class RegistroUsuarioComponent implements OnInit {
             if (usuario.operativo == true) {
                 this.disabled();
                 this.email_asociado = 'Email asociado a usuario ya está activado';
+                setTimeout(() => this.email_asociado = '', 6000);
             } else {
               this.disabled();
               this.valuesForm.patchValue(valor)
