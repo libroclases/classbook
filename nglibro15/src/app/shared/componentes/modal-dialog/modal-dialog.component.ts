@@ -427,13 +427,11 @@ function zfill(number: number, width: number) {
 
           const anno = parseInt(obj['incorporacion'].substring(0,4));
 
-          //  ;
 
           this.crud.getLastMatricula().pipe(
               map(last => last.max +1),
               tap(last => { obj['nombre'] = zfill(last,6); fks[4]=last; }),
               concatMap(() => this.crud.postData(obj, 'matricula', ids)),
-              // concatMap(() => this.crud.getDataCustom('asistencia','populateMatriculaMes',fks,{anno}))
           ).subscribe((res) => console.log(res))
 
           /*

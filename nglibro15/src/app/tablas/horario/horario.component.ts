@@ -16,6 +16,7 @@ import { UsuarioState } from 'src/app/ngxs/usuario/usuario.state';
 import { Select } from '@ngxs/store';
 import { GetPermissionService } from 'src/app/shared/services/get-permission/get-permission.service';
 import { Permission } from 'src/environments/environment.development';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -141,9 +142,9 @@ export class HorarioComponent implements OnInit, OnDestroy {
   matbutton!:string;
 
   constructor(private crud: CrudService,
-    // route: ActivatedRoute,
-    // originTableIdsService: OriginTableIdService,
-    // activatedRoute: ActivatedRoute,
+    
+    originTableIdsService: OriginTableIdService,
+    activatedRoute: ActivatedRoute,
     private subsManagerService: SubscriptionsManagerService,
     public dialog: MatDialog,
     private selIdsService: SelectionIdsService,
@@ -152,6 +153,13 @@ export class HorarioComponent implements OnInit, OnDestroy {
     private getpermission: GetPermissionService
 
      ) {
+
+      activatedRoute.params.subscribe(params =>
+        this.crud.getDataPk('region', 1)
+        .subscribe( () => { originTableIdsService.nextMsg(params); })
+      )
+    
+
     }
 
      getBiClass(route: string) {
