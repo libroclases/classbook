@@ -145,6 +145,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
   bodybgcolor!:string;
   bgmodal!:string;
   matbutton!:string;
+  modalbutton!:string;
   pagination!:string;
   tablehead!:string;
   tipousuario:any = null;
@@ -213,6 +214,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
         this.tablehead = this.objcolors.primary.tablehead;
         this.bgmodal = this.objcolors.primary.bgmodal;
         this.matbutton = this.objcolors.primary.matbutton;
+        this.modalbutton = this.objcolors.primary.modalbutton;
         this.url = this.photo.primary;
 
       }
@@ -223,6 +225,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
         this.tablehead = this.objcolors.success.tablehead;
         this.bgmodal = this.objcolors.success.bgmodal;
         this.matbutton = this.objcolors.success.matbutton;
+        this.modalbutton = this.objcolors.success.modalbutton;
         this.url = this.photo.success;
       }
       if (color=='info') {
@@ -232,6 +235,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
         this.tablehead = this.objcolors.info.tablehead;
         this.bgmodal = this.objcolors.info.bgmodal;
         this.matbutton = this.objcolors.info.matbutton;
+        this.modalbutton = this.objcolors.info.modalbutton;
         this.url = this.photo.info;
 
       }
@@ -509,7 +513,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
        }
 
        reg['bgmodal'] = this.bgmodal;
-       reg['modalbutton'] = this.matbutton;
+       reg['modalbutton'] = this.modalbutton;
 
     let modaldata: any = this.modalDataObj;
     const dialogRef = this.dialog.open(ModalDialogComponent, {

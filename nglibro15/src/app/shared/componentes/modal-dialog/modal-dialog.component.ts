@@ -119,7 +119,7 @@ function zfill(number: number, width: number) {
     ngOnInit(): void {
 
       this.bgmodal = this.data.registro.bgmodal;
-      this.modalbutton = this.data.registro.modalbutton;
+      this.matbutton = this.data.registro.matbutton;
 
       if(this.data.mainTable == 'horario') {
         this.selectedteacher = this.data.registro.CursoProfesor.id;

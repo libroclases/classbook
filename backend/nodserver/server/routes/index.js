@@ -702,7 +702,7 @@ const checkjwd = auth({
         Usuarios.enable2fa);
     */  
       app.post('/api/token/:usuarioId/generate-secret',
-        checkjwd, requiredScopes(['create:token','read:token']),
+      checkjwd, requiredScopes(['create:token','read:token']),
       Tokens.create);  
       
      

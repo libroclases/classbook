@@ -14,7 +14,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Autentificación</h4>
+        <h2 style="color:blue">Autentificación</h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
@@ -23,9 +23,9 @@
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <button [class]="modalbutton" [disabled]="codigoForm.invalid" type="button" data-bs-dismiss="modal" (click)="validarCodigo()" >Consultar</button>
+            <button [class]="modalbutton" [disabled]="codigoForm.invalid" type="button" data-bs-dismiss="modal" (click)="validarCodigo()" >Validar</button>
           </div>
-          <input type="text"  class="form-control mx-3" id="codigo" formControlName="codigo"  placeholder="Ingrese código de autentificación">
+          <input type="text"  class="form-control mx-3" id="codigo" formControlName="codigo" placeholder="Ingrese código">
         </div>
         <div *ngIf="codigoForm.get('codigo')?.invalid && (codigoForm.get('codigo')?.dirty || codigoForm.get('codigo')?.touched)" class="alert alert-danger">
           <div *ngIf="codigoForm.get('codigo')?.errors?.['required']">Código es requerido.</div>

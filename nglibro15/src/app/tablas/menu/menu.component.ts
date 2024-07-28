@@ -61,8 +61,8 @@ export class MenuComponent implements OnInit{
       [
         {'submenu':'asistencia', 'nombre': 'Ingreso',  'disable':false},
         {'submenu':'resumen_asistencia', 'nombre' : 'Resumen Asistencia', 'disable':false},
-        {'submenu':'control_asignatura', 'nombre' : 'Control Asignatura', 'disable':false},
-        {'submenu':'registro_actividad', 'nombre' : 'Registro Actividad', 'disable':false}
+        {'submenu':'control_asignatura', 'nombre' : 'Control Asignatura', 'disable':true},
+        {'submenu':'registro_actividad', 'nombre' : 'Registro Actividad', 'disable':true}
       ],
       [
         {'submenu': 'colegio', 'nombre': 'Colegio', 'disable':false },
@@ -82,7 +82,7 @@ export class MenuComponent implements OnInit{
       [
         {'submenu': 'profesor', 'nombre': 'Profesor', 'disable':false },
         {'submenu': 'inscripcioncolegio', 'nombre': 'Inscripción Colegio', 'disable':false },
-        {'submenu': 'cursoprofesor', 'nombre': 'Curso Profesor', 'disable':false },
+        {'submenu': 'cursoprofesor', 'nombre': 'Inscripción Curso', 'disable':false },
         {'submenu': 'evaluacion', 'nombre': 'Evaluación', 'disable':false },
         {'submenu': 'nota', 'nombre': 'Nota', 'disable':false },
         {'submenu': 'resumennota', 'nombre': 'Resumen Nota', 'disable':false },
