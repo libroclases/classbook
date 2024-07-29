@@ -47,7 +47,7 @@ export class MatriculaAlumnoComponent implements OnInit {
   color!:any;
 
   bgmodal!:string;
-  modalbutton!:any;
+  matbutton!:any;
 
   disable:any = null;
   currentDate:Date = new Date();
@@ -82,7 +82,7 @@ export class MatriculaAlumnoComponent implements OnInit {
       this.pagination = this.objcolors.primary.pagination;
       this.tablehead = this.objcolors.primary.tablehead;
       this.bgmodal = this.objcolors.primary.bgmodal;
-      this.modalbutton = this.objcolors.primary.matbutton;
+      this.matbutton = this.objcolors.primary.matbutton;
       this.url = this.photo.primary;
       this.color_h2 = `text-${this.objcolors.primary.color} my-3`;
 
@@ -92,7 +92,7 @@ export class MatriculaAlumnoComponent implements OnInit {
       this.pagination = this.objcolors.success.pagination;
       this.tablehead = this.objcolors.success.tablehead;
       this.bgmodal = this.objcolors.success.bgmodal;
-      this.modalbutton = this.objcolors.success.modalbutton;
+      this.matbutton = this.objcolors.success.matbutton;
       this.url = this.photo.success;
       this.color_h2 = `text-${this.objcolors.success.color} my-3`;
 
@@ -102,7 +102,7 @@ export class MatriculaAlumnoComponent implements OnInit {
       this.pagination = this.objcolors.info.pagination;
       this.tablehead = this.objcolors.info.tablehead;
       this.bgmodal = this.objcolors.info.bgmodal;
-      this.modalbutton = this.objcolors.info.modalbutton;
+      this.matbutton = this.objcolors.info.matbutton;
       this.url = this.photo.info;
       this.color_h2 = `text-${this.objcolors.info.color} my-3`;
 
@@ -180,7 +180,7 @@ export class MatriculaAlumnoComponent implements OnInit {
     reg['foraneas'] = { apoderado: this.apoderado.id, alumno: this.alumno.id }
 
     reg['bgmodal'] = this.bgmodal;
-    reg['modalbutton'] = this.modalbutton;
+    reg['matbutton'] = this.matbutton;
 
     const dialogRef = this.dialog.open(ModalDialogComponent, {
      data: {

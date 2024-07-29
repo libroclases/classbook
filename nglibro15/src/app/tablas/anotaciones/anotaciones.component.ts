@@ -69,7 +69,7 @@ export class AnotacionesComponent implements OnDestroy {
   tablehead!:string;
 
   bgmodal!:string;
-  modalbutton!:string;
+  matbutton!:string;
 
   errorAlert = {
     id: "error",
@@ -107,7 +107,7 @@ export class AnotacionesComponent implements OnDestroy {
       this.pagination = this.objcolors.primary.pagination;
       this.tablehead = this.objcolors.primary.tablehead;
       this.bgmodal = this.objcolors.primary.bgmodal;
-      this.modalbutton = this.objcolors.primary.matbutton;
+      this.matbutton = this.objcolors.primary.matbutton;
       this.url = this.photo.primary;
     }
     else if (color=='success') {
@@ -115,7 +115,7 @@ export class AnotacionesComponent implements OnDestroy {
       this.pagination = this.objcolors.success.pagination;
       this.tablehead = this.objcolors.success.tablehead;
       this.bgmodal = this.objcolors.success.bgmodal;
-      this.modalbutton = this.objcolors.success.modalbutton;
+      this.matbutton = this.objcolors.success.matbutton;
       this.url = this.photo.success;
     }
     else if (color=='info') {
@@ -123,7 +123,7 @@ export class AnotacionesComponent implements OnDestroy {
       this.pagination = this.objcolors.info.pagination;
       this.tablehead = this.objcolors.info.tablehead;
       this.bgmodal = this.objcolors.info.bgmodal;
-      this.modalbutton = this.objcolors.success.modalbutton;
+      this.matbutton = this.objcolors.info.matbutton;
       this.url = this.photo.info;
     }
 }
@@ -201,7 +201,7 @@ export class AnotacionesComponent implements OnDestroy {
    }
 
     reg['bgmodal']=this.bgmodal;
-    reg['modalbutton']=this.modalbutton;
+    reg['matbutton']=this.matbutton;
 
     let modaldata: any = this.modalDataObj;
     modaldata['title'] = `Observación: ${this.nombreAlumno}`;

@@ -41,8 +41,8 @@ if (environment === 'development') {
 } else if (environment === 'production') {
 
   https.createServer({
-    cert: fs.readFileSync('/app/dist/etc/letsencrypt/cert.pem'),
-    key: fs.readFileSync('/app/dist/etc/letsencrypt/privkey.pem')
+    cert: fs.readFileSync('/app/etc/letsencrypt/cert.pem'),
+    key: fs.readFileSync('/app/etc/letsencrypt/privkey.pem')
   },app).listen(port, function(){
          console.log(`Servidor https corriendo en el puerto ${port}`);
  });

@@ -31,6 +31,15 @@ class Regiones {
       .catch(error => res.status(400).send(error));
     }
     
+    static getByPk(req, res) {
+              
+      return Region
+      .findByPk(req.params.regionId)
+      .then(reg => res.status(200).send(reg))
+      .catch(error => res.status(400).send(error));
+    }
+
+
   static modify(req, res) {
     const { nombre, larga } = req.body
     return Region

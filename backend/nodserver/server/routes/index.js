@@ -53,9 +53,7 @@ const checkjwd = auth({
 
   let appMapping = null;
   
-  const environment = process.env.NODE_ENV || 'development';
-
-  // console.log('environment',environment)
+  // const environment = process.env.NODE_ENV || 'development';
 
   appMapping = (app) => {
   
@@ -66,6 +64,9 @@ const checkjwd = auth({
     app.get('/api/region',
       checkjwd, requiredScopes('read:region'),
       Regiones.list);
+    app.get('/api/region/:regionId/pk',
+        checkjwd, requiredScopes('read:region'),
+        Regiones.getByPk);  
     app.post('/api/region',
       checkjwd, requiredScopes('create:region'),
       Regiones.create);
