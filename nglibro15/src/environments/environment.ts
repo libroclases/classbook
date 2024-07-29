@@ -11,6 +11,7 @@ import {
 import { emailValidator } from '../app/shared/directives/email-validator/email-validator.directive';
 // import { horaValidator } from "src/app/shared/directives/hora-validator.directive";
 import { rutValidator } from '../app/shared/directives/rut-validator/rut-validator.directive';
+import { MatButton } from '@angular/material/button';
 
 // --------------------------------------------------------------
 // Auth0 permissions
@@ -65,15 +66,15 @@ tablesArray.forEach((table) => {
   permissions.push(`update:${table}`);
 });
 permissions.push('delete:horario');
-permissions.push('delete:asistencia');
-permissions.push('delete:controlasignatura');
-permissions.push('delete:matricula');
-permissions.push('delete:feriado');
+// permissions.push('delete:asistencia');
+// permissions.push('delete:controlasignatura');
+// permissions.push('delete:matricula');
+// permissions.push('delete:feriado');
 // --------------------------------------------------------------
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost',
+  apiUrl: 'http://libroclases.cl',
   apiKey: 'devKey',
   userinfo: {},
   opacity: '100%',
@@ -81,7 +82,7 @@ export const environment = {
   auth0: {
     domain: 'dev-tupdibnrpuxah8p3.us.auth0.com',
     clientId: 'oW9EH9gLFZFovbTIEaafmVNwg55iCGim',
-    callbackUrl: 'http://localhost',
+    callbackUrl: 'http://libroclases.cl',
     // redirectUri: window.location.origin,
     authorizationParams: {
       redirect_uri: window.location.origin,
@@ -92,22 +93,22 @@ export const environment = {
   },
 
   api: {
-    serverUrl: 'http://localhost:3000',
+    serverUrl: 'http://libroclases.cl:3000',
   },
   cabecera: {
     banner_height: 100, menu_height: 62, margen_superior_tabla: 150
   },
   colors: {
     primary: {
-      color: 'rgb(255, 255, 255)',
+      color: 'primary',
       lineal: 'linear-gradient(to right, #4880EC, #019CAD)',
       menu: '#e3e4f3',
       colorMenuButton: '#059bb0',
       pagination: '#e2e2eb',
-      bodybgcolor: 'rgb(255, 255, 255)', //}
+      bodybgcolor: 'rgb(230, 233, 242)', //  rgb(230, 233, 242)
       tablehead: 'rgb(44,161,213)',
       bgmodal: '#0D6EFD',
-      modalbutton: 'btn btn-primary',
+      modalbutton: 'btn btn-primary text-light',
       matbutton: 'rgb(69, 130, 233)'
     },
 
@@ -117,10 +118,10 @@ export const environment = {
       menu: '#dcf3dd',
       colorMenuButton: '#71f48d',
       pagination: '#dcebe4',
-      bodybgcolor: 'linear-gradient(to right, #38B15C,#76FA91)', // rgb(232, 248, 240)
+      bodybgcolor: 'rgb(214,242,214)', // rgb(214,242,214)
       tablehead: 'lightgreen',
       bgmodal: 'lightgreen',
-      modalbutton: 'btn btn-success',
+      modalbutton: 'btn btn-success text-light',
       matbutton: 'rgb(82, 205, 145)'
     },
 
@@ -130,16 +131,15 @@ export const environment = {
       menu: "rgb(13, 202, 240)",
       colorMenuButton: 'rgb(13, 201, 239)',
       pagination: 'rgb(201, 252, 255)',
-      bodybgcolor: 'linear-gradient(to right, #33D8FF, #425ECC)',
+      bodybgcolor: 'rgb(227, 240, 242)', // rgb(227, 240, 242)
       tablehead:  'rgb(13, 202, 240)',
       bgmodal: 'rgb(13, 202, 240)',
-      modalbutton: 'btn btn-info',
+      modalbutton: 'btn btn-info text-light',
       matbutton: 'rgb(13, 202, 240)'
-
     },
   },
   photo: {
-    primary: 'url(assets/images/fondo_primary.png)',
+    primary: 'url(assets/images/fondo_primary.jpg)',
     success: 'url(assets/images/fondo_success.jpeg)',
     info: 'url(assets/images/fondo_cyan.png)',
   },
@@ -193,56 +193,18 @@ export const dayOfWeekTable = 'dix';
 //       ForeignKeysService
 
 export const fKeysByTable: { [key: string]: string[] } = {
-  region: [],
-  provincix: ['region'],
-  comuna: ['region', 'provincix'],
-  dix: [],
-  anno: [],
-  periodo: [],
-  asignatura: ['tipocolegio'],
-  cursoprofesor: ['anno','colegio','curso','asignatura','profesor'],
-  colegio: ['region', 'provincix', 'comuna', 'tipocolegio'],
-  curso: ['colegio', 'anno'],
-  horaasignada: ['colegio'],
-  profesor: ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
-  administrador:  ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
-  inscripcioncolegio: ['profesor', 'colegio', 'anno'],
-  registroactividad: [
-    'colegio',
-    'curso',
-    'asignatura',
-    'profesor',
-    'anno',
-    'mes',
-    'horario',
-  ],
-  horario: [
-    'anno',
-    'colegio',
-    'curso',
-    'profesor',
-    'asignatura',
-    'dix',
-  ],
-  sexo: [],
-  tipocolegio: [],
-  vinculo: [],
-  niveleducacional: [],
-  tipousuario: [],
-  tema:[],
-  usuario: ['tipousuario','tema'],
   alumno: ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
-  tipoestado: [],
-  estadoalumno: ['anno','colegio','curso','alumno', 'matricula', 'tipoestado'],
+  anno: [],
+  asignatura: ['tipocolegio'],
   anotacion: ['matricula', 'profesor', 'anno', 'colegio', 'curso'],
-  tipoasistente: [],
+  administrador:  ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
   asistentecolegio: [
     'usuario',
-    'tipoasistente',
-    'sexo',
     'region',
     'provincix',
     'comuna',
+    'tipoasistente',
+    'sexo'
   ],
   apoderado: [
     'usuario',
@@ -253,6 +215,10 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'comuna',
   ],
   asistencia: ['matricula', 'colegio', 'curso', 'alumno', 'anno', 'mes'],
+  comuna: ['region', 'provincix'],
+  cursoprofesor: ['anno','colegio','curso','asignatura','profesor'],
+  colegio: ['region', 'provincix', 'comuna', 'tipocolegio'],
+  curso: ['colegio', 'anno'],
   controlasignatura: [
     'colegio',
     'curso',
@@ -262,27 +228,50 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'anno',
     'mes',
   ],
-  tipoevaluacion: [],
+  dix: [],
+  estadoalumno: ['anno','colegio','curso','alumno', 'matricula', 'tipoestado'],
   evaluacion: [
-    'colegio',
-    'curso',
-    'profesor',
-    'asignatura',
     'anno',
     'periodo',
+    'colegio',
+    'curso',
+    'cursoprofesor',
     'tipoevaluacion',
   ],
+  feriado: [],
+  horaasignada: ['colegio'],
+  horario: [
+    'anno',
+    'colegio',
+    'curso',
+    'cursoprofesor',
+    'dix',
+  ],
+  inscripcioncolegio: ['profesor', 'colegio', 'anno'],
   matricula: ['colegio', 'curso', 'apoderado', 'alumno', 'vinculo', 'anno'],
-  ventana: ['colegio','tabla'],
+  mes: [],
+  niveleducacional: [],
   nota: [
     'anno',
     'periodo',
     'colegio',
     'curso',
-    'profesor',
-    'asignatura',
+    'cursoprofesor',
     'matricula',
     'evaluacion',
+  ],
+  provincix: ['region'],
+  periodo: [],
+  profesor: ['usuario', 'sexo', 'region', 'provincix', 'comuna'],
+  region: [],
+  registroactividad: [
+    'colegio',
+    'curso',
+    'asignatura',
+    'profesor',
+    'anno',
+    'mes',
+    'horario',
   ],
   resumennota: [
     'anno',
@@ -292,14 +281,23 @@ export const fKeysByTable: { [key: string]: string[] } = {
     'asignatura',
     'matricula'
   ],
-  mes: [],
-  feriado: [],
+  sexo: [],
   tabla: [],
+  tipocolegio: [],
+  vinculo: [],
+  tipousuario: [],
+  tema:[],
+  tipoestado: [],
+  tipoasistente: [],
+  tipoevaluacion: [],
+  usuario: ['tipousuario','tema'],
+  ventana: ['colegio','tabla'],
   // endpoints especiales: usados en MultiSelect @Input('custom-endpoints')
   //  ejemplo: [custom-endpoints]="{matricula: 'lista_curso_nombres'}"
+  asignatura_por_colegio: ['colegio'],
   lista_curso_nombres: ['colegio', 'curso', 'anno'],
   registro_actividad_by_mes: ['colegio', 'curso', 'asignatura', 'anno', 'mes'],
-  asignatura_por_colegio: ['colegio'],
+
 };
 
 
@@ -385,7 +383,6 @@ export const tableLabels = {
   profesor: 'Profesor',
   administrador: 'Administrador',
   inscripcioncolegio: 'Inscripcion Colegio',
-  inscripcioncurso: 'Inscripcion Curso',
   registroactividad: 'Registro de Actividad',
   provincix: 'Provincia',
   Provincix: 'Provincia',
@@ -728,7 +725,7 @@ export const icons: stringStringPair = {
 
 export const redirectRoutes: any = {
   Colegio: ['/curso'], // ok 26-11-2023 uvr
-  HoraAsignada: [],
+  HoraAsignada: ['/horario'],
   Curso: ['/horario'],
   Profesor: ['/horario'],
   Administrador: ['/horario'],
@@ -737,6 +734,7 @@ export const redirectRoutes: any = {
   Apoderado: ['/matricula'],
   Matricula: ['/curso'],
   Ventana:['/curso'],
+  InscripcionColegio:['/curso'],
   Evaluacion: ['/nota'],
   Horario: ['/horario'],
   AsistenteColegio: ['/asistentecolegio'],
@@ -875,6 +873,7 @@ export const validator: any = {
       username: [Validators.required],
     },
     modalDate: {
+      lastLogin: null,
    }
   },
 
@@ -1083,7 +1082,7 @@ export const modalDataObject: any = {
 
   Horario: {
     mainTable: 'horario',
-    tables: ['profesor', 'asignatura'],
+    tables: ['cursoprofesor'],
     textFields: ['hora'],
     booleanFields:[],
     dateFields: [],
@@ -1222,7 +1221,7 @@ export const modalDataObject: any = {
     mainTable: 'usuario',
     tables: ['tipousuario','tema'],
     textFields: ['email', 'username'],
-    booleanFields:[],
+    booleanFields:['operativo'],
     dateFields: [],
     ignoreFkRequirements: [],
     disable: [],
@@ -1288,7 +1287,7 @@ export const modalDataObject: any = {
 
   AsistenteColegio: {
     mainTable: 'asistentecolegio',
-    tables: ['tipoasistente', 'sexo', 'region', 'provincix', 'comuna'],
+    tables: ['region', 'provincix', 'comuna','tipoasistente', 'sexo' ],
     textFields: ['nombre', 'apellido1','apellido2', 'rut', 'direccion', 'celular'],
     booleanFields:[],
     dateFields: ['nacimiento'],
@@ -1329,12 +1328,11 @@ export const modalDataObject: any = {
   Evaluacion: {
     mainTable: 'evaluacion',
     tables: [
-      'colegio',
-      'curso',
-      'profesor',
-      'asignatura',
       'anno',
       'periodo',
+      'colegio',
+      'curso',
+      'cursoprofesor',
       'tipoevaluacion',
     ],
     textFields: ['nombre', 'hora', 'ponderacion'],

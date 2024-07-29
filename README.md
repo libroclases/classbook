@@ -48,6 +48,3 @@ sudo docker-compose up -d --remove-orphans
 sudo docker logs nodapp
 sudo docker-compose build nodapp
 sudo docker exec -it dbpostgres bash
-
-
-
