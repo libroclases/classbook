@@ -23,7 +23,7 @@ export class MenuComponent implements OnInit{
     @Select(UsuarioState.usuario) usuario$!: Observable<Usuario>;
 
     permission:any = Permission
-    poronga = false;
+  
     fullName!:any;
     tipousuario:any=null;
     esUtp=false;
@@ -90,8 +90,8 @@ export class MenuComponent implements OnInit{
         {'submenu': 'horasinscritas', 'nombre': 'Horas Inscritas', 'disable':false },
       ],
       [
-        {'submenu': 'usuario', 'nombre': 'Usuario', 'disable':false },
-        {'submenu': 'tipousuario', 'nombre': 'Tipo Usuario', 'disable':false },
+        {'submenu': 'usuario', 'nombre': 'Usuario', 'disable':true },
+        {'submenu': 'tipousuario', 'nombre': 'Tipo Usuario', 'disable':true },
       ],
       [
         {'submenu': 'registro_usuario', 'nombre': 'Registro Usuario', 'disable':false },
@@ -223,7 +223,7 @@ export class MenuComponent implements OnInit{
 
   mensaje(color:any) {
     localStorage.setItem('Color', color[1]);
-    console.log('color:',color[0] + ' ' + color[1] + ' ' + this.usuarioId);
+    // console.log('color:',color[0] + ' ' + color[1] + ' ' + this.usuarioId);
     
     this.store.dispatch(new SetUsuario(color[0], this.usuarioId)).pipe(
       tap(() => this.store.dispatch(new GetUsuario(this.email)))

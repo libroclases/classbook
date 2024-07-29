@@ -295,7 +295,7 @@ class Matriculas {
 
         let consulta_cursoprofesor =  { annoId: m.annoId, colegioId: m.colegioId, cursoId: m.cursoId };
           
-          console.log('create_estado_alumno', {...alumno,...matricula , ...estadoalumno, ...consulta_cursoprofesor, ...fecha});
+          // console.log('create_estado_alumno', {...alumno,...matricula , ...estadoalumno, ...consulta_cursoprofesor, ...fecha});
 
 
           EstadoAlumno.create({ ...alumno,...matricula , ...estadoalumno, ...consulta_cursoprofesor, ...fecha})
@@ -360,7 +360,7 @@ class Matriculas {
                   annoId: c.annoId,  colegioId: c.colegioId, cursoId: c.cursoId, cursoprofesorId: c.id
                 }
 
-                console.log('consulta_evaluacion',consulta_evaluacion);
+                // console.log('consulta_evaluacion',consulta_evaluacion);
             
                 let notasObj = [];
                 

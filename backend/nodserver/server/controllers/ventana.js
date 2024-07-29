@@ -21,14 +21,14 @@ class Ventanas {
 
         const { colegioId, tablaId } = req.params;
 
-        console.log('AAA', colegioId, tablaId)
+        // console.log('AAA', colegioId, tablaId)
 
         let consulta = {};
 
         if (colegioId != '0') { consulta['colegioId'] = colegioId; }
         if (tablaId != '0') {  consulta['tablaId'] = tablaId;  }
 
-        console.log('BBB', consulta);
+        // console.log('BBB', consulta);
 
         return Ventana
           .findAll({ where : consulta,

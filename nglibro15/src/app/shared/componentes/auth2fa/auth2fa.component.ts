@@ -74,7 +74,7 @@ export class Auth2faComponent implements OnInit {
     if (this.uuid) {
       this.crud.postData({ userId: this.uuid, auth: this.codigoForm.value.codigo }, 'token').pipe(
         tap(msg => {
-          console.log('msg',msg.validated);
+          // console.log('msg',msg.validated);
           if (msg.validated == true) {
             this.codigoValidado = true;
             this.newItemEvent.emit(true);

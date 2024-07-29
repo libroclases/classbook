@@ -101,7 +101,7 @@ class Usuarios {
                             {model: Profesor, attributes: ['id','nombre','apellido1','apellido2'], where:{}}
                         ]})
                         .then(inscripcionColegio => { 
-                          console.log('personalInfo', personalInfo.usuario.dataValues.id);
+                          // console.log('personalInfo', personalInfo.usuario.dataValues.id);
                           Token.findOne({ where : {usuarioId: personalInfo?.usuario.dataValues.id, authIsSet: true}}).then(token => { 
                             authInfo = { 'uuid': token?.dataValues.id };
                             res.status(200).send({ personalInfo, inscripcionColegio, ...authInfo }); 
@@ -162,7 +162,7 @@ class Usuarios {
 
       static byEmailSearch(req, res) {
         const { expr } = req.params;
-        console.log('expr:',expr)    
+        // console.log('expr:',expr)    
         return Usuario
             .findOne({  
                 where: {email : expr } , include: [
@@ -326,7 +326,7 @@ class Usuarios {
       const { uid, auth } = req.body;
 
         Usuario.findOne({where: {uid}}).then((token) => { 
-          console.log('poronga:',token.secret, auth);
+          
           const verified = speakeasy.totp.verify({
             secret: token.secret,
             encoding: 'base32',

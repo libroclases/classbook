@@ -48,7 +48,7 @@ setUsuario({getState, patchState}: StateContext<UsuarioStateModel>, { color, usu
   return this.crud.putData({Tema: color, id: usuario},'usuario')!.pipe(
     tap((res:any) => {
       const state = getState();
-      console.log('poronga',res);
+      
       patchState({
         usuario: {
           ...state.usuario,

@@ -421,7 +421,7 @@ export class ControlAsignaturaComponent implements OnInit, OnDestroy{
     this.numEntries += 1;
     const hora = entry.hora; // .log('isToday:',this.isToday)
     if ( this.isToday ) {
-      console.log('tipoUsuario',this.tipoUsuario)
+      // console.log('tipoUsuario',this.tipoUsuario)
       // const editable = ( this.tipoUsuario == 'profesor' && this.editar == false );
       const editable = true;
       this.editable.set(hora, editable);

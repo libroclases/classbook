@@ -67,7 +67,7 @@ class Alumnos {
     
     static byRutSearch(req, res) {
         const { expr } = req.params;
-        console.log('expr:',expr)    
+        // console.log('expr:',expr)    
         return Alumno
             .findOne({  
                 where: {rut : expr } , include: [

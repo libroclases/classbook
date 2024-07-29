@@ -413,7 +413,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
    }
 
     reg['bgmodal'] = this.bgmodal;
-    reg['modalbutton'] = this.modalbutton;
+    reg['matbutton'] = this.matbutton;
 
     let modaldata : any = this.modalData
 
@@ -425,7 +425,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().pipe(
       tap(result => {
           this.updateTable();
-          console.log('The dialog was closed', result);
+          // console.log('The dialog was closed', result);
       }),share()
     )
     .subscribe();

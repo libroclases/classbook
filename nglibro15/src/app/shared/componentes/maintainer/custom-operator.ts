@@ -28,12 +28,6 @@ export function getPermission(info: any): any  {
   const colegio = 1;  // REVISAR
 
   const year = currentDate.getFullYear();
-  console.log(Permission.Colegio.ver);
-  console.log(info.inscripcionColegio);
-  console.log(info.personalInfo.usuario.TipoUsuario.nombre);
-  console.log(year);
-
-
 
   switch(info.personalInfo.usuario.TipoUsuario.nombre) {
     case 'profesor': {

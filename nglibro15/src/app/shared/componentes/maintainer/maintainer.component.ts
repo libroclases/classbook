@@ -513,7 +513,7 @@ export class MaintainerComponent implements OnInit, OnDestroy {
        }
 
        reg['bgmodal'] = this.bgmodal;
-       reg['modalbutton'] = this.modalbutton;
+       reg['matbutton'] = this.matbutton;
 
     let modaldata: any = this.modalDataObj;
     const dialogRef = this.dialog.open(ModalDialogComponent, {

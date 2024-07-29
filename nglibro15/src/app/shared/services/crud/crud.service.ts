@@ -167,7 +167,7 @@ export class CrudService {
       });
     }
     let baseurl = `${this.baseurl}/${table}${k}`;
-    console.log('obj:',table,obj,fk);
+    // ('obj:',table,obj,fk);
     return this.http.put(baseurl, obj, this.httpOptions).pipe(
       tap(_ => this.log(`updated ${table} succefuly`)),
       catchError(this.handleError<any>())

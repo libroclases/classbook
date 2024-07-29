@@ -113,14 +113,14 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
 
     /**** obs logs
     for (let r of this.requiredBySelTree.entries()) {
-      console.log('r2',r[0],r[1]);
+      // console.log('r2',r[0],r[1]);
     }
     
-    console.log('patchTablesFromStorage:',this.patchTablesFromStorage);
-    console.log('storage:',storageFks);
-    console.log('freetables', this.freeTables);
-    console.log('considerReqSel', true);
-    console.log('changeFunctionArray', this.changeFunctionsArray);
+    // console.log('patchTablesFromStorage:',this.patchTablesFromStorage);
+    // console.log('storage:',storageFks);
+    // console.log('freetables', this.freeTables);
+    // console.log('considerReqSel', true);
+    // console.log('changeFunctionArray', this.changeFunctionsArray);
      */
     for (let [index, table] of this.tables.entries()) {
       this.queries[table] = EMPTY;
@@ -145,7 +145,7 @@ export class MultiSelectComponent implements OnInit, OnDestroy {
       .pipe(
         take(1),
         tap((msg) => {
-          // console.log('msg poronga', msg); // ok
+          
           this.checkSelection(msg);
         }),
         share()

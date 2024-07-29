@@ -47,7 +47,7 @@ class ResumenNotas {
 
             notas.forEach(el => {
                 const d = el.dataValues; 
-                console.log(d.Matricula.id, d.CursoProfesor.id, d.Evaluacion.ponderacion, d.nota);
+                // console.log(d.Matricula.id, d.CursoProfesor.id, d.Evaluacion.ponderacion, d.nota);
               
                 
                 if (matricula == d.Matricula.id  ) {                

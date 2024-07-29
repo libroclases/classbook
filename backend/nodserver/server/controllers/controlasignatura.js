@@ -270,7 +270,7 @@ class ControlAsignaturas {
   static populateDia(req, res) {
     const { colegioId, cursoId, annoId } = req.params;
     const { anno, mes, dia, diaSemana } = req.body;
-    console.log('populateDia', colegioId, cursoId, annoId,anno, mes, dia, diaSemana )
+    // console.log('populateDia', colegioId, cursoId, annoId,anno, mes, dia, diaSemana )
     // :colegioId/:cursoId/:asignaturaId/:profesorId/:annoId/:dixId
     if (diaSemana > 5) {
       res.status(200).send({
@@ -295,7 +295,7 @@ class ControlAsignaturas {
             cursoId,
             dixId: diaSemana,
           };
-          console.log('consulta',consulta);
+          // console.log('consulta',consulta);
           Horario.findAll({
             where: consulta,
             attributes: ["id", "hora"],

@@ -15,7 +15,6 @@ export class GetPermissionService {
 
   getPermission(table:any, info: any): any  {
 
-    // console.log('poronga',table);
     /*
     let permission:any = {}
 
