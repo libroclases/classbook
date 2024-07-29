@@ -73,8 +73,8 @@ permissions.push('delete:horario');
 // --------------------------------------------------------------
 
 export const environment = {
-  production: false,
-  apiUrl: 'http://libroclases.cl',
+  production: true,
+  apiUrl: 'https://libroclases.cl',
   apiKey: 'devKey',
   userinfo: {},
   opacity: '100%',
