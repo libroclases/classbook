@@ -52,8 +52,6 @@ const checkjwd = auth({
 
 
   let appMapping = null;
-  
-  // const environment = process.env.NODE_ENV || 'development';
 
   appMapping = (app) => {
   

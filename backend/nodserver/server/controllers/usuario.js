@@ -65,7 +65,7 @@ class Usuarios {
     ],
     })
     .then(usuario => {
-
+        console.log('PORONGA',usuario);
         var personalInfo;
         
         var tipousuarioId = usuario.dataValues.TipoUsuario.dataValues.id;
