@@ -60,657 +60,657 @@ const checkjwd = auth({
     }));
 
     app.get('/api/region',
-      checkjwd, requiredScopes('read:region'),
+      // checkjwd, requiredScopes('read:region'),
       Regiones.list);
     app.get('/api/region/:regionId/pk',
-        checkjwd, requiredScopes('read:region'),
+        // checkjwd, requiredScopes('read:region'),
         Regiones.getByPk);  
     app.post('/api/region',
-      checkjwd, requiredScopes('create:region'),
+      // checkjwd, requiredScopes('create:region'),
       Regiones.create);
     app.put('/api/region/:regionId',
-      checkjwd, requiredScopes('update:region'),
+      // checkjwd, requiredScopes('update:region'),
       Regiones.modify);
     app.get('/api/provincix',
-      checkjwd, requiredScopes('read:provincix'),
+      // checkjwd, requiredScopes('read:provincix'),
       Provincixs.list);
     app.get('/api/provincix/:regionId/fk',
-     checkjwd, requiredScopes('read:provincix'),
+     // checkjwd, requiredScopes('read:provincix'),
       Provincixs.getByFk);
     app.post('/api/provincix/:regionId',
-      checkjwd, requiredScopes('create:provincix'),
+      // checkjwd, requiredScopes('create:provincix'),
       Provincixs.create);
     app.put('/api/provincix/:provincixId',
-      checkjwd, requiredScopes('update:provincix'),
+      // checkjwd, requiredScopes('update:provincix'),
       Provincixs.modify);
     app.get('/api/comuna',
-      checkjwd, requiredScopes('read:comuna'),
+      // checkjwd, requiredScopes('read:comuna'),
       Comunas.list);
     app.get('/api/comuna/:regionId/:provincixId/fk',
-      checkjwd, requiredScopes('read:comuna'),
+      // checkjwd, requiredScopes('read:comuna'),
       Comunas.getByFk);
     app.post('/api/comuna/:regionId/:provincixId',
-      checkjwd, requiredScopes('create:comuna'),
+      // checkjwd, requiredScopes('create:comuna'),
       Comunas.create);
     app.put('/api/comuna/:comunaId',
-      checkjwd, requiredScopes('update:comuna'),
+      // checkjwd, requiredScopes('update:comuna'),
       Comunas.modify);
     app.get('/api/dix',
-      checkjwd, requiredScopes('read:dix'),
+      // checkjwd, requiredScopes('read:dix'),
       Dixs.list);
     app.post('/api/dix',
-      checkjwd, requiredScopes('create:dix'),
+      // checkjwd, requiredScopes('create:dix'),
       Dixs.create);
     app.put('/api/dix/:dixId',
-      checkjwd, requiredScopes('update:dix'),
+      // checkjwd, requiredScopes('update:dix'),
       Dixs.modify);
     app.get('/api/tipoestado',
-      checkjwd, requiredScopes('read:tipoestado'),
+      // checkjwd, requiredScopes('read:tipoestado'),
       TipoEstados.list);
     app.post('/api/tipoestado',
-      checkjwd, requiredScopes('create:tipoestado'),
+      // checkjwd, requiredScopes('create:tipoestado'),
       TipoEstados.create);
     app.put('/api/tipoestado/:tipoestadoId',
-      checkjwd, requiredScopes('update:tipoestado'),
+      // checkjwd, requiredScopes('update:tipoestado'),
       TipoEstados.modify);  
     app.get('/api/tipoasistente',
-      checkjwd, requiredScopes('read:tipoasistente'),
+      // checkjwd, requiredScopes('read:tipoasistente'),
       TipoAsistentes.list);
     app.post('/api/tipoasistente',
-      checkjwd, requiredScopes('create:tipoasistente'),
+      // checkjwd, requiredScopes('create:tipoasistente'),
       TipoAsistentes.create);
     app.put('/api/tipoasistente/:tipoasistenteId',
-      checkjwd, requiredScopes('update:tipoasistente'),
+      // checkjwd, requiredScopes('update:tipoasistente'),
       TipoAsistentes.modify);
     app.get('/api/anno',
-      checkjwd, requiredScopes('read:anno'),
+      // checkjwd, requiredScopes('read:anno'),
       Annos.list);
     app.post('/api/anno',
-      checkjwd, requiredScopes('create:anno'),
+      // checkjwd, requiredScopes('create:anno'),
       Annos.create);
     app.put('/api/anno/:annoId',
-      checkjwd, requiredScopes('update:anno'),
+      // checkjwd, requiredScopes('update:anno'),
       Annos.modify);
     app.get('/api/periodo',
-      checkjwd, requiredScopes('read:periodo'),
+      // checkjwd, requiredScopes('read:periodo'),
       Periodos.list);
     app.post('/api/periodo',
-      checkjwd, requiredScopes('create:periodo'),
+      // checkjwd, requiredScopes('create:periodo'),
       Periodos.create);
     app.put('/api/periodo/:periodoId',
-      checkjwd, requiredScopes('update:periodo'),
+      // checkjwd, requiredScopes('update:periodo'),
       Periodos.modify);
     app.get('/api/asignatura',
-      checkjwd, requiredScopes('read:asignatura'),
+      // checkjwd, requiredScopes('read:asignatura'),
       Asignaturas.list);
     app.get('/api/asignatura/:tipocolegioId/fk',
-      checkjwd, requiredScopes('read:asignatura'),
+      // checkjwd, requiredScopes('read:asignatura'),
       Asignaturas.getByFk)
     app.get('/api/asignatura/:colegioId/asignatura_por_colegio',
-      checkjwd, requiredScopes(['read:asignatura', 'read:colegio']),
+      // checkjwd, requiredScopes(['read:asignatura', 'read:colegio']),
       Asignaturas.getByColegio) 
     app.post('/api/asignatura/:tipocolegioId',
-      checkjwd, requiredScopes('create:asignatura'),
+      // checkjwd, requiredScopes('create:asignatura'),
       Asignaturas.create);
     app.put('/api/asignatura/:asignaturaId',
-      checkjwd, requiredScopes('update:asignatura'),
+      // checkjwd, requiredScopes('update:asignatura'),
       Asignaturas.modify);
       app.get('/api/asistentecolegio',
-      checkjwd, requiredScopes('read:asistentecolegio'),
+      // checkjwd, requiredScopes('read:asistentecolegio'),
       AsistenteColegios.list);
     app.get('/api/asistentecolegio/:expr/search',
-      checkjwd, requiredScopes('read:asistentecolegio'),
+      // checkjwd, requiredScopes('read:asistentecolegio'),
       AsistenteColegios.bySearch);
     app.get('/api/asistentecolegio/:usuarioId/:regionId/:provincixId/:comunaId/:tipoasistenteId/:sexoId/fk',
-      checkjwd, requiredScopes('read:asistentecolegio'),
+      // checkjwd, requiredScopes('read:asistentecolegio'),
       AsistenteColegios.getByFk)
     app.get('/api/asistentecolegio/:asistentecolegioId/pk',
-      checkjwd, requiredScopes('read:asistentecolegio'),
+      // checkjwd, requiredScopes('read:asistentecolegio'),
       AsistenteColegios.getByPk);
     app.post('/api/asistentecolegio/:usuarioId/:regionId/:provincixId/:comunaId/:tipoasistenteId/:sexoId',
-      checkjwd, requiredScopes('create:asistentecolegio'),
+      // checkjwd, requiredScopes('create:asistentecolegio'),
       AsistenteColegios.create);
     app.put('/api/asistentecolegio/:asistentecolegioId',
-      checkjwd, requiredScopes('update:asistentecolegio'),
+      // checkjwd, requiredScopes('update:asistentecolegio'),
       AsistenteColegios.modify);  
    app.get('/api/horaasignada',
-      checkjwd, requiredScopes('read:horaasignada'), 
+      // checkjwd, requiredScopes('read:horaasignada'), 
       HorasAsignadas.list);
     app.get('/api/horaasignada/:colegioId/fk',
-      checkjwd, requiredScopes('read:horaasignada'),
+      // checkjwd, requiredScopes('read:horaasignada'),
       HorasAsignadas.getByFk);
     app.post('/api/horaasignada/:colegioId',
-      checkjwd, requiredScopes('create:horaasignada'),
+      // checkjwd, requiredScopes('create:horaasignada'),
       HorasAsignadas.create);
      app.put('/api/horaasignada/:horaasignadaId',
-      checkjwd, requiredScopes('update:horaasignada'),
+      // checkjwd, requiredScopes('update:horaasignada'),
       HorasAsignadas.modify);
     app.get('/api/estadoalumno',
-      checkjwd, requiredScopes('read:estadoalumno'),
+      // checkjwd, requiredScopes('read:estadoalumno'),
       EstadoAlumnos.list);
     app.get('/api/estadoalumno/:annoId/:colegioId/:cursoId/:alumnoId/:matriculaId/:tipoestadoId/fk',
-      checkjwd, requiredScopes('read:estadoalumno'),
+      // checkjwd, requiredScopes('read:estadoalumno'),
       EstadoAlumnos.getByFk);
     app.post('/api/estadoalumno/:annoId/:colegioId/:cursoId/:alumnoId/:matriculaId/:tipoestadoId',
-      checkjwd, requiredScopes('create:estadoalumno'),
+      // checkjwd, requiredScopes('create:estadoalumno'),
       EstadoAlumnos.create);
     app.put('/api/estadoalumno/:estadoalumnoId',
-      checkjwd, requiredScopes('update:estadoalumno'),
+      // checkjwd, requiredScopes('update:estadoalumno'),
       EstadoAlumnos.modify);
     app.get('/api/anotacion',
-      checkjwd, requiredScopes('read:anotacion'),
+      // checkjwd, requiredScopes('read:anotacion'),
       Anotaciones.list);
     app.get('/api/anotacion/:matriculaId/:profesorId/:annoId/:colegioId/:cursoId/fk',
-      checkjwd, requiredScopes('read:anotacion'), 
+      // checkjwd, requiredScopes('read:anotacion'), 
       Anotaciones.getByFk);
     app.get('/api/anotacion/:anotacionId/pk',
-      checkjwd, requiredScopes('read:anotacion'),
+      // checkjwd, requiredScopes('read:anotacion'),
       Anotaciones.getByPk);
     app.post('/api/anotacion/:matriculaId/:profesorId/:annoId/:colegioId/:cursoId',
-      checkjwd, requiredScopes('create:anotacion'),
+      // checkjwd, requiredScopes('create:anotacion'),
       Anotaciones.create);
     app.put('/api/anotacion/:anotacionId',
-      checkjwd, requiredScopes('update:anotacion'),
+      // checkjwd, requiredScopes('update:anotacion'),
       Anotaciones.modify);
     app.get('/api/colegio',
-      checkjwd, requiredScopes('read:colegio'),
+      // checkjwd, requiredScopes('read:colegio'),
       Colegios.list);
     app.get('/api/colegio/:regionId/:provincixId/:comunaId/:tipocolegioId/fk',
-      checkjwd, requiredScopes('read:colegio'),
+      // checkjwd, requiredScopes('read:colegio'),
       Colegios.getByFk);
     app.get('/api/colegio/:colegioId/pk',
-      checkjwd, requiredScopes('read:colegio'),
+      // checkjwd, requiredScopes('read:colegio'),
       Colegios.getByPk);
     app.post('/api/colegio/:regionId/:provincixId/:comunaId/:tipocolegioId',
-      checkjwd, requiredScopes('create:colegio'),
+      // checkjwd, requiredScopes('create:colegio'),
       Colegios.create);
     app.put('/api/colegio/:colegioId',
-      checkjwd, requiredScopes('update:colegio'),
+      // checkjwd, requiredScopes('update:colegio'),
       Colegios.modify);
     app.get('/api/tipocolegio',
-      checkjwd, requiredScopes('read:tipocolegio'),
+      // checkjwd, requiredScopes('read:tipocolegio'),
       TipoColegios.list);
     app.post('/api/tipocolegio',
-      checkjwd, requiredScopes('create:tipocolegio'),
+      // checkjwd, requiredScopes('create:tipocolegio'),
       TipoColegios.create);
     app.put('/api/tipocolegio/:tipocolegioId',
-      checkjwd, requiredScopes('update:tipocolegio'),
+      // checkjwd, requiredScopes('update:tipocolegio'),
       TipoColegios.modify);    
     app.get('/api/curso',
-      checkjwd, requiredScopes('read:curso'),
+      // checkjwd, requiredScopes('read:curso'),
       Cursos.list);
     app.get('/api/curso/:expr/search',
-      checkjwd, requiredScopes('read:curso'),
+      // checkjwd, requiredScopes('read:curso'),
       Cursos.bySearch);  
     app.get('/api/curso/:colegioId/:annoId/fk',
-      checkjwd, requiredScopes('read:curso'),
+      // checkjwd, requiredScopes('read:curso'),
       Cursos.getByFk);
     app.get('/api/curso/:cursoId/pk',
-      checkjwd, requiredScopes('read:curso'),
+      // checkjwd, requiredScopes('read:curso'),
       Cursos.getByPk);
     app.post('/api/curso/:colegioId/:annoId',
-      checkjwd, requiredScopes('create:curso'),
+      // checkjwd, requiredScopes('create:curso'),
       Cursos.create);
     app.put('/api/curso/:cursoId',
-      checkjwd, requiredScopes('update:curso'),
+      // checkjwd, requiredScopes('update:curso'),
       Cursos.modify);
     app.get('/api/profesor',
-      checkjwd, requiredScopes('read:profesor'),
+      // checkjwd, requiredScopes('read:profesor'),
       Profesores.list);
     app.get('/api/profesor/:expr/search',
-      checkjwd, requiredScopes('read:profesor'),
+      // checkjwd, requiredScopes('read:profesor'),
       Profesores.bySearch);
     app.get('/api/profesor/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId/fk',
-      checkjwd, requiredScopes('read:profesor'),
+      // checkjwd, requiredScopes('read:profesor'),
       Profesores.getByFk);
     app.get('/api/profesor/:profesorId/pk',
-      checkjwd, requiredScopes('read:profesor'),
+      // checkjwd, requiredScopes('read:profesor'),
       Profesores.getByPk);    
     app.post('/api/profesor/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId',
-      checkjwd, requiredScopes('create:profesor'),
+      // checkjwd, requiredScopes('create:profesor'),
       Profesores.create);
     app.put('/api/profesor/:profesorId',
-      checkjwd, requiredScopes('update:profesor'),
+      // checkjwd, requiredScopes('update:profesor'),
       Profesores.modify);
 
 
     app.get('/api/administrador',
-      checkjwd, requiredScopes('read:administrador'),
+      // checkjwd, requiredScopes('read:administrador'),
       Administradores.list);
     app.get('/api/administrador/:expr/search',
-      checkjwd, requiredScopes('read:administrador'),
+      // checkjwd, requiredScopes('read:administrador'),
       Administradores.bySearch);
     app.get('/api/administrador/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId/fk',
-      checkjwd, requiredScopes('read:administrador'),
+      // checkjwd, requiredScopes('read:administrador'),
       Administradores.getByFk);
     app.get('/api/administrador/:administradorId/pk',
-      checkjwd, requiredScopes('read:administrador'),
+      // checkjwd, requiredScopes('read:administrador'),
       Administradores.getByPk);    
     app.post('/api/administrador/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId',
-      checkjwd, requiredScopes('create:administrador'),
+      // checkjwd, requiredScopes('create:administrador'),
       Administradores.create);
     app.put('/api/administrador/:administradorId',
-      checkjwd, requiredScopes('update:administrador'),
+      // checkjwd, requiredScopes('update:administrador'),
       Administradores.modify);
 
     app.get('/api/usuario',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.list);
     app.get('/api/usuario/:expr/search',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.bySearch);
     app.get('/api/usuario/:expr/email',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.byEmailSearch);
     app.get('/api/usuario/lastid',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.getLastId); 
     app.get('/api/usuario/where',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.getPersonalInfo);   
     app.get('/api/usuario/:tipousuarioId/fk',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.getByFk);
     app.get('/api/usuario/:tipousuarioId/:temaId/fk',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.getByFk);  
     app.get('/api/usuario/:usuarioId/pk',
-      checkjwd, requiredScopes('read:usuario'),
+      // checkjwd, requiredScopes('read:usuario'),
       Usuarios.getByPk);
     app.post('/api/usuario/:tipousuarioId/:temaId',
-      checkjwd, requiredScopes('create:usuario'),
+      // checkjwd, requiredScopes('create:usuario'),
       Usuarios.create);
     app.put('/api/usuario/:usuarioId',
-      checkjwd, requiredScopes('update:usuario'),
+      // checkjwd, requiredScopes('update:usuario'),
       Usuarios.modify)
 /*
     app.put('/api/usuario/enable2fa/:id', 
-      checkjwd, requiredScopes('update:usuario'),
+      // checkjwd, requiredScopes('update:usuario'),
       Usuarios.enable2fa);
 
       app.put('/api/usuario/:Id/generateSecret',
-      checkjwd, requiredScopes('create:usuario'),
+      // checkjwd, requiredScopes('create:usuario'),
       Usuarios.generateSecret);  
 
     app.get('/api/usuario/verify-token',
-      checkjwd, requiredScopes('create:usuario'),
+      // checkjwd, requiredScopes('create:usuario'),
       Usuarios.veifyToken);     
     */  
     app.get('/api/tabla',
-      checkjwd, requiredScopes('read:tabla'),
+      // checkjwd, requiredScopes('read:tabla'),
       Tablas.list);
     app.post('/api/tabla',
-      checkjwd, requiredScopes(['create:tabla']),
+      // checkjwd, requiredScopes(['create:tabla']),
       Tablas.create);
     app.put('/api/tabla/:tablaId',
-      checkjwd, requiredScopes(['update:tabla']),
+      // checkjwd, requiredScopes(['update:tabla']),
       Tablas.modify);
     app.get('/api/inscripcioncolegio',
-      checkjwd, requiredScopes('read:inscripcioncolegio'),
+      // checkjwd, requiredScopes('read:inscripcioncolegio'),
       InscripcionesColegio.list);
     app.get('/api/inscripcioncolegio/:profesorId/:colegioId/:annoId/fk',
-      checkjwd, requiredScopes('read:inscripcioncolegio'),
+      // checkjwd, requiredScopes('read:inscripcioncolegio'),
       InscripcionesColegio.getByFk);
     app.get('/api/inscripcioncolegio/:colegioId/:annoId/profes',
-      checkjwd, requiredScopes('read:inscripcioncolegio'),
+      // checkjwd, requiredScopes('read:inscripcioncolegio'),
       InscripcionesColegio.getProfesores);
     app.get('/api/inscripcioncolegio/:colegioId/:annoId/profesPie',
-      checkjwd, requiredScopes('read:inscripcioncolegio'),
+      // checkjwd, requiredScopes('read:inscripcioncolegio'),
       InscripcionesColegio.getProfesoresPie);
     app.get('/api/inscripcioncolegio/:inscripcioncolegioId/pk',
-      checkjwd, requiredScopes('read:inscripcioncolegio'),
+      // checkjwd, requiredScopes('read:inscripcioncolegio'),
       InscripcionesColegio.getByPk);
     app.post('/api/inscripcioncolegio/:profesorId/:colegioId/:annoId',
-      checkjwd, requiredScopes('create:inscripcioncolegio'),
+      // checkjwd, requiredScopes('create:inscripcioncolegio'),
       InscripcionesColegio.create);
     app.put('/api/inscripcioncolegio/:inscripcioncolegioId',
-      checkjwd, requiredScopes('update:inscripcioncolegio'),
+      // checkjwd, requiredScopes('update:inscripcioncolegio'),
       InscripcionesColegio.modify);
     app.get('/api/horario',
-      checkjwd, requiredScopes('read:horario'),
+      // checkjwd, requiredScopes('read:horario'),
       Horarios.list);
     app.get('/api/horario/:annoId/:colegioId/:profesorId/:dixId/disponibilidad_hora',
-      checkjwd, requiredScopes('read:horario'),
+      // checkjwd, requiredScopes('read:horario'),
       Horarios.disponibilidadHora);
     app.get('/api/horario/:annoId/:colegioId/:cursoId/:cursoprofesorId/:dixId/group',
-      checkjwd, requiredScopes('read:horario'),
+      // checkjwd, requiredScopes('read:horario'),
       Horarios.groupByFk);
     app.get('/api/horario/:annoId/:colegioId/:cursoId/:cursoprofesorId/:dixId/fk',
-      checkjwd, requiredScopes('read:horario'),
+      // checkjwd, requiredScopes('read:horario'),
       Horarios.getByFk);
     app.post('/api/horario/:annoId/:colegioId/:cursoId/:cursoprofesorId/:dixId',
-      checkjwd, requiredScopes('create:horario'),
+      // checkjwd, requiredScopes('create:horario'),
       Horarios.create);
     app.put('/api/horario/:horarioId',
-      checkjwd, requiredScopes('update:horario'),
+      // checkjwd, requiredScopes('update:horario'),
       Horarios.modify);
     app.delete('/api/horario/:horarioId',
-      checkjwd, requiredScopes('delete:horario'),
+      // checkjwd, requiredScopes('delete:horario'),
       Horarios.delete);
     app.get('/api/sexo',
-      checkjwd, requiredScopes('read:sexo'),
+      // checkjwd, requiredScopes('read:sexo'),
       Sexos.list);
     app.post('/api/sexo',
-      checkjwd, requiredScopes('create:sexo'),
+      // checkjwd, requiredScopes('create:sexo'),
       Sexos.create);
     app.put('/api/sexo/:sexoId',
-      checkjwd, requiredScopes('update:sexo'),
+      // checkjwd, requiredScopes('update:sexo'),
       Sexos.modify);
 
 
       
     app.get('/api/tema',
-      checkjwd, requiredScopes('read:tema'),
+      // checkjwd, requiredScopes('read:tema'),
       Temas.list);
     app.post('/api/tema',
-    checkjwd, requiredScopes('create:tema'),
+    // checkjwd, requiredScopes('create:tema'),
       Temas.create);
     app.put('/api/tema/:temaId',
-      checkjwd, requiredScopes('update:tema'),
+      // checkjwd, requiredScopes('update:tema'),
       Temas.modify);
     app.get('/api/tipousuario',
-      checkjwd, requiredScopes('read:tipousuario'),
+      // checkjwd, requiredScopes('read:tipousuario'),
       TipoUsuarios.list);
     app.get('/api/tipousuario/:name/id',
-      checkjwd, requiredScopes('read:tipousuario'),
+      // checkjwd, requiredScopes('read:tipousuario'),
       TipoUsuarios.getId);
     app.post('/api/tipousuario',
-      checkjwd, requiredScopes('create:tipousuario'),
+      // checkjwd, requiredScopes('create:tipousuario'),
       TipoUsuarios.create);
     app.put('/api/tipousuario/:tipousuarioId',
-      checkjwd, requiredScopes('update:tipousuario'),
+      // checkjwd, requiredScopes('update:tipousuario'),
       TipoUsuarios.modify);
     app.get('/api/vinculo',
-      checkjwd, requiredScopes('read:vinculo'),
+      // checkjwd, requiredScopes('read:vinculo'),
       Vinculos.list);
     app.post('/api/vinculo',
-      checkjwd, requiredScopes('create:vinculo'),
+      // checkjwd, requiredScopes('create:vinculo'),
       Vinculos.create);
     app.put('/api/vinculo/:vinculoId',
-      checkjwd, requiredScopes('update:vinculo'),
+      // checkjwd, requiredScopes('update:vinculo'),
       Vinculos.modify);
     app.get('/api/niveleducacional',
-      checkjwd, requiredScopes('read:niveleducacional'),
+      // checkjwd, requiredScopes('read:niveleducacional'),
       Niveles.list);
     app.post('/api/niveleducacional',
-      checkjwd, requiredScopes('create:niveleducacional'),
+      // checkjwd, requiredScopes('create:niveleducacional'),
       Niveles.create);
     app.put('/api/niveleducacional/:niveleducacionalId',
-      checkjwd, requiredScopes('update:niveleducacional'),
+      // checkjwd, requiredScopes('update:niveleducacional'),
       Niveles.modify);
     app.get('/api/alumno',
-      checkjwd, requiredScopes('read:alumno'),
+      // checkjwd, requiredScopes('read:alumno'),
       Alumnos.list);
     app.get('/api/alumno/:expr/search',
-      checkjwd, requiredScopes('read:alumno'),
+      // checkjwd, requiredScopes('read:alumno'),
       Alumnos.bySearch);
     app.get('/api/alumno/:expr/rut',
-      checkjwd, requiredScopes('read:alumno'),
+      // checkjwd, requiredScopes('read:alumno'),
       Alumnos.byRutSearch);
     app.get('/api/alumno/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId/fk',
-      checkjwd, requiredScopes('read:alumno'),
+      // checkjwd, requiredScopes('read:alumno'),
       Alumnos.getByFk);
     app.get('/api/alumno/:alumnoId/pk',
-      checkjwd, requiredScopes('read:alumno'),
+      // checkjwd, requiredScopes('read:alumno'),
       Alumnos.getByPk);
     app.post('/api/alumno/:usuarioId/:sexoId/:regionId/:provincixId/:comunaId',
-      checkjwd, requiredScopes('create:alumno'),
+      // checkjwd, requiredScopes('create:alumno'),
       Alumnos.create);
     app.put('/api/alumno/:alumnoId',
-      checkjwd, requiredScopes('update:alumno'),
+      // checkjwd, requiredScopes('update:alumno'),
       Alumnos.modify);  
     app.get('/api/apoderado',
-      checkjwd, requiredScopes('read:apoderado'),
+      // checkjwd, requiredScopes('read:apoderado'),
       Apoderados.list);
     app.get('/api/apoderado/:expr/search',
-      checkjwd, requiredScopes('read:apoderado'),
+      // checkjwd, requiredScopes('read:apoderado'),
       Apoderados.bySearch);
     app.get('/api/apoderado/:expr/rut',
-      checkjwd, requiredScopes('read:apoderado'),
+      // checkjwd, requiredScopes('read:apoderado'),
       Apoderados.byRutSearch);
     app.get('/api/apoderado/:usuarioId/:niveleducacionalId/:sexoId/:regionId/:provincixId/:comunaId/fk',
-      checkjwd, requiredScopes('read:apoderado'),
+      // checkjwd, requiredScopes('read:apoderado'),
       Apoderados.getByFk);
     app.get('/api/apoderado/:apoderadoId/pk',
-      checkjwd, requiredScopes('read:apoderado'),
+      // checkjwd, requiredScopes('read:apoderado'),
       Apoderados.getByPk);
     app.post('/api/apoderado/:usuarioId/:niveleducacionalId/:sexoId/:regionId/:provincixId/:comunaId',
-      checkjwd, requiredScopes('create:apoderado'),
+      // checkjwd, requiredScopes('create:apoderado'),
       Apoderados.create);
     app.put('/api/apoderado/:apoderadoId',
-      checkjwd, requiredScopes('update:apoderado'),
+      // checkjwd, requiredScopes('update:apoderado'),
       Apoderados.modify);
     app.get('/api/asistencia',
-      checkjwd, requiredScopes('read:asistencia'),
+      // checkjwd, requiredScopes('read:asistencia'),
       Asistencias.list);
     app.get('/api/asistencia/:matriculaId/:colegioId/:cursoId/:alumnoId/:annoId/:mesId/fk',
-      checkjwd, requiredScopes('read:asistencia'),
+      // checkjwd, requiredScopes('read:asistencia'),
       Asistencias.getByFk);
     app.get('/api/asistencia/:colegioId/:cursoId/:annoId/:mesId/curso_dia',
-      checkjwd, requiredScopes('read:asistencia'),
+      // checkjwd, requiredScopes('read:asistencia'),
       Asistencias.asistenciaCursoDia);
     app.get('/api/asistencia/:matriculaId/:colegioId/:cursoId/:alumnoId/:annoId/:mesId/presente',
-      checkjwd, requiredScopes('read:asistencia'),
+      // checkjwd, requiredScopes('read:asistencia'),
       Asistencias.getPresente);
     app.get('/api/asistencia/:colegioId/:annoId/:mesId/totalesMesColegio',
-      checkjwd, requiredScopes('read:asistencia'),
+      // checkjwd, requiredScopes('read:asistencia'),
       Asistencias.totalesMesColegio);
     app.post('/api/asistencia/:matriculaId/:colegioId/:cursoId/:alumnoId/:annoId/:mesId',
-      checkjwd, requiredScopes('create:asistencia'),
+      // checkjwd, requiredScopes('create:asistencia'),
       Asistencias.create);
     app.post('/api/asistencia/:colegioId/:cursoId/:annoId/:mesId/populateMes',
-      checkjwd, requiredScopes('create:asistencia'),
+      // checkjwd, requiredScopes('create:asistencia'),
       Asistencias.populateMes);
 
     app.get('/api/asistencia/:colegioId/:cursoId/:annoId/:mesId/:matriculaId/:alumnoId/populateMatriculaMes',
-      checkjwd, requiredScopes('create:asistencia'),
+      // checkjwd, requiredScopes('create:asistencia'),
       Asistencias.populateMatriculaMes);
 
 
     app.post('/api/asistencia/:matriculaId/:colegioId/:cursoId/:alumnoId/:annoId/:mesId/findOrCreate',
-      checkjwd, requiredScopes(['read:asistencia', 'create:asistencia']),   
+      // checkjwd, requiredScopes(['read:asistencia', 'create:asistencia']),   
       Asistencias.findOrCreate);
     app.put('/api/asistencia/:asistenciaId',
-      checkjwd, requiredScopes('update:asistencia'),
+      // checkjwd, requiredScopes('update:asistencia'),
       Asistencias.modify);
     app.delete('/api/asistencia/:asistenciaId',
-      checkjwd, requiredScopes('delete:asistencia'),
+      // checkjwd, requiredScopes('delete:asistencia'),
       Asistencias.delete);
     app.get('/api/controlasignatura',
-      checkjwd, requiredScopes('read:controlasignatura'),
+      // checkjwd, requiredScopes('read:controlasignatura'),
       ControlAsignaturas.list);
     app.get('/api/controlasignatura/:colegioId/:cursoId/:asignaturaId/:profesorId/:horarioId/:annoId/:mesId/fk',
-      checkjwd, requiredScopes('read:controlasignatura'),
+      // checkjwd, requiredScopes('read:controlasignatura'),
       ControlAsignaturas.getByFk);
     app.get('/api/controlasignatura/:colegioId/:cursoId/:asignaturaId/:profesorId/:horarioId/:annoId/:mesId/porDia',
-      checkjwd, requiredScopes('read:controlasignatura'),
+      // checkjwd, requiredScopes('read:controlasignatura'),
       ControlAsignaturas.getPorDia);
     app.post('/api/controlasignatura/:colegioId/:cursoId/:asignaturaId/:profesorId/:profesorPieId/:horarioId/:annoId/:mesId',
-      checkjwd, requiredScopes('create:controlasignatura'),
+      // checkjwd, requiredScopes('create:controlasignatura'),
       ControlAsignaturas.create);
     app.post('/api/controlasignatura/:colegioId/:cursoId/:annoId/populateDia',
-      checkjwd,requiredScopes(['create:controlasignatura', 'read:feriado', 'read:horario']),
+      // checkjwd,requiredScopes(['create:controlasignatura', 'read:feriado', 'read:horario']),
       ControlAsignaturas.populateDia);
     app.put('/api/controlasignatura/:controlasignaturaId',
-      checkjwd, requiredScopes('update:controlasignatura'),
+      // checkjwd, requiredScopes('update:controlasignatura'),
       ControlAsignaturas.modify);
     app.delete('/api/controlasignatura/:controlasignaturaId',
-      checkjwd, requiredScopes('delete:controlasignatura'),
+      // checkjwd, requiredScopes('delete:controlasignatura'),
       ControlAsignaturas.delete);
     app.get('/api/registroactividad',
-      checkjwd, requiredScopes('read:registroactividad'),
+      // checkjwd, requiredScopes('read:registroactividad'),
       RegistroActividades.list);
   app.get('/api/registroactividad/:colegioId/:cursoId/:asignaturaId/:profesorId/:horarioId/:annoId/:mesId/fk',
-      checkjwd, requiredScopes('read:registroactividad'),
+      // checkjwd, requiredScopes('read:registroactividad'),
       RegistroActividades.getByFk);
     app.get('/api/registroactividad/:colegioId/:cursoId/:asignaturaId/:annoId/:mesId/registro_actividad_by_mes',
-      checkjwd, requiredScopes('read:registroactividad'),
+      // checkjwd, requiredScopes('read:registroactividad'),
       RegistroActividades.getByMes);
    app.post('/api/registroactividad/:colegioId/:cursoId/:asignaturaId/:profesorId/:horarioId/:annoId/:mesId',
-      checkjwd, requiredScopes('create:registroactividad'),
+      // checkjwd, requiredScopes('create:registroactividad'),
       RegistroActividades.create);
     app.post('/api/registroactividad/:colegioId/:cursoId/:asignaturaId/:annoId/:mesId/populate_mes',
-      checkjwd, requiredScopes('create:registroactividad'),
+      // checkjwd, requiredScopes('create:registroactividad'),
       RegistroActividades.populateMes);
     app.put('/api/registroactividad/:registroactividadId',
-      checkjwd, requiredScopes('update:registroactividad'),
+      // checkjwd, requiredScopes('update:registroactividad'),
       RegistroActividades.modify);
     app.delete('/api/registroactividad/:registroactividadId',
-      checkjwd, requiredScopes('delete:registroactividad'),
+      // checkjwd, requiredScopes('delete:registroactividad'),
       RegistroActividades.delete);
     app.get('/api/tipoevaluacion',
-      checkjwd, requiredScopes('read:tipoevaluacion'),
+      // checkjwd, requiredScopes('read:tipoevaluacion'),
       TiposEvaluacion.list);
     app.post('/api/tipoevaluacion',
-      checkjwd, requiredScopes('create:tipoevaluacion'),
+      // checkjwd, requiredScopes('create:tipoevaluacion'),
       TiposEvaluacion.create);
     app.put('/api/tipoevaluacion/:tipoevaluacionId',
-      checkjwd, requiredScopes('update:tipoevaluacion'),
+      // checkjwd, requiredScopes('update:tipoevaluacion'),
       TiposEvaluacion.modify);
     app.get('/api/ventana',
-      checkjwd, requiredScopes('read:ventana'),
+      // checkjwd, requiredScopes('read:ventana'),
       Ventanas.list);
     app.get('/api/ventana/:colegioId/:tablaId/fk',
-      checkjwd, requiredScopes('read:ventana'),
+      // checkjwd, requiredScopes('read:ventana'),
       Ventanas.getByFk);
     app.post('/api/ventana/:colegioId/:tablaId',
-      checkjwd, requiredScopes('create:ventana'),
+      // checkjwd, requiredScopes('create:ventana'),
       Ventanas.create);
     app.put('/api/ventana/:ventanaId',
-      checkjwd, requiredScopes('update:ventana'),
+      // checkjwd, requiredScopes('update:ventana'),
       Ventanas.modify); 
     app.get('/api/matricula',
-      checkjwd, requiredScopes('read:matricula'),
+      // checkjwd, requiredScopes('read:matricula'),
       Matriculas.list);
     app.get('/api/matricula/:colegioId/:cursoId/:apoderadoId/:alumnoId/:vinculoId/:annoId/fk',
-      checkjwd, requiredScopes('read:matricula'),
+      // checkjwd, requiredScopes('read:matricula'),
       Matriculas.getByFk);
     app.get('/api/matricula/:matriculaId/pk',
-      checkjwd, requiredScopes('read:matricula'),
+      // checkjwd, requiredScopes('read:matricula'),
       Matriculas.getByPk);
     app.get('/api/matricula/:colegioId/:cursoId/:annoId/lista_curso',
-      checkjwd, requiredScopes('read:matricula'),
+      // checkjwd, requiredScopes('read:matricula'),
       Matriculas.listaDeCurso);
     app.get('/api/matricula/:colegioId/:cursoId/:annoId/lista_curso_nombres',
-      checkjwd, requiredScopes('read:matricula'),
+      // checkjwd, requiredScopes('read:matricula'),
       Matriculas.listaDeCursoNombres);
     app.get('/api/matricula/:matriculaId/nombreCompleto',
-      checkjwd, requiredScopes('read:matricula'),
+      // checkjwd, requiredScopes('read:matricula'),
       Matriculas.nombreCompleto);
     app.get('/api/matricula/:colegioId/:cursoId/:apoderadoId/:alumnoId/:vinculoId/:annoId/count',
-      checkjwd, requiredScopes('read:matricula'),
+      // checkjwd, requiredScopes('read:matricula'),
       Matriculas.count);
     app.get('/api/matricula/:colegioId/:annoId/countCursos',
-      checkjwd, requiredScopes('read:matricula'),
+      // checkjwd, requiredScopes('read:matricula'),
       Matriculas.countCursos);
     app.get('/api/matricula/:colegioId/:cursoId/:annoId/countHombresMujeres',
-      checkjwd, requiredScopes('read:matricula'),
+      // checkjwd, requiredScopes('read:matricula'),
       Matriculas.countHombresMujeres);
     app.post('/api/matricula/:colegioId/:cursoId/:apoderadoId/:alumnoId/:vinculoId/:annoId',
-      checkjwd, requiredScopes('create:matricula'),
+      // checkjwd, requiredScopes('create:matricula'),
       Matriculas.create);
     app.put('/api/matricula/:matriculaId',
-      checkjwd, requiredScopes('update:matricula'),
+      // checkjwd, requiredScopes('update:matricula'),
       Matriculas.modify);
     app.delete('/api/matricula/:matriculaId',
-      checkjwd, requiredScopes('delete:matricula'),
+      // checkjwd, requiredScopes('delete:matricula'),
       Matriculas.delete);
     app.get('/api/matricula/lastmatricula',
-      checkjwd, requiredScopes('read:matricula'),
+      // checkjwd, requiredScopes('read:matricula'),
       Matriculas.lastMatricula);  
     app.get('/api/evaluacion',
-      checkjwd, requiredScopes('read:evaluacion'),
+      // checkjwd, requiredScopes('read:evaluacion'),
       Evaluaciones.list);
     app.get('/api/evaluacion/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/:tipoevaluacionId/fk',
-      checkjwd, requiredScopes('read:evaluacion'),
+      // checkjwd, requiredScopes('read:evaluacion'),
       Evaluaciones.getByFk);
     app.post('/api/evaluacion/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/:tipoevaluacionId',
-      checkjwd, requiredScopes('create:evaluacion'),
+      // checkjwd, requiredScopes('create:evaluacion'),
       Evaluaciones.create);
     app.put('/api/evaluacion/:evaluacionId',
-      checkjwd, requiredScopes('update:evaluacion'),
+      // checkjwd, requiredScopes('update:evaluacion'),
       Evaluaciones.modify);
     app.get('/api/nota',
-      checkjwd, requiredScopes('read:nota'),
+      // checkjwd, requiredScopes('read:nota'),
       Notas.list);
     app.get('/api/nota/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/:matriculaId/:evaluacionId/fk',
-      checkjwd, requiredScopes('read:nota'),
+      // checkjwd, requiredScopes('read:nota'),
       Notas.getByFk);
     app.get('/api/nota/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/poblateNota',
-       checkjwd, requiredScopes('read:nota'),
+       // checkjwd, requiredScopes('read:nota'),
         Notas.poblateNotas);  
     app.post('/api/nota/:annoId/:periodoId/:colegioId/:cursoId/:cursoprofesorId/:matriculaId/:evaluacionId',
-      checkjwd, requiredScopes('create:nota'),
+      // checkjwd, requiredScopes('create:nota'),
       Notas.create);
     app.put('/api/nota/:matriculaId/:evaluacionId',
-      checkjwd, requiredScopes('update:nota'),
+      // checkjwd, requiredScopes('update:nota'),
       Notas.modify);
     app.get('/api/mes',
-      checkjwd, requiredScopes('read:mes'),
+      // checkjwd, requiredScopes('read:mes'),
       Meses.list);
     app.post('/api/mes',
-      checkjwd, requiredScopes('create:mes'),
+      // checkjwd, requiredScopes('create:mes'),
       Meses.create);
     app.put('/api/mes/:mesId',
-      checkjwd, requiredScopes('update:mes'),
+      // checkjwd, requiredScopes('update:mes'),
       Meses.modify);
       app.get('/api/feriado',
-      checkjwd, requiredScopes('read:feriado'),
+      // checkjwd, requiredScopes('read:feriado'),
       Feriados.list);
     app.get('/api/feriado/getAtDate',
-      checkjwd, requiredScopes('read:feriado'),
+      // checkjwd, requiredScopes('read:feriado'),
       Feriados.getAtDate);
     app.get('/api/feriado/getYearMonth',
-      checkjwd, requiredScopes('read:feriado'),
+      // checkjwd, requiredScopes('read:feriado'),
       Feriados.getYearMonth);
     app.get('/api/feriado/getInYear',
-      checkjwd, requiredScopes('read:feriado'),
+      // checkjwd, requiredScopes('read:feriado'),
       Feriados.getInYear);
     app.post('/api/feriado',
-      checkjwd, requiredScopes('create:feriado'),
+      // checkjwd, requiredScopes('create:feriado'),
       Feriados.create);
     app.put('/api/feriado/:feriadoId',
-      checkjwd, requiredScopes('update:feriado'),
+      // checkjwd, requiredScopes('update:feriado'),
       Feriados.modify);
     app.delete('/api/feriado/:feriadoId',
-      checkjwd, requiredScopes('delete:feriado'),
+      // checkjwd, requiredScopes('delete:feriado'),
       Feriados.delete);
   
     app.get('/api/resumennota/:annoId/:periodoId/:colegioId/:cursoId/poblateResumenNota',
-      checkjwd, requiredScopes('read:nota'),
+      // checkjwd, requiredScopes('read:nota'),
       ResumenNotas.poblateResumenNotas);
 
     app.get('/api/cursoprofesor',
-      checkjwd, requiredScopes('read:cursoprofesor'),
+      // checkjwd, requiredScopes('read:cursoprofesor'),
       CursoProfesores.list);
     app.get('/api/cursoprofesor/:annoId/:colegioId/:cursoId/:asignaturaId/:profesorId/fk',
-      checkjwd, requiredScopes('read:cursoprofesor'),
+      // checkjwd, requiredScopes('read:cursoprofesor'),
       CursoProfesores.getByFk);
     app.get('/api/cursoprofesor/:annoId/:colegioId/:cursoId/0/profesor_por_curso',
-      checkjwd, requiredScopes('read:cursoprofesor'),
+      // checkjwd, requiredScopes('read:cursoprofesor'),
       CursoProfesores.getByProfesorCurso);  
     app.post('/api/cursoprofesor/:annoId/:colegioId/:cursoId/:asignaturaId/:profesorId',
-      checkjwd, requiredScopes('create:cursoprofesor'),
+      // checkjwd, requiredScopes('create:cursoprofesor'),
       CursoProfesores.create);
     app.put('/api/cursoprofesor/:cursoprofesorId',
-      checkjwd, requiredScopes('update:cursoprofesor'),
+      // checkjwd, requiredScopes('update:cursoprofesor'),
       CursoProfesores.modify);
     /*
       app.put('/api/usuario/enable2fa/:id', 
-        checkjwd, requiredScopes('update:usuario'),
+        // checkjwd, requiredScopes('update:usuario'),
         Usuarios.enable2fa);
     */  
       app.post('/api/token/:usuarioId/generate-secret',
-      checkjwd, requiredScopes(['create:token','read:token']),
+      // checkjwd, requiredScopes(['create:token','read:token']),
       Tokens.create);  
       
      
     app.get('/api/token/verify-token', 
-        checkjwd, requiredScopes(['create:token','read:token']),
+        // checkjwd, requiredScopes(['create:token','read:token']),
       Tokens.veifyToken);  
     
     app.post('/api/token',  
-        checkjwd, requiredScopes(['create:token','read:token']),
+        // checkjwd, requiredScopes(['create:token','read:token']),
       Tokens.validateToken);    
   };
 
